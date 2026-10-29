@@ -1,0 +1,52 @@
+{
+  "mode": "DETERMINISTIC LOCAL FIXTURE \u2014 NOT LIVE AZURE",
+  "pii_mode": "presidio",
+  "scenarios": [
+    {
+      "scenario": "Policy lifecycle and simulation",
+      "status": "PASSED"
+    },
+    {
+      "scenario": "Safe prompt",
+      "status": "PASSED",
+      "request_id": "65d959f0-4736-4364-8267-734195c28dd4"
+    },
+    {
+      "scenario": "Synthetic secret",
+      "status": "PASSED",
+      "request_id": "ff187d8c-114b-4663-9673-c5f8219e62db"
+    },
+    {
+      "scenario": "Synthetic PII",
+      "status": "PASSED",
+      "request_id": "8148645a-9aae-4afc-95fa-4a7c4b86e5f2"
+    },
+    {
+      "scenario": "Fixture moderation",
+      "status": "PASSED",
+      "request_id": "75a3ce22-d720-420f-ab94-9bcf1a28efc1"
+    },
+    {
+      "scenario": "Fixture unavailable moderation",
+      "status": "PASSED",
+      "request_id": "6aa724b0-9d98-4c7e-a771-dec39d9f3e34"
+    },
+    {
+      "scenario": "Fixture output secret",
+      "status": "PASSED",
+      "request_id": "ab26f8c4-8ad9-4a91-a2f3-4d98e9857e6f"
+    },
+    {
+      "scenario": "Disable fails closed and enable restores assignment",
+      "status": "PASSED"
+    },
+    {
+      "scenario": "Human review cannot release held content",
+      "status": "PASSED"
+    },
+    {
+      "scenario": "Audit and analytics persistence",
+      "status": "PASSED"
+    }
+  ]
+}

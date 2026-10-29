@@ -1,0 +1,24 @@
+.env
+.demo-tokens.json
+.venv/
+**/__pycache__/
+**/.pytest_cache/
+**/.ruff_cache/
+*.db
+*.db-*
+node_modules/
+dist/
+*.tsbuildinfo
+artifacts/
+
+.azure-sql-cli/
+# Private Phase 5 credential/evidence manifests (normally stored outside the repo).
+governance-sql-http-*.json
+
+# Additional local secrets and credentials
+.env.*
+!.env.example
+*.pem
+*.key
+*credentials*.json
+*token*.json

@@ -1,0 +1,33 @@
+{
+  "checked_at_utc": "2026-10-28T14:32:56.101376+00:00",
+  "probe_type": "LIVE_SYNTHETIC_ADAPTER_CHECK",
+  "services": {
+    "azure_openai": {
+      "status": "LIVE_VERIFIED",
+      "response_nonempty": true,
+      "duration_ms": 2706.13
+    },
+    "openai_moderation": {
+      "checked_at_utc": "2026-10-28T14:46:11.238061+00:00",
+      "service": "openai_moderation",
+      "status": "LIVE_VERIFIED",
+      "synthetic_prompt_flagged": false
+    }
+  },
+  "live_generation_and_moderation_ready": true,
+  "running_gateway_probe": {
+    "checked_at_utc": "2026-10-28T14:47:09.251769+00:00",
+    "provider_mode": "live",
+    "decision": "ALLOW",
+    "input_decision": "ALLOW",
+    "input_moderation_status": "SATISFIED",
+    "model_invoked": true,
+    "output_decision": "ALLOW",
+    "output_moderation_status": "SATISFIED",
+    "safe_response_released": true,
+    "request_id": "3a211b68-d6a9-4058-b66d-545fa64422c3",
+    "duration_ms": 7944.71,
+    "status": "LIVE_VERIFIED",
+    "audit_persisted": true
+  }
+}
