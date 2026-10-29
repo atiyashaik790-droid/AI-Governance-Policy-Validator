@@ -757,7 +757,10 @@ def main(argv=None):
             "operations": [],
             "retention": "COMMITTED_SYNTHETIC_HISTORY",
         }
-        checkpoint = lambda: store.save(manifest)
+
+        def checkpoint():
+            return store.save(manifest)
+
         checkpoint()
         cache = ROOT / ".azure-sql-cli"
         require(cache.is_dir())
