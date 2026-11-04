@@ -1,0 +1,376 @@
+{
+  "scope": "real hosted Chrome; GET/HEAD/OPTIONS only; no generation, moderation or export calls",
+  "checks": [
+    {
+      "name": "unauthenticated deep link shows login",
+      "passed": true
+    },
+    {
+      "name": "invalid hosted token rejected",
+      "passed": true
+    },
+    {
+      "name": "authorized hosted login",
+      "passed": true
+    },
+    {
+      "name": "desktop / renders",
+      "passed": true
+    },
+    {
+      "name": "desktop / no page overflow",
+      "passed": true,
+      "client": 1440,
+      "scroll": 1440
+    },
+    {
+      "name": "desktop /policies renders",
+      "passed": true
+    },
+    {
+      "name": "desktop /policies no page overflow",
+      "passed": true,
+      "client": 1440,
+      "scroll": 1440
+    },
+    {
+      "name": "desktop /simulator renders",
+      "passed": true
+    },
+    {
+      "name": "desktop /simulator no page overflow",
+      "passed": true,
+      "client": 1440,
+      "scroll": 1440
+    },
+    {
+      "name": "desktop /playground renders",
+      "passed": true
+    },
+    {
+      "name": "desktop /playground no page overflow",
+      "passed": true,
+      "client": 1440,
+      "scroll": 1440
+    },
+    {
+      "name": "desktop /history renders",
+      "passed": true
+    },
+    {
+      "name": "desktop /history no page overflow",
+      "passed": true,
+      "client": 1440,
+      "scroll": 1440
+    },
+    {
+      "name": "desktop /reviews renders",
+      "passed": true
+    },
+    {
+      "name": "desktop /reviews no page overflow",
+      "passed": true,
+      "client": 1440,
+      "scroll": 1440
+    },
+    {
+      "name": "desktop /analytics renders",
+      "passed": true
+    },
+    {
+      "name": "desktop /analytics no page overflow",
+      "passed": true,
+      "client": 1440,
+      "scroll": 1440
+    },
+    {
+      "name": "desktop /reports renders",
+      "passed": true
+    },
+    {
+      "name": "desktop /reports no page overflow",
+      "passed": true,
+      "client": 1440,
+      "scroll": 1440
+    },
+    {
+      "name": "desktop /settings renders",
+      "passed": true
+    },
+    {
+      "name": "desktop /settings no page overflow",
+      "passed": true,
+      "client": 1440,
+      "scroll": 1440
+    },
+    {
+      "name": "tablet / renders",
+      "passed": true
+    },
+    {
+      "name": "tablet / no page overflow",
+      "passed": true,
+      "client": 820,
+      "scroll": 820
+    },
+    {
+      "name": "tablet /policies renders",
+      "passed": true
+    },
+    {
+      "name": "tablet /policies no page overflow",
+      "passed": true,
+      "client": 820,
+      "scroll": 820
+    },
+    {
+      "name": "tablet /simulator renders",
+      "passed": true
+    },
+    {
+      "name": "tablet /simulator no page overflow",
+      "passed": true,
+      "client": 820,
+      "scroll": 820
+    },
+    {
+      "name": "tablet /playground renders",
+      "passed": true
+    },
+    {
+      "name": "tablet /playground no page overflow",
+      "passed": true,
+      "client": 820,
+      "scroll": 820
+    },
+    {
+      "name": "tablet /history renders",
+      "passed": true
+    },
+    {
+      "name": "tablet /history no page overflow",
+      "passed": true,
+      "client": 820,
+      "scroll": 820
+    },
+    {
+      "name": "tablet /reviews renders",
+      "passed": true
+    },
+    {
+      "name": "tablet /reviews no page overflow",
+      "passed": true,
+      "client": 820,
+      "scroll": 820
+    },
+    {
+      "name": "tablet /analytics renders",
+      "passed": true
+    },
+    {
+      "name": "tablet /analytics no page overflow",
+      "passed": true,
+      "client": 820,
+      "scroll": 820
+    },
+    {
+      "name": "tablet /reports renders",
+      "passed": true
+    },
+    {
+      "name": "tablet /reports no page overflow",
+      "passed": true,
+      "client": 820,
+      "scroll": 820
+    },
+    {
+      "name": "tablet /settings renders",
+      "passed": true
+    },
+    {
+      "name": "tablet /settings no page overflow",
+      "passed": true,
+      "client": 820,
+      "scroll": 820
+    },
+    {
+      "name": "mobile / renders",
+      "passed": true
+    },
+    {
+      "name": "mobile / no page overflow",
+      "passed": true,
+      "client": 390,
+      "scroll": 390
+    },
+    {
+      "name": "mobile /policies renders",
+      "passed": true
+    },
+    {
+      "name": "mobile /policies no page overflow",
+      "passed": true,
+      "client": 390,
+      "scroll": 390
+    },
+    {
+      "name": "mobile /simulator renders",
+      "passed": true
+    },
+    {
+      "name": "mobile /simulator no page overflow",
+      "passed": true,
+      "client": 390,
+      "scroll": 390
+    },
+    {
+      "name": "mobile /playground renders",
+      "passed": true
+    },
+    {
+      "name": "mobile /playground no page overflow",
+      "passed": true,
+      "client": 390,
+      "scroll": 390
+    },
+    {
+      "name": "mobile /history renders",
+      "passed": true
+    },
+    {
+      "name": "mobile /history no page overflow",
+      "passed": true,
+      "client": 390,
+      "scroll": 390
+    },
+    {
+      "name": "mobile /reviews renders",
+      "passed": true
+    },
+    {
+      "name": "mobile /reviews no page overflow",
+      "passed": true,
+      "client": 390,
+      "scroll": 390
+    },
+    {
+      "name": "mobile /analytics renders",
+      "passed": true
+    },
+    {
+      "name": "mobile /analytics no page overflow",
+      "passed": true,
+      "client": 390,
+      "scroll": 390
+    },
+    {
+      "name": "mobile /reports renders",
+      "passed": true
+    },
+    {
+      "name": "mobile /reports no page overflow",
+      "passed": true,
+      "client": 390,
+      "scroll": 390
+    },
+    {
+      "name": "mobile /settings renders",
+      "passed": true
+    },
+    {
+      "name": "mobile /settings no page overflow",
+      "passed": true,
+      "client": 390,
+      "scroll": 390
+    },
+    {
+      "name": "hosted immutable version history",
+      "passed": true
+    },
+    {
+      "name": "policy search filters rows",
+      "passed": true
+    },
+    {
+      "name": "policy status filter",
+      "passed": true
+    },
+    {
+      "name": "hosted metadata details /history",
+      "passed": true
+    },
+    {
+      "name": "hosted metadata details /reviews",
+      "passed": true
+    },
+    {
+      "name": "hosted metadata details /reports",
+      "passed": true
+    },
+    {
+      "name": "successful exact export visible",
+      "passed": true
+    },
+    {
+      "name": "success status visible",
+      "passed": true
+    },
+    {
+      "name": "hosted logout",
+      "passed": true
+    },
+    {
+      "name": "developer export history access denied",
+      "passed": true
+    },
+    {
+      "name": "invalidated session request denied with visible error",
+      "passed": true
+    },
+    {
+      "name": "no hosted mutations sent",
+      "passed": true
+    },
+    {
+      "name": "no unhandled exceptions",
+      "passed": true
+    },
+    {
+      "name": "no failed transport requests",
+      "passed": true
+    },
+    {
+      "name": "only intentional 401/403 network errors",
+      "passed": true
+    }
+  ],
+  "passed": 72,
+  "failed": 0,
+  "pageErrors": [],
+  "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+    "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+  ],
+  "httpErrors": [
+    {
+      "path": "/api/settings",
+      "status": 401
+    },
+    {
+      "path": "/api/reports/exports",
+      "status": 403
+    },
+    {
+      "path": "/api/settings",
+      "status": 401
+    },
+    {
+      "path": "/api/settings",
+      "status": 401
+    }
+  ],
+  "requestFailures": [],
+  "blockedMutations": []
+}

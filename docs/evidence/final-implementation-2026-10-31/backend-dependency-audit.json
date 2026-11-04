@@ -1,0 +1,7 @@
+{
+  "method": "OSV querybatch for pinned PyPI dependencies; excludes the direct-URL spaCy model",
+  "package_count": 79,
+  "direct_url_model": "Not covered by registry vulnerability query",
+  "findings": [],
+  "completed": true
+}

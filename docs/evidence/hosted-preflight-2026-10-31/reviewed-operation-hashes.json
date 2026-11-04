@@ -1,0 +1,7 @@
+{
+  "backend/migrations/versions/004_reliability_controls.py": "c27bdd18d53f6997c5dde45ad4579f07542a4bfcacc15505f948de4dc866c01d",
+  "docs/evidence/final-implementation-2026-10-31/migration-004.REVIEW_ONLY.sql": "964ea6f196bdc059714de7351bbaefd42550fd3ce8b37a7b7b9ea20d5f165945",
+  "deployment/runtime_004_permissions.REVIEW_ONLY.sql": "694c1b561c78f61dddf4afc7e26cf601ac6b03e5de6d1aafc9bb947e75636a6f",
+  "backend/alembic.ini": "ebfad8a9c8f352d2381e48df599dd04dad764ca95b03f0dc9949d0691c6d2517",
+  "backend/migrations/env.py": "1b3c4ce9da7d92b72f35a2c683decfd3da1d216220f489a93fa49417bfc2e465"
+}

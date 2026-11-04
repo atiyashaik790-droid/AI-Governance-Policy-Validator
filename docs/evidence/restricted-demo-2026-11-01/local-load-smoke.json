@@ -1,0 +1,7 @@
+{
+  "requests": 100,
+  "concurrency": 10,
+  "p50_ms": 53.463158000002295,
+  "p95_ms": 91.94617100000141,
+  "scope": "Disposable loopback fixture read smoke; no production capacity claim"
+}

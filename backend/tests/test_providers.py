@@ -53,7 +53,7 @@ async def test_moderation_failure_contract(monkeypatch, status, payload):
 # Azure v1 request construction and response parsing are exercised without network access.
 @pytest.mark.asyncio
 async def test_azure_generation_contract(monkeypatch):
-    client = mock_http(monkeypatch, {"choices": [{"message": {"content": "Safe answer"}}]})
+    client = mock_http(monkeypatch, {"choices": [{"finish_reason": "stop", "message": {"content": "Safe answer"}}]})
     monkeypatch.setattr(settings, "azure_openai_endpoint", "https://example.openai.azure.com")
     monkeypatch.setattr(settings, "azure_openai_deployment", "test-deployment")
     monkeypatch.setattr(settings, "azure_openai_api_key", "synthetic-key")
@@ -65,7 +65,9 @@ async def test_azure_generation_contract(monkeypatch):
 
 # Invalid provider responses and transport errors always withhold the generated output.
 @pytest.mark.asyncio
-@pytest.mark.parametrize("payload,status", [({}, 200), ({"choices": [{"message": {"content": None}}]}, 200), ({}, 429), ({}, 401)])
+@pytest.mark.parametrize(
+    "payload,status", [({}, 200), ({"choices": [{"finish_reason": "stop", "message": {"content": None}}]}, 200), ({}, 429), ({}, 401)]
+)
 async def test_azure_generation_failure(monkeypatch, payload, status):
     mock_http(monkeypatch, payload, status)
     monkeypatch.setattr(settings, "azure_openai_endpoint", "https://example.openai.azure.com")
@@ -116,7 +118,9 @@ def test_adls_upload_contract(monkeypatch):
     filesystem.assert_called_once_with("reports")
     file = filesystem.return_value.get_file_client
     file.assert_called_once_with("governance-reports/2026/10/28/test.json")
-    file.return_value.upload_data.assert_called_once_with(b"[]", overwrite=False)
+    from azure.core import MatchConditions
+
+    file.return_value.upload_data.assert_called_once_with(b"[]", overwrite=True, match_condition=MatchConditions.IfMissing)
 
 
 # Presidio email validation must not fetch public suffix data during inspection.

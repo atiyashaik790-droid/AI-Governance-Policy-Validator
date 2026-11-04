@@ -1,0 +1,175 @@
+{
+  "download_ok": true,
+  "files": [
+    {
+      "file": "2026_10_30_lw0sdlwk0003R4_default_docker.log",
+      "lines": 100,
+      "markers": {
+        "error": 0,
+        "traceback": 0,
+        "application startup complete": 0,
+        "listening": 0,
+        "worker": 0,
+        "killed": 0,
+        "timeout": 0,
+        "pip": 0,
+        "install": 0,
+        "ready": 0,
+        "failed": 0
+      },
+      "exception_classes": []
+    },
+    {
+      "file": "2026_10_30_lw0sdlwk0003R4_default_scm_docker.log",
+      "lines": 100,
+      "markers": {
+        "error": 0,
+        "traceback": 0,
+        "application startup complete": 0,
+        "listening": 0,
+        "worker": 0,
+        "killed": 0,
+        "timeout": 0,
+        "pip": 1,
+        "install": 1,
+        "ready": 0,
+        "failed": 0
+      },
+      "exception_classes": []
+    },
+    {
+      "file": "2026_10_30_lw0sdlwk0003R4_docker.log",
+      "lines": 100,
+      "markers": {
+        "error": 23,
+        "traceback": 0,
+        "application startup complete": 0,
+        "listening": 0,
+        "worker": 0,
+        "killed": 0,
+        "timeout": 0,
+        "pip": 22,
+        "install": 0,
+        "ready": 6,
+        "failed": 0
+      },
+      "exception_classes": [
+        "LastError"
+      ]
+    },
+    {
+      "file": "2026_10_31_lw0sdlwk0003R4_default_docker.log",
+      "lines": 100,
+      "markers": {
+        "error": 0,
+        "traceback": 0,
+        "application startup complete": 0,
+        "listening": 0,
+        "worker": 0,
+        "killed": 0,
+        "timeout": 0,
+        "pip": 0,
+        "install": 0,
+        "ready": 0,
+        "failed": 0
+      },
+      "exception_classes": []
+    },
+    {
+      "file": "2026_10_31_lw0sdlwk0003R4_default_scm_docker.log",
+      "lines": 100,
+      "markers": {
+        "error": 0,
+        "traceback": 0,
+        "application startup complete": 0,
+        "listening": 0,
+        "worker": 0,
+        "killed": 0,
+        "timeout": 0,
+        "pip": 1,
+        "install": 1,
+        "ready": 0,
+        "failed": 0
+      },
+      "exception_classes": []
+    },
+    {
+      "file": "2026_10_31_lw0sdlwk0003R4_docker.log",
+      "lines": 55,
+      "markers": {
+        "error": 13,
+        "traceback": 0,
+        "application startup complete": 0,
+        "listening": 0,
+        "worker": 0,
+        "killed": 0,
+        "timeout": 0,
+        "pip": 11,
+        "install": 0,
+        "ready": 3,
+        "failed": 0
+      },
+      "exception_classes": [
+        "LastError"
+      ]
+    },
+    {
+      "file": "2026_11_01_lw0sdlwk0003R4_default_docker.log",
+      "lines": 100,
+      "markers": {
+        "error": 0,
+        "traceback": 0,
+        "application startup complete": 2,
+        "listening": 0,
+        "worker": 0,
+        "killed": 0,
+        "timeout": 0,
+        "pip": 0,
+        "install": 1,
+        "ready": 9,
+        "failed": 0
+      },
+      "exception_classes": []
+    },
+    {
+      "file": "2026_11_01_lw0sdlwk0003R4_default_scm_docker.log",
+      "lines": 100,
+      "markers": {
+        "error": 4,
+        "traceback": 0,
+        "application startup complete": 0,
+        "listening": 1,
+        "worker": 0,
+        "killed": 0,
+        "timeout": 0,
+        "pip": 1,
+        "install": 1,
+        "ready": 0,
+        "failed": 2
+      },
+      "exception_classes": [
+        "IOException"
+      ]
+    },
+    {
+      "file": "2026_11_01_lw0sdlwk0003R4_docker.log",
+      "lines": 100,
+      "markers": {
+        "error": 25,
+        "traceback": 0,
+        "application startup complete": 0,
+        "listening": 0,
+        "worker": 0,
+        "killed": 0,
+        "timeout": 0,
+        "pip": 22,
+        "install": 0,
+        "ready": 4,
+        "failed": 0
+      },
+      "exception_classes": [
+        "LastError"
+      ]
+    }
+  ]
+}

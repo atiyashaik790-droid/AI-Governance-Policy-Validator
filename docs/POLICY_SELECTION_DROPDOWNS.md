@@ -1,0 +1,11 @@
+# Policy selection dropdowns — 2 November 2026
+
+The policy editor now uses searchable multi-select dropdowns for PII entities and moderation categories. Closed controls show a count and selected values, or their all-options default. Options remain native checkboxes inside a scrollable dropdown. Users can search, choose multiple values, finish with Done, close with Escape/outside click, and restore the default with Use all. Search Enter does not submit the policy form. Read-only mode disables interaction. Existing selected values and the API's empty-selection-as-null semantics are preserved. Unavailable PII entities remain visible and cannot be added; an existing unavailable selection can be removed.
+
+The detector capability paragraph is replaced by concise help and option-level availability labels. JSON preview still updates from the same policy document state. No backend, schema, provider, grant or persistent policy-data changes are included. The mobile editor panel is constrained to its grid width so long selection summaries do not widen the viewport.
+
+Validation: all 20 frontend tests (including real disposable-backend integration) passed, plus ESLint, TypeScript and production build. Headless Chrome with isolated API fixtures passed PII multi-selection, moderation multi-selection, search, Escape behavior and mobile width 390/390, with zero page errors. See [browser checks](evidence/dropdown-browser.json). The initial mobile check found grid intrinsic-width overflow; the final width constraint fixed it and the browser check passed on repetition.
+
+Final artifact: [release manifest](evidence/policy-dropdown-package.json). Hosted verification will be recorded after the final artifact activates; local browser checks are not hosted acceptance.
+
+Hosted release `1.2-38d43c3690160556` is active from deployment `a1b485f8-e63d-4c72-83cd-5e4dbf44a01e`. Hosted Chrome verified both multi-select controls, search, and mobile width 390/390 with zero page errors. No policy was saved or modified; the diagnostic session was revoked. Azure startup initially timed out and automatically retried a failed worker start; the final worker subsequently passed readiness and the browser checks. See [hosted verification](evidence/dropdown-hosted.json) and desktop/mobile screenshots beside it.

@@ -22,12 +22,12 @@ SELECT t.table_name, p.permission_name,
        CASE WHEN p.permission_name = 'VIEW DEFINITION' THEN NULL
             WHEN p.permission_name IN ('SELECT', 'INSERT') THEN 1
             WHEN p.permission_name = 'UPDATE' AND t.table_name IN
-                 ('policies','active_policy_assignments','human_review_cases','evaluation_exports') THEN 1
+                 ('policies','active_policy_assignments','human_review_cases','evaluation_exports','demo_sessions','inference_rate_buckets','inference_usage','export_jobs','review_assignments') THEN 1
             WHEN p.permission_name = 'DELETE' AND t.table_name = 'policies' THEN 1
             ELSE 0 END AS expected_permission,
        HAS_PERMS_BY_NAME('dbo.' + t.table_name, 'OBJECT', p.permission_name) AS actual_permission
 FROM (VALUES ('policies'), ('policy_versions'), ('active_policy_assignments'), ('audit_events'),
-             ('validation_executions'), ('human_review_cases'), ('feedback_records'), ('evaluation_exports')) t(table_name)
+             ('validation_executions'), ('human_review_cases'), ('feedback_records'), ('evaluation_exports'), ('demo_sessions'), ('inference_rate_buckets'), ('inference_usage'), ('export_jobs'), ('review_assignments'), ('review_notes')) t(table_name)
 CROSS JOIN (VALUES ('SELECT'), ('INSERT'), ('UPDATE'), ('DELETE'), ('ALTER'),
                    ('CONTROL'), ('REFERENCES'), ('TAKE OWNERSHIP'), ('VIEW DEFINITION')) p(permission_name)
 ORDER BY t.table_name, p.permission_name;
@@ -37,7 +37,7 @@ ORDER BY t.table_name, p.permission_name;
 SELECT p.permission_name,
        HAS_PERMS_BY_NAME('dbo.alembic_version', 'OBJECT', p.permission_name) AS has_permission
 FROM (VALUES ('SELECT'), ('INSERT'), ('UPDATE'), ('DELETE'), ('ALTER'), ('CONTROL')) p(permission_name);
--- No permission may be 1. NULL can mean hidden metadata and needs the admin audit.
+-- Required current release: SELECT = 1; every other listed permission = 0. NULL is inconclusive.
 SELECT * FROM fn_my_permissions(NULL, 'DATABASE');
 SELECT * FROM fn_my_permissions('dbo', 'SCHEMA');
 -- Administrator must separately audit group-derived access, public permissions,

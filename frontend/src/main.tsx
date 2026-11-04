@@ -1,4 +1,5 @@
-import React, { useCallback, useEffect, useState } from "react";
+import { MultiSelectDropdown } from "./MultiSelectDropdown";
+import React, { useCallback, useEffect, useState, useRef } from "react";
 import { createRoot } from "react-dom/client";
 import {
   BrowserRouter,
@@ -24,24 +25,22 @@ import {
   Search,
   ChevronRight,
   CircleCheck,
+  CircleAlert,
+  CircleMinus,
   LogOut,
 } from "lucide-react";
-import {
-  ResponsiveContainer,
-  AreaChart,
-  Area,
-  XAxis,
-  YAxis,
-  Tooltip,
-  CartesianGrid,
-  BarChart,
-  Bar,
-} from "recharts";
 import { request, getToken } from "./api";
 import "./styles.css";
+import { ErrorBoundary } from "./ErrorBoundary";
 
 type RecordData = Record<string, unknown>;
-type Rule = { enabled: boolean; action: string; values?: string[] };
+type Rule = {
+  enabled: boolean;
+  action: string;
+  values?: string[];
+  entities?: string[] | null;
+  categories?: string[] | null;
+};
 type Document = {
   schema_version: string;
   name: string;
@@ -55,6 +54,9 @@ type Policy = {
   enabled: number;
   draft: string;
   revision: number;
+  row_version: number;
+  has_published_versions?: boolean;
+  is_active?: boolean;
 };
 type Stage = {
   decision: string;
@@ -71,14 +73,22 @@ type Result = {
   output: Stage | null;
   safe_response: string | null;
   model_invoked: boolean;
+  generation_status?: "NOT_INVOKED" | "SUCCEEDED" | "FAILED";
   provider_mode: string;
   policy_id: string;
+  policy_name?: string;
   policy_version: number;
   duration_ms: number;
   request_id: string;
+  review_id?: string;
   provider_error?: string;
+  provider_diagnostics?: {
+    code: string;
+    http_status?: number;
+    request_id?: string;
+  };
 };
-type Summary = {
+export type Summary = {
   total_policies: number;
   active_policies: number;
   total_validations: number;
@@ -88,6 +98,8 @@ type Summary = {
   violations: Record<string, number>;
   contributions: Record<string, number>;
   active_policy: { id: string; version: number } | null;
+  window?: { start: string; end_exclusive: string };
+  trend_sample_limit?: number;
 };
 const initialDocument: Document = {
   schema_version: "1.0",
@@ -121,28 +133,35 @@ const navigation = [
 ];
 
 // Load endpoint data and surface errors with an explicit retry path.
-function useApi<T>(path: string) {
+export function useApi<T>(path: string) {
   const [data, setData] = useState<T | null>(null),
     [error, setError] = useState(""),
     [loading, setLoading] = useState(true);
-  const reload = useCallback(async () => {
-    setLoading(true);
-    setError("");
-    try {
-      setData(await request<T>(path));
-    } catch (error) {
-      setError(String(error));
-    } finally {
-      setLoading(false);
-    }
-  }, [path]);
+  const reload = useCallback(
+    async (signal?: AbortSignal) => {
+      setLoading(true);
+      setData(null);
+      setError("");
+      try {
+        const next = await request<T>(path, "GET", undefined, { signal });
+        if (!signal?.aborted) setData(next);
+      } catch (error) {
+        if (!signal?.aborted) setError(String(error));
+      } finally {
+        if (!signal?.aborted) setLoading(false);
+      }
+    },
+    [path],
+  );
   useEffect(() => {
-    void reload();
+    const controller = new AbortController();
+    void reload(controller.signal);
+    return () => controller.abort();
   }, [reload]);
-  return { data, error, loading, reload };
+  return { data, error, loading, reload: () => reload() };
 }
 // Render an accessible status badge with consistent decision colors.
-function Badge({ value }: { value: string }) {
+export function Badge({ value }: { value: string }) {
   return (
     <span className={`badge ${value.toLowerCase()}`}>
       {value.replaceAll("_", " ")}
@@ -158,7 +177,7 @@ function Notice({ message }: { message: string }) {
   ) : null;
 }
 // Display a loading, retryable error, or actual empty state.
-function DataState({
+export function DataState({
   loading,
   error,
   empty,
@@ -182,188 +201,72 @@ function DataState({
   ) : null;
 }
 // Show live tenant metrics and compliance history.
-function Overview({ analytics = false }: { analytics?: boolean }) {
-  const { data, error, loading, reload } = useApi<Summary>(
-    "/api/analytics/overview",
-  );
-  return (
-    <>
-      <div className="page-heading">
-        <div>
-          <span className="eyebrow">GOVERNANCE INTELLIGENCE</span>
-          <h1>
-            {analytics
-              ? "Compliance analytics"
-              : "Your governance, at a glance"}
-          </h1>
-          <p>Understand how your policies protect every AI interaction.</p>
-        </div>
-        <NavLink className="primary button" to="/playground">
-          Open playground <ArrowUpRight size={16} />
-        </NavLink>
-      </div>
-      <DataState {...{ loading, error, reload }} />
-      {data && (
-        <>
-          <div className="metrics">
-            {[
-              [
-                "Total validations",
-                data.total_validations,
-                "All inspected requests",
-              ],
-              [
-                "Active policies",
-                data.active_policies,
-                `${data.total_policies} policies in your workspace`,
-              ],
-              [
-                "Blocked requests",
-                data.decisions.BLOCK,
-                "Held before content release",
-              ],
-              [
-                "Pending reviews",
-                data.pending_reviews,
-                "Awaiting a human decision",
-              ],
-            ].map(([title, value, caption], index) => (
-              <div className="metric" key={String(title)}>
-                <span className={`metric-icon color-${index}`}>
-                  <ShieldCheck size={19} />
-                </span>
-                <p>{title}</p>
-                <strong>{value}</strong>
-                <small>{caption}</small>
-              </div>
-            ))}
-          </div>
-          <div className="chart-grid">
-            <section className="panel">
-              <div className="panel-heading">
-                <div>
-                  <h2>Compliance score</h2>
-                  <p>Weighted control results across recent inspections</p>
-                </div>
-                <span className="badge">LIVE DATA</span>
-              </div>
-              {data.trends.length ? (
-                <div className="chart">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <AreaChart data={data.trends}>
-                      <defs>
-                        <linearGradient id="blue" x1="0" y1="0" x2="0" y2="1">
-                          <stop
-                            offset="0%"
-                            stopColor="#2563eb"
-                            stopOpacity={0.25}
-                          />
-                          <stop
-                            offset="100%"
-                            stopColor="#2563eb"
-                            stopOpacity={0}
-                          />
-                        </linearGradient>
-                      </defs>
-                      <CartesianGrid vertical={false} stroke="#edf0f5" />
-                      <XAxis dataKey="date" tick={{ fontSize: 11 }} />
-                      <YAxis domain={[0, 100]} tick={{ fontSize: 11 }} />
-                      <Tooltip />
-                      <Area
-                        type="monotone"
-                        dataKey="score"
-                        stroke="#2563eb"
-                        fill="url(#blue)"
-                        strokeWidth={3}
-                      />
-                    </AreaChart>
-                  </ResponsiveContainer>
-                </div>
-              ) : (
-                <div className="empty">
-                  Your first validation starts the trend.
-                </div>
-              )}
-            </section>
-            <section className="panel">
-              <h2>Decision distribution</h2>
-              <p>Actual enforcement outcomes</p>
-              <div className="decision-list">
-                {Object.entries(data.decisions).map(([name, count]) => (
-                  <div key={name}>
-                    <Badge value={name} />
-                    <strong>{count}</strong>
-                  </div>
-                ))}
-              </div>
-              <div className="note">
-                <ShieldCheck size={18} /> Decisions enforce policy independently
-                of the score.
-              </div>
-            </section>
-          </div>
-          <section className="panel">
-            <h2>
-              {analytics
-                ? "Control contribution totals"
-                : "Violation categories"}
-            </h2>
-            <p>
-              {analytics
-                ? "Sum of satisfied control weights; this is not regulatory certification."
-                : "Failed and unknown controls in persisted inspections."}
-            </p>
-            {Object.keys(analytics ? data.contributions : data.violations)
-              .length ? (
-              <div className="chart">
-                <ResponsiveContainer width="100%" height="100%">
-                  <BarChart
-                    data={Object.entries(
-                      analytics ? data.contributions : data.violations,
-                    ).map(([category, count]) => ({
-                      category: category.replaceAll("_", " "),
-                      count,
-                    }))}
-                  >
-                    <CartesianGrid vertical={false} />
-                    <XAxis dataKey="category" tick={{ fontSize: 11 }} />
-                    <YAxis />
-                    <Tooltip />
-                    <Bar dataKey="count" fill="#7c3aed" radius={[5, 5, 0, 0]} />
-                  </BarChart>
-                </ResponsiveContainer>
-              </div>
-            ) : (
-              <div className="empty">No violations recorded.</div>
-            )}
-          </section>
-        </>
-      )}
-    </>
-  );
-}
+const Overview = React.lazy(() => import("./Overview"));
 // Manage policy drafts and lifecycle using backend-enforced transitions.
 function Policies() {
-  const [offset, setOffset] = useState(0);
-  const { data, error, loading, reload } = useApi<Policy[]>(
-      `/api/policies?offset=${offset}&limit=20`,
-    ),
+  const [offset, setOffset] = useState(0),
     [search, setSearch] = useState(""),
     [status, setStatus] = useState(""),
+    [enabled, setEnabled] = useState("");
+  const identity = useApi<RecordData>("/api/settings");
+  const role = String(identity.data?.role || "");
+  const canManage = ["Admin", "Policy Owner"].includes(role);
+  const canReview = ["Admin", "Reviewer"].includes(role);
+  const { data, error, loading, reload } = useApi<Policy[]>(
+      `/api/policies?offset=${offset}&limit=20&search=${encodeURIComponent(search)}${status ? `&status=${status}` : ""}${enabled ? `&enabled=${enabled}` : ""}`,
+    ),
     [message, setMessage] = useState(""),
-    [versions, setVersions] = useState<RecordData[] | null>(null);
+    [versions, setVersions] = useState<RecordData[] | null>(null),
+    [versionPolicy, setVersionPolicy] = useState(""),
+    [versionOffset, setVersionOffset] = useState(0),
+    [busy, setBusy] = useState(false);
+  async function loadVersions(policyId: string, nextOffset = 0) {
+    setBusy(true);
+    try {
+      const rows = await request<RecordData[]>(
+        `/api/policies/${policyId}/versions?limit=20&offset=${nextOffset}`,
+      );
+      setVersions(rows);
+      setVersionPolicy(policyId);
+      setVersionOffset(nextOffset);
+    } catch (error) {
+      setMessage(String(error));
+    } finally {
+      setBusy(false);
+    }
+  }
   // Confirm and execute a policy action, then refresh live data.
   async function act(policy: Policy, operation: string) {
-    if (!confirm(`${operation} “${policy.name}”?`)) return;
+    if (busy) return;
+    if (
+      !confirm(
+        operation === "delete"
+          ? `Delete “${policy.name}” from Policies? Audit history and published versions will be kept.`
+          : `${operation} “${policy.name}”?`,
+      )
+    )
+      return;
+    setBusy(true);
     try {
       await request(
         `/api/policies/${policy.id}${operation === "delete" ? "" : `/${operation}`}`,
         operation === "delete" ? "DELETE" : "POST",
+        undefined,
+        operation === "delete"
+          ? { headers: { "If-Match": String(policy.row_version) } }
+          : {},
       );
-      setMessage(`Policy ${operation} completed.`);
       await reload();
+      setMessage(
+        operation === "delete"
+          ? "Policy removed from Policies. Audit history is retained."
+          : `Policy ${operation} completed.`,
+      );
+      if (operation === "delete") setVersions(null);
     } catch (error) {
       setMessage(String(error));
+    } finally {
+      setBusy(false);
     }
   }
   return (
@@ -374,10 +277,18 @@ function Policies() {
           <h1>Policy management</h1>
           <p>Build, review, and publish immutable governance rules.</p>
         </div>
-        <NavLink to="/policies/new" className="primary button">
-          <Plus size={17} />
-          Create policy
-        </NavLink>
+        {canManage && (
+          <NavLink to="/policies/new" className="primary button">
+            <Plus size={17} />
+            Create policy
+          </NavLink>
+        )}
+        {!canManage && (
+          <small>
+            Your role can view policies. Admin or Policy Owner access is
+            required to change drafts.
+          </small>
+        )}
       </div>
       <Notice message={message} />
       <section className="panel">
@@ -385,15 +296,22 @@ function Policies() {
           <label className="search">
             <Search size={17} />
             <input
-              placeholder="Search this page…"
+              aria-label="Search policies"
+              placeholder="Search all policies…"
               value={search}
-              onChange={(event) => setSearch(event.target.value)}
+              onChange={(event) => {
+                setSearch(event.target.value);
+                setOffset(0);
+              }}
             />
           </label>
           <select
             aria-label="Filter status"
             value={status}
-            onChange={(event) => setStatus(event.target.value)}
+            onChange={(event) => {
+              setStatus(event.target.value);
+              setOffset(0);
+            }}
           >
             <option value="">All statuses</option>
             {["DRAFT", "SUBMITTED", "APPROVED", "PUBLISHED", "ARCHIVED"].map(
@@ -403,6 +321,21 @@ function Policies() {
             )}
           </select>
         </div>
+        <label>
+          Enabled filter
+          <select
+            aria-label="Filter enabled"
+            value={enabled}
+            onChange={(event) => {
+              setEnabled(event.target.value);
+              setOffset(0);
+            }}
+          >
+            <option value="">All</option>
+            <option value="true">Enabled</option>
+            <option value="false">Disabled</option>
+          </select>
+        </label>
         <DataState {...{ loading, error, reload }} empty={data?.length === 0} />
         <div className="table-wrap">
           <table>
@@ -415,73 +348,97 @@ function Policies() {
               </tr>
             </thead>
             <tbody>
-              {data
-                ?.filter(
-                  (policy) =>
-                    policy.name.toLowerCase().includes(search.toLowerCase()) &&
-                    (!status || policy.status === status),
-                )
-                .map((policy) => (
-                  <tr key={policy.id}>
-                    <td>
-                      <NavLink to={`/policies/${policy.id}`}>
-                        {policy.name}
+              {data?.map((policy) => (
+                <tr key={policy.id}>
+                  <td>
+                    <NavLink to={`/policies/${policy.id}`}>
+                      {policy.name}
+                    </NavLink>
+                    <small>Draft revision {policy.revision}</small>
+                    {policy.is_active && (
+                      <small>
+                        Active assignment — activate another policy before
+                        deleting.
+                      </small>
+                    )}
+                  </td>
+                  <td>
+                    <Badge value={policy.status} />
+                  </td>
+                  <td>
+                    <Badge value={policy.enabled ? "ENABLED" : "DISABLED"} />
+                  </td>
+                  <td>
+                    <div className="actions">
+                      <NavLink className="button" to={`/policies/${policy.id}`}>
+                        View / edit
                       </NavLink>
-                      <small>Draft revision {policy.revision}</small>
-                    </td>
-                    <td>
-                      <Badge value={policy.status} />
-                    </td>
-                    <td>
-                      <Badge value={policy.enabled ? "ENABLED" : "DISABLED"} />
-                    </td>
-                    <td>
-                      <div className="actions">
-                        <NavLink
-                          className="button"
-                          to={`/policies/${policy.id}`}
-                        >
-                          View / edit
-                        </NavLink>
-                        {[
-                          ...(policy.status === "DRAFT"
-                            ? ["submit", "delete"]
-                            : []),
-                          ...(policy.status === "SUBMITTED" ? ["approve"] : []),
-                          ...(policy.status === "APPROVED" ? ["publish"] : []),
-                          ...(policy.status === "PUBLISHED" && policy.enabled
-                            ? ["activate"]
-                            : []),
-                          ...(policy.status !== "ARCHIVED"
-                            ? [policy.enabled ? "disable" : "enable", "archive"]
-                            : []),
-                        ].map((operation) => (
-                          <button
-                            key={operation}
-                            onClick={() => void act(policy, operation)}
-                          >
-                            {operation}
-                          </button>
-                        ))}
+                      {[
+                        ...(canManage && policy.status === "DRAFT"
+                          ? ["submit"]
+                          : []),
+                        ...(canReview && policy.status === "SUBMITTED"
+                          ? ["approve", "reject"]
+                          : []),
+                        ...(canManage && policy.status === "APPROVED"
+                          ? ["publish"]
+                          : []),
+                        ...(canManage &&
+                        policy.status === "PUBLISHED" &&
+                        policy.enabled
+                          ? ["activate"]
+                          : []),
+                        ...(canManage && policy.status !== "ARCHIVED"
+                          ? [
+                              policy.enabled ? "disable" : "enable",
+                              ...(policy.is_active ? [] : ["archive"]),
+                            ]
+                          : []),
+                      ].map((operation) => (
                         <button
-                          onClick={async () => {
-                            try {
-                              setVersions(
-                                await request(
-                                  `/api/policies/${policy.id}/versions`,
-                                ),
-                              );
-                            } catch (error) {
-                              setMessage(String(error));
-                            }
-                          }}
+                          key={operation}
+                          disabled={busy}
+                          onClick={() => void act(policy, operation)}
                         >
-                          History
+                          {operation}
                         </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
+                      ))}
+                      {canManage && (
+                        <button
+                          disabled={
+                            busy ||
+                            Boolean(policy.is_active) ||
+                            (policy.has_published_versions
+                              ? Boolean(policy.enabled)
+                              : policy.status !== "DRAFT")
+                          }
+                          title={
+                            policy.is_active
+                              ? "Activate another policy before deleting this policy"
+                              : policy.has_published_versions && policy.enabled
+                                ? "Disable this policy before deleting it"
+                                : "Remove from Policies and keep history"
+                          }
+                          onClick={() => void act(policy, "delete")}
+                        >
+                          Delete
+                        </button>
+                      )}
+                      <button
+                        onClick={async () => {
+                          try {
+                            await loadVersions(policy.id);
+                          } catch (error) {
+                            setMessage(String(error));
+                          }
+                        }}
+                      >
+                        History
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
@@ -507,6 +464,65 @@ function Policies() {
             <h2>Immutable version history</h2>
             <button onClick={() => setVersions(null)}>Close</button>
           </div>
+          <p>
+            Restoring a version creates a draft and requires approval,
+            publication and activation again.
+          </p>
+          {canManage &&
+            versions.map((version) => (
+              <button
+                key={String(version.id)}
+                disabled={busy}
+                onClick={async () => {
+                  if (
+                    !confirm(
+                      "Restore this version as a draft? Current enforcement stays on its published snapshot.",
+                    )
+                  )
+                    return;
+                  setBusy(true);
+                  try {
+                    await request(
+                      `/api/policies/${version.policy_id}/rollback`,
+                      "POST",
+                      { version: version.number },
+                    );
+                    setMessage(
+                      "Version restored as draft. Submit for approval before activating.",
+                    );
+                    await reload();
+                  } catch (error) {
+                    setMessage(String(error));
+                  } finally {
+                    setBusy(false);
+                  }
+                }}
+              >
+                Restore version {String(version.number)} as draft
+              </button>
+            ))}
+          <div className="pagination">
+            <button
+              disabled={busy || !versionOffset}
+              onClick={() =>
+                void loadVersions(
+                  versionPolicy,
+                  Math.max(0, versionOffset - 20),
+                )
+              }
+            >
+              Previous versions
+            </button>
+            <span>Page {versionOffset / 20 + 1}</span>
+            <button
+              disabled={busy || versions.length < 20}
+              onClick={() =>
+                void loadVersions(versionPolicy, versionOffset + 20)
+              }
+            >
+              Next versions
+            </button>
+          </div>
           <pre>{JSON.stringify(versions, null, 2)}</pre>
         </section>
       )}
@@ -519,28 +535,58 @@ function Editor() {
     navigate = useNavigate(),
     [document, setDocument] = useState<Document>(initialDocument),
     [message, setMessage] = useState(""),
-    [ready, setReady] = useState(!id);
+    [ready, setReady] = useState(!id),
+    [saving, setSaving] = useState(false),
+    [policyState, setPolicyState] = useState("DRAFT"),
+    [loadedVersion, setLoadedVersion] = useState<number | null>(null);
+  const identity = useApi<RecordData>("/api/settings");
+  const capabilities = useApi<{
+    available_pii_entities: string[];
+    pii_status: string;
+  }>("/api/capabilities");
+  const editable =
+    ["Admin", "Policy Owner"].includes(String(identity.data?.role)) &&
+    !["ARCHIVED", "DELETED"].includes(policyState);
   useEffect(() => {
+    const controller = new AbortController();
+    setReady(!id);
+    setLoadedVersion(null);
+    setMessage("");
+    setDocument(initialDocument);
+    setPolicyState("DRAFT");
     if (id)
-      void request<Policy>(`/api/policies/${id}`)
+      void request<Policy>(`/api/policies/${id}`, "GET", undefined, {
+        signal: controller.signal,
+      })
         .then((policy) => {
+          if (controller.signal.aborted) return;
           setDocument(JSON.parse(policy.draft));
+          setPolicyState(policy.status);
+          setLoadedVersion(policy.row_version);
           setReady(true);
         })
-        .catch((error) => setMessage(String(error)));
+        .catch((error) => {
+          if (!controller.signal.aborted) setMessage(String(error));
+        });
+    return () => controller.abort();
   }, [id]);
   // Persist a validated draft without modifying published snapshots.
   async function save(event: React.FormEvent) {
     event.preventDefault();
+    if (saving || !editable || !ready || (id && loadedVersion === null)) return;
+    setSaving(true);
     try {
       await request(
         id ? `/api/policies/${id}` : "/api/policies",
         id ? "PUT" : "POST",
         document,
+        id ? { headers: { "If-Match": String(loadedVersion) } } : {},
       );
       navigate("/policies");
     } catch (error) {
       setMessage(String(error));
+    } finally {
+      setSaving(false);
     }
   }
   return (
@@ -556,91 +602,215 @@ function Editor() {
       {ready && (
         <div className="editor-grid">
           <form className="panel" onSubmit={save}>
-            <label>
-              Policy name
-              <input
-                required
-                maxLength={120}
-                pattern="[\w .\-]+"
-                value={document.name}
-                onChange={(event) =>
-                  setDocument({ ...document, name: event.target.value })
-                }
-              />
-            </label>
-            <label>
-              Description
-              <textarea
-                value={document.description}
-                maxLength={1000}
-                onChange={(event) =>
-                  setDocument({ ...document, description: event.target.value })
-                }
-              />
-            </label>
-            {Object.entries(document.rules).map(([name, rule]) => (
-              <div className="rule" key={name}>
-                <label className="checkbox">
-                  <input
-                    type="checkbox"
-                    checked={rule.enabled}
-                    onChange={(event) =>
-                      setDocument({
-                        ...document,
-                        rules: {
-                          ...document.rules,
-                          [name]: { ...rule, enabled: event.target.checked },
-                        },
-                      })
-                    }
-                  />
-                  <strong>{name.replaceAll("_", " ")}</strong>
-                </label>
-                <select
-                  aria-label={`${name} action`}
-                  value={rule.action}
+            <fieldset className="editor-fields" disabled={!editable || saving}>
+              <label>
+                Policy name
+                <input
+                  required
+                  maxLength={120}
+                  pattern="[\w .\-]+"
+                  value={document.name}
+                  onChange={(event) =>
+                    setDocument({ ...document, name: event.target.value })
+                  }
+                />
+              </label>
+              <label>
+                Description
+                <textarea
+                  value={document.description}
+                  maxLength={1000}
                   onChange={(event) =>
                     setDocument({
                       ...document,
-                      rules: {
-                        ...document.rules,
-                        [name]: { ...rule, action: event.target.value },
-                      },
+                      description: event.target.value,
                     })
                   }
-                >
-                  {(name === "moderation"
-                    ? ["BLOCK", "HUMAN_REVIEW"]
-                    : ["BLOCK", "REDACT", "HUMAN_REVIEW"]
-                  ).map((action) => (
-                    <option key={action}>{action}</option>
-                  ))}
-                </select>
-                {rule.values && (
-                  <label>
-                    Blocked words (comma separated)
+                />
+              </label>
+              {Object.entries(document.rules).map(([name, rule]) => (
+                <div className="rule" key={name}>
+                  <label className="checkbox">
                     <input
-                      value={rule.values.join(",")}
+                      type="checkbox"
+                      checked={rule.enabled}
                       onChange={(event) =>
                         setDocument({
                           ...document,
                           rules: {
                             ...document.rules,
-                            [name]: {
-                              ...rule,
-                              values: event.target.value.split(","),
-                            },
+                            [name]: { ...rule, enabled: event.target.checked },
                           },
                         })
                       }
                     />
+                    <strong>{name.replaceAll("_", " ")}</strong>
                   </label>
-                )}
-              </div>
-            ))}
-            <button className="primary" type="submit">
-              Save draft
-            </button>
+                  <select
+                    aria-label={`${name} action`}
+                    value={rule.action}
+                    onChange={(event) =>
+                      setDocument({
+                        ...document,
+                        rules: {
+                          ...document.rules,
+                          [name]: { ...rule, action: event.target.value },
+                        },
+                      })
+                    }
+                  >
+                    {(name === "moderation"
+                      ? ["BLOCK", "HUMAN_REVIEW"]
+                      : ["BLOCK", "REDACT", "HUMAN_REVIEW"]
+                    ).map((action) => (
+                      <option key={action}>{action}</option>
+                    ))}
+                  </select>
+                  {(name === "pii_detection" || name === "moderation") && (
+                    <div className="rule-selection">
+                      <MultiSelectDropdown
+                        label={
+                          name === "pii_detection"
+                            ? "PII entity selection"
+                            : "Moderation categories"
+                        }
+                        options={
+                          name === "pii_detection"
+                            ? [
+                                "EMAIL_ADDRESS",
+                                "PHONE_NUMBER",
+                                "CREDIT_CARD",
+                                "US_SSN",
+                                "PERSON",
+                                "LOCATION",
+                                "IP_ADDRESS",
+                                "URL",
+                                "DATE_TIME",
+                                "IBAN_CODE",
+                                "US_BANK_NUMBER",
+                                "US_DRIVER_LICENSE",
+                                "US_PASSPORT",
+                                "US_ITIN",
+                                "UK_NHS",
+                                "MEDICAL_LICENSE",
+                                "CRYPTO",
+                                "NRP",
+                                "AU_ABN",
+                                "AU_ACN",
+                                "AU_TFN",
+                                "AU_MEDICARE",
+                                "IN_PAN",
+                                "IN_AADHAAR",
+                                "IN_VEHICLE_REGISTRATION",
+                                "SG_NRIC_FIN",
+                                "ES_NIF",
+                                "IT_FISCAL_CODE",
+                                "IT_DRIVER_LICENSE",
+                                "IT_VAT_CODE",
+                                "IT_PASSPORT",
+                                "IT_IDENTITY_CARD",
+                                "PL_PESEL",
+                                "FI_PERSONAL_ID",
+                                "KR_RRN",
+                                "TH_TNIN",
+                              ]
+                            : [
+                                "harassment",
+                                "harassment/threatening",
+                                "hate",
+                                "hate/threatening",
+                                "illicit",
+                                "illicit/violent",
+                                "self-harm",
+                                "self-harm/intent",
+                                "self-harm/instructions",
+                                "sexual",
+                                "sexual/minors",
+                                "violence",
+                                "violence/graphic",
+                              ]
+                        }
+                        selected={
+                          rule[
+                            name === "pii_detection" ? "entities" : "categories"
+                          ] || []
+                        }
+                        available={
+                          name === "pii_detection"
+                            ? capabilities.data?.available_pii_entities || []
+                            : undefined
+                        }
+                        allLabel={
+                          name === "pii_detection"
+                            ? "All installed PII entities (default)"
+                            : "All moderation categories (default)"
+                        }
+                        disabled={!editable || saving}
+                        onChange={(values) =>
+                          setDocument({
+                            ...document,
+                            rules: {
+                              ...document.rules,
+                              [name]: {
+                                ...rule,
+                                [name === "pii_detection"
+                                  ? "entities"
+                                  : "categories"]: values.length
+                                  ? values
+                                  : null,
+                              },
+                            },
+                          })
+                        }
+                      />
+                      <p className="muted">
+                        {name === "pii_detection"
+                          ? "No selection uses all installed PII entities. Unavailable entities cannot be added."
+                          : "No selection uses all provider moderation categories."}
+                      </p>
+                      {name === "pii_detection" && !capabilities.data && (
+                        <p role="status">
+                          {capabilities.error ||
+                            "Checking detector capabilities…"}
+                        </p>
+                      )}
+                    </div>
+                  )}
+                  {rule.values && (
+                    <label>
+                      Blocked words (comma separated)
+                      <input
+                        value={rule.values.join(",")}
+                        onChange={(event) =>
+                          setDocument({
+                            ...document,
+                            rules: {
+                              ...document.rules,
+                              [name]: {
+                                ...rule,
+                                values: event.target.value.split(","),
+                              },
+                            },
+                          })
+                        }
+                      />
+                    </label>
+                  )}
+                </div>
+              ))}
+              <p>
+                {!editable
+                  ? "Read-only: your role or this policy's state does not permit editing."
+                  : ""}
+              </p>
+              <button
+                className="primary"
+                type="submit"
+                disabled={saving || !editable}
+              >
+                Save draft
+              </button>
+            </fieldset>
           </form>
           <section className="panel">
             <h2>JSON preview</h2>
@@ -673,6 +843,12 @@ function Inspection({ stage, title }: { stage: Stage | null; title: string }) {
             Redaction revalidated:{" "}
             {stage.revalidated ? "yes" : "not applicable / not approved"}
           </p>
+          {stage.breakdown.pii_detection === "FAILED" && (
+            <p className="muted">
+              PII detected: this control failed compliance. Detector
+              unavailability is reported as UNKNOWN.
+            </p>
+          )}
           {stage.findings.length > 0 && (
             <pre>{JSON.stringify(stage.findings, null, 2)}</pre>
           )}
@@ -685,10 +861,14 @@ function Inspection({ stage, title }: { stage: Stage | null; title: string }) {
 }
 // Execute input governance, model generation, and output inspection through one gateway.
 function Playground() {
+  const sourceReview = new URLSearchParams(window.location.search).get(
+    "review",
+  );
   const [text, setText] = useState(
       "Explain the benefits of data governance in simple terms.",
     ),
     [result, setResult] = useState<Result | null>(null),
+    [rated, setRated] = useState(false),
     [busy, setBusy] = useState(false),
     [message, setMessage] = useState("");
   // Submit only to the backend; provider credentials never enter the browser.
@@ -697,9 +877,13 @@ function Playground() {
     setBusy(true);
     setMessage("");
     setResult(null);
+    setRated(false);
     try {
       setResult(
-        await request<Result>("/api/governance/generate", "POST", { text }),
+        await request<Result>("/api/governance/generate", "POST", {
+          text,
+          ...(sourceReview ? { source_review_id: sourceReview } : {}),
+        }),
       );
     } catch (error) {
       setMessage(String(error));
@@ -772,8 +956,8 @@ function Playground() {
             <div>
               <strong>Final decision: {result.decision}</strong>
               <p>
-                Policy {result.policy_id.slice(0, 8)} · v{result.policy_version}{" "}
-                · {result.duration_ms} ms
+                Policy {result.policy_name || result.policy_id.slice(0, 8)} · v
+                {result.policy_version} · {result.duration_ms} ms
               </p>
             </div>
             <Badge
@@ -788,16 +972,40 @@ function Playground() {
             <Inspection stage={result.input} title="01 · Input inspection" />
             <section className="panel">
               <h2>02 · Model gateway</h2>
-              <CircleCheck className="gateway-icon" />
+              {result.provider_error ||
+              result.generation_status === "FAILED" ? (
+                <CircleAlert className="gateway-icon" />
+              ) : result.output ? (
+                <CircleCheck className="gateway-icon" />
+              ) : (
+                <CircleMinus className="gateway-icon" />
+              )}
               <h3>
-                {result.model_invoked
-                  ? "Invocation attempted"
-                  : "Model not invoked"}
+                {result.provider_error || result.generation_status === "FAILED"
+                  ? "Generation failed"
+                  : result.output && result.model_invoked
+                    ? "Generation succeeded"
+                    : result.model_invoked
+                      ? "Invocation attempted"
+                      : "Model not invoked"}
               </h3>
               <p>
                 {result.provider_error ||
-                  "Input approval is required before generation."}
+                  (result.output && result.model_invoked
+                    ? "Generated content passed through output inspection. The final policy decision controls release."
+                    : "Input approval is required before generation.")}
               </p>
+              {result.provider_diagnostics && (
+                <p>
+                  Provider status: {result.provider_diagnostics.code}
+                  {result.provider_diagnostics.http_status
+                    ? ` · HTTP ${result.provider_diagnostics.http_status}`
+                    : ""}
+                  {result.provider_diagnostics.request_id
+                    ? ` · Azure request ${result.provider_diagnostics.request_id}`
+                    : ""}
+                </p>
+              )}
               <Badge value={result.provider_mode} />
             </section>
             <Inspection stage={result.output} title="03 · Output inspection" />
@@ -809,17 +1017,24 @@ function Playground() {
                 "Response withheld. No unvalidated model content was released."}
             </p>
             <small>Request {result.request_id}</small>
+            {result.review_id && (
+              <NavLink className="button" to="/reviews">
+                Track human review
+              </NavLink>
+            )}
             <div className="actions">
               <span>Rate the decision:</span>
               {[1, 2, 3, 4, 5].map((rating) => (
                 <button
                   key={rating}
+                  disabled={rated}
                   onClick={async () => {
                     try {
                       await request("/api/feedback", "POST", {
                         execution_id: result.request_id,
                         rating,
                       });
+                      setRated(true);
                       setMessage("Feedback saved.");
                     } catch (error) {
                       setMessage(String(error));
@@ -838,7 +1053,11 @@ function Playground() {
 }
 // Simulate drafts independently from active policy assignment and generation.
 function Simulator() {
-  const policies = useApi<Policy[]>("/api/policies"),
+  const [policyOffset, setPolicyOffset] = useState(0),
+    [policySearch, setPolicySearch] = useState("");
+  const policies = useApi<Policy[]>(
+      `/api/policies?limit=20&offset=${policyOffset}&search=${encodeURIComponent(policySearch)}`,
+    ),
     [id, setId] = useState(""),
     [text, setText] = useState("Contact demo@example.com"),
     [result, setResult] = useState<Stage | null>(null),
@@ -864,6 +1083,7 @@ function Simulator() {
         onSubmit={async (event) => {
           event.preventDefault();
           setBusy(true);
+          setResult(null);
           try {
             setResult(
               await request(`/api/policies/${id}/simulate`, "POST", { text }),
@@ -876,6 +1096,42 @@ function Simulator() {
           }
         }}
       >
+        <label>
+          Search policies
+          <input
+            value={policySearch}
+            onChange={(event) => {
+              setPolicySearch(event.target.value);
+              setPolicyOffset(0);
+              setId("");
+            }}
+          />
+        </label>
+        <div className="pagination">
+          <button
+            type="button"
+            disabled={!policyOffset || policies.loading}
+            onClick={() => {
+              setPolicyOffset(Math.max(0, policyOffset - 20));
+              setId("");
+            }}
+          >
+            Previous policies
+          </button>
+          <span>Page {policyOffset / 20 + 1}</span>
+          <button
+            type="button"
+            disabled={
+              policies.loading || !policies.data || policies.data.length < 20
+            }
+            onClick={() => {
+              setPolicyOffset(policyOffset + 20);
+              setId("");
+            }}
+          >
+            Next policies
+          </button>
+        </div>
         <label>
           Policy draft
           <select
@@ -908,11 +1164,82 @@ function Simulator() {
     </>
   );
 }
+// Keep published snapshots accessible after a policy is removed from the workspace.
+function RetainedPolicyHistory({
+  policyId,
+  close,
+}: {
+  policyId: string;
+  close: () => void;
+}) {
+  const [offset, setOffset] = useState(0);
+  const policy = useApi<Policy>(`/api/policies/${policyId}`);
+  const versions = useApi<RecordData[]>(
+    `/api/policies/${policyId}/versions?limit=20&offset=${offset}`,
+  );
+  return (
+    <section className="panel">
+      <div className="panel-heading">
+        <h2>
+          Retained policy history{policy.data ? `: ${policy.data.name}` : ""}
+        </h2>
+        <button onClick={close}>Close policy history</button>
+      </div>
+      <p>
+        This policy was removed from Policies. Published versions remain
+        read-only.
+      </p>
+      <DataState
+        loading={versions.loading}
+        error={versions.error || policy.error}
+        reload={versions.reload}
+      />
+      {versions.data?.map((version) => (
+        <details key={String(version.id)}>
+          <summary>
+            Published version {String(version.number)} ·{" "}
+            {String(version.created).slice(0, 19)}
+          </summary>
+          <pre>{String(version.document)}</pre>
+        </details>
+      ))}
+      <div className="pagination">
+        <button
+          disabled={!offset || versions.loading}
+          onClick={() => setOffset(Math.max(0, offset - 20))}
+        >
+          Previous versions
+        </button>
+        <span>Page {offset / 20 + 1}</span>
+        <button
+          disabled={
+            versions.loading || !versions.data || versions.data.length < 20
+          }
+          onClick={() => setOffset(offset + 20)}
+        >
+          Next versions
+        </button>
+      </div>
+    </section>
+  );
+}
 // Present paginated real records with optional review and export actions.
 function Records({ kind }: { kind: "history" | "reviews" | "reports" }) {
   const [offset, setOffset] = useState(0),
+    [auditCategory, setAuditCategory] = useState("policy"),
+    [retainedPolicyId, setRetainedPolicyId] = useState(""),
     [message, setMessage] = useState(""),
-    [details, setDetails] = useState<RecordData | null>(null);
+    [details, setDetails] = useState<RecordData | null>(null),
+    [busy, setBusy] = useState(false),
+    [reason, setReason] = useState(""),
+    [assignee, setAssignee] = useState(""),
+    [startDate, setStartDate] = useState(""),
+    [endDate, setEndDate] = useState(""),
+    [exportOffset, setExportOffset] = useState(0);
+  const exportKeys = useRef<Record<string, string>>({});
+  const identity = useApi<RecordData>("/api/settings");
+  const canReview = ["Admin", "Reviewer"].includes(String(identity.data?.role));
+  const canExport = ["Admin", "Auditor"].includes(String(identity.data?.role));
   const path =
     kind === "history"
       ? "/api/audit/executions"
@@ -920,10 +1247,14 @@ function Records({ kind }: { kind: "history" | "reviews" | "reports" }) {
         ? "/api/reviews"
         : "/api/audit/events";
   const { data, error, loading, reload } = useApi<RecordData[]>(
-    `${path}?offset=${offset}&limit=20`,
+    `${path}?offset=${offset}&limit=20${kind === "reports" ? `&category=${auditCategory}` : ""}`,
   );
-  const exports = useApi<RecordData[]>(
-    kind === "reports" ? "/api/reports/exports" : "/api/feedback/summary",
+  const exports = useApi<
+    RecordData[] | { count: number; average: number | null }
+  >(
+    kind === "reports"
+      ? `/api/reports/exports?limit=20&offset=${exportOffset}`
+      : "/api/feedback/summary",
   );
   return (
     <>
@@ -943,24 +1274,39 @@ function Records({ kind }: { kind: "history" | "reviews" | "reports" }) {
               : "Sanitized metadata, persisted by the governance gateway."}
           </p>
         </div>
-        {kind === "reports" && (
+        {kind === "reports" && canExport && (
           <div className="actions">
             {["json", "csv"].map((format) => (
               <button
                 className="primary"
                 key={format}
+                disabled={busy}
                 onClick={async () => {
+                  if (busy) return;
+                  setBusy(true);
                   try {
+                    const payload = {
+                      format,
+                      ...(startDate ? { start_date: startDate } : {}),
+                      ...(endDate ? { end_date: endDate } : {}),
+                    };
+                    const signature = JSON.stringify(payload);
+                    const key = (exportKeys.current[signature] ||=
+                      crypto.randomUUID());
                     const report = await request<RecordData>(
                       "/api/reports/export",
                       "POST",
-                      { format },
+                      { ...payload, idempotency_key: key },
                     );
+                    if (report.state === "COMPLETED")
+                      delete exportKeys.current[signature];
                     setMessage(`ADLS export: ${report.status}`);
                     void exports.reload();
                     void reload();
                   } catch (error) {
                     setMessage(String(error));
+                  } finally {
+                    setBusy(false);
                   }
                 }}
               >
@@ -971,8 +1317,81 @@ function Records({ kind }: { kind: "history" | "reviews" | "reports" }) {
         )}
       </div>
       <Notice message={message} />
+      {kind === "reports" && (
+        <section className="panel">
+          <h2>Export window</h2>
+          <p>
+            Exports include all audit categories within the selected window.
+          </p>
+          <p>
+            Default: last 90 days. Maximum: 366 days, 10,000 records and 5 MB
+            with default settings. Check history after an uncertain result.
+          </p>
+          <label>
+            Start date
+            <input
+              type="date"
+              value={startDate}
+              onChange={(event) => setStartDate(event.target.value)}
+            />
+          </label>
+          <label>
+            End date
+            <input
+              type="date"
+              value={endDate}
+              onChange={(event) => setEndDate(event.target.value)}
+            />
+          </label>
+          {!canExport && (
+            <p>Admin or Auditor access is required to export reports.</p>
+          )}
+        </section>
+      )}
       <section className="panel">
-        <DataState {...{ loading, error, reload }} empty={data?.length === 0} />
+        {kind === "reports" && (
+          <>
+            <div
+              className="actions"
+              role="group"
+              aria-label="Audit history category"
+            >
+              {[
+                ["policy", "Policy history"],
+                ["governance", "Governance execution history"],
+                ["administration", "Administrative history"],
+              ].map(([category, label]) => (
+                <button
+                  key={category}
+                  className={auditCategory === category ? "primary" : ""}
+                  aria-pressed={auditCategory === category}
+                  onClick={() => {
+                    setAuditCategory(category);
+                    setOffset(0);
+                    setDetails(null);
+                    setRetainedPolicyId("");
+                  }}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+            <h2>
+              {auditCategory === "policy"
+                ? "Policy history"
+                : auditCategory === "governance"
+                  ? "Governance execution history"
+                  : "Administrative history"}
+            </h2>
+            {!loading && !error && data?.length === 0 && (
+              <p role="status">No events in this history yet.</p>
+            )}
+          </>
+        )}
+        <DataState
+          {...{ loading, error, reload }}
+          empty={kind !== "reports" && data?.length === 0}
+        />
         <div className="table-wrap">
           <table>
             <thead>
@@ -995,30 +1414,67 @@ function Records({ kind }: { kind: "history" | "reviews" | "reports" }) {
                   </td>
                   <td>
                     <div className="actions">
-                      <button onClick={() => setDetails(row)}>
+                      <button
+                        onClick={async () => {
+                          if (kind !== "reviews") {
+                            setDetails(row);
+                            return;
+                          }
+                          try {
+                            const detail = await request<RecordData>(
+                              `/api/reviews/${row.id}`,
+                            );
+                            setDetails(detail);
+                            const assignment =
+                              detail.assignment as RecordData | null;
+                            setAssignee(
+                              String(assignment?.assigned_reviewer || ""),
+                            );
+                          } catch (error) {
+                            setMessage(String(error));
+                          }
+                        }}
+                      >
                         Inspect metadata
                       </button>
+                      {kind === "reports" &&
+                        row.action === "policy.removed" && (
+                          <button
+                            onClick={() =>
+                              setRetainedPolicyId(String(row.resource))
+                            }
+                          >
+                            View retained versions
+                          </button>
+                        )}
                       {kind === "reviews" &&
+                        canReview &&
                         row.status === "PENDING" &&
                         ["approve", "reject"].map((operation) => (
                           <button
                             key={operation}
+                            disabled={busy}
                             onClick={async () => {
+                              if (busy) return;
                               if (
                                 !confirm(
                                   `${operation} review? This never releases held content.`,
                                 )
                               )
                                 return;
+                              setBusy(true);
                               try {
                                 await request(
                                   `/api/reviews/${row.id}/${operation}`,
                                   "POST",
+                                  { reason },
                                 );
                                 setMessage(`Review ${operation} recorded.`);
                                 await reload();
                               } catch (error) {
                                 setMessage(String(error));
+                              } finally {
+                                setBusy(false);
                               }
                             }}
                           >
@@ -1048,12 +1504,97 @@ function Records({ kind }: { kind: "history" | "reviews" | "reports" }) {
           </button>
         </div>
       </section>
+      {kind === "reports" && retainedPolicyId && (
+        <RetainedPolicyHistory
+          key={retainedPolicyId}
+          policyId={retainedPolicyId}
+          close={() => setRetainedPolicyId("")}
+        />
+      )}
+      {kind === "reviews" && (
+        <section className="panel">
+          <h2>Review decision note</h2>
+          <label>
+            Reason (metadata only; omit sensitive content)
+            <textarea
+              maxLength={1000}
+              value={reason}
+              onChange={(event) => setReason(event.target.value)}
+            />
+          </label>
+          <p>
+            Approval never releases held content. The author must revise and
+            resubmit through every current gate.
+          </p>
+        </section>
+      )}
+      {kind === "history" && exports.data && !Array.isArray(exports.data) && (
+        <section className="panel">
+          <h2>Decision feedback</h2>
+          <p>
+            {exports.data.count} ratings · Average{" "}
+            {exports.data.average ?? "No ratings"}
+          </p>
+        </section>
+      )}
       {details && (
         <section className="panel">
           <div className="panel-heading">
             <h2>Record metadata</h2>
             <button onClick={() => setDetails(null)}>Close</button>
           </div>
+          {kind === "reviews" && (
+            <>
+              <p>
+                Held content is not retained. Inspect execution findings and the
+                decision history below.
+              </p>
+              {details.status === "PENDING" && canReview && (
+                <>
+                  <label>
+                    Assigned reviewer username
+                    <input
+                      value={assignee}
+                      maxLength={100}
+                      onChange={(event) => setAssignee(event.target.value)}
+                    />
+                  </label>
+                  <button
+                    disabled={busy}
+                    onClick={async () => {
+                      setBusy(true);
+                      try {
+                        await request(
+                          `/api/reviews/${details.id}/assignment`,
+                          "PUT",
+                          { assigned_reviewer: assignee, reason },
+                        );
+                        setMessage("Review assignment recorded.");
+                        setDetails(await request(`/api/reviews/${details.id}`));
+                      } catch (error) {
+                        setMessage(String(error));
+                      } finally {
+                        setBusy(false);
+                      }
+                    }}
+                  >
+                    Save assignment
+                  </button>
+                </>
+              )}
+              {details.status !== "PENDING" &&
+                ["Admin", "Developer", "Policy Owner"].includes(
+                  String(identity.data?.role),
+                ) && (
+                  <NavLink
+                    className="button"
+                    to={`/playground?review=${details.id}`}
+                  >
+                    Submit revised text for reinspection
+                  </NavLink>
+                )}
+            </>
+          )}
           <pre>
             {JSON.stringify(
               {
@@ -1076,6 +1617,66 @@ function Records({ kind }: { kind: "history" | "reviews" | "reports" }) {
             error={exports.error}
             reload={exports.reload}
           />
+          {Array.isArray(exports.data) &&
+            exports.data.map((report) => (
+              <div className="detector" key={String(report.id)}>
+                <span>
+                  {String(report.id).slice(0, 8)} ·{" "}
+                  {String(report.state || report.status)} ·{" "}
+                  {String(report.error_code || "")}
+                </span>
+                {canExport &&
+                  Boolean(report.state) &&
+                  report.state !== "COMPLETED" && (
+                    <button
+                      disabled={busy}
+                      onClick={async () => {
+                        if (
+                          !confirm(
+                            "Check existing storage evidence and retry a missing object within the attempt limit? This may access ADLS.",
+                          )
+                        )
+                          return;
+                        setBusy(true);
+                        try {
+                          const recovered = await request<RecordData>(
+                            `/api/reports/exports/${report.id}/reconcile`,
+                            "POST",
+                          );
+                          setMessage(`Recovery: ${recovered.state}`);
+                          await exports.reload();
+                          await reload();
+                        } catch (error) {
+                          setMessage(String(error));
+                        } finally {
+                          setBusy(false);
+                        }
+                      }}
+                    >
+                      Reconcile / recover
+                    </button>
+                  )}
+              </div>
+            ))}
+          <div className="pagination">
+            <button
+              disabled={!exportOffset || exports.loading}
+              onClick={() => setExportOffset(Math.max(0, exportOffset - 20))}
+            >
+              Previous exports
+            </button>
+            <span>Page {exportOffset / 20 + 1}</span>
+            <button
+              disabled={
+                exports.loading ||
+                !Array.isArray(exports.data) ||
+                exports.data.length < 20
+              }
+              onClick={() => setExportOffset(exportOffset + 20)}
+            >
+              Next exports
+            </button>
+          </div>
           <pre>{JSON.stringify(exports.data, null, 2)}</pre>
         </section>
       )}
@@ -1099,8 +1700,86 @@ function EnvironmentBanner() {
 }
 
 // Display truthful configuration and live database diagnostics without secrets.
+function SessionManager() {
+  const [offset, setOffset] = useState(0),
+    [message, setMessage] = useState(""),
+    [busy, setBusy] = useState(false);
+  const sessions = useApi<
+    {
+      id: string;
+      actor: string;
+      expires: string;
+      revoked: boolean;
+      expired: boolean;
+    }[]
+  >(`/api/auth/sessions?limit=20&offset=${offset}`);
+  return (
+    <section className="panel">
+      <h2>Workspace sessions</h2>
+      <p>
+        Revocation ends the selected session. Provisioned credentials can still
+        create new sessions until an operator disables or rotates them.
+      </p>
+      <Notice message={message} />
+      <DataState {...sessions} empty={sessions.data?.length === 0} />
+      {sessions.data?.map((session) => (
+        <div className="detector" key={session.id}>
+          <span>
+            {session.actor} · expires {session.expires} ·{" "}
+            {session.revoked
+              ? "Revoked"
+              : session.expired
+                ? "Expired"
+                : "Active"}
+          </span>
+          <button
+            disabled={busy || session.revoked || session.expired}
+            onClick={async () => {
+              if (!confirm(`Revoke this session for ${session.actor}?`)) return;
+              setBusy(true);
+              try {
+                await request(
+                  `/api/auth/sessions/${session.id}/revoke`,
+                  "POST",
+                );
+                setMessage("Session revoked.");
+                await sessions.reload();
+              } catch (error) {
+                setMessage(String(error));
+              } finally {
+                setBusy(false);
+              }
+            }}
+          >
+            Revoke session
+          </button>
+        </div>
+      ))}
+      <div className="pagination">
+        <button
+          disabled={!offset || sessions.loading}
+          onClick={() => setOffset(Math.max(0, offset - 20))}
+        >
+          Previous sessions
+        </button>
+        <span>Page {offset / 20 + 1}</span>
+        <button
+          disabled={
+            sessions.loading || !sessions.data || sessions.data.length < 20
+          }
+          onClick={() => setOffset(offset + 20)}
+        >
+          Next sessions
+        </button>
+        <button onClick={() => void sessions.reload()}>Refresh sessions</button>
+      </div>
+    </section>
+  );
+}
+
 function Configuration() {
   const { data, error, loading, reload } = useApi<RecordData>("/api/settings");
+  const consumption = useApi<RecordData>("/api/usage");
   return (
     <>
       <div className="page-heading">
@@ -1111,9 +1790,28 @@ function Configuration() {
             Configuration presence does not imply successful cloud connectivity.
           </p>
         </div>
-        <button onClick={reload}>Refresh diagnostics</button>
+        <button
+          onClick={() => {
+            void reload();
+            void consumption.reload();
+          }}
+        >
+          Refresh diagnostics
+        </button>
       </div>
       <DataState {...{ loading, error, reload }} />
+      {data && ["Admin", "Auditor"].includes(String(data.role)) && (
+        <section className="panel">
+          <h2>Inference consumption</h2>
+          <DataState
+            loading={consumption.loading}
+            error={consumption.error}
+            reload={consumption.reload}
+          />
+          <pre>{JSON.stringify(consumption.data, null, 2)}</pre>
+        </section>
+      )}
+      {data?.role === "Admin" && <SessionManager />}
       <section className="panel">
         {data &&
           Object.entries(data).map(([key, value]) => (
@@ -1134,7 +1832,16 @@ function Configuration() {
 export function App() {
   const [authenticated, setAuthenticated] = useState(Boolean(getToken())),
     [token, setToken] = useState(""),
-    [error, setError] = useState("");
+    [error, setError] = useState(""),
+    [loggingIn, setLoggingIn] = useState(false);
+  useEffect(() => {
+    const ended = () => {
+      setAuthenticated(false);
+      setError("Session expired or revoked. Sign in again.");
+    };
+    window.addEventListener("governance-session-ended", ended);
+    return () => window.removeEventListener("governance-session-ended", ended);
+  }, []);
   if (!authenticated)
     return (
       <div className="login">
@@ -1147,14 +1854,24 @@ export function App() {
           className="panel"
           onSubmit={async (event) => {
             event.preventDefault();
+            if (loggingIn) return;
+            setLoggingIn(true);
             sessionStorage.setItem("governance-token", token);
             try {
-              await request("/api/settings");
+              const session = await request<{ access_token: string }>(
+                "/api/auth/session",
+                "POST",
+              );
+              sessionStorage.setItem("governance-token", session.access_token);
+              setToken("");
+              setError("");
               setAuthenticated(true);
               setToken("");
             } catch (error) {
               sessionStorage.removeItem("governance-token");
               setError(String(error));
+            } finally {
+              setLoggingIn(false);
             }
           }}
         >
@@ -1172,7 +1889,7 @@ export function App() {
             />
           </label>
           <Notice message={error} />
-          <button className="primary">
+          <button className="primary" disabled={loggingIn}>
             Connect workspace <ChevronRight size={16} />
           </button>
           <small>Roles and tenant access are enforced by the server.</small>
@@ -1204,7 +1921,7 @@ export function App() {
           <ShieldCheck size={21} />
           <strong>Govern with confidence</strong>
           <p>Policy enforcement at every step of the AI lifecycle.</p>
-          <small>LOCAL WORKSPACE · v1.0</small>
+          <small>DEMO WORKSPACE · v1.1</small>
         </div>
       </aside>
       <div className="workspace">
@@ -1215,11 +1932,18 @@ export function App() {
           <div className="header-right">
             <span className="local-pill">
               <i />
-              Local environment
+              Governed workspace
             </span>
             <button
               title="Sign out"
-              onClick={() => {
+              onClick={async () => {
+                try {
+                  await request("/api/auth/logout", "POST");
+                } catch (error) {
+                  setError(
+                    `Signed out on this device. Server revocation was not confirmed: ${String(error)}. The server session remains valid until expiry or administrator revocation.`,
+                  );
+                }
                 sessionStorage.removeItem("governance-token");
                 setAuthenticated(false);
               }}
@@ -1230,21 +1954,36 @@ export function App() {
           </div>
         </header>
         <main>
+          <Notice message={error} />
           <EnvironmentBanner />
-          <Routes>
-            <Route path="/" element={<Overview />} />
-            <Route path="/policies" element={<Policies />} />
-            <Route path="/policies/new" element={<Editor />} />
-            <Route path="/policies/:id" element={<Editor />} />
-            <Route path="/simulator" element={<Simulator />} />
-            <Route path="/playground" element={<Playground />} />
-            <Route path="/history" element={<Records kind="history" />} />
-            <Route path="/reviews" element={<Records kind="reviews" />} />
-            <Route path="/analytics" element={<Overview analytics />} />
-            <Route path="/reports" element={<Records kind="reports" />} />
-            <Route path="/settings" element={<Configuration />} />
-            <Route path="*" element={<p>Page not found.</p>} />
-          </Routes>
+          <Notice message={error} />
+          <React.Suspense
+            fallback={<div className="skeleton" aria-label="Loading page" />}
+          >
+            <Routes>
+              <Route path="/" element={<Overview />} />
+              <Route path="/policies" element={<Policies />} />
+              <Route path="/policies/new" element={<Editor key="new" />} />
+              <Route path="/policies/:id" element={<Editor key="existing" />} />
+              <Route path="/simulator" element={<Simulator />} />
+              <Route path="/playground" element={<Playground />} />
+              <Route
+                path="/history"
+                element={<Records key="history" kind="history" />}
+              />
+              <Route
+                path="/reviews"
+                element={<Records key="reviews" kind="reviews" />}
+              />
+              <Route path="/analytics" element={<Overview analytics />} />
+              <Route
+                path="/reports"
+                element={<Records key="reports" kind="reports" />}
+              />
+              <Route path="/settings" element={<Configuration />} />
+              <Route path="*" element={<p>Page not found.</p>} />
+            </Routes>
+          </React.Suspense>
           <footer>
             <ShieldCheck size={14} /> Governance signals are heuristic controls,
             not legal compliance certification.
@@ -1259,6 +1998,8 @@ const root = document.getElementById("root");
 if (root)
   createRoot(root).render(
     <React.StrictMode>
-      <App />
+      <ErrorBoundary>
+        <App />
+      </ErrorBoundary>
     </React.StrictMode>,
   );

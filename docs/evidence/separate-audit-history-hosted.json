@@ -1,0 +1,32 @@
+{
+  "release": {
+    "git_commit": "8d12cc4caf78ad2b38c0d81fa297d27ace7aca9a",
+    "build_version": "1.2-bcba8e97a8b84793",
+    "built_utc": "2026-11-01T20:31:22.484782+00:00",
+    "frontend_sha256": "ebe4503ce247e19975b233e6649be9a28563f41e601dcf62005724a0707c7d68",
+    "backend_sha256": "66790536252fe519591fd42ce91335ffede0970a1ee376f1cc42e5f666c99932",
+    "required_migration": "004"
+  },
+  "checks": [
+    {
+      "category": "policy",
+      "http_status": 200,
+      "rows": 20,
+      "separated": true
+    },
+    {
+      "category": "governance",
+      "http_status": 200,
+      "rows": 13,
+      "separated": true
+    },
+    {
+      "category": "administration",
+      "http_status": 200,
+      "rows": 20,
+      "separated": true
+    }
+  ],
+  "frontend_labels_verified": true,
+  "diagnostic_session_revoked": true
+}

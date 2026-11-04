@@ -1,0 +1,107 @@
+{
+  "checks": [
+    {
+      "name": "/health healthy",
+      "passed": true
+    },
+    {
+      "name": "/ready healthy",
+      "passed": true
+    },
+    {
+      "name": "private/missing path denied /.env",
+      "passed": true,
+      "detail": {
+        "status": 404
+      }
+    },
+    {
+      "name": "private/missing path denied /.git/config",
+      "passed": true,
+      "detail": {
+        "status": 404
+      }
+    },
+    {
+      "name": "private/missing path denied /startup.sh",
+      "passed": true,
+      "detail": {
+        "status": 404
+      }
+    },
+    {
+      "name": "private/missing path denied /requirements.txt",
+      "passed": true,
+      "detail": {
+        "status": 404
+      }
+    },
+    {
+      "name": "private/missing path denied /app/providers.py",
+      "passed": true,
+      "detail": {
+        "status": 404
+      }
+    },
+    {
+      "name": "private/missing path denied /api/not-a-real-route",
+      "passed": true,
+      "detail": {
+        "status": 404
+      }
+    },
+    {
+      "name": "private/missing path denied /assets/not-a-real-file.js",
+      "passed": true,
+      "detail": {
+        "status": 404
+      }
+    },
+    {
+      "name": "private/missing path denied /assets/%2e%2e/%2e%2e/.env",
+      "passed": true,
+      "detail": {
+        "status": 404
+      }
+    },
+    {
+      "name": "untrusted CORS origin denied",
+      "passed": true
+    },
+    {
+      "name": "trusted CORS origin allowed",
+      "passed": true
+    },
+    {
+      "name": "hosted pagination rejects limit=0",
+      "passed": true
+    },
+    {
+      "name": "hosted pagination rejects limit=101",
+      "passed": true
+    },
+    {
+      "name": "hosted pagination rejects offset=-1",
+      "passed": true
+    },
+    {
+      "name": "hosted SQL live Presidio configuration",
+      "passed": true
+    },
+    {
+      "name": "safe diagnostics excludes secret field names",
+      "passed": true
+    },
+    {
+      "name": "previous verified export still visible",
+      "passed": true
+    },
+    {
+      "name": "four previous failed exports retained",
+      "passed": true
+    }
+  ],
+  "passed": 19,
+  "failed": 0,
+  "scope": "GET and CORS OPTIONS only; no mutations or paid calls"
+}

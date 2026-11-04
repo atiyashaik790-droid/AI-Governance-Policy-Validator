@@ -1,0 +1,7 @@
+{
+  "package_source_match": "PASS",
+  "zip_sha256": "3d81bdfca85f4df3b4786562283bce4d599d34662993f2c21623eeb6d3286992",
+  "report_links": "PASS",
+  "configured_secret_exact_match_scan": "PASS",
+  "nonignored_files_scanned": 278
+}

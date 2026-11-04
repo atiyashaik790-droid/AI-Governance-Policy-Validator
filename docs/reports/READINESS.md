@@ -1,6 +1,6 @@
 # Final readiness report — 28 October 2026
 
-**Live connectivity update:** Azure GPT-5 mini and OpenAI moderation are now LIVE VERIFIED. One complete live gateway request passed input moderation, Azure generation, output moderation, safe response release, and persisted SQLite audit metadata in approximately 7.9 seconds. The backend has been restarted with both credentials in private `.env`. Azure SQL, ADLS, Docker and browser acceptance remain outstanding. See [live-connectivity.json](live-connectivity.json). Earlier fixture demonstration results below remain valid historical evidence.
+**Live connectivity update:** Azure GPT-5 mini and OpenAI moderation are now LIVE VERIFIED. One complete live gateway request passed input moderation, Azure generation, output moderation, safe response release, and persisted SQLite audit metadata in approximately 7.9 seconds. The backend has been restarted with both credentials in private `.env`. Azure SQL, ADLS, Docker and browser acceptance remain outstanding. See [live-connectivity.json](../live-connectivity.json). Earlier fixture demonstration results below remain valid historical evidence.
 
 **Verdict: the core local fixture demonstration is implemented and tested. Full acceptance is not yet satisfied.** Azure SQL/ADLS access, Docker execution and browser visual/end-to-end verification remain blocked. Human review is metadata-only and requires resubmission; automatic approval/resume is not implemented. This is not a production-ready system.
 
@@ -70,10 +70,10 @@ No secrets were added to tracked source/documentation. The private local `.env`,
 
 ## Handoff
 
-Use the [README](../README.md) for startup/configuration, [architecture](ARCHITECTURE.md) for schema/security/decision explanations, [API guide](API.md) for integration, [phase reports](PHASES.md) for delivery scope, and [demo/viva guide](DEMO.md) for the presentation and five architect questions. Generated synthetic evidence is in [demo-results.json](demo-results.json).
+Use the [README](../../README.md) for startup/configuration, [architecture](../ARCHITECTURE.md) for schema/security/decision explanations, [API guide](../API.md) for integration, [phase reports](PHASES.md) for delivery scope, and [demo/viva guide](../guides/DEMO.md) for the presentation and five architect questions. Generated synthetic evidence is in [demo-results.json](../demo-results.json).
 
 Both services are intended to remain running locally at http://localhost:5173 and http://localhost:8000. If the environment stops them after the session, the README commands restart them. Use an Admin token from the private local handoff file; do not publish it. The existing demonstration workspace contains actual synthetic executions and an enabled active version.
 
 ## Local Entra SQL adapter implementation update
 
-The new Azure SQL adapter adds explicit organizational CLI authentication, fresh tokens on new physical connections, TLS/certificate validation and fail-closed database selection. The active application remains on SQLite. Final backend tests: 86 passed, 0 failed, 0 skipped. No system installation, Azure SQL connection, Azure migration, permission change or database switch was performed in this phase. See [the SQL phase report](AZURE_SQL_PHASE_REPORT.md) and [approval-gated setup runbook](AZURE_SQL_SETUP.md).
+The new Azure SQL adapter adds explicit organizational CLI authentication, fresh tokens on new physical connections, TLS/certificate validation and fail-closed database selection. The active application remains on SQLite. Final backend tests: 86 passed, 0 failed, 0 skipped. No system installation, Azure SQL connection, Azure migration, permission change or database switch was performed in this phase. See [the SQL phase report](AZURE_SQL_PHASE_REPORT.md) and [approval-gated setup runbook](../guides/AZURE_SQL_SETUP.md).

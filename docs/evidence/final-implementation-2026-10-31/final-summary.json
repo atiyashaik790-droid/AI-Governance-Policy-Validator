@@ -1,0 +1,48 @@
+{
+  "readiness": "CONDITIONAL",
+  "production": "NOT_READY",
+  "backend": {
+    "passed": 415,
+    "failed": 0,
+    "skipped": 0
+  },
+  "backend_clean_install": {
+    "passed": 415,
+    "failed": 0,
+    "skipped": 0
+  },
+  "frontend": {
+    "passed": 16,
+    "failed": 0,
+    "skipped": 0
+  },
+  "chrome": {
+    "passed": 49,
+    "failed": 0
+  },
+  "exact_package": {
+    "passed": 15,
+    "failed": 0
+  },
+  "ci": "Configured; remote run not observed",
+  "sql": "SELECT verified, revision 003; candidate requires 004",
+  "new_paid_generation_calls": 0,
+  "new_paid_moderation_calls": 0,
+  "new_adls_operations": 0,
+  "deployments_performed": 0,
+  "hosted_mutations_performed": 0,
+  "zip_sha256": "3d81bdfca85f4df3b4786562283bce4d599d34662993f2c21623eeb6d3286992",
+  "release": "1.1-544cbf32d11a251a",
+  "source_and_package_match": true,
+  "configured_secret_exact_match_scan": "PASS; current nonignored files, not full history",
+  "reports": [
+    "FINAL_IMPLEMENTATION_REPORT.md",
+    "FINAL_TEST_RESULTS.md",
+    "FINAL_AZURE_INTEGRATION_VERIFICATION.md",
+    "FINAL_SECURITY_REVIEW.md",
+    "FINAL_DEPLOYMENT_VERIFICATION.md",
+    "FINAL_DEMO_RUNBOOK.md",
+    "FINAL_PRODUCTION_READINESS.md",
+    "FINAL_PENDING_APPROVALS.md"
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "time": "2026-11-01T19:59:39.552579+00:00",
+  "mode": "ISOLATED_DOCKER_FIXTURE",
+  "checks": [],
+  "status": "BLOCKED",
+  "reason": "Docker executable unavailable"
+}

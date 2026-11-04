@@ -1,0 +1,18 @@
+{
+  "scope": "READ_ONLY_ROLLBACK_PUBLIC_ASSETS",
+  "mutations": false,
+  "assets": {
+    "static/assets/Overview-CX2SwRN7.js": {
+      "matches": true
+    },
+    "static/assets/index-BOD5T5Fn.css": {
+      "matches": true
+    },
+    "static/assets/index-CPzwaiA1.js": {
+      "matches": true
+    },
+    "static/index.html": {
+      "matches": true
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "mode": "ISOLATED_BROWSER_FIXTURES",
+  "checks": [
+    "Active policy Delete is disabled with explanation",
+    "Confirmed Delete removes policy from list with If-Match",
+    "Retained published versions readable in policy history",
+    "Mobile layout fits 390px"
+  ],
+  "page_errors": 0,
+  "widths": {
+    "viewport": 390,
+    "document": 390
+  }
+}

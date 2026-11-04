@@ -1,0 +1,19 @@
+{
+  "scope": "Exact ZIP in isolated process, disposable SQLite and fixture providers; no live SQL/AI/storage",
+  "passed": 12,
+  "checks": [
+    "/health",
+    "/ready",
+    "/",
+    "/policies",
+    "/playground",
+    "/reviews",
+    "/settings",
+    "exchange-only auth",
+    "edit precondition",
+    "input/output gates",
+    "analytics retains input failure",
+    "logout revocation"
+  ],
+  "zip_sha256": "390ca1e896a740754e93f7aa7b3881e8ce32912776c2c1b44b2307715c7d88a9"
+}

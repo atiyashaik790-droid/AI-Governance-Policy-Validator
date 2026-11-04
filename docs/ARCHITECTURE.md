@@ -1,10 +1,16 @@
 # Architecture and decision model
 
+Current controlled-demo status: **COMPLETE**, 30 October 2026. See
+[final acceptance and evidence](reports/FINAL_ACCEPTANCE_REPORT.md); earlier phase reports are
+historical. The existing Azure App Service hosts React static assets and FastAPI on one
+HTTPS origin; Azure SQL is the hosted database. Local SQLite startup remains supported.
+Only the existing approved hosting and four provider/data integrations are used.
+
 ## Runtime
 
 ```mermaid
 flowchart LR
-  UI[React dashboard :5173] --> API[FastAPI :8000]
+  UI[React dashboard] --> API[FastAPI same-origin API]
   API --> AUTH[Local hashed bearer identity + tenant + RBAC]
   AUTH --> POLICY[Enabled immutable active snapshot]
   POLICY --> INPUT[Secret / PII / redaction / moderation / keywords]
@@ -22,13 +28,13 @@ flowchart LR
   EXPORT --> ADLS[Existing ADLS Gen2 filesystem]
 ```
 
-Generation uses a dedicated provider interface expressed as the async `generate_ai_response()` function. Fixture mode replaces remote generation and moderation, but not policy lifecycle, gateway enforcement, SQL persistence, or real Presidio when selected. No provider is called directly by the frontend. No unapproved cloud services or cloud hosting are used.
+Generation uses a dedicated provider interface expressed as the async `generate_ai_response()` function. Fixture mode replaces remote generation and moderation, but not policy lifecycle, gateway enforcement, SQL persistence, or real Presidio when selected. No provider is called directly by the frontend. The existing approved App Service serves React and FastAPI together; no additional cloud service or hosting migration was introduced.
 
 Code ownership boundaries: `schemas.py` validates versioned JSON and request/response contracts; `engine.py` performs deterministic inspection; `providers.py` owns HTTP and Azure SDK calls; `security.py` resolves local identities; `models.py` owns relational records; `database.py` owns transactions; `main.py` handles authenticated API orchestration and queries. The query helpers are intentionally small rather than a generalized repository framework.
 
 ## Policy lifecycle
 
-A policy has a mutable draft and zero or more immutable versions. Submit requires DRAFT; Approve requires SUBMITTED; Publish requires APPROVED. Any edit resets to DRAFT and increments revision. Publishing stores a complete JSON snapshot with a monotonically increasing per-policy version number. The existing active snapshot remains unchanged when its policy draft changes. Activation selects the newest enabled published version for the authenticated tenant. Disabling the active policy makes effective resolution fail closed. Activating another version is required before archiving an active policy. Only never-published DRAFT policies can be deleted.
+A policy has a mutable draft and zero or more immutable versions. Submit requires DRAFT; Approve requires SUBMITTED; Publish requires APPROVED. Any edit resets to DRAFT and increments revision. Publishing stores a complete JSON snapshot with a monotonically increasing per-policy version number. The existing active snapshot remains unchanged when its policy draft changes. Activation selects the newest enabled published version for the authenticated tenant. Disabling the active policy makes effective resolution fail closed. Activating another version is required before archiving an active policy. Never-published DRAFT policies can be physically deleted. Disabled, inactive policies with published versions can instead be removed from the workspace using Delete, while retaining the policy record as DELETED plus all immutable versions, executions and audit events. Removed policies remain readable through tenant-scoped history endpoints and cannot be edited, simulated, activated or restored. Activation advances row_version so a stale activation cannot race a disable/removal.
 
 An optimistic `row_version` prevents concurrent updates from approving a stale draft. The unique policy/version constraint protects concurrent publication. A review decision cannot change its original execution; the immutable audit trail records its disposition. There is no direct REST mutation route for versions or audit events. ORM history hooks reject updates and deletes; these hooks are not a substitute for production database write privileges or tamper-evident audit storage.
 
@@ -66,7 +72,7 @@ The actual demonstration uses eight feature tables (not empty suggested tables).
 | feedback_records | id, tenant, execution_id, rating | tenant-checked execution FK, numeric-only feedback |
 | evaluation_exports | id, tenant, status, path, created | actual attempt outcomes, sanitized exports |
 
-Alembic additionally maintains its `alembic_version` metadata table. Policy drafts and approval evidence use policy fields and append-only events rather than separate unused tables. Executions store historical policy identifiers without deleting audit evidence when a draft is removed. Cross-tenant references are rejected in authenticated service queries; compound tenant foreign keys and database row-level security are future hardening. SQL Server DDL compilation and fresh SQLite migrations are tested separately. Live SQL Server migrations are blocked by credentials/access.
+Alembic additionally maintains its `alembic_version` metadata table. Policy drafts and approval evidence use policy fields and append-only events rather than separate unused tables. Executions store historical policy identifiers without deleting audit evidence when a draft is removed. Cross-tenant references are rejected in authenticated service queries; compound tenant foreign keys and database row-level security are future hardening. SQL Server DDL compilation and fresh SQLite migrations are tested separately. The user has verified live Azure SQL revision 003 with a matching inventory/head. SQL-backed hosted HTTP workflows have prior live acceptance and current read-only/independent export persistence verification. Routine demonstration does not require rerunning migrations.
 
 ## Authentication and authorization
 
@@ -94,3 +100,31 @@ Reviewers see only sanitized execution metadata and control findings, not the or
 Ordinary audit storage and exports omit raw prompts, responses, secrets and matched substrings. Audit storage contains identifiers and timestamps, so still requires controlled access and retention governance. ADLS export uses only request ID, time, decision, policy ID and version; it does not dump arbitrary audit JSON. Failed export attempts remain visible.
 
 The API is synchronous for ADLS SDK work in a threadpool handler. HTTP providers have bounded timeouts; retry/backoff, provider circuit breakers, durable export outboxes, production retention, secret rotation, per-tenant rate limits, enterprise SSO, and tamper-evident audit chains are future work. No hallucination evaluation, comprehensive bias scoring, GDPR certification, or HIPAA certification is implemented or claimed.
+
+## Final ADLS acceptance and browser evidence
+
+The corrected upload uses `overwrite=True, match_condition=MatchConditions.IfMissing`
+to enter the SDK create branch while preserving no-overwrite semantics. Real wire tests
+require `If-None-Match: *` on create and ETag-conditioned flush; existing-file conflicts
+stop before append/flush. Existing-directory checks use supported hdi_isfolder metadata.
+The final deployed export was independently downloaded and verified against SQL metadata,
+row count, byte size, exact serialization and SHA256; temporary reader access was removed.
+No durable recovery redesign was introduced. Export SELECT order is unspecified; the
+integrity verifier validates all expected records before deriving contract bytes in the
+observed order. See [final acceptance](reports/FINAL_ACCEPTANCE_REPORT.md).
+
+Real Chrome verified nine hosted pages at desktop/tablet/mobile sizes and used disposable
+fixtures for interactive authoring/governance/review/feedback. No extra paid live AI call
+was needed. Production identity/security/recovery work remains in the
+[separate backlog](reports/PRODUCTION_BACKLOG.md).
+
+
+## 31 October reliability release (local candidate; SQL 004 not applied)
+
+New modules: exports (durable SQL snapshots and leased explicit ADLS recovery), usage (SQL rate windows/concurrency reservations and actual token metadata), sessions (restricted opaque demo session lifecycle), pii (normalized detection view mapped to original spans), analytics (SQL aggregates with bounded trends), release (package-generated provenance). Existing React/FastAPI/SQLAlchemy architecture and Azure providers are retained. Overview/chart UI is lazy-loaded.
+
+Six additive tables supplement the original eight: demo_sessions, inference_rate_buckets, inference_usage, export_jobs, review_assignments and review_notes. Migration 004 adds a tenant/created/id index on executions and append-only UPDATE/DELETE triggers for audit, versions and review notes. No historical records or core columns are removed. Runtime permissions and hosted migration require approval.
+
+Governance/simulation reserve SQL limits before provider access; request deadlines and durable completion status bound usage. Generation still inspects input, generates only after approval, inspects output and commits audit before content release. PII/moderation selectors default to all existing installed entities/categories for old 1.0 policies. Unsupported regex entities fail closed. Human review stores metadata/notes, never original content; linked revised resubmission always runs current gates.
+
+Export first commits a tenant-scoped idempotent metadata snapshot with deterministic object path/hash, then claims an expiring SQL lease, uploads conditionally, and finalizes only with the current lease. Partial SQL/storage failure leaves recoverable state; explicit reconciliation verifies exact bytes before any bounded retry. No new queue/cloud service exists. See FINAL_IMPLEMENTATION_REPORT.md and OPERATIONS_RUNBOOK.md.

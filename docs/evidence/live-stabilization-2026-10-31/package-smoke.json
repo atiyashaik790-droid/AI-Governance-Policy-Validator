@@ -1,0 +1,38 @@
+{
+  "checks": [
+    {
+      "path": "/health",
+      "status": 200
+    },
+    {
+      "path": "/",
+      "status": 200
+    },
+    {
+      "path": "/playground",
+      "status": 200
+    },
+    {
+      "path": "/policies",
+      "status": 200
+    },
+    {
+      "path": "/api/policies",
+      "status": 401
+    },
+    {
+      "path": "/.env",
+      "status": 404
+    },
+    {
+      "path": "/api/not-a-route",
+      "status": 404
+    },
+    {
+      "path": "/openapi.json",
+      "status": 200
+    }
+  ],
+  "passed": 8,
+  "network_calls": 0
+}

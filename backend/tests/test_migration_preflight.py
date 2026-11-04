@@ -31,7 +31,7 @@ def operation_calls(tree, name):
 
 
 def test_linear_revision_chain():
-    for revision, parent in [("001", None), ("002", "001"), ("003", "002")]:
+    for revision, parent in [("001", None), ("002", "001"), ("003", "002"), ("004", "003")]:
         values = {node.targets[0].id: ast.literal_eval(node.value) for node in migration(revision).body if isinstance(node, ast.Assign)}
         assert values["revision"] == revision
         assert values["down_revision"] == parent
@@ -47,10 +47,12 @@ def test_foundation_dependencies_and_expected_objects():
                 for target in ast.literal_eval(argument.args[1]):
                     assert target.split(".")[0] in created
         created.add(name)
-    assert created == set(Base.metadata.tables)
+    added = {ast.literal_eval(call.args[0]) for call in operation_calls(migration("004"), "create_table")}
+    assert created.isdisjoint(added)
+    assert created | added == set(Base.metadata.tables)
     assert len(calls) == 8
     assert len(operation_calls(migration("001"), "create_index")) == 9
-    assert sum(len(table.foreign_key_constraints) for table in Base.metadata.tables.values()) == 4
+    assert sum(len(table.foreign_key_constraints) for table in Base.metadata.tables.values()) == 7
 
 
 def test_concurrency_columns_match_fresh_baseline():

@@ -1,0 +1,19 @@
+{
+  "backend_tests": {
+    "passed": 439
+  },
+  "frontend_tests": {
+    "passed": 16,
+    "skipped": 0,
+    "includes_real_local_backend": true
+  },
+  "frontend_lint": "PASS",
+  "production_build": "PASS",
+  "python_lint_and_format": "PASS",
+  "python_compile": "PASS",
+  "storage_readback": "BLOCKED_403",
+  "docker_startup": "BLOCKED_RUNTIME_NOT_INSTALLED",
+  "permissions_changed": false,
+  "packages_installed": false,
+  "full_acceptance": "NOT_PASSED"
+}

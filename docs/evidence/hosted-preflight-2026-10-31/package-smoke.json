@@ -1,0 +1,24 @@
+{
+  "checks": [
+    "/",
+    "/policies",
+    "/reviews",
+    "/reports",
+    "/health",
+    "/ready",
+    "unauthenticated denial",
+    "session exchange",
+    "release provenance",
+    "policy lifecycle",
+    "input model output audit workflow",
+    "PII normalization",
+    "strict validation",
+    "private path denial",
+    "logout revocation"
+  ],
+  "passed": 15,
+  "failed": 0,
+  "scope": "Extracted exact ZIP with disposable SQLite and fixture providers; production managed identity is not tested",
+  "credential_scan": "Configured generation/moderation keys and local demo credentials absent from all ZIP members",
+  "zip_sha256": "3d81bdfca85f4df3b4786562283bce4d599d34662993f2c21623eeb6d3286992"
+}

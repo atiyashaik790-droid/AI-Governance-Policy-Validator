@@ -243,7 +243,14 @@ def test_preflight_stops_schema_drift(script, monkeypatch, problem):
     inspector.get_columns.side_effect = columns
     monkeypatch.setattr(script, "inspect", lambda connection: inspector)
     with pytest.raises(script.SafetyStop):
+        script._historical_preflight_003(connection, inventory)
+
+
+def test_retired_protocol_never_queries_database(script):
+    connection, inventory = Mock(), Mock()
+    with pytest.raises(script.SafetyStop, match="Retired"):
         script.preflight(connection, inventory)
+    assert not connection.mock_calls and not inventory.mock_calls
 
 
 def valid_operations():

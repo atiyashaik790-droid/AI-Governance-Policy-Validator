@@ -10,7 +10,10 @@ ROOT = Path(__file__).resolve().parents[1]
 
 # Fail visibly on unexpected statuses without printing tokens or content.
 def call(client, method, path, body=None, expected=200):
-    response = client.request(method, path, json=body)
+    headers = {}
+    if method == "PUT" and path.startswith("/api/policies/"):
+        headers["If-Match"] = str(client.get(path).json()["row_version"])
+    response = client.request(method, path, json=body, headers=headers)
     if response.status_code != expected:
         raise RuntimeError(
             f"{method} {path}: expected {expected}, received {response.status_code}"
@@ -27,6 +30,8 @@ def run_demo():
         headers={"Authorization": f"Bearer {token}"},
         timeout=60,
     ) as client:
+        session = call(client, "POST", "/api/auth/session", expected=201)
+        client.headers["Authorization"] = "Bearer " + session["access_token"]
         diagnostics = call(client, "GET", "/api/settings")
         if diagnostics["provider_mode"] != "fixture":
             raise RuntimeError(

@@ -1,0 +1,18 @@
+{
+  "zip_sha256": "3d81bdfca85f4df3b4786562283bce4d599d34662993f2c21623eeb6d3286992",
+  "zip_matches": true,
+  "corrupt_member": null,
+  "members_match": true,
+  "member_hash_mismatches": [],
+  "source_mismatches": [],
+  "release": {
+    "backend_sha256": "7e2dd1d182461af24365d7d0fc08785b5d57c7a8135bd3a7c20375a6347bdef7",
+    "build_version": "1.1-544cbf32d11a251a",
+    "built_utc": "2026-10-31T14:14:32.149755+00:00",
+    "frontend_sha256": "32e3eada6c0498f7a0319b27218c3431c906842b12fab9662a58dfe70a114ea3",
+    "git_commit": "8d12cc4caf78ad2b38c0d81fa297d27ace7aca9a",
+    "required_migration": "004"
+  },
+  "migration_in_runtime_zip": false,
+  "migration_source_present": true
+}

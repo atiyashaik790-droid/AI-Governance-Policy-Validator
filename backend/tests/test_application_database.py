@@ -71,7 +71,9 @@ def test_workflows_persist_across_independent_http_requests(selected_application
         assert response.json()["decision"] == "ALLOW"
     execution = client.get("/api/audit/executions").json()[0]
     for rating in (2, 3):
+        client.headers["Authorization"] = "Bearer admin" if rating == 2 else "Bearer developer"
         assert client.post("/api/feedback", json={"execution_id": execution["id"], "rating": rating}).status_code == 201
+    client.headers["Authorization"] = "Bearer admin"
     assert client.get("/api/feedback/summary").json() == {"count": 2, "average": 2.5}
     for endpoint in ("audit/summary", "analytics/overview", "analytics/violations", "analytics/compliance"):
         assert client.get(f"/api/{endpoint}").json()["total_validations"] == 3
@@ -82,7 +84,11 @@ def test_workflows_persist_across_independent_http_requests(selected_application
     assert client.get("/api/audit/events").json()
     # Publishing a second version and replacing activation uses the same database.
     document["name"] = "Synthetic second version"
-    edited = client.put(f"/api/policies/{policy_id}", json=document)
+    edited = client.put(
+        f"/api/policies/{policy_id}",
+        json=document,
+        headers={"If-Match": str(client.get(f"/api/policies/{policy_id}").json()["row_version"])},
+    )
     assert edited.json()["row_version"] == client.get(f"/api/policies/{policy_id}").json()["row_version"]
     for action in ("submit", "approve", "publish", "activate", "disable", "enable"):
         assert client.post(f"/api/policies/{policy_id}/{action}").status_code == 200

@@ -1,0 +1,10 @@
+{
+  "scope": "READ_ONLY_EXISTING_SQL_QUERY_VERIFICATION",
+  "mutations": false,
+  "usage_query": "FAILED",
+  "error_type": "ProgrammingError",
+  "known_sql_error_codes": [
+    "8120"
+  ],
+  "superseded_by": "sql-query-verification.json"
+}

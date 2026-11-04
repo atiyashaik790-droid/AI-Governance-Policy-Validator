@@ -202,7 +202,7 @@ Files added:
 
 - scripts/test_azure_sql_writes.py
 - backend/tests/test_sql_write_plan.py
-- docs/AZURE_SQL_CONTROLLED_WRITE_TEST.md
+- docs/runbooks/AZURE_SQL_CONTROLLED_WRITE_TEST.md
 
 Executed: Ruff formatting/lint for the script/tests, installed SQLAlchemy version check,
 and default OFFLINE_PLAN_ONLY invocation with a synthetic example run UUID. The offline

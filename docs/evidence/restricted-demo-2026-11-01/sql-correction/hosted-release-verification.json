@@ -1,0 +1,84 @@
+{
+  "scope": "PUBLIC_READ_ONLY_RELEASE_VERIFICATION",
+  "checks": {
+    "/health": {
+      "status": 200,
+      "security_headers": {
+        "Content-Security-Policy": true,
+        "X-Content-Type-Options": true,
+        "X-Frame-Options": true,
+        "Referrer-Policy": true
+      }
+    },
+    "/ready": {
+      "status": 200,
+      "security_headers": {
+        "Content-Security-Policy": true,
+        "X-Content-Type-Options": true,
+        "X-Frame-Options": true,
+        "Referrer-Policy": true
+      },
+      "release": {
+        "git_commit": "8d12cc4caf78ad2b38c0d81fa297d27ace7aca9a",
+        "build_version": "1.2-fd9d6fee6af8aa17",
+        "built_utc": "2026-11-01T14:49:51.372940+00:00",
+        "frontend_sha256": "33cc01ae06dbedc874033d3e8684c40d512d249bf3657bcc378679b882a05154",
+        "backend_sha256": "23a0b8848b06c5168b81e32955d1a6a2e9012b34e19596b40128dbef1878ee20",
+        "required_migration": "004"
+      }
+    },
+    "/openapi.json": {
+      "status": 200,
+      "security_headers": {
+        "Content-Security-Policy": true,
+        "X-Content-Type-Options": true,
+        "X-Frame-Options": true,
+        "Referrer-Policy": true
+      },
+      "api_version": "1.2.0"
+    },
+    "/policies": {
+      "status": 200,
+      "security_headers": {
+        "Content-Security-Policy": true,
+        "X-Content-Type-Options": true,
+        "X-Frame-Options": true,
+        "Referrer-Policy": true
+      }
+    },
+    "/reviews": {
+      "status": 200,
+      "read_only_followup": true,
+      "security_headers": {
+        "Content-Security-Policy": true,
+        "X-Content-Type-Options": true,
+        "X-Frame-Options": true,
+        "Referrer-Policy": true
+      }
+    },
+    "/settings": {
+      "status": 200,
+      "security_headers": {
+        "Content-Security-Policy": true,
+        "X-Content-Type-Options": true,
+        "X-Frame-Options": true,
+        "Referrer-Policy": true
+      }
+    }
+  },
+  "assets": {
+    "static/assets/Overview-BTWLjfli.js": {
+      "matches_candidate": true
+    },
+    "static/assets/index-CWzBBiSi.js": {
+      "matches_candidate": true
+    },
+    "static/assets/index-CtRqvlKe.css": {
+      "matches_candidate": true
+    },
+    "static/index.html": {
+      "matches_candidate": true
+    }
+  },
+  "candidate_verified": true
+}

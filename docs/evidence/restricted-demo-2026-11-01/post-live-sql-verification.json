@@ -1,0 +1,8 @@
+{
+  "scope": "READ_ONLY_EXISTING_SQL_QUERY_VERIFICATION",
+  "mutations": false,
+  "usage_query": "PASS",
+  "active_reserved": 0,
+  "export_snapshot_hash_matches": true,
+  "four_api_sessions_revoked": true
+}

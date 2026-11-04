@@ -277,6 +277,7 @@ def test_alembic_uses_shared_token_engine(monkeypatch):
     monkeypatch.setattr(context, "configure", configure)
     monkeypatch.setattr(context, "begin_transaction", lambda: nullcontext())
     monkeypatch.setattr(context, "run_migrations", run_migrations)
+    monkeypatch.setattr(context, "is_offline_mode", lambda: False)
     runpy.run_path(str(Path(__file__).resolve().parents[1] / "migrations" / "env.py"))
     assert configure.call_args.kwargs["connection"].engine is engine
     assert len(handshakes) == 1

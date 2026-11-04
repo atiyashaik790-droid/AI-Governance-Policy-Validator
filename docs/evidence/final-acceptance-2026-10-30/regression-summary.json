@@ -1,0 +1,64 @@
+{
+  "date": "2026-10-30",
+  "backend": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 timeout 90 ../.venv/bin/pytest -q -p no:cacheprovider --ignore=tests/test_sql_http_plan.py -k 'not test_migrations_on_fresh_sqlite'",
+    "passed": 224,
+    "failed": 0,
+    "skipped": 0,
+    "deselected": 1,
+    "excluded_module": "tests/test_sql_http_plan.py",
+    "duration_seconds": 8.38,
+    "warning": "Existing Starlette/httpx deprecation",
+    "baseline_before_test_contract_fix": {
+      "passed": 223,
+      "failed": 1,
+      "reason": "stale overwrite=False mock expectation"
+    }
+  },
+  "focused_adls_deployment_workflow": {
+    "passed": 40,
+    "failed": 0,
+    "skipped": 0,
+    "duration_seconds": 1.04,
+    "subset_of_backend_total": true
+  },
+  "frontend": {
+    "command": "GOVERNANCE_TEST_PYTHON='<repository>/.venv/bin/python' npm test",
+    "passed": 7,
+    "failed": 0,
+    "skipped": 0,
+    "files": 2,
+    "duration_seconds": 6.39,
+    "includes": "real disposable loopback FastAPI integration"
+  },
+  "frontend_default_baseline": {
+    "passed": 6,
+    "failed": 0,
+    "skipped": 1,
+    "reason": "HTTP integration requires explicit opt-in"
+  },
+  "lint": {
+    "python": "PASS",
+    "python_format_files": 39,
+    "frontend_eslint": "PASS",
+    "git_diff_check": "PASS"
+  },
+  "build": {
+    "typescript": "PASS",
+    "vite": "PASS",
+    "warning": "Existing JS chunk exceeds 500 kB advisory"
+  },
+  "browser": {
+    "local_passed": 50,
+    "local_failed": 0,
+    "hosted_passed": 72,
+    "hosted_failed": 0,
+    "unhandled_exceptions": 0,
+    "failed_transport_requests": 0
+  },
+  "new_live_calls": {
+    "generation": 0,
+    "moderation": 0,
+    "export": 1
+  }
+}

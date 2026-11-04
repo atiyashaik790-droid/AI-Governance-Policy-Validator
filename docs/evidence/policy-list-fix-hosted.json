@@ -1,0 +1,39 @@
+{
+  "release": "1.2-37d875d722719d8a",
+  "checks": [
+    {
+      "path": "/api/policies",
+      "status": 200,
+      "count": 3
+    },
+    {
+      "path": "/api/policies?offset=1&limit=1",
+      "status": 200,
+      "count": 1
+    },
+    {
+      "path": "/api/policies?search=demo",
+      "status": 200,
+      "count": 0
+    },
+    {
+      "path": "/api/policies?enabled=true",
+      "status": 200,
+      "count": 3
+    },
+    {
+      "path": "/api/policies?status=PUBLISHED",
+      "status": 200,
+      "count": 2
+    },
+    {
+      "path": "/policies",
+      "status": 200
+    },
+    {
+      "path": "/simulator",
+      "status": 200
+    }
+  ],
+  "diagnostic_session_revoked": true
+}

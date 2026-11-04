@@ -1,0 +1,11 @@
+{
+  "remote_command_http_status": 200,
+  "exit_code": 0,
+  "verification": {
+    "scope": "READ_ONLY_EXISTING_EXPORT",
+    "identity": "Existing application managed identity",
+    "permissions_changed": false,
+    "independent_reader_identity": false,
+    "status": "IDENTITY_UNAVAILABLE"
+  }
+}

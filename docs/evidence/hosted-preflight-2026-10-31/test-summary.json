@@ -1,0 +1,34 @@
+{
+  "backend": [
+    {
+      "name": "pytest",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "tests": "415",
+      "time": "58.977",
+      "timestamp": "2026-10-31T23:22:03.882064+05:30",
+      "hostname": "sigmoid-ThinkPad-E14-Gen-4"
+    }
+  ],
+  "frontend": {
+    "passed": 16,
+    "failed": 0,
+    "skipped": 0
+  },
+  "chrome": {
+    "passed": 49,
+    "failed": 0
+  },
+  "package": {
+    "passed": 15,
+    "failed": 0
+  },
+  "ruff": "PASS",
+  "ruff_format": "PASS",
+  "eslint": "PASS",
+  "typescript": "PASS",
+  "vite": "PASS",
+  "git_diff_check": "PASS",
+  "initial_restrictions": "First backend sandbox attempt interrupted; frontend sandbox attempt: 15 passed, 1 skipped, suite failed due loopback EPERM. Successful complete reruns used approved escalation. No test removed."
+}

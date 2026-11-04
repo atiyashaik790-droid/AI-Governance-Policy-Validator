@@ -1,0 +1,13 @@
+{
+  "release": "1.2-38d43c3690160556",
+  "checks": [
+    "Hosted PII multiple selection",
+    "Hosted search filter",
+    "Hosted moderation multiple selection",
+    "Hosted mobile width 390/390"
+  ],
+  "page_errors": 0,
+  "status": "PASS",
+  "policy_writes": 0,
+  "diagnostic_session_revoked": true
+}

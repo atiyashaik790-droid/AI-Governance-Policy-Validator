@@ -196,7 +196,7 @@ def local_workflow(client, monkeypatch):
     assert driver.sql_check(data, before=False) == driver.EXPECTED_COUNTS
     yield data, engine, test_azure_sql_writes.MODELS, snapshots
     assert existing_rows() == baseline
-    assert len(Base.metadata.tables) == 8
+    assert len(Base.metadata.tables) == 14
 
 
 def test_http_sequence_and_persisted_counts(local_workflow):

@@ -1,0 +1,924 @@
+{
+  "date": "2026-10-30",
+  "timezone": "Asia/Kolkata",
+  "run_id": "d5056ed2-99ec-4fa0-9a43-e1d938c1e69c",
+  "tenant": "live-demo-81a5d4cc190a433bacc1",
+  "foreign_tenant": "live-foreign-48de9559fbd4460ea92e",
+  "url": "https://app-governance-validator-atiya-1026.azurewebsites.net",
+  "status": "COMPLETED_WITH_FAILURES",
+  "raw_live_assertions": {
+    "passed": 171,
+    "failed": 10
+  },
+  "corrected_checker_false_positives": 4,
+  "live_assertions": {
+    "passed": 180,
+    "failed": 6,
+    "total": 186
+  },
+  "checks": [
+    {
+      "name": "health HTTP 200",
+      "passed": true
+    },
+    {
+      "name": "readiness HTTP 200",
+      "passed": true
+    },
+    {
+      "name": "live provider mode",
+      "passed": true
+    },
+    {
+      "name": "unauthenticated policies HTTP 401",
+      "passed": true
+    },
+    {
+      "name": "identity Admin HTTP 200",
+      "passed": true
+    },
+    {
+      "name": "identity tenant binding Admin",
+      "passed": true
+    },
+    {
+      "name": "identity Policy Owner HTTP 200",
+      "passed": true
+    },
+    {
+      "name": "identity tenant binding Policy Owner",
+      "passed": true
+    },
+    {
+      "name": "identity Developer HTTP 200",
+      "passed": true
+    },
+    {
+      "name": "identity tenant binding Developer",
+      "passed": true
+    },
+    {
+      "name": "identity Reviewer HTTP 200",
+      "passed": true
+    },
+    {
+      "name": "identity tenant binding Reviewer",
+      "passed": true
+    },
+    {
+      "name": "identity Auditor HTTP 200",
+      "passed": true
+    },
+    {
+      "name": "identity tenant binding Auditor",
+      "passed": true
+    },
+    {
+      "name": "identity Foreign Admin HTTP 200",
+      "passed": true
+    },
+    {
+      "name": "identity tenant binding Foreign Admin",
+      "passed": true
+    },
+    {
+      "name": "initial list Admin HTTP 200",
+      "passed": true
+    },
+    {
+      "name": "initial policy list empty Admin",
+      "passed": true
+    },
+    {
+      "name": "initial list Foreign Admin HTTP 200",
+      "passed": true
+    },
+    {
+      "name": "initial policy list empty Foreign Admin",
+      "passed": true
+    },
+    {
+      "name": "initial dashboard HTTP 200",
+      "passed": true
+    },
+    {
+      "name": "initial dashboard zero",
+      "passed": true
+    },
+    {
+      "name": "no active policy fails closed HTTP 409",
+      "passed": true
+    },
+    {
+      "name": "invalid policy rejected HTTP 422",
+      "passed": true
+    },
+    {
+      "name": "add primary policy HTTP 201",
+      "passed": true
+    },
+    {
+      "name": "created policy owned and draft",
+      "passed": true
+    },
+    {
+      "name": "add pagination policy HTTP 201",
+      "passed": true
+    },
+    {
+      "name": "second policy owned",
+      "passed": true
+    },
+    {
+      "name": "edit primary draft HTTP 200",
+      "passed": true
+    },
+    {
+      "name": "pagination 0 HTTP 200",
+      "passed": true
+    },
+    {
+      "name": "stable policy pagination 0",
+      "passed": true
+    },
+    {
+      "name": "pagination 1 HTTP 200",
+      "passed": true
+    },
+    {
+      "name": "stable policy pagination 1",
+      "passed": true
+    },
+    {
+      "name": "empty pagination HTTP 200",
+      "passed": true
+    },
+    {
+      "name": "empty terminal page",
+      "passed": true
+    },
+    {
+      "name": "foreign policy read denied HTTP 404",
+      "passed": true
+    },
+    {
+      "name": "foreign policy edit denied HTTP 404",
+      "passed": true
+    },
+    {
+      "name": "developer edit denied HTTP 403",
+      "passed": true
+    },
+    {
+      "name": "reviewer creation denied HTTP 403",
+      "passed": true
+    },
+    {
+      "name": "developer approval denied HTTP 403",
+      "passed": true
+    },
+    {
+      "name": "premature publish denied HTTP 409",
+      "passed": true
+    },
+    {
+      "name": "simulate draft HTTP 200",
+      "passed": true
+    },
+    {
+      "name": "live draft simulation ALLOW",
+      "passed": true
+    },
+    {
+      "name": "lifecycle submit 4 HTTP 200",
+      "passed": true
+    },
+    {
+      "name": "lifecycle returns owned policy submit",
+      "passed": true
+    },
+    {
+      "name": "lifecycle approve 5 HTTP 200",
+      "passed": true
+    },
+    {
+      "name": "lifecycle returns owned policy approve",
+      "passed": true
+    },
+    {
+      "name": "lifecycle publish 6 HTTP 200",
+      "passed": true
+    },
+    {
+      "name": "lifecycle returns owned policy publish",
+      "passed": true
+    },
+    {
+      "name": "lifecycle activate 7 HTTP 200",
+      "passed": true
+    },
+    {
+      "name": "lifecycle returns owned policy activate",
+      "passed": true
+    },
+    {
+      "name": "first immutable snapshot HTTP 200",
+      "passed": true
+    },
+    {
+      "name": "first version number and snapshot",
+      "passed": true
+    },
+    {
+      "name": "lifecycle disable 8 HTTP 200",
+      "passed": true
+    },
+    {
+      "name": "lifecycle returns owned policy disable",
+      "passed": true
+    },
+    {
+      "name": "disabled policy fails closed HTTP 409",
+      "passed": true
+    },
+    {
+      "name": "lifecycle enable 9 HTTP 200",
+      "passed": true
+    },
+    {
+      "name": "lifecycle returns owned policy enable",
+      "passed": true
+    },
+    {
+      "name": "edit published policy HTTP 200",
+      "passed": true
+    },
+    {
+      "name": "snapshot after edit HTTP 200",
+      "passed": true
+    },
+    {
+      "name": "first immutable snapshot unchanged after edit",
+      "passed": true
+    },
+    {
+      "name": "active snapshot during draft edit HTTP 200",
+      "passed": true
+    },
+    {
+      "name": "draft edit preserves active version",
+      "passed": true
+    },
+    {
+      "name": "lifecycle submit 11 HTTP 200",
+      "passed": true
+    },
+    {
+      "name": "lifecycle returns owned policy submit",
+      "passed": true
+    },
+    {
+      "name": "lifecycle approve 12 HTTP 200",
+      "passed": true
+    },
+    {
+      "name": "lifecycle returns owned policy approve",
+      "passed": true
+    },
+    {
+      "name": "lifecycle publish 13 HTTP 200",
+      "passed": true
+    },
+    {
+      "name": "lifecycle returns owned policy publish",
+      "passed": true
+    },
+    {
+      "name": "lifecycle activate 14 HTTP 200",
+      "passed": true
+    },
+    {
+      "name": "lifecycle returns owned policy activate",
+      "passed": true
+    },
+    {
+      "name": "two immutable snapshots HTTP 200",
+      "passed": true
+    },
+    {
+      "name": "two distinct ordered immutable versions",
+      "passed": true
+    },
+    {
+      "name": "governance ALLOW HTTP 200",
+      "passed": true
+    },
+    {
+      "name": "decision ALLOW",
+      "passed": false,
+      "detail": {
+        "actual": "BLOCK",
+        "model_invoked": true,
+        "provider_error": "Generation unavailable; response withheld"
+      }
+    },
+    {
+      "name": "execution uses current live immutable snapshot ALLOW",
+      "passed": true
+    },
+    {
+      "name": "live generation and inspected safe output ALLOW",
+      "passed": false
+    },
+    {
+      "name": "governance BLOCK HTTP 200",
+      "passed": true
+    },
+    {
+      "name": "decision BLOCK",
+      "passed": true,
+      "detail": {
+        "actual": "BLOCK",
+        "model_invoked": false,
+        "provider_error": null
+      }
+    },
+    {
+      "name": "execution uses current live immutable snapshot BLOCK",
+      "passed": true
+    },
+    {
+      "name": "withhold and skip generation BLOCK",
+      "passed": true
+    },
+    {
+      "name": "governance REDACT HTTP 200",
+      "passed": true
+    },
+    {
+      "name": "decision REDACT",
+      "passed": false,
+      "detail": {
+        "actual": "BLOCK",
+        "model_invoked": true,
+        "provider_error": "Generation unavailable; response withheld"
+      }
+    },
+    {
+      "name": "execution uses current live immutable snapshot REDACT",
+      "passed": true
+    },
+    {
+      "name": "live generation and inspected safe output REDACT",
+      "passed": false
+    },
+    {
+      "name": "PII redacted and revalidated before release",
+      "passed": true
+    },
+    {
+      "name": "governance HUMAN_REVIEW HTTP 200",
+      "passed": true
+    },
+    {
+      "name": "decision HUMAN_REVIEW",
+      "passed": true,
+      "detail": {
+        "actual": "HUMAN_REVIEW",
+        "model_invoked": false,
+        "provider_error": null
+      }
+    },
+    {
+      "name": "execution uses current live immutable snapshot HUMAN_REVIEW",
+      "passed": true
+    },
+    {
+      "name": "withhold and skip generation HUMAN_REVIEW",
+      "passed": true
+    },
+    {
+      "name": "human review case created",
+      "passed": true
+    },
+    {
+      "name": "review detail HTTP 200",
+      "passed": true
+    },
+    {
+      "name": "review relates to held execution",
+      "passed": true
+    },
+    {
+      "name": "developer review access denied HTTP 403",
+      "passed": true
+    },
+    {
+      "name": "foreign review denied HTTP 404",
+      "passed": true
+    },
+    {
+      "name": "review disposition HTTP 200",
+      "passed": true
+    },
+    {
+      "name": "review requires resubmission without release",
+      "passed": true
+    },
+    {
+      "name": "duplicate review disposition rejected HTTP 409",
+      "passed": true
+    },
+    {
+      "name": "revised input revalidation HTTP 200",
+      "passed": true
+    },
+    {
+      "name": "revised request traverses current gates",
+      "passed": true
+    },
+    {
+      "name": "foreign execution feedback rejected HTTP 404",
+      "passed": true
+    },
+    {
+      "name": "feedback 0 HTTP 201",
+      "passed": true
+    },
+    {
+      "name": "feedback 1 HTTP 201",
+      "passed": true
+    },
+    {
+      "name": "feedback summary HTTP 200",
+      "passed": true
+    },
+    {
+      "name": "feedback count and numeric mean",
+      "passed": true
+    },
+    {
+      "name": "dashboard /api/analytics/overview HTTP 200",
+      "passed": true
+    },
+    {
+      "name": "persisted dashboard /api/analytics/overview",
+      "passed": true,
+      "checker_correction": "Compare all four decision keys including zero values against independent SQL; original evidence retained."
+    },
+    {
+      "name": "dashboard /api/analytics/violations HTTP 200",
+      "passed": true
+    },
+    {
+      "name": "persisted dashboard /api/analytics/violations",
+      "passed": true,
+      "checker_correction": "Compare all four decision keys including zero values against independent SQL; original evidence retained."
+    },
+    {
+      "name": "dashboard /api/analytics/compliance HTTP 200",
+      "passed": true
+    },
+    {
+      "name": "persisted dashboard /api/analytics/compliance",
+      "passed": true,
+      "checker_correction": "Compare all four decision keys including zero values against independent SQL; original evidence retained."
+    },
+    {
+      "name": "dashboard /api/audit/summary HTTP 200",
+      "passed": true
+    },
+    {
+      "name": "persisted dashboard /api/audit/summary",
+      "passed": true,
+      "checker_correction": "Compare all four decision keys including zero values against independent SQL; original evidence retained."
+    },
+    {
+      "name": "all four expected decisions reflected",
+      "passed": false
+    },
+    {
+      "name": "foreign list /api/policies HTTP 200",
+      "passed": true
+    },
+    {
+      "name": "foreign tenant has no visible records /api/policies",
+      "passed": true
+    },
+    {
+      "name": "foreign list /api/audit/executions HTTP 200",
+      "passed": true
+    },
+    {
+      "name": "foreign tenant has no visible records /api/audit/executions",
+      "passed": true
+    },
+    {
+      "name": "foreign list /api/audit/events HTTP 200",
+      "passed": true
+    },
+    {
+      "name": "foreign tenant has no visible records /api/audit/events",
+      "passed": true
+    },
+    {
+      "name": "foreign list /api/reviews HTTP 200",
+      "passed": true
+    },
+    {
+      "name": "foreign tenant has no visible records /api/reviews",
+      "passed": true
+    },
+    {
+      "name": "foreign list /api/reports/exports HTTP 200",
+      "passed": true
+    },
+    {
+      "name": "foreign tenant has no visible records /api/reports/exports",
+      "passed": true
+    },
+    {
+      "name": "single ADLS export HTTP 201",
+      "passed": true
+    },
+    {
+      "name": "ADLS export succeeded",
+      "passed": false,
+      "detail": {
+        "status": "FAILED",
+        "id": "cc615711-f115-49ca-b35f-46ca292809e2",
+        "path": "governance-reports/2026/10/30/cc615711-f115-49ca-b35f-46ca292809e2.json"
+      }
+    },
+    {
+      "name": "export is unique tenant-owned JSON path",
+      "passed": true
+    },
+    {
+      "name": "developer export listing denied HTTP 403",
+      "passed": true
+    },
+    {
+      "name": "export status listing HTTP 200",
+      "passed": true
+    },
+    {
+      "name": "one retained export status",
+      "passed": true
+    },
+    {
+      "name": "audit history HTTP 200",
+      "passed": true
+    },
+    {
+      "name": "API audit exact action/resource multiset",
+      "passed": true
+    },
+    {
+      "name": "validation history HTTP 200",
+      "passed": true
+    },
+    {
+      "name": "API history has exactly run executions",
+      "passed": true
+    },
+    {
+      "name": "foreign SQL table empty policies",
+      "passed": true
+    },
+    {
+      "name": "foreign SQL table empty policy_versions",
+      "passed": true
+    },
+    {
+      "name": "foreign SQL table empty active_policy_assignments",
+      "passed": true
+    },
+    {
+      "name": "foreign SQL table empty audit_events",
+      "passed": true
+    },
+    {
+      "name": "foreign SQL table empty validation_executions",
+      "passed": true
+    },
+    {
+      "name": "foreign SQL table empty human_review_cases",
+      "passed": true
+    },
+    {
+      "name": "foreign SQL table empty feedback_records",
+      "passed": true
+    },
+    {
+      "name": "foreign SQL table empty evaluation_exports",
+      "passed": true
+    },
+    {
+      "name": "exact committed SQL count policies",
+      "passed": true,
+      "detail": {
+        "expected": 2,
+        "actual": 2
+      }
+    },
+    {
+      "name": "SQL synthetic tenant ownership policies",
+      "passed": true
+    },
+    {
+      "name": "exact committed SQL count policy_versions",
+      "passed": true,
+      "detail": {
+        "expected": 2,
+        "actual": 2
+      }
+    },
+    {
+      "name": "SQL synthetic tenant ownership policy_versions",
+      "passed": true
+    },
+    {
+      "name": "exact committed SQL count active_policy_assignments",
+      "passed": true,
+      "detail": {
+        "expected": 1,
+        "actual": 1
+      }
+    },
+    {
+      "name": "SQL synthetic tenant ownership active_policy_assignments",
+      "passed": true
+    },
+    {
+      "name": "exact committed SQL count audit_events",
+      "passed": true,
+      "detail": {
+        "expected": 24,
+        "actual": 24
+      }
+    },
+    {
+      "name": "SQL synthetic tenant ownership audit_events",
+      "passed": true
+    },
+    {
+      "name": "exact committed SQL count validation_executions",
+      "passed": true,
+      "detail": {
+        "expected": 5,
+        "actual": 5
+      }
+    },
+    {
+      "name": "SQL synthetic tenant ownership validation_executions",
+      "passed": true
+    },
+    {
+      "name": "exact committed SQL count human_review_cases",
+      "passed": true,
+      "detail": {
+        "expected": 1,
+        "actual": 1
+      }
+    },
+    {
+      "name": "SQL synthetic tenant ownership human_review_cases",
+      "passed": true
+    },
+    {
+      "name": "exact committed SQL count feedback_records",
+      "passed": true,
+      "detail": {
+        "expected": 2,
+        "actual": 2
+      }
+    },
+    {
+      "name": "SQL synthetic tenant ownership feedback_records",
+      "passed": true
+    },
+    {
+      "name": "exact committed SQL count evaluation_exports",
+      "passed": true,
+      "detail": {
+        "expected": 1,
+        "actual": 1
+      }
+    },
+    {
+      "name": "SQL synthetic tenant ownership evaluation_exports",
+      "passed": true
+    },
+    {
+      "name": "SQL uses only run-created IDs policies",
+      "passed": true
+    },
+    {
+      "name": "SQL uses only run-created IDs policy_versions",
+      "passed": true
+    },
+    {
+      "name": "SQL uses only run-created IDs validation_executions",
+      "passed": true
+    },
+    {
+      "name": "SQL uses only run-created IDs human_review_cases",
+      "passed": true
+    },
+    {
+      "name": "SQL uses only run-created IDs feedback_records",
+      "passed": true
+    },
+    {
+      "name": "SQL uses only run-created IDs evaluation_exports",
+      "passed": true
+    },
+    {
+      "name": "explicit immutable version record 2",
+      "passed": true
+    },
+    {
+      "name": "explicit immutable version record 1",
+      "passed": true
+    },
+    {
+      "name": "active assignment references latest owned immutable version",
+      "passed": true
+    },
+    {
+      "name": "SQL audit exact action/resource multiset",
+      "passed": true
+    },
+    {
+      "name": "execution relationship 699e05bc-2db8-47f9-9789-7a8c68184467",
+      "passed": true
+    },
+    {
+      "name": "audit excludes raw content 699e05bc-2db8-47f9-9789-7a8c68184467",
+      "passed": true
+    },
+    {
+      "name": "execution relationship 8c159066-7efe-4855-b91b-0c3127938104",
+      "passed": true
+    },
+    {
+      "name": "audit excludes raw content 8c159066-7efe-4855-b91b-0c3127938104",
+      "passed": true
+    },
+    {
+      "name": "execution relationship 8c2e628b-db89-4519-b1f2-8ddfc1489a47",
+      "passed": true
+    },
+    {
+      "name": "audit excludes raw content 8c2e628b-db89-4519-b1f2-8ddfc1489a47",
+      "passed": true
+    },
+    {
+      "name": "execution relationship 9192c144-ff11-40be-960a-8df98047e6f9",
+      "passed": true
+    },
+    {
+      "name": "audit excludes raw content 9192c144-ff11-40be-960a-8df98047e6f9",
+      "passed": true
+    },
+    {
+      "name": "execution relationship f84be7b3-8ef8-454d-affc-45e3108507d5",
+      "passed": true
+    },
+    {
+      "name": "audit excludes raw content f84be7b3-8ef8-454d-affc-45e3108507d5",
+      "passed": true
+    },
+    {
+      "name": "review execution relationship",
+      "passed": true
+    },
+    {
+      "name": "feedback execution relationships",
+      "passed": true
+    },
+    {
+      "name": "audit resources belong to this run",
+      "passed": true
+    },
+    {
+      "name": "deployed React shell",
+      "passed": true
+    },
+    {
+      "name": "deployed asset /assets/index-Dt2dI4nI.js",
+      "passed": true,
+      "sha256": "f781a1c2322338eeb5f23829d49cdab8bd59928a3ce0d89dcd69cb1eb203556e"
+    },
+    {
+      "name": "deployed asset /assets/index-BGNv5V7U.css",
+      "passed": true,
+      "sha256": "e99e019bc26bee03e45a48d05175fd4542b45cef29fd4b87638807baa6efa243"
+    },
+    {
+      "name": "live generation error fails closed ALLOW",
+      "passed": true
+    },
+    {
+      "name": "live generation error fails closed REDACT",
+      "passed": true
+    }
+  ],
+  "live_react_readonly_test": {
+    "passed": 1,
+    "failed": 0,
+    "browser_visual_acceptance": "NOT_RUN_NO_BROWSER_SURFACE"
+  },
+  "committed_record_counts": {
+    "policies": 2,
+    "policy_versions": 2,
+    "active_policy_assignments": 1,
+    "audit_events": 24,
+    "validation_executions": 5,
+    "human_review_cases": 1,
+    "feedback_records": 2,
+    "evaluation_exports": 1
+  },
+  "created_ids": {
+    "policies": [
+      "4c91b481-569b-46cf-bf1d-3088b656e87c",
+      "63bcdde6-cc1b-4bf3-b001-f2798f93c26f"
+    ],
+    "versions": [
+      "61b0ae96-bc17-45c9-b674-f2f01177678d",
+      "110e550b-409a-4044-8fc6-aeea014a0ae5"
+    ],
+    "executions": [
+      "699e05bc-2db8-47f9-9789-7a8c68184467",
+      "f84be7b3-8ef8-454d-affc-45e3108507d5",
+      "8c159066-7efe-4855-b91b-0c3127938104",
+      "8c2e628b-db89-4519-b1f2-8ddfc1489a47",
+      "9192c144-ff11-40be-960a-8df98047e6f9"
+    ],
+    "reviews": [
+      "bd032465-bb52-41d7-88d0-540a87bd4afc"
+    ],
+    "feedback": [
+      "0e78e05f-9be1-4047-94d0-380d29823409",
+      "03af9bc5-88c1-482d-b09b-63d89ee515da"
+    ],
+    "exports": [
+      "cc615711-f115-49ca-b35f-46ca292809e2"
+    ]
+  },
+  "decisions": {
+    "ALLOW": 1,
+    "REDACT": 0,
+    "BLOCK": 3,
+    "HUMAN_REVIEW": 1
+  },
+  "budget": {
+    "azure_openai_reserved": 4,
+    "moderation_reserved": 20,
+    "export_attempts": 1
+  },
+  "completed_moderation_inspections": 5,
+  "eligible_generation_attempts": 2,
+  "successful_generation_responses": 0,
+  "provider_http_billing_telemetry_collected": false,
+  "export": {
+    "id": "cc615711-f115-49ca-b35f-46ca292809e2",
+    "tenant": "live-demo-81a5d4cc190a433bacc1",
+    "status": "FAILED",
+    "path": "governance-reports/2026/10/30/cc615711-f115-49ca-b35f-46ca292809e2.json",
+    "created": "2026-10-30T06:26:05.892091+00:00"
+  },
+  "storage_readback": {
+    "path": "governance-reports/2026/10/30/cc615711-f115-49ca-b35f-46ca292809e2.json",
+    "operation": "HEAD_ONLY",
+    "status": "READ_DENIED",
+    "http_status": 403,
+    "error_code": "AuthorizationPermissionMismatch"
+  },
+  "backend_tests": {
+    "passed": 220,
+    "failed": 0,
+    "deselected": 1,
+    "prohibited_driver_cases_excluded": 69
+  },
+  "frontend_local_tests": {
+    "passed": 7,
+    "failed": 0
+  },
+  "correction_artifact": {
+    "path": "/tmp/governance-live-acceptance-z1mats42/governance-validator-corrected.zip",
+    "sha256": "7058b43850bdd4126d0a936e0e322c7e3bad7c4aba696ea85a7d1e10f784c38d",
+    "changed_archive_entries": [
+      "app/providers.py"
+    ],
+    "deployed": false
+  },
+  "evidence": {
+    "private_directory": "/tmp/governance-live-acceptance-z1mats42",
+    "request_ledger_sha256": "f2fa8cc5e1f5a0813646dc213cd3590dba42daa087a6d6b50c1effc740498fc7",
+    "historical_manifests_reused": false,
+    "original_run_reusable": false
+  },
+  "live_application_changes_after_defects": false
+}

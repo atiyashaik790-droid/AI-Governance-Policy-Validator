@@ -2,7 +2,7 @@
 
 import uuid
 from datetime import datetime, timezone
-from sqlalchemy import String, Text, Integer, ForeignKey, UniqueConstraint, event
+from sqlalchemy import String, Text, Integer, ForeignKey, UniqueConstraint, event, Index
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
 
@@ -110,3 +110,79 @@ def prevent_history_mutation(mapper, connection, target) -> None:
 for historical_model in (Version, Audit):
     event.listen(historical_model, "before_update", prevent_history_mutation)
     event.listen(historical_model, "before_delete", prevent_history_mutation)
+
+
+class DemoSession(Base):
+    __tablename__ = "demo_sessions"
+    id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    tenant: Mapped[str] = mapped_column(String(80), index=True)
+    actor: Mapped[str] = mapped_column(String(100))
+    role: Mapped[str] = mapped_column(String(30))
+    credential_hash: Mapped[str] = mapped_column(String(64))
+    expires: Mapped[str] = mapped_column(String(40), index=True)
+    revoked: Mapped[int] = mapped_column(Integer, default=0)
+    created: Mapped[str] = mapped_column(String(40), default=now)
+
+
+class RateBucket(Base):
+    __tablename__ = "inference_rate_buckets"
+    id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    used: Mapped[int] = mapped_column(Integer, default=0)
+    expires: Mapped[str] = mapped_column(String(40), index=True)
+
+
+class InferenceUsage(Base):
+    __tablename__ = "inference_usage"
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=new_id)
+    tenant: Mapped[str] = mapped_column(String(80), index=True)
+    actor: Mapped[str] = mapped_column(String(100), index=True)
+    status: Mapped[str] = mapped_column(String(30), default="RESERVED")
+    expires: Mapped[str] = mapped_column(String(40), index=True)
+    created: Mapped[str] = mapped_column(String(40), default=now)
+    finished: Mapped[str | None] = mapped_column(String(40), nullable=True)
+    prompt_tokens: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    completion_tokens: Mapped[int | None] = mapped_column(Integer, nullable=True)
+
+
+class ExportJob(Base):
+    __tablename__ = "export_jobs"
+    __table_args__ = (UniqueConstraint("tenant", "idempotency_key"),)
+    id: Mapped[str] = mapped_column(ForeignKey("evaluation_exports.id"), primary_key=True)
+    tenant: Mapped[str] = mapped_column(String(80), index=True)
+    idempotency_key: Mapped[str] = mapped_column(String(100))
+    request_hash: Mapped[str] = mapped_column(String(64))
+    content_hash: Mapped[str] = mapped_column(String(64))
+    content: Mapped[str] = mapped_column(Text)
+    state: Mapped[str] = mapped_column(String(20), default="PENDING", index=True)
+    attempts: Mapped[int] = mapped_column(Integer, default=0)
+    lease_until: Mapped[str] = mapped_column(String(40), default="")
+    error_code: Mapped[str] = mapped_column(String(50), default="")
+    created: Mapped[str] = mapped_column(String(40), default=now)
+    updated: Mapped[str] = mapped_column(String(40), default=now)
+
+
+class ReviewAssignment(Base):
+    __tablename__ = "review_assignments"
+    id: Mapped[str] = mapped_column(ForeignKey("human_review_cases.id"), primary_key=True)
+    tenant: Mapped[str] = mapped_column(String(80), index=True)
+    assigned_reviewer: Mapped[str] = mapped_column(String(100), default="")
+    reason: Mapped[str] = mapped_column(String(1000), default="")
+    updated: Mapped[str] = mapped_column(String(40), default=now)
+
+
+class ReviewNote(Base):
+    __tablename__ = "review_notes"
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=new_id)
+    review_id: Mapped[str] = mapped_column(ForeignKey("human_review_cases.id"), index=True)
+    tenant: Mapped[str] = mapped_column(String(80), index=True)
+    actor: Mapped[str] = mapped_column(String(100))
+    action: Mapped[str] = mapped_column(String(40))
+    reason: Mapped[str] = mapped_column(String(1000), default="")
+    created: Mapped[str] = mapped_column(String(40), default=now)
+
+
+event.listen(ReviewNote, "before_update", prevent_history_mutation)
+event.listen(ReviewNote, "before_delete", prevent_history_mutation)
+
+
+Index("ix_execution_tenant_created", Execution.tenant, Execution.created, Execution.id)

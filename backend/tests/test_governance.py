@@ -83,10 +83,22 @@ def test_lifecycle_immutable_history(client):
     policy_id, document = activate(client)
     before = client.get(f"/api/policies/{policy_id}/versions").json()
     document["name"] = "New draft"
-    assert client.put(f"/api/policies/{policy_id}", json=document).json()["status"] == "DRAFT"
+    assert (
+        client.put(
+            f"/api/policies/{policy_id}",
+            json=document,
+            headers={"If-Match": str(client.get(f"/api/policies/{policy_id}").json()["row_version"])},
+        ).json()["status"]
+        == "DRAFT"
+    )
     assert client.get(f"/api/policies/{policy_id}/versions").json() == before
     assert client.post(f"/api/policies/{policy_id}/publish").status_code == 409
-    assert client.delete(f"/api/policies/{policy_id}").status_code == 409
+    assert (
+        client.delete(
+            f"/api/policies/{policy_id}", headers={"If-Match": str(client.get(f"/api/policies/{policy_id}").json()["row_version"])}
+        ).status_code
+        == 409
+    )
     assert client.post(f"/api/policies/{policy_id}/archive").status_code == 409
 
 
@@ -95,7 +107,14 @@ def test_draft_crud(client):
     document = PolicyDocument(name="Draft").model_dump()
     policy_id = client.post("/api/policies", json=document).json()["id"]
     document["name"] = "Changed"
-    assert client.put(f"/api/policies/{policy_id}", json=document).status_code == 200
+    assert (
+        client.put(
+            f"/api/policies/{policy_id}",
+            json=document,
+            headers={"If-Match": str(client.get(f"/api/policies/{policy_id}").json()["row_version"])},
+        ).status_code
+        == 200
+    )
     assert client.delete(f"/api/policies/{policy_id}").status_code == 200
     assert client.get(f"/api/policies/{policy_id}").status_code == 404
     assert len(client.get("/api/audit/events").json()) == 3
@@ -116,9 +135,16 @@ def test_tenant_isolation(client):
 def test_role_and_authentication(client):
     policy_id, document = activate(client)
     client.headers["Authorization"] = "Bearer developer"
-    assert client.put(f"/api/policies/{policy_id}", json=document).status_code == 403
+    assert (
+        client.put(
+            f"/api/policies/{policy_id}",
+            json=document,
+            headers={"If-Match": str(client.get(f"/api/policies/{policy_id}").json()["row_version"])},
+        ).status_code
+        == 403
+    )
     assert client.post("/api/reports/export", json={}).status_code == 403
-    assert client.get("/api/reviews").status_code == 403
+    assert client.get("/api/reviews").json() == []
     client.headers["Authorization"] = "Bearer fake-admin"
     assert client.get("/api/policies").status_code == 401
 

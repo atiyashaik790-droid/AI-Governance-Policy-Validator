@@ -55,7 +55,7 @@ def test_restricted_empty_metadata_is_unknown(inventory):
     connection, _ = catalog_connection(inventory)
     report = inventory.collect_inventory(connection, inventory.TARGET_DATABASE)
     assert report["inventory_status"] == "COMPLETED_WITH_LIMITATIONS"
-    assert len(report["required_tables"]) == 8
+    assert len(report["required_tables"]) == 14
     assert all(table["status"] == "UNKNOWN_NOT_VISIBLE" for table in report["required_tables"].values())
     assert report["alembic_history"]["status"] == "UNKNOWN_NOT_VISIBLE"
     assert "database_is_empty" not in report
@@ -93,7 +93,7 @@ def test_existing_alembic_revision(inventory):
     responses[inventory.HISTORY_SQL] = [{"version_num": "002"}]
     report = inventory.collect_inventory(connection, inventory.TARGET_DATABASE)
     assert report["alembic_history"] == {"status": "READABLE", "revisions": ["002"], "matches_expected_heads": False}
-    assert report["expected_alembic_heads"] == ["003"]
+    assert report["expected_alembic_heads"] == ["004"]
 
 
 # Per-section errors are sanitized and leave metadata unknown instead of absent.
@@ -137,8 +137,8 @@ def test_non_allowlisted_sql_is_rejected(inventory):
 # Read migration declarations without importing a migration or calling upgrade functions.
 def test_migration_inventory_matches_current_chain(inventory):
     revisions = inventory.migration_inventory()
-    assert [revision["revision"] for revision in revisions] == ["001", "002", "003"]
-    assert set(revisions[0]["creates_tables"]) == set(inventory.expected_schema())
+    assert [revision["revision"] for revision in revisions] == ["001", "002", "003", "004"]
+    assert set(revisions[0]["creates_tables"]) | set(revisions[3]["creates_tables"]) == set(inventory.expected_schema())
     assert revisions[1]["adds_columns_to"] == ["policies"]
     assert revisions[2]["adds_columns_to"] == ["human_review_cases"]
 

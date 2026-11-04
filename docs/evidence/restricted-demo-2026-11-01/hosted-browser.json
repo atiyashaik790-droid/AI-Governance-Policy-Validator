@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "checks": [
+    "Hosted browser login",
+    "Overview renders",
+    "Policy management renders",
+    "Policy simulator renders",
+    "AI playground renders",
+    "Validation history renders",
+    "Human review renders",
+    "Compliance analytics renders",
+    "Audit & reports renders",
+    "Settings renders",
+    "Mobile width 390/390",
+    "Desktop and mobile screenshots",
+    "Hosted browser logout"
+  ],
+  "page_errors": 0,
+  "session_upper_bound": 6,
+  "read_only_after_login": true
+}

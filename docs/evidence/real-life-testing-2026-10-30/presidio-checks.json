@@ -1,0 +1,86 @@
+{
+  "checks": [
+    {
+      "name": "plain email detected and revalidated",
+      "passed": true,
+      "decision": "REDACT"
+    },
+    {
+      "name": "plain email original value withheld",
+      "passed": true
+    },
+    {
+      "name": "email with plus alias detected and revalidated",
+      "passed": true,
+      "decision": "REDACT"
+    },
+    {
+      "name": "email with plus alias original value withheld",
+      "passed": true
+    },
+    {
+      "name": "mixed-case email detected and revalidated",
+      "passed": true,
+      "decision": "REDACT"
+    },
+    {
+      "name": "mixed-case email original value withheld",
+      "passed": true
+    },
+    {
+      "name": "two emails detected and revalidated",
+      "passed": true,
+      "decision": "REDACT"
+    },
+    {
+      "name": "two emails original value withheld",
+      "passed": true
+    },
+    {
+      "name": "contextual phone detected and revalidated",
+      "passed": true,
+      "decision": "REDACT"
+    },
+    {
+      "name": "contextual phone original value withheld",
+      "passed": true
+    },
+    {
+      "name": "test credit card detected and revalidated",
+      "passed": true,
+      "decision": "REDACT"
+    },
+    {
+      "name": "test credit card original value withheld",
+      "passed": true
+    },
+    {
+      "name": "no outbound network attempts",
+      "passed": true
+    }
+  ],
+  "passed": 13,
+  "failed": 0,
+  "observations": [
+    {
+      "name": "obfuscated email",
+      "recognized_entities": [],
+      "interpretation": "Exploratory recognizer coverage; no claim of universal PII detection"
+    },
+    {
+      "name": "zero-width email",
+      "recognized_entities": [
+        "URL"
+      ],
+      "interpretation": "Exploratory recognizer coverage; no claim of universal PII detection"
+    },
+    {
+      "name": "synthetic person",
+      "recognized_entities": [
+        "PERSON"
+      ],
+      "interpretation": "Exploratory recognizer coverage; no claim of universal PII detection"
+    }
+  ],
+  "scope": "installed real Presidio/spaCy model; network disabled; fixture moderation only; no generation"
+}

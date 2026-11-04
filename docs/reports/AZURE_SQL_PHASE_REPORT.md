@@ -11,8 +11,8 @@ Created:
 - `backend/app/azure_sql.py`: explicit organizational CLI identity, tenant/user binding, ODBC token injection, renewal at new handshakes, TLS enforcement, pool setup and sanitized exceptions.
 - `backend/tests/test_azure_sql.py`: synthetic identity/transport contracts, local pool tests, shared Alembic engine checks, read-only probe safety and API failure behavior.
 - `scripts/check_azure_sql.py`: explicitly requested, SELECT-only target probe and effective runtime-permission checks without application database selection changes.
-- `docs/AZURE_SQL_SETUP.md`: exact approval-gated dependency commands, organizational login, configuration, least-privilege permissions, read-only validation and migration/switch gates.
-- `docs/AZURE_SQL_PHASE_REPORT.md`: this evidence and handoff report.
+- `docs/guides/AZURE_SQL_SETUP.md`: exact approval-gated dependency commands, organizational login, configuration, least-privilege permissions, read-only validation and migration/switch gates.
+- `docs/reports/AZURE_SQL_PHASE_REPORT.md`: this evidence and handoff report.
 
 Modified:
 
@@ -21,7 +21,7 @@ Modified:
 - `.env.example`: placeholder-only identity settings; active example database remains SQLite.
 - `.gitignore`: ignore the dedicated organizational CLI cache.
 - `README.md`: corrected the previous unsupported ODBC authentication advice and linked the runbook.
-- `docs/READINESS.md`: updated backend test counts and SQL adapter status.
+- `docs/reports/READINESS.md`: updated backend test counts and SQL adapter status.
 
 Unchanged: private `.env`, application data, database models/schema revisions, dependency manifests, Docker files, Azure resource settings, users/grants and firewall rules. Alembic's existing environment already imports the application engine and therefore required no edit.
 
@@ -74,6 +74,6 @@ These tests do not prove native ODBC behavior, organizational sign-in, current f
 
 ## Approval boundary and exact next action
 
-The next action is **review and approve Gate 1 in `docs/AZURE_SQL_SETUP.md`**: native Ubuntu unixODBC/Driver 18.6.2.1 installation and EULA acceptance, plus the explicitly documented Azure CLI jammy repository fallback. No privileged installation has run. If the fallback is not company-approved, agree on an approved supported CLI platform/installation first.
+The next action is **review and approve Gate 1 in `docs/guides/AZURE_SQL_SETUP.md`**: native Ubuntu unixODBC/Driver 18.6.2.1 installation and EULA acceptance, plus the explicitly documented Azure CLI jammy repository fallback. No privileged installation has run. If the fallback is not company-approved, agree on an approved supported CLI platform/installation first.
 
 Then authenticate locally with the organizational tenant/user, set the two identifier fields without changing the SQLite URL, verify the driver, and run the SELECT-only probe. Have the administrator review identity/table permissions. Request a **separate explicit approval** for Azure SQL migrations after the target/schema/permission review. Switch the application's active URL only after successful validation and approval; retain SQLite and plan any data copy separately.

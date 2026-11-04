@@ -1,26 +1,43 @@
 """Tenant-scoped API and governance gateway."""
 
-import csv
-import io
+import asyncio
+import re
+from uuid import uuid4
 import json
 import logging
 import time
 from datetime import datetime, timezone
-from fastapi import FastAPI, Depends, HTTPException, Query, Request
+from fastapi import FastAPI, Depends, HTTPException, Query, Request, Body, Header
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
-from sqlalchemy import select, func, text, cast, Float
+from sqlalchemy import select, func, text, cast, Float, case
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import Session
 from sqlalchemy.orm.exc import StaleDataError
 from .config import settings
 from .database import get_database
 from .models import Policy, Version, Assignment, Audit, Execution, Review, Feedback, Export
-from .schemas import PolicyDocument, TextRequest, FeedbackRequest, ExportRequest, GovernanceResult, PolicyResponse, InspectionResult
-from .security import authenticate, require_role, Identity
-from .engine import inspect_text
-from . import providers
+from .schemas import (
+    PolicyDocument,
+    TextRequest,
+    FeedbackRequest,
+    ExportRequest,
+    GovernanceResult,
+    PolicyResponse,
+    InspectionResult,
+    RollbackRequest,
+    ReviewUpdate,
+    ReviewResolution,
+)
+from .security import authenticate, require_role, Identity, account_enabled
+from .engine import inspect_text, detect_sensitive_information, redact_personal_information
+from . import providers, exports, analytics as analytics_service, usage
+from .sessions import router as session_router
+from .release import information as release_information
+from .models import ReviewAssignment, ReviewNote
+
+app_schema_revision = "004"
 
 logger = logging.getLogger("governance.http")
 logger.setLevel(logging.INFO)
@@ -28,12 +45,14 @@ if not logger.handlers:
     logger.addHandler(logging.StreamHandler())
 logger.propagate = False
 
-app = FastAPI(title="AI Governance Policy Validator", version="1.0.0")
+app = FastAPI(title="AI Governance Policy Validator", version="1.2.0")
+app.include_router(session_router)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[settings.cors_origin],
     allow_methods=["GET", "POST", "PUT", "DELETE"],
-    allow_headers=["Authorization", "Content-Type"],
+    allow_headers=["Authorization", "Content-Type", "If-Match"],
+    expose_headers=["X-Request-ID", "Retry-After"],
 )
 # Finish the transaction before sending success, including dependency commit failures.
 DB = Depends(get_database, scope="function")
@@ -55,11 +74,23 @@ async def bound_request_size(request: Request, call_next):
             return JSONResponse(status_code=413, content={"detail": "Request exceeds 64 KB"})
     request._body = b"".join(chunks)
     started = time.perf_counter()
+    supplied = request.headers.get("x-request-id", "")
+    correlation = supplied if re.fullmatch(r"[A-Za-z0-9_-]{8,64}", supplied) else str(uuid4())
     response = await call_next(request)
+    response.headers["X-Request-ID"] = correlation
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["X-Frame-Options"] = "DENY"
+    response.headers["Referrer-Policy"] = "no-referrer"
+    response.headers["Content-Security-Policy"] = (
+        "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'"
+    )
+    if request.url.path.startswith("/api/"):
+        response.headers["Cache-Control"] = "no-store"
     logger.info(
         json.dumps(
             {
                 "event": "http.completed",
+                "correlation_id": correlation,
                 "route": getattr(request.scope.get("route"), "path", "unmatched"),
                 "method": request.method,
                 "status": response.status_code,
@@ -94,9 +125,9 @@ def record_audit_event(db: Session, user: Identity, action: str, resource: str) 
 
 
 # Resolve a tenant-owned policy without disclosing foreign tenant identifiers.
-def get_policy(db: Session, user: Identity, policy_id: str) -> Policy:
+def get_policy(db: Session, user: Identity, policy_id: str, include_deleted: bool = False) -> Policy:
     policy = db.scalar(select(Policy).where(Policy.id == policy_id, Policy.tenant == user.tenant))
-    if not policy:
+    if not policy or (policy.status == "DELETED" and not include_deleted):
         raise HTTPException(404, "Policy not found")
     return policy
 
@@ -120,7 +151,7 @@ def load_active_policy(db: Session, user: Identity):
     assignment = db.get(Assignment, user.tenant)
     version = db.get(Version, assignment.version_id) if assignment else None
     policy = get_policy(db, user, version.policy_id) if version and version.tenant == user.tenant else None
-    if not policy or not policy.enabled or policy.status == "ARCHIVED":
+    if not policy or not policy.enabled or policy.status in ("ARCHIVED", "DELETED"):
         raise HTTPException(409, "No enabled active policy; request withheld")
     return policy, version, PolicyDocument.model_validate_json(version.document)
 
@@ -135,13 +166,48 @@ def health():
 @app.get("/ready")
 def ready(db: Session = DB):
     db.execute(text("SELECT 1"))
-    return {"status": "ready", "provider_mode": settings.provider_mode}
+    if db.bind.dialect.name == "mssql":
+        revision = db.execute(text("SELECT version_num FROM alembic_version")).scalar()
+        if revision != app_schema_revision:
+            raise HTTPException(503, "Reviewed database migration required before serving this release")
+    return {"status": "ready", "provider_mode": settings.provider_mode, "release": release_information()}
 
 
 # List real policies, scoped to the authenticated tenant.
 @app.get("/api/policies", response_model=list[PolicyResponse])
-def get_all_policies(offset: int = Query(0, ge=0), limit: int = Query(50, ge=1, le=100), db: Session = DB, user: Identity = USER):
-    return list_records(db, user, Policy, offset, limit)
+def get_all_policies(
+    offset: int = Query(0, ge=0),
+    limit: int = Query(50, ge=1, le=100),
+    search: str = Query("", max_length=120),
+    status: str | None = Query(None, pattern="^(DRAFT|SUBMITTED|APPROVED|PUBLISHED|ARCHIVED)$"),
+    enabled: bool | None = None,
+    db: Session = DB,
+    user: Identity = USER,
+):
+    query = select(Policy).where(Policy.tenant == user.tenant, Policy.status != "DELETED")
+    if search:
+        query = query.where(Policy.name.icontains(search, autoescape=True))
+    if status:
+        query = query.where(Policy.status == status)
+    if enabled is not None:
+        query = query.where(Policy.enabled == int(enabled))
+    published = select(Version.id).where(Version.policy_id == Policy.id, Version.tenant == user.tenant).exists()
+    active = (
+        select(Assignment.tenant)
+        .join(Version, Assignment.version_id == Version.id)
+        .where(Assignment.tenant == user.tenant, Version.tenant == user.tenant, Version.policy_id == Policy.id)
+        .exists()
+    )
+    return [
+        {**serialize(row), "has_published_versions": bool(has_versions), "is_active": bool(is_active)}
+        for row, has_versions, is_active in db.execute(
+            # SQL Server permits EXISTS as a predicate, but not a SELECT value.
+            query.add_columns(case((published, 1), else_=0), case((active, 1), else_=0))
+            .order_by(Policy.id.desc())
+            .offset(offset)
+            .limit(limit)
+        )
+    ]
 
 
 # Validate and persist a new editable policy document.
@@ -152,36 +218,79 @@ def create_new_policy(document: PolicyDocument, db: Session = DB, user: Identity
     db.add(policy)
     db.flush()
     record_audit_event(db, user, "policy.created", policy.id)
-    return serialize(policy)
+    return policy_details(db, user, policy)
+
+
+def policy_details(db: Session, user: Identity, policy: Policy) -> dict:
+    has_versions = db.scalar(select(Version.id).where(Version.policy_id == policy.id, Version.tenant == user.tenant).limit(1)) is not None
+    active = (
+        db.scalar(
+            select(Version.id)
+            .join(Assignment, Assignment.version_id == Version.id)
+            .where(Assignment.tenant == user.tenant, Version.tenant == user.tenant, Version.policy_id == policy.id)
+        )
+        is not None
+    )
+    return {**serialize(policy), "has_published_versions": has_versions, "is_active": active}
 
 
 # Read the current draft and lifecycle status.
 @app.get("/api/policies/{policy_id}", response_model=PolicyResponse)
 def view_policy(policy_id: str, db: Session = DB, user: Identity = USER):
-    return serialize(get_policy(db, user, policy_id))
+    return policy_details(db, user, get_policy(db, user, policy_id, include_deleted=True))
 
 
 # Editing leaves historical versions intact and invalidates all draft approvals.
 @app.put("/api/policies/{policy_id}", response_model=PolicyResponse)
-def update_existing_policy(policy_id: str, document: PolicyDocument, db: Session = DB, user: Identity = USER):
+def update_existing_policy(
+    policy_id: str,
+    document: PolicyDocument,
+    db: Session = DB,
+    user: Identity = USER,
+    expected_version: str | None = Header(default=None, alias="If-Match"),
+):
     require_role(user, "Admin", "Policy Owner")
     policy = get_policy(db, user, policy_id)
     if policy.status == "ARCHIVED":
         raise HTTPException(409, "Archived policy cannot be edited")
+    if expected_version is None:
+        raise HTTPException(428, "Reload this policy and send its row_version in If-Match")
+    if expected_version.strip('"') != str(policy.row_version):
+        raise HTTPException(412, "Policy changed since you opened it; reload and review your changes")
     policy.draft, policy.name, policy.status = document.model_dump_json(), document.name, "DRAFT"
     policy.revision += 1
     record_audit_event(db, user, "policy.draft_updated", policy.id)
     db.flush()
-    return serialize(policy)
+    return policy_details(db, user, policy)
 
 
-# Delete drafts only; retain any published policy for auditability.
+# Remove published policies from the workspace while preserving immutable history.
 @app.delete("/api/policies/{policy_id}")
-def delete_draft_policy(policy_id: str, db: Session = DB, user: Identity = USER):
+def delete_draft_policy(
+    policy_id: str,
+    db: Session = DB,
+    user: Identity = USER,
+    expected_version: str | None = Header(default=None, alias="If-Match"),
+):
     require_role(user, "Admin", "Policy Owner")
     policy = get_policy(db, user, policy_id)
-    versions = db.scalar(select(func.count()).select_from(Version).where(Version.policy_id == policy_id))
-    if versions or policy.status != "DRAFT":
+    versions = db.scalar(select(func.count()).select_from(Version).where(Version.policy_id == policy_id, Version.tenant == user.tenant))
+    if versions:
+        if expected_version is None:
+            raise HTTPException(428, "Reload this policy and send its row_version in If-Match")
+        if expected_version.strip('"') != str(policy.row_version):
+            raise HTTPException(412, "Policy changed since you opened it; reload and review your changes")
+        assignment = db.get(Assignment, user.tenant)
+        active_version = db.get(Version, assignment.version_id) if assignment else None
+        if active_version and active_version.policy_id == policy.id:
+            raise HTTPException(409, "Activate another policy before deleting this policy")
+        if policy.enabled:
+            raise HTTPException(409, "Disable this policy before deleting it")
+        policy.status, policy.enabled = "DELETED", 0
+        record_audit_event(db, user, "policy.removed", policy.id)
+        db.flush()
+        return {"deleted": True, "history_retained": True}
+    if policy.status != "DRAFT":
         raise HTTPException(409, "Only never-published drafts can be deleted")
     record_audit_event(db, user, "policy.deleted", policy.id)
     db.delete(policy)
@@ -192,15 +301,32 @@ def delete_draft_policy(policy_id: str, db: Session = DB, user: Identity = USER)
 @app.post("/api/policies/{policy_id}/simulate", response_model=InspectionResult)
 async def simulate_policy(policy_id: str, payload: TextRequest, db: Session = DB, user: Identity = USER):
     policy = get_policy(db, user, policy_id)
-    result = await inspect_text(payload.text, PolicyDocument.model_validate_json(policy.draft))
-    record_audit_event(db, user, "policy.simulated", policy_id)
-    return result
+    document = PolicyDocument.model_validate_json(policy.draft)
+    identifier = usage.reserve(db, user)
+    state = "FAILED"
+    try:
+        async with asyncio.timeout(settings.inference_deadline):
+            deadline = time.monotonic() + settings.inference_deadline
+            result = await inspect_text(payload.text, document)
+        if time.monotonic() >= deadline:
+            raise HTTPException(504, "Simulation deadline exceeded; response withheld")
+        record_audit_event(db, user, "policy.simulated", policy_id)
+        db.commit()
+        if time.monotonic() >= deadline:
+            raise HTTPException(504, "Simulation deadline exceeded after persistence; inspect audit history")
+        state = "SIMULATED"
+        return result
+    except TimeoutError:
+        raise HTTPException(504, "Simulation deadline exceeded; response withheld") from None
+    finally:
+        db.rollback()
+        usage.finish(db, identifier, state)
 
 
 # Apply explicit lifecycle transitions under backend authorization.
 def transition_policy(policy_id: str, operation: str, db: Session = DB, user: Identity = USER):
     policy = get_policy(db, user, policy_id)
-    if operation == "approve":
+    if operation in ("approve", "reject"):
         require_role(user, "Admin", "Reviewer")
     else:
         require_role(user, "Admin", "Policy Owner")
@@ -208,17 +334,35 @@ def transition_policy(policy_id: str, operation: str, db: Session = DB, user: Id
         expected = {"submit": "DRAFT", "approve": "SUBMITTED", "publish": "APPROVED"}[operation]
         if policy.status != expected:
             raise HTTPException(409, f"{operation} requires {expected}")
-        PolicyDocument.model_validate_json(policy.draft)
+        document = PolicyDocument.model_validate_json(policy.draft)
+        if document.rules.pii_detection.enabled and document.rules.pii_detection.entities:
+            from .engine import get_pii_analyzer
+
+            available = {"EMAIL_ADDRESS", "PHONE_NUMBER", "CREDIT_CARD", "US_SSN"}
+            if settings.pii_mode == "presidio":
+                try:
+                    available.update(get_pii_analyzer().get_supported_entities(language="en"))
+                except Exception:
+                    raise HTTPException(503, "PII recognizers unavailable; policy cannot advance") from None
+            if set(document.rules.pii_detection.entities) - available:
+                raise HTTPException(422, "Policy selects PII entities unavailable in the configured detector")
         policy.status = {"submit": "SUBMITTED", "approve": "APPROVED", "publish": "PUBLISHED"}[operation]
         if operation == "publish":
             number = (db.scalar(select(func.max(Version.number)).where(Version.policy_id == policy_id)) or 0) + 1
             db.add(Version(policy_id=policy_id, tenant=user.tenant, number=number, document=policy.draft))
+    elif operation == "reject":
+        if policy.status != "SUBMITTED":
+            raise HTTPException(409, "Rejection requires SUBMITTED")
+        policy.status = "DRAFT"
     elif operation == "activate":
         version = db.scalar(
             select(Version).where(Version.policy_id == policy_id, Version.tenant == user.tenant).order_by(Version.number.desc())
         )
         if not version or not policy.enabled or policy.status != "PUBLISHED":
             raise HTTPException(409, "Activation requires enabled published policy")
+        # A concurrent disable/delete must invalidate an activation's stale read.
+        policy.row_version += 1
+        db.flush()
         assignment = db.get(Assignment, user.tenant)
         if assignment:
             assignment.version_id = version.id
@@ -238,7 +382,7 @@ def transition_policy(policy_id: str, operation: str, db: Session = DB, user: Id
         raise HTTPException(404, "Unknown lifecycle operation")
     record_audit_event(db, user, f"policy.{operation}", policy_id)
     db.flush()
-    return serialize(policy)
+    return policy_details(db, user, policy)
 
 
 # Return immutable published versions in newest-first order.
@@ -246,7 +390,7 @@ def transition_policy(policy_id: str, operation: str, db: Session = DB, user: Id
 def policy_versions(
     policy_id: str, offset: int = Query(0, ge=0), limit: int = Query(50, ge=1, le=100), db: Session = DB, user: Identity = USER
 ):
-    get_policy(db, user, policy_id)
+    get_policy(db, user, policy_id, include_deleted=True)
     return [
         serialize(row)
         for row in db.scalars(
@@ -260,10 +404,14 @@ def policy_versions(
 
 
 # Run the complete input and output gates using the same immutable snapshot.
-async def governance(operation: str, payload: TextRequest, db: Session = DB, user: Identity = USER):
+async def governed_execution(operation: str, payload: TextRequest, db: Session = DB, user: Identity = USER, deadline: float | None = None):
     require_role(user, "Admin", "Developer", "Policy Owner")
     if operation not in ("generate", "validate-input", "validate-output"):
         raise HTTPException(404, "Unknown governance operation")
+    if payload.source_review_id:
+        source_review = get_review(db, user, payload.source_review_id)
+        if source_review.status == "PENDING":
+            raise HTTPException(409, "Resolve the review before linked resubmission")
     started = time.perf_counter()
     policy, version, document = load_active_policy(db, user)
     inspected = await inspect_text(payload.text, document)
@@ -273,22 +421,29 @@ async def governance(operation: str, payload: TextRequest, db: Session = DB, use
         "decision": inspected["decision"],
         "safe_response": None,
         "model_invoked": False,
+        "generation_status": "NOT_INVOKED",
         "provider_mode": settings.provider_mode,
         "policy_id": policy.id,
+        "policy_name": document.name,
         "policy_version": version.number,
     }
     if operation == "generate" and inspected["decision"] in ("ALLOW", "REDACT"):
         try:
             result["model_invoked"] = True
             generated = await providers.generate_ai_response(inspected["safe_text"])
+            result["generation_status"] = "SUCCEEDED"
             output = await inspect_text(generated, document)
             result["output"] = output
             result["decision"] = "REDACT" if inspected["decision"] == "REDACT" and output["decision"] == "ALLOW" else output["decision"]
             if output["decision"] in ("ALLOW", "REDACT"):
                 result["safe_response"] = output["safe_text"]
-        except providers.ProviderUnavailable:
+        except providers.ProviderUnavailable as error:
+            result["generation_status"] = "FAILED"
             result["decision"] = "BLOCK"
             result["provider_error"] = "Generation unavailable; response withheld"
+            result["provider_diagnostics"] = error.diagnostics
+    if payload.source_review_id:
+        result["source_review_id"] = payload.source_review_id
     result["duration_ms"] = round((time.perf_counter() - started) * 1000, 2)
     metadata = json.loads(json.dumps(result))
     metadata.pop("safe_response", None)
@@ -313,9 +468,58 @@ async def governance(operation: str, payload: TextRequest, db: Session = DB, use
         db.add(review)
         db.flush()
         result["review_id"] = review.id
-    # Commit audit persistence before returning any content to the caller.
+    # Synchronous database work cannot be cancelled by asyncio; check elapsed time before release.
+    if deadline is not None and time.monotonic() >= deadline:
+        raise HTTPException(504, "Governance deadline exceeded; response withheld")
     db.commit()
+    if deadline is not None and time.monotonic() >= deadline:
+        raise HTTPException(504, "Governance deadline exceeded after persistence; inspect history before retrying")
     return result
+
+
+async def governance(operation: str, payload: TextRequest, db: Session = DB, user: Identity = USER):
+    require_role(user, "Admin", "Developer", "Policy Owner")
+    # Quotas include inspections because live moderation is also a paid dependency.
+    load_active_policy(db, user)
+    identifier = usage.reserve(db, user)
+    providers.generation_usage.set(None)
+    state = "FAILED"
+    try:
+        async with asyncio.timeout(settings.inference_deadline):
+            result = await governed_execution(operation, payload, db, user, time.monotonic() + settings.inference_deadline)
+        state = result["generation_status"] if operation == "generate" else "INSPECTED"
+        return result
+    except TimeoutError:
+        db.rollback()
+        raise HTTPException(504, "Governance deadline exceeded; response withheld") from None
+    finally:
+        db.rollback()
+        usage.finish(db, identifier, state, providers.generation_usage.get())
+
+
+@app.get("/api/usage")
+def inference_usage(db: Session = DB, user: Identity = USER):
+    require_role(user, "Admin", "Auditor")
+    return usage.summary(db, user)
+
+
+@app.post("/api/policies/{policy_id}/rollback")
+def rollback_policy(policy_id: str, payload: RollbackRequest, db: Session = DB, user: Identity = USER):
+    require_role(user, "Admin", "Policy Owner")
+    policy = get_policy(db, user, policy_id)
+    if policy.status == "ARCHIVED":
+        raise HTTPException(409, "Archived policies cannot be rolled back")
+    version = db.scalar(
+        select(Version).where(Version.policy_id == policy_id, Version.tenant == user.tenant, Version.number == payload.version)
+    )
+    if not version:
+        raise HTTPException(404, "Eligible published version not found")
+    document = PolicyDocument.model_validate_json(version.document)
+    policy.draft, policy.name, policy.status = document.model_dump_json(), document.name, "DRAFT"
+    policy.revision += 1
+    record_audit_event(db, user, "policy.rollback.DRAFT_REAPPROVAL_REQUIRED", policy.id)
+    db.flush()
+    return policy_details(db, user, policy)
 
 
 # Retrieve execution metadata without raw content.
@@ -326,8 +530,19 @@ def executions(offset: int = Query(0, ge=0), limit: int = Query(50, ge=1, le=100
 
 # Retrieve append-only policy and enforcement events.
 @app.get("/api/audit/events")
-def audit_events(offset: int = Query(0, ge=0), limit: int = Query(50, ge=1, le=100), db: Session = DB, user: Identity = USER):
-    return list_records(db, user, Audit, offset, limit)
+def audit_events(
+    offset: int = Query(0, ge=0),
+    limit: int = Query(50, ge=1, le=100),
+    category: str = Query("all", pattern="^(all|policy|governance|administration)$"),
+    db: Session = DB,
+    user: Identity = USER,
+):
+    query = select(Audit).where(Audit.tenant == user.tenant)
+    if category in ("policy", "governance"):
+        query = query.where(Audit.action.startswith(category + "."))
+    elif category == "administration":
+        query = query.where(~Audit.action.startswith("policy."), ~Audit.action.startswith("governance."))
+    return [serialize(row) for row in db.scalars(query.order_by(Audit.created.desc(), Audit.id).offset(offset).limit(limit))]
 
 
 # Calculate analytics from persisted tenant executions, never seeded counters.
@@ -335,50 +550,39 @@ def audit_events(offset: int = Query(0, ge=0), limit: int = Query(50, ge=1, le=1
 @app.get("/api/analytics/overview")
 @app.get("/api/analytics/violations")
 @app.get("/api/analytics/compliance")
-def analytics(db: Session = DB, user: Identity = USER):
-    rows = db.scalars(select(Execution).where(Execution.tenant == user.tenant)).all()
-    decisions = {key: sum(row.decision == key for row in rows) for key in ("ALLOW", "REDACT", "BLOCK", "HUMAN_REVIEW")}
-    breakdown, trends, violations = {}, [], {}
-    for row in rows:
-        metadata = json.loads(row.metadata_json)
-        stage = metadata.get("output") or metadata.get("input")
-        if stage:
-            trends.append({"date": row.created[:10], "score": stage["score"]})
-            for category, status in stage["breakdown"].items():
-                breakdown[category] = breakdown.get(category, 0) + stage["contributions"][category]
-                if status in ("FAILED", "UNKNOWN"):
-                    violations[category] = violations.get(category, 0) + 1
-    assignment = db.get(Assignment, user.tenant)
-    active = db.get(Version, assignment.version_id) if assignment else None
-    active_policy = db.get(Policy, active.policy_id) if active else None
-    return {
-        "total_policies": db.scalar(select(func.count()).select_from(Policy).where(Policy.tenant == user.tenant)),
-        "active_policies": int(bool(active_policy and active_policy.enabled)),
-        "total_validations": len(rows),
-        "decisions": decisions,
-        "trends": trends[-100:],
-        "violations": violations,
-        "contributions": breakdown,
-        "active_policy": {"id": active.policy_id, "version": active.number} if active else None,
-        "pending_reviews": db.scalar(
-            select(func.count()).select_from(Review).where(Review.tenant == user.tenant, Review.status == "PENDING")
-        ),
-    }
+def analytics(db: Session = DB, user: Identity = USER, start_date: str | None = None, end_date: str | None = None):
+    return analytics_service.overview(db, user, start_date, end_date)
 
 
 # List metadata-only review cases.
 @app.get("/api/reviews")
 def reviews(offset: int = Query(0, ge=0), limit: int = Query(50, ge=1, le=100), db: Session = DB, user: Identity = USER):
-    require_role(user, "Admin", "Reviewer", "Auditor")
+    require_role(user, "Admin", "Reviewer", "Auditor", "Developer", "Policy Owner")
+    if user.role in ("Developer", "Policy Owner"):
+        return [
+            serialize(row)
+            for row in db.scalars(
+                select(Review)
+                .join(Execution, Review.execution_id == Execution.id)
+                .where(Review.tenant == user.tenant, Execution.tenant == user.tenant, Execution.actor == user.user)
+                .order_by(Review.created.desc(), Review.id)
+                .offset(offset)
+                .limit(limit)
+            )
+        ]
     return list_records(db, user, Review, offset, limit)
 
 
 # Resolve a review inside the authenticated tenant.
 def get_review(db: Session, user: Identity, review_id: str):
-    require_role(user, "Admin", "Reviewer", "Auditor")
+    require_role(user, "Admin", "Reviewer", "Auditor", "Developer", "Policy Owner")
     review = db.scalar(select(Review).where(Review.id == review_id, Review.tenant == user.tenant))
     if not review:
         raise HTTPException(404, "Review not found")
+    if user.role in ("Developer", "Policy Owner"):
+        execution = db.get(Execution, review.execution_id)
+        if not execution or execution.actor != user.user:
+            raise HTTPException(404, "Review not found")
     return review
 
 
@@ -386,17 +590,47 @@ def get_review(db: Session, user: Identity, review_id: str):
 @app.get("/api/reviews/{review_id}")
 def review_detail(review_id: str, db: Session = DB, user: Identity = USER):
     review = get_review(db, user, review_id)
-    return {**serialize(review), "execution": serialize(db.get(Execution, review.execution_id))}
+    return {
+        **serialize(review),
+        "execution": serialize(db.get(Execution, review.execution_id)),
+        "assignment": serialize(db.get(ReviewAssignment, review_id)) if db.get(ReviewAssignment, review_id) else None,
+        "decision_history": [
+            serialize(note)
+            for note in db.scalars(
+                select(ReviewNote)
+                .where(ReviewNote.review_id == review_id, ReviewNote.tenant == user.tenant)
+                .order_by(ReviewNote.created, ReviewNote.id)
+            )
+        ],
+        "instruction": "Original content is not stored. Submit revised text through the playground; all current gates run again.",
+    }
+
+
+def sanitize_review_reason(reason: str) -> str:
+    if not reason:
+        return ""
+    policy = PolicyDocument(name="Review metadata protection")
+    try:
+        spans = detect_sensitive_information(reason, "secret_detection", policy)
+        spans += detect_sensitive_information(reason, "pii_detection", policy)
+        return redact_personal_information(reason, spans)[:1000]
+    except Exception:
+        raise HTTPException(503, "Review metadata inspection unavailable") from None
 
 
 # Record disposition only; approval never releases content or bypasses revalidation.
-def resolve_review(review_id: str, operation: str, db: Session = DB, user: Identity = USER):
+def resolve_review(review_id: str, operation: str, db: Session = DB, user: Identity = USER, reason: str = ""):
     require_role(user, "Admin", "Reviewer")
     review = get_review(db, user, review_id)
     if operation not in ("approve", "reject"):
         raise HTTPException(404, "Unknown review action")
     if review.status != "PENDING":
         raise HTTPException(409, "Review already resolved")
+    assignment = db.get(ReviewAssignment, review_id)
+    if assignment and assignment.assigned_reviewer and assignment.assigned_reviewer != user.user and user.role != "Admin":
+        raise HTTPException(403, "This case is assigned to another reviewer")
+    reason = sanitize_review_reason(reason)
+    db.add(ReviewNote(review_id=review_id, tenant=user.tenant, actor=user.user, action=operation, reason=reason))
     review.status = "APPROVED_RESUBMIT_REQUIRED" if operation == "approve" else "REJECTED"
     record_audit_event(db, user, f"review.{operation}", review.id)
     db.flush()
@@ -406,12 +640,63 @@ def resolve_review(review_id: str, operation: str, db: Session = DB, user: Ident
     }
 
 
+@app.put("/api/reviews/{review_id}/assignment")
+def assign_review(review_id: str, payload: ReviewUpdate, db: Session = DB, user: Identity = USER):
+    require_role(user, "Admin", "Reviewer")
+    review = get_review(db, user, review_id)
+    if review.status != "PENDING":
+        raise HTTPException(409, "Only pending reviews can be assigned")
+    if payload.assigned_reviewer:
+        accounts = json.loads(settings.demo_accounts_json)
+        if not any(
+            account["user"] == payload.assigned_reviewer
+            and account["tenant"] == user.tenant
+            and account["role"] in ("Admin", "Reviewer")
+            and account_enabled(account)
+            for account in accounts
+        ):
+            raise HTTPException(422, "Select an enabled reviewer in this tenant")
+    assignment = db.get(ReviewAssignment, review_id)
+    if user.role != "Admin":
+        if assignment and assignment.assigned_reviewer and assignment.assigned_reviewer != user.user:
+            raise HTTPException(403, "Only the assigned reviewer or an administrator can reassign this case")
+        if not assignment or not assignment.assigned_reviewer:
+            if payload.assigned_reviewer != user.user:
+                raise HTTPException(403, "Reviewers may claim an unassigned case for themselves")
+    if not assignment:
+        assignment = ReviewAssignment(id=review_id, tenant=user.tenant)
+        db.add(assignment)
+    # Invalidate a disposition loaded before a concurrent reassignment.
+    review.row_version += 1
+    payload.reason = sanitize_review_reason(payload.reason)
+    assignment.assigned_reviewer, assignment.reason = payload.assigned_reviewer, payload.reason
+    assignment.updated = datetime.now(timezone.utc).isoformat()
+    db.add(ReviewNote(review_id=review_id, tenant=user.tenant, actor=user.user, action="assigned", reason=payload.reason))
+    record_audit_event(db, user, "review.assigned", review.id)
+    return {"review_id": review.id, **payload.model_dump()}
+
+
 # Store bounded numeric feedback, checking the referenced execution tenant.
 @app.post("/api/feedback", status_code=201)
 def collect_feedback(payload: FeedbackRequest, db: Session = DB, user: Identity = USER):
     execution = db.scalar(select(Execution).where(Execution.id == payload.execution_id, Execution.tenant == user.tenant))
     if not execution:
         raise HTTPException(404, "Execution not found")
+    prior = db.scalar(
+        select(Feedback.id)
+        .join(Audit, Audit.resource == Feedback.id)
+        .where(
+            Feedback.tenant == user.tenant,
+            Feedback.execution_id == payload.execution_id,
+            Audit.tenant == user.tenant,
+            Audit.actor == user.user,
+            Audit.action == "feedback.created",
+        )
+        .limit(1)
+    )
+    if prior:
+        raise HTTPException(409, "You have already submitted feedback for this execution")
+    usage.claim_action(db, user, "feedback:" + payload.execution_id, 1, once=True)
     feedback = Feedback(tenant=user.tenant, **payload.model_dump())
     db.add(feedback)
     db.flush()
@@ -432,36 +717,55 @@ def feedback_summary(db: Session = DB, user: Identity = USER):
 @app.post("/api/reports/export", status_code=201)
 def export_sanitized_report(payload: ExportRequest, db: Session = DB, user: Identity = USER):
     require_role(user, "Admin", "Auditor")
-    report = Export(tenant=user.tenant)
-    db.add(report)
-    db.flush()
-    rows = [
-        {"request_id": row.id, "timestamp": row.created, "decision": row.decision, "policy_id": row.policy_id, "version": row.version}
-        for row in db.scalars(select(Execution).where(Execution.tenant == user.tenant))
-    ]
-    if payload.format == "json":
-        content = json.dumps(rows)
-    else:
-        stream = io.StringIO()
-        writer = csv.DictWriter(stream, fieldnames=["request_id", "timestamp", "decision", "policy_id", "version"])
-        writer.writeheader()
-        writer.writerows(rows)
-        content = stream.getvalue()
-    report.path = f"governance-reports/{datetime.now(timezone.utc):%Y/%m/%d}/{report.id}.{payload.format}"
-    try:
-        providers.upload_report(report.path, content)
-        report.status = "SUCCEEDED"
-    except Exception:
-        report.status = "FAILED"
-    record_audit_event(db, user, f"report.{report.status}", report.id)
-    return serialize(report)
+    return exports.create(db, user, payload)
+
+
+@app.post("/api/reports/exports/{export_id}/reconcile")
+def reconcile_export(export_id: str, db: Session = DB, user: Identity = USER):
+    require_role(user, "Admin", "Auditor")
+    return exports.process(db, user, export_id, reconcile=True)
 
 
 # List actual export attempts and their accurate outcomes.
 @app.get("/api/reports/exports")
 def report_exports(offset: int = Query(0, ge=0), limit: int = Query(50, ge=1, le=100), db: Session = DB, user: Identity = USER):
     require_role(user, "Admin", "Auditor")
-    return list_records(db, user, Export, offset, limit)
+    return [
+        exports.public_report(db, report)
+        for report in db.scalars(
+            select(Export).where(Export.tenant == user.tenant).order_by(Export.created.desc(), Export.id).offset(offset).limit(limit)
+        )
+    ]
+
+
+@app.get("/api/maintenance")
+def maintenance_status(db: Session = DB, user: Identity = USER):
+    require_role(user, "Admin")
+    from .maintenance import plan
+
+    return plan(db, user.tenant)
+
+
+@app.get("/api/capabilities")
+def capabilities(user: Identity = USER):
+    from typing import get_args
+    from .schemas import PIIEntity, ModerationCategory
+    from .engine import get_pii_analyzer
+
+    available = {"EMAIL_ADDRESS", "PHONE_NUMBER", "CREDIT_CARD", "US_SSN"}
+    detector_status = "AVAILABLE"
+    if settings.pii_mode == "presidio":
+        try:
+            available.update(get_pii_analyzer().get_supported_entities(language="en"))
+        except Exception:
+            detector_status = "UNAVAILABLE"
+            available.clear()
+    return {
+        "pii_entities": list(get_args(PIIEntity)),
+        "available_pii_entities": sorted(available),
+        "pii_status": detector_status,
+        "moderation_categories": list(get_args(ModerationCategory)),
+    }
 
 
 # Expose configuration presence only; connectivity is not inferred from credentials.
@@ -469,7 +773,18 @@ def report_exports(offset: int = Query(0, ge=0), limit: int = Query(50, ge=1, le
 def diagnostics(db: Session = DB, user: Identity = USER):
     db.execute(text("SELECT 1"))
     return {
-        "authentication": "Local demonstration tokens; not enterprise identity",
+        "authentication": "Expiring restricted demo sessions and provisioned demo credentials; not enterprise identity",
+        "build_version": settings.build_version,
+        "release": release_information(),
+        "api_contract": "1.2",
+        "required_migration": app_schema_revision,
+        "migration_status": "READINESS_ENFORCED" if db.bind.dialect.name == "mssql" else "LOCAL_SCHEMA",
+        "database_migration": db.execute(text("SELECT version_num FROM alembic_version")).scalar()
+        if db.bind.dialect.name == "mssql"
+        else "DISPOSABLE_OR_MANUALLY_VERSIONED_SQLITE",
+        "demo_session_minutes": settings.demo_session_minutes,
+        "legacy_api_credentials": settings.allow_legacy_api_credentials,
+        "retention_days": settings.retention_days,
         "database": db.bind.dialect.name,
         "database_status": "CONNECTED",
         "provider_mode": settings.provider_mode,
@@ -505,14 +820,16 @@ def register_governance_operation(operation: str) -> None:
 # Expose only supported review dispositions in the REST schema.
 def register_review_operation(operation: str) -> None:
     # Resolve the specified review action through the authorization and status gates.
-    def review_operation(review_id: str, db: Session = DB, user: Identity = USER):
-        return resolve_review(review_id, operation, db, user)
+    def review_operation(
+        review_id: str, payload: ReviewResolution = Body(default=ReviewResolution()), db: Session = DB, user: Identity = USER
+    ):
+        return resolve_review(review_id, operation, db, user, payload.reason)
 
     review_operation.__name__ = f"{operation}_review"
     app.add_api_route(f"/api/reviews/{{review_id}}/{operation}", review_operation, methods=["POST"])
 
 
-for policy_operation_name in ("submit", "approve", "publish", "activate", "enable", "disable", "archive"):
+for policy_operation_name in ("submit", "approve", "reject", "publish", "activate", "enable", "disable", "archive"):
     register_policy_operation(policy_operation_name)
 for governance_operation_name in ("validate-input", "validate-output", "generate"):
     register_governance_operation(governance_operation_name)

@@ -1,0 +1,178 @@
+[
+  {
+    "component": "Frontend startup",
+    "expected_behavior": "Hosted React and assets load",
+    "verification_method": "Live HTTP byte equality + Chrome",
+    "evidence_reference": "postdeploy-verification.json",
+    "result": "PASS",
+    "remaining_issue": "None"
+  },
+  {
+    "component": "Backend startup",
+    "expected_behavior": "Correct worker starts; health/readiness 200",
+    "verification_method": "Platform worker event + live HTTP",
+    "evidence_reference": "serving-verification.json",
+    "result": "PASS",
+    "remaining_issue": "None"
+  },
+  {
+    "component": "Authentication",
+    "expected_behavior": "Valid credential accepted; invalid denied; logout works",
+    "verification_method": "Hosted Chrome + API",
+    "evidence_reference": "browser-hosted.json",
+    "result": "PASS",
+    "remaining_issue": "Demo tokens have no time expiry"
+  },
+  {
+    "component": "Authorization",
+    "expected_behavior": "Server rejects forbidden role operations",
+    "verification_method": "Developer 403 + backend regressions",
+    "evidence_reference": "browser-hosted.json",
+    "result": "PASS",
+    "remaining_issue": "Enterprise identity deferred"
+  },
+  {
+    "component": "Azure SQL",
+    "expected_behavior": "Connected; persist export/audit; preserve prior rows",
+    "verification_method": "Independent SELECT snapshots across eight tables",
+    "evidence_reference": "export-verification.json",
+    "result": "PASS",
+    "remaining_issue": "No migrations rerun"
+  },
+  {
+    "component": "Azure OpenAI",
+    "expected_behavior": "Governed generation only after input approval",
+    "verification_method": "Prior live ALLOW/REDACT evidence + current mocked regressions",
+    "evidence_reference": "../../FINAL_LIVE_VERIFICATION_RESULTS_2026_10_30.json",
+    "result": "PASS",
+    "remaining_issue": "Prior live evidence; zero fresh generation calls"
+  },
+  {
+    "component": "OpenAI Moderation",
+    "expected_behavior": "Inspect input/revalidation/output; fail closed",
+    "verification_method": "Prior live evidence + fixture failures/regressions",
+    "evidence_reference": "../../FINAL_LIVE_VERIFICATION_RESULTS_2026_10_30.json",
+    "result": "PASS",
+    "remaining_issue": "Prior live evidence; zero fresh moderation calls"
+  },
+  {
+    "component": "Presidio",
+    "expected_behavior": "Detect PII before safe release",
+    "verification_method": "Prior live REDACT evidence + hosted mode check",
+    "evidence_reference": "configuration-verification.json",
+    "result": "PASS",
+    "remaining_issue": "Local browser uses limited regex fixtures"
+  },
+  {
+    "component": "Policy CRUD",
+    "expected_behavior": "Create/edit drafts; supported delete/archive",
+    "verification_method": "Disposable real Chrome + backend tests",
+    "evidence_reference": "browser-local-final.json",
+    "result": "PASS",
+    "remaining_issue": "No hosted policy mutations"
+  },
+  {
+    "component": "Policy lifecycle",
+    "expected_behavior": "Submit/approve/publish/activate/disable/enable/history",
+    "verification_method": "Disposable Chrome + hosted immutable history",
+    "evidence_reference": "browser-local-final.json",
+    "result": "PASS",
+    "remaining_issue": "Policy rejection is not a supported lifecycle action"
+  },
+  {
+    "component": "Input governance",
+    "expected_behavior": "ALLOW/REDACT/BLOCK/HUMAN_REVIEW",
+    "verification_method": "Fixture Chrome and prior live evidence",
+    "evidence_reference": "browser-local-final.json",
+    "result": "PASS",
+    "remaining_issue": "Fixtures clearly distinguished"
+  },
+  {
+    "component": "Output governance",
+    "expected_behavior": "Inspect output and withhold unsafe content",
+    "verification_method": "Fixture output secret + prior live output inspection",
+    "evidence_reference": "browser-local-final.json",
+    "result": "PASS",
+    "remaining_issue": "No new live model invocation"
+  },
+  {
+    "component": "Simulation",
+    "expected_behavior": "Validate draft rules without generation",
+    "verification_method": "Disposable Chrome + backend schema tests",
+    "evidence_reference": "browser-local-final.json",
+    "result": "PASS",
+    "remaining_issue": "Live moderation may still incur a call; not repeated"
+  },
+  {
+    "component": "Human review",
+    "expected_behavior": "Queue/details/approve/reject preserve held content",
+    "verification_method": "Disposable Chrome + hosted recorded metadata",
+    "evidence_reference": "browser-local-final.json",
+    "result": "PASS",
+    "remaining_issue": "Approval requires revised resubmission"
+  },
+  {
+    "component": "Feedback",
+    "expected_behavior": "Save numeric rating; aggregate via existing API",
+    "verification_method": "Disposable Chrome + live read-only summary + tests",
+    "evidence_reference": "browser-local-final.json",
+    "result": "PASS",
+    "remaining_issue": "No dedicated aggregate UI panel"
+  },
+  {
+    "component": "Compliance scoring",
+    "expected_behavior": "Show persisted heuristic scores and contributions",
+    "verification_method": "Hosted charts + existing engine regressions",
+    "evidence_reference": "browser-hosted.json",
+    "result": "PASS",
+    "remaining_issue": "Not regulatory certification"
+  },
+  {
+    "component": "Audit logging",
+    "expected_behavior": "Committed export event; historical records unchanged",
+    "verification_method": "Independent SQL comparison + hosted listing",
+    "evidence_reference": "export-verification.json",
+    "result": "PASS",
+    "remaining_issue": "ORM immutability is not tamper-proof storage"
+  },
+  {
+    "component": "ADLS export",
+    "expected_behavior": "One fresh export succeeds on deployed correction",
+    "verification_method": "Exactly one POST; SQL/audit + object read",
+    "evidence_reference": "export-verification.json",
+    "result": "PASS",
+    "remaining_issue": "Allowance consumed; no automatic retry"
+  },
+  {
+    "component": "ADLS file integrity",
+    "expected_behavior": "Exact object contains expected sanitized records",
+    "verification_method": "Independent download, row bijection, bytes, size, SHA256",
+    "evidence_reference": "export-verification.json",
+    "result": "PASS",
+    "remaining_issue": "Temporary reader removed"
+  },
+  {
+    "component": "Browser acceptance",
+    "expected_behavior": "Nine hosted pages render at three viewports",
+    "verification_method": "72 hosted + 50 disposable Chrome checks",
+    "evidence_reference": "browser-hosted.json",
+    "result": "PASS",
+    "remaining_issue": "No formal WCAG/cross-browser certification"
+  },
+  {
+    "component": "Regression testing",
+    "expected_behavior": "Relevant existing suites and build pass",
+    "verification_method": "224 backend; 40 focused subset; 7 frontend; lint/build",
+    "evidence_reference": "regression-summary.json",
+    "result": "PASS",
+    "remaining_issue": "One migration test deselected; historical driver module excluded"
+  },
+  {
+    "component": "Documentation",
+    "expected_behavior": "Current status, evidence, demo and backlog agree",
+    "verification_method": "Handover links and evidence validation",
+    "evidence_reference": "documentation-verification.json",
+    "result": "PASS",
+    "remaining_issue": "Historical checkpoints intentionally preserved"
+  }
+]

@@ -27,6 +27,8 @@ def client(monkeypatch):
     monkeypatch.setattr(settings, "demo_accounts_json", json.dumps(accounts))
     monkeypatch.setattr(settings, "provider_mode", "fixture")
     monkeypatch.setattr(settings, "pii_mode", "regex")
+    # Existing operator/adapter contracts explicitly exercise compatibility mode.
+    monkeypatch.setattr(settings, "allow_legacy_api_credentials", True)
     engine = create_engine("sqlite://", connect_args={"check_same_thread": False}, poolclass=StaticPool)
     Base.metadata.create_all(engine)
 

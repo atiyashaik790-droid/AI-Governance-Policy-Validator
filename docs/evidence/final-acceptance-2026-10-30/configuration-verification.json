@@ -1,0 +1,41 @@
+{
+  "configuration": {
+    "database": "mssql",
+    "database_status": "CONNECTED",
+    "provider_mode": "live",
+    "pii_mode": "presidio",
+    "azure_generation": "CONFIGURED_NOT_VERIFIED",
+    "moderation": "CONFIGURED_NOT_VERIFIED",
+    "adls": "CONFIGURED_NOT_VERIFIED",
+    "role": "Admin"
+  },
+  "checks": [
+    {
+      "name": "hosted database",
+      "passed": true
+    },
+    {
+      "name": "hosted database_status",
+      "passed": true
+    },
+    {
+      "name": "hosted provider_mode",
+      "passed": true
+    },
+    {
+      "name": "hosted pii_mode",
+      "passed": true
+    },
+    {
+      "name": "hosted role",
+      "passed": true
+    },
+    {
+      "name": "foreign policy ID denied",
+      "passed": true,
+      "http_status": 404
+    }
+  ],
+  "passed": 6,
+  "failed": 0
+}

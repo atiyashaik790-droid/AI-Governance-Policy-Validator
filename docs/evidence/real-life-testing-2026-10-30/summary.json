@@ -1,0 +1,76 @@
+{
+  "date": "2026-10-30",
+  "timezone": "Asia/Kolkata",
+  "scope": "Expanded testing run; preserves earlier acceptance evidence",
+  "backend_pytest": {
+    "passed": 224,
+    "failed": 0,
+    "skipped": 0,
+    "deselected": 1,
+    "excluded_module": "tests/test_sql_http_plan.py",
+    "duration_seconds": 8.79
+  },
+  "frontend_vitest": {
+    "passed": 7,
+    "failed": 0,
+    "skipped": 0,
+    "includes": "opt-in real disposable HTTP integration"
+  },
+  "additional_scenario_checks": {
+    "real-life-http.json": {
+      "passed": 263,
+      "failed": 0
+    },
+    "presidio-checks.json": {
+      "passed": 13,
+      "failed": 0
+    },
+    "browser-local-final.json": {
+      "passed": 50,
+      "failed": 0
+    },
+    "browser-hosted.json": {
+      "passed": 72,
+      "failed": 0
+    },
+    "hosted-security.json": {
+      "passed": 19,
+      "failed": 0
+    }
+  },
+  "existing_test_results_passed": 231,
+  "additional_scenario_results_passed": 417,
+  "combined_test_and_check_results_passed": 648,
+  "failed_test_or_check_results": 0,
+  "counting_note": "Mixed test and assertion/check results across multiple layers; not a claim of that many independent business workflows. HTTP request count is not added. Focused ADLS tests are included in backend and not added again. Prior paid-live acceptance is not counted as fresh testing.",
+  "tooling": {
+    "python_lint": "PASS",
+    "python_format_39_files": "PASS",
+    "frontend_lint": "PASS",
+    "typescript": "PASS",
+    "vite_build": "PASS",
+    "pip_check": "PASS",
+    "npm_audit_vulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0,
+      "total": 0
+    },
+    "git_diff_check": "PASS"
+  },
+  "new_live_calls": {
+    "generation": 0,
+    "moderation": 0,
+    "export": 0
+  },
+  "excluded_work": {
+    "live_provider_mutations": "No new paid live AI/moderation/export allowance; previous live evidence retained",
+    "historical_sql_driver": "Saved restriction preserved; module excluded",
+    "migration_test": "One fresh SQLite migration test deselected under saved boundary; no migrations performed",
+    "docker": "Executable unavailable",
+    "browser_matrix": "Chrome only, not full cross-browser certification",
+    "load": "40 requests / 8 workers on disposable local SQLite; not cloud capacity testing"
+  }
+}

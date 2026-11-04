@@ -181,7 +181,7 @@ appropriate to the eventual deployment and implement an explicit supported provi
 the current default CLI-user path is not a production workload identity design. Do not
 introduce services or create identities as part of this phase.
 
-Apply only the table-level DML matrix in docs/AZURE_SQL_RUNTIME_ACCESS_PLAN.md using an
+Apply only the table-level DML matrix in docs/runbooks/AZURE_SQL_RUNTIME_ACCESS_PLAN.md using an
 administrator after separate approval. Audit public, group and role inheritance and
 ownership; runtime must not enter as dbo. Verify both required and excluded privileges,
 then approve controlled behavioral tests and a separate runtime-switch decision. No

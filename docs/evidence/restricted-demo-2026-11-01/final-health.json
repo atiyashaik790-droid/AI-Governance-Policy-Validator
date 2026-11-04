@@ -1,0 +1,23 @@
+{
+  "/health": {
+    "http_status": 200,
+    "body": {
+      "status": "ok"
+    }
+  },
+  "/ready": {
+    "http_status": 200,
+    "body": {
+      "status": "ready",
+      "provider_mode": "live",
+      "release": {
+        "git_commit": "8d12cc4caf78ad2b38c0d81fa297d27ace7aca9a",
+        "build_version": "1.2-fd9d6fee6af8aa17",
+        "built_utc": "2026-11-01T14:49:51.372940+00:00",
+        "frontend_sha256": "33cc01ae06dbedc874033d3e8684c40d512d249bf3657bcc378679b882a05154",
+        "backend_sha256": "23a0b8848b06c5168b81e32955d1a6a2e9012b34e19596b40128dbef1878ee20",
+        "required_migration": "004"
+      }
+    }
+  }
+}

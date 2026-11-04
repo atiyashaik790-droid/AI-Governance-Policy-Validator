@@ -1,0 +1,2025 @@
+{
+  "scope": "real loopback HTTP, disposable SQLite, six server-controlled identities including foreign tenant; fixture generation/moderation, regex PII; no cloud calls",
+  "checks": [
+    {
+      "name": "disposable fixture startup",
+      "passed": true
+    },
+    {
+      "name": "Admin GET /api/settings",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Admin GET /api/policies",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Admin GET /api/audit/executions",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Admin GET /api/audit/events",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Admin GET /api/audit/summary",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Admin GET /api/analytics/overview",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Admin GET /api/analytics/violations",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Admin GET /api/analytics/compliance",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Admin GET /api/feedback/summary",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Admin GET /api/reviews",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Admin GET /api/reports/exports",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Policy Owner GET /api/settings",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Policy Owner GET /api/policies",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Policy Owner GET /api/audit/executions",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Policy Owner GET /api/audit/events",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Policy Owner GET /api/audit/summary",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Policy Owner GET /api/analytics/overview",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Policy Owner GET /api/analytics/violations",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Policy Owner GET /api/analytics/compliance",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Policy Owner GET /api/feedback/summary",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Policy Owner GET /api/reviews",
+      "passed": true,
+      "detail": {
+        "expected_status": 403,
+        "actual_status": 403
+      }
+    },
+    {
+      "name": "Policy Owner GET /api/reports/exports",
+      "passed": true,
+      "detail": {
+        "expected_status": 403,
+        "actual_status": 403
+      }
+    },
+    {
+      "name": "Developer GET /api/settings",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Developer GET /api/policies",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Developer GET /api/audit/executions",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Developer GET /api/audit/events",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Developer GET /api/audit/summary",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Developer GET /api/analytics/overview",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Developer GET /api/analytics/violations",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Developer GET /api/analytics/compliance",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Developer GET /api/feedback/summary",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Developer GET /api/reviews",
+      "passed": true,
+      "detail": {
+        "expected_status": 403,
+        "actual_status": 403
+      }
+    },
+    {
+      "name": "Developer GET /api/reports/exports",
+      "passed": true,
+      "detail": {
+        "expected_status": 403,
+        "actual_status": 403
+      }
+    },
+    {
+      "name": "Reviewer GET /api/settings",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Reviewer GET /api/policies",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Reviewer GET /api/audit/executions",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Reviewer GET /api/audit/events",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Reviewer GET /api/audit/summary",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Reviewer GET /api/analytics/overview",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Reviewer GET /api/analytics/violations",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Reviewer GET /api/analytics/compliance",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Reviewer GET /api/feedback/summary",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Reviewer GET /api/reviews",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Reviewer GET /api/reports/exports",
+      "passed": true,
+      "detail": {
+        "expected_status": 403,
+        "actual_status": 403
+      }
+    },
+    {
+      "name": "Auditor GET /api/settings",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Auditor GET /api/policies",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Auditor GET /api/audit/executions",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Auditor GET /api/audit/events",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Auditor GET /api/audit/summary",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Auditor GET /api/analytics/overview",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Auditor GET /api/analytics/violations",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Auditor GET /api/analytics/compliance",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Auditor GET /api/feedback/summary",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Auditor GET /api/reviews",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Auditor GET /api/reports/exports",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "anonymous denied /api/settings",
+      "passed": true,
+      "detail": {
+        "expected_status": 401,
+        "actual_status": 401
+      }
+    },
+    {
+      "name": "anonymous denied /api/policies",
+      "passed": true,
+      "detail": {
+        "expected_status": 401,
+        "actual_status": 401
+      }
+    },
+    {
+      "name": "anonymous denied /api/audit/executions",
+      "passed": true,
+      "detail": {
+        "expected_status": 401,
+        "actual_status": 401
+      }
+    },
+    {
+      "name": "anonymous denied /api/audit/events",
+      "passed": true,
+      "detail": {
+        "expected_status": 401,
+        "actual_status": 401
+      }
+    },
+    {
+      "name": "anonymous denied /api/audit/summary",
+      "passed": true,
+      "detail": {
+        "expected_status": 401,
+        "actual_status": 401
+      }
+    },
+    {
+      "name": "anonymous denied /api/analytics/overview",
+      "passed": true,
+      "detail": {
+        "expected_status": 401,
+        "actual_status": 401
+      }
+    },
+    {
+      "name": "anonymous denied /api/analytics/violations",
+      "passed": true,
+      "detail": {
+        "expected_status": 401,
+        "actual_status": 401
+      }
+    },
+    {
+      "name": "anonymous denied /api/analytics/compliance",
+      "passed": true,
+      "detail": {
+        "expected_status": 401,
+        "actual_status": 401
+      }
+    },
+    {
+      "name": "anonymous denied /api/feedback/summary",
+      "passed": true,
+      "detail": {
+        "expected_status": 401,
+        "actual_status": 401
+      }
+    },
+    {
+      "name": "anonymous denied /api/reviews",
+      "passed": true,
+      "detail": {
+        "expected_status": 401,
+        "actual_status": 401
+      }
+    },
+    {
+      "name": "anonymous denied /api/reports/exports",
+      "passed": true,
+      "detail": {
+        "expected_status": 401,
+        "actual_status": 401
+      }
+    },
+    {
+      "name": "malformed credential Bearer 30",
+      "passed": true,
+      "detail": {
+        "expected_status": 401,
+        "actual_status": 401
+      }
+    },
+    {
+      "name": "malformed credential Basic 13",
+      "passed": true,
+      "detail": {
+        "expected_status": 401,
+        "actual_status": 401
+      }
+    },
+    {
+      "name": "malformed credential Bearer 6",
+      "passed": true,
+      "detail": {
+        "expected_status": 401,
+        "actual_status": 401
+      }
+    },
+    {
+      "name": "Admin policy create",
+      "passed": true,
+      "detail": {
+        "expected_status": 201,
+        "actual_status": 201
+      }
+    },
+    {
+      "name": "Admin policy edit",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Admin policy delete",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Admin policy submit",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Admin policy approve",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Admin policy publish",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Admin policy activate",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Admin policy disable",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Admin policy enable",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Admin policy archive",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Policy Owner policy create",
+      "passed": true,
+      "detail": {
+        "expected_status": 201,
+        "actual_status": 201
+      }
+    },
+    {
+      "name": "Policy Owner policy edit",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Policy Owner policy delete",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Policy Owner policy submit",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Policy Owner policy approve",
+      "passed": true,
+      "detail": {
+        "expected_status": 403,
+        "actual_status": 403
+      }
+    },
+    {
+      "name": "Policy Owner policy publish",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Policy Owner policy activate",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Policy Owner policy disable",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Policy Owner policy enable",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Policy Owner policy archive",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Developer policy create",
+      "passed": true,
+      "detail": {
+        "expected_status": 403,
+        "actual_status": 403
+      }
+    },
+    {
+      "name": "Developer policy edit",
+      "passed": true,
+      "detail": {
+        "expected_status": 403,
+        "actual_status": 403
+      }
+    },
+    {
+      "name": "Developer policy delete",
+      "passed": true,
+      "detail": {
+        "expected_status": 403,
+        "actual_status": 403
+      }
+    },
+    {
+      "name": "Developer policy submit",
+      "passed": true,
+      "detail": {
+        "expected_status": 403,
+        "actual_status": 403
+      }
+    },
+    {
+      "name": "Developer policy approve",
+      "passed": true,
+      "detail": {
+        "expected_status": 403,
+        "actual_status": 403
+      }
+    },
+    {
+      "name": "Developer policy publish",
+      "passed": true,
+      "detail": {
+        "expected_status": 403,
+        "actual_status": 403
+      }
+    },
+    {
+      "name": "Developer policy activate",
+      "passed": true,
+      "detail": {
+        "expected_status": 403,
+        "actual_status": 403
+      }
+    },
+    {
+      "name": "Developer policy disable",
+      "passed": true,
+      "detail": {
+        "expected_status": 403,
+        "actual_status": 403
+      }
+    },
+    {
+      "name": "Developer policy enable",
+      "passed": true,
+      "detail": {
+        "expected_status": 403,
+        "actual_status": 403
+      }
+    },
+    {
+      "name": "Developer policy archive",
+      "passed": true,
+      "detail": {
+        "expected_status": 403,
+        "actual_status": 403
+      }
+    },
+    {
+      "name": "Reviewer policy create",
+      "passed": true,
+      "detail": {
+        "expected_status": 403,
+        "actual_status": 403
+      }
+    },
+    {
+      "name": "Reviewer policy edit",
+      "passed": true,
+      "detail": {
+        "expected_status": 403,
+        "actual_status": 403
+      }
+    },
+    {
+      "name": "Reviewer policy delete",
+      "passed": true,
+      "detail": {
+        "expected_status": 403,
+        "actual_status": 403
+      }
+    },
+    {
+      "name": "Reviewer policy submit",
+      "passed": true,
+      "detail": {
+        "expected_status": 403,
+        "actual_status": 403
+      }
+    },
+    {
+      "name": "Reviewer policy approve",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Reviewer policy publish",
+      "passed": true,
+      "detail": {
+        "expected_status": 403,
+        "actual_status": 403
+      }
+    },
+    {
+      "name": "Reviewer policy activate",
+      "passed": true,
+      "detail": {
+        "expected_status": 403,
+        "actual_status": 403
+      }
+    },
+    {
+      "name": "Reviewer policy disable",
+      "passed": true,
+      "detail": {
+        "expected_status": 403,
+        "actual_status": 403
+      }
+    },
+    {
+      "name": "Reviewer policy enable",
+      "passed": true,
+      "detail": {
+        "expected_status": 403,
+        "actual_status": 403
+      }
+    },
+    {
+      "name": "Reviewer policy archive",
+      "passed": true,
+      "detail": {
+        "expected_status": 403,
+        "actual_status": 403
+      }
+    },
+    {
+      "name": "Auditor policy create",
+      "passed": true,
+      "detail": {
+        "expected_status": 403,
+        "actual_status": 403
+      }
+    },
+    {
+      "name": "Auditor policy edit",
+      "passed": true,
+      "detail": {
+        "expected_status": 403,
+        "actual_status": 403
+      }
+    },
+    {
+      "name": "Auditor policy delete",
+      "passed": true,
+      "detail": {
+        "expected_status": 403,
+        "actual_status": 403
+      }
+    },
+    {
+      "name": "Auditor policy submit",
+      "passed": true,
+      "detail": {
+        "expected_status": 403,
+        "actual_status": 403
+      }
+    },
+    {
+      "name": "Auditor policy approve",
+      "passed": true,
+      "detail": {
+        "expected_status": 403,
+        "actual_status": 403
+      }
+    },
+    {
+      "name": "Auditor policy publish",
+      "passed": true,
+      "detail": {
+        "expected_status": 403,
+        "actual_status": 403
+      }
+    },
+    {
+      "name": "Auditor policy activate",
+      "passed": true,
+      "detail": {
+        "expected_status": 403,
+        "actual_status": 403
+      }
+    },
+    {
+      "name": "Auditor policy disable",
+      "passed": true,
+      "detail": {
+        "expected_status": 403,
+        "actual_status": 403
+      }
+    },
+    {
+      "name": "Auditor policy enable",
+      "passed": true,
+      "detail": {
+        "expected_status": 403,
+        "actual_status": 403
+      }
+    },
+    {
+      "name": "Auditor policy archive",
+      "passed": true,
+      "detail": {
+        "expected_status": 403,
+        "actual_status": 403
+      }
+    },
+    {
+      "name": "Admin governance validate-input",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Admin governance validate-output",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Admin governance generate",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Admin draft simulation",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Admin offline export permission",
+      "passed": true,
+      "detail": {
+        "expected_status": 201,
+        "actual_status": 201
+      }
+    },
+    {
+      "name": "Admin offline ADLS fails honestly",
+      "passed": true
+    },
+    {
+      "name": "Policy Owner governance validate-input",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Policy Owner governance validate-output",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Policy Owner governance generate",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Policy Owner draft simulation",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Policy Owner offline export permission",
+      "passed": true,
+      "detail": {
+        "expected_status": 403,
+        "actual_status": 403
+      }
+    },
+    {
+      "name": "Developer governance validate-input",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Developer governance validate-output",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Developer governance generate",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Developer draft simulation",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Developer offline export permission",
+      "passed": true,
+      "detail": {
+        "expected_status": 403,
+        "actual_status": 403
+      }
+    },
+    {
+      "name": "Reviewer governance validate-input",
+      "passed": true,
+      "detail": {
+        "expected_status": 403,
+        "actual_status": 403
+      }
+    },
+    {
+      "name": "Reviewer governance validate-output",
+      "passed": true,
+      "detail": {
+        "expected_status": 403,
+        "actual_status": 403
+      }
+    },
+    {
+      "name": "Reviewer governance generate",
+      "passed": true,
+      "detail": {
+        "expected_status": 403,
+        "actual_status": 403
+      }
+    },
+    {
+      "name": "Reviewer draft simulation",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Reviewer offline export permission",
+      "passed": true,
+      "detail": {
+        "expected_status": 403,
+        "actual_status": 403
+      }
+    },
+    {
+      "name": "Auditor governance validate-input",
+      "passed": true,
+      "detail": {
+        "expected_status": 403,
+        "actual_status": 403
+      }
+    },
+    {
+      "name": "Auditor governance validate-output",
+      "passed": true,
+      "detail": {
+        "expected_status": 403,
+        "actual_status": 403
+      }
+    },
+    {
+      "name": "Auditor governance generate",
+      "passed": true,
+      "detail": {
+        "expected_status": 403,
+        "actual_status": 403
+      }
+    },
+    {
+      "name": "Auditor draft simulation",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "Auditor offline export permission",
+      "passed": true,
+      "detail": {
+        "expected_status": 201,
+        "actual_status": 201
+      }
+    },
+    {
+      "name": "Auditor offline ADLS fails honestly",
+      "passed": true
+    },
+    {
+      "name": "ordinary safe prose",
+      "passed": true,
+      "detail": {
+        "status": 200,
+        "expected_decision": "ALLOW",
+        "actual_decision": "ALLOW"
+      }
+    },
+    {
+      "name": "benign multilingual",
+      "passed": true,
+      "detail": {
+        "status": 200,
+        "expected_decision": "ALLOW",
+        "actual_decision": "ALLOW"
+      }
+    },
+    {
+      "name": "long safe boundary",
+      "passed": true,
+      "detail": {
+        "status": 200,
+        "expected_decision": "ALLOW",
+        "actual_decision": "ALLOW"
+      }
+    },
+    {
+      "name": "OpenAI-shaped synthetic secret",
+      "passed": true,
+      "detail": {
+        "status": 200,
+        "expected_decision": "BLOCK",
+        "actual_decision": "BLOCK"
+      }
+    },
+    {
+      "name": "OpenAI-shaped synthetic secret output withheld",
+      "passed": true
+    },
+    {
+      "name": "AWS-shaped synthetic secret",
+      "passed": true,
+      "detail": {
+        "status": 200,
+        "expected_decision": "BLOCK",
+        "actual_decision": "BLOCK"
+      }
+    },
+    {
+      "name": "AWS-shaped synthetic secret output withheld",
+      "passed": true
+    },
+    {
+      "name": "password assignment",
+      "passed": true,
+      "detail": {
+        "status": 200,
+        "expected_decision": "BLOCK",
+        "actual_decision": "BLOCK"
+      }
+    },
+    {
+      "name": "password assignment output withheld",
+      "passed": true
+    },
+    {
+      "name": "private key header",
+      "passed": true,
+      "detail": {
+        "status": 200,
+        "expected_decision": "BLOCK",
+        "actual_decision": "BLOCK"
+      }
+    },
+    {
+      "name": "private key header output withheld",
+      "passed": true
+    },
+    {
+      "name": "blocked keyword mixed case",
+      "passed": true,
+      "detail": {
+        "status": 200,
+        "expected_decision": "BLOCK",
+        "actual_decision": "BLOCK"
+      }
+    },
+    {
+      "name": "blocked keyword mixed case output withheld",
+      "passed": true
+    },
+    {
+      "name": "synthetic email",
+      "passed": true,
+      "detail": {
+        "status": 200,
+        "expected_decision": "REDACT",
+        "actual_decision": "REDACT"
+      }
+    },
+    {
+      "name": "synthetic email revalidated",
+      "passed": true
+    },
+    {
+      "name": "synthetic SSN",
+      "passed": true,
+      "detail": {
+        "status": 200,
+        "expected_decision": "REDACT",
+        "actual_decision": "REDACT"
+      }
+    },
+    {
+      "name": "synthetic SSN revalidated",
+      "passed": true
+    },
+    {
+      "name": "synthetic phone",
+      "passed": true,
+      "detail": {
+        "status": 200,
+        "expected_decision": "REDACT",
+        "actual_decision": "REDACT"
+      }
+    },
+    {
+      "name": "synthetic phone revalidated",
+      "passed": true
+    },
+    {
+      "name": "multiple emails",
+      "passed": true,
+      "detail": {
+        "status": 200,
+        "expected_decision": "REDACT",
+        "actual_decision": "REDACT"
+      }
+    },
+    {
+      "name": "multiple emails revalidated",
+      "passed": true
+    },
+    {
+      "name": "mixed secret and PII",
+      "passed": true,
+      "detail": {
+        "status": 200,
+        "expected_decision": "BLOCK",
+        "actual_decision": "BLOCK"
+      }
+    },
+    {
+      "name": "mixed secret and PII output withheld",
+      "passed": true
+    },
+    {
+      "name": "fixture moderation flag",
+      "passed": true,
+      "detail": {
+        "status": 200,
+        "expected_decision": "BLOCK",
+        "actual_decision": "BLOCK"
+      }
+    },
+    {
+      "name": "fixture moderation flag output withheld",
+      "passed": true
+    },
+    {
+      "name": "fixture moderation outage",
+      "passed": true,
+      "detail": {
+        "status": 200,
+        "expected_decision": "BLOCK",
+        "actual_decision": "BLOCK"
+      }
+    },
+    {
+      "name": "fixture moderation outage output withheld",
+      "passed": true
+    },
+    {
+      "name": "fixture output secret",
+      "passed": true,
+      "detail": {
+        "status": 200,
+        "expected_decision": "BLOCK",
+        "actual_decision": "BLOCK"
+      }
+    },
+    {
+      "name": "fixture output secret output withheld",
+      "passed": true
+    },
+    {
+      "name": "reject empty text",
+      "passed": true,
+      "detail": {
+        "expected_status": 422,
+        "actual_status": 422
+      }
+    },
+    {
+      "name": "error does not reflect payload empty text",
+      "passed": true
+    },
+    {
+      "name": "reject too long",
+      "passed": true,
+      "detail": {
+        "expected_status": 422,
+        "actual_status": 422
+      }
+    },
+    {
+      "name": "error does not reflect payload too long",
+      "passed": true
+    },
+    {
+      "name": "reject missing text",
+      "passed": true,
+      "detail": {
+        "expected_status": 422,
+        "actual_status": 422
+      }
+    },
+    {
+      "name": "error does not reflect payload missing text",
+      "passed": true
+    },
+    {
+      "name": "reject null text",
+      "passed": true,
+      "detail": {
+        "expected_status": 422,
+        "actual_status": 422
+      }
+    },
+    {
+      "name": "error does not reflect payload null text",
+      "passed": true
+    },
+    {
+      "name": "reject numeric text",
+      "passed": true,
+      "detail": {
+        "expected_status": 422,
+        "actual_status": 422
+      }
+    },
+    {
+      "name": "error does not reflect payload numeric text",
+      "passed": true
+    },
+    {
+      "name": "reject extra field",
+      "passed": true,
+      "detail": {
+        "expected_status": 422,
+        "actual_status": 422
+      }
+    },
+    {
+      "name": "error does not reflect payload extra field",
+      "passed": true
+    },
+    {
+      "name": "malformed JSON rejected",
+      "passed": true,
+      "detail": {
+        "expected_status": 422,
+        "actual_status": 422
+      }
+    },
+    {
+      "name": "64KB request bound",
+      "passed": true,
+      "detail": {
+        "expected_status": 413,
+        "actual_status": 413
+      }
+    },
+    {
+      "name": "policy schema bad schema version",
+      "passed": true,
+      "detail": {
+        "expected_status": 422,
+        "actual_status": 422
+      }
+    },
+    {
+      "name": "policy schema empty name",
+      "passed": true,
+      "detail": {
+        "expected_status": 422,
+        "actual_status": 422
+      }
+    },
+    {
+      "name": "policy schema oversize name",
+      "passed": true,
+      "detail": {
+        "expected_status": 422,
+        "actual_status": 422
+      }
+    },
+    {
+      "name": "policy schema HTML name",
+      "passed": true,
+      "detail": {
+        "expected_status": 422,
+        "actual_status": 422
+      }
+    },
+    {
+      "name": "policy schema extra policy field",
+      "passed": true,
+      "detail": {
+        "expected_status": 422,
+        "actual_status": 422
+      }
+    },
+    {
+      "name": "policy schema ALLOW violation",
+      "passed": true,
+      "detail": {
+        "expected_status": 422,
+        "actual_status": 422
+      }
+    },
+    {
+      "name": "policy schema moderation redaction",
+      "passed": true,
+      "detail": {
+        "expected_status": 422,
+        "actual_status": 422
+      }
+    },
+    {
+      "name": "policy schema empty keyword",
+      "passed": true,
+      "detail": {
+        "expected_status": 422,
+        "actual_status": 422
+      }
+    },
+    {
+      "name": "policy schema too many keywords",
+      "passed": true,
+      "detail": {
+        "expected_status": 422,
+        "actual_status": 422
+      }
+    },
+    {
+      "name": "pagination boundary /api/policies?offset=-1",
+      "passed": true,
+      "detail": {
+        "expected_status": 422,
+        "actual_status": 422
+      }
+    },
+    {
+      "name": "pagination boundary /api/policies?limit=0",
+      "passed": true,
+      "detail": {
+        "expected_status": 422,
+        "actual_status": 422
+      }
+    },
+    {
+      "name": "pagination boundary /api/policies?limit=101",
+      "passed": true,
+      "detail": {
+        "expected_status": 422,
+        "actual_status": 422
+      }
+    },
+    {
+      "name": "pagination boundary /api/audit/events?offset=-1",
+      "passed": true,
+      "detail": {
+        "expected_status": 422,
+        "actual_status": 422
+      }
+    },
+    {
+      "name": "pagination boundary /api/audit/executions?limit=101",
+      "passed": true,
+      "detail": {
+        "expected_status": 422,
+        "actual_status": 422
+      }
+    },
+    {
+      "name": "pagination boundary /api/reviews?limit=0",
+      "passed": true,
+      "detail": {
+        "expected_status": 422,
+        "actual_status": 422
+      }
+    },
+    {
+      "name": "pagination boundary /api/reports/exports?limit=101",
+      "passed": true,
+      "detail": {
+        "expected_status": 422,
+        "actual_status": 422
+      }
+    },
+    {
+      "name": "invalid export format 'xml'",
+      "passed": true,
+      "detail": {
+        "expected_status": 422,
+        "actual_status": 422
+      }
+    },
+    {
+      "name": "invalid export format ''",
+      "passed": true,
+      "detail": {
+        "expected_status": 422,
+        "actual_status": 422
+      }
+    },
+    {
+      "name": "invalid export format 'JSON'",
+      "passed": true,
+      "detail": {
+        "expected_status": 422,
+        "actual_status": 422
+      }
+    },
+    {
+      "name": "Admin feedback allowed",
+      "passed": true,
+      "detail": {
+        "expected_status": 201,
+        "actual_status": 201
+      }
+    },
+    {
+      "name": "Policy Owner feedback allowed",
+      "passed": true,
+      "detail": {
+        "expected_status": 201,
+        "actual_status": 201
+      }
+    },
+    {
+      "name": "Developer feedback allowed",
+      "passed": true,
+      "detail": {
+        "expected_status": 201,
+        "actual_status": 201
+      }
+    },
+    {
+      "name": "Reviewer feedback allowed",
+      "passed": true,
+      "detail": {
+        "expected_status": 201,
+        "actual_status": 201
+      }
+    },
+    {
+      "name": "Auditor feedback allowed",
+      "passed": true,
+      "detail": {
+        "expected_status": 201,
+        "actual_status": 201
+      }
+    },
+    {
+      "name": "invalid feedback rating 0",
+      "passed": true,
+      "detail": {
+        "expected_status": 422,
+        "actual_status": 422
+      }
+    },
+    {
+      "name": "invalid feedback rating 6",
+      "passed": true,
+      "detail": {
+        "expected_status": 422,
+        "actual_status": 422
+      }
+    },
+    {
+      "name": "invalid feedback rating -1",
+      "passed": true,
+      "detail": {
+        "expected_status": 422,
+        "actual_status": 422
+      }
+    },
+    {
+      "name": "invalid feedback rating 2.5",
+      "passed": true,
+      "detail": {
+        "expected_status": 422,
+        "actual_status": 422
+      }
+    },
+    {
+      "name": "invalid feedback rating None",
+      "passed": true,
+      "detail": {
+        "expected_status": 422,
+        "actual_status": 422
+      }
+    },
+    {
+      "name": "invalid feedback rating 'bad'",
+      "passed": true,
+      "detail": {
+        "expected_status": 422,
+        "actual_status": 422
+      }
+    },
+    {
+      "name": "feedback missing execution",
+      "passed": true,
+      "detail": {
+        "expected_status": 404,
+        "actual_status": 404
+      }
+    },
+    {
+      "name": "draft forbids approve",
+      "passed": true,
+      "detail": {
+        "expected_status": 409,
+        "actual_status": 409
+      }
+    },
+    {
+      "name": "draft forbids publish",
+      "passed": true,
+      "detail": {
+        "expected_status": 409,
+        "actual_status": 409
+      }
+    },
+    {
+      "name": "draft forbids activate",
+      "passed": true,
+      "detail": {
+        "expected_status": 409,
+        "actual_status": 409
+      }
+    },
+    {
+      "name": "stale approval invalidated",
+      "passed": true,
+      "detail": {
+        "expected_status": 409,
+        "actual_status": 409
+      }
+    },
+    {
+      "name": "published deletion denied",
+      "passed": true,
+      "detail": {
+        "expected_status": 409,
+        "actual_status": 409
+      }
+    },
+    {
+      "name": "active archive denied",
+      "passed": true,
+      "detail": {
+        "expected_status": 409,
+        "actual_status": 409
+      }
+    },
+    {
+      "name": "disabled active governance fails closed",
+      "passed": true,
+      "detail": {
+        "expected_status": 409,
+        "actual_status": 409
+      }
+    },
+    {
+      "name": "Admin review approve",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "review disposition immutable Admin approve",
+      "passed": true,
+      "detail": {
+        "expected_status": 409,
+        "actual_status": 409
+      }
+    },
+    {
+      "name": "Admin review reject",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "review disposition immutable Admin reject",
+      "passed": true,
+      "detail": {
+        "expected_status": 409,
+        "actual_status": 409
+      }
+    },
+    {
+      "name": "Policy Owner review approve",
+      "passed": true,
+      "detail": {
+        "expected_status": 403,
+        "actual_status": 403
+      }
+    },
+    {
+      "name": "Policy Owner review reject",
+      "passed": true,
+      "detail": {
+        "expected_status": 403,
+        "actual_status": 403
+      }
+    },
+    {
+      "name": "Developer review approve",
+      "passed": true,
+      "detail": {
+        "expected_status": 403,
+        "actual_status": 403
+      }
+    },
+    {
+      "name": "Developer review reject",
+      "passed": true,
+      "detail": {
+        "expected_status": 403,
+        "actual_status": 403
+      }
+    },
+    {
+      "name": "Reviewer review approve",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "review disposition immutable Reviewer approve",
+      "passed": true,
+      "detail": {
+        "expected_status": 409,
+        "actual_status": 409
+      }
+    },
+    {
+      "name": "Reviewer review reject",
+      "passed": true,
+      "detail": {
+        "expected_status": 200,
+        "actual_status": 200
+      }
+    },
+    {
+      "name": "review disposition immutable Reviewer reject",
+      "passed": true,
+      "detail": {
+        "expected_status": 409,
+        "actual_status": 409
+      }
+    },
+    {
+      "name": "Auditor review approve",
+      "passed": true,
+      "detail": {
+        "expected_status": 403,
+        "actual_status": 403
+      }
+    },
+    {
+      "name": "Auditor review reject",
+      "passed": true,
+      "detail": {
+        "expected_status": 403,
+        "actual_status": 403
+      }
+    },
+    {
+      "name": "cross-tenant GET policies",
+      "passed": true,
+      "detail": {
+        "expected_status": 404,
+        "actual_status": 404
+      }
+    },
+    {
+      "name": "cross-tenant PUT policies",
+      "passed": true,
+      "detail": {
+        "expected_status": 404,
+        "actual_status": 404
+      }
+    },
+    {
+      "name": "cross-tenant DELETE policies",
+      "passed": true,
+      "detail": {
+        "expected_status": 404,
+        "actual_status": 404
+      }
+    },
+    {
+      "name": "cross-tenant GET policies",
+      "passed": true,
+      "detail": {
+        "expected_status": 404,
+        "actual_status": 404
+      }
+    },
+    {
+      "name": "cross-tenant POST policies",
+      "passed": true,
+      "detail": {
+        "expected_status": 404,
+        "actual_status": 404
+      }
+    },
+    {
+      "name": "cross-tenant POST policies",
+      "passed": true,
+      "detail": {
+        "expected_status": 404,
+        "actual_status": 404
+      }
+    },
+    {
+      "name": "cross-tenant GET reviews",
+      "passed": true,
+      "detail": {
+        "expected_status": 404,
+        "actual_status": 404
+      }
+    },
+    {
+      "name": "cross-tenant POST reviews",
+      "passed": true,
+      "detail": {
+        "expected_status": 404,
+        "actual_status": 404
+      }
+    },
+    {
+      "name": "cross-tenant POST feedback",
+      "passed": true,
+      "detail": {
+        "expected_status": 404,
+        "actual_status": 404
+      }
+    },
+    {
+      "name": "foreign empty /api/policies",
+      "passed": true
+    },
+    {
+      "name": "foreign empty /api/audit/executions",
+      "passed": true
+    },
+    {
+      "name": "foreign empty /api/audit/events",
+      "passed": true
+    },
+    {
+      "name": "foreign empty /api/reviews",
+      "passed": true
+    },
+    {
+      "name": "foreign empty /api/reports/exports",
+      "passed": true
+    },
+    {
+      "name": "published version unchanged after edit",
+      "passed": true
+    },
+    {
+      "name": "audit excludes prompt/output text",
+      "passed": true
+    },
+    {
+      "name": "synthetic sensitive values absent from stored metadata",
+      "passed": true
+    },
+    {
+      "name": "bounded concurrent reads/writes all successful",
+      "passed": true,
+      "detail": {
+        "requests": 40,
+        "workers": 8,
+        "statuses": {
+          "200": 40
+        }
+      }
+    },
+    {
+      "name": "concurrent write identifiers unique",
+      "passed": true
+    },
+    {
+      "name": "concurrent writes all committed",
+      "passed": true,
+      "detail": {
+        "delta": 20
+      }
+    },
+    {
+      "name": "disposable credentials and database cleaned",
+      "passed": true
+    }
+  ],
+  "passed": 263,
+  "failed": 0,
+  "observations": [
+    {
+      "bounded_concurrency": {
+        "requests": 40,
+        "workers": 8,
+        "p50_ms": 70.01,
+        "p95_ms": 118.28,
+        "max_ms": 180.07
+      },
+      "interpretation": "Disposable local fixture smoke, not an Azure capacity/load certification"
+    },
+    {
+      "input_coercion": {
+        "whitespace_prompt_http": 200,
+        "boolean_rating_http": 201,
+        "numeric_string_rating_http": 201
+      },
+      "interpretation": "Current Pydantic contract permits these coercions; usability/strictness limitations, not counted as failed documented requirements"
+    }
+  ],
+  "http_request_count": 391,
+  "new_live_generation_calls": 0,
+  "new_live_moderation_calls": 0,
+  "new_live_export_calls": 0
+}

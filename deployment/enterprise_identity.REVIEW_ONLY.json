@@ -1,0 +1,18 @@
+{
+  "status": "PREPARATION_ONLY_NOT_CONFIGURED",
+  "approved_provider": "USER_TO_IDENTIFY",
+  "issuer": "SECURE_CONFIGURATION_REQUIRED",
+  "audience": "SECURE_CONFIGURATION_REQUIRED",
+  "tenant_claim_mapping": "REVIEW_REQUIRED",
+  "role_claim_mapping": "REVIEW_REQUIRED",
+  "requirements": [
+    "Use the approved provider for username/password account lifecycle and MFA",
+    "Use a supported OIDC client library after provider approval",
+    "Validate issuer, audience, signature, algorithm allowlist, expiry and tenant claims",
+    "Map roles on the server; never trust browser-selected roles",
+    "Define refresh, logout, revocation, disabled-account and session-cookie/CSRF behavior",
+    "Restrict or retire provisioned demo credentials after migration",
+    "Do not create cloud resources or enable a new service without approval"
+  ],
+  "secrets": "Never put secrets in this file or chat; use existing approved secure configuration"
+}

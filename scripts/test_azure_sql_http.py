@@ -189,7 +189,7 @@ EXPECTED_COUNTS = dict(
             "feedback_records",
             "evaluation_exports",
         ),
-        (1, 2, 1, 29, 7, 2, 2, 2),
+        (1, 2, 1, 31, 7, 2, 2, 2),
         strict=True,
     )
 )
@@ -222,7 +222,15 @@ def verify_retained(connection, manifest, models):
             require(
                 row["tenant"] == tenant
                 and api["tenant"] == tenant
-                and set(row) == set(api)
+                and set(row) <= set(api)
+                and set(api) - set(row)
+                <= (
+                    {"has_published_versions", "is_active"}
+                    if name == "policies"
+                    else {"state", "attempts", "error_code", "sha256"}
+                    if name == "evaluation_exports"
+                    else set()
+                )
             )
             require(
                 all(
@@ -241,7 +249,8 @@ def verify_retained(connection, manifest, models):
                 )
     policy = expected["policies"][0]
     require(
-        policy["row_version"] == 10
+        # The two activations also advance the optimistic concurrency version.
+        policy["row_version"] == 12
         and policy["revision"] == 2
         and policy["status"] == "PUBLISHED"
         and policy["enabled"] == 1
@@ -341,7 +350,14 @@ def verify_retained(connection, manifest, models):
     }
     require(
         all(
-            row["resource"] in owned and row["actor"] == "synthetic-admin"
+            row["resource"] in owned
+            and (
+                row["actor"] == "synthetic-admin"
+                or (
+                    row["action"] == "feedback.created"
+                    and row["actor"] == "synthetic-developer"
+                )
+            )
             for row in expected["audit_events"]
         )
     )
@@ -383,6 +399,7 @@ def verify_retained(connection, manifest, models):
         elif parts[1] == "feedback":
             expected_audits.append(("feedback.created", operation["record_id"]))
         elif parts[1] == "reports":
+            expected_audits.append(("report.PENDING", operation["record_id"]))
             expected_audits.append(("report.FAILED", operation["record_id"]))
     require(
         Counter(expected_audits)
@@ -415,14 +432,16 @@ class Driver:
             operation = {"method": method, "path": path, "outcome": "UNKNOWN"}
             self.evidence["operations"].append(operation)
             self.checkpoint()  # Durable intent MUST precede transmission.
-            response = self.client.request(
-                method,
-                path,
-                json=body,
-                headers={"Authorization": "Bearer " + self.manifest["tokens"][role]}
+            headers = (
+                {"Authorization": "Bearer " + self.manifest["tokens"][role]}
                 if role
-                else {"Authorization": ""},
+                else {"Authorization": ""}
             )
+            if method == "PUT" and path.startswith("/api/policies/"):
+                observed = self.client.request("GET", path, headers=headers)
+                require(observed.status_code == 200)
+                headers["If-Match"] = str(observed.json()["row_version"])
+            response = self.client.request(method, path, json=body, headers=headers)
             operation.update(status=response.status_code, outcome="RECEIVED")
             self.checkpoint()
             require(response.status_code == expected)
@@ -594,6 +613,7 @@ class Driver:
                     "/api/feedback",
                     {"execution_id": execution, "rating": rating},
                     201,
+                    role="Admin" if rating == 2 else "Developer",
                 )
             )
         require(call("GET", "/api/feedback/summary") == {"count": 2, "average": 2.5})

@@ -1,0 +1,204 @@
+{
+  "scope": "Real Chrome; disposable SQLite, fixture providers, regex PII; no cloud/provider calls",
+  "checks": [
+    {
+      "name": "Login rejects invalid credential",
+      "passed": true
+    },
+    {
+      "name": "Demo credential exchanged for authenticated session",
+      "passed": true
+    },
+    {
+      "name": "Create policy with enforced entity selectors",
+      "passed": true
+    },
+    {
+      "name": "Policy lifecycle submit",
+      "passed": true
+    },
+    {
+      "name": "Policy lifecycle reject",
+      "passed": true
+    },
+    {
+      "name": "Policy lifecycle submit",
+      "passed": true
+    },
+    {
+      "name": "Policy lifecycle approve",
+      "passed": true
+    },
+    {
+      "name": "Policy lifecycle publish",
+      "passed": true
+    },
+    {
+      "name": "Policy lifecycle activate",
+      "passed": true
+    },
+    {
+      "name": "Policy lifecycle disable",
+      "passed": true
+    },
+    {
+      "name": "Policy lifecycle enable",
+      "passed": true
+    },
+    {
+      "name": "Server-side search and enabled filter",
+      "passed": true
+    },
+    {
+      "name": "Version restoration creates draft",
+      "passed": true
+    },
+    {
+      "name": "Simulator recognizes obfuscated synthetic email",
+      "passed": true
+    },
+    {
+      "name": "Safe fixture input and output ALLOW",
+      "passed": true
+    },
+    {
+      "name": "Synthetic obfuscated PII REDACT with reinspection",
+      "passed": true
+    },
+    {
+      "name": "Secret blocks before generation",
+      "passed": true
+    },
+    {
+      "name": "Unsafe generated output withheld",
+      "passed": true
+    },
+    {
+      "name": "Fixture moderation BLOCK",
+      "passed": true
+    },
+    {
+      "name": "Fixture moderation outage fails closed",
+      "passed": true
+    },
+    {
+      "name": "Human-review execution is held",
+      "passed": true
+    },
+    {
+      "name": "Reviewer assignment persisted",
+      "passed": true
+    },
+    {
+      "name": "Review decision history and revised resubmission link",
+      "passed": true
+    },
+    {
+      "name": "Revised text passes all current gates",
+      "passed": true
+    },
+    {
+      "name": "Feedback aggregate visible",
+      "passed": true
+    },
+    {
+      "name": "Offline export durably fails without false success",
+      "passed": true
+    },
+    {
+      "name": "Administrative usage panel visible",
+      "passed": true
+    },
+    {
+      "name": "desktop / fits viewport",
+      "passed": true
+    },
+    {
+      "name": "desktop /policies fits viewport",
+      "passed": true
+    },
+    {
+      "name": "desktop /policies/new fits viewport",
+      "passed": true
+    },
+    {
+      "name": "desktop /playground fits viewport",
+      "passed": true
+    },
+    {
+      "name": "desktop /reviews fits viewport",
+      "passed": true
+    },
+    {
+      "name": "desktop /reports fits viewport",
+      "passed": true
+    },
+    {
+      "name": "tablet / fits viewport",
+      "passed": true
+    },
+    {
+      "name": "tablet /policies fits viewport",
+      "passed": true
+    },
+    {
+      "name": "tablet /policies/new fits viewport",
+      "passed": true
+    },
+    {
+      "name": "tablet /playground fits viewport",
+      "passed": true
+    },
+    {
+      "name": "tablet /reviews fits viewport",
+      "passed": true
+    },
+    {
+      "name": "tablet /reports fits viewport",
+      "passed": true
+    },
+    {
+      "name": "mobile / fits viewport",
+      "passed": true
+    },
+    {
+      "name": "mobile /policies fits viewport",
+      "passed": true
+    },
+    {
+      "name": "mobile /policies/new fits viewport",
+      "passed": true
+    },
+    {
+      "name": "mobile /playground fits viewport",
+      "passed": true
+    },
+    {
+      "name": "mobile /reviews fits viewport",
+      "passed": true
+    },
+    {
+      "name": "mobile /reports fits viewport",
+      "passed": true
+    },
+    {
+      "name": "Keyboard focus reaches an interactive control",
+      "passed": true
+    },
+    {
+      "name": "Bounded local authenticated read burst",
+      "passed": true
+    },
+    {
+      "name": "Logout revokes server session",
+      "passed": true
+    },
+    {
+      "name": "Auditor sees read-only policy controls",
+      "passed": true
+    }
+  ],
+  "passed": 49,
+  "failed": 0,
+  "errors": []
+}

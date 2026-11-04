@@ -22,6 +22,13 @@ RUNTIME_PERMISSIONS = {
     "human_review_cases": ("SELECT", "INSERT", "UPDATE"),
     "feedback_records": ("SELECT", "INSERT"),
     "evaluation_exports": ("SELECT", "INSERT", "UPDATE"),
+    "alembic_version": ("SELECT",),
+    "demo_sessions": ("SELECT", "INSERT", "UPDATE"),
+    "inference_rate_buckets": ("SELECT", "INSERT", "UPDATE"),
+    "inference_usage": ("SELECT", "INSERT", "UPDATE"),
+    "export_jobs": ("SELECT", "INSERT", "UPDATE"),
+    "review_assignments": ("SELECT", "INSERT", "UPDATE"),
+    "review_notes": ("SELECT", "INSERT"),
 }
 
 

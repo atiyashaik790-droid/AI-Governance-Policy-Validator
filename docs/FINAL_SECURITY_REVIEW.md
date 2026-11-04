@@ -1,0 +1,29 @@
+# Final security review
+
+Updated 31 October 2026, Asia/Kolkata. **CONDITIONAL DEMO READINESS; NOT PRODUCTION READY.**
+
+This is source review and automated security regression testing, not an independent penetration test.
+
+## Implemented and tested
+- Hashed opaque demo sessions expire after 60 minutes by default. Logout/admin revocation persists in SQL. Removed, disabled, expired or re-roled source demo accounts invalidate their sessions. Source credentials are entered as passwords in the UI and exchanged; only the session token stays in sessionStorage. Session hashes are not usable bearer credentials.
+- Server-owned role/tenant mappings remain authoritative. Foreign policy/review/export access returns 404; forbidden roles return 403. SQLAlchemy binds user input, including escaped literal name search. Browser controls reflect permissions, but server checks remain mandatory.
+- Input/output inspection, redaction reinspection and audit-before-response remain in effect. Provider failures, unknown recognizers and incomplete responses fail closed. Prompt-injection text has no capability to override backend gates; there is no claim of universal semantic prompt-injection detection.
+- Reassigning a review advances its optimistic concurrency counter; a stale reviewer disposition cannot overwrite the reassignment.
+- SQL quotas/reservations precede any governed generation or simulation. Limits persist across workers; a permanent tenant gate serializes concurrency across rate windows. Provider usage is recorded only when the response supplies nonnegative integer counts; billing amounts are not inferred.
+- Exports persist an immutable-in-practice metadata snapshot/hash before storage writes. Conditional creation prevents overwrites; recovery checks exact bytes with ETag-pinned reads, bounded size and attempt count. SQL leases and final ownership fencing prevent stale workers finalizing a newer claim. No cloud retries were added; SDK upload/recovery retries are disabled. There is no blind replay of uncertain operations.
+- Structured logs use route templates, duration/status and sanitized correlation IDs. Provider error categories/status and UUID request IDs omit bodies, URLs, keys and prompt content. JSON validation errors omit raw input. API responses are no-store; nosniff, frame denial, referrer policy and same-origin CSP are set.
+- Migration 004 adds database triggers against UPDATE/DELETE on audit_events, policy_versions and review_notes. Raw SQL denial was tested on migrated SQLite; MSSQL trigger SQL was compiled, not executed. Database administrators can disable triggers: no tamper-proof claim.
+
+## Limitations and required decisions
+- Provisioned demo root credentials remain a compatibility/operator path, optionally expiring/disabled through server account configuration. They are not automatically revoked by session logout. Restrict distribution and remove/disable them through an approved operator change. Username/password account lifecycle, enterprise SSO and MFA are not implemented. The approved provider, issuer/audience, role/tenant mapping and configuration must be supplied before integration; use a supported OIDC library and validated JWKS, not custom JWT/MFA code.
+- The SPA uses sessionStorage bearer tokens; XSS could steal a session. React escaping and CSP reduce exposure, not eliminate it. Production identity should decide secure cookie/BFF versus short-lived bearer architecture and its CSRF protections.
+- PII normalization covers bracketed at/dot, spacing at email delimiters, zero-width format characters, fullwidth compatibility characters, phones, Luhn cards and SSN-shaped values. Original spans are used for redaction and released safe text is not globally normalized. General 'at' prose is not rewritten. Advanced evasion, all Unicode compositions, all languages and contextual entities remain imperfect. Regex mode supports only its declared classes; requesting unsupported entity types fails closed.
+- No hallucination, comprehensive bias or legal-compliance certification is provided. Selective moderation applies only configured categories; model-native filtering may still independently reject content.
+- Tenant isolation is application-enforced, not database row-level security. The operator's SQL identity and runtime inherited privileges need a fresh least-privilege review; no permission was widened here.
+- OSV matched no advisories for 79 pinned PyPI dependencies. npm reports 11 moderate development-tool findings rooted in minimatch; no high/critical findings. Current compatible dependency ranges still use affected versions, and npm's suggested automatic fix includes incompatible downgrades. No force fix was applied. The production ZIP contains built static assets, not Node development dependencies. Keep builds restricted to trusted inputs; review compatible upstream patches separately. The direct-URL spaCy model is outside the OSV registry check.
+- Hosted session revocation, SQL locking under concurrency, runtime permissions, ADLS reconciliation and restore/failover have not been accepted live. Security headers on the actual hosted new version await deployment.
+
+## Release safety
+The allowlisted package excluded environment files, tokens, databases, migrations, tests and CLI caches. Exact configured generation/moderation keys and local root demo tokens were scanned in memory against package members and were absent; values were not printed. This check does not prove absence of every possible unrelated secret in repository history. No secret rotation or external notification was performed.
+
+Evidence: [backend regressions](evidence/final-implementation-2026-10-31/backend-final.xml), [package scan](evidence/final-implementation-2026-10-31/package-smoke.json), [backend advisories](evidence/final-implementation-2026-10-31/backend-dependency-audit.json), [frontend advisories](evidence/final-implementation-2026-10-31/frontend-dependency-audit.json).

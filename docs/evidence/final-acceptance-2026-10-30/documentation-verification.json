@@ -1,0 +1,16 @@
+{
+  "relative_links_checked": 83,
+  "broken_links": [],
+  "plaintext_credential_matches": [],
+  "passed": true,
+  "files_checked": [
+    "README.md",
+    "docs/FINAL_ACCEPTANCE_REPORT.md",
+    "docs/FINAL_PROJECT_COMPLETION_REPORT.md",
+    "docs/AZURE_DEPLOYMENT_RUNBOOK.md",
+    "docs/TECHNICAL_DEMO_RUNBOOK.md",
+    "docs/ARCHITECTURE.md",
+    "docs/PRODUCTION_BACKLOG.md"
+  ],
+  "scope": "Known provisioned role tokens and locally configured API keys searched without printing values; screenshots inspected separately; not a universal secret audit"
+}

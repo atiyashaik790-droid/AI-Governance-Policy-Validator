@@ -1,0 +1,8 @@
+{
+  "candidate_rollback_path": "artifacts/live-stabilization-20261031/governance-live-stabilized.zip",
+  "candidate_rollback_sha256": "5f22b7d829e79251f58f4b216bcc18d92f500220e28381eee18ad6f251e1d697",
+  "hosted_html_sha256": "394e369fe32bd6dbe85b7d22e67f190c4aa5f9f308f9baaa170581e721c07916",
+  "rollback_html_sha256": "394e369fe32bd6dbe85b7d22e67f190c4aa5f9f308f9baaa170581e721c07916",
+  "frontend_shell_matches_hosted": true,
+  "backend_limit": "No fresh worker archive checksum read in this task; retain existing serving verification and verify before rollback execution"
+}

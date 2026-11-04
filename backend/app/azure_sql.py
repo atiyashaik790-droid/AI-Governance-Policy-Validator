@@ -12,7 +12,7 @@ from typing import Any
 from uuid import UUID
 
 from azure.core.credentials import TokenCredential
-from azure.identity import AzureCliCredential
+from azure.identity import AzureCliCredential, ManagedIdentityCredential
 from sqlalchemy import create_engine, event
 from sqlalchemy.engine import Engine, URL
 from sqlalchemy.exc import SQLAlchemyError
@@ -117,7 +117,16 @@ def install_token_provider(engine: Engine, credential: TokenCredential, tenant_i
 
 
 # Build the SQL engine without opening a connection or performing interactive login.
-def create_azure_sql_engine(database_url: URL, tenant_id: str, user_object_id: str, credential: TokenCredential | None = None) -> Engine:
+def create_azure_sql_engine(
+    database_url: URL,
+    tenant_id: str,
+    user_object_id: str,
+    credential: TokenCredential | None = None,
+    auth_mode: str = "cli",
+    query_timeout: int = 15,
+) -> Engine:
+    if auth_mode not in ("cli", "managed_identity"):
+        raise DatabaseConfigurationError("Azure SQL authentication must be cli or managed_identity")
     tenant_id, user_object_id = validate_identity_ids(tenant_id, user_object_id)
     secure_url = build_azure_sql_url(database_url)
     try:
@@ -130,7 +139,12 @@ def create_azure_sql_engine(database_url: URL, tenant_id: str, user_object_id: s
         ) from None
     # Use one pool owner; recycled/disposed SQLAlchemy connections must really close.
     pyodbc.pooling = False
-    azure_credential = credential if credential is not None else AzureCliCredential(tenant_id=tenant_id, process_timeout=15)
+    if credential is not None:
+        azure_credential = credential
+    elif auth_mode == "managed_identity":
+        azure_credential = ManagedIdentityCredential()
+    else:
+        azure_credential = AzureCliCredential(tenant_id=tenant_id, process_timeout=15)
     engine = create_engine(
         secure_url,
         pool_pre_ping=True,
@@ -142,4 +156,9 @@ def create_azure_sql_engine(database_url: URL, tenant_id: str, user_object_id: s
         connect_args={"timeout": 10},
     )
     install_token_provider(engine, azure_credential, tenant_id, user_object_id)
+
+    def set_query_timeout(connection, record):
+        connection.timeout = query_timeout
+
+    event.listen(engine, "connect", set_query_timeout, insert=True)
     return engine

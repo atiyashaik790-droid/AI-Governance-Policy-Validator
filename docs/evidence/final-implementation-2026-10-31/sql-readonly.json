@@ -1,0 +1,17 @@
+{
+  "method": "SELECT-only Azure SQL schema check; no DDL/data writes",
+  "actual_migration": [
+    "003"
+  ],
+  "existing_application_tables": [
+    "active_policy_assignments",
+    "audit_events",
+    "evaluation_exports",
+    "feedback_records",
+    "human_review_cases",
+    "policies",
+    "policy_versions",
+    "validation_executions"
+  ],
+  "connected": true
+}

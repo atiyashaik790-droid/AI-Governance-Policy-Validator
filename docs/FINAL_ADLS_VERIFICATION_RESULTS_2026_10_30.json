@@ -1,0 +1,491 @@
+{
+  "date": "2026-10-30",
+  "overall_status": "PARTIALLY READY",
+  "scope": "Controlled technical demonstration; not a production hardening certification",
+  "deployment_id": "5197c62d-7fc9-45ba-bec4-c3709bd42623",
+  "package": {
+    "archive": "/tmp/governance-adls-final-bqcipv0q/governance-adls-final.zip",
+    "sha256": "f54ab2adc143a0abcf8014e92d0f9f0a9badeace51d33da1ed484bd4220b0a64",
+    "provider_sha256": "b986ac649012a99f410cf6fa5d2cc675cd4897432f15a686126d2e8a2a87d1da",
+    "changed_members": [
+      "app/providers.py"
+    ]
+  },
+  "worker_verification": {
+    "deployment_id": "5197c62d-7fc9-45ba-bec4-c3709bd42623",
+    "worker_serving_events": [
+      "2026-10-30T08:00:31.9219120Z Site is running with deployment version: 5197c62d-7fc9-45ba-bec4-c3709bd42623"
+    ]
+  },
+  "preliminary_startup_failure": {
+    "phase": "Preliminary candidate worker during final package replacement",
+    "platform_time_utc": "2026-10-30T07:55:38",
+    "exit_code": 2,
+    "observed_errors": [
+      "Could not find build manifest file at /home/site/wwwroot/oryx-manifest.toml",
+      "sh: 0: cannot open startup.sh: No such file"
+    ],
+    "final_package_complete_utc": "2026-10-30T07:56:00.6705841Z",
+    "fresh_worker_started_utc": "2026-10-30T07:59:02",
+    "export_attempts_at_this_point": 0
+  },
+  "startup": {
+    "checks": [
+      {
+        "name": "React root",
+        "passed": true
+      },
+      {
+        "name": "/assets/index-Dt2dI4nI.js",
+        "passed": true
+      },
+      {
+        "name": "/assets/index-BGNv5V7U.css",
+        "passed": true
+      },
+      {
+        "name": "/policies",
+        "passed": true,
+        "http_status": 200
+      },
+      {
+        "name": "/health",
+        "passed": true,
+        "http_status": 200
+      },
+      {
+        "name": "/ready",
+        "passed": true,
+        "http_status": 200
+      },
+      {
+        "name": "/api/policies",
+        "passed": true,
+        "http_status": 401
+      },
+      {
+        "name": "/api/not-a-route",
+        "passed": true,
+        "http_status": 404
+      },
+      {
+        "name": "/.env",
+        "passed": true,
+        "http_status": 404
+      },
+      {
+        "name": "CORS exact origin",
+        "passed": true
+      },
+      {
+        "name": "authenticated SQL/live/Presidio settings",
+        "passed": true
+      }
+    ],
+    "passed": 11,
+    "failed": 0
+  },
+  "baseline_checks": [
+    {
+      "name": "prior records unchanged policies",
+      "passed": true
+    },
+    {
+      "name": "foreign tenant remains empty policies",
+      "passed": true
+    },
+    {
+      "name": "prior records unchanged policy_versions",
+      "passed": true
+    },
+    {
+      "name": "foreign tenant remains empty policy_versions",
+      "passed": true
+    },
+    {
+      "name": "prior records unchanged active_policy_assignments",
+      "passed": true
+    },
+    {
+      "name": "foreign tenant remains empty active_policy_assignments",
+      "passed": true
+    },
+    {
+      "name": "prior records unchanged audit_events",
+      "passed": true
+    },
+    {
+      "name": "foreign tenant remains empty audit_events",
+      "passed": true
+    },
+    {
+      "name": "prior records unchanged validation_executions",
+      "passed": true
+    },
+    {
+      "name": "foreign tenant remains empty validation_executions",
+      "passed": true
+    },
+    {
+      "name": "prior records unchanged human_review_cases",
+      "passed": true
+    },
+    {
+      "name": "foreign tenant remains empty human_review_cases",
+      "passed": true
+    },
+    {
+      "name": "prior records unchanged feedback_records",
+      "passed": true
+    },
+    {
+      "name": "foreign tenant remains empty feedback_records",
+      "passed": true
+    },
+    {
+      "name": "prior records unchanged evaluation_exports",
+      "passed": true
+    },
+    {
+      "name": "foreign tenant remains empty evaluation_exports",
+      "passed": true
+    }
+  ],
+  "adls_acceptance": {
+    "state": "COMPLETED_WITH_FAILURES",
+    "passed": 34,
+    "failed": 2,
+    "checks": [
+      {
+        "name": "replacement worker serving corrected deployment",
+        "passed": true
+      },
+      {
+        "name": "current startup checks passed",
+        "passed": true
+      },
+      {
+        "name": "all prior rows unchanged before export",
+        "passed": true
+      },
+      {
+        "name": "additional export HTTP 201",
+        "passed": true
+      },
+      {
+        "name": "single fresh ADLS export succeeded",
+        "passed": false,
+        "detail": {
+          "status": "FAILED",
+          "id": "d99ccce6-2726-462f-b42b-827d09500c0f",
+          "path": "governance-reports/2026/10/30/d99ccce6-2726-462f-b42b-827d09500c0f.json"
+        }
+      },
+      {
+        "name": "unique export ID and synthetic tenant",
+        "passed": true
+      },
+      {
+        "name": "foreign tenant remains empty policies",
+        "passed": true
+      },
+      {
+        "name": "foreign tenant remains empty policy_versions",
+        "passed": true
+      },
+      {
+        "name": "foreign tenant remains empty active_policy_assignments",
+        "passed": true
+      },
+      {
+        "name": "foreign tenant remains empty audit_events",
+        "passed": true
+      },
+      {
+        "name": "foreign tenant remains empty validation_executions",
+        "passed": true
+      },
+      {
+        "name": "foreign tenant remains empty human_review_cases",
+        "passed": true
+      },
+      {
+        "name": "foreign tenant remains empty feedback_records",
+        "passed": true
+      },
+      {
+        "name": "foreign tenant remains empty evaluation_exports",
+        "passed": true
+      },
+      {
+        "name": "all earlier records unchanged policies",
+        "passed": true
+      },
+      {
+        "name": "exact final count policies",
+        "passed": true,
+        "detail": {
+          "expected": 2,
+          "actual": 2
+        }
+      },
+      {
+        "name": "all earlier records unchanged policy_versions",
+        "passed": true
+      },
+      {
+        "name": "exact final count policy_versions",
+        "passed": true,
+        "detail": {
+          "expected": 2,
+          "actual": 2
+        }
+      },
+      {
+        "name": "all earlier records unchanged active_policy_assignments",
+        "passed": true
+      },
+      {
+        "name": "exact final count active_policy_assignments",
+        "passed": true,
+        "detail": {
+          "expected": 1,
+          "actual": 1
+        }
+      },
+      {
+        "name": "all earlier records unchanged audit_events",
+        "passed": true
+      },
+      {
+        "name": "exact final count audit_events",
+        "passed": true,
+        "detail": {
+          "expected": 31,
+          "actual": 31
+        }
+      },
+      {
+        "name": "all earlier records unchanged validation_executions",
+        "passed": true
+      },
+      {
+        "name": "exact final count validation_executions",
+        "passed": true,
+        "detail": {
+          "expected": 9,
+          "actual": 9
+        }
+      },
+      {
+        "name": "all earlier records unchanged human_review_cases",
+        "passed": true
+      },
+      {
+        "name": "exact final count human_review_cases",
+        "passed": true,
+        "detail": {
+          "expected": 1,
+          "actual": 1
+        }
+      },
+      {
+        "name": "all earlier records unchanged feedback_records",
+        "passed": true
+      },
+      {
+        "name": "exact final count feedback_records",
+        "passed": true,
+        "detail": {
+          "expected": 2,
+          "actual": 2
+        }
+      },
+      {
+        "name": "all earlier records unchanged evaluation_exports",
+        "passed": true
+      },
+      {
+        "name": "exact final count evaluation_exports",
+        "passed": true,
+        "detail": {
+          "expected": 4,
+          "actual": 4
+        }
+      },
+      {
+        "name": "only returned execution IDs created",
+        "passed": true
+      },
+      {
+        "name": "new audit actions and resources exact",
+        "passed": true
+      },
+      {
+        "name": "only returned new export ID created",
+        "passed": true
+      },
+      {
+        "name": "dashboard after HTTP 200",
+        "passed": true
+      },
+      {
+        "name": "all prior execution counts and dashboard preserved",
+        "passed": true
+      },
+      {
+        "name": "independent export readback",
+        "passed": false,
+        "detail": {
+          "path": "governance-reports/2026/10/30/d99ccce6-2726-462f-b42b-827d09500c0f.json",
+          "readback_verified": false,
+          "failure_type": "ResourceNotFoundError",
+          "http_status": 404
+        }
+      }
+    ],
+    "budget": {
+      "generation": 0,
+      "moderation_upper_bound": 0,
+      "exports": 1
+    },
+    "created": {
+      "executions": [],
+      "audits": [
+        "1ff6a47c-9fef-4270-8613-18524d7b5da4"
+      ],
+      "exports": [
+        "d99ccce6-2726-462f-b42b-827d09500c0f"
+      ]
+    },
+    "counts": {
+      "policies": 2,
+      "policy_versions": 2,
+      "active_policy_assignments": 1,
+      "audit_events": 31,
+      "validation_executions": 9,
+      "human_review_cases": 1,
+      "feedback_records": 2,
+      "evaluation_exports": 4
+    }
+  },
+  "export": {
+    "id": "d99ccce6-2726-462f-b42b-827d09500c0f",
+    "tenant": "live-demo-81a5d4cc190a433bacc1",
+    "status": "FAILED",
+    "path": "governance-reports/2026/10/30/d99ccce6-2726-462f-b42b-827d09500c0f.json",
+    "created": "2026-10-30T08:01:26.396290+00:00"
+  },
+  "independent_readback": {
+    "path": "governance-reports/2026/10/30/d99ccce6-2726-462f-b42b-827d09500c0f.json",
+    "readback_verified": false,
+    "failure_type": "ResourceNotFoundError",
+    "http_status": 404
+  },
+  "temporary_reader_cleanup": {
+    "removed": true,
+    "all_preexisting_assignments_preserved": true
+  },
+  "parent_properties_readonly": [
+    {
+      "parent": "governance-reports",
+      "directory_flag": "true",
+      "type_headers": {
+        "x-ms-resource-type": "directory",
+        "x-ms-meta-hdi_isfolder": "true"
+      }
+    },
+    {
+      "parent": "governance-reports/2026",
+      "directory_flag": "true",
+      "type_headers": {
+        "x-ms-resource-type": "directory",
+        "x-ms-meta-hdi_isfolder": "true"
+      }
+    },
+    {
+      "parent": "governance-reports/2026/10",
+      "directory_flag": "true",
+      "type_headers": {
+        "x-ms-resource-type": "directory",
+        "x-ms-meta-hdi_isfolder": "true"
+      }
+    },
+    {
+      "parent": "governance-reports/2026/10/30",
+      "directory_flag": "true",
+      "type_headers": {
+        "x-ms-resource-type": "directory",
+        "x-ms-meta-hdi_isfolder": "true"
+      }
+    }
+  ],
+  "tests": {
+    "targeted_backend_passed": 39,
+    "targeted_backend_failed": 0,
+    "targeted_backend_skipped": 0,
+    "deprecation_warnings": 1,
+    "ruff": "PASS",
+    "formatting": "PASS; 39 Python files",
+    "diff_whitespace": "PASS",
+    "existing_full_backend_and_frontend": "Previous results reused; no unrelated suites repeated"
+  },
+  "prior_generation_evidence": "FINAL_LIVE_VERIFICATION_RESULTS_2026_10_30.json",
+  "generation_requests_this_run": 0,
+  "moderation_requests_this_run": 0,
+  "export_posts_this_run": 1,
+  "historical_evidence_preserved": true,
+  "prior_failed_export_count_retained": 3,
+  "current_failed_export_count": 4,
+  "runtime_readonly_diagnostic": {
+    "exit_code": 0,
+    "remote_exit": 0,
+    "output": "{\"provider_source_sha256\": \"b986ac649012a99f410cf6fa5d2cc675cd4897432f15a686126d2e8a2a87d1da\", \"identity_endpoint_present\": true, \"identity_header_present\": true}\n{\"operation\": \"parent_HEAD\", \"parent\": \"governance-reports\", \"folder_marker\": \"true\"}\n{\"operation\": \"parent_HEAD\", \"parent\": \"governance-reports/2026\", \"folder_marker\": \"true\"}\n{\"operation\": \"parent_HEAD\", \"parent\": \"governance-reports/2026/10\", \"folder_marker\": \"true\"}\n{\"operation\": \"parent_HEAD\", \"parent\": \"governance-reports/2026/10/30\", \"folder_marker\": \"true\"}\n{\"operation\": \"failed_export_HEAD\", \"type\": \"ResourceNotFoundError\", \"status\": 404, \"code\": \"BlobNotFound\"}\n",
+    "error_output_present": false
+  },
+  "offline_upload_correction": {
+    "archive": "/tmp/governance-adls-final-bqcipv0q/governance-adls-create-only.zip",
+    "sha256": "b1a3dc0f3d53e98c4ce8c133cbd81d29146299530c42622a11cd384b492d46e1",
+    "provider_sha256": "0da32cb68c09068a107025de001f7f766bde65ee1c09bb51f821ee24df95ecc1",
+    "changed_members": [
+      "app/providers.py"
+    ],
+    "deployed": false,
+    "fresh_export_executed": false,
+    "tests": {
+      "passed": 40,
+      "failed": 0,
+      "skipped": 0,
+      "warnings": 1,
+      "red_phase_passed": 4,
+      "red_phase_failed": 3,
+      "no_cloud_calls": true
+    }
+  },
+  "new_resources_or_tier_changes": false,
+  "migrations_run": false,
+  "missing_credentials": [],
+  "blockers": [
+    "Fresh-file creation is missing in deployed upload_data(overwrite=False) path. Conditional-create fix is tested and packaged locally; deployment and a new single-export approval are pending."
+  ],
+  "pending_approval": "Deploy prepared guarded-create ZIP and execute one additional fresh export with temporary reader/readback/cleanup; zero AI/moderation.",
+  "source_changes_this_phase": [
+    "backend/app/providers.py",
+    "backend/tests/test_live_acceptance_regressions.py",
+    "backend/tests/test_deployment_preparation.py",
+    "backend/tests/test_demo_completion.py"
+  ],
+  "final_readonly_health": [
+    {
+      "path": "/health",
+      "http_status": 200,
+      "passed": true
+    },
+    {
+      "path": "/ready",
+      "http_status": 200,
+      "passed": true
+    }
+  ],
+  "runtime_provider_sha256_verified": "b986ac649012a99f410cf6fa5d2cc675cd4897432f15a686126d2e8a2a87d1da"
+}

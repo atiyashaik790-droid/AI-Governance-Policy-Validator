@@ -1,0 +1,6 @@
+{
+  "scope": "READ_ONLY_EXISTING_SQL_QUERY_VERIFICATION",
+  "mutations": false,
+  "usage_query": "PASS",
+  "active_reserved": 0
+}

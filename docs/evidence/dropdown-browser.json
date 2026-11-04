@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "mode": "ISOLATED_BROWSER_FIXTURES",
+  "checks": [
+    "PII multiple selections and summary",
+    "Search filtering",
+    "Escape closes dropdown",
+    "Moderation multiple selections",
+    "Mobile dropdown fits viewport"
+  ],
+  "page_errors": 0,
+  "widths": {
+    "viewport": 390,
+    "document": 390
+  }
+}

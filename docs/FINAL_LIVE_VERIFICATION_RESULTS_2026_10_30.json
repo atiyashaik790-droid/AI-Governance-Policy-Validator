@@ -1,0 +1,625 @@
+{
+  "date": "2026-10-30",
+  "overall": "PARTIALLY READY",
+  "run_id": "2ff6ca565c0f4fc5bbb4aeb3bde571ab",
+  "url": "https://app-governance-validator-atiya-1026.azurewebsites.net",
+  "deployment_id": "96fedb1b-e5db-426d-b7df-cf818f599bb7",
+  "worker_verification": {
+    "deployment_id": "96fedb1b-e5db-426d-b7df-cf818f599bb7",
+    "lines": [
+      "2026-10-30T07:06:55.4165470Z App path is set to '/tmp/8df3652ff617019'",
+      "2026-10-30T07:08:16.5103270Z INFO:     Started server process [1965]",
+      "2026-10-30T07:08:16.5281681Z INFO:     Application startup complete.",
+      "2026-10-30T07:08:17.5479012Z Site startup probe succeeded after 168.1853756 seconds.",
+      "2026-10-30T07:08:18.0279385Z State: Starting, Action: WarmUpProbeSucceeded, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site startup probe succeeded after 168.1853756 seconds., DetailsLevel: INFO",
+      "2026-10-30T07:08:19.1614932Z Site is running with deployment version: 96fedb1b-e5db-426d-b7df-cf818f599bb7",
+      "2026-10-30T07:08:19.1888104Z Site started.",
+      "2026-10-30T07:08:19.1899397Z State: Started, Action: None, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 10/30/2026 07:08:19 (UTC), DetailsLevel: INFO",
+      "2026-10-30T07:08:19.2379126Z Site is running with patch version PYTHON-3.13.18",
+      "2026-10-30T07:08:39.7189848Z State: Stopping, Action: StoppingSite, LastError: SiteStartupCancelled, LastErrorTimestamp: 10/29/2026 16:14:23, LastErrorDetails: Site stopped manually or container terminated, Details: Site started at 10/29/2026 16:35:18 (UTC), DetailsLevel: INFO",
+      "2026-10-30T07:08:39.7844821Z State: Stopping, Action: StoppingSiteContainers, LastError: SiteStartupCancelled, LastErrorTimestamp: 10/29/2026 16:14:23, LastErrorDetails: Site stopped manually or container terminated, Details: Site started at 10/29/2026 16:35:18 (UTC), DetailsLevel: INFO",
+      "2026-10-30T07:08:39.8125976Z Container is terminating. Grace period: 5 seconds.",
+      "2026-10-30T07:08:50.8310428Z Container is terminated. Total time elapsed: 10995 ms."
+    ]
+  },
+  "startup": {
+    "checks": [
+      {
+        "name": "React root",
+        "passed": true
+      },
+      {
+        "name": "/assets/index-Dt2dI4nI.js",
+        "passed": true
+      },
+      {
+        "name": "/assets/index-BGNv5V7U.css",
+        "passed": true
+      },
+      {
+        "name": "/policies",
+        "passed": true,
+        "http_status": 200
+      },
+      {
+        "name": "/health",
+        "passed": true,
+        "http_status": 200
+      },
+      {
+        "name": "/ready",
+        "passed": true,
+        "http_status": 200
+      },
+      {
+        "name": "/api/policies",
+        "passed": true,
+        "http_status": 401
+      },
+      {
+        "name": "/api/not-a-route",
+        "passed": true,
+        "http_status": 404
+      },
+      {
+        "name": "/.env",
+        "passed": true,
+        "http_status": 404
+      },
+      {
+        "name": "CORS exact origin",
+        "passed": true
+      },
+      {
+        "name": "authenticated SQL/live/Presidio settings",
+        "passed": true
+      }
+    ],
+    "passed": 11,
+    "failed": 0
+  },
+  "baseline": [
+    {
+      "name": "prior records unchanged policies",
+      "passed": true
+    },
+    {
+      "name": "foreign tenant remains empty policies",
+      "passed": true
+    },
+    {
+      "name": "prior records unchanged policy_versions",
+      "passed": true
+    },
+    {
+      "name": "foreign tenant remains empty policy_versions",
+      "passed": true
+    },
+    {
+      "name": "prior records unchanged active_policy_assignments",
+      "passed": true
+    },
+    {
+      "name": "foreign tenant remains empty active_policy_assignments",
+      "passed": true
+    },
+    {
+      "name": "prior records unchanged audit_events",
+      "passed": true
+    },
+    {
+      "name": "foreign tenant remains empty audit_events",
+      "passed": true
+    },
+    {
+      "name": "prior records unchanged validation_executions",
+      "passed": true
+    },
+    {
+      "name": "foreign tenant remains empty validation_executions",
+      "passed": true
+    },
+    {
+      "name": "prior records unchanged human_review_cases",
+      "passed": true
+    },
+    {
+      "name": "foreign tenant remains empty human_review_cases",
+      "passed": true
+    },
+    {
+      "name": "prior records unchanged feedback_records",
+      "passed": true
+    },
+    {
+      "name": "foreign tenant remains empty feedback_records",
+      "passed": true
+    },
+    {
+      "name": "prior records unchanged evaluation_exports",
+      "passed": true
+    },
+    {
+      "name": "foreign tenant remains empty evaluation_exports",
+      "passed": true
+    }
+  ],
+  "live_acceptance": {
+    "passed": 58,
+    "failed": 2,
+    "skipped": 0,
+    "checks": [
+      {
+        "name": "baseline unchanged before completion",
+        "passed": true
+      },
+      {
+        "name": "ready HTTP 200",
+        "passed": true
+      },
+      {
+        "name": "live backend readiness",
+        "passed": true
+      },
+      {
+        "name": "settings HTTP 200",
+        "passed": true
+      },
+      {
+        "name": "same scoped live SQL and PII configuration",
+        "passed": true
+      },
+      {
+        "name": "immutable versions before new requests HTTP 200",
+        "passed": true
+      },
+      {
+        "name": "use only previously created immutable policy",
+        "passed": true
+      },
+      {
+        "name": "dashboard before HTTP 200",
+        "passed": true
+      },
+      {
+        "name": "active approved snapshot preserved",
+        "passed": true
+      },
+      {
+        "name": "fresh ALLOW HTTP 200",
+        "passed": true
+      },
+      {
+        "name": "live final decision ALLOW",
+        "passed": true,
+        "detail": {
+          "actual": "ALLOW",
+          "model_invoked": true,
+          "provider_error": null
+        }
+      },
+      {
+        "name": "live model response released only after output inspection ALLOW",
+        "passed": true
+      },
+      {
+        "name": "input and output moderation succeeded ALLOW",
+        "passed": true
+      },
+      {
+        "name": "correct live immutable snapshot ALLOW",
+        "passed": true
+      },
+      {
+        "name": "fresh REDACT HTTP 200",
+        "passed": true
+      },
+      {
+        "name": "live final decision REDACT",
+        "passed": true,
+        "detail": {
+          "actual": "REDACT",
+          "model_invoked": true,
+          "provider_error": null
+        }
+      },
+      {
+        "name": "live model response released only after output inspection REDACT",
+        "passed": true
+      },
+      {
+        "name": "input and output moderation succeeded REDACT",
+        "passed": true
+      },
+      {
+        "name": "correct live immutable snapshot REDACT",
+        "passed": true
+      },
+      {
+        "name": "redacted email withheld and input revalidated",
+        "passed": true
+      },
+      {
+        "name": "additional export HTTP 201",
+        "passed": true
+      },
+      {
+        "name": "single additional ADLS export succeeded",
+        "passed": false,
+        "detail": {
+          "status": "FAILED",
+          "id": "1dfbf584-bfd2-4d5e-8614-5d244a61fa89",
+          "path": "governance-reports/2026/10/30/1dfbf584-bfd2-4d5e-8614-5d244a61fa89.json"
+        }
+      },
+      {
+        "name": "new export is not earlier failed ID or path",
+        "passed": true
+      },
+      {
+        "name": "foreign tenant remains empty policies",
+        "passed": true
+      },
+      {
+        "name": "foreign tenant remains empty policy_versions",
+        "passed": true
+      },
+      {
+        "name": "foreign tenant remains empty active_policy_assignments",
+        "passed": true
+      },
+      {
+        "name": "foreign tenant remains empty audit_events",
+        "passed": true
+      },
+      {
+        "name": "foreign tenant remains empty validation_executions",
+        "passed": true
+      },
+      {
+        "name": "foreign tenant remains empty human_review_cases",
+        "passed": true
+      },
+      {
+        "name": "foreign tenant remains empty feedback_records",
+        "passed": true
+      },
+      {
+        "name": "foreign tenant remains empty evaluation_exports",
+        "passed": true
+      },
+      {
+        "name": "all earlier records unchanged policies",
+        "passed": true
+      },
+      {
+        "name": "exact final count policies",
+        "passed": true,
+        "detail": {
+          "expected": 2,
+          "actual": 2
+        }
+      },
+      {
+        "name": "all earlier records unchanged policy_versions",
+        "passed": true
+      },
+      {
+        "name": "exact final count policy_versions",
+        "passed": true,
+        "detail": {
+          "expected": 2,
+          "actual": 2
+        }
+      },
+      {
+        "name": "all earlier records unchanged active_policy_assignments",
+        "passed": true
+      },
+      {
+        "name": "exact final count active_policy_assignments",
+        "passed": true,
+        "detail": {
+          "expected": 1,
+          "actual": 1
+        }
+      },
+      {
+        "name": "all earlier records unchanged audit_events",
+        "passed": true
+      },
+      {
+        "name": "exact final count audit_events",
+        "passed": true,
+        "detail": {
+          "expected": 30,
+          "actual": 30
+        }
+      },
+      {
+        "name": "all earlier records unchanged validation_executions",
+        "passed": true
+      },
+      {
+        "name": "exact final count validation_executions",
+        "passed": true,
+        "detail": {
+          "expected": 9,
+          "actual": 9
+        }
+      },
+      {
+        "name": "all earlier records unchanged human_review_cases",
+        "passed": true
+      },
+      {
+        "name": "exact final count human_review_cases",
+        "passed": true,
+        "detail": {
+          "expected": 1,
+          "actual": 1
+        }
+      },
+      {
+        "name": "all earlier records unchanged feedback_records",
+        "passed": true
+      },
+      {
+        "name": "exact final count feedback_records",
+        "passed": true,
+        "detail": {
+          "expected": 2,
+          "actual": 2
+        }
+      },
+      {
+        "name": "all earlier records unchanged evaluation_exports",
+        "passed": true
+      },
+      {
+        "name": "exact final count evaluation_exports",
+        "passed": true,
+        "detail": {
+          "expected": 3,
+          "actual": 3
+        }
+      },
+      {
+        "name": "only returned execution IDs created",
+        "passed": true
+      },
+      {
+        "name": "committed execution and policy snapshot 30b19444-3c25-4740-903f-c09d27de59f0",
+        "passed": true
+      },
+      {
+        "name": "sensitive content excluded from metadata 30b19444-3c25-4740-903f-c09d27de59f0",
+        "passed": true
+      },
+      {
+        "name": "committed execution and policy snapshot d879c256-b4b8-4a03-8b1c-7bd587da7d73",
+        "passed": true
+      },
+      {
+        "name": "sensitive content excluded from metadata d879c256-b4b8-4a03-8b1c-7bd587da7d73",
+        "passed": true
+      },
+      {
+        "name": "new audit actions and resources exact",
+        "passed": true
+      },
+      {
+        "name": "only returned new export ID created",
+        "passed": true
+      },
+      {
+        "name": "dashboard after HTTP 200",
+        "passed": true
+      },
+      {
+        "name": "dashboard accurately includes retained history and new results",
+        "passed": true
+      },
+      {
+        "name": "all four outcomes now present in live tenant history",
+        "passed": true
+      },
+      {
+        "name": "exports after HTTP 200",
+        "passed": true
+      },
+      {
+        "name": "earlier failed export visibly retained",
+        "passed": true
+      },
+      {
+        "name": "independent ADLS readback available",
+        "passed": false,
+        "detail": {
+          "path": "governance-reports/2026/10/30/1dfbf584-bfd2-4d5e-8614-5d244a61fa89.json",
+          "readback_verified": false,
+          "failure_type": "ResourceNotFoundError",
+          "http_status": 404
+        }
+      }
+    ],
+    "state": "COMPLETED_WITH_FAILURES"
+  },
+  "scenarios": [
+    {
+      "name": "fresh ALLOW",
+      "request_id": "30b19444-3c25-4740-903f-c09d27de59f0",
+      "decision": "ALLOW",
+      "provider_mode": "live",
+      "model_invoked": true,
+      "policy_id": "4c91b481-569b-46cf-bf1d-3088b656e87c",
+      "policy_version": 2,
+      "input_decision": "ALLOW",
+      "input_revalidated": false,
+      "input_moderation": "SATISFIED",
+      "output_decision": "ALLOW",
+      "output_moderation": "SATISFIED",
+      "safe_response_present": true,
+      "provider_error_present": false
+    },
+    {
+      "name": "fresh REDACT",
+      "request_id": "d879c256-b4b8-4a03-8b1c-7bd587da7d73",
+      "decision": "REDACT",
+      "provider_mode": "live",
+      "model_invoked": true,
+      "policy_id": "4c91b481-569b-46cf-bf1d-3088b656e87c",
+      "policy_version": 2,
+      "input_decision": "REDACT",
+      "input_revalidated": true,
+      "input_moderation": "SATISFIED",
+      "output_decision": "ALLOW",
+      "output_moderation": "SATISFIED",
+      "safe_response_present": true,
+      "provider_error_present": false
+    }
+  ],
+  "export": {
+    "id": "1dfbf584-bfd2-4d5e-8614-5d244a61fa89",
+    "tenant": "live-demo-81a5d4cc190a433bacc1",
+    "status": "FAILED",
+    "path": "governance-reports/2026/10/30/1dfbf584-bfd2-4d5e-8614-5d244a61fa89.json",
+    "created": "2026-10-30T07:38:34.018494+00:00"
+  },
+  "independent_readback": {
+    "path": "governance-reports/2026/10/30/1dfbf584-bfd2-4d5e-8614-5d244a61fa89.json",
+    "readback_verified": false,
+    "failure_type": "ResourceNotFoundError",
+    "http_status": 404
+  },
+  "counts": {
+    "policies": 2,
+    "policy_versions": 2,
+    "active_policy_assignments": 1,
+    "audit_events": 30,
+    "validation_executions": 9,
+    "human_review_cases": 1,
+    "feedback_records": 2,
+    "evaluation_exports": 3
+  },
+  "dashboard": {
+    "total_policies": 2,
+    "active_policies": 1,
+    "total_validations": 9,
+    "decisions": {
+      "ALLOW": 2,
+      "REDACT": 1,
+      "BLOCK": 5,
+      "HUMAN_REVIEW": 1
+    },
+    "trends": [
+      {
+        "date": "2026-10-30",
+        "score": 100.0
+      },
+      {
+        "date": "2026-10-30",
+        "score": 20.0
+      },
+      {
+        "date": "2026-10-30",
+        "score": 75.0
+      },
+      {
+        "date": "2026-10-30",
+        "score": 55.0
+      },
+      {
+        "date": "2026-10-30",
+        "score": 100.0
+      },
+      {
+        "date": "2026-10-30",
+        "score": 100.0
+      },
+      {
+        "date": "2026-10-30",
+        "score": 75.0
+      },
+      {
+        "date": "2026-10-30",
+        "score": 100.0
+      },
+      {
+        "date": "2026-10-30",
+        "score": 100.0
+      }
+    ],
+    "violations": {
+      "secret_detection": 1,
+      "pii_detection": 3,
+      "moderation": 2,
+      "blocked_keywords": 1
+    },
+    "contributions": {
+      "secret_detection": 240,
+      "pii_detection": 150,
+      "blocked_keywords": 160,
+      "moderation": 175
+    },
+    "active_policy": {
+      "id": "4c91b481-569b-46cf-bf1d-3088b656e87c",
+      "version": 2
+    },
+    "pending_reviews": 0
+  },
+  "request_budget": {
+    "generation_http_attempts": 2,
+    "successful_generations": 2,
+    "moderation_reserved_upper_bound": 8,
+    "successful_moderation_inspections_evidenced": 5,
+    "moderation_count_method": "Two ALLOW stages; REDACT input, revalidation and output. Source-confirmed one-shot calls; not cloud billing telemetry.",
+    "export_posts": 1,
+    "automatic_http_retries": false
+  },
+  "temporary_reader_cleanup": {
+    "removed": true,
+    "all_preexisting_assignments_preserved": true
+  },
+  "offline_diagnostic": {
+    "reproduced": true,
+    "failure_type": "AttributeError",
+    "message": "'DirectoryProperties' object has no attribute 'is_directory'",
+    "network": "fully mocked; no cloud calls",
+    "calls": [
+      {
+        "method": "PUT",
+        "path": "/reports/governance-reports"
+      },
+      {
+        "method": "HEAD",
+        "path": "/reports/governance-reports"
+      }
+    ]
+  },
+  "targeted_regressions": {
+    "passed": 3,
+    "failed": 0,
+    "skipped": 0,
+    "warnings": 1,
+    "path": "backend/tests/test_live_acceptance_regressions.py"
+  },
+  "previous_suite_reused": {
+    "backend_passed": 220,
+    "backend_failed": 0,
+    "migration_execution_deselected": 1,
+    "prohibited_driver_cases_excluded": 69,
+    "frontend_passed": 7,
+    "frontend_failed": 0,
+    "live_readonly_react_passed": 1,
+    "ruff_format_eslint_typescript_build": "PASS; unchanged source; not repeated"
+  },
+  "code_changed": false,
+  "redeployed": false,
+  "historical_evidence_preserved": true,
+  "remaining_blocker": {
+    "path": "backend/app/providers.py:125",
+    "issue": "Existing-parent branch accesses nonexistent DirectoryProperties.is_directory; reproduced AttributeError with real SDK and fully mocked HTTP. Live route suppresses exact underlying failure.",
+    "required": "Approve targeted SDK-compatible directory-type check, focused new regression, correction deployment and one fresh non-overwriting export/readback. No more generation checks necessary."
+  }
+}

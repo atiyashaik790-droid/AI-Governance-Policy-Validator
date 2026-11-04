@@ -1,17 +1,36 @@
 """Deterministic enforcement; scores are explanatory, never release gates."""
 
 import re
+import asyncio
+import threading
 from functools import lru_cache
 from .schemas import PolicyDocument
+from .pii import normalized_view, supplemental_findings
 from .config import settings
 from .providers import moderate_user_prompt, ProviderUnavailable
+
+DETECTOR_SLOTS = threading.BoundedSemaphore(4)
+
+
+def bounded_detection(text, category, policy):
+    if not DETECTOR_SLOTS.acquire(blocking=False):
+        raise RuntimeError("Detector capacity unavailable")
+    try:
+        return detect_sensitive_information(text, category, policy)
+    finally:
+        DETECTOR_SLOTS.release()
+
 
 WEIGHTS = {"secret_detection": 30, "pii_detection": 25, "moderation": 25, "blocked_keywords": 20}
 PRIORITY = {"ALLOW": 0, "REDACT": 1, "HUMAN_REVIEW": 2, "BLOCK": 3}
 SECRET_PATTERNS = [
     r"\bsk-[A-Za-z0-9_-]{20,}",
     r"\bAKIA[A-Z0-9]{16}\b",
-    r'(?i)\b(?:api[_-]?key|password|client_secret)\s*[:=]\s*["\']?[^\s"\']{8,}',
+    r'(?i)\b(?:api[ _-]?key|password|client_secret)\s*[:=]\s*["\']?[^\s"\']{8,}',
+    # Natural-language disclosure requires a long token with letters and digits,
+    # so ordinary questions about API keys do not become secret findings.
+    r'(?i)\bapi[ _-]?key\s+(?:is|value(?:\s+is)?)\s*[:=]?\s*["\']?'
+    r"(?=[A-Za-z0-9_./+~-]*[A-Za-z])(?=[A-Za-z0-9_./+~-]*[0-9])[A-Za-z0-9_./+~-]{16,}",
     r"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----",
 ]
 PII_PATTERNS = [r"\b[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}\b", r"\b\d{3}-\d{2}-\d{4}\b", r"(?<!\w)(?:\+?\d[\d ()-]{8,}\d)(?!\w)"]
@@ -50,12 +69,39 @@ def get_pii_analyzer():
 
 # Find sensitive spans without returning the matched secret values.
 def detect_sensitive_information(text: str, category: str, policy: PolicyDocument) -> list[tuple[int, int]]:
-    if category == "pii_detection" and settings.pii_mode == "presidio":
-        return [(finding.start, finding.end) for finding in get_pii_analyzer().analyze(text=text, language="en")]
+    if category == "pii_detection":
+        view, positions = normalized_view(text)
+        entities = policy.rules.pii_detection.entities
+        if (
+            settings.pii_mode == "regex"
+            and entities
+            and any(entity not in ("EMAIL_ADDRESS", "PHONE_NUMBER", "CREDIT_CARD", "US_SSN") for entity in entities)
+        ):
+            raise ValueError("Selected PII entity requires an installed Presidio recognizer")
+        findings = supplemental_findings(view, entities)
+        if settings.pii_mode == "presidio":
+            analyzer = get_pii_analyzer()
+            supported = analyzer.get_supported_entities(language="en")
+            if entities and any(
+                entity not in supported and entity not in ("EMAIL_ADDRESS", "PHONE_NUMBER", "CREDIT_CARD", "US_SSN") for entity in entities
+            ):
+                raise ValueError("Selected PII entity is unavailable in installed recognizers")
+            selected = [entity for entity in entities if entity in supported] if entities else None
+            if selected is None or selected:
+                findings.extend((finding.start, finding.end) for finding in analyzer.analyze(text=view, language="en", entities=selected))
+        return sorted({(positions[start][0], positions[end - 1][1]) for start, end in findings if 0 <= start < end <= len(positions)})
     patterns = SECRET_PATTERNS if category == "secret_detection" else PII_PATTERNS
     if category == "blocked_keywords":
-        patterns = [re.escape(value) for value in policy.rules.blocked_keywords.values]
-    return [(match.start(), match.end()) for pattern in patterns for match in re.finditer(pattern, text, re.I)]
+        patterns = [re.escape(value.strip()) for value in policy.rules.blocked_keywords.values]
+    view, positions = normalized_view(text)
+    return sorted(
+        {
+            (positions[match.start()][0], positions[match.end() - 1][1])
+            for pattern in patterns
+            for match in re.finditer(pattern, view, re.I)
+            if match.end() > match.start()
+        }
+    )
 
 
 # Replace overlapping sensitive spans once, leaving no original sensitive substring.
@@ -88,7 +134,7 @@ async def inspect_text(text: str, policy: PolicyDocument, revalidation: bool = F
             statuses[category] = "NOT_APPLICABLE"
             continue
         try:
-            matches = detect_sensitive_information(text, category, policy)
+            matches = await asyncio.to_thread(bounded_detection, text, category, policy)
             statuses[category] = "FAILED" if matches else "SATISFIED"
             if matches:
                 findings.append({"category": category, "count": len(matches), "action": rule.action})
@@ -104,9 +150,14 @@ async def inspect_text(text: str, policy: PolicyDocument, revalidation: bool = F
     rule = policy.rules.moderation
     if rule.enabled:
         try:
-            categories = (
-                await moderate_user_prompt(sanitized) if not any(action in ("BLOCK", "HUMAN_REVIEW") for action in actions) else None
-            )
+            if any(action in ("BLOCK", "HUMAN_REVIEW") for action in actions):
+                categories = None
+            elif rule.categories:
+                categories = await moderate_user_prompt(sanitized, required_categories=rule.categories)
+            else:
+                categories = await moderate_user_prompt(sanitized)
+            if categories and rule.categories is not None:
+                categories = [category for category in categories if category in rule.categories]
             statuses["moderation"] = "UNKNOWN" if categories is None else ("FAILED" if categories else "SATISFIED")
             if categories:
                 actions.append(rule.action)

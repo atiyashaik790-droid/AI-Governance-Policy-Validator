@@ -15,7 +15,13 @@ def create_database_engine(configuration: Settings) -> Engine:
     except Exception:
         raise DatabaseConfigurationError("Invalid DATABASE_URL; check the documented database configuration") from None
     if url.drivername == "mssql+pyodbc":
-        return create_azure_sql_engine(url, configuration.azure_sql_tenant_id, configuration.azure_sql_user_object_id)
+        return create_azure_sql_engine(
+            url,
+            configuration.azure_sql_tenant_id,
+            configuration.azure_sql_user_object_id,
+            auth_mode=configuration.azure_sql_auth_mode,
+            query_timeout=configuration.database_query_timeout,
+        )
     if url.drivername not in ("sqlite", "sqlite+pysqlite"):
         raise DatabaseConfigurationError("Unsupported database; choose SQLite or Azure SQL with mssql+pyodbc")
     sqlite_engine = create_engine(url, pool_pre_ping=True, hide_parameters=True, connect_args={"check_same_thread": False})
@@ -24,6 +30,7 @@ def create_database_engine(configuration: Settings) -> Engine:
     @event.listens_for(sqlite_engine, "connect")
     def enable_sqlite_foreign_keys(connection, record) -> None:
         connection.execute("PRAGMA foreign_keys=ON")
+        connection.execute(f"PRAGMA busy_timeout={configuration.database_query_timeout * 1000}")
 
     return sqlite_engine
 

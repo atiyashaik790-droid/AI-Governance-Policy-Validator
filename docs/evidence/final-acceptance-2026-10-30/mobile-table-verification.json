@@ -1,0 +1,15 @@
+{
+  "name": "mobile policy actions accessible by table horizontal scroll",
+  "passed": true,
+  "dimensions": {
+    "scrollLeft": 56,
+    "scrollWidth": 364,
+    "clientWidth": 308
+  },
+  "button": {
+    "x": 277.84375,
+    "y": 627.6875,
+    "width": 53.671875,
+    "height": 29
+  }
+}

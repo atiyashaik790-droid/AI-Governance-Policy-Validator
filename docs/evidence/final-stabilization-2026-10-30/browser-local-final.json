@@ -1,0 +1,251 @@
+{
+  "scope": "real Chrome, disposable local SQLite, fixture generation/moderation, regex PII; no cloud calls",
+  "checks": [
+    {
+      "name": "login form visible",
+      "passed": true
+    },
+    {
+      "name": "invalid token rejected",
+      "passed": true
+    },
+    {
+      "name": "authorized login dashboard",
+      "passed": true
+    },
+    {
+      "name": "create draft via UI",
+      "passed": true
+    },
+    {
+      "name": "edit draft via UI",
+      "passed": true
+    },
+    {
+      "name": "local simulation",
+      "passed": true
+    },
+    {
+      "name": "safe simulation ALLOW",
+      "passed": true
+    },
+    {
+      "name": "blocked keyword simulation BLOCK",
+      "passed": true
+    },
+    {
+      "name": "contextual API key simulation BLOCK",
+      "passed": true
+    },
+    {
+      "name": "policy submit",
+      "passed": true
+    },
+    {
+      "name": "policy approve",
+      "passed": true
+    },
+    {
+      "name": "policy publish",
+      "passed": true
+    },
+    {
+      "name": "policy activate",
+      "passed": true
+    },
+    {
+      "name": "policy disable",
+      "passed": true
+    },
+    {
+      "name": "policy enable",
+      "passed": true
+    },
+    {
+      "name": "immutable policy history",
+      "passed": true
+    },
+    {
+      "name": "fixture Safe prompt ALLOW",
+      "passed": true
+    },
+    {
+      "name": "feedback submission",
+      "passed": true
+    },
+    {
+      "name": "fixture Synthetic secret BLOCK",
+      "passed": true
+    },
+    {
+      "name": "fixture Synthetic PII REDACT",
+      "passed": true
+    },
+    {
+      "name": "fixture Fixture moderation BLOCK",
+      "passed": true
+    },
+    {
+      "name": "fixture Fixture failure BLOCK",
+      "passed": true
+    },
+    {
+      "name": "fixture output secret blocked",
+      "passed": true
+    },
+    {
+      "name": "unsafe output withheld",
+      "passed": true
+    },
+    {
+      "name": "held content approve",
+      "passed": true
+    },
+    {
+      "name": "review approve",
+      "passed": true
+    },
+    {
+      "name": "review metadata history approve",
+      "passed": true
+    },
+    {
+      "name": "held content reject",
+      "passed": true
+    },
+    {
+      "name": "review reject",
+      "passed": true
+    },
+    {
+      "name": "review metadata history reject",
+      "passed": true
+    },
+    {
+      "name": "unused draft delete",
+      "passed": true
+    },
+    {
+      "name": "unused draft archive",
+      "passed": true
+    },
+    {
+      "name": "navigation /history",
+      "passed": true
+    },
+    {
+      "name": "navigation /reviews",
+      "passed": true
+    },
+    {
+      "name": "navigation /analytics",
+      "passed": true
+    },
+    {
+      "name": "navigation /reports",
+      "passed": true
+    },
+    {
+      "name": "navigation /settings",
+      "passed": true
+    },
+    {
+      "name": "desktop / page overflow",
+      "passed": true,
+      "client": 1440,
+      "scroll": 1440
+    },
+    {
+      "name": "desktop /policies page overflow",
+      "passed": true,
+      "client": 1440,
+      "scroll": 1440
+    },
+    {
+      "name": "desktop /policies/new page overflow",
+      "passed": true,
+      "client": 1440,
+      "scroll": 1440
+    },
+    {
+      "name": "desktop /playground page overflow",
+      "passed": true,
+      "client": 1440,
+      "scroll": 1440
+    },
+    {
+      "name": "desktop /reports page overflow",
+      "passed": true,
+      "client": 1440,
+      "scroll": 1440
+    },
+    {
+      "name": "tablet / page overflow",
+      "passed": true,
+      "client": 820,
+      "scroll": 820
+    },
+    {
+      "name": "tablet /policies page overflow",
+      "passed": true,
+      "client": 820,
+      "scroll": 820
+    },
+    {
+      "name": "tablet /policies/new page overflow",
+      "passed": true,
+      "client": 820,
+      "scroll": 820
+    },
+    {
+      "name": "tablet /playground page overflow",
+      "passed": true,
+      "client": 820,
+      "scroll": 820
+    },
+    {
+      "name": "tablet /reports page overflow",
+      "passed": true,
+      "client": 820,
+      "scroll": 820
+    },
+    {
+      "name": "mobile / page overflow",
+      "passed": true,
+      "client": 390,
+      "scroll": 390
+    },
+    {
+      "name": "mobile /policies page overflow",
+      "passed": true,
+      "client": 390,
+      "scroll": 390
+    },
+    {
+      "name": "mobile /policies/new page overflow",
+      "passed": true,
+      "client": 390,
+      "scroll": 390
+    },
+    {
+      "name": "mobile /playground page overflow",
+      "passed": true,
+      "client": 390,
+      "scroll": 390
+    },
+    {
+      "name": "mobile /reports page overflow",
+      "passed": true,
+      "client": 390,
+      "scroll": 390
+    },
+    {
+      "name": "logout",
+      "passed": true
+    }
+  ],
+  "passed": 53,
+  "failed": 0,
+  "errors": [],
+  "runner_errors": []
+}

@@ -315,6 +315,13 @@ def inventory_module():
 
 
 def preflight(connection, inventory):
+    raise SafetyStop(
+        "Retired revision-003 write protocol: use the current schema inventory and restricted demo acceptance workflow"
+    )
+
+
+def _historical_preflight_003(connection, inventory):
+    """Offline regression reference only; the executable protocol uses the retirement guard."""
     report = inventory.collect_inventory(connection, DATABASE)
     require(report.get("inventory_status") == "COMPLETED")
     require(report.get("context", {}).get("database_name") == DATABASE)

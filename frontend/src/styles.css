@@ -833,3 +833,94 @@ footer {
   margin-left: auto;
   white-space: nowrap;
 }
+
+.editor-fields {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+.table-wrap {
+  scrollbar-gutter: stable;
+}
+@media (max-width: 700px) {
+  .table-wrap::before {
+    content: "Scroll horizontally for all actions →";
+    display: block;
+    font-size: 12px;
+    padding: 8px 0;
+    color: #475569;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.rule-selection {
+  margin-top: 14px;
+}
+.multi-select {
+  position: relative;
+  min-width: 0;
+}
+.multi-select-label {
+  display: block;
+  margin-bottom: 8px;
+}
+.multi-select-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  text-align: left;
+  min-height: 46px;
+}
+.multi-select-trigger > span:first-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+.multi-select-panel {
+  position: absolute;
+  z-index: 20;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 6px;
+  padding: 12px;
+  background: #fff;
+  border: 1px solid #dce3ef;
+  border-radius: 8px;
+  box-shadow: 0 10px 24px #182d4d26;
+}
+.multi-select-options {
+  max-height: 240px;
+  overflow-y: auto;
+  margin: 10px 0;
+  overscroll-behavior: contain;
+}
+.multi-select-options .checkbox {
+  margin: 0;
+  padding: 8px 4px;
+  overflow-wrap: anywhere;
+}
+.multi-select-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  border-top: 1px solid #e7edf5;
+  padding-top: 10px;
+}
+.editor-grid > * {
+  min-width: 0;
+}
+.multi-select-trigger {
+  min-width: 0;
+}

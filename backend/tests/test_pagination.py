@@ -6,10 +6,26 @@ from unittest.mock import Mock
 import pytest
 from sqlalchemy.dialects import mssql
 
-from app.main import app, get_database, list_records, serialize
+from app.main import app, get_all_policies, get_database, list_records, serialize
 from app.models import Audit, Execution, Export, Policy, Review
 from app.schemas import PolicyDocument
 from app.security import Identity
+
+
+@pytest.mark.parametrize("offset_fetch", [False, True])
+def test_policy_flags_use_sql_server_scalar_case(offset_fetch):
+    database = Mock()
+    database.execute.return_value = []
+    assert get_all_policies(2, 3, "example", "PUBLISHED", True, database, Identity("fixture", "one", "Admin")) == []
+    statement = database.execute.call_args.args[0]
+    dialect = mssql.dialect()
+    dialect._supports_offset_fetch = offset_fetch
+    sql = str(statement.compile(dialect=dialect, compile_kwargs={"literal_binds": True}))
+    assert sql.count("CASE WHEN (EXISTS (SELECT") == 2
+    assert sql.count("THEN 1 ELSE 0 END") == 2
+    assert "policy_versions.tenant = 'one'" in sql
+    assert "active_policy_assignments.tenant = 'one'" in sql
+    assert "policy_versions.policy_id = policies.id" in sql
 
 
 @pytest.mark.parametrize("model", [Policy, Audit, Execution, Review, Export])
@@ -76,6 +92,8 @@ def test_pagination_multiple_records_and_tenant_isolation(client, model, endpoin
         dependency.close()
     order = [4, 3, 2, 1] if model is Policy else [1, 3, 2, 4]
     ordered_rows = [expected[identifier(number)] for number in order]
+    if model is Policy:
+        ordered_rows = [{**row, "has_published_versions": False, "is_active": False} for row in ordered_rows]
     for offset, limit in ((0, 2), (2, 2), (1, 2), (3, 2), (4, 2), (20, 2), (0, 1), (0, 100)):
         response = client.get(endpoint, params={"offset": offset, "limit": limit})
         assert response.status_code == 200
