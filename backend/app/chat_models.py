@@ -1,5 +1,6 @@
 """User chat display history, separate from metadata-only governance and audit records."""
 
+from sqlalchemy.dialects import mssql
 from sqlalchemy import CheckConstraint, ForeignKeyConstraint, Index, Integer, MetaData, String, UnicodeText
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
@@ -19,7 +20,7 @@ class ChatConversation(ChatBase):
     id: Mapped[str] = mapped_column(String(36), primary_key=True, default=new_id)
     tenant: Mapped[str] = mapped_column(String(80), nullable=False)
     actor: Mapped[str] = mapped_column(String(100), nullable=False)
-    title: Mapped[str] = mapped_column(String(120), nullable=False, default="New conversation")
+    title: Mapped[str] = mapped_column(String(120).with_variant(mssql.NVARCHAR(120), "mssql"), nullable=False, default="New conversation")
     created_at: Mapped[str] = mapped_column(String(40), nullable=False, default=now)
     updated_at: Mapped[str] = mapped_column(String(40), nullable=False, default=now)
 
@@ -41,6 +42,6 @@ class ChatMessage(ChatBase):
     actor: Mapped[str] = mapped_column(String(100), nullable=False)
     role: Mapped[str] = mapped_column(String(10), nullable=False)
     ordinal: Mapped[int] = mapped_column(Integer, nullable=False)
-    content: Mapped[str] = mapped_column(UnicodeText, nullable=False)
+    content: Mapped[str] = mapped_column(UnicodeText().with_variant(mssql.NVARCHAR(None), "mssql"), nullable=False)
     decision: Mapped[str] = mapped_column(String(20), nullable=False)
     created_at: Mapped[str] = mapped_column(String(40), nullable=False, default=now)

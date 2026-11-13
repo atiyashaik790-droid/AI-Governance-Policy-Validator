@@ -11,6 +11,7 @@ from sqlalchemy.pool import StaticPool
 
 # Keep application imports and subprocesses on disposable database configuration.
 _PRESERVED_DB = (Path(__file__).resolve().parents[2] / "private/demo-preserved/offline.db").resolve()
+_PERSISTENT_LIVE_DB = (Path(__file__).resolve().parents[2] / "private/live-local-chat/offline.db").resolve()
 os.environ["DATABASE_URL"] = "sqlite://"
 
 
@@ -24,7 +25,7 @@ def _guard_preserved_database(event, args):
             return
     else:
         path = target
-    if Path(path).resolve() == _PRESERVED_DB:
+    if Path(path).resolve() in (_PRESERVED_DB, _PERSISTENT_LIVE_DB):
         raise RuntimeError("Automated tests cannot write to the preserved demo database")
 
 
