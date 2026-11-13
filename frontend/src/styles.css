@@ -1014,7 +1014,9 @@ footer {
 .session-active { background: #d1fae5; color: #065f46; }
 .session-expired { background: #fef3c7; color: #92400e; }
 .session-revoked { background: #ede9fe; color: #5b21b6; }
-.settings-page { min-width: 0; }
+.settings-page { min-width: 0; display: grid; gap: 1.5rem; }
+.settings-page .session-metrics { margin: 1.25rem 0; }
+.settings-page .pagination { margin-top: 1.25rem; }
 .settings-section-heading { margin-bottom: 18px; }
 .settings-section-heading p { margin-top: 4px; font-size: 12px; }
 .settings-health-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
@@ -1045,3 +1047,6 @@ footer {
 .category-form label { display: grid; gap: 0.4rem; }
 .category-form .checkbox { display: flex; align-items: center; }
 .category-editor li { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin: 0.5rem 0; }
+.field-status { display: block; margin-top: 6px; color: #475569; font-size: .85rem; font-weight: 400; }
+.field-error { display: block; margin-top: 6px; color: #b42318; font-size: .875rem; font-weight: 400; }
+.field-error button { margin-left: 6px; padding: 2px 10px; font-size: .8rem; }

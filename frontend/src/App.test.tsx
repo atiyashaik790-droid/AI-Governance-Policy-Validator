@@ -485,12 +485,12 @@ it("shows actor attribution, safe categories and pinned names/versions in separa
     ] });
     if (url.pathname === "/api/v2/audit/events") return json({ total: 1, items: [{ id: "event", created: "2026-11-06",
       action: url.searchParams.get("category") === "administration" ? "sso.session.created" : "policy.published",
-      actor: "actual.admin@example.test", actor_role: "Not recorded", policy_name: "Finance policy" }] });
+      actor: "actual.admin@example.test", actor_role: "Historical role unavailable", policy_name: "Finance policy" }] });
     return json([]);
   });
   await renderWorkspace();
   await screen.findByText("policy.published");
-  expect(screen.getByText("Not recorded")).toBeInTheDocument();
+  expect(screen.getByText("Historical role unavailable")).toBeInTheDocument();
   fireEvent.click(screen.getByRole("button", { name: "Governance execution history" }));
   await screen.findByText("actual.user@example.test");
   expect(screen.getByText("Finance policy, Safety policy")).toBeInTheDocument();

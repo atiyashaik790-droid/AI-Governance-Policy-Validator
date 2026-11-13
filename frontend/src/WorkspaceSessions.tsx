@@ -15,7 +15,7 @@ export function WorkspaceSessions({ mode = "sso" }: { mode?: "sso" | "demo" }) {
   const [busy, setBusy] = useState(false);
   const sessions = useApi<WorkspaceSession[]>(`/api/${mode === "demo" ? "auth" : "sso"}/sessions?limit=20&offset=${offset}`);
   return <section className="panel" aria-labelledby="sessions-heading">
-    <div className="panel-heading"><div><h2 id="sessions-heading">Workspace Sessions</h2><p>{mode === "demo" ? "Local demo sessions for this workspace." : "Microsoft Entra sessions for this workspace."}</p></div><button disabled={sessions.loading || busy} onClick={() => void sessions.reload()}>Refresh sessions</button></div>
+    <div className="panel-heading"><div><h2 id="sessions-heading">Sessions</h2><p>{mode === "demo" ? "Local demo sessions for this workspace." : "Microsoft Entra sessions for this workspace."}</p></div><button disabled={sessions.loading || busy} onClick={() => void sessions.reload()}>Refresh sessions</button></div>
     <p>Revocation ends the selected session. An authorized operator must disable the membership or source credential to prevent future sign-ins.</p>
     <p className="muted">Summary counts cover this page only, not all workspace sessions. Roles and creation timestamps are not provided by the current session API.</p>
     {message && <p className="notice" role="status">{message}</p>}

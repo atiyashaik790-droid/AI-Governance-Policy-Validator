@@ -24,34 +24,56 @@ function setup(sso: boolean, role = "Admin", sessionsStatus = 200) {
   return calls;
 }
 
-it("shows accurate local demo sections and structured release diagnostics", async () => {
+it("shows only Workspace Sessions for local demo authentication", async () => {
   const calls = setup(false);
-  expect(await screen.findByRole("heading", { name: "System Health" })).toBeInTheDocument();
-  expect(screen.getByText("Connected · SQLITE")).toBeInTheDocument();
-  expect(screen.getByText("Local Fixture Mode")).toBeInTheDocument();
-  expect(await screen.findByText("Presidio")).toBeInTheDocument();
-  expect(screen.getByText("Local demo authentication")).toBeInTheDocument();
-  expect(screen.getByText("actual.operator@example.test")).toBeInTheDocument();
-  expect(screen.getByText("Not provided by this session API")).toBeInTheDocument();
+  expect(await screen.findByRole("heading", { name: "Workspace Sessions", level: 1 })).toBeInTheDocument();
   expect(await screen.findByText("No workspace sessions on this page.")).toBeInTheDocument();
   expect(calls.mock.calls.some(([input]) => new URL(String(input)).pathname === "/api/auth/sessions")).toBe(true);
-  expect(screen.getByText("Verification result: Configured, not verified")).toBeInTheDocument();
-  expect(screen.queryByText(/ADLS upload/i)).not.toBeInTheDocument();
-  const summary = screen.getByText("Advanced Diagnostics");
-  expect(summary.closest("details")).not.toHaveAttribute("open");
-  fireEvent.click(summary);
-  expect(summary.closest("details")).toHaveAttribute("open");
-  expect(screen.getByText("demo-build · abc123")).toBeInTheDocument();
-  expect(screen.queryByText("[object Object]")).not.toBeInTheDocument();
+  for (const removed of ["System Health", "Authentication & Workspace", "Integration Verification", "Settings & diagnostics"]) {
+    expect(screen.queryByRole("heading", { name: removed })).not.toBeInTheDocument();
+  }
+  for (const removed of ["Advanced Diagnostics", "Connected · SQLITE", "Local Fixture Mode", "Local demo authentication", "demo-build · abc123"]) {
+    expect(screen.queryByText(removed)).not.toBeInTheDocument();
+  }
+  expect(screen.queryByRole("button", { name: "Refresh diagnostics" })).not.toBeInTheDocument();
+  expect(screen.queryByRole("button", { name: /Verify Azure OpenAI/ })).not.toBeInTheDocument();
+  expect(screen.getByRole("button", { name: "Refresh sessions" })).toBeInTheDocument();
   expect(calls.mock.calls.every(([, options]) => options?.method !== "POST")).toBe(true);
 });
 
 it("shows Entra session errors and limits session management to Admin", async () => {
   const calls = setup(true, "Admin", 503);
-  expect(await screen.findByText("Microsoft Entra ID SSO")).toBeInTheDocument();
   expect(await screen.findByRole("alert")).toHaveTextContent("Sessions unavailable");
   expect(calls.mock.calls.some(([input]) => new URL(String(input)).pathname === "/api/sso/sessions")).toBe(true);
+  expect(screen.queryByText("Microsoft Entra ID SSO")).not.toBeInTheDocument();
   expect(calls.mock.calls.every(([, options]) => options?.method !== "POST")).toBe(true);
+});
+
+it("refreshes and revokes a single Entra session", async () => {
+  window.history.replaceState({}, "", "/settings");
+  let revoked = false;
+  const calls = vi.spyOn(globalThis, "fetch").mockImplementation(async (input, options = {}) => {
+    const path = new URL(String(input)).pathname;
+    if (path === "/api/sso/status") return json({ configured: true });
+    if (path === "/api/sso/me") return json({ user: "actual.operator@example.test", role: "Admin", tenant: "demo-workspace", csrf_token: "synthetic" });
+    if (path === "/api/settings") return json({ role: "Admin", tenant: "demo-workspace", sso_enabled: true });
+    if (path === "/api/v2/workspace/policy-state") return json({ mode: "LEGACY", multi_policy_available: false });
+    if (path === "/api/sso/sessions/session-1/revoke" && options.method === "POST") { revoked = true; return json({ revoked: true }); }
+    if (path === "/api/sso/sessions") return json([{ id: "session-1", actor: "user.one@example.test", expires: "2099-01-01T00:00:00Z", revoked, expired: false }]);
+    return json([]);
+  });
+  vi.spyOn(window, "confirm").mockReturnValue(true);
+  render(<App />);
+  await screen.findByText("user.one@example.test");
+  const listCalls = () => calls.mock.calls.filter(([input]) => new URL(String(input)).pathname === "/api/sso/sessions").length;
+  const before = listCalls();
+  fireEvent.click(screen.getByRole("button", { name: "Refresh sessions" }));
+  await waitFor(() => expect(listCalls()).toBeGreaterThan(before));
+  fireEvent.click(screen.getByRole("button", { name: "Revoke session for user.one@example.test" }));
+  expect(await screen.findByText("Session revoked.")).toBeInTheDocument();
+  expect(calls.mock.calls.filter(([, options]) => options?.method === "POST").map(([input]) => new URL(String(input)).pathname))
+    .toEqual(["/api/sso/sessions/session-1/revoke"]);
+  expect(await screen.findByText("Revoked")).toBeInTheDocument();
 });
 
 it("does not fetch workspace sessions for a non-admin viewer", async () => {
@@ -59,5 +81,4 @@ it("does not fetch workspace sessions for a non-admin viewer", async () => {
   expect(await screen.findByText("Session management is available to workspace administrators.")).toBeInTheDocument();
   await waitFor(() => expect(calls.mock.calls.some(([input]) => new URL(String(input)).pathname === "/api/settings")).toBe(true));
   expect(calls.mock.calls.some(([input]) => new URL(String(input)).pathname.endsWith("/sessions"))).toBe(false);
-  expect(screen.queryByRole("button", { name: /Verify Azure OpenAI/ })).not.toBeInTheDocument();
 });

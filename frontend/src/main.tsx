@@ -1,6 +1,5 @@
 import { WorkspaceSessions } from "./WorkspaceSessions";
 import { ReviewContent, REVIEW_REASONS } from "./ReviewContent";
-import { IntegrationStatus } from "./IntegrationStatus";
 import { UserPortal } from "./UserPortal";
 import { MultiSelectDropdown } from "./MultiSelectDropdown";
 import React, { useCallback, useEffect, useState, useRef } from "react";
@@ -148,7 +147,7 @@ const initialDocument: Document = {
 const navigation = [
   { to: "/", label: "Overview", icon: LayoutDashboard },
   { to: "/policies", label: "Policy management", icon: ScrollText },
-  { to: "/simulator", label: "Policy simulator", icon: FlaskConical },
+  { to: "/simulator", label: "Policy Validation Studio", icon: FlaskConical },
   { to: "/playground", label: "AI playground", icon: Sparkles },
   { to: "/history", label: "Validation history", icon: History },
   { to: "/reviews", label: "Human review", icon: UserCheck },
@@ -1161,18 +1160,13 @@ function Simulator() {
       <div className="page-heading">
         <div>
           <span className="eyebrow">TEST BEFORE PUBLISHING</span>
-          <h1>Policy simulator</h1>
-          <p>Preview governance decisions without generating AI output.</p>
+          <h1>Policy Validation Studio</h1>
+          <p>Validate governance policies before publishing or activating them.</p>
         </div>
       </div>
-      <DataState
-        loading={policies.loading}
-        error={policies.error}
-        reload={policies.reload}
-      />
-      <Notice message={message} />
       <form
         className="panel"
+        aria-label="Policy validation"
         onSubmit={async (event) => {
           event.preventDefault();
           setBusy(true);
@@ -1181,7 +1175,7 @@ function Simulator() {
             setResult(await request(mode === "selected" ? `/api/v2/simulation/policies/${id}` : "/api/v2/simulation/workspace", "POST", { text }));
             setMessage("");
           } catch (error) {
-            setMessage(String(error));
+            setMessage(error instanceof Error ? error.message : String(error));
           } finally {
             setBusy(false);
           }
@@ -1243,6 +1237,11 @@ function Simulator() {
               </option>
             ))}
           </select>
+          {policies.loading && <small className="field-status" role="status">Loading policies…</small>}
+          {policies.error && !policies.loading && <span className="field-error" role="alert">
+            Policies couldn't be loaded: {policies.error}{" "}
+            <button type="button" onClick={() => void policies.reload()}>Try again</button>
+          </span>}
         </label>}
         <label>
           Sample prompt
@@ -1256,6 +1255,7 @@ function Simulator() {
         <button className="primary" disabled={busy || !text.trim() || (mode === "selected" && !id) || (mode === "workspace" && workspace.data?.mode !== "MULTI")}>
           Simulate policy
         </button>
+        {message && <p className="field-error" role="alert">Validation failed: {message}</p>}
       </form>
       {result && <><p>The decision reflects the strongest action from the evaluated policy rules. Expand each policy for detector findings.</p><Inspection stage={result} title="Simulation only · no AI generation" /></>}
     </>
@@ -1485,7 +1485,7 @@ function Records({
                   <td>{String(row.created).slice(0, 19)}</td>
                   {(kind === "history" || kind === "reports") && <>
                     {(kind === "history" || auditCategory !== "administration") && <td>{Array.isArray(row.policy_names) ? row.policy_names.join(", ") : String(row.policy_name || "Not recorded")}</td>}
-                    <td>{String(row.actor || "Not recorded")}</td><td>{String(row.actor_role || "Not recorded")}</td>
+                    <td>{String(row.actor || "Not recorded")}</td><td>{String(row.actor_role || "Historical role unavailable")}</td>
                   </>}
                   <td>
                     <Badge
@@ -1682,95 +1682,25 @@ function Records({
     </>
   );
 }
-// Display truthful configuration and live database diagnostics without secrets.
+// Settings shows only workspace session management; diagnostics stay available server-side.
 
 type SettingsIdentity = { user: string; role: string; tenant: string; expires_at?: string };
-const diagnosticLabels: Record<string, string> = {
-  build_version: "Build Version", api_contract: "API Contract", required_migration: "Required Migration",
-  migration_status: "Migration Status", database_migration: "Database Migration",
-  demo_session_minutes: "Demo Session Minutes", sso_session_minutes: "SSO Session Minutes",
-  legacy_api_credentials: "Legacy API Credentials", retention_days: "Retention Days",
-};
-const diagnosticDescriptions: Record<string, string> = {
-  required_migration: "Schema revision required by this application build.",
-  migration_status: "How database schema readiness is checked in this environment.",
-  database_migration: "Database revision reported by the server.",
-  legacy_api_credentials: "Whether older API credential access is enabled.",
-  retention_days: "Configured retention period for eligible records.",
-};
-function readableValue(value: unknown): string {
-  if (typeof value === "boolean") return value ? "Enabled" : "Disabled";
-  if (typeof value === "string" || typeof value === "number") return String(value);
-  return "Not available";
-}
-function Configuration({ identity }: { identity: SettingsIdentity | null }) {
+function Configuration() {
   const { data, error, loading, reload } = useWorkspaceSettings();
-  const capabilities = useApi<RecordData>("/api/capabilities");
-  const integrations = data?.integrations && typeof data.integrations === "object" ? data.integrations as Record<string, RecordData> : {};
-  const demo = data?.sso_enabled === false;
-  const release = data?.release && typeof data.release === "object" ? data.release as RecordData : null;
-  const advanced = data ? Object.entries(data).filter(([key]) => ![
-    "integrations", "release", "database", "database_status", "provider_mode", "pii_mode",
-    "role", "tenant", "authentication", "sso_enabled", "azure_generation", "moderation", "adls",
-  ].includes(key)) : [];
-  const health = data ? [
-    { label: "Database", value: `${data.database_status === "CONNECTED" ? "Connected" : readableValue(data.database_status)} · ${readableValue(data.database).toUpperCase()}`, description: "Connection reported by the application server.", state: data.database_status === "CONNECTED" ? "good" : "warn" },
-    { label: "PII Detection", value: capabilities.data ? readableValue(data.pii_mode).replace(/^./, letter => letter.toUpperCase()) : "Checking…", description: capabilities.data?.pii_status === "AVAILABLE" ? "Recognizers available in the running engine." : capabilities.error ? "Detector status unavailable." : "Checking installed recognizers.", state: capabilities.data?.pii_status === "AVAILABLE" ? "good" : "warn" },
-    { label: "AI Generation", value: data.provider_mode === "fixture" ? "Local Fixture Mode" : data.provider_mode === "live" ? "Live Provider Mode" : readableValue(data.provider_mode), description: data.provider_mode === "fixture" ? "Local sample responses; no Azure generation." : `Integration: ${readableValue(integrations.azure_generation?.status).replaceAll("_", " ").toLowerCase()}.`, state: data.provider_mode === "fixture" ? "info" : integrations.azure_generation?.status === "VERIFIED" ? "good" : "warn" },
-    { label: "Moderation", value: readableValue(integrations.moderation?.status).replaceAll("_", " ").toLowerCase().replace(/^./, letter => letter.toUpperCase()), description: "Verification evidence for the configured moderation provider.", state: integrations.moderation?.status === "VERIFIED" ? "good" : "warn" },
-  ] : [];
   return (
     <>
       <div className="page-heading">
         <div>
-          <span className="eyebrow">WORKSPACE CONFIGURATION</span>
-          <h1>Settings & diagnostics</h1>
-          <p>
-            Configuration presence does not imply successful cloud connectivity.
-          </p>
+          <span className="eyebrow">WORKSPACE SETTINGS</span>
+          <h1>Workspace Sessions</h1>
+          <p>Review active, expired and revoked sign-in sessions for this workspace.</p>
         </div>
-        <button
-          onClick={() => {
-            void reload();
-          }}
-        >
-          Refresh diagnostics
-        </button>
       </div>
       <DataState {...{ loading, error, reload }} />
       {data && <div className="settings-page">
-        <section className="panel" aria-labelledby="system-health-heading">
-          <div className="settings-section-heading"><h2 id="system-health-heading">System Health</h2><p>Current server status and available capabilities.</p></div>
-          <div className="settings-health-grid">{health.map(item => <div className="settings-health-card" key={item.label}>
-            <span className="settings-card-label">{item.label}</span>
-            <strong><i className={`settings-status-dot ${item.state}`} aria-hidden="true" />{item.value}</strong>
-            <p>{item.description}</p>
-          </div>)}</div>
-        </section>
-        {data.role === "Admin" ? <WorkspaceSessions mode={demo ? "demo" : "sso"} /> : <section className="panel" aria-labelledby="sessions-heading">
-          <h2 id="sessions-heading">Workspace Sessions</h2><p>Session management is available to workspace administrators.</p>
+        {data.role === "Admin" ? <WorkspaceSessions mode={data.sso_enabled === false ? "demo" : "sso"} /> : <section className="panel" aria-labelledby="sessions-heading">
+          <h2 id="sessions-heading">Session management</h2><p>Session management is available to workspace administrators.</p>
         </section>}
-        <IntegrationStatus value={data.integrations} admin={data.role === "Admin"} onRefresh={reload} />
-        <section className="panel" aria-labelledby="authentication-heading">
-          <div className="settings-section-heading"><h2 id="authentication-heading">Authentication &amp; Workspace</h2><p>Identity and access for this session.</p></div>
-          <dl className="settings-facts">
-            <div><dt>Authentication method</dt><dd>{demo ? "Local demo authentication" : "Microsoft Entra ID SSO"}</dd></div>
-            <div><dt>Microsoft Entra SSO</dt><dd>{data.sso_enabled === true ? "Enabled" : "Disabled in this environment"}</dd></div>
-            <div><dt>Signed in as</dt><dd>{identity?.user || "Not available"}</dd></div>
-            <div><dt>Role</dt><dd>{identity?.role || readableValue(data.role)}</dd></div>
-            <div><dt>Workspace</dt><dd>{identity?.tenant || readableValue(data.tenant)}</dd></div>
-            <div><dt>Session expiration</dt><dd>{identity?.expires_at ? new Date(identity.expires_at).toLocaleString() : "Not provided by this session API"}</dd></div>
-          </dl>
-        </section>
-        <details className="panel settings-advanced">
-          <summary>Advanced Diagnostics</summary>
-          <p>Technical details reported by the application server.</p>
-          {release && <div className="settings-diagnostic"><strong>Release</strong><span>{typeof release.build_version === "string" ? release.build_version : "Not available"}{typeof release.git_commit === "string" ? ` · ${release.git_commit}` : ""}</span><small>Build identifier and source revision reported by this release.</small></div>}
-          {advanced.map(([key, value]) => <div className="settings-diagnostic" key={key}>
-            <strong>{diagnosticLabels[key] || key.replaceAll("_", " ")}</strong><span>{readableValue(value)}</span>
-            {diagnosticDescriptions[key] && <small>{diagnosticDescriptions[key]}</small>}
-          </div>)}
-        </details>
       </div>}
     </>
   );
@@ -2078,7 +2008,7 @@ export function App() {
                     />
                   }
                 />
-                <Route path="/settings" element={<Configuration identity={identity} />} />
+                <Route path="/settings" element={<Configuration />} />
                 <Route path="*" element={<p>Page not found.</p>} />
               </Routes>
             </React.Suspense>

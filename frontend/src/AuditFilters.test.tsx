@@ -129,8 +129,8 @@ it("removes export attempts without fetching them and preserves diagnostics", as
   expect(fetch.mock.calls.some(([input]) => new URL(String(input)).pathname.includes("/reports/exports"))).toBe(false);
   expect(fetch.mock.calls.some(([, options]) => options?.method === "POST")).toBe(false);
   fireEvent.click(screen.getByRole("link", { name: "Settings" }));
-  await screen.findByRole("heading", { name: "Settings & diagnostics" });
-  expect(screen.getByRole("button", { name: "Refresh diagnostics" })).toBeInTheDocument();
+  await screen.findByRole("heading", { name: "Workspace Sessions", level: 1 });
+  expect(screen.queryByRole("button", { name: "Refresh diagnostics" })).not.toBeInTheDocument();
 });
 
 it("shows filtered loading and the explicit date-range empty state", async () => {

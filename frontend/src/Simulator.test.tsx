@@ -43,3 +43,41 @@ it("simulates a selected policy and active MULTI workspace repeatedly", async ()
   await waitFor(() => expect(calls.filter(path => path === "/api/v2/simulation/workspace")).toHaveLength(1));
   expect(calls.filter(path => path === "/api/v2/simulation/policies/one")).toHaveLength(1);
 });
+
+it("shows Policy Validation Studio on the existing route without a page-wide banner", async () => {
+  mock(); window.history.replaceState({}, "", "/simulator"); render(<App />);
+  expect(await screen.findByRole("heading", { name: "Policy Validation Studio", level: 1 })).toBeInTheDocument();
+  expect(screen.getByText("Validate governance policies before publishing or activating them.")).toBeInTheDocument();
+  expect(screen.getByRole("link", { name: "Policy Validation Studio" })).toHaveAttribute("href", "/simulator");
+  expect(screen.queryByText(/Policy simulator/i)).not.toBeInTheDocument();
+  await screen.findByRole("option", { name: "Synthetic policy" });
+  expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+  expect(document.querySelector(".page-heading + .notice")).toBeNull();
+});
+
+it("reports policy-list and simulation failures next to the action without fabricating results", async () => {
+  let policiesFail = true;
+  const posts: string[] = [];
+  vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+    const path = new URL(String(input)).pathname;
+    const json = (value: unknown, status = 200) => new Response(JSON.stringify(value), { status });
+    if (path === "/api/sso/status") return json({ configured: true });
+    if (path === "/api/sso/me") return json({ user: "synthetic", role: "Admin", tenant: "one", csrf_token: "csrf" });
+    if (path === "/api/v2/workspace/policy-state") return json({ mode: "MULTI", multi_policy_available: true, set_revision: 2, active_policy_count: 1 });
+    if (path === "/api/policies") { if (policiesFail) throw new TypeError("Failed to fetch"); return json([{ id: "one", name: "Synthetic policy", revision: 3 }]); }
+    if (path.startsWith("/api/v2/simulation/")) { posts.push(path); return json({ detail: "Simulation backend unavailable" }, 503); }
+    return json([]);
+  });
+  window.history.replaceState({}, "", "/simulator"); render(<App />);
+  const failure = await screen.findByText(/Policies couldn't be loaded/);
+  expect(failure).toHaveTextContent("Network unavailable");
+  policiesFail = false;
+  fireEvent.click(screen.getByRole("button", { name: "Try again" }));
+  await screen.findByRole("option", { name: "Synthetic policy" });
+  expect(screen.queryByText(/Policies couldn't be loaded/)).not.toBeInTheDocument();
+  fireEvent.change(screen.getByLabelText("Policy draft"), { target: { value: "one" } });
+  fireEvent.click(screen.getByRole("button", { name: "Simulate policy" }));
+  expect(await screen.findByText(/Validation failed: Simulation backend unavailable/)).toBeInTheDocument();
+  expect(screen.queryByText("Simulation only · no AI generation")).not.toBeInTheDocument();
+  expect(posts).toEqual(["/api/v2/simulation/policies/one"]);
+});

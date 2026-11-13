@@ -37,12 +37,12 @@ def test_local_010_migration_and_audit_api_preserve_historical_unknown(tmp_path)
         rows = audit_events(offset=0, limit=10, category="policy", db=db, user=admin)
         assert len(rows) == 2
         assert {row["actor"]: row["actor_role"] for row in rows} == {
-            "offline-admin": "Admin", "synthetic-admin": "Not recorded"
+            "offline-admin": "Admin", "synthetic-admin": "Historical role unavailable"
         }
         result = events(offset=0, limit=10, category="policy", db=db, user=admin)
         assert result["total"] == 2
         assert {row["actor"]: row["actor_role"] for row in result["items"]} == {
-            "offline-admin": "Admin", "synthetic-admin": "Not recorded"
+            "offline-admin": "Admin", "synthetic-admin": "Historical role unavailable"
         }
         assert events(offset=0, limit=10, category="policy", db=db, user=other)["items"] == []
     engine.dispose()

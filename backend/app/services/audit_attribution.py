@@ -8,6 +8,9 @@ from ..repositories import serialize
 
 MISSING = "Not recorded"
 NA = "Not applicable"
+# Events written before revision 010 (or executions without an identity snapshot) have no
+# trustworthy event-time role; never substitute the actor's current membership.
+HISTORICAL_ROLE = "Historical role unavailable"
 CATEGORIES = {"pii_detection", "secret_detection", "moderation", "blocked_keywords"}
 
 
@@ -79,7 +82,7 @@ def execution_attribution(db, user, row):
                                                .order_by(Evidence.policy_id))]
     else:
         policies = [policy_label(db, user.tenant, row.policy_id, number=row.version)] if row.policy_id else []
-    return {"actor": row.actor or MISSING, "actor_role": identity["role"] if identity else MISSING,
+    return {"actor": row.actor or MISSING, "actor_role": identity["role"] if identity else HISTORICAL_ROLE,
             "execution_identity": identity, "policies": policies,
             "policy_names": [p["name"] for p in policies] or [MISSING],
             "violation_categories": violations(metadata) or ([NA] if metadata else [MISSING])}
@@ -87,7 +90,7 @@ def execution_attribution(db, user, row):
 
 def event_view(db, user, row):
     value = serialize(row)
-    value.update(actor=row.actor or MISSING, actor_role=row.actor_role or MISSING, policy_name=NA, policy_name_source=NA)
+    value.update(actor=row.actor or MISSING, actor_role=row.actor_role or (NA if (row.actor or "").startswith("system:") else HISTORICAL_ROLE), policy_name=NA, policy_name_source=NA)
     if row.action.startswith("policy.") and not row.action.startswith("policy.mode."):
         label = policy_label(db, user.tenant, row.resource)
         if label["name"] == MISSING:

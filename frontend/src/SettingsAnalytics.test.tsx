@@ -115,7 +115,7 @@ it.each([["Admin", "LEGACY"], ["Auditor", "LEGACY"], ["Reviewer", "LEGACY"], ["A
   await screen.findByRole("heading", { name: "Your governance, at a glance" });
   await waitFor(() => expect(window.location.pathname).toBe("/"));
   expect(screen.queryByRole("link", { name: "Compliance analytics" })).not.toBeInTheDocument();
-  for (const page of ["Policy management", "Policy simulator", "AI playground", "Human review", "Audit & reports", "Settings"]) {
+  for (const page of ["Policy management", "Policy Validation Studio", "AI playground", "Human review", "Audit & reports", "Settings"]) {
     expect(screen.getByRole("link", { name: page })).toBeInTheDocument();
   }
   expect(fetch.mock.calls.some(([url]) => String(url).endsWith("/api/usage"))).toBe(false);

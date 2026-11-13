@@ -241,7 +241,7 @@ def test_execution_snapshots_are_append_only_and_old_records_do_not_infer_role(b
         db.commit()
         from app.security import Identity
         value = execution_attribution(db, Identity("admin", "one", "Admin"), old)
-        assert value["actor_role"] == "Not recorded" and value["execution_identity"] is None
+        assert value["actor_role"] == "Historical role unavailable" and value["execution_identity"] is None
 
 
 def test_policy_and_administrative_history_are_named_without_role_backfill(bridge, engine006):
@@ -257,7 +257,7 @@ def test_policy_and_administrative_history_are_named_without_role_backfill(bridg
         db.commit()
     admin = bridge.get("/api/v2/audit/events?category=administration").json()["items"][0]
     assert admin["actor"] == "actual.user@example.test" and admin["policy_name"] == "Not applicable"
-    assert admin["actor_role"] == "Not recorded"
+    assert admin["actor_role"] == "Historical role unavailable"
 
 
 @pytest.mark.parametrize("role", ["User", "Admin"])
@@ -402,3 +402,28 @@ def test_document_question_requires_the_request_boundary():
     assert document_question(combined) == "Summarize it"
     assert document_question(combined.replace(f"{marker} END", f"{'b' * 32} END")) is None
     assert document_question("Summarize it") is None
+
+
+def test_event_role_is_an_immutable_snapshot_and_system_actors_have_none(bridge, engine006, monkeypatch):
+    with Session(engine006, expire_on_commit=False) as db:
+        workspace(bridge, db, "LEGACY", "ALLOW")
+    before = {item["id"]: item["actor_role"] for item in
+              bridge.get("/api/v2/audit/events?category=policy&limit=100&offset=0").json()["items"]}
+    assert before and set(before.values()) == {"Admin"}
+    # Later demotion of the same account must not rewrite event-time roles.
+    accounts = json.loads(settings.demo_accounts_json)
+    for account in accounts:
+        if account["user"] == "admin":
+            account["role"] = "Auditor"
+    monkeypatch.setattr(settings, "demo_accounts_json", json.dumps(accounts))
+    after = {item["id"]: item["actor_role"] for item in
+             bridge.get("/api/v2/audit/events?category=policy&limit=100&offset=0").json()["items"]}
+    assert after == before
+    with Session(engine006) as db:
+        db.add(Audit(tenant="one", actor="system:review-cleanup", action="review.content.expired", resource="synthetic"))
+        db.commit()
+    system = [item for item in bridge.get("/api/v2/audit/events?category=administration&limit=100&offset=0").json()["items"]
+              if item["actor"] == "system:review-cleanup"]
+    assert system and system[0]["actor_role"] == "Not applicable"
+    bridge.headers["Authorization"] = "Bearer foreign"
+    assert bridge.get("/api/v2/audit/events?category=policy&limit=100&offset=0").json()["items"] == []
