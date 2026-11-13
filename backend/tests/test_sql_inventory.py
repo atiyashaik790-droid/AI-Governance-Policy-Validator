@@ -93,7 +93,7 @@ def test_existing_alembic_revision(inventory):
     responses[inventory.HISTORY_SQL] = [{"version_num": "002"}]
     report = inventory.collect_inventory(connection, inventory.TARGET_DATABASE)
     assert report["alembic_history"] == {"status": "READABLE", "revisions": ["002"], "matches_expected_heads": False}
-    assert report["expected_alembic_heads"] == ["009"]
+    assert report["expected_alembic_heads"] == ["011"]
 
 
 # Per-section errors are sanitized and leave metadata unknown instead of absent.
@@ -137,7 +137,7 @@ def test_non_allowlisted_sql_is_rejected(inventory):
 # Read migration declarations without importing a migration or calling upgrade functions.
 def test_migration_inventory_matches_current_chain(inventory):
     revisions = inventory.migration_inventory()
-    assert [revision["revision"] for revision in revisions] == ["001", "002", "003", "004", "005", "006", "007", "008", "009"]
+    assert [revision["revision"] for revision in revisions] == ["001", "002", "003", "004", "005", "006", "007", "008", "009", "010", "011"]
     assert set(revisions[0]["creates_tables"]) | set(revisions[3]["creates_tables"]) | set(revisions[4]["creates_tables"]) | set(revisions[8]["creates_tables"]) == set(
         inventory.expected_schema()
     )

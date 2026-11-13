@@ -37,9 +37,9 @@ def fresh(tmp_path):
 
 
 def test_empty_chain_schema_and_analytics(fresh):
-    assert fresh.scalar(text("SELECT version_num FROM alembic_version")) == "010"
-    assert inspect_schema(fresh, require_sso=True)["revision"] == "010"
-    for table in metadata_for_revision("010").sorted_tables:
+    assert fresh.scalar(text("SELECT version_num FROM alembic_version")) == "011"
+    assert inspect_schema(fresh, require_sso=True)["revision"] == "011"
+    for table in metadata_for_revision("011").sorted_tables:
         expected = 8 if table.name == "governance_categories" else 0
         assert fresh.scalar(select(text("count(*)")).select_from(table)) == expected
     result = overview(fresh, Identity("admin", demo.TENANT, "Admin"), None, None)
@@ -50,7 +50,7 @@ def test_demo_idempotence_memberships_multi_and_isolation(fresh):
     demo.seed_local(fresh)
 
     def snapshot():
-        return {table.name: list(fresh.execute(select(table)).tuples()) for table in metadata_for_revision("010").sorted_tables}
+        return {table.name: list(fresh.execute(select(table)).tuples()) for table in metadata_for_revision("011").sorted_tables}
 
     before = snapshot()
     demo.seed_local(fresh)
