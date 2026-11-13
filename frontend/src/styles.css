@@ -989,6 +989,8 @@ footer {
 .chat-message p { margin-bottom: 0; }
 .chat-message-user { margin-left: auto; background: #e5edff; }
 .chat-message-assistant { margin-right: auto; border: 1px solid #dfe5ee; }
+.chat-message .chat-message-withheld { font-style: italic; color: #475569; }
+.chat-message .chat-attachment { margin-top: 8px; font-size: 0.9em; color: #334155; }
 .user-chat-composer textarea { min-height: 100px; }
 .user-chat-composer .actions { margin-top: 16px; }
 @media (max-width: 700px) { .user-chat-layout { grid-template-columns: 1fr; } .user-chat-sidebar { border-right: 0; border-bottom: 1px solid #dfe5ee; } .user-chat-sidebar nav { max-height: 160px; overflow: auto; } }

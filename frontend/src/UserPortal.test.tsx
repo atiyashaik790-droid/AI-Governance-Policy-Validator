@@ -22,10 +22,18 @@ function setup(decision = "ALLOW") {
         created_at: "2026-11-13T12:00:00+00:00", updated_at: "2026-11-13T12:00:00+00:00", messages: [] };
       conversations.unshift(row); return json(row, 201);
     }
-    if (path === "/api/chat/conversations") return json(conversations.map(({ messages: _messages, ...row }) => row));
+    if (path === "/api/chat/conversations") return json(conversations.map(({ id, title, created_at, updated_at }) => ({ id, title, created_at, updated_at })));
     if (path.startsWith("/api/chat/conversations/")) {
       const row = conversations.find(item => item.id === path.split("/").at(-1));
       return row ? json(row) : json({ detail: "Conversation not found" }, 404);
+    }
+    if (path === "/api/v2/governance/generate-document") {
+      const row = conversations.find(item => item.id === body.conversation_id)!;
+      const shown = ["ALLOW", "REDACT"].includes(decision) ? `${String(body.text)}\n\nAttachment: PDF document` : "Request submitted";
+      row.messages.push({ id: `message-${row.messages.length + 1}`, role: "user", content: shown, decision });
+      row.messages.push({ id: `message-${row.messages.length + 1}`, role: "assistant", content: "Safe document answer", decision });
+      if (row.title === "New conversation") row.title = "Resume Summary";
+      return json({ decision, request_id: "private-request-id", attachment: { type: "pdf" } });
     }
     if (path === "/api/v2/governance/generate") {
       const row = conversations.find(item => item.id === body.conversation_id)!;
@@ -87,4 +95,46 @@ it("starts and reopens conversations, restoring server history after remount", a
   fireEvent.click(screen.getByRole("button", { name: /First question/ }));
   await screen.findByText("First question");
   expect(screen.getByText("Safe AI answer")).toBeInTheDocument();
+});
+
+it("shows the governed question with the attachment name, and only the type after reload", async () => {
+  const { calls } = setup();
+  await screen.findByText("No conversations yet.");
+  fireEvent.change(screen.getByLabelText("Message"), { target: { value: "Summarize this resume" } });
+  fireEvent.change(screen.getByLabelText("Attach PDF, DOCX or TXT"),
+    { target: { files: [new File(["%PDF synthetic"], "resume.pdf", { type: "application/pdf" })] } });
+  fireEvent.click(screen.getByRole("button", { name: "Send message" }));
+  await screen.findByText("Safe document answer");
+  expect(screen.getByText("Summarize this resume")).toBeInTheDocument();
+  expect(screen.getByText("Attachment: resume.pdf")).toBeInTheDocument();
+  expect(await screen.findByRole("button", { name: /Resume Summary/ })).toBeInTheDocument();
+  expect(calls.find(call => call.path === "/api/v2/governance/generate-document")?.body.filename).toBe("resume.pdf");
+  expect(JSON.stringify(window.localStorage)).not.toContain("resume");
+  cleanup();
+  render(<App />);
+  await screen.findByText("Safe document answer");
+  expect(screen.getByText("Summarize this resume")).toBeInTheDocument();
+  expect(screen.getByText("Attachment: PDF document")).toBeInTheDocument();
+  expect(screen.queryByText(/resume\.pdf/)).not.toBeInTheDocument();
+});
+
+it.each([["BLOCK", /withheld by a governance policy/], ["HUMAN_REVIEW", /held for review/]])(
+  "explains a withheld %s prompt without showing it or the placeholder", async (decision, reason) => {
+    setup(decision);
+    await screen.findByText("No conversations yet.");
+    fireEvent.change(screen.getByLabelText("Message"), { target: { value: "api_key=sk-test-SECRET1234567890" } });
+    fireEvent.click(screen.getByRole("button", { name: "Send message" }));
+    await screen.findByText(reason);
+    expect(screen.queryByText("Request submitted")).not.toBeInTheDocument();
+    expect(screen.queryByText(/sk-test-SECRET/)).not.toBeInTheDocument();
+  });
+
+it("keeps multiline prompts intact in the user bubble", async () => {
+  setup();
+  await screen.findByText("No conversations yet.");
+  fireEvent.change(screen.getByLabelText("Message"), { target: { value: "Line one\nLine two" } });
+  fireEvent.click(screen.getByRole("button", { name: "Send message" }));
+  await screen.findByText("Safe AI answer");
+  const bubble = screen.getByText((_, element) => element?.tagName === "P" && element.textContent === "Line one\nLine two");
+  expect(bubble.closest("article")).toHaveClass("chat-message-user");
 });

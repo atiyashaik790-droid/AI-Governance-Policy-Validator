@@ -322,3 +322,83 @@ def test_identity_snapshot_rejects_unknown_extra_and_cross_tenant_data():
                   {"actor": "actor", "tenant": "one", "role": "Unknown"},
                   {"actor": "actor", "tenant": "one", "role": "User", "secret": "MustNotEscape"}]:
         assert recorded_identity(row, {"execution_identity": value}) is None
+
+
+@pytest.mark.parametrize("decision", ["ALLOW", "REDACT", "BLOCK"])
+def test_document_turn_keeps_only_governed_question_and_attachment_type(bridge, engine006, monkeypatch, decision):
+    with Session(engine006, expire_on_commit=False) as db:
+        prefix, headers = workspace(bridge, db, "MULTI", decision)
+    user_account(bridge, monkeypatch)
+    monkeypatch.setattr(providers, "generate_ai_response", AsyncMock(return_value="public reply"))
+    conversation_id = bridge.post("/api/chat/conversations").json()["id"]
+    prompt = "Summarize this resume" if decision == "ALLOW" else "Summarize this private finance resume"
+    body = uploads.payload("pdf", text="public document body", prompt=prompt) | {"conversation_id": conversation_id}
+    assert bridge.post(prefix + "/governance/generate-document", json=body, headers=headers).status_code == 200
+    detail = bridge.get("/api/chat/conversations/" + conversation_id).json()
+    shown = detail["messages"][0]["content"]
+    serialized = json.dumps(detail)
+    # Extracted document text and the client filename are never retained.
+    assert "public document body" not in serialized and "synthetic.pdf" not in serialized
+    assert "private finance" not in serialized
+    if decision == "ALLOW":
+        assert shown == "Summarize this resume\n\nAttachment: PDF document"
+        assert detail["title"] == "Resume Summary"
+    elif decision == "REDACT":
+        assert shown.startswith("Summarize this ") and shown.endswith("\n\nAttachment: PDF document")
+        assert detail["title"] == "Resume Summary"
+    else:
+        assert shown == "Request submitted" and detail["title"] == "Document conversation"
+
+
+def test_established_title_is_not_rewritten_by_later_turns(bridge, engine006, monkeypatch):
+    with Session(engine006, expire_on_commit=False) as db:
+        prefix, headers = workspace(bridge, db, "MULTI", "ALLOW")
+    user_account(bridge, monkeypatch)
+    monkeypatch.setattr(providers, "generate_ai_response", AsyncMock(return_value="public reply"))
+    conversation_id = bridge.post("/api/chat/conversations").json()["id"]
+    for text in ("What is AI governance?", "Explain Python decorators."):
+        assert bridge.post(prefix + "/governance/generate", json={"text": text, "conversation_id": conversation_id},
+                           headers=headers).status_code == 200
+    detail = bridge.get("/api/chat/conversations/" + conversation_id).json()
+    assert detail["title"] == "Understanding AI Governance"
+    assert [m["content"] for m in detail["messages"] if m["role"] == "user"] == [
+        "What is AI governance?", "Explain Python decorators."]
+    assert bridge.get("/api/chat/conversations").json()[0]["title"] == "Understanding AI Governance"
+
+
+@pytest.mark.parametrize("prompt,attachment,title", [
+    ("What is AI governance?", None, "Understanding AI Governance"),
+    ("Explain Python decorators.", None, "Python Decorators"),
+    ("Summarize the uploaded resume", "pdf", "Resume Summary"),
+    ("Tell me about Azure SQL connections", None, "Azure SQL Connections"),
+    ("Explain what a data retention policy is", None, "Understanding Data Retention Policy"),
+    ("", "docx", "DOCX Document"),
+    ("[REDACTED]", None, "New conversation"),
+])
+def test_conversation_title_is_short_and_deterministic(prompt, attachment, title):
+    from app.chat_history import conversation_title
+    assert conversation_title(prompt, attachment) == title
+
+
+@pytest.mark.parametrize("prompt", [
+    "My email is jane.doe@example.com, summarise GDPR",
+    "Use api_key=sk-test-ABCDEFGHIJKLMNOPQRSTUVWX to call the service",
+    "Call me on 9876543210 about payroll",
+    "Reset password Hunter2Hunter2Hunter2Hunter2 for https://intranet.example.test/login",
+    "Contact [REDACTED] at [REDACTED] about onboarding",
+])
+def test_conversation_title_excludes_sensitive_tokens(prompt):
+    from app.chat_history import conversation_title
+    title = conversation_title(prompt)
+    assert 1 <= len(title.split()) <= 7
+    for fragment in ("@", "jane", "sk-test", "9876543210", "Hunter2", "http", "intranet", "REDACTED", "="):
+        assert fragment.lower() not in title.lower()
+
+
+def test_document_question_requires_the_request_boundary():
+    from app.chat_history import document_question
+    marker = "a" * 32
+    combined = f"USER PROMPT:\nSummarize it\n\nUNTRUSTED DOCUMENT DATA {marker} BEGIN\nsecret body\nUNTRUSTED DOCUMENT DATA {marker} END"
+    assert document_question(combined) == "Summarize it"
+    assert document_question(combined.replace(f"{marker} END", f"{'b' * 32} END")) is None
+    assert document_question("Summarize it") is None

@@ -7,6 +7,21 @@ type Conversation = { id: string; title: string; created_at: string; updated_at:
 type Message = { id: string; role: "user" | "assistant"; content: string; decision: string };
 type Detail = Conversation & { messages: Message[] };
 
+const SUBMITTED_PLACEHOLDER = "Request submitted";
+const STORED_ATTACHMENT = /(?:^|\n\n)Attachment: (PDF|DOCX|TXT) document$/;
+
+// Server history holds only governed text; withheld prompts keep a placeholder that is explained here.
+function userMessageView(message: Message, sessionFilename?: string) {
+  const stored = STORED_ATTACHMENT.exec(message.content);
+  const body = stored ? message.content.slice(0, stored.index) : message.content;
+  const attachment = sessionFilename ?? (stored ? `${stored[1]} document` : undefined);
+  if (body !== SUBMITTED_PLACEHOLDER) return { body, attachment, withheld: false };
+  const reason = message.decision === "BLOCK" ? "Your message was withheld by a governance policy and isn't shown."
+    : message.decision === "HUMAN_REVIEW" ? "Your message is held for review and isn't shown."
+      : "Your message isn't shown.";
+  return { body: reason, attachment, withheld: true };
+}
+
 export function UserPortal({ account, onSignOut, sessionError }: { account: string; onSignOut: () => Promise<void>; sessionError: string }) {
   const workspace = useWorkspace();
   const [text, setText] = useState("");
@@ -15,6 +30,8 @@ export function UserPortal({ account, onSignOut, sessionError }: { account: stri
   const [moreAvailable, setMoreAvailable] = useState(false);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
+  // Filenames chosen in this browser session only; never sent to history or browser storage.
+  const [sessionFilenames, setSessionFilenames] = useState<Record<string, string>>({});
   const [loadingHistory, setLoadingHistory] = useState(true);
   const [loadingConversation, setLoadingConversation] = useState(false);
   const [historyError, setHistoryError] = useState("");
@@ -82,6 +99,8 @@ export function UserPortal({ account, onSignOut, sessionError }: { account: stri
         { text, ...attachment, conversation_id: conversationId },
         multi ? { headers: { "If-Match": `"${workspace.data.set_revision}"` } } : {});
       const detail = await request<Detail>(`/api/chat/conversations/${conversationId}`);
+      const sent = file ? detail.messages.filter(message => message.role === "user").at(-1) : undefined;
+      if (sent && file) setSessionFilenames(previous => ({ ...previous, [sent.id]: file.name }));
       setMessages(detail.messages); await loadList();
       setText(""); setFile(null);
     } catch { setError("We couldn't complete that request. Please try again."); await workspace.reload(); }
@@ -115,9 +134,16 @@ export function UserPortal({ account, onSignOut, sessionError }: { account: stri
         <section className="user-conversation" aria-label="Conversation">
           {loadingConversation && <p role="status">Loading conversation…</p>}
           {!loadingConversation && !messages.length && <p>Ask a question to start this conversation.</p>}
-          {messages.map(message => <article className={`chat-message chat-message-${message.role}`} key={message.id}>
-            <strong>{message.role === "user" ? "You" : "Assistant"}</strong><p>{message.content}</p>
-          </article>)}
+          {messages.map(message => {
+            if (message.role === "assistant") return <article className="chat-message chat-message-assistant" key={message.id}>
+              <strong>Assistant</strong><p>{message.content}</p>
+            </article>;
+            const view = userMessageView(message, sessionFilenames[message.id]);
+            return <article className="chat-message chat-message-user" key={message.id}>
+              <strong>You</strong><p className={view.withheld ? "chat-message-withheld" : undefined}>{view.body}</p>
+              {view.attachment && <p className="chat-attachment">Attachment: {view.attachment}</p>}
+            </article>;
+          })}
         </section>
         <form className="panel user-chat-composer" onSubmit={send}>
           <label htmlFor="chat-prompt">Message<textarea id="chat-prompt" value={text} disabled={busy} maxLength={12000}

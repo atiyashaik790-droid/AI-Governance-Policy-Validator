@@ -13,6 +13,7 @@ import sqlite3
 import sys
 import tempfile
 from pathlib import Path
+from urllib.parse import urlsplit
 
 from run_offline_demo import ROOT, offline_environment
 
@@ -23,9 +24,13 @@ def main() -> None:
     parser.add_argument("--frontend-origin", default="http://localhost:5176")
     parser.add_argument("--persistent-local", action="store_true",
                         help="Keep local chat history in private/live-local-chat across restarts")
+    parser.add_argument("--sso", action="store_true",
+                        help="Microsoft Entra sign-in via the HTTPS form of --frontend-origin (requires --persistent-local)")
     args = parser.parse_args()
     if not 1024 <= args.port <= 65535:
         parser.error("Use an unprivileged port from 1024 to 65535")
+    if args.sso and not args.persistent_local:
+        parser.error("--sso requires --persistent-local, where the approved SSO memberships are stored")
 
     sys.path.insert(0, str(ROOT / "backend"))
     from app import config
@@ -35,6 +40,8 @@ def main() -> None:
         parser.error("Azure OpenAI endpoint and deployment must be configured in .env")
     if not configured.openai_api_key:
         parser.error("OpenAI Moderation API key must be configured in .env")
+    if args.sso and not (configured.entra_tenant_id and configured.entra_client_id and configured.entra_client_secret):
+        parser.error("ENTRA_TENANT_ID, ENTRA_CLIENT_ID and ENTRA_CLIENT_SECRET must be configured in .env for --sso")
 
     persistent_directory = ROOT / "private" / "live-local-chat"
     if args.persistent_local:
@@ -63,6 +70,18 @@ def main() -> None:
             OPENAI_API_KEY=configured.openai_api_key,
             PROVIDER_TIMEOUT=str(configured.provider_timeout),
         )
+        if args.sso:
+            # The SPA proxies /api on the same HTTPS origin, so __Host- Secure cookies apply.
+            https_origin = "https://" + urlsplit(args.frontend_origin).netloc
+            local.update(
+                SSO_ENABLED="true",
+                DEMO_BROWSER_LOGIN_ENABLED="false",
+                ENTRA_TENANT_ID=configured.entra_tenant_id,
+                ENTRA_CLIENT_ID=configured.entra_client_id,
+                ENTRA_CLIENT_SECRET=configured.entra_client_secret,
+                SSO_PUBLIC_ORIGIN=https_origin,
+                CORS_ORIGIN=https_origin,
+            )
         os.environ.update(local)
         config.settings = config.Settings()
 
@@ -106,6 +125,7 @@ def main() -> None:
                         "credential_file": str(directory / ".demo-tokens.json"),
                         "database": "persistent local SQLite" if args.persistent_local else "disposable SQLite; removed on graceful exit",
                         "provider_mode": "live",
+                        "sign_in": f"Microsoft Entra SSO at {local['SSO_PUBLIC_ORIGIN']}" if args.sso else "local demo token",
                         "azure_deployment": configured.azure_openai_deployment,
                         "moderation_model": "omni-moderation-latest",
                         "port": args.port,
