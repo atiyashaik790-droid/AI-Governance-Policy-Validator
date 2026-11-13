@@ -58,8 +58,8 @@ def package(root: Path, frontend: Path, output: Path) -> dict:
     except (OSError, subprocess.CalledProcessError):
         commit = "unavailable"
     schema_contract = {
-        "required_migration": "009",
-        "supported_migrations": ["004", "005", "006", "007", "008", "009"],
+        "required_migration": "011",
+        "supported_migrations": ["004", "005", "006", "007", "008", "009", "010", "011"],
         "sso_required_migration": "005",
     }
     release = {

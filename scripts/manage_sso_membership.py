@@ -59,6 +59,9 @@ def apply_mapping(db, data: dict, operator: str, approval: str):
         return (
             membership  # Exact rerun is a no-op, including append-only audit history.
         )
+    # audit_events.resource is VARCHAR(80); SQLite does not enforce it, Azure SQL does.
+    if 36 + len(f":{data['role']}:{data['enabled']}:{approval}") > 80:
+        raise ValueError("Approval reference too long for the audit record; shorten it")
     if not membership:
         membership = SsoMembership(**data)
         db.add(membership)

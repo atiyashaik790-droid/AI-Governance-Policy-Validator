@@ -24,8 +24,8 @@ def information() -> dict:
         }
     return {
         "build_version": settings.build_version,
-        "required_migration": "010",
-        "supported_migrations": ["004", "005", "006", "007", "008", "009", "010"],
+        "required_migration": "011",
+        "supported_migrations": ["004", "005", "006", "007", "008", "009", "010", "011"],
         "sso_required_migration": "005",
         "git_commit": "unpackaged-working-tree",
     }
