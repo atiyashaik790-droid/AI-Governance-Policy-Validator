@@ -10,6 +10,7 @@ node_modules/
 dist/
 *.tsbuildinfo
 artifacts/
+/private/
 
 .azure-sql-cli/
 # Private Phase 5 credential/evidence manifests (normally stored outside the repo).

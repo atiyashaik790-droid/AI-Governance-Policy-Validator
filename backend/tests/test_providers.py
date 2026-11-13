@@ -63,6 +63,19 @@ async def test_azure_generation_contract(monkeypatch):
     assert client.post.call_args.kwargs["json"]["messages"][0]["content"] == "approved"
 
 
+@pytest.mark.asyncio
+async def test_live_generation_forwards_distinct_approved_prompts(monkeypatch):
+    client = mock_http(monkeypatch, {"choices": [{"finish_reason": "stop", "message": {"content": "Mock answer"}}]})
+    monkeypatch.setattr(settings, "azure_openai_endpoint", "https://example.openai.azure.com")
+    monkeypatch.setattr(settings, "azure_openai_deployment", "test-deployment")
+    monkeypatch.setattr(settings, "azure_openai_api_key", "synthetic-key")
+    monkeypatch.setattr(settings, "azure_openai_api_version", "v1")
+    assert await generate_ai_response("first approved prompt") == "Mock answer"
+    assert await generate_ai_response("second approved prompt") == "Mock answer"
+    sent = [call.kwargs["json"]["messages"][0]["content"] for call in client.post.call_args_list]
+    assert sent == ["first approved prompt", "second approved prompt"]
+
+
 # Invalid provider responses and transport errors always withhold the generated output.
 @pytest.mark.asyncio
 @pytest.mark.parametrize(

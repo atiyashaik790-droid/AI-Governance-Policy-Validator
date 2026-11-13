@@ -25,8 +25,8 @@ def ensure_bucket(db: Session, key: str, expires: str) -> None:
             pass  # Another worker inserted the unique bucket; atomic UPDATE arbitrates.
 
 
-def reserve(db: Session, user: Identity) -> str:
-    current = datetime.now(timezone.utc)
+def reserve(db: Session, user: Identity, *, commit: bool = True, gate_locked: bool = False, current: datetime | None = None) -> str:
+    current = current or datetime.now(timezone.utc)
     minute = current.strftime("%Y-%m-%dT%H:%M")
     day = current.strftime("%Y-%m-%d")
     expires = (current + timedelta(days=2)).isoformat()
@@ -38,9 +38,10 @@ def reserve(db: Session, user: Identity) -> str:
     ]
     try:
         # A permanent tenant gate serializes claims even across minute/day boundaries.
-        gate = bucket_id(f"tenant:{user.tenant}:concurrency-gate")
-        ensure_bucket(db, gate, expires)
-        db.execute(update(RateBucket).where(RateBucket.id == gate).values(used=0, expires=expires))
+        if not gate_locked:
+            gate = bucket_id(f"tenant:{user.tenant}:concurrency-gate")
+            ensure_bucket(db, gate, expires)
+            db.execute(update(RateBucket).where(RateBucket.id == gate).values(used=0, expires=expires))
         for value, limit in limits:
             key = bucket_id(value)
             ensure_bucket(db, key, expires)
@@ -48,11 +49,22 @@ def reserve(db: Session, user: Identity) -> str:
             if claimed.rowcount != 1:
                 raise HTTPException(429, "Inference quota exhausted; wait for the next window", headers={"Retry-After": "60"})
         # Tenant/day row remains write-locked until commit, serializing lease claims.
-        active = db.scalar(
-            select(func.count())
-            .select_from(InferenceUsage)
-            .where(InferenceUsage.tenant == user.tenant, InferenceUsage.status == "RESERVED", InferenceUsage.expires > current.isoformat())
-        )
+        if gate_locked:
+            active = 0
+            for expiry in db.scalars(select(InferenceUsage.expires).where(InferenceUsage.tenant == user.tenant, InferenceUsage.status == "RESERVED")):
+                try:
+                    parsed = datetime.fromisoformat(expiry)
+                    if parsed.tzinfo is None:
+                        raise ValueError()
+                except (TypeError, ValueError):
+                    raise HTTPException(503, "INVALID_RESERVATION_EXPIRY") from None
+                active += int(parsed > current)
+        else:
+            active = db.scalar(
+                select(func.count())
+                .select_from(InferenceUsage)
+                .where(InferenceUsage.tenant == user.tenant, InferenceUsage.status == "RESERVED", InferenceUsage.expires > current.isoformat())
+            )
         if active >= settings.inference_concurrency:
             raise HTTPException(429, "Concurrent inference limit reached", headers={"Retry-After": "5"})
         usage = InferenceUsage(
@@ -61,7 +73,8 @@ def reserve(db: Session, user: Identity) -> str:
         db.add(usage)
         db.flush()
         identifier = usage.id
-        db.commit()  # Reservation is durable before a provider can be called.
+        if commit:
+            db.commit()  # Reservation is durable before a provider can be called.
         return identifier
     except Exception:
         db.rollback()

@@ -31,7 +31,7 @@ def operation_calls(tree, name):
 
 
 def test_linear_revision_chain():
-    for revision, parent in [("001", None), ("002", "001"), ("003", "002"), ("004", "003")]:
+    for revision, parent in [("001", None), ("002", "001"), ("003", "002"), ("004", "003"), ("005", "004")]:
         values = {node.targets[0].id: ast.literal_eval(node.value) for node in migration(revision).body if isinstance(node, ast.Assign)}
         assert values["revision"] == revision
         assert values["down_revision"] == parent
@@ -49,10 +49,12 @@ def test_foundation_dependencies_and_expected_objects():
         created.add(name)
     added = {ast.literal_eval(call.args[0]) for call in operation_calls(migration("004"), "create_table")}
     assert created.isdisjoint(added)
-    assert created | added == set(Base.metadata.tables)
+    sso_added = {ast.literal_eval(call.args[0]) for call in operation_calls(migration("005"), "create_table")}
+    category_added = {ast.literal_eval(call.args[0]) for call in operation_calls(migration("009"), "create_table")}
+    assert created | added | sso_added | category_added == set(Base.metadata.tables)
     assert len(calls) == 8
     assert len(operation_calls(migration("001"), "create_index")) == 9
-    assert sum(len(table.foreign_key_constraints) for table in Base.metadata.tables.values()) == 7
+    assert sum(len(table.foreign_key_constraints) for table in Base.metadata.tables.values()) == 10
 
 
 def test_concurrency_columns_match_fresh_baseline():
@@ -76,7 +78,9 @@ def test_mssql_ddl_compiles_without_executing():
         compiled = str(CreateTable(table).compile(dialect=dialect))
         assert "CREATE TABLE" in compiled
         for index in table.indexes:
-            assert "CREATE INDEX" in str(CreateIndex(index).compile(dialect=dialect))
+            assert "CREATE INDEX" in str(CreateIndex(index).compile(dialect=dialect)) or "CREATE UNIQUE INDEX" in str(
+                CreateIndex(index).compile(dialect=dialect)
+            )
     column = sa.Column("row_version", sa.Integer(), nullable=False, server_default="1")
     sa.Table("human_review_cases", sa.MetaData(), column)
     addition = AddColumn("human_review_cases", column)

@@ -11,6 +11,21 @@ def information() -> dict:
         data = json.loads(path.read_text())
         return {
             key: data.get(key)
-            for key in ("git_commit", "build_version", "built_utc", "frontend_sha256", "backend_sha256", "required_migration")
+            for key in (
+                "git_commit",
+                "build_version",
+                "built_utc",
+                "frontend_sha256",
+                "backend_sha256",
+                "required_migration",
+                "supported_migrations",
+                "sso_required_migration",
+            )
         }
-    return {"build_version": settings.build_version, "required_migration": "004", "git_commit": "unpackaged-working-tree"}
+    return {
+        "build_version": settings.build_version,
+        "required_migration": "010",
+        "supported_migrations": ["004", "005", "006", "007", "008", "009", "010"],
+        "sso_required_migration": "005",
+        "git_commit": "unpackaged-working-tree",
+    }

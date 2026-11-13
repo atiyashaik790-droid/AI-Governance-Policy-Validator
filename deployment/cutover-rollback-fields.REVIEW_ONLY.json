@@ -1,0 +1,16 @@
+{
+  "mode": "REVIEW_ONLY_NO_AZURE_WRITE",
+  "subscription": "25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6",
+  "resource_group": "rg_techdemo_Atiya_Tabsum_Shaik",
+  "webapp": "app-governance-validator-atiya-1026",
+  "old_release": "1.2-ca5df7c1dc19e525",
+  "old_database_revision": "005",
+  "original_changed_fields": {
+    "DATABASE_URL": "mssql+pyodbc://@sql-governance-validator-dev-atiya.database.windows.net/sqldb-governance-validator-dev",
+    "REVIEW_CAPTURE_ENABLED": null,
+    "REVIEW_CLEANUP_ENABLED": null
+  },
+  "null_means_setting_absent": true,
+  "secret_setting_values_included": false,
+  "rollback_pair": "old_release_with_original_database_and_only_original_changed_fields"
+}

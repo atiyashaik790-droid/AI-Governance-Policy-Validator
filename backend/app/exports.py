@@ -51,6 +51,8 @@ def create(db: Session, user: Identity, payload: ExportRequest) -> dict:
                 raise HTTPException(409, "Idempotency key already used for a different export request")
             return public_report(db, db.get(Export, existing.id))
     first, last = date_bounds(payload.start_date, payload.end_date)
+    from .services.policy_sets import guard_v1_history
+    guard_v1_history(db, user, first=first, last=last)
     claim_action(db, user, "export", settings.export_per_minute)
     rows = list(
         db.scalars(
@@ -90,7 +92,7 @@ def create(db: Session, user: Identity, payload: ExportRequest) -> dict:
             content=content,
         )
         db.add(job)
-        db.add(Audit(tenant=user.tenant, actor=user.user, action="report.PENDING", resource=report.id))
+        db.add(Audit(tenant=user.tenant, actor=user.user, actor_role=user.role, action="report.PENDING", resource=report.id))
         db.commit()  # Durable SQL snapshot exists before any ADLS operation.
     except IntegrityError:
         db.rollback()
@@ -164,6 +166,6 @@ def process(db: Session, user: Identity, identifier: str, reconcile: bool = True
         db.rollback()
         raise HTTPException(409, "Export ownership changed; inspect durable recovery state")
     report.status = status
-    db.add(Audit(tenant=user.tenant, actor=user.user, action=f"report.{status}", resource=report.id))
+    db.add(Audit(tenant=user.tenant, actor=user.user, actor_role=user.role, action=f"report.{status}", resource=report.id))
     db.commit()
     return public_report(db, report)

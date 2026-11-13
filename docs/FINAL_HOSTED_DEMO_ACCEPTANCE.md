@@ -1,3 +1,5 @@
+> Historical checkpoint: targets, revisions and approval requests below are not current execution authority. See [current master repair deployment readiness](MASTER_REPAIR_DEPLOYMENT_READINESS.md) before preparing any operation.
+
 # Final hosted demo acceptance
 
 31 October 2026, Asia/Kolkata. **DEMO: BLOCKED for required hosted acceptance (local rehearsal remains CONDITIONAL). PRODUCTION: NOT READY.**

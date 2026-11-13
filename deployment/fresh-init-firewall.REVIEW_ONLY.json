@@ -1,0 +1,17 @@
+{
+  "mode": "REVIEW_ONLY_SEPARATE_APPROVAL_REQUIRED",
+  "subscription": "25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6",
+  "resource_group": "rg_techdemo_Atiya_Tabsum_Shaik",
+  "name": "gpv-fresh-init-20261108",
+  "server": "sql-governance-validator-dev-atiya",
+  "start_ip": "45.127.46.209",
+  "end_ip": "45.127.46.209",
+  "maximum_window_minutes": 15,
+  "requires_separate_approval": true,
+  "database": "sqldb-gpv-demo-v008-20261108",
+  "expected_duration_minutes": "5-10",
+  "cleanup": "Delete only this rule immediately after success/failure; restore even after deadline; verify absence and unchanged original inventory",
+  "independent_cleanup_supervisor": "NOT_VERIFIED",
+  "estimated_added_service_cost_usd": 0,
+  "expected_downtime_minutes": 0
+}

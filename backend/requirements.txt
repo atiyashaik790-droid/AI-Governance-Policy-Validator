@@ -12,6 +12,14 @@ presidio-anonymizer>=2.2,<3
 pytest>=8,<10
 pytest-asyncio>=1,<2
 ruff>=0.14,<1
+regex==2026.9.29
 
 # Install at setup time; detectors never download models during inspection.
 en-core-web-sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl
+
+Authlib==1.9.4
+joserfc==1.8.0
+
+pypdf==6.21.4
+
+cryptography==50.0.2

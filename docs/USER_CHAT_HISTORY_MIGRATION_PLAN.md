@@ -1,0 +1,9 @@
+# User chatbot history: revision 011 plan
+
+Revision 011 adds `chat_conversations` and `chat_messages`. It does not alter policies, assignments, memberships, audit events, protected review content, or existing governance decisions. Messages are written only by the authenticated User governance path after input and output inspection. Owner checks use both workspace tenant and authenticated actor on every history query and write.
+
+The new schema was created and inspected on a disposable database, and a separate disposable revision-010 database was upgraded to 011. The preserved `private/demo-preserved/offline.db` was read only and remains at revision 009. No migration was applied to that database or Azure SQL.
+
+Before using history with an existing persistent database, review its current revision, backup and recovery plan, exact target, and service release pairing. A preserved database would need its reviewed 009→010 transition and then 010→011. The existing Azure SQL candidate was last evidenced at revision 008 and would need the intervening reviewed migrations before 011. Request separate target-specific approval before applying any of these migrations. Do not point the new application release at an older schema: history endpoints fail closed unless the database is exactly revision 011.
+
+The default local live demo launcher uses a disposable database. Its history survives page refresh and logout/login while that backend is running; it is removed when the disposable backend exits. The opt-in `--persistent-local` mode creates one dedicated local database at `private/live-local-chat/offline.db` on first use and keeps it across restarts. It reuses only an existing revision-011 database and refuses to migrate an older existing one. This dedicated target does not touch the protected preserved database. Applying revision 011 to the preserved database or Azure SQL remains separately approval-gated.

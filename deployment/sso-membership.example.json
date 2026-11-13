@@ -1,0 +1,8 @@
+{
+  "directory_tenant": "REPLACE_WITH_APPROVED_DIRECTORY_UUID",
+  "object_id": "REPLACE_WITH_APPROVED_USER_OBJECT_UUID",
+  "tenant": "REPLACE_WITH_EXISTING_APPLICATION_WORKSPACE",
+  "actor": "REPLACE_WITH_APPROVED_STABLE_APPLICATION_ACTOR",
+  "role": "Reviewer",
+  "enabled": false
+}

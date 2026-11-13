@@ -180,7 +180,7 @@ def local_workflow(client, monkeypatch):
             response = client.request(method, path, **kwargs)
             if path == "/api/settings" and response.status_code == 200:
                 content = response.json()
-                content.update(database="mssql", azure_generation="BLOCKED", moderation="BLOCKED")
+                content.update(database="mssql", azure_generation="NOT_CONFIGURED", moderation="NOT_CONFIGURED")
                 return driver.httpx.Response(200, json=content)
             return response
 
@@ -196,7 +196,7 @@ def local_workflow(client, monkeypatch):
     assert driver.sql_check(data, before=False) == driver.EXPECTED_COUNTS
     yield data, engine, test_azure_sql_writes.MODELS, snapshots
     assert existing_rows() == baseline
-    assert len(Base.metadata.tables) == 14
+    assert len(Base.metadata.tables) == 19
 
 
 def test_http_sequence_and_persisted_counts(local_workflow):
@@ -271,6 +271,14 @@ def test_changed_database_records_rejected(local_workflow, table, field, value):
         connection.execute(update(model).where(getattr(model, key) == row[key]).values(**{field: value}))
     with pytest.raises((driver.SafetyStop, KeyError)):
         driver.sql_check(data, before=False)
+
+
+def test_unexpected_audit_api_field_rejected(local_workflow):
+    data, engine, models, _ = local_workflow
+    corrupted = copy.deepcopy(data)
+    corrupted["http_test"]["records"]["audit_events"][0]["unexpected_field"] = "synthetic"
+    with engine.connect() as connection, pytest.raises(driver.SafetyStop):
+        driver.verify_retained(connection, corrupted, models)
 
 
 @pytest.mark.parametrize("table", list(driver.EXPECTED_COUNTS))
@@ -410,9 +418,9 @@ def test_authentication_mismatch_stops_before_http_mutations(mismatch):
                     "database": "mssql",
                     "provider_mode": "fixture",
                     "pii_mode": "regex",
-                    "adls": "BLOCKED",
-                    "moderation": "BLOCKED",
-                    "azure_generation": "BLOCKED",
+                    "adls": "NOT_CONFIGURED",
+                    "moderation": "NOT_CONFIGURED",
+                    "azure_generation": "NOT_CONFIGURED",
                     "tenant": tenant,
                     "role": role,
                 },
@@ -492,3 +500,28 @@ def test_swapped_review_dispositions_even_if_api_and_sql_agree(local_workflow):
             connection.execute(update(Review).where(Review.id == row["id"]).values(status=row["status"]))
     with engine.connect() as connection, pytest.raises(driver.SafetyStop):
         driver.verify_retained(connection, data, models)
+
+
+@pytest.mark.parametrize("key", ["adls", "moderation", "azure_generation"])
+@pytest.mark.parametrize("state", ["CONFIGURED_NOT_VERIFIED", "VERIFIED", "FAILED", "BLOCKED", None])
+def test_provider_configuration_stops_before_any_http_write(key, state):
+    data = manifest()
+    data["http_test"] = {"operations": []}
+    methods = []
+
+    class Diagnostics:
+        def request(self, method, path, **kwargs):
+            methods.append(method)
+            if path == "/health":
+                return driver.httpx.Response(200, json={"status": "ok"})
+            if path == "/ready":
+                return driver.httpx.Response(200, json={"status": "ready"})
+            content = {"database": "mssql", "provider_mode": "fixture", "pii_mode": "regex",
+                       "adls": "NOT_CONFIGURED", "moderation": "NOT_CONFIGURED",
+                       "azure_generation": "NOT_CONFIGURED", "tenant": data["tenant"], "role": "Admin"}
+            content[key] = state
+            return driver.httpx.Response(200, json=content)
+
+    with pytest.raises(driver.SafetyStop):
+        driver.Driver(Diagnostics(), data, lambda: None).workflows()
+    assert methods == ["GET", "GET", "GET"]

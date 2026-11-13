@@ -106,11 +106,42 @@ class Rules(StrictModel):
         return self
 
 
+class CustomCategory(StrictModel):
+    id: str = Field(min_length=1, max_length=64, pattern=r"^[a-zA-Z0-9_-]+$")
+    name: str = Field(min_length=1, max_length=120)
+    description: str = Field(default="", max_length=1000)
+    enabled: bool = Field(default=True, strict=True)
+    action: Literal["BLOCK", "REDACT", "HUMAN_REVIEW"] = "BLOCK"
+    detection: Literal["keyword", "regex"] = "keyword"
+    values: list[str] = Field(min_length=1, max_length=10)
+
+    @model_validator(mode="after")
+    def validate_detector(self):
+        from .custom_rules import compile_pattern, MAX_PATTERN
+        if not self.name.strip() or any(not value.strip() or len(value) > MAX_PATTERN for value in self.values):
+            raise ValueError("Custom categories require a name and 1–200 character patterns")
+        if self.detection == "regex":
+            for value in self.values:
+                compile_pattern(value)
+        return self
+
+
 class PolicyDocument(StrictModel):
     schema_version: Literal["1.0"] = "1.0"
     name: str = Field(min_length=1, max_length=120, pattern=r"^[\w .-]+$")
     description: str = Field(default="", max_length=1000)
     rules: Rules = Field(default_factory=Rules)
+    custom_categories: list[CustomCategory] = Field(default_factory=list, max_length=20)
+    decision_messages: dict[Literal["BLOCK", "HUMAN_REVIEW", "REDACT"], Literal["revise", "public_example", "contact_admin"]] = Field(default_factory=dict)
+
+    @model_validator(mode="after")
+    def unique_categories(self):
+        if len({rule.id for rule in self.custom_categories}) != len(self.custom_categories):
+            raise ValueError("Custom category IDs must be unique")
+        if len({rule.name.strip().casefold() for rule in self.custom_categories}) != len(self.custom_categories):
+            raise ValueError("Custom category names must be unique")
+        return self
+
 
     @field_validator("name")
     @classmethod
@@ -122,6 +153,7 @@ class PolicyDocument(StrictModel):
 
 class TextRequest(StrictModel):
     source_review_id: str | None = Field(default=None, min_length=36, max_length=36)
+    conversation_id: str | None = Field(default=None, min_length=36, max_length=36)
     text: str = Field(strict=True, min_length=1, max_length=12000)
 
     @field_validator("text")
@@ -167,7 +199,22 @@ class InspectionResult(StrictModel):
     safe_text: str | None
 
 
+class AttachmentMetadata(StrictModel):
+    type: Literal["pdf", "docx", "txt"]
+    size_bytes: int = Field(ge=1, le=262144)
+    extracted_characters: int = Field(ge=1, le=10000)
+
+
+class DecisionNotice(StrictModel):
+    kind: Literal["policy", "technical", "success"]
+    category: Literal["personal", "secret", "confidential", "unsafe", "custom", "generic", "provider", "incomplete"]
+    title: str
+    message: str
+    next_action: str
+
+
 class GovernanceResult(StrictModel):
+    decision_notice: DecisionNotice | None = None
     input: InspectionResult | None
     output: InspectionResult | None
     decision: Action
@@ -197,3 +244,7 @@ class PolicyResponse(StrictModel):
     enabled: int
     revision: int
     row_version: int
+
+
+class PolicyListResponse(PolicyResponse):
+    latest_version_number: int | None = None

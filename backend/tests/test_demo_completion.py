@@ -213,14 +213,17 @@ def test_trends_are_chronological_and_recent(client):
     result = client.get("/api/analytics/overview?start_date=2026-01-01&end_date=2026-04-30").json()
     assert result["total_validations"] == 102 and result["trends"] == expected
     db = Mock()
-    db.scalars.return_value = []
+    db.scalars.return_value = MagicMock()
+    db.scalars.return_value.__iter__.return_value = iter(())
+    db.scalars.return_value.yield_per.return_value = iter(())
     db.execute.return_value.all.return_value = []
-    db.execute.return_value.one.return_value = (0, 0)
+    db.execute.return_value.one.return_value = (0,) * 8
     db.bind.dialect.name = "mssql"
     db.get.return_value = None
-    main.analytics(db, Identity("fixture", "one", "Admin"))
-    sql = str(db.scalars.call_args.args[0].compile(dialect=mssql.dialect()))
-    assert "ORDER BY validation_executions.created DESC, validation_executions.id DESC" in sql
+    # Compile aggregation SQL independently of the HTTP mode/history guards.
+    main.analytics_service.overview(db, Identity("fixture", "one", "Admin"), None, None)
+    sql_statements = [str(call.args[0].compile(dialect=mssql.dialect())) for call in db.scalars.call_args_list]
+    assert any("ORDER BY validation_executions.created DESC, validation_executions.id DESC" in sql for sql in sql_statements)
 
 
 def test_offline_launcher_isolates_configuration(tmp_path):
@@ -228,7 +231,7 @@ def test_offline_launcher_isolates_configuration(tmp_path):
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     environment = module.offline_environment(tmp_path, "http://localhost:5174")
-    assert environment["PROVIDER_MODE"] == "fixture" and environment["PII_MODE"] == "regex"
+    assert environment["PROVIDER_MODE"] == "fixture" and environment["PII_MODE"] == "presidio"
     assert str(tmp_path) in environment["DATABASE_URL"]
     assert not any(
         environment[key]
@@ -237,7 +240,7 @@ def test_offline_launcher_isolates_configuration(tmp_path):
     token_file = tmp_path / ".demo-tokens.json"
     assert token_file.stat().st_mode & 0o777 == 0o600
     tokens = json.loads(token_file.read_text())
-    assert set(tokens) == {"Admin", "Policy Owner", "Developer", "Reviewer", "Auditor"}
+    assert set(tokens) == {"Admin", "User", "Policy Owner", "Developer", "Reviewer", "Auditor"}
     assert all(token not in environment["DEMO_ACCOUNTS_JSON"] for token in tokens.values())
     assert Settings(_env_file=None, **{key.lower(): value for key, value in environment.items()}).provider_mode == "fixture"
     with pytest.raises(ValueError):

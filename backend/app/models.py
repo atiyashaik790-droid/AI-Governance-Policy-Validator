@@ -2,7 +2,7 @@
 
 import uuid
 from datetime import datetime, timezone
-from sqlalchemy import String, Text, Integer, ForeignKey, UniqueConstraint, event, Index
+from sqlalchemy import String, Text, Integer, ForeignKey, ForeignKeyConstraint, UniqueConstraint, event, Index
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
 
@@ -22,6 +22,7 @@ class Base(DeclarativeBase):
 
 class Policy(Base):
     __tablename__ = "policies"
+    __table_args__ = (Index("ux_policies_tenant_id", "tenant", "id", unique=True),)
     id: Mapped[str] = mapped_column(String(36), primary_key=True, default=new_id)
     tenant: Mapped[str] = mapped_column(String(80), index=True)
     name: Mapped[str] = mapped_column(String(120))
@@ -44,6 +45,29 @@ class Version(Base):
     created: Mapped[str] = mapped_column(String(40), default=now)
 
 
+class GovernanceCategory(Base):
+    __tablename__ = "governance_categories"
+    __table_args__ = (UniqueConstraint("tenant", "name", name="uq_governance_category_tenant_name"),)
+    id: Mapped[str] = mapped_column(String(64), primary_key=True, default=new_id)
+    tenant: Mapped[str] = mapped_column(String(80), index=True)
+    name: Mapped[str] = mapped_column(String(120))
+    description: Mapped[str] = mapped_column(String(1000), default="")
+    builtin: Mapped[int] = mapped_column(Integer, default=0)
+    enabled: Mapped[int] = mapped_column(Integer, default=1)
+    detector: Mapped[str] = mapped_column(String(20), default="keyword")
+    action: Mapped[str] = mapped_column(String(20), default="BLOCK")
+    values_json: Mapped[str] = mapped_column(Text, default="[]")
+    revision: Mapped[int] = mapped_column(Integer, default=1)
+
+
+class PolicyCategory(Base):
+    __tablename__ = "policy_categories"
+    __table_args__ = (ForeignKeyConstraint(["tenant", "policy_id"], ["policies.tenant", "policies.id"], name="fk_policy_category_policy"),)
+    tenant: Mapped[str] = mapped_column(String(80), primary_key=True)
+    policy_id: Mapped[str] = mapped_column(String(36), primary_key=True)
+    category_id: Mapped[str] = mapped_column(ForeignKey("governance_categories.id"), primary_key=True)
+
+
 class Assignment(Base):
     __tablename__ = "active_policy_assignments"
     tenant: Mapped[str] = mapped_column(String(80), primary_key=True)
@@ -55,6 +79,7 @@ class Audit(Base):
     id: Mapped[str] = mapped_column(String(36), primary_key=True, default=new_id)
     tenant: Mapped[str] = mapped_column(String(80), index=True)
     actor: Mapped[str] = mapped_column(String(80))
+    actor_role: Mapped[str | None] = mapped_column(String(30), nullable=True)
     action: Mapped[str] = mapped_column(String(80))
     resource: Mapped[str] = mapped_column(String(80))
     created: Mapped[str] = mapped_column(String(40), default=now)
@@ -107,7 +132,7 @@ def prevent_history_mutation(mapper, connection, target) -> None:
     raise ValueError("Historical records are append-only")
 
 
-for historical_model in (Version, Audit):
+for historical_model in (Version, Audit, Execution):
     event.listen(historical_model, "before_update", prevent_history_mutation)
     event.listen(historical_model, "before_delete", prevent_history_mutation)
 
@@ -186,3 +211,34 @@ event.listen(ReviewNote, "before_delete", prevent_history_mutation)
 
 
 Index("ix_execution_tenant_created", Execution.tenant, Execution.created, Execution.id)
+
+
+class SsoMembership(Base):
+    __tablename__ = "sso_memberships"
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=new_id)
+    directory_tenant: Mapped[str] = mapped_column(String(36))
+    object_id: Mapped[str] = mapped_column(String(36))
+    tenant: Mapped[str] = mapped_column(String(80))
+    actor: Mapped[str] = mapped_column(String(80))
+    role: Mapped[str] = mapped_column(String(30))
+    enabled: Mapped[int] = mapped_column(Integer, default=1)
+    __table_args__ = (UniqueConstraint("directory_tenant", "object_id"), UniqueConstraint("tenant", "actor"))
+
+
+class SsoTransaction(Base):
+    __tablename__ = "sso_transactions"
+    id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    binding_hash: Mapped[str] = mapped_column(String(64))
+    nonce: Mapped[str] = mapped_column(String(100))
+    verifier: Mapped[str] = mapped_column(String(128))
+    return_path: Mapped[str] = mapped_column(String(500))
+    expires: Mapped[str] = mapped_column(String(40), index=True)
+    consumed: Mapped[int] = mapped_column(Integer, default=0)
+
+
+class SsoSession(Base):
+    __tablename__ = "sso_sessions"
+    id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    membership_id: Mapped[str] = mapped_column(String(36), ForeignKey("sso_memberships.id"))
+    expires: Mapped[str] = mapped_column(String(40), index=True)
+    revoked: Mapped[int] = mapped_column(Integer, default=0)

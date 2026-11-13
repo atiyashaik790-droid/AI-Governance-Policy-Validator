@@ -1,0 +1,41 @@
+{
+  "review_only": true,
+  "target": "app-governance-validator-atiya-1026",
+  "subscription": "25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6",
+  "resourceGroup": "rg_techdemo_Atiya_Tabsum_Shaik",
+  "approval_scope": "STAGE HUMAN REVIEW ENCRYPTION KEYS ONLY",
+  "add_only": [
+    "REVIEW_CONTENT_ACTIVE_KEY_ID",
+    "REVIEW_CONTENT_KEYS_JSON"
+  ],
+  "active_key_id": "review-20261107-v1",
+  "key_material": "Generate once with secrets.token_bytes(32), standard base64; never print or pass in command arguments",
+  "preserve_existing_keys": true,
+  "must_remain_false": [
+    "REVIEW_CAPTURE_ENABLED",
+    "REVIEW_CLEANUP_ENABLED",
+    "INTEGRATION_VERIFICATION_ENABLED"
+  ],
+  "permission_changes": [],
+  "sql_operations": [],
+  "application_deployment": false,
+  "new_services": false,
+  "app_recycle_expected": true,
+  "verification_outputs": [
+    "key_present",
+    "active_id_member",
+    "all_keys_decode_to_32_bytes",
+    "no_duplicate_ids",
+    "independent_from_provider_and_sso_secrets",
+    "synthetic_aes_gcm_round_trip",
+    "unrelated_settings_unchanged",
+    "health_ok",
+    "served_release_unchanged"
+  ],
+  "backup_required": "Protected encrypted operator recovery copy outside repository, CLI history and logs, recoverable independently of SQL; no ADLS write authorized",
+  "abort_if": "Unexpected existing key material/active ID, missing protected backup, concurrent config change, unhealthy app, inability to handle payload without disclosure",
+  "rollback": "Before first capture only, restore original two settings and verify health; after any captured content retain every required key and use separately approved compatible rollback",
+  "maximum_window_minutes": 15,
+  "estimated_incremental_service_cost_usd": 0,
+  "do_not_run_during": "Any temporary SQL resource protected by a watcher on this same Web App"
+}

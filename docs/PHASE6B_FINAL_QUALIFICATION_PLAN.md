@@ -1,0 +1,23 @@
+# Final Approval A retry-5 — NOT AUTHORIZED / stop before Azure
+
+## Exact proposed scope
+
+Subscription `25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6`; group `rg_techdemo_Atiya_Tabsum_Shaik`; SQL server `sql-governance-validator-dev-atiya`; only database `sqldb-gpv-mig-20261106-a1`. Production and master excluded by per-connection/per-statement guards. Candidate **1.2-0b51806b794e3d00**, SHA-256 `e6e8531e0c28a8fca921e56a38014c9b369b5e9b170c36055f08f7ca5c14eb23`, plus separately pinned new additive migration **008**. Frozen 001–007 unchanged. Do not use the previous e4d3 candidate at 008.
+
+Same limits: Standard S0 / 10 DTUs maximum, Local backup, max 250 GiB, four hours TOTAL, USD 1 estimated compute maximum, at most two sequential incarnations of the same exact name; synthetic fixtures/test encryption keys and mocked AI/storage providers only. Latest historical S0 meter USD 0.4839/day; conservative ten billed hours USD 0.201625. Refresh price and target restrictions before execution and stop if estimate exceeds USD 1. This is an estimate safeguard, not an Azure billing cap.
+
+## Gated sequence after fresh explicit approval only
+
+1. Recheck subscription/server/FQDN, temporary absence, candidate/migration/source pins, current firewall connectivity, S0 availability/restrictions and live price. Production metadata/revision/runtime mapping/grants are SELECT-only baselines; no customer data/production secrets in fixtures. If current IP/firewall has drifted, stop; no firewall mutation is included.
+2. Start independent cleanup watchdog before creating the exact tagged S0 target. Initialize 005 and seed synthetic data/minimum temporary runtime grants. Reuse prior Azure 005 and unchanged session evidence under existing byte/hash guards. Do not repeat unrelated local suites.
+3. Migrate through frozen 006 and 007; require retained hashes/catalog contracts at each boundary. Recheck 006 readiness/MULTI/tenant gates on the new bridge candidate; these preserve confidence across the revision-recognition change rather than repeating the old failing session-lifetime experiment. Do not run/serve 007 as a qualified final schema: it still lacks execution protection.
+4. Apply additive **007→008**, retain all prior row hashes and require the new enabled trigger(s). 008 readiness runs under temporary runtime EXECUTE AS identity, not privileged operator, so required grants AND absence of execution UPDATE/DELETE permissions are checked correctly. Run the **unchanged** security() gate after the additive repair, including the exact previously failing execution UPDATE and DELETE assertions. Stop on any failure; no assertion is weakened/skipped.
+5. Only then run full extracted 008 candidate readiness, 120-minute issuance/absolute-expiry/cookie alignment/revoked/expired session checks, Human Review encrypted capture/reveal/access audit/tenant/RBAC/constraints/tampering/expiry cleanup and MULTI integrity. Test same-code compatible-copy ciphertext preservation without claiming independent rollback qualification.
+6. Delete first incarnation. At most one second incarnation may run previously planned synthetic 006 preflight denials and controlled transactional 007 THROW rollback/catalog/hash checks. No unexplained-failure retry and no third incarnation.
+7. Stop testing at three hours, reserving one hour for cleanup. Finally/watchdog attempt exact-target deletion; independently require ARM GET 404/ResourceNotFound plus inventory absence. Immediately report any cleanup failure. Compare production metadata, source hashes and local revision-003 SQLite hash. Report actual incarnation/time, conservative compute estimate and incomplete gates.
+
+Prepared harness window `retry-5`, distinct token/evidence `docs/evidence/phase6b-approval-a-retry5-2026-11-07/`; seven negative guards and 77 dependencies pinned. Package probe bounded 1800s, tenant probe 480s, CLI/SQL timeouts retained; no run launched. Helpers `prepare_readonly.py`, `source_metadata_readonly.py`, `launch_approved.py`, `tenant_006_gate.py`, `verify_deletion_readonly.py` prepared in that directory. Existing single-IP rule is left untouched. Cleanup is mandatory but cannot be guaranteed in advance.
+
+## Approval request
+
+Explicitly approve **Approval A retry-5 only**, including the new candidate and **005→006→007→008** migration chain on the exact temporary target, under the resource/cost/time/data/provider/two-incarnation limits and cleanup verification above. No production schema/grants/settings changes, deployment, firewall changes, new services, recovery B or production C–F are authorized. If 008 later proceeds toward production, it requires separate production schema/release approval; old candidate compatibility does not cover 008.

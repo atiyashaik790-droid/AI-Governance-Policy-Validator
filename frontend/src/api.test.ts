@@ -89,3 +89,41 @@ describe("reliable API transport", () => {
     expect(fetch).toHaveBeenCalledOnce();
   });
 });
+
+describe("bounded read waits", () => {
+  it("times out GETs after 20 seconds without retrying", async () => {
+    vi.useFakeTimers();
+    const fetch = vi
+      .spyOn(globalThis, "fetch")
+      .mockImplementation(
+        (_url, options) =>
+          new Promise((_resolve, reject) =>
+            options?.signal?.addEventListener(
+              "abort",
+              () => reject(new DOMException("Aborted", "AbortError")),
+              { once: true },
+            ),
+          ),
+      );
+    try {
+      const result = expect(request("/api/policies")).rejects.toThrow(
+        "Retry loading this page",
+      );
+      await vi.advanceTimersByTimeAsync(20001);
+      await result;
+      expect(fetch).toHaveBeenCalledOnce();
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+});
+
+it("preserves session reason codes and never treats a permission denial as sign-out", async () => {
+  const listener = vi.fn();
+  window.addEventListener("governance-session-ended", listener);
+  try {
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(new Response(JSON.stringify({ detail: "Forbidden" }), { status: 403 }));
+    await expect(request("/api/settings")).rejects.toThrow("Forbidden");
+    expect(listener).not.toHaveBeenCalled();
+  } finally { window.removeEventListener("governance-session-ended", listener); }
+});

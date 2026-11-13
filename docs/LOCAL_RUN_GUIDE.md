@@ -67,21 +67,21 @@ Terminal 2:
 
 ```bash
 cd "/home/sigmoid/AI governance policy validator/frontend"
-VITE_API_URL=http://127.0.0.1:8010 npm run dev -- --host 127.0.0.1 --port 5174
+VITE_LOCAL_DEMO=true VITE_API_URL=http://127.0.0.1:8010 npm run dev -- --host 127.0.0.1 --port 5174
 ```
 
 Expected: Vite ready and `http://127.0.0.1:5174/`. **Open
 <http://localhost:5174>** to match the configured CORS origin.
 The application visibly labels its fixture generation/moderation and regex detector.
-Each launcher run begins with an empty disposable database.
+Each launcher run begins with a disposable revision-009 database seeded with eight synthetic policies and catalog categories.
 
 ## Login and demonstrate
 
 Authentication uses opaque bearer tokens mapped to server-side roles and tenants;
 it does not use username/password or JWTs. Open the exact private `credential_file`
 printed by Terminal 1 in your local editor. Copy the `Admin` value privately into
-**Access token**, then click **Connect workspace**. Do not paste it into chat.
-Available roles: Admin, Policy Owner, Developer, Reviewer, Auditor. Admin may perform
+**Local demo credential**, then click **Enter local preview**. Do not paste it into chat.
+Available roles: Admin, User, Policy Owner, Developer, Reviewer, Auditor. Admin may perform
 the full demo; Reviewer can approve policies and resolve review cases. Sign out before
 switching role. The token is held in tab session storage and removed by **Sign out**.
 
@@ -185,7 +185,7 @@ ownership and return to the terminal that started the intended process.
 
 | Problem | Action |
 | --- | --- |
-| Port already used | Reuse the known project server or choose unused ports. For fixtures, pass `--port 8011 --frontend-origin http://localhost:5175`, then set `VITE_API_URL=http://127.0.0.1:8011` and Vite `--port 5175`. |
+| Port already used | Reuse the known project server or choose unused ports. For fixtures, pass `--port 8011 --frontend-origin http://localhost:5175`, then set `VITE_LOCAL_DEMO=true VITE_API_URL=http://127.0.0.1:8011` and Vite `--port 5175`. |
 | `python` missing | Use `.venv/bin/python`, or `python3` when creating a new environment. |
 | Missing Python module | Run `.venv/bin/python -m pip install -r backend/requirements.lock.txt` from root. |
 | Missing npm module | Run `npm ci` inside `frontend/`. |

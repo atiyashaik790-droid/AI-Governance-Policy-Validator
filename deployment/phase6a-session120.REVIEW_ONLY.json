@@ -1,0 +1,14 @@
+{
+  "proposal_only": true,
+  "approval_required": true,
+  "target": {
+    "resource_group": "rg_techdemo_Atiya_Tabsum_Shaik",
+    "web_app": "app-governance-validator-atiya-1026"
+  },
+  "exact_appsetting_delta": {"SSO_SESSION_MINUTES": "120"},
+  "observed_previous_value": "60",
+  "precondition": "Confirm organizational policy permits 120 minutes; preserve shorter upstream controls.",
+  "preserve": ["SSO_ENABLED=true", "DEMO_BROWSER_LOGIN_ENABLED=false", "ALLOW_LEGACY_API_CREDENTIALS=false", "ENTRA_CLIENT_SECRET", "SSO_PUBLIC_ORIGIN", "CORS_ORIGIN"],
+  "session_semantics": "New sessions only. Existing absolute expiry remains unchanged; no blanket revocation or lifetime extension.",
+  "not_executed": true
+}

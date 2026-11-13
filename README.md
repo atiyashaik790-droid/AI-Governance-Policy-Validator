@@ -1,3 +1,5 @@
+> **Undeployed compatibility candidate (4 November 2026):** See [SSO compatibility readiness](docs/SSO_COMPATIBILITY_RELEASE.md). This local candidate validates reviewed schemas 004/005, preserves operator-provisioned demo login, and gates SSO on 005. The existing hosted release is unchanged.
+
 > **Current release status (1 November 2026):** See [restricted demo completion status](docs/CURRENT_STATUS.md) and [validation results](docs/COMPLETION_VALIDATION.md). Earlier release reports are historical.
 
 # AI Governance Policy Validator
@@ -23,10 +25,29 @@ In another terminal:
 
 ```bash
 cd frontend
-VITE_API_URL=http://127.0.0.1:8010 npm run dev -- --host 127.0.0.1 --port 5174
+VITE_LOCAL_DEMO=true VITE_API_URL=http://127.0.0.1:8010 npm run dev -- --host 127.0.0.1 --port 5174
 ```
 
-Open http://localhost:5174. The launcher prints only the path of a private temporary credential file; open it privately to use the Admin token. It runs the existing FastAPI app on port 8010 against a new temporary SQLite database, with fixture AI/moderation, explicitly limited regex PII and ADLS disabled. It never edits .env or existing application data. Graceful shutdown removes its disposable data and credentials. Fixture exports correctly report FAILED; the hosted JSON export has separate independent live verification. Do not use offline fixtures as proof of live storage or AI behavior. See the runbook for decisions, lifecycle steps and the normal/live startup path.
+Open http://localhost:5174. The launcher prints only the path of a private temporary credential file; open it privately and enter the Admin token into the local preview sign-in field. It initializes eight synthetic published policies and nine catalog categories in disposable SQLite, with fixture AI/moderation, explicitly limited regex PII and ADLS disabled. It never edits .env or existing application data. Graceful shutdown removes its disposable data and credentials. Fixture exports correctly report FAILED; the hosted JSON export has separate independent live verification. Do not use offline fixtures as proof of live storage or AI behavior. See the runbook for decisions, lifecycle steps and the normal/live startup path.
+
+## Local playground with live Azure OpenAI and Moderation
+
+The preserved demo on `localhost:5175` is deliberately in fixture mode. To get real answers without migrating the preserved database or connecting Azure SQL, start a separate disposable local workspace:
+
+```bash
+.venv/bin/python -B scripts/run_live_local_demo.py
+```
+
+In another terminal:
+
+```bash
+cd frontend
+VITE_LOCAL_DEMO=true VITE_API_URL=http://127.0.0.1:8012 npm run dev -- --host 127.0.0.1 --port 5176
+```
+
+Open `http://localhost:5176`, read the private credential file path printed by the backend, and use its Admin token in the local sign-in form. The launcher reads the existing `.env` provider settings, creates a disposable revision-011 SQLite database with local demo policies, and calls no provider during startup. Local demo sessions stay valid until logout, revocation, credential removal, or server shutdown; hosted and other sessions retain their configured expiration. A browser request approved by policy contacts the configured OpenAI Moderation API and Azure OpenAI deployment; each request may incur provider usage. No Azure SQL connection, deployment, preserved database migration, or ADLS operation is made. Stop the backend gracefully to remove its temporary database and tokens.
+
+For User chatbot history that survives local backend restarts, run the backend with `--persistent-local --port 8013 --frontend-origin http://localhost:5177`, then run the frontend with `VITE_LOCAL_DEMO=true VITE_API_URL=http://127.0.0.1:8013 npm run dev -- --host 127.0.0.1 --port 5177`. This creates one dedicated database under `private/live-local-chat/` on first start and reuses it later. It does not migrate an existing database automatically.
 
 ## Quick start without Docker
 
@@ -48,7 +69,7 @@ In a second terminal from the repository root:
 ```bash
 cd frontend
 npm ci
-npm run dev -- --host 127.0.0.1
+VITE_DEMO_LOGIN=true npm run dev -- --host 127.0.0.1
 ```
 
 The provisioner refuses to overwrite `.env`. It creates private `.env` and `.demo-tokens.json` files, excluded from Git. Open the latter **locally**, copy the Admin token, and enter it into the dashboard. Do not paste credentials into chat or commit them. Roles and tenant are server-controlled; the browser cannot select a trusted role. Tokens persist only in the browser tab's session storage and are removed on sign out.

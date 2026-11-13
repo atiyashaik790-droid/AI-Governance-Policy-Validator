@@ -14,7 +14,7 @@ from urllib.parse import urlsplit
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def offline_environment(directory: Path, origin: str) -> dict[str, str]:
+def offline_environment(directory: Path, origin: str, *, reuse_credentials: bool = False) -> dict[str, str]:
     parsed = urlsplit(origin)
     if (
         parsed.scheme != "http"
@@ -25,31 +25,37 @@ def offline_environment(directory: Path, origin: str) -> dict[str, str]:
         or parsed.username is not None
     ):
         raise ValueError("Use an HTTP loopback frontend origin without a path")
-    accounts, tokens = [], {}
-    for role in ("Admin", "Policy Owner", "Developer", "Reviewer", "Auditor"):
-        token = secrets.token_urlsafe(32)
-        tokens[role] = token
+    roles = ("Admin", "User", "Policy Owner", "Developer", "Reviewer", "Auditor")
+    credential_path = directory / ".demo-tokens.json"
+    if reuse_credentials:
+        tokens = json.loads(credential_path.read_text())
+        if set(tokens) != set(roles) or any(not isinstance(tokens[role], str) or len(tokens[role]) < 32 for role in roles):
+            raise ValueError("Existing local demo credentials are invalid")
+    else:
+        tokens = {role: secrets.token_urlsafe(32) for role in roles}
+        fd = os.open(credential_path, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o600)
+        with os.fdopen(fd, "w") as output:
+            os.fchmod(output.fileno(), 0o600)
+            json.dump(tokens, output)
+    accounts = []
+    for role in roles:
+        token = tokens[role]
         accounts.append(
             {
                 "user": "offline-" + role.lower().replace(" ", "-"),
-                "tenant": "offline-demo",
+                "tenant": "clean-demo-local",
                 "role": role,
                 "token_hash": hashlib.sha256(token.encode()).hexdigest(),
             }
         )
-    credential_path = directory / ".demo-tokens.json"
-    fd = os.open(
-        credential_path, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o600
-    )
-    with os.fdopen(fd, "w") as output:
-        os.fchmod(output.fileno(), 0o600)
-        json.dump(tokens, output)
     return {
         "DATABASE_URL": "sqlite:///" + str(directory / "offline.db"),
         "PROVIDER_MODE": "fixture",
-        "PII_MODE": "regex",
+        "PII_MODE": "presidio",
         "CORS_ORIGIN": origin,
         "DEMO_ACCOUNTS_JSON": json.dumps(accounts),
+        "SSO_ENABLED": "false",
+        "DEMO_BROWSER_LOGIN_ENABLED": "true",
         "AZURE_SQL_TENANT_ID": "",
         "AZURE_SQL_USER_OBJECT_ID": "",
         "AZURE_OPENAI_ENDPOINT": "",
@@ -75,8 +81,15 @@ def main():
         os.environ.update(offline_environment(directory, args.frontend_origin))
         sys.path.insert(0, str(ROOT / "backend"))
         import uvicorn
+        from alembic import command
+        from alembic.config import Config
+        from sqlalchemy import select
+        from sqlalchemy.orm import Session
         from app.database import engine
-        from app.models import Base
+        from app.models import Policy
+        from app.schemas import PolicyDocument
+        from app.services.category_catalog import sync_draft_categories
+        from prepare_fresh_demo import seed_local
 
         def graceful_exit(*_):
             raise KeyboardInterrupt
@@ -84,9 +97,21 @@ def main():
         # Uvicorn replays SIGTERM after shutdown; turn that replay into normal cleanup.
         previous_term = signal.signal(signal.SIGTERM, graceful_exit)
         try:
-            Base.metadata.create_all(
-                engine
-            )  # Only this new disposable database; no Alembic or existing DB access.
+            migration_config = Config(str(ROOT / "backend" / "alembic.ini"))
+            migration_config.set_main_option(
+                "script_location", str(ROOT / "backend" / "migrations")
+            )
+            command.upgrade(migration_config, "head")
+            with Session(engine, expire_on_commit=False) as db:
+                seed_local(db)
+                for policy in db.scalars(select(Policy)).all():
+                    sync_draft_categories(
+                        db,
+                        policy.tenant,
+                        policy.id,
+                        PolicyDocument.model_validate_json(policy.draft),
+                    )
+                db.commit()
             print(
                 json.dumps(
                     {

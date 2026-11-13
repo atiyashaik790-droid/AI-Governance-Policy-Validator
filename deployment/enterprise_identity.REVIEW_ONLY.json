@@ -1,18 +1,18 @@
 {
-  "status": "PREPARATION_ONLY_NOT_CONFIGURED",
-  "approved_provider": "USER_TO_IDENTIFY",
+  "status": "IMPLEMENTED_LOCALLY_NOT_CONFIGURED_OR_DEPLOYED",
+  "approved_provider": "Microsoft Entra ID single tenant; operator must confirm directory",
   "issuer": "SECURE_CONFIGURATION_REQUIRED",
   "audience": "SECURE_CONFIGURATION_REQUIRED",
-  "tenant_claim_mapping": "REVIEW_REQUIRED",
-  "role_claim_mapping": "REVIEW_REQUIRED",
+  "tenant_claim_mapping": "Validated tid + oid to sso_memberships; no automatic enrollment",
+  "role_claim_mapping": "Server-controlled sso_memberships.role; no browser or email-domain roles",
   "requirements": [
-    "Use the approved provider for username/password account lifecycle and MFA",
-    "Use a supported OIDC client library after provider approval",
-    "Validate issuer, audience, signature, algorithm allowlist, expiry and tenant claims",
-    "Map roles on the server; never trust browser-selected roles",
-    "Define refresh, logout, revocation, disabled-account and session-cookie/CSRF behavior",
-    "Restrict or retire provisioned demo credentials after migration",
-    "Do not create cloud resources or enable a new service without approval"
+    "Confirm authorized tenant and registration Governance-Studio-SSO; initial discovery returned no match",
+    "Register exact HTTPS Web callback; request only openid profile",
+    "Provision a server-only client secret through approved secure settings",
+    "Review SQL 005 and recovery; explicit approval before hosted migration",
+    "Provision approved memberships with scripts/manage_sso_membership.py; no automatic Admin",
+    "Complete real organizational login/logout acceptance before removing rollback option"
   ],
-  "secrets": "Never put secrets in this file or chat; use existing approved secure configuration"
+  "secrets": "Never put secrets in this file or chat; use existing approved secure configuration",
+  "callback_path": "/api/sso/callback"
 }

@@ -1,0 +1,30 @@
+# Targeted Approval A retry-7 — NOT AUTHORIZED
+
+Candidate **1.2-677a11e4b649fa7d**, SHA-256 `be1ab97768954fecb5cf26b255bfcecf2a22811848ca910536846b3784174ee9`, [artifact/source/evidence pins](evidence/phase6b-review504-local-2026-11-07/qualification-pins.json). This is a proposed fresh window; retry-6 approval is consumed. No cloud action has been performed for this preparation.
+
+## Exact target, limits and exclusions
+
+Subscription `25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6`, resource group `rg_techdemo_Atiya_Tabsum_Shaik`, server `sql-governance-validator-dev-atiya`, FQDN `sql-governance-validator-dev-atiya.database.windows.net`, temporary database **only** `sqldb-gpv-mig-20261106-a1`.
+
+Maximum Standard **S0 / 10 DTUs**, Local backup, maximum size 250 GiB, **four hours total**, **USD 1 estimated compute**, at most **two sequential incarnations**. Stop testing at three hours and reserve one hour for cleanup. Refresh live S0 pricing before creation and stop if the conservative estimate exceeds USD 1. Historical price USD 0.4839/day gives USD 0.201625 for ten conservatively billed hours; that historical estimate is not a billing cap or a current quote.
+
+Only synthetic fixtures, dedicated test encryption keys, mocked OIDC/AI/storage and minimum temporary runtime grants. No production changes/migrations/permissions/configuration, deployment, firewall changes, new services, real Azure OpenAI/Moderation/ADLS calls, recovery drill B or production C–F. Preserve source changes, local SQLite and historical evidence. No Git reset/clean/stash/discard/commit.
+
+## Proposed execution, after fresh explicit approval only
+
+1. Prepare a distinct retry-7 execution directory/token and offline-validate the new targeted orchestration against the frozen pins and exact-target/time/cost/incarnation guards. Do not relaunch consumed retry-6, which points to the historical candidate and repeats the completed session probe. Keep all HUMAN_REVIEW/encryption/deadline/security assertions and provider-denial mocks unchanged. No candidate patching, deadline increases, forced health or unexplained-failure retry during execution.
+2. Recheck subscription/server/FQDN, candidate/migration/evidence pins, temporary absence, current firewall IP/connectivity without mutation, S0 capabilities/restrictions/locks and refreshed price. Take SELECT-only production revision/schema/runtime-mapping/grant baseline. Stop on drift or target collision.
+3. Start independent exact-target cleanup watchdog before creation. Create one tagged temporary S0 database and execute unchanged 005→006→007→008 as fixture setup with retained hashes and established synthetic grants. Reuse historical migration/immutability/MULTI/tenant results. Check final 008 enabled immutability trigger, actual runtime grants and **new batched schema/readiness path** under SQL `EXECUTE AS`. Actual managed-identity authentication is not qualified by impersonation.
+4. Require the unchanged first-pass cleanup assertion, then `/ready` for the exact extracted candidate. Preserve startup and stage timings. Reuse pinned retry-6 120-minute issuance/cookie/expiry/revocation evidence rather than repeating the full timed SSO sequence. No claim of new candidate session performance is made from historical evidence; session/configuration bytes and authentication logic equivalence are pinned.
+5. Execute the synthetic policy setup and **HUMAN_REVIEW request first**, without increasing the 90-second inference deadline. Require HTTP 200/HUMAN_REVIEW, model not invoked, encrypted original prompt with no plaintext in metadata/ciphertext, correct seven-day retention and corresponding audit. Save sanitized request-correlated stage/SQL/count/acquisition/remaining-budget evidence on both success and failure. Require a positive remaining execution budget before commit. On 504, readiness/security failure or malformed diagnostics, stop and clean up; do not use a passing ALLOW request as a substitute. Logs distinguish metadata/capture/persistence stages, but do not themselves prove server lock waits.
+6. Complete the existing previously unreached encrypted-review reveal/access-audit, tenant/role/assignment denials, tampering and immediate expiry/cleanup assertions, plus remaining 008 MULTI application integrity checks. Keep every security and retention assertion. With capture disabled and the same synthetic key, run compatible-copy ciphertext decryptability and unchanged retained-row hashes using a byte-identical copy of this corrected candidate. This is same-code preservation, not recovery B.
+7. Delete incarnation one and confirm absence. Only after all preceding gates pass, create incarnation two for the previously planned synthetic 006 preflight denials and controlled transactional 007 THROW rollback. Require unchanged marker/catalog/retained hashes at each denial/rollback. No third incarnation or failure-driven rerun.
+8. Finally/watchdog delete the exact tagged target. Independently require **ARM GET 404 / ResourceNotFound plus server inventory absence**. Compare production SELECT-only metadata/grants and source/candidate/migration/SQLite hashes with baselines. Report PASS/PARTIAL/BLOCKED, reached/unreached assertions, stage timings, incarnation/lifetime, compute estimate and remaining uncertainty. Report cleanup failure immediately. Stop after retry-7.
+
+No new privileges, server tracing configuration or production DMV sampling are included. If stage evidence remains insufficient to attribute a failure, report that uncertainty and stop rather than adding diagnostics that require unapproved access.
+
+## Fresh approval requested
+
+Explicitly approve **Approval A retry-7 ONLY**, candidate **1.2-677a11e4b649fa7d**, on the exact temporary target and sequence above, within S0/10-DTU, four-hour, USD 1 estimated compute, two-sequential-incarnation and synthetic-only limits, including mandatory cleanup and independent deletion verification. Deployment, recovery B and production Approvals C–F remain excluded.
+
+**STOP at this approval gate.**

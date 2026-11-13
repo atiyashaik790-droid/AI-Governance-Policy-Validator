@@ -36,6 +36,11 @@ def hosted_settings(**changes):
         adls_account_url="https://example.dfs.core.windows.net",
         adls_file_system="reports",
         cors_origin="https://example.azurewebsites.net",
+        sso_enabled=True,
+        entra_tenant_id=TENANT,
+        entra_client_id=PRINCIPAL,
+        entra_client_secret="synthetic-server-only",
+        sso_public_origin="https://example.azurewebsites.net",
         demo_accounts_json=json.dumps([{"user": "fixture", "tenant": "fixture", "role": "Admin", "token_hash": "a" * 64}]),
     )
     configuration.update(changes)
@@ -95,7 +100,12 @@ def test_database_routes_managed_identity_explicitly(monkeypatch):
         {"openai_api_key": ""},
         {"adls_file_system": ""},
         {"cors_origin": "http://localhost:5173"},
-        {"demo_accounts_json": "[]"},
+        {"sso_enabled": False, "demo_browser_login_enabled": False},
+        {"entra_client_secret": ""},
+        {"entra_client_id": ""},
+        {"entra_tenant_id": ""},
+        {"sso_public_origin": "http://example.azurewebsites.net"},
+        {"demo_browser_login_enabled": True, "demo_accounts_json": "[]", "sso_enabled": False},
         {"demo_accounts_json": "invalid-private-data"},
         {"azure_sql_user_object_id": ""},
     ],
@@ -108,6 +118,10 @@ def test_hosting_rejects_incomplete_or_local_configuration(changes):
 
 def test_valid_hosting_configuration_does_not_connect():
     validate_hosting_settings(hosted_settings())
+    validate_hosting_settings(hosted_settings(demo_accounts_json="[]", demo_browser_login_enabled=False))
+    validate_hosting_settings(
+        hosted_settings(sso_enabled=False, demo_browser_login_enabled=True, entra_client_id="", entra_client_secret="", entra_tenant_id="")
+    )
 
 
 def test_static_spa_does_not_capture_api_or_private_paths(tmp_path):
@@ -125,6 +139,7 @@ def test_static_spa_does_not_capture_api_or_private_paths(tmp_path):
     with TestClient(application) as client:
         assert client.get("/").status_code == 200
         assert "React shell" in client.get("/policies/synthetic-id").text
+        assert "React shell" in client.get("/chat").text
         assert client.get("/assets/fixture.js").status_code == 200
         assert client.get("/assets/missing.js").status_code == 404
         assert client.get("/api/missing").status_code == 404

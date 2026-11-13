@@ -1,0 +1,298 @@
+{
+  "mode": "REVIEW_ONLY_NOT_AUTHORIZED",
+  "database": "sqldb-gpv-demo-v008-20261108",
+  "required_revision": "008",
+  "tenant": "demo-appservice-4e2dcce8d618",
+  "profile": "gpv-clean-demo-v2",
+  "policy_mode": "MULTI",
+  "policies": [
+    {
+      "schema_version": "1.0",
+      "name": "Customer Personal Data Protection",
+      "description": "",
+      "rules": {
+        "secret_detection": {
+          "enabled": false,
+          "action": "BLOCK"
+        },
+        "pii_detection": {
+          "enabled": true,
+          "action": "REDACT",
+          "entities": [
+            "EMAIL_ADDRESS",
+            "PHONE_NUMBER"
+          ]
+        },
+        "moderation": {
+          "enabled": false,
+          "action": "BLOCK",
+          "categories": null
+        },
+        "blocked_keywords": {
+          "enabled": false,
+          "action": "BLOCK",
+          "values": [
+            "internal-only",
+            "confidential-demo"
+          ]
+        }
+      },
+      "custom_categories": [],
+      "decision_messages": {}
+    },
+    {
+      "schema_version": "1.0",
+      "name": "API Key and Secret Leakage Prevention",
+      "description": "",
+      "rules": {
+        "secret_detection": {
+          "enabled": true,
+          "action": "BLOCK"
+        },
+        "pii_detection": {
+          "enabled": false,
+          "action": "REDACT",
+          "entities": [
+            "EMAIL_ADDRESS",
+            "PHONE_NUMBER"
+          ]
+        },
+        "moderation": {
+          "enabled": false,
+          "action": "BLOCK",
+          "categories": null
+        },
+        "blocked_keywords": {
+          "enabled": false,
+          "action": "BLOCK",
+          "values": [
+            "internal-only",
+            "confidential-demo"
+          ]
+        }
+      },
+      "custom_categories": [],
+      "decision_messages": {}
+    },
+    {
+      "schema_version": "1.0",
+      "name": "Credit Card Data Protection",
+      "description": "",
+      "rules": {
+        "secret_detection": {
+          "enabled": false,
+          "action": "BLOCK"
+        },
+        "pii_detection": {
+          "enabled": true,
+          "action": "BLOCK",
+          "entities": [
+            "CREDIT_CARD"
+          ]
+        },
+        "moderation": {
+          "enabled": false,
+          "action": "BLOCK",
+          "categories": null
+        },
+        "blocked_keywords": {
+          "enabled": false,
+          "action": "BLOCK",
+          "values": [
+            "internal-only",
+            "confidential-demo"
+          ]
+        }
+      },
+      "custom_categories": [],
+      "decision_messages": {}
+    },
+    {
+      "schema_version": "1.0",
+      "name": "Confidential Company Information Protection",
+      "description": "",
+      "rules": {
+        "secret_detection": {
+          "enabled": false,
+          "action": "BLOCK"
+        },
+        "pii_detection": {
+          "enabled": false,
+          "action": "REDACT",
+          "entities": [
+            "EMAIL_ADDRESS",
+            "PHONE_NUMBER"
+          ]
+        },
+        "moderation": {
+          "enabled": false,
+          "action": "BLOCK",
+          "categories": null
+        },
+        "blocked_keywords": {
+          "enabled": true,
+          "action": "BLOCK",
+          "values": [
+            "internal-only",
+            "confidential-demo"
+          ]
+        }
+      },
+      "custom_categories": [],
+      "decision_messages": {}
+    },
+    {
+      "schema_version": "1.0",
+      "name": "Unsafe Content Prevention",
+      "description": "",
+      "rules": {
+        "secret_detection": {
+          "enabled": false,
+          "action": "BLOCK"
+        },
+        "pii_detection": {
+          "enabled": false,
+          "action": "REDACT",
+          "entities": [
+            "EMAIL_ADDRESS",
+            "PHONE_NUMBER"
+          ]
+        },
+        "moderation": {
+          "enabled": true,
+          "action": "BLOCK",
+          "categories": null
+        },
+        "blocked_keywords": {
+          "enabled": false,
+          "action": "BLOCK",
+          "values": [
+            "internal-only",
+            "confidential-demo"
+          ]
+        }
+      },
+      "custom_categories": [],
+      "decision_messages": {}
+    },
+    {
+      "schema_version": "1.0",
+      "name": "Human Approval for Sensitive Requests",
+      "description": "",
+      "rules": {
+        "secret_detection": {
+          "enabled": false,
+          "action": "BLOCK"
+        },
+        "pii_detection": {
+          "enabled": false,
+          "action": "REDACT",
+          "entities": [
+            "EMAIL_ADDRESS",
+            "PHONE_NUMBER"
+          ]
+        },
+        "moderation": {
+          "enabled": false,
+          "action": "BLOCK",
+          "categories": null
+        },
+        "blocked_keywords": {
+          "enabled": false,
+          "action": "BLOCK",
+          "values": [
+            "internal-only",
+            "confidential-demo"
+          ]
+        }
+      },
+      "custom_categories": [
+        {
+          "id": "review-required",
+          "name": "Synthetic review",
+          "description": "",
+          "enabled": true,
+          "action": "HUMAN_REVIEW",
+          "detection": "keyword",
+          "values": [
+            "review-required"
+          ]
+        }
+      ],
+      "decision_messages": {}
+    },
+    {
+      "schema_version": "1.0",
+      "name": "AI Output Data Leakage Prevention",
+      "description": "",
+      "rules": {
+        "secret_detection": {
+          "enabled": true,
+          "action": "BLOCK"
+        },
+        "pii_detection": {
+          "enabled": true,
+          "action": "REDACT",
+          "entities": [
+            "EMAIL_ADDRESS",
+            "PHONE_NUMBER",
+            "CREDIT_CARD"
+          ]
+        },
+        "moderation": {
+          "enabled": false,
+          "action": "BLOCK",
+          "categories": null
+        },
+        "blocked_keywords": {
+          "enabled": false,
+          "action": "BLOCK",
+          "values": [
+            "internal-only",
+            "confidential-demo"
+          ]
+        }
+      },
+      "custom_categories": [],
+      "decision_messages": {}
+    },
+    {
+      "schema_version": "1.0",
+      "name": "Enterprise AI Safety Baseline",
+      "description": "",
+      "rules": {
+        "secret_detection": {
+          "enabled": true,
+          "action": "BLOCK"
+        },
+        "pii_detection": {
+          "enabled": true,
+          "action": "REDACT",
+          "entities": [
+            "EMAIL_ADDRESS",
+            "PHONE_NUMBER"
+          ]
+        },
+        "moderation": {
+          "enabled": true,
+          "action": "BLOCK",
+          "categories": null
+        },
+        "blocked_keywords": {
+          "enabled": true,
+          "action": "BLOCK",
+          "values": [
+            "internal-only",
+            "confidential-demo"
+          ]
+        }
+      },
+      "custom_categories": [],
+      "decision_messages": {}
+    }
+  ],
+  "no_memberships_in_this_manifest": true,
+  "output_rules_apply_to_both_input_and_output": true,
+  "credit_card_action": "BLOCK",
+  "apply_gate": "Separate approval and exact existing-state/etag validation; no cloud apply mode invoked"
+}

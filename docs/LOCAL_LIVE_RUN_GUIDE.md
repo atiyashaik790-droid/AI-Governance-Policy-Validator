@@ -73,7 +73,7 @@ Run in Terminal 2:
 
 ```bash
 cd "/home/sigmoid/AI governance policy validator/frontend"
-VITE_API_URL=http://127.0.0.1:8002 npm run dev -- --host 127.0.0.1 --port 5175
+VITE_DEMO_LOGIN=true VITE_API_URL=http://127.0.0.1:8002 npm run dev -- --host 127.0.0.1 --port 5175
 ```
 
 Open **http://localhost:5175**, using `localhost` to match CORS.

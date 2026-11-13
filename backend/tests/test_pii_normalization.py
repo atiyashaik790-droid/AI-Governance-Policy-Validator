@@ -92,3 +92,34 @@ async def test_regex_rejects_unsupported_entity_selection(monkeypatch):
     policy = PolicyDocument(name="Unsupported local entity", rules={"pii_detection": {"entities": ["PERSON"]}})
     result = await inspect_text("Synthetic ordinary text", policy)
     assert result["decision"] == "BLOCK" and result["breakdown"]["pii_detection"] == "UNKNOWN"
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("entity,label,value", [
+    ("IN_AADHAAR", "Aadhaar", "2341 2341 2346"),
+    ("IN_PAN", "PAN", "ABCPD1234F"),
+    ("CREDIT_CARD", "Card", "4111 1111 1111 1111"),
+    ("EMAIL_ADDRESS", "Email", "person@example.com"),
+    ("PHONE_NUMBER", "Phone", "+91 9876543210"),
+    ("US_SSN", "SSN", "123-45-6789"),
+    ("IP_ADDRESS", "Server IP", "192.0.2.1"),
+    ("IBAN_CODE", "IBAN", "GB82 WEST 1234 5698 7654 32"),
+    ("PERSON", "Person", "John Smith"),
+    ("IT_PASSPORT", "Passport", "AB1234567"),
+])
+async def test_supported_identifiers_enforce_block_and_redact(monkeypatch, entity, label, value):
+    from app import engine
+    async def inline(function, *args):
+        return function(*args)
+    monkeypatch.setattr(engine.asyncio, "to_thread", inline)
+    monkeypatch.setattr(settings, "pii_mode", "presidio")
+    monkeypatch.setattr(settings, "provider_mode", "fixture")
+    text = f"{label}: {value}"
+    for action in ("BLOCK", "REDACT"):
+        policy = PolicyDocument(name="Synthetic identifier", rules={"pii_detection": {"entities": [entity], "action": action}})
+        result = await inspect_text(text, policy)
+        assert result["decision"] == action
+        if action == "BLOCK":
+            assert result["safe_text"] is None
+        else:
+            assert value not in result["safe_text"]

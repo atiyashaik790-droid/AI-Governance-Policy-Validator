@@ -1,8 +1,13 @@
+import { WorkspaceSessions } from "./WorkspaceSessions";
+import { ReviewContent, REVIEW_REASONS } from "./ReviewContent";
+import { IntegrationStatus } from "./IntegrationStatus";
+import { UserPortal } from "./UserPortal";
 import { MultiSelectDropdown } from "./MultiSelectDropdown";
 import React, { useCallback, useEffect, useState, useRef } from "react";
 import { createRoot } from "react-dom/client";
 import {
   BrowserRouter,
+  Navigate,
   NavLink,
   Route,
   Routes,
@@ -17,7 +22,6 @@ import {
   Sparkles,
   History,
   UserCheck,
-  ChartNoAxesCombined,
   FileChartColumn,
   Settings,
   ArrowUpRight,
@@ -29,9 +33,17 @@ import {
   CircleMinus,
   LogOut,
 } from "lucide-react";
-import { request, getToken } from "./api";
+import { request, setCsrfToken, loginUrl, ApiError, LOCAL_DEMO } from "./api";
 import "./styles.css";
 import { ErrorBoundary } from "./ErrorBoundary";
+import { WorkspaceProvider, AssignmentControl, useWorkspace, useAssignments, workspaceError, normalizeRecord } from "./workspace";
+import type { Page } from "./workspace";
+
+import { DecisionNotice, DecisionMessageSettings, canRelease } from "./DecisionNotice";
+import type { DecisionMessage, DecisionSettings } from "./DecisionNotice";
+import { AttachmentPicker, attachmentBase64 } from "./AttachmentPicker";
+import { CustomCategories } from "./CustomCategories";
+import type { CustomCategory } from "./CustomCategories";
 
 type RecordData = Record<string, unknown>;
 type Rule = {
@@ -46,6 +58,8 @@ type Document = {
   name: string;
   description: string;
   rules: Record<string, Rule>;
+  custom_categories?: CustomCategory[];
+  decision_messages?: DecisionSettings;
 };
 type Policy = {
   id: string;
@@ -57,17 +71,22 @@ type Policy = {
   row_version: number;
   has_published_versions?: boolean;
   is_active?: boolean;
+  latest_version_number?: number | null;
 };
 type Stage = {
   decision: string;
-  score: number;
-  breakdown: Record<string, string>;
+  score?: number;
+  breakdown?: Record<string, string>;
   contributions: Record<string, number>;
-  findings: RecordData[];
+  findings?: RecordData[];
   safe_text: string | null;
   revalidated: boolean;
+  policies?: RecordData[];
+  policy_count?: number;
+  inspection_status?: string;
 };
 type Result = {
+  decision_notice?: DecisionMessage | null;
   decision: string;
   input: Stage | null;
   output: Stage | null;
@@ -75,10 +94,10 @@ type Result = {
   model_invoked: boolean;
   generation_status?: "NOT_INVOKED" | "SUCCEEDED" | "FAILED";
   provider_mode: string;
-  policy_id: string;
+  policy_id?: string;
   policy_name?: string;
-  policy_version: number;
-  duration_ms: number;
+  policy_version?: number;
+  duration_ms?: number;
   request_id: string;
   review_id?: string;
   provider_error?: string;
@@ -100,6 +119,16 @@ export type Summary = {
   active_policy: { id: string; version: number } | null;
   window?: { start: string; end_exclusive: string };
   trend_sample_limit?: number;
+  policy_evaluation_count?: number;
+  compliance?: {
+    score: number | null;
+    scored_requests: number;
+    incomplete_inspections: number;
+    trends: { date: string; score: number }[];
+    violations: Record<string, number>;
+    findings_available: boolean;
+    counting: string;
+  };
 };
 const initialDocument: Document = {
   schema_version: "1.0",
@@ -123,22 +152,18 @@ const navigation = [
   { to: "/playground", label: "AI playground", icon: Sparkles },
   { to: "/history", label: "Validation history", icon: History },
   { to: "/reviews", label: "Human review", icon: UserCheck },
-  {
-    to: "/analytics",
-    label: "Compliance analytics",
-    icon: ChartNoAxesCombined,
-  },
   { to: "/reports", label: "Audit & reports", icon: FileChartColumn },
   { to: "/settings", label: "Settings", icon: Settings },
 ];
 
 // Load endpoint data and surface errors with an explicit retry path.
-export function useApi<T>(path: string) {
+export function useApi<T>(path: string | null) {
   const [data, setData] = useState<T | null>(null),
     [error, setError] = useState(""),
     [loading, setLoading] = useState(true);
   const reload = useCallback(
     async (signal?: AbortSignal) => {
+      if (!path) { setLoading(false); return; }
       setLoading(true);
       setData(null);
       setError("");
@@ -159,6 +184,35 @@ export function useApi<T>(path: string) {
     return () => controller.abort();
   }, [reload]);
   return { data, error, loading, reload: () => reload() };
+}
+
+function useRecordList(path: string) {
+  const state = useApi<RecordData[] | Page<RecordData>>(path);
+  const rows = Array.isArray(state.data) ? state.data : state.data?.items;
+  return { ...state, data: rows?.map(normalizeRecord) || null };
+}
+// Share the current workspace configuration request within this mounted workspace.
+// This is ordinary component state, not a cross-session or authentication cache.
+const WorkspaceSettingsContext = React.createContext<ReturnType<
+  typeof useApi<RecordData>
+> | null>(null);
+function WorkspaceSettingsProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const settings = useApi<RecordData>("/api/settings");
+  return (
+    <WorkspaceSettingsContext.Provider value={settings}>
+      {children}
+    </WorkspaceSettingsContext.Provider>
+  );
+}
+function useWorkspaceSettings() {
+  const settings = React.useContext(WorkspaceSettingsContext);
+  if (!settings)
+    throw new Error("Workspace settings require an authenticated workspace");
+  return settings;
 }
 // Render an accessible status badge with consistent decision colors.
 export function Badge({ value }: { value: string }) {
@@ -203,13 +257,13 @@ export function DataState({
 // Show live tenant metrics and compliance history.
 const Overview = React.lazy(() => import("./Overview"));
 // Manage policy drafts and lifecycle using backend-enforced transitions.
-function Policies() {
+function Policies({ role }: { role: string }) {
+  const workspace = useWorkspace();
+  const assignments = useAssignments();
   const [offset, setOffset] = useState(0),
     [search, setSearch] = useState(""),
     [status, setStatus] = useState(""),
     [enabled, setEnabled] = useState("");
-  const identity = useApi<RecordData>("/api/settings");
-  const role = String(identity.data?.role || "");
   const canManage = ["Admin", "Policy Owner"].includes(role);
   const canReview = ["Admin", "Reviewer"].includes(role);
   const { data, error, loading, reload } = useApi<Policy[]>(
@@ -257,6 +311,7 @@ function Policies() {
           : {},
       );
       await reload();
+      await workspace.reload();
       setMessage(
         operation === "delete"
           ? "Policy removed from Policies. Audit history is retained."
@@ -268,6 +323,29 @@ function Policies() {
     } finally {
       setBusy(false);
     }
+  }
+  async function disablePolicy(policy: Policy) {
+    if (busy || !canManage) return;
+    const requiresDeactivation = workspace.data?.mode === "MULTI" && policy.is_active;
+    if (requiresDeactivation && role !== "Admin") {
+      setMessage("An Admin must deactivate this assignment before the policy can be disabled.");
+      return;
+    }
+    if (!confirm(requiresDeactivation
+      ? `Deactivate “${policy.name}” and then disable it? Active enforcement will stop.`
+      : `Disable “${policy.name}”? Active enforcement will stop.`)) return;
+    setBusy(true);
+    try {
+      if (requiresDeactivation) await workspace.mutate(`/api/v2/workspace/policy-assignments/${policy.id}`, { active: false });
+      await request(`/api/policies/${policy.id}/disable`, "POST");
+      await reload();
+      await workspace.reload();
+      setMessage("Policy disabled.");
+    } catch (error) {
+      await reload();
+      await workspace.reload();
+      setMessage(`Policy change was not completed. ${workspaceError(error)}`);
+    } finally { setBusy(false); }
   }
   return (
     <>
@@ -291,6 +369,8 @@ function Policies() {
         )}
       </div>
       <Notice message={message} />
+      {workspace.error && <Notice message={workspace.error} />}
+      {workspace.data?.mode === "MULTI" && <Notice message={assignments.error} />}
       <section className="panel">
         <div className="toolbar">
           <label className="search">
@@ -337,13 +417,13 @@ function Policies() {
           </select>
         </label>
         <DataState {...{ loading, error, reload }} empty={data?.length === 0} />
-        <div className="table-wrap">
-          <table>
+        <div className="table-wrap policy-table-wrap">
+          <table className="policy-table">
             <thead>
               <tr>
                 <th>Policy name</th>
                 <th>Status</th>
-                <th>Enabled</th>
+                <th>Version</th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -354,25 +434,25 @@ function Policies() {
                     <NavLink to={`/policies/${policy.id}`}>
                       {policy.name}
                     </NavLink>
-                    <small>Draft revision {policy.revision}</small>
-                    {policy.is_active && (
-                      <small>
-                        Active assignment — activate another policy before
-                        deleting.
-                      </small>
-                    )}
+                    {policy.status === "DRAFT" && <small>Draft revision {policy.revision}</small>}
                   </td>
                   <td>
-                    <Badge value={policy.status} />
+                    <Badge value={policy.is_active && policy.enabled ? "ACTIVE" : policy.has_published_versions || policy.status === "PUBLISHED" ? "INACTIVE" : "DRAFT"} />
+                    {policy.status !== "DRAFT" && <small>{policy.status.toLowerCase()}</small>}
                   </td>
                   <td>
-                    <Badge value={policy.enabled ? "ENABLED" : "DISABLED"} />
+                    {policy.latest_version_number ? `Version ${policy.latest_version_number}` : `Draft ${policy.revision}`}
                   </td>
                   <td>
                     <div className="actions">
                       <NavLink className="button" to={`/policies/${policy.id}`}>
-                        View / edit
+                        {canManage ? "Edit" : "View"}
                       </NavLink>
+                      {canManage && policy.status !== "ARCHIVED" && (policy.enabled
+                        ? <button disabled={busy || (workspace.data?.mode === "MULTI" && Boolean(policy.is_active) && role !== "Admin")} onClick={() => void disablePolicy(policy)}>Disable</button>
+                        : <button disabled={busy} onClick={() => void act(policy, "enable")}>Enable</button>)}
+                      <button onClick={() => void loadVersions(policy.id)}>History</button>
+                      <details className="policy-more-actions"><summary>More</summary><div className="actions">
                       {[
                         ...(canManage && policy.status === "DRAFT"
                           ? ["submit"]
@@ -383,14 +463,13 @@ function Policies() {
                         ...(canManage && policy.status === "APPROVED"
                           ? ["publish"]
                           : []),
-                        ...(canManage &&
+                        ...(canManage && workspace.data?.mode === "LEGACY" &&
                         policy.status === "PUBLISHED" &&
                         policy.enabled
                           ? ["activate"]
                           : []),
                         ...(canManage && policy.status !== "ARCHIVED"
                           ? [
-                              policy.enabled ? "disable" : "enable",
                               ...(policy.is_active ? [] : ["archive"]),
                             ]
                           : []),
@@ -403,6 +482,9 @@ function Policies() {
                           {operation}
                         </button>
                       ))}
+                      {workspace.data?.mode === "MULTI" && <AssignmentControl policy={policy} role={role}
+                        assignment={assignments.data[policy.id]} disabled={busy || assignments.loading || Boolean(assignments.error) || workspace.loading}
+                        changed={reload} />}
                       {canManage && (
                         <button
                           disabled={
@@ -424,17 +506,7 @@ function Policies() {
                           Delete
                         </button>
                       )}
-                      <button
-                        onClick={async () => {
-                          try {
-                            await loadVersions(policy.id);
-                          } catch (error) {
-                            setMessage(String(error));
-                          }
-                        }}
-                      >
-                        History
-                      </button>
+                      </div></details>
                     </div>
                   </td>
                 </tr>
@@ -501,6 +573,13 @@ function Policies() {
                 Restore version {String(version.number)} as draft
               </button>
             ))}
+          {role === "Admin" && workspace.data?.mode === "MULTI" && versions.map((version) => <button key={`legacy-${version.id}`}
+            disabled={busy || workspace.busy || (workspace.data?.active_policy_count || 0) > 1}
+            onClick={async () => {
+              if (!confirm(`Return to LEGACY using published version ${version.number}? Other active policies must be deactivated first.`)) return;
+              try { await workspace.mutate("/api/v2/workspace/policy-mode", { mode: "LEGACY", legacy_version_id: version.id }); await reload(); setVersions(null); }
+              catch (error) { setMessage(workspaceError(error)); }
+            }}>Use version {String(version.number)} in LEGACY mode</button>)}
           <div className="pagination">
             <button
               disabled={busy || !versionOffset}
@@ -523,14 +602,14 @@ function Policies() {
               Next versions
             </button>
           </div>
-          <pre>{JSON.stringify(versions, null, 2)}</pre>
+          <ul>{versions.map((version) => <li key={String(version.id)}>Version {String(version.number)} · {String(version.created).slice(0, 19)}</li>)}</ul>
         </section>
       )}
     </>
   );
 }
 // Provide structured editing with a live versioned JSON preview.
-function Editor() {
+function Editor({ role }: { role: string }) {
   const { id } = useParams(),
     navigate = useNavigate(),
     [document, setDocument] = useState<Document>(initialDocument),
@@ -539,13 +618,13 @@ function Editor() {
     [saving, setSaving] = useState(false),
     [policyState, setPolicyState] = useState("DRAFT"),
     [loadedVersion, setLoadedVersion] = useState<number | null>(null);
-  const identity = useApi<RecordData>("/api/settings");
   const capabilities = useApi<{
     available_pii_entities: string[];
     pii_status: string;
+    pii_mode: string;
   }>("/api/capabilities");
   const editable =
-    ["Admin", "Policy Owner"].includes(String(identity.data?.role)) &&
+    ["Admin", "Policy Owner"].includes(role) &&
     !["ARCHIVED", "DELETED"].includes(policyState);
   useEffect(() => {
     const controller = new AbortController();
@@ -677,42 +756,9 @@ function Editor() {
                         options={
                           name === "pii_detection"
                             ? [
-                                "EMAIL_ADDRESS",
-                                "PHONE_NUMBER",
-                                "CREDIT_CARD",
-                                "US_SSN",
-                                "PERSON",
-                                "LOCATION",
-                                "IP_ADDRESS",
-                                "URL",
-                                "DATE_TIME",
-                                "IBAN_CODE",
-                                "US_BANK_NUMBER",
-                                "US_DRIVER_LICENSE",
-                                "US_PASSPORT",
-                                "US_ITIN",
-                                "UK_NHS",
-                                "MEDICAL_LICENSE",
-                                "CRYPTO",
-                                "NRP",
-                                "AU_ABN",
-                                "AU_ACN",
-                                "AU_TFN",
-                                "AU_MEDICARE",
-                                "IN_PAN",
-                                "IN_AADHAAR",
-                                "IN_VEHICLE_REGISTRATION",
-                                "SG_NRIC_FIN",
-                                "ES_NIF",
-                                "IT_FISCAL_CODE",
-                                "IT_DRIVER_LICENSE",
-                                "IT_VAT_CODE",
-                                "IT_PASSPORT",
-                                "IT_IDENTITY_CARD",
-                                "PL_PESEL",
-                                "FI_PERSONAL_ID",
-                                "KR_RRN",
-                                "TH_TNIN",
+                                "EMAIL_ADDRESS", "PHONE_NUMBER", "CREDIT_CARD",
+                                "IN_AADHAAR", "IN_PAN", "IBAN_CODE", "PERSON",
+                                "IP_ADDRESS", "US_SSN",
                               ]
                             : [
                                 "harassment",
@@ -740,6 +786,13 @@ function Editor() {
                             ? capabilities.data?.available_pii_entities || []
                             : undefined
                         }
+                        unsupportedExplanation={name === "pii_detection" ? (
+                          capabilities.data?.pii_mode === "regex"
+                            ? "Regex mode supports email, phone, credit card and US SSN. Presidio mode requires the installed English NLP model."
+                            : capabilities.data?.pii_status === "UNAVAILABLE"
+                              ? "The English Presidio model or recognizer registry is unavailable."
+                              : "These detectors have no executable recognizer in the current English pipeline."
+                        ) : undefined}
                         allLabel={
                           name === "pii_detection"
                             ? "All installed PII entities (default)"
@@ -798,6 +851,10 @@ function Editor() {
                   )}
                 </div>
               ))}
+              <DecisionMessageSettings value={document.decision_messages || {}} admin={role === "Admin"}
+                onChange={decision_messages => setDocument({ ...document, decision_messages })} />
+              <CustomCategories categories={document.custom_categories || []} admin={role === "Admin"}
+                onChange={custom_categories => setDocument({ ...document, custom_categories })} />
               <p>
                 {!editable
                   ? "Read-only: your role or this policy's state does not permit editing."
@@ -823,7 +880,28 @@ function Editor() {
   );
 }
 // Show detector outcomes and findings without rendering raw HTML.
-function Inspection({ stage, title }: { stage: Stage | null; title: string }) {
+function Inspection({ stage, title, playground = false }: { stage: Stage | null; title: string; playground?: boolean }) {
+  if (stage?.policies && playground) return <section className="panel playground-inspection"><h2>{title}</h2>
+    <p>{stage.policy_count} policies evaluated · Evidence: {stage.inspection_status}</p>
+    <div className="playground-policy-list">{stage.policies.map((policy) => {
+      const local = policy.local as RecordData | undefined;
+      const findings = Array.isArray(local?.findings) ? local.findings as RecordData[] : [];
+      const categories = findings.map(finding => String(finding.category || "control").replaceAll("_", " "));
+      const explanation = categories.length ? `${[...new Set(categories)].join(", ")} detected` : policy.inspection_status === "INCOMPLETE" ? "Inspection incomplete" : "Enabled checks passed";
+      return <div className="playground-policy-row" key={String(policy.policy_id)}>
+        <div><strong>{String(policy.policy_name || "Policy name unavailable")}</strong><small>Version {String(policy.version)} · {explanation}</small></div>
+        <Badge value={String(policy.decision)} />
+      </div>;
+    })}</div>
+  </section>;
+  if (stage?.policies) return <section className="panel"><h2>{title}</h2>
+    <div className="panel-heading"><Badge value={stage.decision} /><strong>{stage.policy_count} policies evaluated</strong></div>
+    <p>Evidence: {stage.inspection_status}</p>
+    {stage.policies.map((policy) => <details key={String(policy.policy_id)}>
+      <summary>{String(policy.policy_name || policy.policy_id)} · {String(policy.version_label || `Published version ${policy.version}`)} · {String(policy.decision)}</summary>
+      <pre>{JSON.stringify(policy, null, 2)}</pre>
+    </details>)}
+  </section>;
   return (
     <section className="panel">
       <h2>{title}</h2>
@@ -831,9 +909,9 @@ function Inspection({ stage, title }: { stage: Stage | null; title: string }) {
         <>
           <div className="panel-heading">
             <Badge value={stage.decision} />
-            <strong>{stage.score}/100</strong>
+            {typeof stage.score === "number" && <strong>{stage.score}/100</strong>}
           </div>
-          {Object.entries(stage.breakdown).map(([name, value]) => (
+          {Object.entries(stage.breakdown || {}).map(([name, value]) => (
             <div className="detector" key={name}>
               <span>{name.replaceAll("_", " ")}</span>
               <Badge value={value} />
@@ -843,13 +921,13 @@ function Inspection({ stage, title }: { stage: Stage | null; title: string }) {
             Redaction revalidated:{" "}
             {stage.revalidated ? "yes" : "not applicable / not approved"}
           </p>
-          {stage.breakdown.pii_detection === "FAILED" && (
+          {stage.breakdown?.pii_detection === "FAILED" && (
             <p className="muted">
               PII detected: this control failed compliance. Detector
               unavailability is reported as UNKNOWN.
             </p>
           )}
-          {stage.findings.length > 0 && (
+          {Boolean(stage.findings?.length) && (
             <pre>{JSON.stringify(stage.findings, null, 2)}</pre>
           )}
         </>
@@ -861,6 +939,11 @@ function Inspection({ stage, title }: { stage: Stage | null; title: string }) {
 }
 // Execute input governance, model generation, and output inspection through one gateway.
 function Playground() {
+  const workspace = useWorkspace();
+  const settings = useWorkspaceSettings();
+  const inFlight = useRef(false);
+  const [attachment, setAttachment] = useState<File | null>(null);
+  const [stage, setStage] = useState("");
   const sourceReview = new URLSearchParams(window.location.search).get(
     "review",
   );
@@ -874,20 +957,29 @@ function Playground() {
   // Submit only to the backend; provider credentials never enter the browser.
   async function run(event: React.FormEvent) {
     event.preventDefault();
+    if (inFlight.current || !workspace.data || workspace.loading) return;
+    inFlight.current = true;
     setBusy(true);
     setMessage("");
     setResult(null);
     setRated(false);
     try {
-      setResult(
-        await request<Result>("/api/governance/generate", "POST", {
-          text,
-          ...(sourceReview ? { source_review_id: sourceReview } : {}),
-        }),
-      );
+      setStage(attachment ? "Reading attachment…" : "Inspecting prompt…");
+      const documentFields = attachment ? {
+        filename: attachment.name, content_type: attachment.type, content_base64: await attachmentBase64(attachment),
+      } : {};
+      if (attachment) setStage("Extracting document and inspecting complete content…");
+      const base = workspace.data.mode === "MULTI" ? "/api/v2/governance" : "/api/governance";
+      setResult(await request<Result>(`${base}/${attachment ? "generate-document" : "generate"}`, "POST", {
+        text, ...documentFields, ...(sourceReview ? { source_review_id: sourceReview } : {}),
+      }, workspace.data.mode === "MULTI" ? { headers: { "If-Match": `"${workspace.data.set_revision}"` } } : {}));
+      setStage(attachment ? "Document extraction and governance completed." : "Governance completed.");
     } catch (error) {
-      setMessage(String(error));
+      setStage("Request stopped; no content released.");
+      setMessage(workspaceError(error));
+      await workspace.reload();
     } finally {
+      inFlight.current = false;
       setBusy(false);
     }
   }
@@ -902,20 +994,28 @@ function Playground() {
         <span className="badge">INPUT → MODEL → OUTPUT</span>
       </div>
       <Notice message={message} />
+      {settings.data?.provider_mode === "fixture" && (
+        <div role="status" className="notice">
+          Local test mode is active. Approved prompts receive the same sample response; no Azure AI generation is used.
+        </div>
+      )}
       <form className="panel prompt-panel" onSubmit={run}>
         <h2>What would you like to explore?</h2>
         <textarea
+          id="playground-prompt"
           aria-label="User prompt"
           value={text}
           maxLength={12000}
-          required
+          required={!attachment}
           onChange={(event) => setText(event.target.value)}
         />
+        <AttachmentPicker file={attachment} disabled={busy} onChange={file => { setAttachment(file); setResult(null); setStage(""); }} />
+        {stage && <p role="status">{stage}</p>}
         <div className="toolbar">
           <span className="muted">
             Only approved content reaches the configured model.
           </span>
-          <button className="primary" disabled={busy}>
+          <button className="primary" disabled={busy || workspace.loading || !workspace.data}>
             {busy ? "Inspecting…" : "Run governed request"}{" "}
             <ArrowUpRight size={16} />
           </button>
@@ -925,8 +1025,6 @@ function Playground() {
             "Safe prompt",
             "Synthetic secret",
             "Synthetic PII",
-            "Fixture moderation",
-            "Fixture failure",
           ].map((label, index) => (
             <button
               type="button"
@@ -937,8 +1035,6 @@ function Playground() {
                     "Explain the benefits of data governance in simple terms.",
                     "api_key=sk-test-ABCDEFGHIJKLMNOPQRSTUVWXYZ12345",
                     "Contact test.person@example.com about data governance.",
-                    "[MODERATION_FLAG]",
-                    "[MODERATION_UNAVAILABLE]",
                   ][index],
                 )
               }
@@ -951,25 +1047,21 @@ function Playground() {
       {busy && <div className="skeleton" />}
       {result && (
         <>
+          <DecisionNotice result={result} />
           <div className="result-banner">
             <ShieldCheck />
             <div>
               <strong>Final decision: {result.decision}</strong>
               <p>
-                Policy {result.policy_name || result.policy_id.slice(0, 8)} · v
-                {result.policy_version} · {result.duration_ms} ms
+                {result.input?.policies || result.output?.policies
+                  ? `${result.input?.policy_count || result.output?.policy_count} active published policies evaluated`
+                  : `Policy ${result.policy_name || result.policy_id?.slice(0, 8)} · v${result.policy_version} · ${result.duration_ms} ms`}
               </p>
             </div>
-            <Badge
-              value={
-                result.provider_mode === "fixture"
-                  ? "LOCAL TEST FIXTURE"
-                  : "LIVE PROVIDER MODE"
-              }
-            />
+            {result.provider_mode === "fixture" && <Badge value="LOCAL TEST FIXTURE" />}
           </div>
           <div className="inspection-grid">
-            <Inspection stage={result.input} title="01 · Input inspection" />
+            <Inspection stage={result.input} title="01 · Input inspection" playground />
             <section className="panel">
               <h2>02 · Model gateway</h2>
               {result.provider_error ||
@@ -1006,17 +1098,16 @@ function Playground() {
                     : ""}
                 </p>
               )}
-              <Badge value={result.provider_mode} />
+              <p className="muted">Provider: {result.provider_mode === "fixture" ? "Local deterministic fixture" : "Azure OpenAI"}</p>
             </section>
-            <Inspection stage={result.output} title="03 · Output inspection" />
+            <Inspection stage={result.output} title="03 · Output inspection" playground />
           </div>
           <section className="panel">
             <h2>Safe response</h2>
             <p className="response">
-              {result.safe_response ||
+              {canRelease(result) ? result.safe_response :
                 "Response withheld. No unvalidated model content was released."}
             </p>
-            <small>Request {result.request_id}</small>
             {result.review_id && (
               <NavLink className="button" to="/reviews">
                 Track human review
@@ -1053,6 +1144,8 @@ function Playground() {
 }
 // Simulate drafts independently from active policy assignment and generation.
 function Simulator() {
+  const workspace = useWorkspace();
+  const [mode, setMode] = useState<"selected" | "workspace">("selected");
   const [policyOffset, setPolicyOffset] = useState(0),
     [policySearch, setPolicySearch] = useState("");
   const policies = useApi<Policy[]>(
@@ -1069,7 +1162,7 @@ function Simulator() {
         <div>
           <span className="eyebrow">TEST BEFORE PUBLISHING</span>
           <h1>Policy simulator</h1>
-          <p>Evaluate a draft without calling the generation provider.</p>
+          <p>Preview governance decisions without generating AI output.</p>
         </div>
       </div>
       <DataState
@@ -1085,9 +1178,7 @@ function Simulator() {
           setBusy(true);
           setResult(null);
           try {
-            setResult(
-              await request(`/api/policies/${id}/simulate`, "POST", { text }),
-            );
+            setResult(await request(mode === "selected" ? `/api/v2/simulation/policies/${id}` : "/api/v2/simulation/workspace", "POST", { text }));
             setMessage("");
           } catch (error) {
             setMessage(String(error));
@@ -1096,7 +1187,13 @@ function Simulator() {
           }
         }}
       >
-        <label>
+        <label>Simulation mode
+          <select value={mode} onChange={(event) => { setMode(event.target.value as "selected" | "workspace"); setResult(null); }}>
+            <option value="selected">Selected policy draft</option>
+            {workspace.data?.mode === "MULTI" && <option value="workspace">Active workspace policy set</option>}
+          </select>
+        </label>
+        {mode === "selected" && <label>
           Search policies
           <input
             value={policySearch}
@@ -1106,8 +1203,8 @@ function Simulator() {
               setId("");
             }}
           />
-        </label>
-        <div className="pagination">
+        </label>}
+        {mode === "selected" && <div className="pagination">
           <button
             type="button"
             disabled={!policyOffset || policies.loading}
@@ -1131,8 +1228,8 @@ function Simulator() {
           >
             Next policies
           </button>
-        </div>
-        <label>
+        </div>}
+        {mode === "selected" && <label>
           Policy draft
           <select
             required
@@ -1146,7 +1243,7 @@ function Simulator() {
               </option>
             ))}
           </select>
-        </label>
+        </label>}
         <label>
           Sample prompt
           <textarea
@@ -1156,11 +1253,11 @@ function Simulator() {
             onChange={(event) => setText(event.target.value)}
           />
         </label>
-        <button className="primary" disabled={busy}>
+        <button className="primary" disabled={busy || !text.trim() || (mode === "selected" && !id) || (mode === "workspace" && workspace.data?.mode !== "MULTI")}>
           Simulate policy
         </button>
       </form>
-      {result && <Inspection stage={result} title="Simulation results" />}
+      {result && <><p>The decision reflects the strongest action from the evaluated policy rules. Expand each policy for detector findings.</p><Inspection stage={result} title="Simulation only · no AI generation" /></>}
     </>
   );
 }
@@ -1224,7 +1321,16 @@ function RetainedPolicyHistory({
   );
 }
 // Present paginated real records with optional review and export actions.
-function Records({ kind }: { kind: "history" | "reviews" | "reports" }) {
+function Records({
+  kind,
+  role,
+}: {
+  kind: "history" | "reviews" | "reports";
+  role: string;
+}) {
+  const workspace = useWorkspace();
+  const versioned = workspace.data?.multi_policy_available === true;
+  const api = versioned ? "/api/v2" : "/api";
   const [offset, setOffset] = useState(0),
     [auditCategory, setAuditCategory] = useState("policy"),
     [retainedPolicyId, setRetainedPolicyId] = useState(""),
@@ -1234,27 +1340,19 @@ function Records({ kind }: { kind: "history" | "reviews" | "reports" }) {
     [reason, setReason] = useState(""),
     [assignee, setAssignee] = useState(""),
     [startDate, setStartDate] = useState(""),
-    [endDate, setEndDate] = useState(""),
-    [exportOffset, setExportOffset] = useState(0);
-  const exportKeys = useRef<Record<string, string>>({});
-  const identity = useApi<RecordData>("/api/settings");
-  const canReview = ["Admin", "Reviewer"].includes(String(identity.data?.role));
-  const canExport = ["Admin", "Auditor"].includes(String(identity.data?.role));
+    [endDate, setEndDate] = useState("");
+  const [appliedDates, setAppliedDates] = useState({ start: "", end: "" });
+  const [filterError, setFilterError] = useState("");
+  const dateQuery = kind === "reports" ? `${appliedDates.start ? `&start_date=${appliedDates.start}` : ""}${appliedDates.end ? `&end_date=${appliedDates.end}` : ""}` : "";
+  const canReview = ["Admin", "Reviewer"].includes(role);
   const path =
-    kind === "history"
-      ? "/api/audit/executions"
+    (kind === "history" || (kind === "reports" && auditCategory === "governance"))
+      ? `${api}/audit/executions`
       : kind === "reviews"
-        ? "/api/reviews"
-        : "/api/audit/events";
-  const { data, error, loading, reload } = useApi<RecordData[]>(
-    `${path}?offset=${offset}&limit=20${kind === "reports" ? `&category=${auditCategory}` : ""}`,
-  );
-  const exports = useApi<
-    RecordData[] | { count: number; average: number | null }
-  >(
-    kind === "reports"
-      ? `/api/reports/exports?limit=20&offset=${exportOffset}`
-      : "/api/feedback/summary",
+        ? `${api}/reviews`
+        : `${api}/audit/events`;
+  const { data, error, loading, reload } = useRecordList(
+    `${path}?offset=${offset}&limit=20${kind === "reports" ? `&category=${auditCategory}` : ""}${dateQuery}`,
   );
   return (
     <>
@@ -1274,59 +1372,13 @@ function Records({ kind }: { kind: "history" | "reviews" | "reports" }) {
               : "Sanitized metadata, persisted by the governance gateway."}
           </p>
         </div>
-        {kind === "reports" && canExport && (
-          <div className="actions">
-            {["json", "csv"].map((format) => (
-              <button
-                className="primary"
-                key={format}
-                disabled={busy}
-                onClick={async () => {
-                  if (busy) return;
-                  setBusy(true);
-                  try {
-                    const payload = {
-                      format,
-                      ...(startDate ? { start_date: startDate } : {}),
-                      ...(endDate ? { end_date: endDate } : {}),
-                    };
-                    const signature = JSON.stringify(payload);
-                    const key = (exportKeys.current[signature] ||=
-                      crypto.randomUUID());
-                    const report = await request<RecordData>(
-                      "/api/reports/export",
-                      "POST",
-                      { ...payload, idempotency_key: key },
-                    );
-                    if (report.state === "COMPLETED")
-                      delete exportKeys.current[signature];
-                    setMessage(`ADLS export: ${report.status}`);
-                    void exports.reload();
-                    void reload();
-                  } catch (error) {
-                    setMessage(String(error));
-                  } finally {
-                    setBusy(false);
-                  }
-                }}
-              >
-                Export {format.toUpperCase()}
-              </button>
-            ))}
-          </div>
-        )}
       </div>
       <Notice message={message} />
       {kind === "reports" && (
         <section className="panel">
-          <h2>Export window</h2>
-          <p>
-            Exports include all audit categories within the selected window.
-          </p>
-          <p>
-            Default: last 90 days. Maximum: 366 days, 10,000 records and 5 MB
-            with default settings. Check history after an uncertain result.
-          </p>
+          <h2>History date filter</h2>
+          <p>Dates use UTC, including the entire end date. With one date omitted, the end defaults to today and the start to 89 days before the end. Maximum range: 366 days.</p>
+          {filterError && <p role="alert" className="notice">{filterError}</p>}
           <label>
             Start date
             <input
@@ -1343,9 +1395,23 @@ function Records({ kind }: { kind: "history" | "reviews" | "reports" }) {
               onChange={(event) => setEndDate(event.target.value)}
             />
           </label>
-          {!canExport && (
-            <p>Admin or Auditor access is required to export reports.</p>
-          )}
+          <div className="actions">
+            <button className="primary" onClick={() => {
+              const valid = (value: string) => !value || /^\d{4}-\d{2}-\d{2}$/.test(value) && !value.startsWith("0000") && value === new Date(`${value}T00:00:00Z`).toISOString().slice(0, 10);
+              try {
+                if (!valid(startDate) || !valid(endDate)) throw new Error();
+                if (startDate || endDate) {
+                  const end = Date.parse(`${endDate || new Date().toISOString().slice(0, 10)}T00:00:00Z`);
+                  const start = startDate ? Date.parse(`${startDate}T00:00:00Z`) : end - 89 * 86400000;
+                  if (start > end || start < Date.parse("0001-01-01T00:00:00Z") || end - start > 365 * 86400000 || endDate === "9999-12-31") throw new Error();
+                }
+                setFilterError(""); setOffset(0); setDetails(null); setRetainedPolicyId("");
+                setAppliedDates({ start: startDate, end: endDate });
+              } catch { setFilterError("Use valid dates with the start on or before the end, within 366 days."); }
+            }}>Apply Filter</button>
+            <button onClick={() => { setStartDate(""); setEndDate(""); setAppliedDates({ start: "", end: "" }); setFilterError(""); setOffset(0); setDetails(null); setRetainedPolicyId(""); }}>Clear Filter</button>
+          </div>
+          {(appliedDates.start || appliedDates.end) && <p role="status">Applied range (UTC): {appliedDates.start || "89 days before end date"} through {appliedDates.end || "today"}.</p>}
         </section>
       )}
       <section className="panel">
@@ -1384,7 +1450,7 @@ function Records({ kind }: { kind: "history" | "reviews" | "reports" }) {
                   : "Administrative history"}
             </h2>
             {!loading && !error && data?.length === 0 && (
-              <p role="status">No events in this history yet.</p>
+              <p role="status">{appliedDates.start || appliedDates.end ? "No records found for the selected date range" : "No events in this history yet."}</p>
             )}
           </>
         )}
@@ -1398,44 +1464,60 @@ function Records({ kind }: { kind: "history" | "reviews" | "reports" }) {
               <tr>
                 <th>Record</th>
                 <th>Timestamp</th>
+                {(kind === "history" || kind === "reports") && <>
+                  {(kind === "history" || auditCategory !== "administration") && <th>Policy name(s)</th>}
+                  <th>{kind === "history" || auditCategory === "governance" ? "Executed By" : "Actor"}</th>
+                  <th>Role at event time</th>
+                </>}
                 <th>Status / event</th>
+                {(kind === "history" || (kind === "reports" && auditCategory === "governance")) && <th>Safe violation category</th>}
                 <th>Details</th>
               </tr>
             </thead>
             <tbody>
               {data?.map((row) => (
                 <tr key={String(row.id)}>
-                  <td className="mono">{String(row.id).slice(0, 8)}</td>
+                  <td className="mono">{String(row.id).slice(0, 8)}
+                    {Boolean(row.execution_mode || (row.execution as RecordData | undefined)?.execution_mode) && <small>
+                      {String(row.execution_mode || (row.execution as RecordData)?.execution_mode)} · {String(row.policy_evaluation_count ?? (row.execution as RecordData)?.policy_evaluation_count)} policy evaluations
+                    </small>}
+                  </td>
                   <td>{String(row.created).slice(0, 19)}</td>
+                  {(kind === "history" || kind === "reports") && <>
+                    {(kind === "history" || auditCategory !== "administration") && <td>{Array.isArray(row.policy_names) ? row.policy_names.join(", ") : String(row.policy_name || "Not recorded")}</td>}
+                    <td>{String(row.actor || "Not recorded")}</td><td>{String(row.actor_role || "Not recorded")}</td>
+                  </>}
                   <td>
                     <Badge
                       value={String(row.decision || row.status || row.action)}
                     />
                   </td>
+                  {(kind === "history" || (kind === "reports" && auditCategory === "governance")) && <td>{Array.isArray(row.violation_categories) ? row.violation_categories.join(", ") : "Not recorded"}</td>}
                   <td>
                     <div className="actions">
                       <button
                         onClick={async () => {
-                          if (kind !== "reviews") {
+                          if (kind !== "reviews" && !((kind === "history" || (kind === "reports" && auditCategory === "governance")) && versioned)) {
                             setDetails(row);
                             return;
                           }
+                          setDetails(null);
                           try {
                             const detail = await request<RecordData>(
-                              `/api/reviews/${row.id}`,
+                              (kind === "history" || (kind === "reports" && auditCategory === "governance")) ? `${api}/audit/executions/${row.id}` : `${api}/reviews/${row.id}`,
                             );
-                            setDetails(detail);
+                            setDetails(normalizeRecord(detail));
                             const assignment =
                               detail.assignment as RecordData | null;
                             setAssignee(
-                              String(assignment?.assigned_reviewer || ""),
+                              String(assignment?.assigned_reviewer || detail.assigned_reviewer || ""),
                             );
                           } catch (error) {
                             setMessage(String(error));
                           }
                         }}
                       >
-                        Inspect metadata
+                        {kind === "reviews" ? "Open review" : "Inspect metadata"}
                       </button>
                       {kind === "reports" &&
                         row.action === "policy.removed" && (
@@ -1463,12 +1545,14 @@ function Records({ kind }: { kind: "history" | "reviews" | "reports" }) {
                               )
                                 return;
                               setBusy(true);
+                              setDetails(null);
                               try {
                                 await request(
-                                  `/api/reviews/${row.id}/${operation}`,
+                                  `${api}/reviews/${row.id}/${operation}`,
                                   "POST",
                                   { reason },
                                 );
+                                setDetails(null);
                                 setMessage(`Review ${operation} recorded.`);
                                 await reload();
                               } catch (error) {
@@ -1516,11 +1600,10 @@ function Records({ kind }: { kind: "history" | "reviews" | "reports" }) {
           <h2>Review decision note</h2>
           <label>
             Reason (metadata only; omit sensitive content)
-            <textarea
-              maxLength={1000}
-              value={reason}
-              onChange={(event) => setReason(event.target.value)}
-            />
+            <select value={reason} onChange={(event) => setReason(event.target.value)}>
+              <option value="">Select a safe review note</option>
+              {REVIEW_REASONS.map((value) => <option key={value}>{value}</option>)}
+            </select>
           </label>
           <p>
             Approval never releases held content. The author must revise and
@@ -1528,27 +1611,15 @@ function Records({ kind }: { kind: "history" | "reviews" | "reports" }) {
           </p>
         </section>
       )}
-      {kind === "history" && exports.data && !Array.isArray(exports.data) && (
-        <section className="panel">
-          <h2>Decision feedback</h2>
-          <p>
-            {exports.data.count} ratings · Average{" "}
-            {exports.data.average ?? "No ratings"}
-          </p>
-        </section>
-      )}
       {details && (
         <section className="panel">
           <div className="panel-heading">
-            <h2>Record metadata</h2>
+            <h2>{kind === "reviews" ? "Review case" : "Record metadata"}</h2>
             <button onClick={() => setDetails(null)}>Close</button>
           </div>
           {kind === "reviews" && (
             <>
-              <p>
-                Held content is not retained. Inspect execution findings and the
-                decision history below.
-              </p>
+              <ReviewContent key={JSON.stringify([details.id, details.row_version, details.status, details.assigned_reviewer, details.assignment, details.protected_content])} record={details} refreshPath={`${api}/reviews/${details.id}`} onRefresh={(value) => setDetails(normalizeRecord(value))} />
               {details.status === "PENDING" && canReview && (
                 <>
                   <label>
@@ -1563,14 +1634,15 @@ function Records({ kind }: { kind: "history" | "reviews" | "reports" }) {
                     disabled={busy}
                     onClick={async () => {
                       setBusy(true);
+                      setDetails(null);
                       try {
                         await request(
-                          `/api/reviews/${details.id}/assignment`,
+                          `${api}/reviews/${details.id}/assignment`,
                           "PUT",
                           { assigned_reviewer: assignee, reason },
                         );
                         setMessage("Review assignment recorded.");
-                        setDetails(await request(`/api/reviews/${details.id}`));
+                        setDetails(normalizeRecord(await request<RecordData>(`${api}/reviews/${details.id}`)));
                       } catch (error) {
                         setMessage(String(error));
                       } finally {
@@ -1583,9 +1655,7 @@ function Records({ kind }: { kind: "history" | "reviews" | "reports" }) {
                 </>
               )}
               {details.status !== "PENDING" &&
-                ["Admin", "Developer", "Policy Owner"].includes(
-                  String(identity.data?.role),
-                ) && (
+                ["Admin", "Developer", "Policy Owner"].includes(role) && (
                   <NavLink
                     className="button"
                     to={`/playground?review=${details.id}`}
@@ -1595,7 +1665,7 @@ function Records({ kind }: { kind: "history" | "reviews" | "reports" }) {
                 )}
             </>
           )}
-          <pre>
+          <details><summary>Technical metadata</summary><pre>
             {JSON.stringify(
               {
                 ...details,
@@ -1606,180 +1676,49 @@ function Records({ kind }: { kind: "history" | "reviews" | "reports" }) {
               null,
               2,
             )}
-          </pre>
-        </section>
-      )}
-      {kind === "reports" && (
-        <section className="panel">
-          <h2>Export attempts</h2>
-          <DataState
-            loading={exports.loading}
-            error={exports.error}
-            reload={exports.reload}
-          />
-          {Array.isArray(exports.data) &&
-            exports.data.map((report) => (
-              <div className="detector" key={String(report.id)}>
-                <span>
-                  {String(report.id).slice(0, 8)} ·{" "}
-                  {String(report.state || report.status)} ·{" "}
-                  {String(report.error_code || "")}
-                </span>
-                {canExport &&
-                  Boolean(report.state) &&
-                  report.state !== "COMPLETED" && (
-                    <button
-                      disabled={busy}
-                      onClick={async () => {
-                        if (
-                          !confirm(
-                            "Check existing storage evidence and retry a missing object within the attempt limit? This may access ADLS.",
-                          )
-                        )
-                          return;
-                        setBusy(true);
-                        try {
-                          const recovered = await request<RecordData>(
-                            `/api/reports/exports/${report.id}/reconcile`,
-                            "POST",
-                          );
-                          setMessage(`Recovery: ${recovered.state}`);
-                          await exports.reload();
-                          await reload();
-                        } catch (error) {
-                          setMessage(String(error));
-                        } finally {
-                          setBusy(false);
-                        }
-                      }}
-                    >
-                      Reconcile / recover
-                    </button>
-                  )}
-              </div>
-            ))}
-          <div className="pagination">
-            <button
-              disabled={!exportOffset || exports.loading}
-              onClick={() => setExportOffset(Math.max(0, exportOffset - 20))}
-            >
-              Previous exports
-            </button>
-            <span>Page {exportOffset / 20 + 1}</span>
-            <button
-              disabled={
-                exports.loading ||
-                !Array.isArray(exports.data) ||
-                exports.data.length < 20
-              }
-              onClick={() => setExportOffset(exportOffset + 20)}
-            >
-              Next exports
-            </button>
-          </div>
-          <pre>{JSON.stringify(exports.data, null, 2)}</pre>
+          </pre></details>
         </section>
       )}
     </>
   );
 }
-// Identify fixture execution prominently across every dashboard screen.
-function EnvironmentBanner() {
-  const { data, error } = useApi<RecordData>("/api/settings");
-  if (error) return <Notice message={error} />;
-  if (!data) return null;
-  return (
-    <div className="environment-banner">
-      <ShieldCheck size={15} />
-      {data.provider_mode === "fixture"
-        ? "DETERMINISTIC LOCAL FIXTURES · Generation and moderation are simulated test dependencies."
-        : "LIVE PROVIDER MODE · Required cloud inspections fail closed when unavailable."}{" "}
-      <span>PII: {String(data.pii_mode)}</span>
-    </div>
-  );
-}
-
 // Display truthful configuration and live database diagnostics without secrets.
-function SessionManager() {
-  const [offset, setOffset] = useState(0),
-    [message, setMessage] = useState(""),
-    [busy, setBusy] = useState(false);
-  const sessions = useApi<
-    {
-      id: string;
-      actor: string;
-      expires: string;
-      revoked: boolean;
-      expired: boolean;
-    }[]
-  >(`/api/auth/sessions?limit=20&offset=${offset}`);
-  return (
-    <section className="panel">
-      <h2>Workspace sessions</h2>
-      <p>
-        Revocation ends the selected session. Provisioned credentials can still
-        create new sessions until an operator disables or rotates them.
-      </p>
-      <Notice message={message} />
-      <DataState {...sessions} empty={sessions.data?.length === 0} />
-      {sessions.data?.map((session) => (
-        <div className="detector" key={session.id}>
-          <span>
-            {session.actor} · expires {session.expires} ·{" "}
-            {session.revoked
-              ? "Revoked"
-              : session.expired
-                ? "Expired"
-                : "Active"}
-          </span>
-          <button
-            disabled={busy || session.revoked || session.expired}
-            onClick={async () => {
-              if (!confirm(`Revoke this session for ${session.actor}?`)) return;
-              setBusy(true);
-              try {
-                await request(
-                  `/api/auth/sessions/${session.id}/revoke`,
-                  "POST",
-                );
-                setMessage("Session revoked.");
-                await sessions.reload();
-              } catch (error) {
-                setMessage(String(error));
-              } finally {
-                setBusy(false);
-              }
-            }}
-          >
-            Revoke session
-          </button>
-        </div>
-      ))}
-      <div className="pagination">
-        <button
-          disabled={!offset || sessions.loading}
-          onClick={() => setOffset(Math.max(0, offset - 20))}
-        >
-          Previous sessions
-        </button>
-        <span>Page {offset / 20 + 1}</span>
-        <button
-          disabled={
-            sessions.loading || !sessions.data || sessions.data.length < 20
-          }
-          onClick={() => setOffset(offset + 20)}
-        >
-          Next sessions
-        </button>
-        <button onClick={() => void sessions.reload()}>Refresh sessions</button>
-      </div>
-    </section>
-  );
-}
 
-function Configuration() {
-  const { data, error, loading, reload } = useApi<RecordData>("/api/settings");
-  const consumption = useApi<RecordData>("/api/usage");
+type SettingsIdentity = { user: string; role: string; tenant: string; expires_at?: string };
+const diagnosticLabels: Record<string, string> = {
+  build_version: "Build Version", api_contract: "API Contract", required_migration: "Required Migration",
+  migration_status: "Migration Status", database_migration: "Database Migration",
+  demo_session_minutes: "Demo Session Minutes", sso_session_minutes: "SSO Session Minutes",
+  legacy_api_credentials: "Legacy API Credentials", retention_days: "Retention Days",
+};
+const diagnosticDescriptions: Record<string, string> = {
+  required_migration: "Schema revision required by this application build.",
+  migration_status: "How database schema readiness is checked in this environment.",
+  database_migration: "Database revision reported by the server.",
+  legacy_api_credentials: "Whether older API credential access is enabled.",
+  retention_days: "Configured retention period for eligible records.",
+};
+function readableValue(value: unknown): string {
+  if (typeof value === "boolean") return value ? "Enabled" : "Disabled";
+  if (typeof value === "string" || typeof value === "number") return String(value);
+  return "Not available";
+}
+function Configuration({ identity }: { identity: SettingsIdentity | null }) {
+  const { data, error, loading, reload } = useWorkspaceSettings();
+  const capabilities = useApi<RecordData>("/api/capabilities");
+  const integrations = data?.integrations && typeof data.integrations === "object" ? data.integrations as Record<string, RecordData> : {};
+  const demo = data?.sso_enabled === false;
+  const release = data?.release && typeof data.release === "object" ? data.release as RecordData : null;
+  const advanced = data ? Object.entries(data).filter(([key]) => ![
+    "integrations", "release", "database", "database_status", "provider_mode", "pii_mode",
+    "role", "tenant", "authentication", "sso_enabled", "azure_generation", "moderation", "adls",
+  ].includes(key)) : [];
+  const health = data ? [
+    { label: "Database", value: `${data.database_status === "CONNECTED" ? "Connected" : readableValue(data.database_status)} · ${readableValue(data.database).toUpperCase()}`, description: "Connection reported by the application server.", state: data.database_status === "CONNECTED" ? "good" : "warn" },
+    { label: "PII Detection", value: capabilities.data ? readableValue(data.pii_mode).replace(/^./, letter => letter.toUpperCase()) : "Checking…", description: capabilities.data?.pii_status === "AVAILABLE" ? "Recognizers available in the running engine." : capabilities.error ? "Detector status unavailable." : "Checking installed recognizers.", state: capabilities.data?.pii_status === "AVAILABLE" ? "good" : "warn" },
+    { label: "AI Generation", value: data.provider_mode === "fixture" ? "Local Fixture Mode" : data.provider_mode === "live" ? "Live Provider Mode" : readableValue(data.provider_mode), description: data.provider_mode === "fixture" ? "Local sample responses; no Azure generation." : `Integration: ${readableValue(integrations.azure_generation?.status).replaceAll("_", " ").toLowerCase()}.`, state: data.provider_mode === "fixture" ? "info" : integrations.azure_generation?.status === "VERIFIED" ? "good" : "warn" },
+    { label: "Moderation", value: readableValue(integrations.moderation?.status).replaceAll("_", " ").toLowerCase().replace(/^./, letter => letter.toUpperCase()), description: "Verification evidence for the configured moderation provider.", state: integrations.moderation?.status === "VERIFIED" ? "good" : "warn" },
+  ] : [];
   return (
     <>
       <div className="page-heading">
@@ -1793,51 +1732,150 @@ function Configuration() {
         <button
           onClick={() => {
             void reload();
-            void consumption.reload();
           }}
         >
           Refresh diagnostics
         </button>
       </div>
       <DataState {...{ loading, error, reload }} />
-      {data && ["Admin", "Auditor"].includes(String(data.role)) && (
-        <section className="panel">
-          <h2>Inference consumption</h2>
-          <DataState
-            loading={consumption.loading}
-            error={consumption.error}
-            reload={consumption.reload}
-          />
-          <pre>{JSON.stringify(consumption.data, null, 2)}</pre>
+      {data && <div className="settings-page">
+        <section className="panel" aria-labelledby="system-health-heading">
+          <div className="settings-section-heading"><h2 id="system-health-heading">System Health</h2><p>Current server status and available capabilities.</p></div>
+          <div className="settings-health-grid">{health.map(item => <div className="settings-health-card" key={item.label}>
+            <span className="settings-card-label">{item.label}</span>
+            <strong><i className={`settings-status-dot ${item.state}`} aria-hidden="true" />{item.value}</strong>
+            <p>{item.description}</p>
+          </div>)}</div>
         </section>
-      )}
-      {data?.role === "Admin" && <SessionManager />}
-      <section className="panel">
-        {data &&
-          Object.entries(data).map(([key, value]) => (
-            <div className="detector" key={key}>
-              <strong>{key.replaceAll("_", " ")}</strong>
-              <span>{String(value)}</span>
-            </div>
-          ))}
-        <div className="note">
-          This demonstration uses local bearer credentials. Configure providers
-          on the server through environment variables.
-        </div>
-      </section>
+        {data.role === "Admin" ? <WorkspaceSessions mode={demo ? "demo" : "sso"} /> : <section className="panel" aria-labelledby="sessions-heading">
+          <h2 id="sessions-heading">Workspace Sessions</h2><p>Session management is available to workspace administrators.</p>
+        </section>}
+        <IntegrationStatus value={data.integrations} admin={data.role === "Admin"} onRefresh={reload} />
+        <section className="panel" aria-labelledby="authentication-heading">
+          <div className="settings-section-heading"><h2 id="authentication-heading">Authentication &amp; Workspace</h2><p>Identity and access for this session.</p></div>
+          <dl className="settings-facts">
+            <div><dt>Authentication method</dt><dd>{demo ? "Local demo authentication" : "Microsoft Entra ID SSO"}</dd></div>
+            <div><dt>Microsoft Entra SSO</dt><dd>{data.sso_enabled === true ? "Enabled" : "Disabled in this environment"}</dd></div>
+            <div><dt>Signed in as</dt><dd>{identity?.user || "Not available"}</dd></div>
+            <div><dt>Role</dt><dd>{identity?.role || readableValue(data.role)}</dd></div>
+            <div><dt>Workspace</dt><dd>{identity?.tenant || readableValue(data.tenant)}</dd></div>
+            <div><dt>Session expiration</dt><dd>{identity?.expires_at ? new Date(identity.expires_at).toLocaleString() : "Not provided by this session API"}</dd></div>
+          </dl>
+        </section>
+        <details className="panel settings-advanced">
+          <summary>Advanced Diagnostics</summary>
+          <p>Technical details reported by the application server.</p>
+          {release && <div className="settings-diagnostic"><strong>Release</strong><span>{typeof release.build_version === "string" ? release.build_version : "Not available"}{typeof release.git_commit === "string" ? ` · ${release.git_commit}` : ""}</span><small>Build identifier and source revision reported by this release.</small></div>}
+          {advanced.map(([key, value]) => <div className="settings-diagnostic" key={key}>
+            <strong>{diagnosticLabels[key] || key.replaceAll("_", " ")}</strong><span>{readableValue(value)}</span>
+            {diagnosticDescriptions[key] && <small>{diagnosticDescriptions[key]}</small>}
+          </div>)}
+        </details>
+      </div>}
     </>
   );
 }
-// Require a provisioned local credential before loading tenant-owned screens.
+// Restore only the server-managed Microsoft session before loading workspace data.
 export function App() {
-  const [authenticated, setAuthenticated] = useState(Boolean(getToken())),
-    [token, setToken] = useState(""),
+  const sessionKnown = useRef(false);
+  const sessionDeadline = useRef<number | null>(null);
+  const [authenticated, setAuthenticated] = useState(false),
     [error, setError] = useState(""),
     [loggingIn, setLoggingIn] = useState(false);
+  const [restoring, setRestoring] = useState(true);
+  const [ssoReady, setSsoReady] = useState(false);
+  const [checkingSso, setCheckingSso] = useState(true);
+  const [statusError, setStatusError] = useState("");
+  const [demoCredential, setDemoCredential] = useState("");
+  const [restoreAttempt, setRestoreAttempt] = useState(0);
+  const [identity, setIdentity] = useState<SettingsIdentity | null>(null);
   useEffect(() => {
-    const ended = () => {
+    if (!LOCAL_DEMO) sessionStorage.removeItem("governance-token");
+    const controller = new AbortController();
+    const options = {
+      signal: controller.signal,
+      timeoutMs: 10000,
+      notifyUnauthorized: false,
+    };
+    const reason = new URLSearchParams(window.location.search).get(
+      "auth_error",
+    );
+    if (reason) {
+      setError(
+        reason === "access_denied"
+          ? "Access denied. Ask your workspace administrator for authorized membership."
+          : "Microsoft sign-in could not be completed. Please try again.",
+      );
+      window.history.replaceState({}, "", window.location.pathname);
+    }
+    // Availability and cookie authentication are independent. A valid /me response
+    // unlocks the workspace without waiting for the public status request.
+    void request<{ configured: boolean; demo_login_enabled: boolean }>(
+      "/api/sso/status",
+      "GET",
+      undefined,
+      options,
+    )
+      .then((status) => {
+        if (!controller.signal.aborted) setSsoReady(status.configured || (LOCAL_DEMO && status.demo_login_enabled));
+      })
+      .catch(() => {
+        if (!controller.signal.aborted)
+          setStatusError(
+            "Sign-in service is unavailable. Please try again later.",
+          );
+      })
+      .finally(() => {
+        if (!controller.signal.aborted) setCheckingSso(false);
+      });
+    void request<{
+      user: string;
+      role: string;
+      tenant: string;
+      csrf_token: string;
+      expires_at?: string;
+      server_now?: string;
+    }>(LOCAL_DEMO ? "/api/auth/me" : "/api/sso/me", "GET", undefined, options)
+      .then((user) => {
+        if (controller.signal.aborted) return;
+        if (!["Admin", "User", "Policy Owner", "Developer", "Reviewer", "Auditor"].includes(user.role) ||
+            !user.user?.trim() || !user.tenant?.trim() || !user.csrf_token?.trim())
+          throw new Error("Authorized membership is required");
+        sessionKnown.current = true;
+        const remaining = Date.parse(user.expires_at || "") - Date.parse(user.server_now || "");
+        sessionDeadline.current = Number.isFinite(remaining) ? performance.now() + remaining : null;
+        setCsrfToken(user.csrf_token);
+        setIdentity(user);
+        setAuthenticated(true);
+        setError("");
+      })
+      .catch((error) => {
+        if (!controller.signal.aborted && error instanceof ApiError && error.status === 401) {
+          if (error.sessionReason === "expired") setError("Your session has expired. Please sign in again.");
+          else if (error.sessionReason === "ended") setError("Your session has ended. Please sign in again.");
+          return;
+        }
+        if (!controller.signal.aborted)
+          setError(
+            "Your session could not be checked. Retry the connection to continue.",
+          );
+      })
+      .finally(() => {
+        if (!controller.signal.aborted) setRestoring(false);
+      });
+    return () => controller.abort();
+  }, [restoreAttempt]);
+  useEffect(() => {
+    const ended = (event: Event) => {
+      const reason = (event as CustomEvent<{ reason?: string }>).detail?.reason;
+      const previouslyAuthenticated = sessionKnown.current;
+      const expired = reason === "expired" || (reason !== "ended" && sessionDeadline.current !== null && performance.now() >= sessionDeadline.current);
+      sessionKnown.current = false;
+      sessionDeadline.current = null;
       setAuthenticated(false);
-      setError("Session expired or revoked. Sign in again.");
+      setIdentity(null);
+      setCsrfToken("");
+      if (previouslyAuthenticated) setError(expired ? "Your session has expired. Please sign in again." : "Your session has ended. Please sign in again.");
     };
     window.addEventListener("governance-session-ended", ended);
     return () => window.removeEventListener("governance-session-ended", ended);
@@ -1846,151 +1884,213 @@ export function App() {
     return (
       <div className="login">
         <div className="login-brand">
-          <ShieldCheck size={38} />
+          <ShieldCheck size={48} />
           <h1>Governance Studio</h1>
-          <p>A trusted checkpoint for enterprise AI.</p>
+          <p>Secure Enterprise AI Governance Platform</p>
         </div>
-        <form
-          className="panel"
-          onSubmit={async (event) => {
-            event.preventDefault();
-            if (loggingIn) return;
-            setLoggingIn(true);
-            sessionStorage.setItem("governance-token", token);
-            try {
-              const session = await request<{ access_token: string }>(
-                "/api/auth/session",
-                "POST",
-              );
-              sessionStorage.setItem("governance-token", session.access_token);
-              setToken("");
-              setError("");
-              setAuthenticated(true);
-              setToken("");
-            } catch (error) {
-              sessionStorage.removeItem("governance-token");
-              setError(String(error));
-            } finally {
-              setLoggingIn(false);
-            }
-          }}
-        >
-          <span className="eyebrow">LOCAL DEMONSTRATION ACCESS</span>
-          <h2>Sign in to your workspace</h2>
-          <p>Use a token provisioned with the local setup script.</p>
-          <label>
-            Access token
-            <input
-              type="password"
-              required
-              value={token}
-              onChange={(event) => setToken(event.target.value)}
-              autoComplete="off"
-            />
-          </label>
-          <Notice message={error} />
-          <button className="primary" disabled={loggingIn}>
-            Connect workspace <ChevronRight size={16} />
+        <section className="panel" aria-labelledby="sso-title">
+          <span className="eyebrow">SECURE WORKSPACE ACCESS</span>
+          <h2 id="sso-title">Welcome to Governance Studio</h2>
+          <p>{LOCAL_DEMO ? "Local demo preview. Provider mode is shown after sign-in." :
+            "Use your organization's Microsoft account to securely access your workspace."}</p>
+          <Notice message={error || statusError} />
+          {restoring && <p role="status">Checking sign-in…</p>}
+          {checkingSso && (
+            <p role="status">Checking Microsoft sign-in availability…</p>
+          )}
+          {!checkingSso && !ssoReady && (
+            <p role="status">
+              {LOCAL_DEMO ? "Local demo login is unavailable." : "Microsoft sign-in is not available. Contact your application administrator."}
+            </p>
+          )}
+          {LOCAL_DEMO && <label>Local demo credential<input type="password" autoComplete="off" value={demoCredential}
+            onChange={event => setDemoCredential(event.target.value)} /></label>}
+          <button
+            className="primary"
+            aria-busy={loggingIn}
+            disabled={!ssoReady || loggingIn || restoring || (LOCAL_DEMO && !demoCredential)}
+            onClick={() => {
+              setLoggingIn(true);
+              if (!LOCAL_DEMO) { window.location.assign(loginUrl()); return; }
+              void request<{ access_token: string }>("/api/auth/session", "POST", undefined,
+                { headers: { Authorization: `Bearer ${demoCredential}` } })
+                .then(result => { sessionStorage.setItem("governance-token", result.access_token); setDemoCredential(""); setRestoreAttempt(value => value + 1); })
+                .catch(failure => setError((failure as Error).message))
+                .finally(() => setLoggingIn(false));
+            }}
+          >
+            {LOCAL_DEMO ? "Enter local preview" : "Sign in"}
           </button>
-          <small>Roles and tenant access are enforced by the server.</small>
-        </form>
+          {!restoring &&
+            !checkingSso &&
+            (error || statusError || !ssoReady) && (
+              <button
+                onClick={() => {
+                  setError("");
+                  setStatusError("");
+                  setSsoReady(false);
+                  setRestoring(true);
+                  setCheckingSso(true);
+                  setRestoreAttempt((attempt) => attempt + 1);
+                }}
+              >
+                Retry connection
+              </button>
+            )}
+          <small>
+            Access follows your approved workspace membership. Your organization
+            manages MFA and sign-in policies.
+          </small>
+        </section>
       </div>
     );
+  if (identity?.role === "User") return <BrowserRouter><WorkspaceProvider><Routes>
+    <Route path="/chat" element={<UserPortal account={identity.user} sessionError={error} onSignOut={async () => {
+      try {
+        const result = LOCAL_DEMO ? null : await request<{ logout_url: string }>("/api/sso/logout", "POST");
+        if (LOCAL_DEMO) { await request("/api/auth/logout", "POST"); sessionStorage.removeItem("governance-token"); }
+        sessionKnown.current = false; sessionDeadline.current = null; setError("");
+        setCsrfToken(""); setIdentity(null); setAuthenticated(false); if (result) window.location.assign(result.logout_url);
+      } catch { setError("Sign out could not be confirmed. Please retry; your server session may still be active."); }
+    }} />} />
+    <Route path="*" element={<Navigate to="/chat" replace />} />
+  </Routes></WorkspaceProvider></BrowserRouter>;
   return (
-    <BrowserRouter>
-      <aside className="sidebar">
-        <div className="brand">
-          <span>
-            <ShieldCheck size={24} />
-          </span>
-          <div>
-            Governance<small>STUDIO</small>
-          </div>
-        </div>
-        <span className="nav-label">WORKSPACE</span>
-        <nav>
-          {navigation.map((item) => (
-            <NavLink key={item.to} to={item.to} end={item.to === "/"}>
-              <item.icon size={18} />
-              {item.label}
-              {item.to === "/playground" && <span className="nav-dot" />}
-            </NavLink>
-          ))}
-        </nav>
-        <div className="sidebar-bottom">
-          <ShieldCheck size={21} />
-          <strong>Govern with confidence</strong>
-          <p>Policy enforcement at every step of the AI lifecycle.</p>
-          <small>DEMO WORKSPACE · v1.1</small>
-        </div>
-      </aside>
-      <div className="workspace">
-        <header>
-          <div className="breadcrumbs">
-            Workspace <ChevronRight size={13} /> <strong>AI Governance</strong>
-          </div>
-          <div className="header-right">
-            <span className="local-pill">
-              <i />
-              Governed workspace
+    <WorkspaceSettingsProvider>
+      <WorkspaceProvider>
+      <BrowserRouter>
+        <aside className="sidebar">
+          <div className="brand">
+            <span>
+              <ShieldCheck size={24} />
             </span>
-            <button
-              title="Sign out"
-              onClick={async () => {
-                try {
-                  await request("/api/auth/logout", "POST");
-                } catch (error) {
-                  setError(
-                    `Signed out on this device. Server revocation was not confirmed: ${String(error)}. The server session remains valid until expiry or administrator revocation.`,
-                  );
-                }
-                sessionStorage.removeItem("governance-token");
-                setAuthenticated(false);
-              }}
-            >
-              <LogOut size={17} />
-            </button>
-            <span className="avatar">GV</span>
+            <div>
+              Governance<small>STUDIO</small>
+            </div>
           </div>
-        </header>
-        <main>
-          <Notice message={error} />
-          <EnvironmentBanner />
-          <Notice message={error} />
-          <React.Suspense
-            fallback={<div className="skeleton" aria-label="Loading page" />}
-          >
-            <Routes>
-              <Route path="/" element={<Overview />} />
-              <Route path="/policies" element={<Policies />} />
-              <Route path="/policies/new" element={<Editor key="new" />} />
-              <Route path="/policies/:id" element={<Editor key="existing" />} />
-              <Route path="/simulator" element={<Simulator />} />
-              <Route path="/playground" element={<Playground />} />
-              <Route
-                path="/history"
-                element={<Records key="history" kind="history" />}
-              />
-              <Route
-                path="/reviews"
-                element={<Records key="reviews" kind="reviews" />}
-              />
-              <Route path="/analytics" element={<Overview analytics />} />
-              <Route
-                path="/reports"
-                element={<Records key="reports" kind="reports" />}
-              />
-              <Route path="/settings" element={<Configuration />} />
-              <Route path="*" element={<p>Page not found.</p>} />
-            </Routes>
-          </React.Suspense>
-          <footer>
-            <ShieldCheck size={14} /> Governance signals are heuristic controls,
-            not legal compliance certification.
-          </footer>
-        </main>
-      </div>
-    </BrowserRouter>
+          <span className="nav-label">WORKSPACE</span>
+          <nav>
+            {navigation.map((item) => (
+              <NavLink key={item.to} to={item.to} end={item.to === "/"}>
+                <item.icon size={18} />
+                {item.label}
+                {item.to === "/playground" && <span className="nav-dot" />}
+              </NavLink>
+            ))}
+          </nav>
+          <div className="sidebar-bottom">
+            <ShieldCheck size={21} />
+            <strong>Govern with confidence</strong>
+            <p>Policy enforcement at every step of the AI lifecycle.</p>
+            <small>DEMO WORKSPACE · v1.1</small>
+          </div>
+        </aside>
+        <div className="workspace">
+          <header>
+            <div className="breadcrumbs">
+              Workspace <ChevronRight size={13} />{" "}
+              <strong>AI Governance</strong>
+            </div>
+            <div className="header-right">
+              <span className="local-pill">
+                <i />
+                {identity
+                  ? `${identity.user} · ${identity.role} · ${identity.tenant}`
+                  : "Governed workspace"}
+              </span>
+              <button
+                title="Sign out"
+                onClick={async () => {
+                  try {
+                    const result = LOCAL_DEMO ? null : await request<{ logout_url: string }>("/api/sso/logout", "POST");
+                    if (LOCAL_DEMO) { await request("/api/auth/logout", "POST"); sessionStorage.removeItem("governance-token"); }
+                    sessionKnown.current = false;
+                    sessionDeadline.current = null;
+                    setError("");
+                    setCsrfToken("");
+                    setIdentity(null);
+                    setAuthenticated(false);
+                    if (result) window.location.assign(result.logout_url);
+                  } catch {
+                    setError(
+                      "Sign out could not be confirmed. Please retry; your server session may still be active.",
+                    );
+                  }
+                }}
+              >
+                <LogOut size={17} />
+              </button>
+              <span className="avatar">GV</span>
+            </div>
+          </header>
+          <main>
+            <Notice message={error} />
+            <React.Suspense
+              fallback={<div className="skeleton" aria-label="Loading page" />}
+            >
+              <Routes>
+                <Route path="/" element={<Overview />} />
+                <Route
+                  path="/policies"
+                  element={<Policies role={identity?.role || ""} />}
+                />
+                <Route path="/categories" element={<Navigate to="/" replace />} />
+                <Route
+                  path="/policies/new"
+                  element={<Editor key="new" role={identity?.role || ""} />}
+                />
+                <Route
+                  path="/policies/:id"
+                  element={
+                    <Editor key="existing" role={identity?.role || ""} />
+                  }
+                />
+                <Route path="/simulator" element={<Simulator />} />
+                <Route path="/playground" element={<Playground />} />
+                <Route
+                  path="/history"
+                  element={
+                    <Records
+                      key="history"
+                      kind="history"
+                      role={identity?.role || ""}
+                    />
+                  }
+                />
+                <Route
+                  path="/reviews"
+                  element={
+                    <Records
+                      key="reviews"
+                      kind="reviews"
+                      role={identity?.role || ""}
+                    />
+                  }
+                />
+                <Route path="/analytics" element={<Navigate to="/" replace />} />
+                <Route
+                  path="/reports"
+                  element={
+                    <Records
+                      key="reports"
+                      kind="reports"
+                      role={identity?.role || ""}
+                    />
+                  }
+                />
+                <Route path="/settings" element={<Configuration identity={identity} />} />
+                <Route path="*" element={<p>Page not found.</p>} />
+              </Routes>
+            </React.Suspense>
+            <footer>
+              <ShieldCheck size={14} /> Governance signals are heuristic
+              controls, not legal compliance certification.
+            </footer>
+          </main>
+        </div>
+      </BrowserRouter>
+      </WorkspaceProvider>
+    </WorkspaceSettingsProvider>
   );
 }
 

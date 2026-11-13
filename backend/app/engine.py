@@ -25,6 +25,7 @@ WEIGHTS = {"secret_detection": 30, "pii_detection": 25, "moderation": 25, "block
 PRIORITY = {"ALLOW": 0, "REDACT": 1, "HUMAN_REVIEW": 2, "BLOCK": 3}
 SECRET_PATTERNS = [
     r"\bsk-[A-Za-z0-9_-]{20,}",
+    r"(?i)\bBearer[ \t]+[A-Za-z0-9._~+/-]{16,}={0,2}",
     r"\bAKIA[A-Z0-9]{16}\b",
     r'(?i)\b(?:api[ _-]?key|password|client_secret)\s*[:=]\s*["\']?[^\s"\']{8,}',
     # Natural-language disclosure requires a long token with letters and digits,
@@ -64,11 +65,18 @@ def get_pii_analyzer():
 
     registry.remove_recognizer("EmailRecognizer")
     registry.add_recognizer(OfflineEmailRecognizer(name="OfflineEmailRecognizer"))
+    from .country_recognizers import register_country_recognizers
+
+    register_country_recognizers(registry)
     return AnalyzerEngine(nlp_engine=engine, registry=registry, supported_languages=["en"])
 
 
 # Find sensitive spans without returning the matched secret values.
 def detect_sensitive_information(text: str, category: str, policy: PolicyDocument) -> list[tuple[int, int]]:
+    if category.startswith("custom:"):
+        from .custom_rules import detect
+        rule = next(rule for rule in policy.custom_categories if category == f"custom:{rule.id}")
+        return detect(text, rule)
     if category == "pii_detection":
         view, positions = normalized_view(text)
         entities = policy.rules.pii_detection.entities
@@ -119,17 +127,23 @@ def redact_personal_information(text: str, spans: list[tuple[int, int]]) -> str:
 
 # Score only satisfied controls; unknown and failed controls receive zero weight.
 def calculate_compliance_score(statuses: dict[str, str]) -> tuple[float, dict]:
-    denominator = sum(weight for category, weight in WEIGHTS.items() if statuses[category] != "NOT_APPLICABLE")
-    contributions = {category: weight if statuses[category] == "SATISFIED" else 0 for category, weight in WEIGHTS.items()}
+    weights = {**WEIGHTS, **{category: 20 for category in statuses if category.startswith("custom:")}}
+    denominator = sum(weight for category, weight in weights.items() if statuses[category] != "NOT_APPLICABLE")
+    contributions = {category: weight if statuses[category] == "SATISFIED" else 0 for category, weight in weights.items()}
     return (round(100 * sum(contributions.values()) / denominator, 2) if denominator else 0), contributions
+
+
+def local_rules(policy):
+    return [(name, getattr(policy.rules, name)) for name in ("secret_detection", "pii_detection", "blocked_keywords")] + [
+        (f"custom:{rule.id}", rule) for rule in policy.custom_categories
+    ]
 
 
 # Inspect all controls, redact permitted spans, and revalidate before releasing text.
 async def inspect_text(text: str, policy: PolicyDocument, revalidation: bool = False) -> dict:
     statuses, findings, actions, spans = {}, [], [], []
     sanitized = text
-    for category in ("secret_detection", "pii_detection", "blocked_keywords"):
-        rule = getattr(policy.rules, category)
+    for category, rule in local_rules(policy):
         if not rule.enabled:
             statuses[category] = "NOT_APPLICABLE"
             continue

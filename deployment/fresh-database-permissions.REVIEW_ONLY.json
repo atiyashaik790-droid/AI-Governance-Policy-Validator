@@ -1,0 +1,132 @@
+{
+  "mode": "REVIEW_ONLY_NOT_AUTHORIZED",
+  "database": "sqldb-gpv-demo-v008-20261108",
+  "revision": "008",
+  "runtime_principal": "app-governance-validator-atiya-1026",
+  "runtime_role": "governance_validator_web_runtime",
+  "permissions": {
+    "policies": [
+      "SELECT",
+      "INSERT",
+      "UPDATE",
+      "DELETE"
+    ],
+    "policy_versions": [
+      "SELECT",
+      "INSERT"
+    ],
+    "active_policy_assignments": [
+      "SELECT",
+      "INSERT",
+      "UPDATE"
+    ],
+    "audit_events": [
+      "SELECT",
+      "INSERT"
+    ],
+    "validation_executions": [
+      "SELECT",
+      "INSERT"
+    ],
+    "human_review_cases": [
+      "SELECT",
+      "INSERT",
+      "UPDATE"
+    ],
+    "feedback_records": [
+      "SELECT",
+      "INSERT"
+    ],
+    "evaluation_exports": [
+      "SELECT",
+      "INSERT",
+      "UPDATE"
+    ],
+    "alembic_version": [
+      "SELECT"
+    ],
+    "demo_sessions": [
+      "SELECT",
+      "INSERT",
+      "UPDATE"
+    ],
+    "inference_rate_buckets": [
+      "SELECT",
+      "INSERT",
+      "UPDATE"
+    ],
+    "inference_usage": [
+      "SELECT",
+      "INSERT",
+      "UPDATE"
+    ],
+    "export_jobs": [
+      "SELECT",
+      "INSERT",
+      "UPDATE"
+    ],
+    "review_assignments": [
+      "SELECT",
+      "INSERT",
+      "UPDATE"
+    ],
+    "review_notes": [
+      "SELECT",
+      "INSERT"
+    ],
+    "sso_memberships": [
+      "SELECT"
+    ],
+    "sso_transactions": [
+      "SELECT",
+      "INSERT",
+      "UPDATE"
+    ],
+    "sso_sessions": [
+      "SELECT",
+      "INSERT",
+      "UPDATE"
+    ],
+    "workspace_policy_states": [
+      "SELECT",
+      "INSERT",
+      "UPDATE"
+    ],
+    "workspace_policy_assignments": [
+      "SELECT",
+      "INSERT",
+      "UPDATE"
+    ],
+    "workspace_policy_assignment_events": [
+      "SELECT",
+      "INSERT"
+    ],
+    "execution_policy_evidence": [
+      "SELECT",
+      "INSERT"
+    ],
+    "review_protected_content": [
+      "SELECT",
+      "INSERT",
+      "DELETE"
+    ]
+  },
+  "object_metadata_visibility": "VIEW DEFINITION on listed objects only",
+  "required_denials": {
+    "validation_executions": [
+      "UPDATE",
+      "DELETE"
+    ]
+  },
+  "excluded": [
+    "db_owner",
+    "db_ddladmin",
+    "db_datareader",
+    "db_datawriter",
+    "schema-wide grants",
+    "runtime membership provisioning",
+    "runtime ALTER/CONTROL"
+  ],
+  "identity_creation": "Separate explicit approval; verify actual managed identity SID; no blind reuse of source SID",
+  "operator": "Distinct migration/provisioning authority; never runtime identity"
+}

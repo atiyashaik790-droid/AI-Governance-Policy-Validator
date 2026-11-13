@@ -1,14 +1,39 @@
 import hashlib
 import json
+import os
+import sys
+from pathlib import Path
 import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
 from sqlalchemy.pool import StaticPool
-from app.models import Base
-from app.main import app
-from app.database import get_database
-from app.config import settings
+
+# Keep application imports and subprocesses on disposable database configuration.
+_PRESERVED_DB = (Path(__file__).resolve().parents[2] / "private/demo-preserved/offline.db").resolve()
+os.environ["DATABASE_URL"] = "sqlite://"
+
+
+def _guard_preserved_database(event, args):
+    if event != "sqlite3.connect" or not args:
+        return
+    target = str(args[0])
+    if target.startswith("file:"):
+        path, _, query = target[5:].partition("?")
+        if "mode=ro" in query.split("&"):
+            return
+    else:
+        path = target
+    if Path(path).resolve() == _PRESERVED_DB:
+        raise RuntimeError("Automated tests cannot write to the preserved demo database")
+
+
+sys.addaudithook(_guard_preserved_database)
+
+from app.models import Base  # noqa: E402
+from app.main import app  # noqa: E402
+from app.database import get_database  # noqa: E402
+from app.config import settings  # noqa: E402
 
 
 # Provide independent disposable databases and server-side test identities.

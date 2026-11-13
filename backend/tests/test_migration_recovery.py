@@ -19,6 +19,7 @@ from app import exports, providers, usage
 from app.config import Settings, settings
 from app.database import create_database_engine
 from app.models import Base, ExportJob, InferenceUsage, Execution
+from app.models_review_content import ReviewContentBase
 from app.schemas import ExportRequest
 from app.security import Identity
 
@@ -47,9 +48,9 @@ def test_upgrade_existing_003_preserves_rows_and_protects_history(tmp_path):
         )
     migrate(path, "head")
     migrate(path, "head")
-    assert set(inspect(engine).get_table_names()) == set(Base.metadata.tables) | {"alembic_version"}
+    assert set(inspect(engine).get_table_names()) == set(ReviewContentBase.metadata.tables) | {"alembic_version"}
     with engine.connect() as connection:
-        assert connection.execute(text("SELECT version_num FROM alembic_version")).scalar() == "004"
+        assert connection.execute(text("SELECT version_num FROM alembic_version")).scalar() == "010"
         assert connection.execute(text("SELECT id FROM audit_events")).scalar() == "existing"
     for statement in ("UPDATE audit_events SET actor='changed'", "DELETE FROM audit_events"):
         with engine.begin() as connection:
@@ -161,6 +162,6 @@ def test_disposable_sqlite_backup_restore_drill(tmp_path):
     with sqlite3.connect(backup) as restored:
         assert restored.execute("PRAGMA integrity_check").fetchone() == ("ok",)
         assert restored.execute("SELECT id FROM audit_events").fetchone() == ("restore-fixture",)
-        assert restored.execute("SELECT version_num FROM alembic_version").fetchone() == ("004",)
+        assert restored.execute("SELECT version_num FROM alembic_version").fetchone() == ("010",)
         with pytest.raises(sqlite3.IntegrityError, match="append-only"):
             restored.execute("DELETE FROM audit_events")

@@ -1,0 +1,10 @@
+{
+  "review_only": true,
+  "blocked_until_exact_scope_precreation_support_and_permissions_verified": true,
+  "principalId": "600447fe-5fea-4801-9033-ab4aafc474cc",
+  "principalType": "ServicePrincipal",
+  "roleDefinitionId": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/providers/Microsoft.Authorization/roleDefinitions/7400b650-d6eb-5852-b7cf-b110b3ab1679",
+  "scope": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/databases/sqldb-gpv-mig-20261106-a1",
+  "broader_scope_fallback_permitted": false,
+  "inventory_permissions_granted": false
+}

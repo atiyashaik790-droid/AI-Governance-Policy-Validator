@@ -8,12 +8,25 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=Path(__file__).resolve().parents[2] / ".env", extra="ignore")
+    # Browser SSO is opt-in until registration, membership and migration approval.
+    review_capture_enabled: bool = False
+    review_cleanup_enabled: bool = False
+    review_content_active_key_id: str = ""
+    review_content_keys_json: str = Field(default="{}", repr=False)
+    sso_enabled: bool = False
+    demo_browser_login_enabled: bool = True
+    entra_tenant_id: str = ""
+    entra_client_id: str = ""
+    entra_client_secret: str = ""
+    sso_public_origin: str = ""
+    sso_session_minutes: int = Field(default=120, ge=5, le=120)
     session_per_minute: int = Field(default=10, ge=1, le=1000)
     export_per_minute: int = Field(default=10, ge=1, le=1000)
     allow_legacy_api_credentials: bool = False
     database_query_timeout: int = Field(default=15, ge=1, le=60)
     build_version: str = "working-tree"
     demo_session_minutes: int = Field(default=60, ge=5, le=480)
+    demo_session_unlimited_local: bool = False
     inference_user_per_minute: int = Field(default=30, ge=1, le=10000)
     inference_tenant_per_minute: int = Field(default=100, ge=1, le=10000)
     inference_daily_quota: int = Field(default=500, ge=1, le=100000)
@@ -37,6 +50,8 @@ class Settings(BaseSettings):
     azure_openai_api_version: str = "v1"
     azure_openai_api_key: str = ""
     openai_api_key: str = ""
+    integration_verification_enabled: bool = False
+    integration_verification_freshness_hours: int = Field(default=24, ge=1, le=168)
     provider_timeout: float = 20
     adls_account_url: str = ""
     adls_file_system: str = ""

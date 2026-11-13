@@ -2,6 +2,12 @@
 
 # API integration guide
 
+## Revision 009 category catalog
+
+`GET /api/categories?search=&enabled=true&offset=0&limit=20` lists built-in and tenant categories with association IDs. `GET /api/categories/{id}` returns a strong `ETag` containing the category revision. Admins use `POST /api/categories` to create a validated custom keyword or safe-regex category and `PUT`/`DELETE /api/categories/{id}` with `If-Match: "<revision>"` to edit or delete an unreferenced custom category. Missing or stale preconditions return 428 or 412. Built-ins cannot be edited or deleted. `PUT`/`DELETE /api/categories/{id}/policies/{policy_id}` assigns or unassigns an existing draft policy. The API rejects published policy association changes with 409. Custom category configuration is copied into the policy draft and only takes effect after publication and activation. Admin-only mutations use the same authenticated session and CSRF checks as other `/api` endpoints. Category endpoints return 503 on a pre-009 database; no migration runs at startup.
+
+The prepared Azure SQL migration and runtime grants are not yet deployed. For the revision-009 candidate, Azure SQL readiness must report revision 009. The older hosted revision-005 release remains unchanged.
+
 The running contract is at http://localhost:8000/docs and `/openapi.json`. All `/api/*` endpoints require `Authorization: Bearer <locally-provisioned-token>`. Never pass a tenant or trusted role from the browser. The backend resolves both from the authenticated account. The gateway returns typed Pydantic inspection and generation results; policy request/response contracts are also typed.
 
 ## Minimal integration
@@ -88,7 +94,7 @@ Governance BLOCK and HUMAN_REVIEW are successful inspections returning HTTP 200 
 - `POST /api/reports/export`: format plus optional idempotency_key/start_date/end_date. Same tenant/key/request returns the original job; changed request with the same key returns 409. Default date window is 90 days, maximum explicit window 366 days; default bounds 10,000 records/5 MB. Job states are PENDING/UPLOADING/COMPLETED/FAILED; legacy success status remains SUCCEEDED. SQL snapshot/claim commits precede storage I/O.
 - `POST /api/reports/exports/{id}/reconcile`: Admin/Auditor, explicit bounded storage read/recovery. Live use needs approval. An active lease returns 409; matching bytes finalize without upload; mismatch never overwrites; missing object can be conditionally uploaded within the attempt bound. Historical exports without jobs remain preserved. No automatic HTTP mutation retry.
 - Analytics accepts start_date/end_date with the same bounded date window and SQL aggregation. Trends return at most 100 latest chronological samples.
-- Settings/readiness expose release metadata from the exact ZIP; MSSQL readiness requires head 004. Configured provider settings still do not prove data-plane availability.
+- Settings/readiness expose release metadata from the exact ZIP; the new category candidate requires Azure SQL revision 009. Configured provider settings still do not prove data-plane availability.
 
 All additions retain server-owned tenant/RBAC enforcement, sanitized diagnostics and audit-before-content-release. See FINAL_DEPLOYMENT_VERIFICATION.md before using new source against the current SQL 003 database.
 

@@ -28,6 +28,15 @@ def test_provisioned_offline_roles_enforce_draft_creation(client, tmp_path, monk
     diagnostics = client.get("/api/settings")
     assert diagnostics.status_code == 200
     assert diagnostics.json()["role"] == role
+    if role == "User":
+        session = client.post("/api/auth/session")
+        assert session.status_code == 201
+        client.headers["Authorization"] = "Bearer " + session.json()["access_token"]
+        assert client.get("/api/auth/me").json()["role"] == "User"
+        assert client.get("/api/policies").status_code == 403
+        assert client.post("/api/auth/logout").status_code == 200
+        assert client.get("/api/auth/me").status_code == 401
+        client.headers["Authorization"] = "Bearer " + tokens[role]
     response = client.post("/api/policies", json=PolicyDocument(name="Synthetic RBAC policy").model_dump())
     assert response.status_code == expected
     policies = client.get("/api/policies").json()

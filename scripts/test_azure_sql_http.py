@@ -227,6 +227,10 @@ def verify_retained(connection, manifest, models):
                 <= (
                     {"has_published_versions", "is_active"}
                     if name == "policies"
+                    else {"actor_role", "policy_name", "policy_name_source", "version"}
+                    if name == "audit_events"
+                    else {"actor_role", "execution_identity", "policies", "policy_names", "violation_categories"}
+                    if name == "validation_executions"
                     else {"state", "attempts", "error_code", "sha256"}
                     if name == "evaluation_exports"
                     else set()
@@ -507,9 +511,9 @@ class Driver:
                     "database": "mssql",
                     "provider_mode": "fixture",
                     "pii_mode": "regex",
-                    "adls": "BLOCKED",
-                    "moderation": "BLOCKED",
-                    "azure_generation": "BLOCKED",
+                    "adls": "NOT_CONFIGURED",
+                    "moderation": "NOT_CONFIGURED",
+                    "azure_generation": "NOT_CONFIGURED",
                     "tenant": self.manifest["tenant"],
                     "role": "Admin",
                 }.items()

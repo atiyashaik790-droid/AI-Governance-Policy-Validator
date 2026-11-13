@@ -8,6 +8,32 @@ import {
 } from "@testing-library/react";
 import { App } from "./main";
 import { request } from "./api";
+// Supply the real application's cookie-session bootstrap to workspace fixtures.
+function mockWorkspaceFetch(handler: typeof fetch) {
+  return vi
+    .spyOn(globalThis, "fetch")
+    .mockImplementation(async (input, options) => {
+      if (String(input).endsWith("/api/v2/workspace/policy-state"))
+        return new Response(JSON.stringify({ mode: "LEGACY", multi_policy_available: false, set_revision: null, active_policy_count: 1 }));
+      if (String(input).endsWith("/api/sso/status"))
+        return new Response(JSON.stringify({ configured: true }));
+      if (String(input).endsWith("/api/sso/me"))
+        return new Response(
+          JSON.stringify({
+            user: "synthetic-admin",
+            role: "Admin",
+            tenant: "one",
+            csrf_token: "synthetic-csrf",
+          }),
+        );
+      return handler(input, options);
+    });
+}
+async function renderWorkspace() {
+  render(<App />);
+  await screen.findByTitle("Sign out");
+  await waitFor(() => expect(screen.queryByText("Checking workspace policy mode…")).not.toBeInTheDocument());
+}
 // Reset session state and mocks between frontend integration tests.
 afterEach(() => {
   cleanup();
@@ -15,7 +41,29 @@ afterEach(() => {
   vi.restoreAllMocks();
 });
 describe("real API boundary", () => {
-  // Attach the token to network requests without trusting any browser role.
+  it("shows four overview cards and persisted analytics without the policy evaluation card", async () => {
+    window.history.replaceState({}, "", "/");
+    mockWorkspaceFetch(async (input) => {
+      const url = String(input);
+      if (url.includes("/api/analytics/overview"))
+        return new Response(JSON.stringify({
+          total_policies: 8, active_policies: 8, total_validations: 2, pending_reviews: 0,
+          decisions: { ALLOW: 1, REDACT: 0, BLOCK: 1, HUMAN_REVIEW: 0 },
+          compliance: { score: 87.5, scored_requests: 2, incomplete_inspections: 1,
+            trends: [{ date: "2026-11-10", score: 87.5 }],
+            violations: { secret_detection: 1, pii_detection: 0, moderation: 0, blocked_keywords: 0, custom: 0 },
+            findings_available: true },
+        }));
+      return new Response(JSON.stringify({}));
+    });
+    await renderWorkspace();
+    expect(await screen.findByText("87.5% control evidence coverage", { exact: false })).toBeInTheDocument();
+    for (const label of ["Total validations", "Active policies", "Blocked requests", "Pending reviews"])
+      expect(screen.getByText(label, { exact: false })).toBeInTheDocument();
+    expect(screen.queryByText("Policy evaluations", { exact: false })).not.toBeInTheDocument();
+    expect(screen.getByText("Violation categories")).toBeInTheDocument();
+  });
+  // Cookie credentials accompany requests without a browser bearer token.
   it("sends authenticated request bodies", async () => {
     sessionStorage.setItem("governance-token", "test-token");
     const fetch = vi
@@ -27,7 +75,7 @@ describe("real API boundary", () => {
       expect.objectContaining({
         method: "POST",
         headers: expect.objectContaining({
-          Authorization: "Bearer test-token",
+          "Content-Type": "application/json",
         }),
         body: '{"text":"safe"}',
       }),
@@ -46,22 +94,23 @@ describe("real API boundary", () => {
       "Role does not permit",
     );
   });
-  // A user enters a credential; the backend must validate it before navigation.
-  it("requires successful backend authentication", async () => {
+  it("requires successful Microsoft session restoration", async () => {
     vi.spyOn(globalThis, "fetch").mockImplementation(
-      async () =>
-        new Response(JSON.stringify({ detail: "Invalid token" }), {
-          status: 401,
-        }),
+      async (url) =>
+        new Response(
+          JSON.stringify(
+            String(url).endsWith("/status")
+              ? { configured: true }
+              : { detail: "Sign in" },
+          ),
+          { status: String(url).endsWith("/status") ? 200 : 401 },
+        ),
     );
     render(<App />);
-    fireEvent.change(screen.getByLabelText("Access token"), {
-      target: { value: "invalid" },
-    });
-    fireEvent.click(screen.getByRole("button", { name: /Connect workspace/ }));
-    await waitFor(() =>
-      expect(screen.getByRole("status")).toHaveTextContent("Invalid token"),
-    );
+    expect(
+      await screen.findByRole("button", { name: "Sign in" }),
+    ).toBeEnabled();
+    expect(screen.queryByLabelText("Access token")).not.toBeInTheDocument();
     expect(sessionStorage.getItem("governance-token")).toBeNull();
   });
 });
@@ -90,7 +139,7 @@ describe("governed playground integration", () => {
       safe_text: "Safe answer",
       revalidated: false,
     };
-    vi.spyOn(globalThis, "fetch").mockImplementation(
+    mockWorkspaceFetch(
       async () =>
         new Response(
           JSON.stringify({
@@ -107,7 +156,7 @@ describe("governed playground integration", () => {
           }),
         ),
     );
-    render(<App />);
+    await renderWorkspace();
     fireEvent.click(
       screen.getByRole("button", { name: /Run governed request/ }),
     );
@@ -117,6 +166,7 @@ describe("governed playground integration", () => {
       ).toBeInTheDocument(),
     );
     expect(screen.getByText("LOCAL TEST FIXTURE")).toBeInTheDocument();
+    expect(screen.queryByText("LIVE PROVIDER MODE")).toBeNull();
     expect(screen.getByText("Final decision: ALLOW")).toBeInTheDocument();
     window.history.pushState({}, "", "/");
   });
@@ -133,7 +183,7 @@ describe("governed playground integration", () => {
       safe_text: null,
       revalidated: false,
     };
-    vi.spyOn(globalThis, "fetch").mockImplementation(
+    mockWorkspaceFetch(
       async () =>
         new Response(
           JSON.stringify({
@@ -150,7 +200,7 @@ describe("governed playground integration", () => {
           }),
         ),
     );
-    render(<App />);
+    await renderWorkspace();
     fireEvent.click(
       screen.getByRole("button", { name: /Run governed request/ }),
     );
@@ -203,7 +253,7 @@ describe("truthful generation diagnostics", () => {
         safe_text: null,
         revalidated: false,
       };
-      vi.spyOn(globalThis, "fetch").mockImplementation(
+      mockWorkspaceFetch(
         async () =>
           new Response(
             JSON.stringify({
@@ -228,7 +278,7 @@ describe("truthful generation diagnostics", () => {
             }),
           ),
       );
-      render(<App />);
+      await renderWorkspace();
       fireEvent.click(
         screen.getByRole("button", { name: /Run governed request/ }),
       );
@@ -250,30 +300,29 @@ describe("separate audit histories", () => {
   it("loads policy and governance histories independently and clears old metadata", async () => {
     sessionStorage.setItem("governance-token", "test-token");
     window.history.pushState({}, "", "/reports");
-    const fetch = vi
-      .spyOn(globalThis, "fetch")
-      .mockImplementation(async (input) => {
-        const url = String(input);
-        let result: unknown = [];
-        if (url.includes("/api/settings")) result = { role: "Admin" };
-        if (url.includes("/api/audit/events")) {
-          const category = new URL(url).searchParams.get("category");
-          result = [
-            {
-              id: "audit-record",
-              created: "2026-11-01T00:00:00",
-              action:
-                category === "policy"
-                  ? "policy.created"
-                  : category === "governance"
-                    ? "governance.generate.ALLOW"
-                    : "session.created",
-            },
-          ];
-        }
-        return new Response(JSON.stringify(result));
-      });
-    render(<App />);
+    const fetch = mockWorkspaceFetch(async (input) => {
+      const url = String(input);
+      let result: unknown = [];
+      if (url.includes("/api/settings")) result = { role: "Admin" };
+      if (url.includes("/api/audit/events")) {
+        const category = new URL(url).searchParams.get("category");
+        result = [
+          {
+            id: "audit-record",
+            created: "2026-11-01T00:00:00",
+            action:
+              category === "policy"
+                ? "policy.created"
+                : category === "governance"
+                  ? "governance.generate.ALLOW"
+                  : "session.created",
+          },
+        ];
+      }
+      if (url.includes("/api/audit/executions")) result = [{ id: "execution-record", created: "2026-11-01T00:00:00", decision: "ALLOW", actor: "actual.user@example.test", actor_role: "User", policy_names: ["Published policy"], violation_categories: ["Not applicable"] }];
+      return new Response(JSON.stringify(result));
+    });
+    await renderWorkspace();
     await screen.findByText("policy.created");
     expect(
       screen.queryByText("governance.generate.ALLOW"),
@@ -281,11 +330,13 @@ describe("separate audit histories", () => {
     fireEvent.click(
       screen.getByRole("button", { name: "Governance execution history" }),
     );
-    await screen.findByText("governance.generate.ALLOW");
+    await screen.findByText("ALLOW");
+    expect(screen.getByText("actual.user@example.test")).toBeInTheDocument();
+    expect(screen.getByText("Published policy")).toBeInTheDocument();
     expect(screen.queryByText("policy.created")).not.toBeInTheDocument();
     expect(
       fetch.mock.calls.some(([url]) =>
-        String(url).includes("offset=0&limit=20&category=governance"),
+        String(url).includes("/api/audit/executions?offset=0&limit=20&category=governance"),
       ),
     ).toBe(true);
     fireEvent.click(
@@ -305,48 +356,46 @@ describe("remove policies while retaining history", () => {
     window.history.pushState({}, "", "/policies");
     vi.spyOn(window, "confirm").mockReturnValue(true);
     let removed = false;
-    const fetch = vi
-      .spyOn(globalThis, "fetch")
-      .mockImplementation(async (input, options) => {
-        const url = String(input);
-        if (options?.method === "DELETE") {
-          removed = true;
-          return new Response(
-            JSON.stringify({ deleted: true, history_retained: true }),
-          );
-        }
+    const fetch = mockWorkspaceFetch(async (input, options) => {
+      const url = String(input);
+      if (options?.method === "DELETE") {
+        removed = true;
         return new Response(
-          JSON.stringify(
-            url.includes("/api/settings")
-              ? { role: "Admin" }
-              : [
-                  ...(!removed
-                    ? [
-                        {
-                          id: "inactive",
-                          name: "Disabled policy",
-                          status: "PUBLISHED",
-                          enabled: 0,
-                          has_published_versions: true,
-                          is_active: false,
-                          row_version: 7,
-                        },
-                      ]
-                    : []),
-                  {
-                    id: "active",
-                    name: "Assigned policy",
-                    status: "PUBLISHED",
-                    enabled: 0,
-                    has_published_versions: true,
-                    is_active: true,
-                    row_version: 4,
-                  },
-                ],
-          ),
+          JSON.stringify({ deleted: true, history_retained: true }),
         );
-      });
-    render(<App />);
+      }
+      return new Response(
+        JSON.stringify(
+          url.includes("/api/settings")
+            ? { role: "Admin" }
+            : [
+                ...(!removed
+                  ? [
+                      {
+                        id: "inactive",
+                        name: "Disabled policy",
+                        status: "PUBLISHED",
+                        enabled: 0,
+                        has_published_versions: true,
+                        is_active: false,
+                        row_version: 7,
+                      },
+                    ]
+                  : []),
+                {
+                  id: "active",
+                  name: "Assigned policy",
+                  status: "PUBLISHED",
+                  enabled: 0,
+                  has_published_versions: true,
+                  is_active: true,
+                  row_version: 4,
+                },
+              ],
+        ),
+      );
+    });
+    await renderWorkspace();
     await screen.findByRole("link", { name: "Disabled policy" });
     const deletes = screen.getAllByRole("button", {
       name: "Delete",
@@ -378,7 +427,7 @@ describe("remove policies while retaining history", () => {
   it("shows retained published versions from policy history without restore controls", async () => {
     sessionStorage.setItem("governance-token", "test-token");
     window.history.pushState({}, "", "/reports");
-    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+    mockWorkspaceFetch(async (input) => {
       const url = String(input);
       let data: unknown = [];
       if (url.includes("/api/settings")) data = { role: "Admin" };
@@ -404,7 +453,7 @@ describe("remove policies while retaining history", () => {
         data = { name: "Retained policy", status: "DELETED" };
       return new Response(JSON.stringify(data));
     });
-    render(<App />);
+    await renderWorkspace();
     fireEvent.click(
       await screen.findByRole("button", { name: "View retained versions" }),
     );
@@ -417,4 +466,39 @@ describe("remove policies while retaining history", () => {
     ).not.toBeInTheDocument();
     window.history.replaceState({}, "", "/");
   });
+});
+
+it("shows actor attribution, safe categories and pinned names/versions in separate audit histories", async () => {
+  window.history.replaceState({}, "", "/reports");
+  const fetch = vi.spyOn(globalThis, "fetch").mockImplementation(async input => {
+    const url = new URL(String(input));
+    const json = (value: unknown) => new Response(JSON.stringify(value));
+    if (url.pathname === "/api/sso/status") return json({ configured: true });
+    if (url.pathname === "/api/sso/me") return json({ user: "actual.admin@example.test", role: "Admin", tenant: "one", csrf_token: "csrf" });
+    if (url.pathname === "/api/settings") return json({ role: "Admin" });
+    if (url.pathname === "/api/v2/workspace/policy-state") return json({ mode: "MULTI", multi_policy_available: true, set_revision: 7, active_policy_count: 2 });
+    const execution = { request_id: "one-request", timestamp: "2026-11-06", execution_mode: "MULTI", policy_evaluation_count: 2,
+      actor: "actual.user@example.test", actor_role: "User", policy_names: ["Finance policy", "Safety policy"], decision: "BLOCK", violation_categories: ["custom_policy"] };
+    if (url.pathname === "/api/v2/audit/executions") return json({ total: 1, items: [execution] });
+    if (url.pathname === "/api/v2/audit/executions/one-request") return json({ ...execution, policies: [
+      { name: "Finance policy", version: 1 }, { name: "Safety policy", version: 2 },
+    ] });
+    if (url.pathname === "/api/v2/audit/events") return json({ total: 1, items: [{ id: "event", created: "2026-11-06",
+      action: url.searchParams.get("category") === "administration" ? "sso.session.created" : "policy.published",
+      actor: "actual.admin@example.test", actor_role: "Not recorded", policy_name: "Finance policy" }] });
+    return json([]);
+  });
+  await renderWorkspace();
+  await screen.findByText("policy.published");
+  expect(screen.getByText("Not recorded")).toBeInTheDocument();
+  fireEvent.click(screen.getByRole("button", { name: "Governance execution history" }));
+  await screen.findByText("actual.user@example.test");
+  expect(screen.getByText("Finance policy, Safety policy")).toBeInTheDocument();
+  expect(screen.getByText("custom_policy")).toBeInTheDocument();
+  expect(screen.getAllByRole("button", { name: "Inspect metadata" })).toHaveLength(1);
+  fireEvent.click(screen.getByRole("button", { name: "Inspect metadata" }));
+  await waitFor(() => expect(screen.getByText("Record metadata").closest("section")).toHaveTextContent('"version": 2'));
+  expect(fetch.mock.calls.some(([url]) => String(url).includes("/api/v2/audit/executions/one-request"))).toBe(true);
+  fireEvent.click(screen.getByRole("button", { name: "Administrative history" }));
+  await screen.findByText("sso.session.created");
 });

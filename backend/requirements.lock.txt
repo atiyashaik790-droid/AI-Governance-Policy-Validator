@@ -78,3 +78,8 @@ uvicorn==0.54.0
 wasabi==1.1.3
 weasel==1.0.1
 wrapt==2.5.1
+
+authlib==1.9.4
+joserfc==1.8.0
+
+pypdf==6.21.4

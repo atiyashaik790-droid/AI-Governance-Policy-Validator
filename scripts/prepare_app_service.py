@@ -22,8 +22,9 @@ def package(root: Path, frontend: Path, output: Path) -> dict:
         "requirements.txt": root / "backend/requirements.lock.txt",
         "startup.sh": root / "deployment/startup.sh",
     }
-    for path in (root / "backend/app").glob("*.py"):
-        files["app/" + path.name] = path
+    app_root = root / "backend/app"
+    for path in app_root.rglob("*.py"):
+        files["app/" + path.relative_to(app_root).as_posix()] = path
     files["static/index.html"] = frontend / "index.html"
     for path in (frontend / "assets").iterdir():
         if (
@@ -56,12 +57,17 @@ def package(root: Path, frontend: Path, output: Path) -> dict:
         ).stdout.strip()
     except (OSError, subprocess.CalledProcessError):
         commit = "unavailable"
+    schema_contract = {
+        "required_migration": "009",
+        "supported_migrations": ["004", "005", "006", "007", "008", "009"],
+        "sso_required_migration": "005",
+    }
     release = {
         "git_commit": commit,
         "build_version": "1.2-"
-        + hashlib.sha256(json.dumps(hashes, sort_keys=True).encode()).hexdigest()[:16],
+        + hashlib.sha256(json.dumps({"files": hashes, "schema_contract": schema_contract}, sort_keys=True).encode()).hexdigest()[:16],
         "built_utc": datetime.now(UTC).isoformat(),
-        "required_migration": "004",
+        **schema_contract,
         "frontend_sha256": hashlib.sha256(
             json.dumps(
                 {

@@ -1,0 +1,50 @@
+{
+  "review_only": true,
+  "app": "app-governance-validator-atiya-1026",
+  "resourceGroup": "rg_techdemo_Atiya_Tabsum_Shaik",
+  "subscription": "25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6",
+  "configuration_delta": {
+    "set_only": {
+      "WEBSITE_SKIP_RUNNING_KUDUAGENT": "false"
+    },
+    "assert_unchanged": {
+      "alwaysOn": true,
+      "linuxFxVersion": "PYTHON|3.13",
+      "numberOfWorkers": 1
+    },
+    "remove": []
+  },
+  "job": {
+    "name": "gpv-sql-expiry-watchdog",
+    "type": "continuous",
+    "settings": {
+      "is_singleton": true
+    },
+    "policy_mode": "disabled",
+    "permit_delete": false,
+    "upload_method": "PUT",
+    "upload_url": "https://app-governance-validator-atiya-1026.scm.azurewebsites.net/api/continuouswebjobs/gpv-sql-expiry-watchdog",
+    "content_type": "application/zip",
+    "content_disposition": "attachment; filename=webjob-disabled-final.zip",
+    "artifact": "artifacts/webapp-watchdog-review/webjob-disabled-final.zip",
+    "sha256": "fc4070ec948fd1465fa2226e7979357eec8def1f9dd9ab97fe2f3ef9bb2d7cd1"
+  },
+  "next_setup_only_approval": {
+    "window_minutes": 15,
+    "permission_changes": [],
+    "resource_creates": [],
+    "sql_operations": [],
+    "application_release_deployment": false,
+    "restart_may_occur": true,
+    "steps": [
+      "Freshly verify identity, settings absence, no latent WebJobs, job-name absence and checksum; record current health/release/settings baseline",
+      "Set the one enablement flag, accepting possible app recycle; preserve every other setting",
+      "Upload only the disabled WebJob using authenticated Kudu job upload; never deploy the ZIP as the application",
+      "Verify DISABLED logs, persistent /home state path and platform runtime; disconnect operator session briefly and retrieve later timestamps to check independence",
+      "Stop this job by the end of the 15-minute window; leave it disabled; preserve logs",
+      "Verify application release, health and configuration baseline; rollback enablement if compatibility or application checks fail"
+    ]
+  },
+  "future_arming_separate_approval_required": true,
+  "hard_lifetime_guarantee_established": false
+}

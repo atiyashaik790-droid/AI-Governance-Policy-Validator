@@ -1,0 +1,93 @@
+{
+  "mode": "REVIEW_ONLY_NOT_AUTHORIZED",
+  "subscription": "25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6",
+  "server": "sql-governance-validator-dev-atiya",
+  "database": "sqldb-gpv-demo-v008-20261108",
+  "required_revision": "008",
+  "runtime_identity": {
+    "name": "app-governance-validator-atiya-1026",
+    "expected_managed_identity_principal_id": "600447fe-5fea-4801-9033-ab4aafc474cc",
+    "role": "governance_validator_web_runtime",
+    "contained_sid": "VERIFIED_SERVICE_PRINCIPAL_CLIENT_ID_FROM_CURRENT_GRAPH_READ",
+    "contained_sid_guid": "f7bacace-698a-4968-8add-cba221319a17",
+    "object_id": "600447fe-5fea-4801-9033-ab4aafc474cc",
+    "identity_evidence": "docs/evidence/final-completion-preparation-2026-11-09/hosted-config-readonly.json"
+  },
+  "permissions_manifest": "deployment/fresh-database-permissions.REVIEW_ONLY.json",
+  "grant_sql": "deployment/fresh-runtime-provision.REVIEW_ONLY.sql",
+  "tenant": "demo-appservice-4e2dcce8d618",
+  "admin_membership_proposed": {
+    "directory_tenant": "4ac50105-0c66-404e-a107-7cbd8a9a6442",
+    "object_id": "b5d8bfbe-f03a-4132-a13f-ab49aae834b7",
+    "tenant": "demo-appservice-4e2dcce8d618",
+    "actor": "atiya-tabsum-shaik",
+    "role": "Admin",
+    "enabled": true
+  },
+  "user_membership": {
+    "status": "APPLIED_AND_VERIFIED_ON_NEW_008_DATABASE",
+    "directory_tenant": "4ac50105-0c66-404e-a107-7cbd8a9a6442",
+    "candidates": [
+      {
+        "sign_in": "demo@Sigmoidanalytics.com",
+        "display_name": "Demo",
+        "object_id": "03773d13-51ea-4231-97de-26c941e71d48",
+        "mapping_file": "deployment/user-demo.PROPOSED.json",
+        "mapping": {
+          "directory_tenant": "4ac50105-0c66-404e-a107-7cbd8a9a6442",
+          "object_id": "03773d13-51ea-4231-97de-26c941e71d48",
+          "tenant": "demo-appservice-4e2dcce8d618",
+          "actor": "gpv-demo",
+          "role": "User",
+          "enabled": true
+        },
+        "owner_selection_and_control": "NOT_SELECTED",
+        "sql_apply_authorized": false
+      },
+      {
+        "sign_in": "demo-user@Sigmoidanalytics.com",
+        "display_name": "demo-user citizen",
+        "object_id": "f4799f3f-703a-42b7-acf7-4cbbf55e7320",
+        "mapping_file": "deployment/user-demo-user.PROPOSED.json",
+        "mapping": {
+          "directory_tenant": "4ac50105-0c66-404e-a107-7cbd8a9a6442",
+          "object_id": "f4799f3f-703a-42b7-acf7-4cbbf55e7320",
+          "tenant": "demo-appservice-4e2dcce8d618",
+          "actor": "gpv-demo-user",
+          "role": "User",
+          "enabled": true
+        },
+        "owner_selection_and_control": "OWNER_SELECTED_REUSE",
+        "sql_apply_authorized": false
+      }
+    ],
+    "selected_mapping": {
+      "directory_tenant": "4ac50105-0c66-404e-a107-7cbd8a9a6442",
+      "object_id": "f4799f3f-703a-42b7-acf7-4cbbf55e7320",
+      "tenant": "demo-appservice-4e2dcce8d618",
+      "actor": "gpv-demo-user",
+      "role": "User",
+      "enabled": true
+    },
+    "no_automatic_selection": true,
+    "no_entra_app_assignment_required": true,
+    "identity_evidence": "docs/evidence/demo-user-discovery-2026-11-09/result.json",
+    "role": "User",
+    "tenant": "demo-appservice-4e2dcce8d618",
+    "selected_sign_in": "demo-user@Sigmoidanalytics.com",
+    "selection_authorized": true,
+    "sql_apply_authorized": true,
+    "actual_sign_in_verified": false
+  },
+  "no_policy_seed_or_application_cutover": true,
+  "sql_access_requires_fresh_explicit_bounded_window": true,
+  "execution_status": "APPLIED_AND_VERIFIED_UNDER_EXPLICIT_CONDITIONAL_APPROVAL",
+  "execution_evidence": "docs/evidence/runtime-user-bootstrap-2026-11-09/result.json",
+  "bootstrap_verification": {
+    "runtime": "PASS",
+    "admin": "PASS",
+    "user": "PASS",
+    "firewall_cleanup": "PASS",
+    "website_still_uses_old_database": true
+  }
+}

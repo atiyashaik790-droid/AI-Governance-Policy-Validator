@@ -13,7 +13,12 @@ from app.security import Identity
 
 
 @pytest.mark.parametrize("offset_fetch", [False, True])
-def test_policy_flags_use_sql_server_scalar_case(offset_fetch):
+def test_policy_flags_use_sql_server_scalar_case(offset_fetch, monkeypatch):
+    # This test compiles the LEGACY query without a database. Revision/mode
+    # discovery is exercised separately against actual 005/006 fixtures.
+    from app.routers import policies as policy_routes
+    if hasattr(policy_routes, "policy_sets"):
+        monkeypatch.setattr(policy_routes.policy_sets, "multi_mode", lambda *_: False)
     database = Mock()
     database.execute.return_value = []
     assert get_all_policies(2, 3, "example", "PUBLISHED", True, database, Identity("fixture", "one", "Admin")) == []
@@ -93,7 +98,9 @@ def test_pagination_multiple_records_and_tenant_isolation(client, model, endpoin
     order = [4, 3, 2, 1] if model is Policy else [1, 3, 2, 4]
     ordered_rows = [expected[identifier(number)] for number in order]
     if model is Policy:
-        ordered_rows = [{**row, "has_published_versions": False, "is_active": False} for row in ordered_rows]
+        ordered_rows = [{**row, "has_published_versions": False, "is_active": False, "latest_version_number": None} for row in ordered_rows]
+    if model is Audit:
+        ordered_rows = [{**row, "actor_role": "Not recorded", "policy_name": "Not applicable", "policy_name_source": "Not applicable"} for row in ordered_rows]
     for offset, limit in ((0, 2), (2, 2), (1, 2), (3, 2), (4, 2), (20, 2), (0, 1), (0, 100)):
         response = client.get(endpoint, params={"offset": offset, "limit": limit})
         assert response.status_code == 200

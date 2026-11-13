@@ -1,0 +1,56 @@
+# HUMAN_REVIEW 504 investigation — local correction verified, Azure cause not fully confirmed
+
+## Exact failure and what the evidence can establish
+
+Retry-6's second `POST /api/governance/generate`, correlation ID `e3524a20-571c-4221-83be-e2f75aed4919`, submitted the synthetic blocked-keyword HUMAN_REVIEW fixture. The assertion at `scripts/tests/phase6b_sql_package_probe.py:306` expected HTTP 200 and decision HUMAN_REVIEW. Actual: **HTTP 504**, `Governance deadline exceeded; response withheld`, after **274,791.87 ms**. The preceding ALLOW request succeeded in 154,616.16 ms. `/ready` took 243,707.4 ms; SSO calls took approximately 123–129 seconds.
+
+**The exact historical SQL wait/statement and internal timeout raise site remain unconfirmed.** FastAPI handled the application exception; the saved traceback shows the probe assertion, not an internal SQL stack. Two sites can produce this identical response: the synchronous pre-commit elapsed-time check in `governed_execution`, or `governance`'s asyncio timeout handler. The separate post-commit deadline check has a different response and is not the reported failure. There was no stage or SQL timing trace, lock sample, retry count or pool checkout trace in retry-6. Do not present the whole-request duration as one query's execution time or as proof of blocking/pool exhaustion.
+
+The demonstrated application performance issue is **repeated, round-trip-heavy schema reflection**. Protected-review readiness runs the full schema/runtime contract before admission and runs it again during capture. The latter is inside the execution deadline. SQLAlchemy's installed MSSQL implementation reads PK metadata separately per table, indexes with at least two queries per table, and foreign keys separately per table. Revision 008 has 22 contract tables. The qualification harness additionally performs a raw target-identity query before each SQLAlchemy statement. This combination amplifies metadata costs. No evidence supports increasing the deadline, skipping readiness/capture, changing grants or assuming encryption itself is slow.
+
+## Deadline and connection trace
+
+| Stage | Budget relationship and relevant behavior |
+| --- | --- |
+| Authentication/authorization | FastAPI dependencies run before the governance service; cookie identity can invoke schema readiness. Not charged to the existing inference deadline. No change made to this boundary. |
+| Protected-review preflight | Keyring, full schema/permission verification, revision and cleanup health. Before admission and execution deadline. |
+| Policy selection/admission | Schema-mode check, tenant quota/reservation and captured policy set; before the execution deadline. Existing tenant locks/fences remain. |
+| Execution/inspection | Existing `inference_deadline` default **90 seconds** starts immediately before governed execution; both asyncio timeout and absolute monotonic checks remain. Fixture inspection selects HUMAN_REVIEW without a real provider call. |
+| Persistence/capture | Fence, execution/review flushes and audit; capture rechecks full readiness, encrypts, reads database clock and flushes encrypted content/audit. Inside the same deadline. |
+| Release/commit | Elapsed-time check before commit and another after persistence; expired work cannot be returned as successful. Existing rollback/finalization remains. Failure bookkeeping may take additional time outside the execution budget. |
+
+Thus 274.8 seconds of HTTP wall time does not imply a configured 274.8-second inference budget. Synchronous DB calls cannot be interrupted immediately by asyncio; the existing monotonic check prevents late release.
+
+Configured transport is unchanged: ODBC connect timeout 10 seconds, per-statement query timeout default 15 seconds, pool size 5 plus overflow 5, pool checkout timeout 10 seconds, pre-ping and recycling. The harness opens runtime/operator engines and uses SQL `EXECUTE AS`; it adds one exact-target check per statement. Retry-6 did not record lock waits, reconnects or retries; no recorded pool/query-timeout exception establishes those as the cause. The current task made no cloud connection to fill that gap.
+
+## Smallest supported correction
+
+`schema_reflection.BatchedKeys` fetches SQL Server primary-key/index metadata in one catalog query and foreign-key metadata in another, per `inspect_schema` invocation. SQLAlchemy still reflects columns. Existing comparisons still verify ordered composite PKs/FKs, tenant references, unique indexes, required included columns, physical types/defaults, CHECK constraints, enabled/trusted constraints, immutable triggers, required grants and absence of execution mutation grants. Both preflight and capture verification remain; there is **no cross-request cache** and no permission/health bypass. SQLite behavior is unchanged.
+
+A focused model executes the complete 008 verifier against synthetic SQL Server catalog rows, counting other reads and cached column reflection. It gives **71 modeled reads versus a conservative 157 before batching**. At an explicitly hypothetical one second per guarded read, the old shape exceeds 90 seconds and the new shape does not. This is a reproducible latency mechanism consistent with the historical timings, **not measured Azure query latency or proof that all actual request work now fits the budget**.
+
+Sanitized inclusive stage diagnostics record authentication, preflight/schema verification, admission, policy selection, inspection, execution/review persistence, protected capture, deadline checkpoint and commit. They include elapsed time, remaining budget where applicable, connection acquisition/reuse duration and SQL/catalog counts/cursor time for instrumented connection stages, correlated with the HTTP request ID. Authentication duration is measured without forcing a connection; its SQL counters are omitted. Nested stage totals overlap and must not be added together. SQL cursor timing is not a server lock-wait measurement or a retry counter, and raw DBAPI target-guard queries are not separate SQLAlchemy query-count events. Connection acquisition/reuse timing alone does not isolate pool wait from connection setup.
+
+No SQL text, parameters, prompts, identities, ciphertext, nonces, keys or exception messages are emitted by these diagnostics. The external package harness saves only allowlisted stage fields on success/failure rather than losing the earlier stages to its traceback tail. Deadline values, encryption format/AAD/key selection, seven-day retention, cleanup limits/health, authorization, tenant fences and transaction/audit requirements are unchanged.
+
+## Files changed
+
+- New `backend/app/schema_reflection.py`; `backend/app/schema_compatibility.py` installs its per-check MSSQL key adapter.
+- New `backend/app/stage_timing.py`; observational wrappers in `backend/app/services/governance.py`, `backend/app/protected_reviews.py`, `backend/app/security.py` and request correlation in `backend/app/middleware.py`.
+- `scripts/phase6b_approval_a.py`: retain allowlisted stage timing evidence. No candidate/security assertion is removed or weakened.
+- New `backend/tests/test_schema_key_batching.py` and `backend/tests/test_review_deadline_diagnostics.py`. Existing fake-inspector tests in `test_mssql_schema_reflection.py`, `test_schema_compatibility.py` and `test_multi_policy_mssql_contract.py` isolate their original verifier layer; new full-verifier tests exercise the actual batching adapter.
+- Local evidence, artifacts, this report, the targeted plan and current-status entry. Existing source changes and historical artifacts/evidence preserved; no Git mutation commands used.
+
+## Focused validation and candidate
+
+**107 focused tests passed** in 41.49 seconds. Selection: new batching/deadline/diagnostic tests, revision-008 encrypted-review cases, existing MSSQL reflection/contract and schema-drift checks, capture-failure rollback and authenticated-encryption tampering checks. Initial failures were confined to synthetic unnamed unique-constraint fixture collisions and the test log observer; those were corrected without weakening assertions. A completed focused rerun is saved. All tests use synthetic providers/keys and disposable databases under `/tmp`, with inherited kernel IPv4/IPv6 socket denial and repository dotenv blocking. Permission-review timeouts on local test launches were retried once successfully; no tests remain blocked.
+
+The extracted final candidate passed **25 tests in 4.64 seconds**, including bridge revisions 004–007, full 008 key/permission/trigger drift, expiry/deadline rollback, sanitized logs and established 008 LEGACY/MULTI encrypted capture/reveal/tenant/role/session-assignment/cleanup checks. See [extracted final results](evidence/phase6b-review504-local-2026-11-07/extracted-final.log). The over-budget regression advances a local monotonic clock past the **unchanged 90-second budget** after real encrypted capture; it requires 504 and absence of execution, review, ciphertext and retained-content audit rows, with FAILED usage and no provider invocation. Successful capture still performs two schema checks and retains encrypted content plus audit for exactly 604800 seconds. Ruff and AST checks passed.
+
+Final candidate **1.2-677a11e4b649fa7d**, [ZIP](../artifacts/phase6b-review504-final-2026-11-07/candidate.zip), SHA-256 **be1ab97768954fecb5cf26b255bfcecf2a22811848ca910536846b3784174ee9**. It contains the correction and diagnostics. Earlier locally built intermediate artifacts are preserved and superseded. Compared with retry-6, only five existing application files changed and two diagnostic/reflection modules were added, plus release metadata. Frontend, migrations 001–008, configuration/deadline and SSO/session/model bytes are unchanged. Authentication's AST is identical after removing its timing wrapper. Same-code compatible copy is byte-identical to this final ZIP; it is not independent recovery qualification.
+
+Local SQLite remains revision 003, SHA-256 `0cad09a35e73ad70bb5ff5e522f783f9b59fdd5b3c31eb5b5dddd4d300795766`. Historical retry-5/6 Azure migration, immutability, retained-data, cleanup-health and session results are hash-pinned and reused; none was rerun against Azure here. The new SQL metadata read path still requires Azure runtime confirmation, so prior readiness cannot be represented as a cloud pass of this new implementation.
+
+[Focused log](evidence/phase6b-review504-local-2026-11-07/final-focused.log), [candidate/byte comparison](evidence/phase6b-review504-local-2026-11-07/candidate.json), [source/evidence pins](evidence/phase6b-review504-local-2026-11-07/qualification-pins.json), [retry-6 failure](evidence/phase6b-approval-a-retry6-2026-11-07/package-candidate-008-failure.txt).
+
+Remaining: confirm actual SQL metadata compatibility/performance and successful HUMAN_REVIEW on the approved disposable Azure target; finish encryption/authorization/retention/ciphertext preservation and planned failure cycles. Exact historical lock/query attribution remains unknown. See [targeted confirmation plan](PHASE6B_HUMAN_REVIEW_CONFIRMATION_PLAN.md). **No Azure operations, deployment, real provider calls or production changes occurred. STOPPED at the fresh approval gate.**

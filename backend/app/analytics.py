@@ -7,6 +7,7 @@ from sqlalchemy.dialects.mssql import NVARCHAR
 from .models import Execution, Policy, Review, Version, Assignment
 from .exports import date_bounds
 from .security import Identity
+from .services.dashboard_findings import aggregate as dashboard_aggregate
 
 
 def overview(db: Session, user: Identity, start: str | None, end: str | None) -> dict:
@@ -22,7 +23,9 @@ def overview(db: Session, user: Identity, start: str | None, end: str | None) ->
         return function(document, path)
 
     contributions, violations = {}, {}
-    for category in ("secret_detection", "pii_detection", "moderation", "blocked_keywords"):
+    categories = ("secret_detection", "pii_detection", "moderation", "blocked_keywords")
+    aggregates = []
+    for category in categories:
         input_status = value(f"$.input.breakdown.{category}")
         output_status = value(f"$.output.breakdown.{category}")
         failed_control = or_(input_status.in_(("FAILED", "UNKNOWN")), output_status.in_(("FAILED", "UNKNOWN")))
@@ -31,12 +34,15 @@ def overview(db: Session, user: Identity, start: str | None, end: str | None) ->
             (failed_control, 0),
             else_=func.coalesce(value(f"$.output.contributions.{category}"), value(f"$.input.contributions.{category}")),
         )
-        weight, failed = db.execute(
-            select(
+        aggregates.extend(
+            [
                 func.coalesce(func.sum(cast(contribution, Float)), 0),
                 func.coalesce(func.sum(case((failed_control, 1), else_=0)), 0),
-            ).where(*filters)
-        ).one()
+            ]
+        )
+    values = db.execute(select(*aggregates).where(*filters)).one()
+    for index, category in enumerate(categories):
+        weight, failed = values[index * 2 : index * 2 + 2]
         if weight:
             contributions[category] = weight
         if failed:
@@ -52,6 +58,7 @@ def overview(db: Session, user: Identity, start: str | None, end: str | None) ->
     active = db.get(Version, assignment.version_id) if assignment else None
     active_policy = db.get(Policy, active.policy_id) if active and active.tenant == user.tenant else None
     return {
+        "compliance": dashboard_aggregate(db.scalars(select(Execution).where(*filters).order_by(Execution.created, Execution.id)).yield_per(500)),
         "total_policies": db.scalar(
             select(func.count()).select_from(Policy).where(Policy.tenant == user.tenant, Policy.status != "DELETED")
         ),

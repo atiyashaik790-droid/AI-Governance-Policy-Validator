@@ -104,7 +104,7 @@ def _generation_access_token() -> str:
 
 
 # Generate only after the gateway has approved input; never log request bodies.
-async def generate_ai_response(text: str) -> str:
+async def generate_ai_response(text: str, *, max_completion_tokens: int = 700, timeout: float | None = None) -> str:
     generation_usage.set(None)
     if settings.provider_mode == "fixture":
         if "[OUTPUT_SECRET]" in text:
@@ -113,6 +113,8 @@ async def generate_ai_response(text: str) -> str:
     validate_azure_endpoint(settings.azure_openai_endpoint, ".openai.azure.com")
     if not settings.azure_openai_deployment:
         raise ProviderUnavailable("Azure deployment not configured")
+    if not 1 <= max_completion_tokens <= 700:
+        raise ValueError("Invalid completion token limit")
     response = None
     try:
         headers = {}
@@ -134,14 +136,14 @@ async def generate_ai_response(text: str) -> str:
         payload = {
             "model": settings.azure_openai_deployment,
             "messages": [{"role": "user", "content": text}],
-            "max_completion_tokens": 700,
+            "max_completion_tokens": max_completion_tokens,
         }
         # The verified deployment uses original GPT-5 mini. Its reasoning shares the
         # completion cap; reduce reasoning effort rather than raising cost/time limits.
         # Do not send this model-specific parameter to arbitrary deployment aliases.
         if settings.azure_openai_deployment in ("gpt-5", "gpt-5-mini", "gpt-5-nano"):
             payload["reasoning_effort"] = "minimal"
-        async with httpx.AsyncClient(timeout=settings.provider_timeout) as client:
+        async with httpx.AsyncClient(timeout=timeout if timeout is not None else settings.provider_timeout) as client:
             response = await client.post(
                 url,
                 params=params,

@@ -1,6 +1,6 @@
 // Opt in with GOVERNANCE_TEST_PYTHON to exercise the real local API, never cloud services.
 import { spawn } from "node:child_process";
-import { access, readFile } from "node:fs/promises";
+import { access } from "node:fs/promises";
 import { createServer } from "node:net";
 import { resolve } from "node:path";
 import {
@@ -23,7 +23,9 @@ const python = process.env.GOVERNANCE_TEST_PYTHON;
 describe.skipIf(!python)("React to disposable FastAPI integration", () => {
   let child;
   let address = "";
-  let token = "";
+  let sessionCookie = "";
+  let csrf = "";
+  let networkFetch;
   let credentialFile = "";
   let App;
   beforeAll(async () => {
@@ -43,7 +45,7 @@ describe.skipIf(!python)("React to disposable FastAPI integration", () => {
       python,
       [
         "-B",
-        resolve(root, "scripts/run_offline_demo.py"),
+        resolve(root, "backend/tests/sso_integration_server.py"),
         "--port",
         String(port),
       ],
@@ -86,7 +88,7 @@ describe.skipIf(!python)("React to disposable FastAPI integration", () => {
       });
     });
     credentialFile = state.credential_file;
-    token = JSON.parse(await readFile(credentialFile, "utf8")).Admin;
+
     const deadline = Date.now() + 10000;
     while (true) {
       try {
@@ -98,6 +100,31 @@ describe.skipIf(!python)("React to disposable FastAPI integration", () => {
         throw new Error("Disposable backend was not ready");
       await new Promise((done) => setTimeout(done, 50));
     }
+    // Node fetch has no browser cookie jar. Retain only synthetic fixture cookies
+    // in this test transport; production still enforces Secure cookies over HTTPS.
+    networkFetch = globalThis.fetch.bind(globalThis);
+    const started = await networkFetch(address + "/api/sso/login", {
+      redirect: "manual",
+    });
+    const binding = started.headers.get("set-cookie").split(";")[0];
+    const stateValue = new URL(
+      started.headers.get("location"),
+    ).searchParams.get("state");
+    const callback = await networkFetch(
+      address +
+        "/api/sso/callback?" +
+        new URLSearchParams({ state: stateValue, code: "synthetic-code" }),
+      {
+        redirect: "manual",
+        headers: { Cookie: binding },
+      },
+    );
+    expect(callback.status).toBe(303);
+    sessionCookie = callback.headers.get("set-cookie").split(";")[0];
+    const me = await networkFetch(address + "/api/sso/me", {
+      headers: { Cookie: sessionCookie },
+    });
+    csrf = (await me.json()).csrf_token;
     vi.stubEnv("VITE_API_URL", address);
     App = (await import("./main")).App;
   }, 30000);
@@ -109,7 +136,8 @@ describe.skipIf(!python)("React to disposable FastAPI integration", () => {
     window.history.replaceState({}, "", "/");
   });
   afterAll(async () => {
-    token = "";
+    sessionCookie = "";
+    csrf = "";
     if (child && child.exitCode === null && child.signalCode === null) {
       await new Promise((done) => {
         const timer = setTimeout(() => {
@@ -151,11 +179,18 @@ describe.skipIf(!python)("React to disposable FastAPI integration", () => {
       },
     });
     expect(deniedOrigin.status).toBe(400);
+    vi.spyOn(globalThis, "fetch").mockImplementation((url, options = {}) =>
+      networkFetch(url, {
+        ...options,
+        headers: {
+          ...options.headers,
+          Cookie: sessionCookie,
+          Origin: "https://testserver",
+          "X-CSRF-Token": csrf,
+        },
+      }),
+    );
     render(<App />);
-    fireEvent.change(screen.getByLabelText("Access token"), {
-      target: { value: token },
-    });
-    fireEvent.click(screen.getByRole("button", { name: /Connect workspace/ }));
     await screen.findByRole("heading", {
       name: "Your governance, at a glance",
     });
@@ -256,14 +291,21 @@ describe.skipIf(!python)("React to disposable FastAPI integration", () => {
     fireEvent.click(screen.getByRole("link", { name: "Validation history" }));
     await screen.findAllByRole("button", { name: "Inspect metadata" });
     fireEvent.click(screen.getByRole("link", { name: "Audit & reports" }));
-    fireEvent.click(await screen.findByRole("button", { name: "Export JSON" }));
-    await screen.findByText("ADLS export: FAILED");
+    await screen.findByRole("heading", { name: "History date filter" });
+    expect(screen.queryByRole("button", { name: "Export JSON" })).toBeNull();
+    expect(screen.queryByRole("button", { name: "Export CSV" })).toBeNull();
+    const exported = await fetch(address + "/api/reports/export", {
+      method: "POST", headers: { Cookie: sessionCookie, "Content-Type": "application/json", "X-CSRF-Token": csrf, Origin: "https://testserver" },
+      body: JSON.stringify({ format: "json" }),
+    });
+    expect(exported.status).toBe(201);
+    expect((await exported.json()).status).toBe("FAILED");
     const feedback = await fetch(address + "/api/feedback/summary", {
-      headers: { Authorization: `Bearer ${sessionStorage.getItem("governance-token") || token}` },
+      headers: { Cookie: sessionCookie },
     });
     expect(await feedback.json()).toEqual({ count: 1, average: 3 });
     const summary = await fetch(address + "/api/analytics/overview", {
-      headers: { Authorization: `Bearer ${sessionStorage.getItem("governance-token") || token}` },
+      headers: { Cookie: sessionCookie },
     });
     expect((await summary.json()).total_validations).toBe(5);
     fireEvent.click(screen.getByRole("link", { name: "Overview" }));

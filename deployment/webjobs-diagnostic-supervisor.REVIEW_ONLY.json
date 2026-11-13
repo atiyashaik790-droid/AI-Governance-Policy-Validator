@@ -1,0 +1,12 @@
+{
+  "target": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Web/sites/app-governance-validator-atiya-1026",
+  "verified": false,
+  "different_host": false,
+  "survives_initiator_termination": false,
+  "survives_host_unavailability": false,
+  "journal_access_verified": false,
+  "key_access_verified": false,
+  "azure_restore_access_verified": false,
+  "coverage_until": 0,
+  "evidence_reference": "REVIEW_ONLY: no verified independent supervisor; local desktop secret store and journal are host-dependent."
+}

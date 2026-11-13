@@ -1,0 +1,9 @@
+{
+  "mode": "disabled",
+  "target": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/databases/sqldb-gpv-mig-20261106-a1",
+  "approval_id": null,
+  "creation_not_before": null,
+  "creation_not_after": null,
+  "cleanup_after_seconds": 10800,
+  "maximum_lifetime_seconds": 14400
+}

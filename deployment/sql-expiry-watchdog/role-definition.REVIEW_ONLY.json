@@ -1,0 +1,16 @@
+{
+  "Name": "GPV temporary SQL exact-target expiry",
+  "Id": "7400b650-d6eb-5852-b7cf-b110b3ab1679",
+  "IsCustom": true,
+  "Description": "Review only. Assign only at the exact approved temporary SQL database scope; never at server/group/subscription. No create/write/data actions.",
+  "Actions": [
+    "Microsoft.Sql/servers/databases/read",
+    "Microsoft.Sql/servers/databases/delete"
+  ],
+  "NotActions": [],
+  "DataActions": [],
+  "NotDataActions": [],
+  "AssignableScopes": [
+    "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik"
+  ]
+}

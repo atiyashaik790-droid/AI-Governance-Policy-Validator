@@ -1,3 +1,5 @@
+> Historical checkpoint: targets, revisions and approval requests below are not current execution authority. See [current master repair deployment readiness](MASTER_REPAIR_DEPLOYMENT_READINESS.md) before preparing any operation.
+
 # Bounded Azure SQL recovery drill — approval plan
 
 31 October 2026, Asia/Kolkata. **PREPARED; NOT EXECUTED.** No application changes, migrations, provider calls or provisioning performed. Previously passing development suites were not repeated.

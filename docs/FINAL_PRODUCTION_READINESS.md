@@ -1,3 +1,5 @@
+> Historical checkpoint: targets, revisions and approval requests below are not current execution authority. See [current master repair deployment readiness](MASTER_REPAIR_DEPLOYMENT_READINESS.md) before preparing any operation.
+
 > Historical release report. For the current implementation and deployment boundary, see [CURRENT_STATUS.md](CURRENT_STATUS.md).
 
 # Final production readiness

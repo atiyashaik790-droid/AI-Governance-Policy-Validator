@@ -1,12 +1,20 @@
-export const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
-export function getToken(): string {
-  return sessionStorage.getItem("governance-token") || "";
+export const API_URL =
+  import.meta.env.VITE_API_URL ||
+  (import.meta.env.PROD ? "/" : "http://localhost:8000");
+export const LOCAL_DEMO = import.meta.env.VITE_LOCAL_DEMO === "true" || import.meta.env.VITE_DEMO_LOGIN === "true";
+let csrfToken = "";
+export function setCsrfToken(value: string) {
+  csrfToken = value;
+}
+export function loginUrl() {
+  return `${API_URL.replace(/\/$/, "")}/api/sso/login?return_to=${encodeURIComponent(window.location.pathname)}`;
 }
 export class ApiError extends Error {
   constructor(
     message: string,
     public status: number,
     public correlationId = "",
+    public sessionReason = "",
   ) {
     super(message);
   }
@@ -20,6 +28,7 @@ export async function request<T = unknown>(
     signal?: AbortSignal;
     timeoutMs?: number;
     headers?: Record<string, string>;
+    notifyUnauthorized?: boolean;
   } = {},
 ): Promise<T> {
   const controller = new AbortController();
@@ -27,15 +36,20 @@ export async function request<T = unknown>(
   const cancel = () => controller.abort();
   options.signal?.addEventListener("abort", cancel, { once: true });
   if (options.signal?.aborted) controller.abort();
-  const timer = setTimeout(() => {
-    timedOut = true;
-    controller.abort();
-  }, options.timeoutMs ?? 100000);
+  const timer = setTimeout(
+    () => {
+      timedOut = true;
+      controller.abort();
+    },
+    options.timeoutMs ?? (method === "GET" ? 20000 : 100000),
+  );
   try {
     const response = await fetch(`${API_URL.replace(/\/$/, "")}${path}`, {
       method,
+      credentials: "include",
       headers: {
-        Authorization: `Bearer ${getToken()}`,
+        ...(LOCAL_DEMO && sessionStorage.getItem("governance-token") ? { Authorization: `Bearer ${sessionStorage.getItem("governance-token")}` } : {}),
+        ...(csrfToken ? { "X-CSRF-Token": csrfToken } : {}),
         "Content-Type": "application/json",
         ...options.headers,
       },
@@ -55,9 +69,10 @@ export async function request<T = unknown>(
       );
     }
     if (!response.ok) {
-      if (response.status === 401) {
+      const sessionReason = ["expired", "ended", "anonymous"].includes(response.headers.get("X-Session-Reason") || "") ? response.headers.get("X-Session-Reason")! : "";
+      if (response.status === 401 && options.notifyUnauthorized !== false && !controller.signal.aborted) {
         sessionStorage.removeItem("governance-token");
-        window.dispatchEvent(new Event("governance-session-ended"));
+        window.dispatchEvent(new CustomEvent("governance-session-ended", { detail: { reason: sessionReason } }));
       }
       const detail = payload?.detail;
       const message =
@@ -71,7 +86,7 @@ export async function request<T = unknown>(
                 )
                 .join("; ")
             : `Request failed (${response.status})`;
-      throw new ApiError(message, response.status, correlation);
+      throw new ApiError(message, response.status, correlation, sessionReason);
     }
     return payload as T;
   } catch (error) {
@@ -79,7 +94,9 @@ export async function request<T = unknown>(
     if (controller.signal.aborted)
       throw new Error(
         timedOut
-          ? "Request timed out. Check operation history before retrying."
+          ? method === "GET"
+            ? "Request timed out. Retry loading this page."
+            : "Request timed out. Check operation history before retrying."
           : "Request cancelled.",
       );
     throw new Error(

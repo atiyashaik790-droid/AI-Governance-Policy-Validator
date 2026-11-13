@@ -1,0 +1,6 @@
+{
+  "target": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Web/sites/app-governance-validator-atiya-1026",
+  "api_version": "2024-11-01",
+  "verified": false,
+  "reference": "REVIEW_ONLY: actual read-only settings response has no ETag; Microsoft operation reference does not document If-Match. No conditional enforcement proof."
+}

@@ -1,5 +1,5 @@
 from alembic import context
-from app.models import Base
+from app.models_review_content import ReviewContentBase as Base
 
 
 def run_migrations_online():
