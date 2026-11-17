@@ -1,0 +1,6 @@
+{
+  "collation": "SQL_Latin1_General_CP1_CI_AS",
+  "location": "westus2",
+  "maxSizeBytes": 268435456000,
+  "objective": "S0"
+}

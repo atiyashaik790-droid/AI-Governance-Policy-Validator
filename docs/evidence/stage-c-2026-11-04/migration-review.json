@@ -1,0 +1,18 @@
+{
+  "release": "1.2-6749226f1af65b63",
+  "supported_migrations": [
+    "004",
+    "005"
+  ],
+  "minimum_migration": "004",
+  "sso_required_migration": "005",
+  "stage_b_deployed_acceptance_reference": "docs/evidence/stage-b-2026-11-04/acceptance.json",
+  "package_sha256": "9d81fa9b7700557eac2cb41edd5ab861d19a6b8c4f9052e55068e5eab784df80",
+  "migration_source_sha256": "325a1fc4e0f7f415d102d340e2b737e1734ecdb119c76f78e61a1e4a4658618a",
+  "review_sql_sha256": "4bbaf5c8a0db69bf52efa9be5d5d824a60856a2a292abde8fedb8a6456b9e29d",
+  "fresh_offline_004_to005_compile_matches_review_sql": true,
+  "migration_executed": false,
+  "tests_rerun": false,
+  "combined_c_and_separately_approved_visibility_batch_sha256": "26b9537cc66fdf7eb4853b177fd5f8fdfd411edcd73949a0f3a0cae9adc02f97",
+  "combined_batch_executed": false
+}

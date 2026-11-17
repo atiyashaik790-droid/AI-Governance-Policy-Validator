@@ -1,0 +1,11 @@
+{
+  "target_negative_guards": 7,
+  "third_incarnation_denied": true,
+  "testing_deadline_denied": true,
+  "human_review_before_allow": true,
+  "unchanged_health_assertion": true,
+  "fixed_90_second_budget_assertion": true,
+  "positive_precommit_budget_required": true,
+  "candidate_modified": false,
+  "status": "PASS"
+}

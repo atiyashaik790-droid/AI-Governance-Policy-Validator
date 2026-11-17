@@ -1,0 +1,314 @@
+{
+  "utc": "2026-11-06T11:05:40.516376+00:00",
+  "scope": "Approval A final verification; read-only only",
+  "target_arm_get": {
+    "http_status": 404,
+    "error_code": "ResourceNotFound"
+  },
+  "inventory": [
+    {
+      "id": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/databases/sqldb-governance-validator-dev",
+      "name": "sqldb-governance-validator-dev",
+      "sku": {
+        "capacity": 10,
+        "family": null,
+        "name": "Standard",
+        "size": null,
+        "tier": "Standard"
+      },
+      "status": "Online"
+    },
+    {
+      "id": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/databases/master",
+      "name": "master",
+      "sku": {
+        "capacity": 4,
+        "family": "SYSTEM",
+        "name": "GP_SYSTEM",
+        "size": null,
+        "tier": "System"
+      },
+      "status": "Online"
+    }
+  ],
+  "temporary_deleted_backup_records": [],
+  "production_revision": [
+    "005"
+  ],
+  "production_new_tables": [],
+  "production_runtime_grants": [
+    {
+      "object_name": "active_policy_assignments",
+      "permission_name": "INSERT",
+      "state_desc": "GRANT"
+    },
+    {
+      "object_name": "active_policy_assignments",
+      "permission_name": "SELECT",
+      "state_desc": "GRANT"
+    },
+    {
+      "object_name": "active_policy_assignments",
+      "permission_name": "UPDATE",
+      "state_desc": "GRANT"
+    },
+    {
+      "object_name": "alembic_version",
+      "permission_name": "SELECT",
+      "state_desc": "GRANT"
+    },
+    {
+      "object_name": "audit_events",
+      "permission_name": "INSERT",
+      "state_desc": "GRANT"
+    },
+    {
+      "object_name": "audit_events",
+      "permission_name": "SELECT",
+      "state_desc": "GRANT"
+    },
+    {
+      "object_name": "demo_sessions",
+      "permission_name": "INSERT",
+      "state_desc": "GRANT"
+    },
+    {
+      "object_name": "demo_sessions",
+      "permission_name": "SELECT",
+      "state_desc": "GRANT"
+    },
+    {
+      "object_name": "demo_sessions",
+      "permission_name": "UPDATE",
+      "state_desc": "GRANT"
+    },
+    {
+      "object_name": "evaluation_exports",
+      "permission_name": "INSERT",
+      "state_desc": "GRANT"
+    },
+    {
+      "object_name": "evaluation_exports",
+      "permission_name": "SELECT",
+      "state_desc": "GRANT"
+    },
+    {
+      "object_name": "evaluation_exports",
+      "permission_name": "UPDATE",
+      "state_desc": "GRANT"
+    },
+    {
+      "object_name": "export_jobs",
+      "permission_name": "INSERT",
+      "state_desc": "GRANT"
+    },
+    {
+      "object_name": "export_jobs",
+      "permission_name": "SELECT",
+      "state_desc": "GRANT"
+    },
+    {
+      "object_name": "export_jobs",
+      "permission_name": "UPDATE",
+      "state_desc": "GRANT"
+    },
+    {
+      "object_name": "feedback_records",
+      "permission_name": "INSERT",
+      "state_desc": "GRANT"
+    },
+    {
+      "object_name": "feedback_records",
+      "permission_name": "SELECT",
+      "state_desc": "GRANT"
+    },
+    {
+      "object_name": "human_review_cases",
+      "permission_name": "INSERT",
+      "state_desc": "GRANT"
+    },
+    {
+      "object_name": "human_review_cases",
+      "permission_name": "SELECT",
+      "state_desc": "GRANT"
+    },
+    {
+      "object_name": "human_review_cases",
+      "permission_name": "UPDATE",
+      "state_desc": "GRANT"
+    },
+    {
+      "object_name": "inference_rate_buckets",
+      "permission_name": "INSERT",
+      "state_desc": "GRANT"
+    },
+    {
+      "object_name": "inference_rate_buckets",
+      "permission_name": "SELECT",
+      "state_desc": "GRANT"
+    },
+    {
+      "object_name": "inference_rate_buckets",
+      "permission_name": "UPDATE",
+      "state_desc": "GRANT"
+    },
+    {
+      "object_name": "inference_usage",
+      "permission_name": "INSERT",
+      "state_desc": "GRANT"
+    },
+    {
+      "object_name": "inference_usage",
+      "permission_name": "SELECT",
+      "state_desc": "GRANT"
+    },
+    {
+      "object_name": "inference_usage",
+      "permission_name": "UPDATE",
+      "state_desc": "GRANT"
+    },
+    {
+      "object_name": "policies",
+      "permission_name": "DELETE",
+      "state_desc": "GRANT"
+    },
+    {
+      "object_name": "policies",
+      "permission_name": "INSERT",
+      "state_desc": "GRANT"
+    },
+    {
+      "object_name": "policies",
+      "permission_name": "SELECT",
+      "state_desc": "GRANT"
+    },
+    {
+      "object_name": "policies",
+      "permission_name": "UPDATE",
+      "state_desc": "GRANT"
+    },
+    {
+      "object_name": "policy_versions",
+      "permission_name": "INSERT",
+      "state_desc": "GRANT"
+    },
+    {
+      "object_name": "policy_versions",
+      "permission_name": "SELECT",
+      "state_desc": "GRANT"
+    },
+    {
+      "object_name": "review_assignments",
+      "permission_name": "INSERT",
+      "state_desc": "GRANT"
+    },
+    {
+      "object_name": "review_assignments",
+      "permission_name": "SELECT",
+      "state_desc": "GRANT"
+    },
+    {
+      "object_name": "review_assignments",
+      "permission_name": "UPDATE",
+      "state_desc": "GRANT"
+    },
+    {
+      "object_name": "review_notes",
+      "permission_name": "INSERT",
+      "state_desc": "GRANT"
+    },
+    {
+      "object_name": "review_notes",
+      "permission_name": "SELECT",
+      "state_desc": "GRANT"
+    },
+    {
+      "object_name": "sso_memberships",
+      "permission_name": "SELECT",
+      "state_desc": "GRANT"
+    },
+    {
+      "object_name": "sso_memberships",
+      "permission_name": "VIEW DEFINITION",
+      "state_desc": "GRANT"
+    },
+    {
+      "object_name": "sso_sessions",
+      "permission_name": "INSERT",
+      "state_desc": "GRANT"
+    },
+    {
+      "object_name": "sso_sessions",
+      "permission_name": "SELECT",
+      "state_desc": "GRANT"
+    },
+    {
+      "object_name": "sso_sessions",
+      "permission_name": "UPDATE",
+      "state_desc": "GRANT"
+    },
+    {
+      "object_name": "sso_sessions",
+      "permission_name": "VIEW DEFINITION",
+      "state_desc": "GRANT"
+    },
+    {
+      "object_name": "sso_transactions",
+      "permission_name": "INSERT",
+      "state_desc": "GRANT"
+    },
+    {
+      "object_name": "sso_transactions",
+      "permission_name": "SELECT",
+      "state_desc": "GRANT"
+    },
+    {
+      "object_name": "sso_transactions",
+      "permission_name": "UPDATE",
+      "state_desc": "GRANT"
+    },
+    {
+      "object_name": "sso_transactions",
+      "permission_name": "VIEW DEFINITION",
+      "state_desc": "GRANT"
+    },
+    {
+      "object_name": "validation_executions",
+      "permission_name": "INSERT",
+      "state_desc": "GRANT"
+    },
+    {
+      "object_name": "validation_executions",
+      "permission_name": "SELECT",
+      "state_desc": "GRANT"
+    }
+  ],
+  "production_grants_equal_preflight": true,
+  "hosted_ready": {
+    "http_status": 200,
+    "data": {
+      "status": "ready",
+      "provider_mode": "live",
+      "release": {
+        "git_commit": "unavailable",
+        "build_version": "1.2-ca5df7c1dc19e525",
+        "built_utc": "2026-11-05T12:09:33.571692+00:00",
+        "frontend_sha256": "beb38c3485b8abfb672e5a2bf851f1f178c1a8049f367b450708e5abbe7581d4",
+        "backend_sha256": "ad2e4af6c958f24e27e8838cccf8ca9dc46c76fb430c583d2c6737cd3034a813",
+        "required_migration": "004",
+        "supported_migrations": [
+          "004",
+          "005"
+        ],
+        "sso_required_migration": "005"
+      },
+      "database_revision": "005",
+      "schema_versioned": true,
+      "sso_available": true
+    }
+  },
+  "sqlite_sha256": "0cad09a35e73ad70bb5ff5e522f783f9b59fdd5b3c31eb5b5dddd4d300795766",
+  "sqlite_unchanged": true,
+  "existing_app_migration_sources_unchanged": true,
+  "watchdog_process_gone": true
+}

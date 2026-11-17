@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "submission_count": 1,
+  "secrets_exported": false,
+  "cli_exit_code": 0,
+  "unrelated_settings_and_secret_unchanged": true,
+  "flags": {
+    "DEMO_BROWSER_LOGIN_ENABLED": "false",
+    "SSO_ENABLED": "true",
+    "ALLOW_LEGACY_API_CREDENTIALS": "false"
+  },
+  "settings_induced_restart_expected": true,
+  "observed_at_utc": "2026-11-05T08:08:54.156586+00:00"
+}

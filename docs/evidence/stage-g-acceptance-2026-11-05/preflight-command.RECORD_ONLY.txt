@@ -1,0 +1,26 @@
+import subprocess,json,concurrent.futures
+from pathlib import Path
+from datetime import datetime,timezone
+origin='https://app-governance-validator-atiya-1026.azurewebsites.net'
+r={'stage':'G','observed_at_utc':datetime.now(timezone.utc).isoformat(),'sessions_created_by_agent':0,'changes_by_agent':False}
+def fetch(route):
+ try:
+  p=subprocess.run(['curl','--silent','--show-error','--connect-timeout','5','--max-time','45','-H','Cache-Control: no-cache','--write-out','\n%{http_code}',origin+route],capture_output=True,text=True,timeout=50)
+  body,code=p.stdout.rsplit('\n',1);entry={'http_status':int(code),'transport_exit_code':p.returncode}
+  if route in ('/health','/ready','/api/sso/status') and int(code)==200:
+   d=json.loads(body)
+   if route=='/health':entry['status']=d.get('status')
+   elif route=='/ready':entry.update(status=d.get('status'),revision=d.get('database_revision'),release=d.get('release',{}).get('build_version'),sso_available=d.get('sso_available'))
+   else:entry.update({k:d.get(k) for k in ('sso_enabled','configured','demo_login_enabled')})
+  # Never persist /me bodies or sensitive session material even on unexpected success.
+  return route,entry
+ except Exception as e:return route,{'error_kind':type(e).__name__}
+with concurrent.futures.ThreadPoolExecutor(max_workers=5) as pool:r['checks']=dict(pool.map(fetch,['/health','/ready','/api/sso/status','/api/policies?limit=1','/api/sso/me']))
+try:
+ c=r['checks'];assert all(x.get('transport_exit_code')==0 for x in c.values())
+ assert c['/health']['status']=='ok' and c['/ready']['status']=='ready' and c['/ready']['revision']=='005' and c['/ready']['release']=='1.2-6749226f1af65b63' and c['/ready']['sso_available'] is True
+ assert all(c['/api/sso/status'][k] is True for k in ('sso_enabled','configured','demo_login_enabled'))
+ assert c['/api/policies?limit=1']['http_status']==401 and c['/api/sso/me']['http_status']==401
+ r['status']='PASS';r['unauthenticated_denial']='PASS'
+except Exception:r['status']='FAIL_STOP';r['unauthenticated_denial']='NOT_FULLY_VERIFIED'
+Path('docs/evidence/stage-g-acceptance-2026-11-05/preflight.json').write_text(json.dumps(r,indent=2)+'\n');print(json.dumps(r))

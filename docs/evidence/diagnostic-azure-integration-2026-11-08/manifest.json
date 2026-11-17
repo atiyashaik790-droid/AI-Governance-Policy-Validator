@@ -1,0 +1,11 @@
+{
+  "docs/evidence/diagnostic-azure-integration-2026-11-08/adapter-tests.xml": "8a8682c697459973aadac4706dc7f4bedefe445ed2263cecc6897cc6666472e1",
+  "docs/evidence/diagnostic-azure-integration-2026-11-08/result.json": "7f81e1e52e5d3c7ed800e2c8bf769a96f18a22d112c8d2463ae26edd5495497c",
+  "docs/evidence/diagnostic-azure-integration-2026-11-08/concurrency-metadata.json": "3b9b9ddb933886cbb07a4b8caa91ea853ce75b3c7871661b9bdf6ced49cc4dc0",
+  "scripts/webjobs_diagnostic.py": "272ecfebca46ac67c3fa2825ef978403e86bdaf0402a17ef77b8f4856fd3acda",
+  "scripts/webjobs_diagnostic_azure.py": "5f9f755dde2644fcedf7c6bb5ba2c27f1b3a8a02eb51e790767e4d6ffed8cd35",
+  "scripts/tests/test_webjobs_diagnostic_azure.py": "b85049437c55cd707536d1e5e88fa66f39b992b4f32ef13f8214a3198fb5cc19",
+  "docs/WEBJOBS_AZURE_INTEGRATION_RESULT.md": "267dd19e10421bcb155cd7ec19492d6b0110debbbfd1362fb648f5733ade0e48",
+  "deployment/webjobs-diagnostic-conditional.REVIEW_ONLY.json": "ed3b1eba239cab5fa99975cf8f9144ebd1d16dd47c5af393ba88623fee8e43b7",
+  "deployment/webjobs-diagnostic-supervisor.REVIEW_ONLY.json": "ad1f50917a328f06e06ef64e557cb2360fdbfb067202720b0f0bf160cc887a24"
+}

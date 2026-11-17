@@ -1,0 +1,257 @@
+{
+  "stage": "B",
+  "started_at_utc": "2026-11-04T15:26:25.591975+00:00",
+  "checks": [
+    {
+      "name": "GET /health status",
+      "passed": true
+    },
+    {
+      "name": "GET /ready status",
+      "passed": true
+    },
+    {
+      "name": "Expected release",
+      "passed": true
+    },
+    {
+      "name": "Revision 004",
+      "passed": true
+    },
+    {
+      "name": "Versioned schema",
+      "passed": true
+    },
+    {
+      "name": "Minimum schema 004",
+      "passed": true
+    },
+    {
+      "name": "Supported schemas",
+      "passed": true
+    },
+    {
+      "name": "SSO unavailable",
+      "passed": true
+    },
+    {
+      "name": "GET /api/sso/status status",
+      "passed": true
+    },
+    {
+      "name": "SSO disabled and demo enabled",
+      "passed": true
+    },
+    {
+      "name": "GET /api/sso/login status",
+      "passed": true
+    },
+    {
+      "name": "GET /api/policies status",
+      "passed": true
+    },
+    {
+      "name": "GET / status",
+      "passed": true
+    },
+    {
+      "name": "Serving pinned static/index.html",
+      "passed": true
+    },
+    {
+      "name": "GET /assets/index-Cyc25r-X.js status",
+      "passed": true
+    },
+    {
+      "name": "Serving pinned static/assets/index-Cyc25r-X.js",
+      "passed": true
+    },
+    {
+      "name": "GET /assets/index-BMnV77cm.css status",
+      "passed": true
+    },
+    {
+      "name": "Serving pinned static/assets/index-BMnV77cm.css",
+      "passed": true
+    },
+    {
+      "name": "GET /policies status",
+      "passed": true
+    },
+    {
+      "name": "GET /history status",
+      "passed": true
+    },
+    {
+      "name": "GET /reviews status",
+      "passed": true
+    },
+    {
+      "name": "GET /analytics status",
+      "passed": true
+    },
+    {
+      "name": "GET /settings status",
+      "passed": true
+    },
+    {
+      "name": "POST /api/auth/session status",
+      "passed": true
+    },
+    {
+      "name": "GET /api/settings status",
+      "passed": true
+    },
+    {
+      "name": "Admin authenticated role and tenant",
+      "passed": true
+    },
+    {
+      "name": "GET /api/policies?limit=5 status",
+      "passed": true
+    },
+    {
+      "name": "Admin tenant-scoped policy list",
+      "passed": true
+    },
+    {
+      "name": "GET /api/policies/c6954694-f2cf-4b7e-b3cb-972f59eaf77b status",
+      "passed": true
+    },
+    {
+      "name": "GET /api/policies/c6954694-f2cf-4b7e-b3cb-972f59eaf77b/versions status",
+      "passed": true
+    },
+    {
+      "name": "GET /api/policies/00000000-0000-0000-0000-000000000000 status",
+      "passed": true
+    },
+    {
+      "name": "GET /api/analytics/overview status",
+      "passed": true
+    },
+    {
+      "name": "GET /api/audit/events?limit=5 status",
+      "passed": true
+    },
+    {
+      "name": "GET /api/reviews?limit=5 status",
+      "passed": true
+    },
+    {
+      "name": "GET /api/auth/sessions status",
+      "passed": true
+    },
+    {
+      "name": "GET /api/settings status",
+      "passed": true
+    },
+    {
+      "name": "GET /api/policies?limit=1 status",
+      "passed": true
+    },
+    {
+      "name": "Admin session restoration",
+      "passed": true
+    },
+    {
+      "name": "POST /api/auth/logout status",
+      "passed": true
+    },
+    {
+      "name": "GET /api/policies status",
+      "passed": true
+    },
+    {
+      "name": "POST /api/auth/session status",
+      "passed": true
+    },
+    {
+      "name": "GET /api/settings status",
+      "passed": true
+    },
+    {
+      "name": "Developer authenticated role and tenant",
+      "passed": true
+    },
+    {
+      "name": "GET /api/policies?limit=5 status",
+      "passed": true
+    },
+    {
+      "name": "Developer tenant-scoped policy list",
+      "passed": true
+    },
+    {
+      "name": "GET /api/policies/c6954694-f2cf-4b7e-b3cb-972f59eaf77b status",
+      "passed": true
+    },
+    {
+      "name": "GET /api/policies/c6954694-f2cf-4b7e-b3cb-972f59eaf77b/versions status",
+      "passed": true
+    },
+    {
+      "name": "GET /api/policies/00000000-0000-0000-0000-000000000000 status",
+      "passed": true
+    },
+    {
+      "name": "GET /api/analytics/overview status",
+      "passed": true
+    },
+    {
+      "name": "GET /api/audit/events?limit=5 status",
+      "passed": true
+    },
+    {
+      "name": "GET /api/reviews?limit=5 status",
+      "passed": true
+    },
+    {
+      "name": "GET /api/auth/sessions status",
+      "passed": true
+    },
+    {
+      "name": "GET /api/settings status",
+      "passed": true
+    },
+    {
+      "name": "GET /api/policies?limit=1 status",
+      "passed": true
+    },
+    {
+      "name": "Developer session restoration",
+      "passed": true
+    },
+    {
+      "name": "POST /api/auth/logout status",
+      "passed": true
+    },
+    {
+      "name": "GET /api/policies status",
+      "passed": true
+    }
+  ],
+  "status": "PASS",
+  "database_schema_changed": false,
+  "provider_or_storage_calls": false,
+  "readiness": {
+    "status": "ready",
+    "database_revision": "004",
+    "schema_versioned": true,
+    "sso_available": false
+  },
+  "release": {
+    "git_commit": "60fa94ef9ec01be0d0b4af347a3251255cf7565c",
+    "build_version": "1.2-6749226f1af65b63",
+    "built_utc": "2026-11-04T12:18:02.616350+00:00",
+    "frontend_sha256": "5bef17e44c53f3652b72f143fffbed00c4c3e77d0395654c7a9497e2a2b7f132",
+    "backend_sha256": "00e764d9e2d2ef88872a0546c63b771e9c5c53dae34b7f97419f53e610c52db4",
+    "required_migration": "004",
+    "supported_migrations": [
+      "004",
+      "005"
+    ],
+    "sso_required_migration": "005"
+  },
+  "finished_at_utc": "2026-11-04T15:26:48.654212+00:00"
+}

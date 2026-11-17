@@ -1,0 +1,40 @@
+{
+  "status": "LOCAL_CANDIDATE_NOT_PRODUCTION_READY",
+  "branch": "main",
+  "head": "60fa94ef9ec01be0d0b4af347a3251255cf7565c",
+  "backend": {
+    "passed": 534,
+    "failed": 0,
+    "skipped": 0,
+    "warnings": 2
+  },
+  "frontend_including_disposable_integration": {
+    "passed": 32,
+    "failed": 0,
+    "skipped": 0
+  },
+  "browser": {
+    "demo004": 8,
+    "demo005": 8,
+    "synthetic_sso005": 11,
+    "failed": 0
+  },
+  "lint": "PASS",
+  "python_source_formatting": "PASS",
+  "changed_frontend_formatting": "PASS",
+  "typescript": "PASS",
+  "production_build": "PASS",
+  "package": {
+    "release": "1.2-7105751bb3be1300",
+    "path": "/tmp/governance-sso-compatibility-20261104.zip",
+    "sha256": "0aa9aa3842a01e29277ceed8a8a52ddae30890337612443ee71152bcd295d579",
+    "files": 28,
+    "integrity": "PASS"
+  },
+  "hosted_operations_performed": false,
+  "hosted_database_revision": "NOT_INDEPENDENTLY_VERIFIED",
+  "real_microsoft_authentication": "NOT_VERIFIED",
+  "azure_sql_runtime_schema_permissions_latency": "NOT_VERIFIED",
+  "migration_files_modified": false,
+  "client_secrets_accessed": false
+}

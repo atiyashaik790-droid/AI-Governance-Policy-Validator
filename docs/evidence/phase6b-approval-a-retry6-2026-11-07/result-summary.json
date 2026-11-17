@@ -1,0 +1,48 @@
+{
+  "status": "PARTIAL",
+  "candidate": "1.2-cf0a97a4daffd3e7",
+  "cleanup_startup": {
+    "completed": true,
+    "elapsed_seconds": 8.087,
+    "event": "cleanup.startup",
+    "healthy": true
+  },
+  "session_contract": {
+    "configured_minutes": 120,
+    "cookie_expires_utc": "2026-11-06T21:59:48+00:00",
+    "cookie_max_age_seconds": 7200,
+    "database_expires_utc": "2026-11-06T21:59:48.796839+00:00",
+    "event": "session.contract",
+    "issued_after_utc": "2026-11-06T19:59:48.796867+00:00",
+    "issued_before_utc": "2026-11-06T19:59:48.796777+00:00",
+    "issued_duration_lower_seconds": 7199.999972,
+    "issued_duration_upper_seconds": 7200.000062,
+    "remaining_seconds": 7069.107498,
+    "server_now_utc": "2026-11-06T20:01:59.689341+00:00"
+  },
+  "session_me_http_statuses": [
+    200,
+    200,
+    401,
+    401
+  ],
+  "stop_assertion": "held.status_code == 200 and held.json()[\"decision\"] == \"HUMAN_REVIEW\"",
+  "actual_http_status": 504,
+  "actual_detail": "Governance deadline exceeded; response withheld",
+  "request_duration_ms": 274791.87,
+  "incarnations": 1,
+  "elapsed_seconds": 2196.7,
+  "conservative_compute_estimate_usd": 0.040325,
+  "independent_cleanup_confirmed": true,
+  "production_metadata_unchanged": true,
+  "source_pins_unchanged_since_launch": true,
+  "sqlite_unchanged": true,
+  "new_application_changes_during_execution": false,
+  "not_reached": [
+    "encrypted capture/reveal/access audit/RBAC/tampering/expiry cleanup assertions",
+    "remaining 008 MULTI application checks",
+    "compatible-copy ciphertext preservation",
+    "second-incarnation 006 denials and 007 rollback"
+  ],
+  "scope_end": "STOP after Approval A retry-6"
+}

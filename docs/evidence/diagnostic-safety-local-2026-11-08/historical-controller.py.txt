@@ -1,0 +1,163 @@
+import base64,hashlib,json,os,re,subprocess,time,ssl
+from pathlib import Path
+from datetime import datetime,timezone
+from urllib.request import Request,build_opener,HTTPRedirectHandler
+from urllib.error import HTTPError,URLError
+R=Path('/home/sigmoid/AI governance policy validator');O=R/'docs/evidence/webjobs-corrected-final-2026-11-08'
+SUB='25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6';APP='app-governance-validator-atiya-1026';F='WEBSITE_SKIP_RUNNING_KUDUAGENT';S=f'/subscriptions/{SUB}/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Web/sites/{APP}';A='?api-version=2024-11-01';ARM='https://management.azure.com';SCM=f'https://{APP}.scm.azurewebsites.net';WEB=f'https://{APP}.azurewebsites.net'
+START=time.time();MONO=time.monotonic();END=START+880;WORK=START+530;TOKEN=None;ORIGINAL=None;CHANGED=False;CLEANUP=False;N=0;PHASE_END=None
+STATE={'status':'RUNNING','started_utc':datetime.now(timezone.utc).isoformat(),'events':[],'warmup_pass':False,'readiness_pairs_pass':False,'listing_requests':0,'listing_http_status':None,'configuration_rollback_pass':False,'final_health_pass':False,'jobs_created':False,'sql_operations':False,'provider_calls':False,'deployment':False}
+class Stop(Exception):pass
+class Transient(Exception):pass
+class NoRedirect(HTTPRedirectHandler):
+ def redirect_request(self,*a,**kw):return None
+opener=build_opener(NoRedirect())
+def save(): (O/'execution.json').write_text(json.dumps(STATE,indent=2)+'\n')
+def emit(event,**kw):
+ e={'utc':datetime.now(timezone.utc).isoformat(),'event':event,**kw};STATE['events'].append(e);save();print(json.dumps(e),flush=True)
+def diagnostic(e):
+ reason=getattr(e,'reason',None);root=reason if reason is not None else e
+ return {'exception_type':type(e).__name__,'underlying_type':type(root).__name__,'errno':getattr(root,'errno',None),'tls_verify_code':getattr(root,'verify_code',None)}
+def request(base,path,method='GET',payload=None,deadline=None):
+ global N
+ limit=min(END if CLEANUP else WORK,deadline or END)
+ if limit-time.time()<1 or time.monotonic()-MONO>880:raise Stop('WINDOW_LIMIT')
+ if base==ARM:assert path.startswith(S) and (method=='GET' or method=='POST' and path==S+'/config/appsettings/list'+A or method=='PUT' and path==S+'/config/appsettings'+A)
+ elif base==SCM:
+  assert method=='GET' and (path.startswith('/api/vfs/') or path=='/api/continuouswebjobs')
+  if path=='/api/continuouswebjobs':
+   assert N==0;N+=1;STATE['listing_requests']=N;save()
+ else:assert base==WEB and method=='GET' and path in ('/health','/ready')
+ headers={} if base==WEB else {'Authorization':'Bearer '+TOKEN};data=None
+ if payload is not None:headers['Content-Type']='application/json';data=json.dumps(payload).encode()
+ if base==SCM and path.endswith('.log'):headers['Range']='bytes=-300000'
+ attempts=2 if base==ARM and method in ('GET','POST') or base==SCM and path.startswith('/api/vfs/') else 1
+ for attempt in range(attempts):
+  timeout=min(10 if base==WEB else 15,limit-time.time())
+  if timeout<1:raise Stop('READINESS_DEADLINE' if deadline else 'WINDOW_LIMIT')
+  try:
+   with opener.open(Request(base+path,headers=headers,data=data,method=method),timeout=timeout) as f:return f.status,f.read(3000000)
+  except HTTPError as e:
+   status=e.code;raw=e.read(200000) if base==SCM and path=='/api/continuouswebjobs' else b'';e.close();return status,raw
+  except (URLError,TimeoutError,ConnectionError) as e:
+   if attempt+1==attempts:raise
+   emit('read_transport_retry',surface='ARM' if base==ARM else 'SCM_VFS',**diagnostic(e));time.sleep(min(2,max(0,limit-time.time())))
+def js(base,path,method='GET',payload=None,deadline=None):
+ status,raw=request(base,path,method,payload,deadline)
+ if status not in (200,201):raise Stop('CONTROL_HTTP_'+str(status))
+ return json.loads(raw)
+def settings():return js(ARM,S+'/config/appsettings/list'+A,'POST')['properties']
+def pair(deadline,label):
+ result={}
+ for path in ('/health','/ready'):
+  begin=time.monotonic()
+  try:status,raw=request(WEB,path,deadline=deadline)
+  except (URLError,TimeoutError,ConnectionError) as e:
+   emit('health_transport_failure',phase=label,route=path,elapsed_ms=round((time.monotonic()-begin)*1000,2),**diagnostic(e))
+   if isinstance(getattr(e,'reason',e),ssl.SSLCertVerificationError):raise Stop('TLS_CERTIFICATE_FAILURE') from None
+   raise Transient() from None
+  if status!=200:
+   emit('health_http_failure',phase=label,route=path,status=status)
+   if status in (502,503,504):raise Transient()
+   raise Stop('HEALTH_HTTP_'+str(status))
+  body=json.loads(raw);result[path]=body
+  if body.get('status')!=('ok' if path=='/health' else 'ready'):raise Stop('UNEXPECTED_HEALTH_BODY')
+ if result['/ready'].get('database_revision')!='005' or result['/ready'].get('release',{}).get('build_version')!='1.2-ca5df7c1dc19e525':raise Stop('RELEASE_OR_REVISION_DRIFT')
+ if STATE.get('baseline_release') and result['/ready']['release']!=STATE['baseline_release']:raise Stop('RELEASE_METADATA_DRIFT')
+ return result
+
+def stable(deadline,label,needed,max_pairs=10):
+ count=0
+ for attempt in range(max_pairs):
+  if time.time()>=deadline:break
+  try:
+   data=pair(deadline,label);count+=1;emit('successful_health_pair',phase=label,attempt=attempt+1,consecutive=count)
+   if count==needed:return data
+  except Transient:count=0;emit('health_streak_reset',phase=label)
+  if time.time()+10>=deadline:break
+  time.sleep(10)
+ raise Stop(label.upper()+'_READINESS_NOT_ESTABLISHED')
+
+def startup(after,deadline):
+ entries=js(SCM,'/api/vfs/LogFiles/',deadline=deadline)
+ files=sorted([x for x in entries if re.fullmatch(r'\d{4}_\d\d_\d\d_[A-Za-z0-9_.-]+_docker\.log',x.get('name',''))],key=lambda x:x.get('mtime') or '',reverse=True)[:2]
+ proof=[];complete=False
+ for file in files:
+  status,raw=request(SCM,'/api/vfs/LogFiles/'+file['name'],deadline=deadline)
+  if status not in (200,206):continue
+  events=[];start_stamp=None;probe_stamp=None
+  for line in raw.decode(errors='replace').splitlines():
+   m=re.match(r'^(\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d+)?Z)\s+(.*)$',line)
+   if not m:continue
+   stamp=datetime.fromisoformat(m.group(1).replace('Z','+00:00')).timestamp();body=m.group(2)
+   if stamp<after:continue
+   if re.fullmatch(r'Starting container: [A-Za-z0-9_-]+_'+re.escape(APP)+r'\.',body):start_stamp=stamp;probe_stamp=None;events.append({'utc':m.group(1),'kind':'APP_CONTAINER_START'})
+   elif start_stamp is not None and re.fullmatch(r'Site startup probe succeeded after [0-9.]+ seconds\.',body):probe_stamp=stamp;events.append({'utc':m.group(1),'kind':'ACTUAL_PROBE_SUCCESS'})
+   elif start_stamp is not None and re.match(r'Site startup probe failed\b|Failed to start site\b',body):raise Stop('CURRENT_CONTAINER_STARTUP_FAILURE')
+   elif body=='Site started.' and probe_stamp is not None and stamp>=probe_stamp:complete=True;events.append({'utc':m.group(1),'kind':'ACTUAL_SITE_STARTED'})
+  if events:proof.append({'file':file['name'],'read_sha256':hashlib.sha256(raw).hexdigest(),'events':events})
+ return complete,proof
+try:
+ assert not (O/'consumed.json').exists(),'APPROVAL_ALREADY_CONSUMED'
+ (O/'consumed.json').write_text(json.dumps({'started_utc':STATE['started_utc'],'maximum_minutes':15})+'\n')
+ env=dict(os.environ,AZURE_CONFIG_DIR=str(R/'.azure-sql-cli'))
+ p=subprocess.run(['az','account','get-access-token','--subscription',SUB,'--resource',ARM+'/','--query','accessToken','-o','tsv','--only-show-errors'],env=env,capture_output=True,text=True,timeout=25);assert p.returncode==0;TOKEN=p.stdout.strip()
+ claims=json.loads(base64.urlsafe_b64decode(TOKEN.split('.')[1]+'==='));assert claims['tid']=='4ac50105-0c66-404e-a107-7cbd8a9a6442' and claims['oid']=='b5d8bfbe-f03a-4132-a13f-ab49aae834b7'
+ site=js(ARM,S+A);config=js(ARM,S+'/config/web'+A)['properties'];assert site['id'].lower()==S.lower() and site['identity']['principalId']=='600447fe-5fea-4801-9033-ab4aafc474cc';assert config['linuxFxVersion']=='PYTHON|3.13' and config['alwaysOn'] and config['numberOfWorkers']==1
+ STATE['baseline_web_config']={k:config.get(k) for k in ('linuxFxVersion','alwaysOn','numberOfWorkers','webJobsEnabled')};ORIGINAL=settings();assert F not in ORIGINAL
+ baseline=stable(min(time.time()+70,WORK),'baseline',1,3);STATE['baseline_release']=baseline['/ready']['release'];STATE['baseline_revision']='005';STATE['original_flag_present']=False;STATE['storage_setting_baseline']={'present':'WEBSITES_ENABLE_APP_SERVICE_STORAGE' in ORIGINAL,'value':ORIGINAL.get('WEBSITES_ENABLE_APP_SERVICE_STORAGE')}
+ for path in ('/api/vfs/site/wwwroot/App_Data/jobs/','/api/vfs/site/wwwroot/app_data/jobs/'):
+  status,_=request(SCM,path)
+  if status!=404:raise Stop('LATENT_JOB_BASELINE_NOT_EMPTY_'+str(status))
+ assert settings()==ORIGINAL,'CONFIGURATION_DRIFT_BEFORE_CHANGE';emit('baseline_verified',release='1.2-ca5df7c1dc19e525',revision='005',flag_absent=True)
+ enabled=time.time();PHASE_END=enabled+300;STATE['readiness_deadline_utc']=datetime.fromtimestamp(PHASE_END,timezone.utc).isoformat();CHANGED=True;STATE['setting_change_attempted']=True;save()
+ status,_=request(ARM,S+'/config/appsettings'+A,'PUT',{'properties':{**ORIGINAL,F:'false'}})
+ if status not in (200,201):raise Stop('SETTING_ENABLEMENT_HTTP_'+str(status))
+ assert settings()=={**ORIGINAL,F:'false'},'CONFIGURATION_DRIFT';emit('single_setting_enabled',fixed_readiness_deadline=STATE['readiness_deadline_utc'])
+ while time.time()<PHASE_END:
+  try:complete,proof=startup(enabled,PHASE_END)
+  except (URLError,TimeoutError,ConnectionError) as e:emit('startup_log_transport_failure',**diagnostic(e));complete=False
+  if complete:
+   STATE['warmup_pass']=True;(O/'warmup-evidence.json').write_text(json.dumps(proof,indent=2)+'\n');emit('actual_warmup_verified');break
+  emit('awaiting_actual_warmup')
+  if time.time()+5>=PHASE_END:break
+  time.sleep(5)
+ if not STATE['warmup_pass']:raise Stop('WARMUP_NOT_VERIFIED_WITHIN_FIXED_DEADLINE')
+ stable(PHASE_END,'enabled',3,10);STATE['readiness_pairs_pass']=True
+ assert time.time()<PHASE_END and settings()=={**ORIGINAL,F:'false'},'READINESS_DEADLINE_OR_CONFIGURATION_DRIFT'
+ emit('three_pairs_verified_before_listing')
+ status,raw=request(SCM,'/api/continuouswebjobs');STATE['listing_http_status']=status
+ summary={'http_status':status,'bytes':len(raw),'response_sha256':hashlib.sha256(raw).hexdigest(),'requests':N}
+ if status==200:
+  jobs=json.loads(raw);assert isinstance(jobs,list);summary['job_count']=len(jobs)
+  if jobs:raise Stop('UNEXPECTED_EXISTING_JOBS')
+ else:
+  text=raw.decode(errors='replace');summary.update(port50555_mentioned='50555' in text,connection_refused='connection refused' in text.lower())
+ (O/'listing-result.json').write_text(json.dumps(summary,indent=2)+'\n');emit('single_listing_result',**summary)
+ if status!=200:raise Stop('WEBJOBS_LISTING_HTTP_'+str(status))
+ STATE['webjobs_listing_verified']=True
+except BaseException as e:
+ STATE['stop_reason']=str(e) if isinstance(e,Stop) else type(e).__name__;STATE['stop_exception']=diagnostic(e);emit('diagnostic_stopped',reason=STATE['stop_reason'],**diagnostic(e))
+finally:
+ CLEANUP=True
+ if CHANGED and ORIGINAL is not None:
+  STATE['rollback_attempted']=True
+  for attempt in (1,2,3):
+   try:
+    current=settings()
+    if {k:v for k,v in current.items() if k!=F}!={k:v for k,v in ORIGINAL.items() if k!=F}:STATE['unrelated_drift_detected']=True
+    if F in current:
+     current.pop(F);status,_=request(ARM,S+'/config/appsettings'+A,'PUT',{'properties':current})
+     if status not in (200,201):raise Stop('ROLLBACK_HTTP_'+str(status))
+    restored=settings();assert F not in restored and restored==ORIGINAL;STATE['configuration_rollback_pass']=True;emit('original_settings_restored',all_settings_match=True);break
+   except BaseException as e:emit('rollback_failure',attempt=attempt,**diagnostic(e))
+   time.sleep(3)
+ if ORIGINAL is not None and (not CHANGED or STATE['configuration_rollback_pass']):
+  try:
+   final=stable(min(time.time()+240,END-20),'final',3,10);current=settings();cfg=js(ARM,S+'/config/web'+A)['properties'];STATE['final_web_config']={k:cfg.get(k) for k in STATE['baseline_web_config']};assert STATE['final_web_config']==STATE['baseline_web_config'] and current==ORIGINAL
+   STATE['configuration_rollback_pass']=True;STATE['final_health_pass']=True;STATE['final_release']=final['/ready']['release']['build_version'];STATE['final_revision']=final['/ready']['database_revision'];emit('final_health_and_configuration_verified',release=STATE['final_release'],revision=STATE['final_revision'])
+  except BaseException as e:STATE['final_verification_failure']=diagnostic(e);emit('final_verification_failed',**diagnostic(e))
+ STATE['finished_utc']=datetime.now(timezone.utc).isoformat();STATE['elapsed_seconds']=round(time.time()-START,3);STATE['monotonic_elapsed_seconds']=round(time.monotonic()-MONO,3);STATE['within_15_minutes']=time.time()-START<=900 and time.monotonic()-MONO<=900
+ clean=STATE['configuration_rollback_pass'] and STATE['final_health_pass'] and STATE['within_15_minutes']
+ STATE['status']=('PASS' if STATE.get('webjobs_listing_verified') else 'PARTIAL') if clean else 'BLOCKED'
+ emit('finished',status=STATE['status'],listing_requests=N,listing_http_status=STATE['listing_http_status'],rollback_pass=STATE['configuration_rollback_pass'],health_pass=STATE['final_health_pass'],elapsed_seconds=STATE['elapsed_seconds'])

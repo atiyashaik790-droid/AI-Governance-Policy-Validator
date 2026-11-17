@@ -1,0 +1,12 @@
+[
+  {
+    "file": "2026_11_08_lw1mdlwk0000LX_docker.log",
+    "tail_sha256": "2ad66f2a8c4101f609c63da273ce2663108a3f5329e3fe5438f9df5c919be331",
+    "markers": [
+      {
+        "utc": "2026-11-08T09:18:20.6665441Z",
+        "classification": "STARTUP_COMPLETE"
+      }
+    ]
+  }
+]

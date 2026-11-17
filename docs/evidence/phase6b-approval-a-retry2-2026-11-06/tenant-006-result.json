@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "revision": "006",
+  "same_tenant_read": 200,
+  "foreign_tenant_read": 404,
+  "cross_tenant_fk_native_code": 547,
+  "failed_insert_retained_rows": 0
+}

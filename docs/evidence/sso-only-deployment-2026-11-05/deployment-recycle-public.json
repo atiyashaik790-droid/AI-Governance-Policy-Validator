@@ -1,0 +1,44 @@
+{
+  "checks": {
+    "/health": {
+      "http_status": 200,
+      "body": {
+        "status": "ok"
+      }
+    },
+    "/ready": {
+      "http_status": 200,
+      "body": {
+        "status": "ready",
+        "provider_mode": "live",
+        "release": {
+          "git_commit": "60fa94ef9ec01be0d0b4af347a3251255cf7565c",
+          "build_version": "1.2-6749226f1af65b63",
+          "built_utc": "2026-11-04T12:18:02.616350+00:00",
+          "frontend_sha256": "5bef17e44c53f3652b72f143fffbed00c4c3e77d0395654c7a9497e2a2b7f132",
+          "backend_sha256": "00e764d9e2d2ef88872a0546c63b771e9c5c53dae34b7f97419f53e610c52db4",
+          "required_migration": "004",
+          "supported_migrations": [
+            "004",
+            "005"
+          ],
+          "sso_required_migration": "005"
+        },
+        "database_revision": "005",
+        "schema_versioned": true,
+        "sso_available": true
+      }
+    },
+    "/api/sso/status": {
+      "http_status": 200,
+      "body": {
+        "sso_enabled": true,
+        "configured": true,
+        "demo_login_enabled": true
+      }
+    }
+  },
+  "status": "IN_PROGRESS",
+  "failure_type": "AssertionError",
+  "category": "OLD_RELEASE_DURING_DEPLOYMENT_RECYCLE"
+}

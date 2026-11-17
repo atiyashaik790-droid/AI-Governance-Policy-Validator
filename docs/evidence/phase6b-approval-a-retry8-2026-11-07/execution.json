@@ -1,0 +1,501 @@
+{
+  "scope": "Approval A ONLY",
+  "events": [
+    {
+      "utc": "2026-11-07T09:26:54.761115+00:00",
+      "kind": "budget_gate_pass",
+      "daily_usd": 0.4839,
+      "conservative_compute_10_billed_hours_usd": 0.20162500000000003,
+      "total_budget_usd": 1,
+      "testing_stop_hours": 3,
+      "cleanup_deadline_hours": 4,
+      "notes": "Bounded tiny synthetic data; local backups; estimate monitored from actual lifetime, not delayed Azure billing"
+    },
+    {
+      "utc": "2026-11-07T09:26:54.762773+00:00",
+      "kind": "cleanup_watchdog_started",
+      "pid": 112629,
+      "delete_after_hours": 3
+    },
+    {
+      "utc": "2026-11-07T09:26:57.711233+00:00",
+      "kind": "create_intent",
+      "resource_id": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/databases/sqldb-gpv-mig-20261106-a1",
+      "incarnation": 1
+    },
+    {
+      "utc": "2026-11-07T09:28:07.961614+00:00",
+      "kind": "created",
+      "resource_id": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/databases/sqldb-gpv-mig-20261106-a1",
+      "sku": {
+        "capacity": 10,
+        "family": null,
+        "name": "Standard",
+        "size": null,
+        "tier": "Standard"
+      },
+      "objective": "S0",
+      "max_size": 268435456000,
+      "backup": "Local"
+    },
+    {
+      "utc": "2026-11-07T09:28:45.844839+00:00",
+      "kind": "migration_pass",
+      "revision": "005"
+    },
+    {
+      "utc": "2026-11-07T09:28:51.317244+00:00",
+      "kind": "synthetic_seed_pass"
+    },
+    {
+      "utc": "2026-11-07T09:29:03.233889+00:00",
+      "kind": "temporary_grants_pass",
+      "revision": "005",
+      "identity": "app-governance-validator-atiya-1026",
+      "authentication": "SQL EXECUTE AS context only; no managed identity authentication claim"
+    },
+    {
+      "utc": "2026-11-07T09:29:23.842774+00:00",
+      "kind": "retained_baseline",
+      "revision": "005",
+      "tables": {
+        "active_policy_assignments": {
+          "count": 1,
+          "sha256": "c6c06ddfd463105234dfbbe2cec2d5509cc1f4fd411838ba9a0beb78192992eb"
+        },
+        "audit_events": {
+          "count": 1,
+          "sha256": "7465501c38a500cbe2850e96cafea1f9decf1eec4c056a3ced66563a6fa77bcf"
+        },
+        "demo_sessions": {
+          "count": 1,
+          "sha256": "0e7c0d562511cfa1b91dca2b61b5d3bb33d5e3db0141be39d27201167a99f74c"
+        },
+        "evaluation_exports": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "export_jobs": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "feedback_records": {
+          "count": 1,
+          "sha256": "393ceaa154625d9784a5f655f8057fc806b2f63f9dc73e180782690cf16d96a4"
+        },
+        "human_review_cases": {
+          "count": 1,
+          "sha256": "9695bdd02be7591bab5370bc72135bae2d923afa536f7c05294ae3d947a32f97"
+        },
+        "inference_rate_buckets": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "inference_usage": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "policies": {
+          "count": 1,
+          "sha256": "69f590af701190563067962740bb3fc3e23aa491d6a49dab553c27495a942057"
+        },
+        "policy_versions": {
+          "count": 1,
+          "sha256": "bad8f9e3ae23df37d0fbde4741368d3cee92a5682fd7be729c1768721e3afc96"
+        },
+        "review_assignments": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "review_notes": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "sso_memberships": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "sso_sessions": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "sso_transactions": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "validation_executions": {
+          "count": 1,
+          "sha256": "358fb0d38b7ed6d8092371c79ec24602e8e35dc922b6af0aba98653567cb2ef0"
+        }
+      }
+    },
+    {
+      "utc": "2026-11-07T09:29:23.844470+00:00",
+      "kind": "prior_005_evidence_reused",
+      "evidence": "phase6b-approval-a-retry1-2026-11-06",
+      "new_candidate_005_azure_qualification": false
+    },
+    {
+      "utc": "2026-11-07T09:30:02.472210+00:00",
+      "kind": "migration_pass",
+      "revision": "006"
+    },
+    {
+      "utc": "2026-11-07T09:30:10.937602+00:00",
+      "kind": "retained_005_to_006_pass",
+      "tables": {
+        "active_policy_assignments": {
+          "count": 1,
+          "sha256": "c6c06ddfd463105234dfbbe2cec2d5509cc1f4fd411838ba9a0beb78192992eb"
+        },
+        "audit_events": {
+          "count": 1,
+          "sha256": "7465501c38a500cbe2850e96cafea1f9decf1eec4c056a3ced66563a6fa77bcf"
+        },
+        "demo_sessions": {
+          "count": 1,
+          "sha256": "0e7c0d562511cfa1b91dca2b61b5d3bb33d5e3db0141be39d27201167a99f74c"
+        },
+        "evaluation_exports": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "export_jobs": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "feedback_records": {
+          "count": 1,
+          "sha256": "393ceaa154625d9784a5f655f8057fc806b2f63f9dc73e180782690cf16d96a4"
+        },
+        "human_review_cases": {
+          "count": 1,
+          "sha256": "9695bdd02be7591bab5370bc72135bae2d923afa536f7c05294ae3d947a32f97"
+        },
+        "inference_rate_buckets": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "inference_usage": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "policies": {
+          "count": 1,
+          "sha256": "69f590af701190563067962740bb3fc3e23aa491d6a49dab553c27495a942057"
+        },
+        "policy_versions": {
+          "count": 1,
+          "sha256": "bad8f9e3ae23df37d0fbde4741368d3cee92a5682fd7be729c1768721e3afc96"
+        },
+        "review_assignments": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "review_notes": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "sso_memberships": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "sso_sessions": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "sso_transactions": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "validation_executions": {
+          "count": 1,
+          "sha256": "358fb0d38b7ed6d8092371c79ec24602e8e35dc922b6af0aba98653567cb2ef0"
+        }
+      }
+    },
+    {
+      "utc": "2026-11-07T09:30:15.057312+00:00",
+      "kind": "temporary_grants_pass",
+      "revision": "006",
+      "identity": "app-governance-validator-atiya-1026",
+      "authentication": "SQL EXECUTE AS context only; no managed identity authentication claim"
+    },
+    {
+      "utc": "2026-11-07T09:31:05.769229+00:00",
+      "kind": "schema_contract_pass",
+      "revision": "006",
+      "result": {
+        "revision": "006",
+        "versioned": true,
+        "sso_schema": true
+      }
+    },
+    {
+      "utc": "2026-11-07T09:31:05.976134+00:00",
+      "kind": "retry5_006_multi_tenant_evidence_reused"
+    },
+    {
+      "utc": "2026-11-07T09:31:36.979072+00:00",
+      "kind": "migration_pass",
+      "revision": "007"
+    },
+    {
+      "utc": "2026-11-07T09:31:46.773888+00:00",
+      "kind": "retained_006_to_007_pass",
+      "tables": {
+        "active_policy_assignments": {
+          "count": 1,
+          "sha256": "c6c06ddfd463105234dfbbe2cec2d5509cc1f4fd411838ba9a0beb78192992eb"
+        },
+        "audit_events": {
+          "count": 1,
+          "sha256": "7465501c38a500cbe2850e96cafea1f9decf1eec4c056a3ced66563a6fa77bcf"
+        },
+        "demo_sessions": {
+          "count": 1,
+          "sha256": "0e7c0d562511cfa1b91dca2b61b5d3bb33d5e3db0141be39d27201167a99f74c"
+        },
+        "evaluation_exports": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "execution_policy_evidence": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "export_jobs": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "feedback_records": {
+          "count": 1,
+          "sha256": "393ceaa154625d9784a5f655f8057fc806b2f63f9dc73e180782690cf16d96a4"
+        },
+        "human_review_cases": {
+          "count": 1,
+          "sha256": "9695bdd02be7591bab5370bc72135bae2d923afa536f7c05294ae3d947a32f97"
+        },
+        "inference_rate_buckets": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "inference_usage": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "policies": {
+          "count": 1,
+          "sha256": "69f590af701190563067962740bb3fc3e23aa491d6a49dab553c27495a942057"
+        },
+        "policy_versions": {
+          "count": 1,
+          "sha256": "bad8f9e3ae23df37d0fbde4741368d3cee92a5682fd7be729c1768721e3afc96"
+        },
+        "review_assignments": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "review_notes": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "sso_memberships": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "sso_sessions": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "sso_transactions": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "validation_executions": {
+          "count": 1,
+          "sha256": "dc203e9ba1c0582877ead4d5364ad02f6cf81709e8b6c6f48afcf3ae6aaa6ae5"
+        },
+        "workspace_policy_assignment_events": {
+          "count": 1,
+          "sha256": "e6fc69d315b8540de1e4bcc59741c75d4f3301606b9d689d41ef0de5ff8e8eeb"
+        },
+        "workspace_policy_assignments": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "workspace_policy_states": {
+          "count": 1,
+          "sha256": "d20072b012235e82e73c33f01baafd6ce0f4b43f3af62e5bbb0232434e02d371"
+        }
+      }
+    },
+    {
+      "utc": "2026-11-07T09:31:50.094529+00:00",
+      "kind": "temporary_grants_pass",
+      "revision": "007",
+      "identity": "app-governance-validator-atiya-1026",
+      "authentication": "SQL EXECUTE AS context only; no managed identity authentication claim"
+    },
+    {
+      "utc": "2026-11-07T09:32:49.601062+00:00",
+      "kind": "schema_contract_pass",
+      "revision": "007",
+      "result": {
+        "revision": "007",
+        "versioned": true,
+        "sso_schema": true
+      }
+    },
+    {
+      "utc": "2026-11-07T09:33:20.000946+00:00",
+      "kind": "migration_pass",
+      "revision": "008"
+    },
+    {
+      "utc": "2026-11-07T09:33:30.316569+00:00",
+      "kind": "retained_007_to_008_pass",
+      "tables": {
+        "active_policy_assignments": {
+          "count": 1,
+          "sha256": "c6c06ddfd463105234dfbbe2cec2d5509cc1f4fd411838ba9a0beb78192992eb"
+        },
+        "audit_events": {
+          "count": 1,
+          "sha256": "7465501c38a500cbe2850e96cafea1f9decf1eec4c056a3ced66563a6fa77bcf"
+        },
+        "demo_sessions": {
+          "count": 1,
+          "sha256": "0e7c0d562511cfa1b91dca2b61b5d3bb33d5e3db0141be39d27201167a99f74c"
+        },
+        "evaluation_exports": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "execution_policy_evidence": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "export_jobs": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "feedback_records": {
+          "count": 1,
+          "sha256": "393ceaa154625d9784a5f655f8057fc806b2f63f9dc73e180782690cf16d96a4"
+        },
+        "human_review_cases": {
+          "count": 1,
+          "sha256": "9695bdd02be7591bab5370bc72135bae2d923afa536f7c05294ae3d947a32f97"
+        },
+        "inference_rate_buckets": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "inference_usage": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "policies": {
+          "count": 1,
+          "sha256": "69f590af701190563067962740bb3fc3e23aa491d6a49dab553c27495a942057"
+        },
+        "policy_versions": {
+          "count": 1,
+          "sha256": "bad8f9e3ae23df37d0fbde4741368d3cee92a5682fd7be729c1768721e3afc96"
+        },
+        "review_assignments": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "review_notes": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "review_protected_content": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "sso_memberships": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "sso_sessions": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "sso_transactions": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "validation_executions": {
+          "count": 1,
+          "sha256": "dc203e9ba1c0582877ead4d5364ad02f6cf81709e8b6c6f48afcf3ae6aaa6ae5"
+        },
+        "workspace_policy_assignment_events": {
+          "count": 1,
+          "sha256": "e6fc69d315b8540de1e4bcc59741c75d4f3301606b9d689d41ef0de5ff8e8eeb"
+        },
+        "workspace_policy_assignments": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "workspace_policy_states": {
+          "count": 1,
+          "sha256": "d20072b012235e82e73c33f01baafd6ce0f4b43f3af62e5bbb0232434e02d371"
+        }
+      }
+    },
+    {
+      "utc": "2026-11-07T09:34:32.568276+00:00",
+      "kind": "schema_contract_pass",
+      "revision": "008",
+      "result": {
+        "revision": "008",
+        "versioned": true,
+        "sso_schema": true
+      }
+    },
+    {
+      "utc": "2026-11-07T09:34:32.776542+00:00",
+      "kind": "retry5_sql_security_evidence_reused",
+      "immutability_catalog_rechecked": true
+    },
+    {
+      "utc": "2026-11-07T09:43:57.982421+00:00",
+      "kind": "unexpected_stop",
+      "failure_type": "RuntimeError",
+      "schema_diagnostic": {
+        "category": "SCHEMA_QUERY_OR_IMPLEMENTATION_FAILURE"
+      },
+      "detail": "Extracted package probe failed: candidate/008"
+    },
+    {
+      "utc": "2026-11-07T09:44:00.402568+00:00",
+      "kind": "delete_intent",
+      "resource_id": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/databases/sqldb-gpv-mig-20261106-a1"
+    },
+    {
+      "utc": "2026-11-07T09:44:20.906105+00:00",
+      "kind": "cleanup_confirmed",
+      "arm_get": "ResourceNotFound",
+      "inventory": [
+        "sqldb-governance-validator-dev",
+        "master"
+      ],
+      "resource_id": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/databases/sqldb-gpv-mig-20261106-a1"
+    },
+    {
+      "utc": "2026-11-07T09:44:20.906713+00:00",
+      "kind": "execution_finished",
+      "status": "STOPPED",
+      "elapsed_seconds": 1046.15,
+      "sqlite_unchanged": true
+    }
+  ],
+  "incarnations": 1,
+  "created": false,
+  "status": "STOPPED",
+  "elapsed_seconds": 1046.15,
+  "sqlite_unchanged": true
+}

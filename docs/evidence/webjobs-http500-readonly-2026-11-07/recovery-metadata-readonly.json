@@ -1,0 +1,17 @@
+{
+  "source": "sqldb-governance-validator-dev",
+  "status": "Online",
+  "earliestRestoreDate_observed": "2026-10-31T17:02:25.2115438Z",
+  "retentionDays": 7,
+  "differentialIntervalHours": 24,
+  "backupRedundancy": "Local",
+  "tier": "Standard",
+  "capacity_dtu": 10,
+  "inventory": [
+    "sqldb-governance-validator-dev",
+    "master"
+  ],
+  "restore_drill_performed": false,
+  "direct_SQL_reads_performed": false,
+  "revision_evidence": "Hosted /ready reports 005; prior SQL metadata evidence reused"
+}

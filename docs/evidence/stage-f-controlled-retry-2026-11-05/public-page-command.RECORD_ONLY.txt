@@ -1,0 +1,25 @@
+import json,re,hashlib,urllib.request,zipfile
+from pathlib import Path
+from urllib.parse import urljoin,urlsplit
+from datetime import datetime,timezone
+origin='https://app-governance-validator-atiya-1026.azurewebsites.net'
+r={'observed_at_utc':datetime.now(timezone.utc).isoformat(),'method':'READ_ONLY_HTTP_PAGE_AND_SCRIPT_INSPECTION','rendered_browser_check':'UNAVAILABLE_NO_CONNECTED_BROWSER','sso_login_endpoint_called':False}
+try:
+ with urllib.request.urlopen(origin+'/',timeout=20) as response:html=response.read().decode();r['page_http_status']=response.status
+ scripts=re.findall(r'<script[^>]+src=["\x27]([^"\x27]+)',html)
+ assert scripts
+ texts=[];r['scripts']=[]
+ with zipfile.ZipFile('artifacts/governance-sso-005-compatible-rollback-20261104.zip') as z:
+  for src in scripts:
+   url=urljoin(origin,src);assert urlsplit(url).netloc==urlsplit(origin).netloc
+   with urllib.request.urlopen(url,timeout=20) as response:b=response.read()
+   member='static'+urlsplit(url).path
+   assert b==z.read(member)
+   r['scripts'].append({'path':urlsplit(url).path,'matches_verified_release':True,'sha256':hashlib.sha256(b).hexdigest()});texts.append(b.decode())
+ content='\n'.join(texts)
+ r['microsoft_choice_in_served_code']='Sign in with Microsoft' in content
+ r['demo_choice_in_served_code']='Use demonstration access' in content
+ assert r['microsoft_choice_in_served_code'] and r['demo_choice_in_served_code']
+ r['status']='PASS_SERVED_PAGE_AND_CHOICES_CODE'
+except Exception as e:r['status']='BLOCKED';r['error_kind']=type(e).__name__
+Path('docs/evidence/stage-f-controlled-retry-2026-11-05/public-login-page.json').write_text(json.dumps(r,indent=2)+'\n');print(json.dumps(r))

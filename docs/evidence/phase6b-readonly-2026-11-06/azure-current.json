@@ -1,0 +1,207 @@
+{
+  "database": {
+    "status": "VERIFIED",
+    "data": {
+      "backupRedundancy": "Local",
+      "earliestRestoreDate": "2026-10-30T08:41:52.774878+00:00",
+      "elasticPoolId": null,
+      "location": "westus2",
+      "maxSizeBytes": 268435456000,
+      "name": "sqldb-governance-validator-dev",
+      "objective": "S0",
+      "sku": {
+        "capacity": 10,
+        "family": null,
+        "name": "Standard",
+        "size": null,
+        "tier": "Standard"
+      },
+      "status": "Online"
+    }
+  },
+  "backup": {
+    "status": "VERIFIED",
+    "data": {
+      "diffBackupIntervalInHours": 24,
+      "retentionDays": 7
+    }
+  },
+  "server_permission_metadata": {
+    "status": "VERIFIED",
+    "data": [
+      {
+        "actions": [
+          "*"
+        ],
+        "notActions": [
+          "Microsoft.Authorization/*/Delete",
+          "Microsoft.Authorization/*/Write",
+          "Microsoft.Authorization/elevateAccess/Action",
+          "Microsoft.Blueprint/blueprintAssignments/write",
+          "Microsoft.Blueprint/blueprintAssignments/delete",
+          "Microsoft.Compute/galleries/share/action",
+          "Microsoft.Purview/consents/write",
+          "Microsoft.Purview/consents/delete",
+          "Microsoft.Resources/deploymentStacks/manageDenySetting/action",
+          "Microsoft.Subscription/cancel/action",
+          "Microsoft.Subscription/enable/action"
+        ]
+      },
+      {
+        "actions": [
+          "*/read",
+          "Microsoft.Authorization/*",
+          "Microsoft.Support/*"
+        ],
+        "notActions": []
+      },
+      {
+        "actions": [
+          "Microsoft.Authorization/*/read",
+          "Microsoft.CognitiveServices/*/read",
+          "Microsoft.CognitiveServices/accounts/listkeys/action",
+          "Microsoft.CognitiveServices/accounts/projects/connections/listsecrets/action",
+          "Microsoft.Insights/alertRules/read",
+          "Microsoft.Insights/diagnosticSettings/read",
+          "Microsoft.Insights/logDefinitions/read",
+          "Microsoft.Insights/metricdefinitions/read",
+          "Microsoft.Insights/metrics/read",
+          "Microsoft.PolicyInsights/*/read",
+          "Microsoft.ResourceHealth/availabilityStatuses/read",
+          "Microsoft.Resources/deployments/*",
+          "Microsoft.Resources/subscriptions/operationresults/read",
+          "Microsoft.Resources/subscriptions/read",
+          "Microsoft.Resources/subscriptions/resourceGroups/read",
+          "Microsoft.Support/*"
+        ],
+        "notActions": []
+      }
+    ],
+    "allow_metadata_only": {
+      "Microsoft.Sql/servers/databases/read": true,
+      "Microsoft.Sql/servers/databases/write": true,
+      "Microsoft.Sql/servers/databases/delete": true,
+      "Microsoft.Sql/servers/databases/restorePoints/read": true,
+      "Microsoft.Sql/servers/databases/backupShortTermRetentionPolicies/read": true
+    },
+    "not_complete_authorization_proof": true
+  },
+  "group_permission_metadata": {
+    "status": "VERIFIED",
+    "data": [
+      {
+        "actions": [
+          "*"
+        ],
+        "notActions": [
+          "Microsoft.Authorization/*/Delete",
+          "Microsoft.Authorization/*/Write",
+          "Microsoft.Authorization/elevateAccess/Action",
+          "Microsoft.Blueprint/blueprintAssignments/write",
+          "Microsoft.Blueprint/blueprintAssignments/delete",
+          "Microsoft.Compute/galleries/share/action",
+          "Microsoft.Purview/consents/write",
+          "Microsoft.Purview/consents/delete",
+          "Microsoft.Resources/deploymentStacks/manageDenySetting/action",
+          "Microsoft.Subscription/cancel/action",
+          "Microsoft.Subscription/enable/action"
+        ]
+      },
+      {
+        "actions": [
+          "*/read",
+          "Microsoft.Authorization/*",
+          "Microsoft.Support/*"
+        ],
+        "notActions": []
+      },
+      {
+        "actions": [
+          "Microsoft.Authorization/*/read",
+          "Microsoft.CognitiveServices/*/read",
+          "Microsoft.CognitiveServices/accounts/listkeys/action",
+          "Microsoft.CognitiveServices/accounts/projects/connections/listsecrets/action",
+          "Microsoft.Insights/alertRules/read",
+          "Microsoft.Insights/diagnosticSettings/read",
+          "Microsoft.Insights/logDefinitions/read",
+          "Microsoft.Insights/metricdefinitions/read",
+          "Microsoft.Insights/metrics/read",
+          "Microsoft.PolicyInsights/*/read",
+          "Microsoft.ResourceHealth/availabilityStatuses/read",
+          "Microsoft.Resources/deployments/*",
+          "Microsoft.Resources/subscriptions/operationresults/read",
+          "Microsoft.Resources/subscriptions/read",
+          "Microsoft.Resources/subscriptions/resourceGroups/read",
+          "Microsoft.Support/*"
+        ],
+        "notActions": []
+      }
+    ],
+    "allow_metadata_only": {
+      "Microsoft.Sql/servers/databases/read": true,
+      "Microsoft.Sql/servers/databases/write": true,
+      "Microsoft.Sql/servers/databases/delete": true,
+      "Microsoft.Sql/servers/databases/restorePoints/read": true,
+      "Microsoft.Sql/servers/databases/backupShortTermRetentionPolicies/read": true
+    },
+    "not_complete_authorization_proof": true
+  },
+  "locks": {
+    "status": "VERIFIED",
+    "data": []
+  },
+  "deny_assignments": {
+    "status": "VERIFIED",
+    "data": []
+  },
+  "current_database_names": {
+    "status": "VERIFIED",
+    "data": [
+      "sqldb-governance-validator-dev",
+      "master"
+    ]
+  },
+  "hosted_settings": {
+    "status": "VERIFIED",
+    "data": [
+      {
+        "name": "DEMO_BROWSER_LOGIN_ENABLED",
+        "value": "false"
+      },
+      {
+        "name": "SSO_ENABLED",
+        "value": "true"
+      },
+      {
+        "name": "SSO_SESSION_MINUTES",
+        "value": "60"
+      },
+      {
+        "name": "ALLOW_LEGACY_API_CREDENTIALS",
+        "value": "false"
+      }
+    ]
+  },
+  "hosted_ready": {
+    "http_status": 200,
+    "data": {
+      "status": "ready",
+      "database_revision": "005",
+      "schema_versioned": true,
+      "sso_available": true,
+      "release": {
+        "git_commit": "unavailable",
+        "build_version": "1.2-ca5df7c1dc19e525",
+        "built_utc": "2026-11-05T12:09:33.571692+00:00",
+        "frontend_sha256": "beb38c3485b8abfb672e5a2bf851f1f178c1a8049f367b450708e5abbe7581d4",
+        "backend_sha256": "ad2e4af6c958f24e27e8838cccf8ca9dc46c76fb430c583d2c6737cd3034a813",
+        "required_migration": "004",
+        "supported_migrations": [
+          "004",
+          "005"
+        ],
+        "sso_required_migration": "005"
+      }
+    }
+  }
+}

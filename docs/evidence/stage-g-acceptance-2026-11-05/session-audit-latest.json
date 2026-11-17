@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "method": "EXISTING_MAIN_CONTAINER_EXEC_WEBSOCKET",
+  "hosted_changes": false,
+  "sql_accessed": true,
+  "pinned_operator_identity_verified": true,
+  "handshake": "PASS",
+  "payload_sent": true,
+  "sql_read_only": true,
+  "session_credentials_exported": false,
+  "audit_counts": {
+    "sso.session.created": 0,
+    "sso.session.revoked": 0
+  },
+  "latest_audit_time": {
+    "sso.session.created": null,
+    "sso.session.revoked": null
+  },
+  "approved_membership_session_counts": {
+    "total": 0,
+    "active": 0,
+    "revoked": 0
+  },
+  "observed_at_utc": "2026-11-05T06:16:47.729604+00:00",
+  "direct_database_writes": false,
+  "metadata_correction": "Inherited wrapper sql_accessed=false was incorrect; this purpose-built probe performed SELECT-only session/audit aggregation and explicit rollback."
+}

@@ -1,0 +1,36 @@
+[
+  {
+    "elapsed_seconds": 8.07,
+    "completed": true,
+    "healthy": true,
+    "event": "cleanup.startup"
+  },
+  {
+    "retained_expires_at": 1794651660,
+    "expires_at": 1794046859,
+    "created_at": 1793442059,
+    "eligible": true,
+    "cutoff": 1794046864,
+    "event": "cleanup.fixture"
+  },
+  {
+    "removed": 0,
+    "stage": "backlog",
+    "attempted": 0,
+    "reason": "COMPLETE",
+    "elapsed_ms": 8070.267,
+    "healthy": true,
+    "selected": 0,
+    "event": "cleanup.pass"
+  },
+  {
+    "removed": 1,
+    "stage": "backlog",
+    "attempted": 1,
+    "reason": "COMPLETE",
+    "elapsed_ms": 4925.286,
+    "healthy": true,
+    "selected": 1,
+    "event": "cleanup.pass"
+  }
+]

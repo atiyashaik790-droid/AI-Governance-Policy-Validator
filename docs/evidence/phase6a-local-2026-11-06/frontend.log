@@ -1,0 +1,58 @@
+
+> governance-console@1.2.0 test
+> vitest run --reporter=default --reporter=junit --outputFile.junit=../docs/evidence/phase6a-local-2026-11-06/frontend.xml
+
+
+ RUN  v5.0.5 /home/sigmoid/AI governance policy validator/frontend
+
+ ✓ src/ReviewContent.test.tsx (10 tests) 1295ms
+   ✓ shows professional metadata and never prefetches protected content 356ms
+   ✓ automatically clears content at the server-provided reveal deadline 519ms
+ ✓ src/CustomCategories.test.tsx (5 tests) 1639ms
+   ✓ adds, edits, disables and removes custom categories alongside built-in controls, then saves through the authenticated API 1024ms
+ ✓ src/Sso.test.tsx (19 tests) 1750ms
+   ✓ Microsoft browser authentication (7)
+     ✓ shows accessible SSO login without manual token entry 375ms
+ ✓ src/DecisionNotice.test.tsx (18 tests) 1647ms
+   ✓ shows accessible default BLOCK guidance with a next action 444ms
+   ✓ integrates review guidance into the Playground for uploads=false without showing held content 575ms
+   ✓ integrates review guidance into the Playground for uploads=true without showing held content 415ms
+ ✓ src/AttachmentPicker.test.tsx (5 tests) 1922ms
+   ✓ previews, replaces and submits one governed document request in LEGACY mode 981ms
+   ✓ removes an attachment and preserves prompt-only routing 361ms
+ ✓ src/UserPortal.test.tsx (19 tests) 2396ms
+   ✓ routes User from / to chatbot only 493ms
+ ✓ src/api.test.ts (8 tests) 27ms
+ ✓ src/MultiSelectDropdown.test.tsx (3 tests) 459ms
+   ✓ keeps a compact summary, supports multiple selections and restores focus on Escape 383ms
+ ✓ src/MultiPolicy.test.tsx (10 tests) 2839ms
+   ✓ requires an explicit version, sends a strong workspace precondition, and deactivates independently 1341ms
+   ✓ surfaces stale ETags and refreshes without replaying the mutation 404ms
+ ✓ src/SettingsAnalytics.test.tsx (12 tests) 2907ms
+   ✓ distinguishes daily reservations, retained statuses and unavailable recorded tokens 587ms
+   ✓ preserves session pagination and refresh with page-scoped counts 397ms
+   ✓ moves usage out of Settings and gates analytics access for Admin in LEGACY 645ms
+ ✓ src/LoadingPerformance.test.tsx (1 test) 207ms
+ ✓ src/App.test.tsx (13 tests) 3101ms
+   ✓ real API boundary (3)
+     ✓ requires successful Microsoft session restoration 463ms
+   ✓ governed playground integration (2)
+     ✓ displays an inspected response with the fixture label 440ms
+     ✓ withholds rejected output 300ms
+   ✓ truthful generation diagnostics (3)
+     ✓ renders FAILED without implying successful release 408ms
+   ✓ remove policies while retaining history (2)
+     ✓ deletes a disabled inactive policy with its version and retains active-policy protection 414ms
+ ✓ src/AuditFilters.test.tsx (7 tests) 3160ms
+   ✓ applies server filters, preserves them on every tab, and clears them (v2=false) 1624ms
+   ✓ applies server filters, preserves them on every tab, and clears them (v2=true) 984ms
+ ✓ src/Backend.integration.test.jsx (1 test) 6314ms
+   ✓ React to disposable FastAPI integration (1)
+     ✓ completes policy, simulation, decisions, review, feedback and failed offline export through existing screens 3600ms
+
+ Test Files  14 passed (14)
+      Tests  131 passed (131)
+   Start at  14:01:43
+   Duration  7.29s (tests 68%, environment 23%, import 6%, setup 2%, transform 1%)
+
+JUNIT report written to /home/sigmoid/AI governance policy validator/docs/evidence/phase6a-local-2026-11-06/frontend.xml

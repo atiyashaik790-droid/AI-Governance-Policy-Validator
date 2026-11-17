@@ -1,0 +1,13 @@
+{
+  "docs/evidence/webjobs-http500-readonly-2026-11-07/startup-failure-sanitized.json": "1cf59b64ae308660a36bed750250cb7f5bae4de85ba7d25f17fe5db69d9a417f",
+  "docs/evidence/webjobs-http500-readonly-2026-11-07/deployment-bundle-manifest.json": "4ac37455112dc50bf8a4e23737c1703c2aac1c7c7228643d01201e3b0bf4762d",
+  "docs/evidence/webjobs-http500-readonly-2026-11-07/hosted-acceptance-matrix.json": "4e776e57c400d4a8b49aab36ebcdb698446d32ab7f57f8582a052216e14da702",
+  "docs/evidence/webjobs-http500-readonly-2026-11-07/failure-traces-sanitized.json": "b6d8b60656f413028b8d79c9934bd7f1cb13e169735f20b522a0caebb36803c2",
+  "docs/evidence/webjobs-http500-readonly-2026-11-07/release-preservation.json": "f82b394551cd3f04b1979627d9bcaf60c06301ab0c6bd4c0bd853d336373a683",
+  "docs/evidence/webjobs-http500-readonly-2026-11-07/container-startup-sanitized.json": "7cc3888e24fc1c3c8bc90734468e1504c522ae4a0a4ca7842173741b2730a5ba",
+  "docs/evidence/webjobs-http500-readonly-2026-11-07/startup-failure-decoding.json": "6ef15486961d52e3dd91d72559c174f299f6649257c40a1992bfa22aa4c0fc5a",
+  "docs/evidence/webjobs-http500-readonly-2026-11-07/log-inventory.json": "f184fbaa351f1646be63e1368809555001d21b1f0c2978a1295df16c3360b041",
+  "docs/evidence/webjobs-http500-readonly-2026-11-07/relevant-log-inventory.json": "946a8e82175d13c59dd523eaaa0ec60339dbd8c01ea8f63997fef37825617310",
+  "docs/evidence/webjobs-http500-readonly-2026-11-07/recovery-metadata-readonly.json": "3d99135a587dddd7c91deb34c09efe8ec7a407241cc480084eeb7ecd07849d59",
+  "docs/evidence/webjobs-http500-readonly-2026-11-07/current-readiness-config-sanitized.json": "87892ecb56289001f3ee2aa9a1f07d07e9756cac6ebae60b6f4fed8b195fcb6a"
+}

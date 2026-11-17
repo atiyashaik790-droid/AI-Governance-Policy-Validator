@@ -1,0 +1,36 @@
+{
+  "candidate_id": "1.2-cf0a97a4daffd3e7",
+  "candidate_sha256": "dbb916e5f2679e482d603e52f349b4de7f85e7d820142ac98ce23999a3d3918d",
+  "candidate_path": "artifacts/phase6b-health-fix-2026-11-07/candidate.zip",
+  "migration_hashes": {
+    "backend/migrations/versions/001_foundation.py": "4cced1e6fdcab34608d61144c10a1b4d093e5cfcfe510e0c7b1b03d779b1f121",
+    "backend/migrations/versions/002_policy_concurrency.py": "6f6626c9df86c84612caaa8c4695046d46ab0ace2547d5ed2bbaa39127a7b5e0",
+    "backend/migrations/versions/003_review_concurrency.py": "1473472d75c340c59d3a94f84808471bac92511c722ba690ecf7999038846225",
+    "backend/migrations/versions/004_reliability_controls.py": "c27bdd18d53f6997c5dde45ad4579f07542a4bfcacc15505f948de4dc866c01d",
+    "backend/migrations/versions/005_entra_sso.py": "325a1fc4e0f7f415d102d340e2b737e1734ecdb119c76f78e61a1e4a4658618a",
+    "backend/migrations/versions/006_multi_policy.py": "e9627d8f1b4c1f6385e1573df9bbd9280beef4f7d93bb2b1c3f6ef8a9fbfe9dc",
+    "backend/migrations/versions/007_protected_review_content.py": "f451e1e83c735b333d5c10b012772cbfa1bf3fd9efe59c1dfbc8c8e2f9f7a8ce",
+    "backend/migrations/versions/008_execution_immutability.py": "d95c0644a256e7a029e0f43e6fc594391b9846c7a5f469755ae581acc3641eb6"
+  },
+  "retry5_evidence_sha256": {
+    "harness-dry-run.json": "625d5b3c0d060a4ada1f051a707a422fb61061c362ccfe4b286197e65a9bf33c",
+    "package-candidate-008-failure.txt": "be1aed1df2b8aa032d7a3475c6eec10ded29bd60ab9c1c97df70ed6fa4be0287",
+    "catalog-1-007.json": "cff01e1cdbe0f946e216282992b1bc1267c28e989cc746b8dafb5f54a353e8ba",
+    "catalog-1-008.json": "e7e0b50b8f16d9cc2e4560caa42f8b4f95a736b1dd383cf97aed3f6eaeb7925b",
+    "independent-deletion.json": "a8cd15af619feac9088f1cb84fa65934b92e2466fe2adb16f760c9d8cf40470f",
+    "execution.json": "fbd72781900155966bd26b244ec3b50a76adff3c7e89b5b806c7032e800597ed",
+    "catalog-1-006.json": "a773861a1841a12aba45da730cdb8f78601e66440d555d7430a4078bc13c2fc1",
+    "production-final-readonly.json": "36663474b9250532674965a7d135bcf8476fddb880520c0ff4f69f9ef5d2805b",
+    "tenant-006-result.json": "7e8f5037c48ad3ad2ecc8bf5e89198b13658d8df48b4aebd313c857d9bac9109"
+  },
+  "qualification_source_sha256": {
+    "backend/app/protected_reviews.py": "c4fb1861db550e8c9c446e6fcf743b5cd25d21ed78f940a3704adb25104fbcc7",
+    "backend/tests/test_cleanup_startup_health.py": "5cf92e752c1ac3c4864d9052970b91750debb7fc0f6fa68e5955c50d15e9eb8f",
+    "scripts/tests/phase6b_sql_package_probe.py": "d70f6488598db5c872d80e3cf7fe4c94d93d66d6b921a7061951b1c04edfc304",
+    "scripts/phase6b_approval_a.py": "8575a23fed9472358ab999a10e501dd9c510458cf2aae7d09d5cdc29314cb950",
+    "scripts/tests/session_contract.py": "1f542e8e48f2f81f321e28d42717a940d70e595da1ad07a4a276f74c90e4242f"
+  },
+  "sqlite_sha256": "0cad09a35e73ad70bb5ff5e522f783f9b59fdd5b3c31eb5b5dddd4d300795766",
+  "azure_operations": 0,
+  "approval_status": "NOT AUTHORIZED"
+}

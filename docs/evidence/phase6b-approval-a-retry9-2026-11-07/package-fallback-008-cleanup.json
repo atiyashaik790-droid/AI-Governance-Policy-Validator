@@ -1,0 +1,18 @@
+[
+  {
+    "elapsed_seconds": 13.346,
+    "completed": true,
+    "healthy": true,
+    "event": "cleanup.startup"
+  },
+  {
+    "removed": 0,
+    "stage": "backlog",
+    "attempted": 0,
+    "reason": "COMPLETE",
+    "elapsed_ms": 13345.75,
+    "healthy": true,
+    "selected": 0,
+    "event": "cleanup.pass"
+  }
+]

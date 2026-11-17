@@ -1,0 +1,18 @@
+[
+  {
+    "variant": "before",
+    "raw_transfer_bytes": 305131,
+    "content_encoding": null,
+    "cache_control": null,
+    "elapsed_local_ms": 9.864,
+    "same_asset": "/assets/index-BAiYczn7.js"
+  },
+  {
+    "variant": "after",
+    "raw_transfer_bytes": 95827,
+    "content_encoding": "gzip",
+    "cache_control": "public, max-age=31536000, immutable",
+    "elapsed_local_ms": 16.85,
+    "same_asset": "/assets/index-BAiYczn7.js"
+  }
+]

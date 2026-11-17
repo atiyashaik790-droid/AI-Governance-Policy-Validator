@@ -1,0 +1,8 @@
+{
+  "magic_hex": "3d3d3d3d3d3d3d3d",
+  "encoding": "utf-8",
+  "decoded_characters": 273544,
+  "contains_kudu": false,
+  "contains_python": true,
+  "error_fragments": []
+}

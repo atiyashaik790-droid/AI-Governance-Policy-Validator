@@ -1,0 +1,20 @@
+{
+  "status": "BLOCKED_AUTHORIZATION_WINDOW_EXCEEDED",
+  "warmup": "PASS",
+  "three_consecutive_pairs": "FAIL",
+  "webjobs_listing": "NOT_ATTEMPTED",
+  "listing_requests": 0,
+  "configuration_rollback": "PASS_LATE_TEMPORARY_FLAG_ABSENT",
+  "final_health": "PASS",
+  "release": "1.2-ca5df7c1dc19e525",
+  "revision": "005",
+  "diagnostic_elapsed_seconds": 17431.155,
+  "total_until_cleanup_verified_seconds": 17607.374,
+  "window_compliant": false,
+  "gap_root_cause": "UNKNOWN; process resumed with a multi-hour wall-clock gap",
+  "rollback_control_defect": "Expired deadline blocked even rollback requests",
+  "unrelated_settings_proof": "Cleanup preserved all then-current unrelated settings. Complete original secret-valued baseline existed only in the lost diagnostic process memory; exact historical full-map equality cannot now be independently re-established.",
+  "disabled_watchdog_test_justified": false,
+  "automatic_approval_review": "First cleanup launch timed out before process creation; one permitted retry executed successfully.",
+  "no_additional_diagnostic_authorization_inferred": true
+}

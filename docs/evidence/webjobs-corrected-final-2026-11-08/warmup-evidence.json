@@ -1,0 +1,20 @@
+[
+  {
+    "file": "2026_11_08_lw1mdlwk0000LX_docker.log",
+    "read_sha256": "2877c75211c5684fd38ea4e9da11b4bfa2d3fea2bea90ab17ee147aec241a9b8",
+    "events": [
+      {
+        "utc": "2026-11-08T09:26:42.0332476Z",
+        "kind": "APP_CONTAINER_START"
+      },
+      {
+        "utc": "2026-11-08T09:27:30.6550919Z",
+        "kind": "ACTUAL_PROBE_SUCCESS"
+      },
+      {
+        "utc": "2026-11-08T09:27:31.1955071Z",
+        "kind": "ACTUAL_SITE_STARTED"
+      }
+    ]
+  }
+]

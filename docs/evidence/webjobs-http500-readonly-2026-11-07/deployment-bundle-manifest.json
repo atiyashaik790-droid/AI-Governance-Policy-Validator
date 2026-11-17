@@ -1,0 +1,29 @@
+{
+  "review_only": true,
+  "deployed": false,
+  "new_runtime_candidate": false,
+  "cloud_execution_blocked": true,
+  "automatic_operations": [],
+  "members": {
+    "artifacts/master-repair-2026-11-07/candidate.zip": "274891fe4ce303d9b05751e1b19cd52e5eb535034ccfedb37eae30fb1c228e22",
+    "artifacts/master-repair-2026-11-07/rollback-cleanup-fixed.zip": "b52287bbf048a66a9f7233753a3fb95730397016f03074d4deb399c1e74c0d29",
+    "docs/REMAINING_DEMO_PREPARATION_RESULT.md": "9628b98a4152778b4a087536d3e1da695ec7fc4e8d8588b05fe6ef35372149d7",
+    "docs/WEBJOBS_SUPPORT_REQUEST_DRAFT.md": "ea1a422adf0af63b6b20137f209fb187e08f2b6bb20fe16d458333dce029cde6",
+    "docs/evidence/webjobs-http500-readonly-2026-11-07/hosted-acceptance-matrix.json": "4e776e57c400d4a8b49aab36ebcdb698446d32ab7f57f8582a052216e14da702",
+    "docs/evidence/webjobs-http500-readonly-2026-11-07/release-preservation.json": "f82b394551cd3f04b1979627d9bcaf60c06301ab0c6bd4c0bd853d336373a683",
+    "docs/evidence/webjobs-http500-readonly-2026-11-07/current-readiness-config-sanitized.json": "87892ecb56289001f3ee2aa9a1f07d07e9756cac6ebae60b6f4fed8b195fcb6a",
+    "docs/evidence/webjobs-http500-readonly-2026-11-07/recovery-metadata-readonly.json": "3d99135a587dddd7c91deb34c09efe8ec7a407241cc480084eeb7ecd07849d59",
+    "deployment/phase6a-runtime-006-grants.REVIEW_ONLY.sql": "28f1a97fffdeb5c268a328a454938ab9deb83ed94c9b2b9187b8039ab150bdc0",
+    "deployment/phase6a-runtime-007-grants.REVIEW_ONLY.sql": "9d7f4d193154c82c4f60885db0b544c730bd1d9cccab6e379bf406489e9ff2b9",
+    "backend/migrations/versions/001_foundation.py": "4cced1e6fdcab34608d61144c10a1b4d093e5cfcfe510e0c7b1b03d779b1f121",
+    "backend/migrations/versions/002_policy_concurrency.py": "6f6626c9df86c84612caaa8c4695046d46ab0ace2547d5ed2bbaa39127a7b5e0",
+    "backend/migrations/versions/003_review_concurrency.py": "1473472d75c340c59d3a94f84808471bac92511c722ba690ecf7999038846225",
+    "backend/migrations/versions/004_reliability_controls.py": "c27bdd18d53f6997c5dde45ad4579f07542a4bfcacc15505f948de4dc866c01d",
+    "backend/migrations/versions/005_entra_sso.py": "325a1fc4e0f7f415d102d340e2b737e1734ecdb119c76f78e61a1e4a4658618a",
+    "backend/migrations/versions/006_multi_policy.py": "e9627d8f1b4c1f6385e1573df9bbd9280beef4f7d93bb2b1c3f6ef8a9fbfe9dc",
+    "backend/migrations/versions/007_protected_review_content.py": "f451e1e83c735b333d5c10b012772cbfa1bf3fd9efe59c1dfbc8c8e2f9f7a8ce",
+    "backend/migrations/versions/008_execution_immutability.py": "d95c0644a256e7a029e0f43e6fc594391b9846c7a5f469755ae581acc3641eb6"
+  },
+  "bundle_sha256": "229cf24e58179c6f6db73ffcc359bfb278ccf6630c6b0a5435b71874c29c4dcb",
+  "bundle_bytes": 686709
+}

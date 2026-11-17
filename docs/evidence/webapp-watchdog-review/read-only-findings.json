@@ -1,0 +1,20 @@
+{
+  "runtime": "PYTHON|3.13",
+  "kind": "app,linux",
+  "alwaysOn": true,
+  "workers": 1,
+  "existing_plan": "Basic B2",
+  "relevant_appsettings_returned": [],
+  "WEBSITE_SKIP_RUNNING_KUDUAGENT": "ABSENT",
+  "WEBSITES_ENABLE_APP_SERVICE_STORAGE": "ABSENT",
+  "WEBJOBS_STOPPED": "ABSENT",
+  "WEBJOBS_DISABLE_SCHEDULE": "ABSENT",
+  "conventional_webjob_directories": {
+    "App_Data/jobs": "SCM404",
+    "app_data/jobs": "SCM404"
+  },
+  "temporary_target_arm_get": "404 ResourceNotFound",
+  "azure_mutations": false,
+  "hosted_python_webjob_execution_tested": false,
+  "support_level": "documented compatible; operational verification pending enablement"
+}

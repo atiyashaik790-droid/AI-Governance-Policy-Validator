@@ -1,0 +1,28 @@
+{
+  "application_release": "1.2-240cc70e239a595f",
+  "application_changed": false,
+  "creation_enabled": false,
+  "watchdog_certified": false,
+  "files": {
+    "artifacts/master-repair-2026-11-07/candidate.zip": "274891fe4ce303d9b05751e1b19cd52e5eb535034ccfedb37eae30fb1c228e22",
+    "artifacts/master-repair-2026-11-07/rollback-cleanup-fixed.zip": "b52287bbf048a66a9f7233753a3fb95730397016f03074d4deb399c1e74c0d29",
+    "scripts/phase6b_approval_a.py": "2e2482a092348a6e9081ebcc92cb6ff1ef08bdaa896d4bab0e810d8527d12434",
+    "scripts/sql_expiry_control.py": "e42c3297c36b3a3de353f38d2c3abf30bdc5670e528d268ad1a4aa7b2a3bac41",
+    "scripts/sql_connection_confirmation.py": "3c0cef05944d8c6c0f5b41ca45d0d3c5bb56cc9ebe70b8e1b716b2eb9c594e79",
+    "scripts/sql_diagnostics.py": "f41e1a9ef68f5a5ddf0aea9bafa96fd690034062b235e4ebb9ae7d9a05b1f5ca",
+    "scripts/tests/test_sql_expiry_control.py": "dbb5220ff060d3806a03552f556f244400b7cdaefe38d6d629f243c58efc9686",
+    "scripts/tests/test_sql_connection_confirmation.py": "a2069d5eb12cfe2c66aa2b9da6fbc6b5cb87c45abd633ec32c8a2705ffb00f2a",
+    "backend/tests/test_sql_verifier_diagnostics.py": "5da433610f13807cba9f2cac50fee87478a14c940c8fc8b673ea858d898d513e",
+    "backend/migrations/versions/001_foundation.py": "4cced1e6fdcab34608d61144c10a1b4d093e5cfcfe510e0c7b1b03d779b1f121",
+    "backend/migrations/versions/002_policy_concurrency.py": "6f6626c9df86c84612caaa8c4695046d46ab0ace2547d5ed2bbaa39127a7b5e0",
+    "backend/migrations/versions/003_review_concurrency.py": "1473472d75c340c59d3a94f84808471bac92511c722ba690ecf7999038846225",
+    "backend/migrations/versions/004_reliability_controls.py": "c27bdd18d53f6997c5dde45ad4579f07542a4bfcacc15505f948de4dc866c01d",
+    "backend/migrations/versions/005_entra_sso.py": "325a1fc4e0f7f415d102d340e2b737e1734ecdb119c76f78e61a1e4a4658618a",
+    "backend/migrations/versions/006_multi_policy.py": "e9627d8f1b4c1f6385e1573df9bbd9280beef4f7d93bb2b1c3f6ef8a9fbfe9dc",
+    "backend/migrations/versions/007_protected_review_content.py": "f451e1e83c735b333d5c10b012772cbfa1bf3fd9efe59c1dfbc8c8e2f9f7a8ce",
+    "backend/migrations/versions/008_execution_immutability.py": "d95c0644a256e7a029e0f43e6fc594391b9846c7a5f469755ae581acc3641eb6"
+  },
+  "sqlite_sha256": "0cad09a35e73ad70bb5ff5e522f783f9b59fdd5b3c31eb5b5dddd4d300795766",
+  "application_source_matches_frozen_candidate": true,
+  "preparation_bundle_sha256": "b10015d039b39eeccf966a413d985514e46c1ca59dca954372f52e38fb340994"
+}

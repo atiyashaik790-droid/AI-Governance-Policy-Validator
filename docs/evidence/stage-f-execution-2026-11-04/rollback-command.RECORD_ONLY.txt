@@ -1,0 +1,31 @@
+import os,subprocess,json,urllib.request,time
+from pathlib import Path
+from datetime import datetime,timezone
+R=Path.cwd();os.environ['AZURE_CONFIG_DIR']=str(R/'.azure-sql-cli');P=R/'docs/evidence/stage-f-execution-2026-11-04/rollback.json';sub='25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6';group='rg_techdemo_Atiya_Tabsum_Shaik';app='app-governance-validator-atiya-1026';args=['--subscription',sub,'-g',group,'-n',app];origin='https://'+app+'.azurewebsites.net'
+r={'stage':'F','status':'ROLLBACK_STARTED','reason':'Saved SSO=true but serving SSO=false after bounded reconciliation; activation acceptance failed','started_at_utc':datetime.now(timezone.utc).isoformat(),'schema_changed':False,'stage_g_executed':False}
+def save():P.write_text(json.dumps(r,indent=2)+'\n')
+def az(a):
+ p=subprocess.run(['az']+a+['-o','json','--only-show-errors'],capture_output=True,text=True,timeout=60)
+ if p.returncode:raise RuntimeError('Azure request failed; raw output withheld')
+ return json.loads(p.stdout) if p.stdout.strip() else None
+def settings():return {x['name']:x.get('value','') for x in az(['webapp','config','appsettings','list']+args)}
+def http(route):
+ with urllib.request.urlopen(origin+route,timeout=45) as x:return {'http_status':x.status,'body':json.load(x)}
+save()
+try:
+ before=settings()
+ az(['webapp','config','appsettings','set']+args+['--settings','SSO_ENABLED=false','DEMO_BROWSER_LOGIN_ENABLED=true'])
+ az(['webapp','config','appsettings','delete']+args+['--setting-names','ENTRA_CLIENT_SECRET'])
+ after=settings();assert after.get('SSO_ENABLED')=='false' and after.get('DEMO_BROWSER_LOGIN_ENABLED')=='true' and 'ENTRA_CLIENT_SECRET' not in after
+ ignore={'SSO_ENABLED','DEMO_BROWSER_LOGIN_ENABLED','ENTRA_CLIENT_SECRET'};assert {k:v for k,v in before.items() if k not in ignore}=={k:v for k,v in after.items() if k not in ignore}
+ r['rollback_settings_verified']=True;r['secret_setting_removed']=True;r['unrelated_settings_preserved']=True;save()
+ for attempt in range(8):
+  try:
+   checks={route:http(route) for route in ('/health','/ready','/api/sso/status')};d=checks['/ready']['body'];s=checks['/api/sso/status']['body']
+   assert d['status']=='ready' and d['database_revision']=='005' and d['release']['build_version']=='1.2-6749226f1af65b63' and d['sso_available'] is False and s=={'sso_enabled':False,'configured':False,'demo_login_enabled':True}
+   r['checks']=checks;r['status']='ROLLBACK_VERIFIED';break
+  except Exception:
+   if attempt==7:raise RuntimeError('Rollback HTTP verification incomplete')
+   time.sleep(5)
+except Exception as e:r['status']='BLOCKED_ROLLBACK_REQUIRES_INSPECTION';r['error_kind']=type(e).__name__
+r['finished_at_utc']=datetime.now(timezone.utc).isoformat();save();print(json.dumps(r))

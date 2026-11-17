@@ -1,0 +1,25 @@
+{
+  "observed_utc": "2026-11-08T09:12:53.733384+00:00",
+  "read_only": true,
+  "site": "app-governance-validator-atiya-1026",
+  "kind": "app,linux",
+  "reserved_linux": true,
+  "state": "Running",
+  "linuxFxVersion": "PYTHON|3.13",
+  "alwaysOn": true,
+  "webJobsEnabled": false,
+  "numberOfWorkers": 1,
+  "settings": {
+    "WEBSITE_SKIP_RUNNING_KUDUAGENT": {
+      "present": false,
+      "value": null
+    },
+    "WEBSITES_ENABLE_APP_SERVICE_STORAGE": {
+      "present": false,
+      "value": null
+    }
+  },
+  "custom_container_image_config_present": false,
+  "webjobs_api_called": false,
+  "changes": false
+}

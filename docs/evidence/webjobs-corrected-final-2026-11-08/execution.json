@@ -1,0 +1,215 @@
+{
+  "status": "BLOCKED",
+  "started_utc": "2026-11-08T09:26:00.776054+00:00",
+  "events": [
+    {
+      "utc": "2026-11-08T09:26:06.724863+00:00",
+      "event": "successful_health_pair",
+      "phase": "baseline",
+      "attempt": 1,
+      "consecutive": 1
+    },
+    {
+      "utc": "2026-11-08T09:26:09.283582+00:00",
+      "event": "baseline_verified",
+      "release": "1.2-ca5df7c1dc19e525",
+      "revision": "005",
+      "flag_absent": true
+    },
+    {
+      "utc": "2026-11-08T09:26:11.844095+00:00",
+      "event": "single_setting_enabled",
+      "fixed_readiness_deadline": "2026-11-08T09:31:09.284332+00:00"
+    },
+    {
+      "utc": "2026-11-08T09:26:28.819805+00:00",
+      "event": "read_transport_retry",
+      "surface": "SCM_VFS",
+      "exception_type": "URLError",
+      "underlying_type": "TimeoutError",
+      "errno": null,
+      "tls_verify_code": null
+    },
+    {
+      "utc": "2026-11-08T09:26:31.627178+00:00",
+      "event": "awaiting_actual_warmup"
+    },
+    {
+      "utc": "2026-11-08T09:26:39.823200+00:00",
+      "event": "awaiting_actual_warmup"
+    },
+    {
+      "utc": "2026-11-08T09:26:47.796677+00:00",
+      "event": "awaiting_actual_warmup"
+    },
+    {
+      "utc": "2026-11-08T09:27:09.613085+00:00",
+      "event": "read_transport_retry",
+      "surface": "SCM_VFS",
+      "exception_type": "URLError",
+      "underlying_type": "TimeoutError",
+      "errno": null,
+      "tls_verify_code": null
+    },
+    {
+      "utc": "2026-11-08T09:27:17.413612+00:00",
+      "event": "awaiting_actual_warmup"
+    },
+    {
+      "utc": "2026-11-08T09:27:25.681782+00:00",
+      "event": "awaiting_actual_warmup"
+    },
+    {
+      "utc": "2026-11-08T09:27:33.091534+00:00",
+      "event": "actual_warmup_verified"
+    },
+    {
+      "utc": "2026-11-08T09:27:36.118018+00:00",
+      "event": "successful_health_pair",
+      "phase": "enabled",
+      "attempt": 1,
+      "consecutive": 1
+    },
+    {
+      "utc": "2026-11-08T09:27:56.189152+00:00",
+      "event": "health_transport_failure",
+      "phase": "enabled",
+      "route": "/health",
+      "elapsed_ms": 10069.94,
+      "exception_type": "URLError",
+      "underlying_type": "TimeoutError",
+      "errno": null,
+      "tls_verify_code": null
+    },
+    {
+      "utc": "2026-11-08T09:27:56.190337+00:00",
+      "event": "health_streak_reset",
+      "phase": "enabled"
+    },
+    {
+      "utc": "2026-11-08T09:28:13.596649+00:00",
+      "event": "successful_health_pair",
+      "phase": "enabled",
+      "attempt": 3,
+      "consecutive": 1
+    },
+    {
+      "utc": "2026-11-08T09:28:26.885801+00:00",
+      "event": "successful_health_pair",
+      "phase": "enabled",
+      "attempt": 4,
+      "consecutive": 2
+    },
+    {
+      "utc": "2026-11-08T14:16:22.920588+00:00",
+      "event": "health_transport_failure",
+      "phase": "enabled",
+      "route": "/health",
+      "elapsed_ms": 10581.71,
+      "exception_type": "URLError",
+      "underlying_type": "TimeoutError",
+      "errno": null,
+      "tls_verify_code": null
+    },
+    {
+      "utc": "2026-11-08T14:16:22.922561+00:00",
+      "event": "health_streak_reset",
+      "phase": "enabled"
+    },
+    {
+      "utc": "2026-11-08T14:16:22.923791+00:00",
+      "event": "diagnostic_stopped",
+      "reason": "ENABLED_READINESS_NOT_ESTABLISHED",
+      "exception_type": "Stop",
+      "underlying_type": "Stop",
+      "errno": null,
+      "tls_verify_code": null
+    },
+    {
+      "utc": "2026-11-08T14:16:22.926488+00:00",
+      "event": "rollback_failure",
+      "attempt": 1,
+      "exception_type": "Stop",
+      "underlying_type": "Stop",
+      "errno": null,
+      "tls_verify_code": null
+    },
+    {
+      "utc": "2026-11-08T14:16:25.928410+00:00",
+      "event": "rollback_failure",
+      "attempt": 2,
+      "exception_type": "Stop",
+      "underlying_type": "Stop",
+      "errno": null,
+      "tls_verify_code": null
+    },
+    {
+      "utc": "2026-11-08T14:16:28.929943+00:00",
+      "event": "rollback_failure",
+      "attempt": 3,
+      "exception_type": "Stop",
+      "underlying_type": "Stop",
+      "errno": null,
+      "tls_verify_code": null
+    },
+    {
+      "utc": "2026-11-08T14:16:31.930864+00:00",
+      "event": "finished",
+      "status": "BLOCKED",
+      "listing_requests": 0,
+      "listing_http_status": null,
+      "rollback_pass": false,
+      "health_pass": false,
+      "elapsed_seconds": 17431.155
+    }
+  ],
+  "warmup_pass": true,
+  "readiness_pairs_pass": false,
+  "listing_requests": 0,
+  "listing_http_status": null,
+  "configuration_rollback_pass": false,
+  "final_health_pass": false,
+  "jobs_created": false,
+  "sql_operations": false,
+  "provider_calls": false,
+  "deployment": false,
+  "baseline_web_config": {
+    "linuxFxVersion": "PYTHON|3.13",
+    "alwaysOn": true,
+    "numberOfWorkers": 1,
+    "webJobsEnabled": false
+  },
+  "baseline_release": {
+    "git_commit": "unavailable",
+    "build_version": "1.2-ca5df7c1dc19e525",
+    "built_utc": "2026-11-05T12:09:33.571692+00:00",
+    "frontend_sha256": "beb38c3485b8abfb672e5a2bf851f1f178c1a8049f367b450708e5abbe7581d4",
+    "backend_sha256": "ad2e4af6c958f24e27e8838cccf8ca9dc46c76fb430c583d2c6737cd3034a813",
+    "required_migration": "004",
+    "supported_migrations": [
+      "004",
+      "005"
+    ],
+    "sso_required_migration": "005"
+  },
+  "baseline_revision": "005",
+  "original_flag_present": false,
+  "storage_setting_baseline": {
+    "present": false,
+    "value": null
+  },
+  "readiness_deadline_utc": "2026-11-08T09:31:09.284332+00:00",
+  "setting_change_attempted": true,
+  "stop_reason": "ENABLED_READINESS_NOT_ESTABLISHED",
+  "stop_exception": {
+    "exception_type": "Stop",
+    "underlying_type": "Stop",
+    "errno": null,
+    "tls_verify_code": null
+  },
+  "rollback_attempted": true,
+  "finished_utc": "2026-11-08T14:16:31.930747+00:00",
+  "elapsed_seconds": 17431.155,
+  "monotonic_elapsed_seconds": 175.703,
+  "within_15_minutes": false
+}

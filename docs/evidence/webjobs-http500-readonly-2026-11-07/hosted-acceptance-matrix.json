@@ -1,0 +1,167 @@
+{
+  "candidate": "1.2-240cc70e239a595f",
+  "hosted_candidate_deployed": false,
+  "provider_verification_enabled": false,
+  "cases": [
+    {
+      "id": "entra_sso_login",
+      "workflow": "Admin and User interactive login",
+      "hosted_candidate_status": "PENDING_APPROVAL_AND_DEPLOYMENT",
+      "data": "synthetic only",
+      "separate_real_operation_budget_required": false,
+      "local_evidence": "Reuse MASTER_REPAIR_RESULT.md and current preservation hashes; no local rerun"
+    },
+    {
+      "id": "admin_portal",
+      "workflow": "Admin Portal",
+      "hosted_candidate_status": "PENDING_APPROVAL_AND_DEPLOYMENT",
+      "data": "synthetic only",
+      "separate_real_operation_budget_required": false,
+      "local_evidence": "Reuse MASTER_REPAIR_RESULT.md and current preservation hashes; no local rerun"
+    },
+    {
+      "id": "user_chatbot",
+      "workflow": "User Chatbot",
+      "hosted_candidate_status": "PENDING_APPROVAL_AND_DEPLOYMENT",
+      "data": "synthetic only",
+      "separate_real_operation_budget_required": false,
+      "local_evidence": "Reuse MASTER_REPAIR_RESULT.md and current preservation hashes; no local rerun"
+    },
+    {
+      "id": "isolation",
+      "workflow": "Role and tenant isolation",
+      "hosted_candidate_status": "PENDING_APPROVAL_AND_DEPLOYMENT",
+      "data": "synthetic only",
+      "separate_real_operation_budget_required": false,
+      "local_evidence": "Reuse MASTER_REPAIR_RESULT.md and current preservation hashes; no local rerun"
+    },
+    {
+      "id": "policy_lifecycle",
+      "workflow": "Policy CRUD and activation",
+      "hosted_candidate_status": "PENDING_APPROVAL_AND_DEPLOYMENT",
+      "data": "synthetic only",
+      "separate_real_operation_budget_required": false,
+      "local_evidence": "Reuse MASTER_REPAIR_RESULT.md and current preservation hashes; no local rerun"
+    },
+    {
+      "id": "multiple_policies",
+      "workflow": "Multiple active policies",
+      "hosted_candidate_status": "PENDING_APPROVAL_AND_DEPLOYMENT",
+      "data": "synthetic only",
+      "separate_real_operation_budget_required": false,
+      "local_evidence": "Reuse MASTER_REPAIR_RESULT.md and current preservation hashes; no local rerun"
+    },
+    {
+      "id": "pii_redact",
+      "workflow": "PII REDACT",
+      "hosted_candidate_status": "PENDING_APPROVAL_AND_DEPLOYMENT",
+      "data": "synthetic only",
+      "separate_real_operation_budget_required": false,
+      "local_evidence": "Reuse MASTER_REPAIR_RESULT.md and current preservation hashes; no local rerun"
+    },
+    {
+      "id": "secret_block",
+      "workflow": "Secret BLOCK",
+      "hosted_candidate_status": "PENDING_APPROVAL_AND_DEPLOYMENT",
+      "data": "synthetic only",
+      "separate_real_operation_budget_required": false,
+      "local_evidence": "Reuse MASTER_REPAIR_RESULT.md and current preservation hashes; no local rerun"
+    },
+    {
+      "id": "keyword_block",
+      "workflow": "Blocked-keyword BLOCK",
+      "hosted_candidate_status": "PENDING_APPROVAL_AND_DEPLOYMENT",
+      "data": "synthetic only",
+      "separate_real_operation_budget_required": false,
+      "local_evidence": "Reuse MASTER_REPAIR_RESULT.md and current preservation hashes; no local rerun"
+    },
+    {
+      "id": "moderation_block",
+      "workflow": "Moderation BLOCK",
+      "hosted_candidate_status": "PENDING_APPROVAL_AND_DEPLOYMENT",
+      "data": "synthetic only",
+      "separate_real_operation_budget_required": true,
+      "local_evidence": "Reuse MASTER_REPAIR_RESULT.md and current preservation hashes; no local rerun"
+    },
+    {
+      "id": "generation",
+      "workflow": "Azure OpenAI generation",
+      "hosted_candidate_status": "PENDING_APPROVAL_AND_DEPLOYMENT",
+      "data": "synthetic only",
+      "separate_real_operation_budget_required": true,
+      "local_evidence": "Reuse MASTER_REPAIR_RESULT.md and current preservation hashes; no local rerun"
+    },
+    {
+      "id": "output_inspection",
+      "workflow": "Output inspection",
+      "hosted_candidate_status": "PENDING_APPROVAL_AND_DEPLOYMENT",
+      "data": "synthetic only",
+      "separate_real_operation_budget_required": false,
+      "local_evidence": "Reuse MASTER_REPAIR_RESULT.md and current preservation hashes; no local rerun"
+    },
+    {
+      "id": "human_review",
+      "workflow": "Review assignment, reveal and resolution",
+      "hosted_candidate_status": "PENDING_APPROVAL_AND_DEPLOYMENT",
+      "data": "synthetic only",
+      "separate_real_operation_budget_required": false,
+      "local_evidence": "Reuse MASTER_REPAIR_RESULT.md and current preservation hashes; no local rerun"
+    },
+    {
+      "id": "history",
+      "workflow": "Validation history",
+      "hosted_candidate_status": "PENDING_APPROVAL_AND_DEPLOYMENT",
+      "data": "synthetic only",
+      "separate_real_operation_budget_required": false,
+      "local_evidence": "Reuse MASTER_REPAIR_RESULT.md and current preservation hashes; no local rerun"
+    },
+    {
+      "id": "analytics",
+      "workflow": "Compliance analytics",
+      "hosted_candidate_status": "PENDING_APPROVAL_AND_DEPLOYMENT",
+      "data": "synthetic only",
+      "separate_real_operation_budget_required": false,
+      "local_evidence": "Reuse MASTER_REPAIR_RESULT.md and current preservation hashes; no local rerun"
+    },
+    {
+      "id": "audit",
+      "workflow": "Immutable audit history",
+      "hosted_candidate_status": "PENDING_APPROVAL_AND_DEPLOYMENT",
+      "data": "synthetic only",
+      "separate_real_operation_budget_required": false,
+      "local_evidence": "Reuse MASTER_REPAIR_RESULT.md and current preservation hashes; no local rerun"
+    },
+    {
+      "id": "adls",
+      "workflow": "ADLS export and checksum read-back",
+      "hosted_candidate_status": "PENDING_APPROVAL_AND_DEPLOYMENT",
+      "data": "synthetic only",
+      "separate_real_operation_budget_required": true,
+      "local_evidence": "Reuse MASTER_REPAIR_RESULT.md and current preservation hashes; no local rerun"
+    },
+    {
+      "id": "settings",
+      "workflow": "Truthful Settings verification statuses",
+      "hosted_candidate_status": "PENDING_APPROVAL_AND_DEPLOYMENT",
+      "data": "synthetic only",
+      "separate_real_operation_budget_required": true,
+      "local_evidence": "Reuse MASTER_REPAIR_RESULT.md and current preservation hashes; no local rerun"
+    },
+    {
+      "id": "sessions",
+      "workflow": "Session expiry and revocation",
+      "hosted_candidate_status": "PENDING_APPROVAL_AND_DEPLOYMENT",
+      "data": "synthetic only",
+      "separate_real_operation_budget_required": false,
+      "local_evidence": "Reuse MASTER_REPAIR_RESULT.md and current preservation hashes; no local rerun"
+    },
+    {
+      "id": "navigation",
+      "workflow": "Critical UI navigation and buttons",
+      "hosted_candidate_status": "PENDING_APPROVAL_AND_DEPLOYMENT",
+      "data": "synthetic only",
+      "separate_real_operation_budget_required": false,
+      "local_evidence": "Reuse MASTER_REPAIR_RESULT.md and current preservation hashes; no local rerun"
+    }
+  ]
+}

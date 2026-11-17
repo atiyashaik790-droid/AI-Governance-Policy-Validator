@@ -1,0 +1,25 @@
+{
+  "source_and_document_files": [
+    "scripts/verify_hosted_runtime.py",
+    "scripts/contracts/schema_compatibility_004_005.py",
+    "scripts/tests/test_hosted_runtime_probe.py",
+    "docs/PHASE5_LOCAL_ACCEPTANCE.md",
+    "docs/PHASE5A_SCHEMA_CONTRACT_REPORT.md"
+  ],
+  "evidence_files": [
+    "docs/evidence/phase5a-local-2026-11-06/approved-schema-compatibility.py.txt",
+    "docs/evidence/phase5a-local-2026-11-06/backend-regression.log",
+    "docs/evidence/phase5a-local-2026-11-06/backend-regression.xml",
+    "docs/evidence/phase5a-local-2026-11-06/contract.diff",
+    "docs/evidence/phase5a-local-2026-11-06/guard-checks.json",
+    "docs/evidence/phase5a-local-2026-11-06/metadata-contracts.json",
+    "docs/evidence/phase5a-local-2026-11-06/metadata-differences.md",
+    "docs/evidence/phase5a-local-2026-11-06/readiness-corrected.log",
+    "docs/evidence/phase5a-local-2026-11-06/readiness-corrected.xml",
+    "docs/evidence/phase5a-local-2026-11-06/readiness.log",
+    "docs/evidence/phase5a-local-2026-11-06/readiness.xml",
+    "docs/evidence/phase5a-local-2026-11-06/reference-inventory.json",
+    "docs/evidence/phase5a-local-2026-11-06/verification.json",
+    "docs/evidence/phase5a-local-2026-11-06/changed-files.json"
+  ]
+}

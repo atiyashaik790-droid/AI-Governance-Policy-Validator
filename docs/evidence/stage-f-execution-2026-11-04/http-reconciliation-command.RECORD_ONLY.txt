@@ -1,0 +1,14 @@
+import json,urllib.request,time
+from pathlib import Path
+from datetime import datetime,timezone
+origin='https://app-governance-validator-atiya-1026.azurewebsites.net';r={'stage':'F','method':'BOUNDED_READ_ONLY_HTTP_RECONCILIATION','observed_at_utc':datetime.now(timezone.utc).isoformat(),'checks':{}}
+for route in ('/health','/ready','/api/sso/status'):
+ start=time.monotonic()
+ try:
+  req=urllib.request.Request(origin+route,headers={'Cache-Control':'no-cache'})
+  with urllib.request.urlopen(req,timeout=45) as response:r['checks'][route]={'http_status':response.status,'body':json.load(response),'elapsed_seconds':round(time.monotonic()-start,1)}
+ except Exception as e:r['checks'][route]={'error_kind':type(e).__name__,'http_status':getattr(e,'code',None)}
+try:
+ d=r['checks']['/ready']['body'];s=r['checks']['/api/sso/status']['body'];assert d['status']=='ready' and d['database_revision']=='005' and d['release']['build_version']=='1.2-6749226f1af65b63' and d['sso_available'] is True and s=={'sso_enabled':True,'configured':True,'demo_login_enabled':True};r['status']='PASS'
+except Exception:r['status']='BLOCKED_SERVING_STATE_MISMATCH'
+Path('docs/evidence/stage-f-execution-2026-11-04/http-reconciliation.json').write_text(json.dumps(r,indent=2)+'\n');print(json.dumps(r))

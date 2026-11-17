@@ -1,0 +1,16 @@
+{
+  "observed_date": "2026-11-09",
+  "channel": "existing_main_app_container_shell",
+  "mechanism": "scripts/verify_hosted_new008.py",
+  "status": "PASS",
+  "database": "sqldb-gpv-demo-v008-20261108",
+  "revision": "008",
+  "runtime_user": "app-governance-validator-atiya-1026",
+  "runtime_role_member": true,
+  "policies": 8,
+  "active_assignments": 8,
+  "hosted_mi_verified": true,
+  "database_mutated": false,
+  "app_settings_changed": false,
+  "deployed_release_changed": false
+}

@@ -1,0 +1,17 @@
+{
+  "control_plane_create_started_utc": "2026-11-07T10:11:24.610911+00:00",
+  "control_plane_delete_succeeded_utc": "2026-11-07T16:24:14.639641+00:00",
+  "control_plane_elapsed_seconds": 22370.02873,
+  "control_plane_elapsed_hours": 6.2138968694444445,
+  "four_hour_limit_met": false,
+  "harness_monotonic_elapsed_seconds": 674.44,
+  "utc_monotonic_discrepancy": true,
+  "watchdog_deadline_observed": true,
+  "watchdog_wall_clock_deadline_enforced": false,
+  "cause": "Unestablished; UTC/monotonic discrepancy and multi-hour log gap are observed. Do not infer a measured suspension root cause.",
+  "daily_usd": 0.4839,
+  "conservative_billed_hours": 8,
+  "conservative_compute_estimate_usd": 0.1613,
+  "supersedes": "independent-deletion.json conservative_compute_estimate_usd=0.040325 uses monotonic seconds and underestimates this run",
+  "billing_note": "Compute estimate only, not an invoice or Azure billing cap"
+}

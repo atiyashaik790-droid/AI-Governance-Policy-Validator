@@ -1,0 +1,11 @@
+{
+  "observed_utc": "2026-11-08T20:33:03.765847+00:00",
+  "mode": "SELECT_ONLY_CONNECTION_RECONCILIATION",
+  "azure_or_sql_mutations": 0,
+  "status": "BLOCKED",
+  "failure_type": "ProgrammingError",
+  "native_codes": [
+    "40615"
+  ],
+  "azure_reported_blocked_ip": "45.127.46.209"
+}

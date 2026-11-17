@@ -1,0 +1,203 @@
+{
+  "current_client_probes": {
+    "observed_utc": "2026-11-08T09:21:02.715579+00:00",
+    "historical_failure_reproduction": false,
+    "checks": [
+      {
+        "utc": "2026-11-08T09:21:03.295016+00:00",
+        "attempt": 1,
+        "routes": {
+          "/health": {
+            "http_status": 200,
+            "status": "ok",
+            "release": null,
+            "revision": null,
+            "elapsed_ms": 709.61
+          },
+          "/ready": {
+            "http_status": 200,
+            "status": "ready",
+            "release": "1.2-ca5df7c1dc19e525",
+            "revision": "005",
+            "elapsed_ms": 6985.76
+          }
+        }
+      },
+      {
+        "utc": "2026-11-08T09:21:13.990589+00:00",
+        "attempt": 2,
+        "routes": {
+          "/health": {
+            "http_status": 200,
+            "status": "ok",
+            "release": null,
+            "revision": null,
+            "elapsed_ms": 707.14
+          },
+          "/ready": {
+            "exception_type": "URLError",
+            "underlying_type": "TimeoutError",
+            "errno": null,
+            "ssl_verify_code": null,
+            "elapsed_ms": 10036.03
+          }
+        }
+      },
+      {
+        "utc": "2026-11-08T09:21:27.734136+00:00",
+        "attempt": 3,
+        "routes": {
+          "/health": {
+            "http_status": 200,
+            "status": "ok",
+            "release": null,
+            "revision": null,
+            "elapsed_ms": 660.19
+          },
+          "/ready": {
+            "http_status": 200,
+            "status": "ready",
+            "release": "1.2-ca5df7c1dc19e525",
+            "revision": "005",
+            "elapsed_ms": 2155.11
+          }
+        }
+      }
+    ],
+    "dns": {
+      "pass": true
+    },
+    "direct_tls": {
+      "pass": true,
+      "certificate_validation": true,
+      "protocol": "TLSv1.3"
+    }
+  },
+  "existing_app_logs": {
+    "observed_utc": "2026-11-08T09:21:03.270905+00:00",
+    "source": "SCM VFS existing logs only; no WebJobs listing or commands",
+    "files": [
+      {
+        "name": "2026_11_08_lw1mdlwk0000LX_docker.log",
+        "read_sha256": "f5b91330a237c8010cb18afd798bf09d8e8f02fd08763d0e99ac02d9b28f1630",
+        "bytes": 22685,
+        "window_markers": [
+          {
+            "utc": "2026-11-08T09:18:18.0908378Z",
+            "classification": "CONTAINER_START"
+          },
+          {
+            "utc": "2026-11-08T09:18:20.2427275Z",
+            "classification": "CONTAINER_START"
+          },
+          {
+            "utc": "2026-11-08T09:18:55.7788308Z",
+            "classification": "STARTUP_COMPLETE"
+          },
+          {
+            "utc": "2026-11-08T09:18:55.9286310Z",
+            "classification": "STARTUP_COMPLETE"
+          },
+          {
+            "utc": "2026-11-08T09:18:56.3157902Z",
+            "classification": "STARTUP_COMPLETE"
+          },
+          {
+            "utc": "2026-11-08T09:18:56.3164117Z",
+            "classification": "STARTUP_COMPLETE"
+          },
+          {
+            "utc": "2026-11-08T09:19:16.3809091Z",
+            "classification": "STARTUP_COMPLETE"
+          },
+          {
+            "utc": "2026-11-08T09:19:16.3811856Z",
+            "classification": "STARTUP_COMPLETE"
+          },
+          {
+            "utc": "2026-11-08T09:19:16.3812605Z",
+            "classification": "CONTAINER_STOP"
+          },
+          {
+            "utc": "2026-11-08T09:19:16.3917953Z",
+            "classification": "CONTAINER_STOP"
+          },
+          {
+            "utc": "2026-11-08T09:19:36.0854680Z",
+            "classification": "CONTAINER_START"
+          },
+          {
+            "utc": "2026-11-08T09:19:37.6008998Z",
+            "classification": "CONTAINER_START"
+          },
+          {
+            "utc": "2026-11-08T09:20:11.7808315Z",
+            "classification": "STARTUP_COMPLETE"
+          },
+          {
+            "utc": "2026-11-08T09:20:11.9681122Z",
+            "classification": "STARTUP_COMPLETE"
+          },
+          {
+            "utc": "2026-11-08T09:20:12.1773096Z",
+            "classification": "STARTUP_COMPLETE"
+          },
+          {
+            "utc": "2026-11-08T09:20:12.1774085Z",
+            "classification": "STARTUP_COMPLETE"
+          },
+          {
+            "utc": "2026-11-08T09:20:32.2363578Z",
+            "classification": "STARTUP_COMPLETE"
+          },
+          {
+            "utc": "2026-11-08T09:20:32.2366714Z",
+            "classification": "STARTUP_COMPLETE"
+          },
+          {
+            "utc": "2026-11-08T09:20:32.2367570Z",
+            "classification": "CONTAINER_STOP"
+          },
+          {
+            "utc": "2026-11-08T09:20:32.2470942Z",
+            "classification": "CONTAINER_STOP"
+          }
+        ]
+      }
+    ],
+    "available_log_entries": [
+      {
+        "name": "2026_11_07_lw1mdlwk0000LX_docker.log",
+        "mtime": "2026-11-07T17:01:11.0931225+00:00",
+        "size": 17284
+      },
+      {
+        "name": "2026_11_08_lw1mdlwk0000LX_docker.log",
+        "mtime": "2026-11-08T09:20:39.9485572+00:00",
+        "size": 22685
+      },
+      {
+        "name": "jobs",
+        "mtime": "2026-11-08T09:18:56.6627222+00:00",
+        "size": 0
+      },
+      {
+        "name": "kudu",
+        "mtime": "2026-10-29T15:49:35.116222+00:00",
+        "size": 0
+      },
+      {
+        "name": "StartupLogs",
+        "mtime": "2026-11-08T08:07:53.0129948+00:00",
+        "size": 0
+      },
+      {
+        "name": "webssh",
+        "mtime": "2026-10-29T15:49:05.2270371+00:00",
+        "size": 0
+      }
+    ]
+  },
+  "cloud_mutations": false,
+  "historical_underlying_exception": "NOT_RECORDED_UNRECOVERABLE_FROM_SAVED_LEDGER"
+}

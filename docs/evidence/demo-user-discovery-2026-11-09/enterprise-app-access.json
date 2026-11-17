@@ -1,0 +1,12 @@
+{
+  "mode": "READ_ONLY",
+  "enterprise_apps": [
+    {
+      "appId": "a1a7da0b-ad29-49ec-a9ea-c59219e60df5",
+      "appRoleAssignmentRequired": false,
+      "displayName": "Governance-Studio-SSO",
+      "id": "e9229aa8-0dca-4959-9eac-179637e3b638"
+    }
+  ],
+  "directory_or_app_assignment_changes": 0
+}

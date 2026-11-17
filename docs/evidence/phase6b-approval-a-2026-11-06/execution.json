@@ -1,0 +1,176 @@
+{
+  "scope": "Approval A ONLY",
+  "events": [
+    {
+      "utc": "2026-11-06T10:52:45.292311+00:00",
+      "kind": "budget_gate_pass",
+      "daily_usd": 0.4839,
+      "conservative_compute_10_billed_hours_usd": 0.20162500000000003,
+      "total_budget_usd": 1,
+      "testing_stop_hours": 3,
+      "cleanup_deadline_hours": 4,
+      "notes": "Bounded tiny synthetic data; local backups; estimate monitored from actual lifetime, not delayed Azure billing"
+    },
+    {
+      "utc": "2026-11-06T10:52:45.293173+00:00",
+      "kind": "cleanup_watchdog_started",
+      "pid": 57780,
+      "delete_after_hours": 3
+    },
+    {
+      "utc": "2026-11-06T10:52:47.750438+00:00",
+      "kind": "create_intent",
+      "resource_id": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/databases/sqldb-gpv-mig-20261106-a1",
+      "incarnation": 1
+    },
+    {
+      "utc": "2026-11-06T10:53:43.478620+00:00",
+      "kind": "created",
+      "resource_id": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/databases/sqldb-gpv-mig-20261106-a1",
+      "sku": {
+        "capacity": 10,
+        "family": null,
+        "name": "Standard",
+        "size": null,
+        "tier": "Standard"
+      },
+      "objective": "S0",
+      "max_size": 268435456000,
+      "backup": "Local"
+    },
+    {
+      "utc": "2026-11-06T10:54:29.436631+00:00",
+      "kind": "migration_pass",
+      "revision": "005"
+    },
+    {
+      "utc": "2026-11-06T10:54:36.645682+00:00",
+      "kind": "synthetic_seed_pass"
+    },
+    {
+      "utc": "2026-11-06T10:54:52.683275+00:00",
+      "kind": "temporary_grants_pass",
+      "revision": "005",
+      "identity": "app-governance-validator-atiya-1026",
+      "authentication": "SQL EXECUTE AS context only; no managed identity authentication claim"
+    },
+    {
+      "utc": "2026-11-06T10:56:44.123629+00:00",
+      "kind": "schema_contract_pass",
+      "revision": "005",
+      "result": {
+        "revision": "005",
+        "versioned": true,
+        "sso_schema": true
+      }
+    },
+    {
+      "utc": "2026-11-06T10:57:15.047041+00:00",
+      "kind": "retained_baseline",
+      "revision": "005",
+      "tables": {
+        "active_policy_assignments": {
+          "count": 1,
+          "sha256": "c6c06ddfd463105234dfbbe2cec2d5509cc1f4fd411838ba9a0beb78192992eb"
+        },
+        "audit_events": {
+          "count": 1,
+          "sha256": "d2fb73eeac7690e9f6014d0856f07d452d17ac71c89db39acda75551adfef62f"
+        },
+        "demo_sessions": {
+          "count": 1,
+          "sha256": "fe72da62b7d11bc7d8b7031d463b5f883d776fa6ae7a8febfddcb36020c35d1a"
+        },
+        "evaluation_exports": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "export_jobs": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "feedback_records": {
+          "count": 1,
+          "sha256": "09b12ff45ca210c7ac36e7cdfb578b113787e10fc532cd7bd2a7f6cac720e2b0"
+        },
+        "human_review_cases": {
+          "count": 1,
+          "sha256": "3b28ecea2ef10c1617c45ad3fd7dd093f4ce1b09e3bd4933d5ec0d13a6789146"
+        },
+        "inference_rate_buckets": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "inference_usage": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "policies": {
+          "count": 1,
+          "sha256": "69f590af701190563067962740bb3fc3e23aa491d6a49dab553c27495a942057"
+        },
+        "policy_versions": {
+          "count": 1,
+          "sha256": "61f8c0679d3920f7022420ca4fc66ff8a8fd2351058f691a97ecc7d3bd6cbfff"
+        },
+        "review_assignments": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "review_notes": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "sso_memberships": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "sso_sessions": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "sso_transactions": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "validation_executions": {
+          "count": 1,
+          "sha256": "acee27987e1780cd767942867361b5fc8d31582b50ff719e90ce39eb1516882f"
+        }
+      }
+    },
+    {
+      "utc": "2026-11-06T11:04:40.943529+00:00",
+      "kind": "unexpected_stop",
+      "failure_type": "RuntimeError",
+      "detail": "Extracted package probe failed: candidate/005"
+    },
+    {
+      "utc": "2026-11-06T11:04:43.556069+00:00",
+      "kind": "delete_intent",
+      "resource_id": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/databases/sqldb-gpv-mig-20261106-a1"
+    },
+    {
+      "utc": "2026-11-06T11:05:05.376441+00:00",
+      "kind": "cleanup_confirmed",
+      "arm_get": "ResourceNotFound",
+      "inventory": [
+        "sqldb-governance-validator-dev",
+        "master"
+      ],
+      "resource_id": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/databases/sqldb-gpv-mig-20261106-a1"
+    },
+    {
+      "utc": "2026-11-06T11:05:05.376996+00:00",
+      "kind": "execution_finished",
+      "status": "STOPPED",
+      "elapsed_seconds": 740.09,
+      "sqlite_unchanged": true
+    }
+  ],
+  "incarnations": 1,
+  "created": false,
+  "status": "STOPPED",
+  "elapsed_seconds": 740.09,
+  "sqlite_unchanged": true
+}

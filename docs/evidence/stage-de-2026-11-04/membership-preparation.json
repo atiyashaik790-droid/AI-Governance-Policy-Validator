@@ -1,0 +1,48 @@
+{
+  "observed_at_utc": "2026-11-04T16:23:45.521904+00:00",
+  "database_mutated": false,
+  "memberships_provisioned": false,
+  "admin_auto_assigned": false,
+  "user_identity": {
+    "accountEnabled": null,
+    "displayName": "atiya tabsum",
+    "objectId": "b5d8bfbe-f03a-4132-a13f-ab49aae834b7",
+    "userType": null
+  },
+  "directory_tenant": "4ac50105-0c66-404e-a107-7cbd8a9a6442",
+  "proposed_existing_workspace": "demo-appservice-4e2dcce8d618",
+  "proposed_named_actor": "atiya-tabsum-shaik",
+  "proposed_role": "Reviewer",
+  "proposed_enabled": true,
+  "identity_mapping_requires_explicit_user_confirmation": true,
+  "existing_local_entra_tenant_pin_matches": false,
+  "revision": [
+    "005"
+  ],
+  "existing_identity_or_proposed_actor_memberships": [],
+  "existing_workspace_policy_count": 8,
+  "operator_provisioning_permissions": {
+    "sso_memberships.SELECT": 1,
+    "sso_memberships.INSERT": 1,
+    "sso_memberships.UPDATE": 1,
+    "audit_events.INSERT": 1
+  },
+  "current_direct_role_sso_grants": [
+    {
+      "object_name": "sso_memberships",
+      "permission_name": "VIEW DEFINITION",
+      "state_desc": "GRANT"
+    },
+    {
+      "object_name": "sso_sessions",
+      "permission_name": "VIEW DEFINITION",
+      "state_desc": "GRANT"
+    },
+    {
+      "object_name": "sso_transactions",
+      "permission_name": "VIEW DEFINITION",
+      "state_desc": "GRANT"
+    }
+  ],
+  "status": "PREPARED_NOT_APPLIED"
+}

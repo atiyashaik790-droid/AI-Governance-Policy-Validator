@@ -1,0 +1,43 @@
+{
+  "source_and_report_files_changed_this_turn": [
+    "backend/app/web_assets.py",
+    "backend/app/sso.py",
+    "backend/tests/test_deployment_preparation.py",
+    "backend/tests/test_entra_sso.py",
+    "backend/tests/test_migration_recovery.py",
+    "backend/tests/test_multi_policy_phase_d.py",
+    "backend/tests/test_pagination.py",
+    "backend/tests/test_sql_http_plan.py",
+    "backend/tests/test_sql_inventory.py",
+    "scripts/test_azure_sql_http.py",
+    "scripts/tests/phase5_browser.cjs",
+    "docs/PHASE5_LOCAL_ACCEPTANCE.md"
+  ],
+  "evidence_files_added_this_turn": [
+    "docs/evidence/phase5-local-2026-11-06/backend-followup.log",
+    "docs/evidence/phase5-local-2026-11-06/backend-followup.xml",
+    "docs/evidence/phase5-local-2026-11-06/backend-recovered.log",
+    "docs/evidence/phase5-local-2026-11-06/backend-targeted.log",
+    "docs/evidence/phase5-local-2026-11-06/backend-targeted.xml",
+    "docs/evidence/phase5-local-2026-11-06/backend.xml",
+    "docs/evidence/phase5-local-2026-11-06/browser-recovered.json",
+    "docs/evidence/phase5-local-2026-11-06/browser.json",
+    "docs/evidence/phase5-local-2026-11-06/browser.log",
+    "docs/evidence/phase5-local-2026-11-06/diff-check.log",
+    "docs/evidence/phase5-local-2026-11-06/failure-page.txt",
+    "docs/evidence/phase5-local-2026-11-06/failure.png",
+    "docs/evidence/phase5-local-2026-11-06/format.log",
+    "docs/evidence/phase5-local-2026-11-06/frontend-build.log",
+    "docs/evidence/phase5-local-2026-11-06/frontend.log",
+    "docs/evidence/phase5-local-2026-11-06/frontend.xml",
+    "docs/evidence/phase5-local-2026-11-06/phase5-desktop.png",
+    "docs/evidence/phase5-local-2026-11-06/phase5-mobile.png",
+    "docs/evidence/phase5-local-2026-11-06/phase5-tablet.png",
+    "docs/evidence/phase5-local-2026-11-06/ruff-followup.log",
+    "docs/evidence/phase5-local-2026-11-06/ruff.log",
+    "docs/evidence/phase5-local-2026-11-06/scripts.log",
+    "docs/evidence/phase5-local-2026-11-06/scripts.xml",
+    "docs/evidence/phase5-local-2026-11-06/summary.json",
+    "docs/evidence/phase5-local-2026-11-06/changed-files.json"
+  ]
+}

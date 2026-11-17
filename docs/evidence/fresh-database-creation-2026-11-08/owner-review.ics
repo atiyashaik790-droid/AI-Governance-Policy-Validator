@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//GPV//Owner Review//EN
+BEGIN:VEVENT
+UID:gpv-fresh-database-owner-review-20261108@local
+DTSTAMP:20261108T160336Z
+DTSTART:20261115T160325Z
+DTEND:20261115T161825Z
+SUMMARY:Review persistent GPV Azure SQL database cost and retention
+DESCRIPTION:Review sqldb-gpv-demo-v008-20261108 on sql-governance-validator
+ -dev-atiya. Persistent billed database. No automatic deletion. Any deletio
+ n or configuration change needs separate approval.
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:Owner review due
+END:VALARM
+END:VEVENT
+END:VCALENDAR

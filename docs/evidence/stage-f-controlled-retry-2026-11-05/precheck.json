@@ -1,0 +1,49 @@
+{
+  "observed_at_utc": "2026-11-05T05:40:41.331164+00:00",
+  "hosted_changes": false,
+  "local_secret_availability": {
+    "process_environment_nonempty": false,
+    "workspace_dotenv_nonempty": false,
+    "external_secure_custody": "NOT_ACCESSIBLE_OR_CONFIRMED"
+  },
+  "registration": {
+    "clientId": "a1a7da0b-ad29-49ec-a9ea-c59219e60df5",
+    "frontChannelLogoutUrl": null,
+    "objectId": "53ae1688-20af-403d-89e2-c33ab08a36e0",
+    "passwordCredentials": [
+      {
+        "endDateTime": "2027-05-03T11:10:28.038Z",
+        "keyId": "300d88e7-c73a-4bb5-865c-041bde6ebc45"
+      }
+    ],
+    "signInAudience": "AzureADMyOrg",
+    "webRedirectUris": [
+      "https://app-governance-validator-atiya-1026.azurewebsites.net/",
+      "https://app-governance-validator-atiya-1026.azurewebsites.net/api/sso/callback"
+    ]
+  },
+  "logging": {
+    "applicationFilesystemLevel": "Information",
+    "detailedErrors": false,
+    "failedRequestTracing": false,
+    "httpBlobEnabled": false,
+    "httpFilesystemEnabled": false
+  },
+  "setting_status": {
+    "SSO_ENABLED": "SET_NONEMPTY",
+    "DEMO_BROWSER_LOGIN_ENABLED": "SET_NONEMPTY",
+    "ENTRA_CLIENT_SECRET": "ABSENT",
+    "ENTRA_CLIENT_ID": "SET_NONEMPTY",
+    "ENTRA_TENANT_ID": "SET_NONEMPTY",
+    "SSO_PUBLIC_ORIGIN": "SET_NONEMPTY",
+    "SSO_SESSION_MINUTES": "SET_NONEMPTY",
+    "CORS_ORIGIN": "SET_NONEMPTY",
+    "DEMO_ACCOUNTS_JSON": "SET_NONEMPTY"
+  },
+  "effective_flags": {
+    "sso_enabled": false,
+    "demo_login_enabled": true,
+    "cors_matches_reviewed_origin": true
+  },
+  "membership": "STAGE_E_ACCEPTED_NO_SQL_READ_OR_WRITE_PERFORMED"
+}

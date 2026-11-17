@@ -1,0 +1,103 @@
+"""One approved retry. Run only after actual user secret-save confirmation."""
+import os,json,subprocess,time,urllib.request,concurrent.futures
+from pathlib import Path
+from datetime import datetime,timezone
+R=Path.cwd();E=R/'docs/evidence/stage-f-controlled-retry-2026-11-05';E.mkdir(exist_ok=True);os.environ['AZURE_CONFIG_DIR']=str(R/'.azure-sql-cli')
+SUB='25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6';GROUP='rg_techdemo_Atiya_Tabsum_Shaik';APP='app-governance-validator-atiya-1026';ORIGIN='https://'+APP+'.azurewebsites.net';TENANT='4ac50105-0c66-404e-a107-7cbd8a9a6442';CLIENT='a1a7da0b-ad29-49ec-a9ea-c59219e60df5';ARGS=['--subscription',SUB,'-g',GROUP,'-n',APP]
+VALUES={'ENTRA_TENANT_ID':TENANT,'ENTRA_CLIENT_ID':CLIENT,'SSO_PUBLIC_ORIGIN':ORIGIN,'SSO_SESSION_MINUTES':'60','DEMO_BROWSER_LOGIN_ENABLED':'true','SSO_ENABLED':'true'}
+J=E/'execution.json';r={'stage':'F','status':'PRECHECK','activation_submitted':False,'rollback_performed':False,'hosted_deployment':False,'sql_modified':False,'stage_g_executed':False,'started_at_utc':datetime.now(timezone.utc).isoformat()}
+def stamp():return datetime.now(timezone.utc).isoformat()
+def save():r['updated_at_utc']=stamp();J.write_text(json.dumps(r,indent=2)+'\n')
+def az(a):
+ p=subprocess.run(['az']+a+['-o','json','--only-show-errors'],capture_output=True,text=True,timeout=60)
+ if p.returncode:raise RuntimeError('Azure operation failed; raw output withheld')
+ return json.loads(p.stdout) if p.stdout.strip() else None
+def saved():return {x['name']:x.get('value','') for x in az(['webapp','config','appsettings','list']+ARGS)}
+def set_values(values):az(['webapp','config','appsettings','set']+ARGS+['--settings']+[k+'='+v for k,v in values.items()])
+def identity(w):return (w['pid'],w['started_at_utc'][:19])
+def inspect():
+ p=subprocess.run(['/opt/az/bin/python3','/tmp/stage_f_retry_inspect.py'],capture_output=True,text=True,timeout=90)
+ if p.returncode:raise RuntimeError('Read-only worker probe unavailable')
+ # Use only JSON emitted by the sanitized inspector, never raw shell output.
+ d=json.loads(p.stdout);return d
+
+def ready_event(d,w):
+ started=datetime.fromisoformat(w['started_at_utc'])
+ for event in d.get('lifecycle_events',[]):
+  if not any(k in event['categories'] for k in ('site_startup_probe_succeeded','site_running')):continue
+  try:t=datetime.fromisoformat(event['timestamp'].replace('Z','+00:00'))
+  except (ValueError,TypeError):continue
+  if t.tzinfo and t>=started:return True
+ return False
+
+def wait_worker(phase,previous,after,sso,secret):
+ deadline=time.monotonic()+900;attempt=0
+ r['phase']=phase;r['status']='WAITING_FOR_REPLACEMENT_WORKER';save()
+ while time.monotonic()<deadline:
+  attempt+=1
+  try:
+   d=inspect();(E/(phase+'-latest-worker.json')).write_text(json.dumps(d,indent=2)+'\n')
+   assert d['status']=='PASS' and d.get('source_matches_reviewed') is True
+   workers=d.get('workers',[]);assert len(workers)==1;w=workers[0]
+   new=identity(w)!=previous and datetime.fromisoformat(w['started_at_utc'])>=after
+   env=w['environment'];flags=(env.get('SSO_ENABLED','false').lower()=='true')==sso and env.get('DEMO_BROWSER_LOGIN_ENABLED','true').lower()=='true' and env.get('secret_present',False)==secret
+   ids=env.get('ENTRA_TENANT_ID')==TENANT and env.get('ENTRA_CLIENT_ID')==CLIENT and env.get('SSO_PUBLIC_ORIGIN')==ORIGIN
+   loaded=d['reconstructed_settings'];consistent=loaded['sso_enabled']==sso and loaded['demo_enabled'] is True and loaded['secret_present']==secret and all(loaded.get(k) is True for k in ('tenant_matches','client_matches','origin_matches'))
+   initialized=new and ready_event(d,w)
+   r['last_worker_observation']={'phase':phase,'attempt':attempt,'pid':w['pid'],'started_at_utc':w['started_at_utc'],'new_worker':new,'flags_match':flags,'identifiers_match':ids,'reconstructed_settings_match':consistent,'platform_startup_confirmed':initialized};save()
+   if initialized and flags and ids and consistent:
+    (E/(phase+'-verified-worker.json')).write_text(json.dumps(d,indent=2)+'\n');return w
+  except Exception as e:r['last_probe_error_kind']=type(e).__name__;save()
+  print(json.dumps({'phase':phase,'status':'WAITING_FOR_REPLACEMENT_WORKER','attempt':attempt}),flush=True)
+  time.sleep(min(25,max(0,deadline-time.monotonic())))
+ raise TimeoutError('Worker readiness deadline reached; no further retry submission')
+
+def public(sso):
+ def get(route):
+  p=subprocess.run(['curl','--silent','--show-error','--fail-with-body','--connect-timeout','5','--max-time','45','-H','Cache-Control: no-cache',ORIGIN+route],capture_output=True,text=True,timeout=50)
+  assert p.returncode==0
+  return route,json.loads(p.stdout)
+ with concurrent.futures.ThreadPoolExecutor(max_workers=3) as pool:d=dict(pool.map(get,('/health','/ready','/api/sso/status')))
+ assert d['/health']['status']=='ok';v=d['/ready'];assert v['status']=='ready' and v['database_revision']=='005' and v['release']['build_version']=='1.2-6749226f1af65b63' and v['sso_available']==sso
+ assert d['/api/sso/status']=={'sso_enabled':sso,'configured':sso,'demo_login_enabled':True}
+ return d
+
+try:
+ assert not J.exists(),'Existing execution journal: reconcile rather than repeat'
+ confirmation=json.loads((E/'user-secret-save-confirmation.json').read_text());assert confirmation['user_confirmed_saved'] is True
+ baseline=json.loads((E/'baseline-worker.json').read_text());old=identity(baseline['workers'][0])
+ app=az(['webapp','show']+ARGS+['--query','{id:id,state:state}']);assert app['id'].lower()==('/subscriptions/'+SUB+'/resourceGroups/'+GROUP+'/providers/Microsoft.Web/sites/'+APP).lower()
+ reg=az(['ad','app','show','--id',CLIENT,'--query','{clientId:appId,uris:web.redirectUris}']);assert reg['clientId']==CLIENT and set(reg['uris'])=={ORIGIN+'/',ORIGIN+'/api/sso/callback'}
+ logs=az(['webapp','log','show']+ARGS+['--query','{http:httpLogs.fileSystem.enabled,application:applicationLogs.fileSystem.level}']);assert logs=={'http':False,'application':'Information'}
+ before=saved();assert before.get('ENTRA_CLIENT_SECRET','').strip() and before.get('SSO_ENABLED','false').lower()=='false' and before.get('DEMO_BROWSER_LOGIN_ENABLED','true').lower()=='true' and before.get('CORS_ORIGIN')==ORIGIN
+ r['secret_setting_present']=True;save()
+ after_baseline=datetime.fromisoformat(baseline['observed_at_utc'])
+ secret_worker=wait_worker('secret-save',old,after_baseline,False,True)
+ r['secret_worker_verified']=True;r['secret_worker_identity']=identity(secret_worker);r['secret_phase_public_checks']=public(False);save()
+ # Re-read all settings immediately before the sole approved activation write.
+ before=saved();assert before.get('ENTRA_CLIENT_SECRET','').strip() and before.get('SSO_ENABLED','false').lower()=='false'
+ r['activation_submitted']=True;r['activation_submitted_at_utc']=stamp();save()
+ submitted=datetime.fromisoformat(r['activation_submitted_at_utc']);set_values(VALUES)
+ after=saved();assert all(after.get(k)==v for k,v in VALUES.items())
+ assert {k:v for k,v in before.items() if k not in VALUES}=={k:v for k,v in after.items() if k not in VALUES}
+ r['unrelated_settings_and_secret_preserved']=True;save()
+ active_worker=wait_worker('activation',identity(secret_worker),submitted,True,True)
+ r['new_worker_verified']=True;r['activation_worker_identity']=identity(active_worker);save()
+ r['public_checks']=public(True);r['status']='WORKER_AND_PUBLIC_CHECKS_PASS_LOGIN_CHOICES_PENDING';save()
+except Exception as e:
+ # Journal replay is a reconciliation blocker; never overwrite or rollback another run.
+ if str(e)=='Existing execution journal: reconcile rather than repeat':print(json.dumps({'status':'BLOCKED_EXISTING_EXECUTION_JOURNAL'}));raise SystemExit(2)
+ r['status']='BLOCKED';r['error_kind']=type(e).__name__;save()
+ if r.get('secret_setting_present'):
+  try:
+   d=inspect();old_worker=d.get('workers',[{}])[0];previous=identity(old_worker) if old_worker.get('pid') else (-1,'')
+  except Exception:previous=(-1,'')
+  try:
+   r['rollback_performed']=True;r['rollback_submitted_at_utc']=stamp();save()
+   set_values({'SSO_ENABLED':'false','DEMO_BROWSER_LOGIN_ENABLED':'true'})
+   az(['webapp','config','appsettings','delete']+ARGS+['--setting-names','ENTRA_CLIENT_SECRET'])
+   x=saved();assert x.get('SSO_ENABLED')=='false' and x.get('DEMO_BROWSER_LOGIN_ENABLED')=='true' and not x.get('ENTRA_CLIENT_SECRET')
+   w=wait_worker('rollback',previous,datetime.fromisoformat(r['rollback_submitted_at_utc']),False,False)
+   r['rollback_worker_verified']=True;r['rollback_worker_identity']=identity(w);r['rollback_public_checks']=public(False);r['status']='BLOCKED_ROLLBACK_VERIFIED';save()
+  except Exception as failure:r['status']='BLOCKED_ROLLBACK_VERIFICATION_INCOMPLETE';r['rollback_error_kind']=type(failure).__name__;save()
+save();print(json.dumps(r),flush=True)

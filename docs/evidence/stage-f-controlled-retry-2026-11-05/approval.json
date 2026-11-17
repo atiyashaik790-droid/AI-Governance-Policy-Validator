@@ -1,0 +1,12 @@
+{
+  "scope": "One explicitly approved controlled Stage F configuration-only retry",
+  "user_secret_entry_required": true,
+  "activation_submitted": false,
+  "manual_restart_allowed": false,
+  "deployment_allowed": false,
+  "sql_changes_allowed": false,
+  "stage_g_allowed": false,
+  "worker_baseline_pid": 1965,
+  "worker_baseline_start": "2026-11-04T18:45:30.069183+00:00",
+  "post_configuration_deadline_minutes": 15
+}

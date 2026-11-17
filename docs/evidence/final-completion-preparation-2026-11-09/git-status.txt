@@ -1,0 +1,340 @@
+ M .env.example
+ M README.md
+ M backend/app/analytics.py
+ M backend/app/config.py
+ M backend/app/engine.py
+ M backend/app/exports.py
+ M backend/app/main.py
+ M backend/app/models.py
+ M backend/app/release.py
+ M backend/app/schemas.py
+ M backend/app/security.py
+ M backend/app/sessions.py
+ M backend/app/usage.py
+ M backend/app/web_assets.py
+ M backend/migrations/env.py
+ M backend/requirements.lock.txt
+ M backend/requirements.txt
+ M backend/tests/test_demo_completion.py
+ M backend/tests/test_deployment_preparation.py
+ M backend/tests/test_migration_preflight.py
+ M backend/tests/test_migration_recovery.py
+ M backend/tests/test_pagination.py
+ M backend/tests/test_sql_http_plan.py
+ M backend/tests/test_sql_inventory.py
+ M deployment/appsettings.example.json
+ M deployment/enterprise_identity.REVIEW_ONLY.json
+ M docs/CURRENT_STATUS.md
+ M docs/FINAL_BOUNDED_RECOVERY_PLAN.md
+ M docs/FINAL_HOSTED_DEMO_ACCEPTANCE.md
+ M docs/FINAL_PRODUCTION_READINESS.md
+ M docs/FINAL_RECOVERY_PREREQUISITES.md
+ M docs/LOCAL_LIVE_RUN_GUIDE.md
+ M docs/LOCAL_RUN_GUIDE.md
+ M frontend/index.html
+ M frontend/src/App.test.tsx
+ M frontend/src/Backend.integration.test.jsx
+ M frontend/src/Overview.tsx
+ M frontend/src/api.test.ts
+ M frontend/src/api.ts
+ M frontend/src/main.tsx
+ M frontend/src/styles.css
+ M scripts/check_azure_sql.py
+ M scripts/prepare_app_service.py
+ M scripts/run_offline_demo.py
+ M scripts/test_azure_sql_http.py
+?? backend/app/custom_rules.py
+?? backend/app/decision_messages.py
+?? backend/app/dependencies.py
+?? backend/app/document_worker.py
+?? backend/app/engine_multi_policy.py
+?? backend/app/exception_handlers.py
+?? backend/app/execution_identity.py
+?? backend/app/integration_verification.py
+?? backend/app/middleware.py
+?? backend/app/models_multi_policy.py
+?? backend/app/models_review_content.py
+?? backend/app/multi_policy_contracts.py
+?? backend/app/protected_reviews.py
+?? backend/app/repositories.py
+?? backend/app/routers/
+?? backend/app/schema_006_verification.py
+?? backend/app/schema_compatibility.py
+?? backend/app/schema_manifests.py
+?? backend/app/schema_reflection.py
+?? backend/app/services/
+?? backend/app/sso.py
+?? backend/app/stage_timing.py
+?? backend/app/user_access.py
+?? backend/migrations/versions/005_entra_sso.py
+?? backend/migrations/versions/006_multi_policy.py
+?? backend/migrations/versions/007_protected_review_content.py
+?? backend/migrations/versions/008_execution_immutability.py
+?? backend/tests/sso_browser_server.py
+?? backend/tests/sso_integration_server.py
+?? backend/tests/test_audit_date_filters.py
+?? backend/tests/test_cleanup_sql_semantics.py
+?? backend/tests/test_cleanup_startup_health.py
+?? backend/tests/test_custom_categories.py
+?? backend/tests/test_decision_messages.py
+?? backend/tests/test_distinct_rollback_preservation.py
+?? backend/tests/test_document_uploads.py
+?? backend/tests/test_entra_sso.py
+?? backend/tests/test_execution_008_application.py
+?? backend/tests/test_execution_immutability_008.py
+?? backend/tests/test_final_readiness.py
+?? backend/tests/test_fresh_database_preparation.py
+?? backend/tests/test_loading_performance.py
+?? backend/tests/test_loading_security.py
+?? backend/tests/test_mssql_schema_reflection.py
+?? backend/tests/test_multi_policy_bit_sql.py
+?? backend/tests/test_multi_policy_bridge.py
+?? backend/tests/test_multi_policy_mssql_contract.py
+?? backend/tests/test_multi_policy_phase_b.py
+?? backend/tests/test_multi_policy_phase_c.py
+?? backend/tests/test_multi_policy_phase_d.py
+?? backend/tests/test_multi_policy_phase_e.py
+?? backend/tests/test_multi_policy_phase_fg.py
+?? backend/tests/test_phase6b_session_assertion.py
+?? backend/tests/test_protected_reviews.py
+?? backend/tests/test_qualification_catalog.py
+?? backend/tests/test_release_transition.py
+?? backend/tests/test_remaining_review_workflow.py
+?? backend/tests/test_remaining_targeted_probe.py
+?? backend/tests/test_review_deadline_diagnostics.py
+?? backend/tests/test_schema_compatibility.py
+?? backend/tests/test_schema_key_batching.py
+?? backend/tests/test_session_lifetime.py
+?? backend/tests/test_sql_verifier_diagnostics.py
+?? backend/tests/test_sso_only.py
+?? backend/tests/test_user_portal.py
+?? deployment/demo-policy-seed.REVIEW_ONLY.json
+?? deployment/fresh-database-permissions.REVIEW_ONLY.json
+?? deployment/fresh-database-runtime-grants.REVIEW_ONLY.sql
+?? deployment/fresh-demo-profile.LOCAL_ONLY.json
+?? deployment/fresh-init-firewall.REVIEW_ONLY.json
+?? deployment/fresh-runtime-and-memberships.REVIEW_ONLY.json
+?? deployment/fresh-runtime-provision.REVIEW_ONLY.sql
+?? deployment/migration-005.REVIEW_ONLY.sql
+?? deployment/phase6a-runtime-006-grants.REVIEW_ONLY.sql
+?? deployment/phase6a-runtime-007-grants.REVIEW_ONLY.sql
+?? deployment/phase6a-runtime-permissions.READ_ONLY.sql
+?? deployment/phase6a-session120.REVIEW_ONLY.json
+?? deployment/phase6b-recovery-validation.REVIEW_ONLY.sql
+?? deployment/review-encryption-staging.REVIEW_ONLY.json
+?? deployment/sql-expiry-watchdog/
+?? deployment/sso-membership.example.json
+?? deployment/sso-runtime-permissions.REVIEW_ONLY.sql
+?? deployment/stage-c005-with-separate-visibility-approval.REVIEW_ONLY.sql
+?? deployment/stage-d-sso-data-permissions.REVIEW_ONLY.sql
+?? deployment/stage-e-atiya-admin-membership.APPROVED.json
+?? deployment/stage-e-atiya-membership.PROPOSED.json
+?? deployment/verify_managed_identity.READ_ONLY.sql
+?? deployment/verify_sso_compatibility.READ_ONLY.sql
+?? deployment/webjobs-diagnostic-conditional.REVIEW_ONLY.json
+?? deployment/webjobs-diagnostic-supervisor.REVIEW_ONLY.json
+?? docs/CUSTOM_POLICY_CATEGORIES.md
+?? docs/DIAGNOSTIC_DEADLINE_RECOVERY_FIX.md
+?? docs/ENTRA_SSO.md
+?? docs/ENTRA_SSO_REPORT.md
+?? docs/FEATURE_1_PHASE_C_API.md
+?? docs/FEATURE_1_PHASE_D_ENGINE.md
+?? docs/FEATURE_1_PHASE_E_REPORTING.md
+?? docs/FINAL_DATABASE_BOOTSTRAP_APPROVAL.md
+?? docs/FINAL_DEMO_SQL_QUALIFICATION_PLAN.md
+?? docs/FINAL_DEMO_SQL_QUALIFICATION_RETRY8_PLAN.HISTORICAL.md
+?? docs/FINAL_DEMO_SQL_QUALIFICATION_RETRY9_PLAN.HISTORICAL.md
+?? docs/FINAL_END_TO_END_DEMO_READINESS.md
+?? docs/FINAL_SSO_DEPLOYMENT_APPROVAL.md
+?? docs/FINAL_TECHNICAL_DEMO_SCRIPT.md
+?? docs/FINAL_THREE_BLOCKERS_APPROVALS.md
+?? docs/FRESH_DATABASE_CREATION_RESULT.md
+?? docs/FRESH_DATABASE_DEPLOYMENT_PREPARATION.md
+?? docs/FRESH_DATABASE_INITIALIZATION_PREFLIGHT_RESULT.md
+?? docs/FRESH_DATABASE_INITIALIZATION_RESULT.md
+?? docs/FRIENDLY_GOVERNANCE_MESSAGES.md
+?? docs/HEALTH_NETWORK_READONLY_DIAGNOSIS.md
+?? docs/HOSTED_005_DEMO_READINESS.md
+?? docs/INDEPENDENT_EXECUTOR_DISCOVERY.md
+?? docs/INTEGRATION_VERIFICATION.md
+?? docs/MASTER_REPAIR_DEPLOYMENT_READINESS.md
+?? docs/MASTER_REPAIR_RESULT.md
+?? docs/ONE_HOUR_DEPLOYMENT_RESULT.md
+?? docs/PHASE5A_SCHEMA_CONTRACT_REPORT.md
+?? docs/PHASE5_LOCAL_ACCEPTANCE.md
+?? docs/PHASE6A_PREDEPLOYMENT_HARDENING.md
+?? docs/PHASE6B_006_VERIFIER_FIX.md
+?? docs/PHASE6B_008_IMMUTABILITY_FIX.md
+?? docs/PHASE6B_A1_LOCAL_VERIFICATION.md
+?? docs/PHASE6B_APPROVAL_A_RESULT.md
+?? docs/PHASE6B_APPROVAL_A_RETRY2_RESULT.md
+?? docs/PHASE6B_APPROVAL_A_RETRY3_RESULT.md
+?? docs/PHASE6B_APPROVAL_A_RETRY4_RESULT.md
+?? docs/PHASE6B_APPROVAL_A_RETRY5_RESULT.md
+?? docs/PHASE6B_APPROVAL_A_RETRY6_RESULT.md
+?? docs/PHASE6B_APPROVAL_A_RETRY7_RESULT.md
+?? docs/PHASE6B_APPROVAL_A_RETRY8_RESULT.md
+?? docs/PHASE6B_APPROVAL_A_RETRY9_RESULT.md
+?? docs/PHASE6B_APPROVAL_A_RETRY_PREPARATION.md
+?? docs/PHASE6B_APPROVAL_A_RETRY_RESULT.md
+?? docs/PHASE6B_CONSOLIDATED_APPROVAL_A_PLAN.md
+?? docs/PHASE6B_FINAL_QUALIFICATION_PLAN.md
+?? docs/PHASE6B_FINAL_TARGETED_QUALIFICATION_PLAN.md
+?? docs/PHASE6B_HUMAN_REVIEW_504_FIX.md
+?? docs/PHASE6B_HUMAN_REVIEW_CONFIRMATION_PLAN.md
+?? docs/PHASE6B_MULTI_SQL_FIX.md
+?? docs/PHASE6B_RETRY5_HEALTH_FIX.md
+?? docs/PHASE6B_SQL_CONNECTIVITY_DIAGNOSIS.md
+?? docs/PHASE6B_SQL_RECOVERY_PREFLIGHT.md
+?? docs/PHASE6_AZURE_READINESS_REPORT.md
+?? docs/PLAYGROUND_DOCUMENT_UPLOADS.md
+?? docs/PRODUCTION_ENCRYPTION_STAGING_RESULT.md
+?? docs/PROTECTED_HUMAN_REVIEW.md
+?? docs/REMAINING_DEMO_PREPARATION_RESULT.md
+?? docs/RUNTIME_PROBE_DIAGNOSTICS.md
+?? docs/SESSION_LIFETIME_PHASE3.md
+?? docs/SQL_VERIFIER_DIAGNOSTICS.md
+?? docs/SSO_COMPATIBILITY_RELEASE.md
+?? docs/SSO_ONLY_DEPLOYMENT_ACCEPTANCE.md
+?? docs/SSO_ONLY_LOGIN.md
+?? docs/SSO_READINESS_AUTOMATION.md
+?? docs/STAGE_B_DEPLOYMENT_APPROVAL.md
+?? docs/STAGE_B_DEPLOYMENT_RESULT.md
+?? docs/STAGE_C_EXECUTION_RESULT.md
+?? docs/STAGE_C_FINAL_CONFIRMATION.md
+?? docs/STAGE_C_MIGRATION_APPROVAL.md
+?? docs/STAGE_C_REMAINING_CONFIRMATION.md
+?? docs/STAGE_D_EXECUTION_RESULT.md
+?? docs/STAGE_D_VERIFICATION_AND_STAGE_E_PREPARATION.md
+?? docs/STAGE_E_CONNECTION_DIAGNOSIS_RESULT.md
+?? docs/STAGE_E_EXECUTION_RESULT.md
+?? docs/STAGE_E_RESUME_RESULT.md
+?? docs/STAGE_F_CONFIGURATION_DIAGNOSIS.md
+?? docs/STAGE_F_CONTROLLED_RETRY_RESULT.md
+?? docs/STAGE_F_EXECUTION_RESULT.md
+?? docs/STAGE_F_FINAL_CONFIGURATION_PLAN.md
+?? docs/STAGE_F_FINAL_CONFIGURATION_PRECHECK.md
+?? docs/STAGE_F_LIVE_WORKER_DIAGNOSIS.md
+?? docs/STAGE_F_READINESS_AND_APPROVAL.md
+?? docs/STAGE_G_ACCEPTANCE_RESULT.md
+?? docs/STAGE_G_CALLBACK_DIAGNOSIS.md
+?? docs/TEMPORARY_SQL_FIREWALL_VERIFICATION_RESULT.md
+?? docs/THREE_FEATURE_PRODUCTION_CHANGE_REVIEW.md
+?? docs/USER_PORTAL_AUDIT.md
+?? docs/WEBAPP_WATCHDOG_DISABLED_CHECK_RESULT.md
+?? docs/WEBAPP_WATCHDOG_REVIEW.md
+?? docs/WEBJOBS_AZURE_INTEGRATION_RESULT.md
+?? docs/WEBJOBS_CORRECTED_FINAL_DIAGNOSTIC_RESULT.md
+?? docs/WEBJOBS_NO_PAID_SUPPORT_REPAIR_REVIEW.md
+?? docs/WEBJOBS_ONE_LISTING_DIAGNOSTIC_RESULT.md
+?? docs/WEBJOBS_SUPPORT_REQUEST_DRAFT.md
+?? docs/WEBJOBS_SUPPORT_SUBMISSION_STATUS.md
+?? docs/evidence/diagnostic-azure-integration-2026-11-08/
+?? docs/evidence/diagnostic-safety-local-2026-11-08/
+?? docs/evidence/encryption-staging-2026-11-08/
+?? docs/evidence/entra-sso/
+?? docs/evidence/final-completion-preparation-2026-11-09/
+?? docs/evidence/final-demo-readiness-2026-11-07/
+?? docs/evidence/final-gates-2026-11-08/
+?? docs/evidence/final-safety-2026-11-07/
+?? docs/evidence/firewall-verification-2026-11-08/
+?? docs/evidence/fresh-database-creation-2026-11-08/
+?? docs/evidence/fresh-database-initialization-2026-11-08/
+?? docs/evidence/fresh-database-initialization-2026-11-09/
+?? docs/evidence/fresh-database-preparation-2026-11-08/
+?? docs/evidence/health-network-readonly-2026-11-08/
+?? docs/evidence/hosted-005-demo-readiness-2026-11-07/
+?? docs/evidence/hosted-005-demo-readiness-2026-11-08/
+?? docs/evidence/loading-performance-2026-11-05/
+?? docs/evidence/master-repair-2026-11-07/
+?? docs/evidence/one-hour-predeployment-2026-11-08/
+?? docs/evidence/phase5-local-2026-11-06/
+?? docs/evidence/phase5a-local-2026-11-06/
+?? docs/evidence/phase6-readonly-2026-11-06/
+?? docs/evidence/phase6a-local-2026-11-06/
+?? docs/evidence/phase6b-006-local-2026-11-06/
+?? docs/evidence/phase6b-008-local-2026-11-07/
+?? docs/evidence/phase6b-a1-local-2026-11-06/
+?? docs/evidence/phase6b-approval-a-2026-11-06/
+?? docs/evidence/phase6b-approval-a-retry1-2026-11-06/
+?? docs/evidence/phase6b-approval-a-retry2-2026-11-06/
+?? docs/evidence/phase6b-approval-a-retry3-2026-11-06/
+?? docs/evidence/phase6b-approval-a-retry4-2026-11-06/
+?? docs/evidence/phase6b-approval-a-retry5-2026-11-07/
+?? docs/evidence/phase6b-approval-a-retry6-2026-11-07/
+?? docs/evidence/phase6b-approval-a-retry7-2026-11-07/
+?? docs/evidence/phase6b-approval-a-retry8-2026-11-07/
+?? docs/evidence/phase6b-approval-a-retry9-2026-11-07/
+?? docs/evidence/phase6b-consolidated-local-2026-11-06/
+?? docs/evidence/phase6b-firewall-create-2026-11-07/
+?? docs/evidence/phase6b-firewall-readonly-2026-11-07/
+?? docs/evidence/phase6b-health-local-2026-11-07/
+?? docs/evidence/phase6b-multi-fix-local-2026-11-06/
+?? docs/evidence/phase6b-readonly-2026-11-06/
+?? docs/evidence/phase6b-review504-local-2026-11-07/
+?? docs/evidence/phase6b-sql-connectivity-2026-11-06/
+?? docs/evidence/sql-unblock-2026-11-08/
+?? docs/evidence/sso-compatibility/
+?? docs/evidence/sso-only-deployment-2026-11-05/
+?? docs/evidence/stage-b-2026-11-04/
+?? docs/evidence/stage-c-2026-11-04/
+?? docs/evidence/stage-c-execution-2026-11-04/
+?? docs/evidence/stage-c-final-2026-11-04/
+?? docs/evidence/stage-d-execution-2026-11-04/
+?? docs/evidence/stage-de-2026-11-04/
+?? docs/evidence/stage-e-execution-2026-11-04/
+?? docs/evidence/stage-f-controlled-retry-2026-11-05/
+?? docs/evidence/stage-f-diagnosis-2026-11-05/
+?? docs/evidence/stage-f-execution-2026-11-04/
+?? docs/evidence/stage-f-live-worker-2026-11-05/
+?? docs/evidence/stage-f-readiness-2026-11-04/
+?? docs/evidence/stage-g-acceptance-2026-11-05/
+?? docs/evidence/stage-g-callback-diagnosis-2026-11-05/
+?? docs/evidence/three-feature-deployment-2026-11-08/
+?? docs/evidence/webapp-watchdog-disabled-check-2026-11-07/
+?? docs/evidence/webapp-watchdog-review/
+?? docs/evidence/webjobs-corrected-final-2026-11-08/
+?? docs/evidence/webjobs-http500-readonly-2026-11-07/
+?? docs/evidence/webjobs-one-listing-diagnostic-2026-11-08/
+?? docs/evidence/webjobs-settings-diagnosis-2026-11-08/
+?? docs/evidence/webjobs-support-submission-2026-11-07/
+?? frontend/src/AttachmentPicker.test.tsx
+?? frontend/src/AttachmentPicker.tsx
+?? frontend/src/AuditFilters.test.tsx
+?? frontend/src/CustomCategories.test.tsx
+?? frontend/src/CustomCategories.tsx
+?? frontend/src/DecisionNotice.test.tsx
+?? frontend/src/DecisionNotice.tsx
+?? frontend/src/IntegrationStatus.test.tsx
+?? frontend/src/IntegrationStatus.tsx
+?? frontend/src/LoadingPerformance.test.tsx
+?? frontend/src/MultiPolicy.test.tsx
+?? frontend/src/ReviewContent.test.tsx
+?? frontend/src/ReviewContent.tsx
+?? frontend/src/SettingsAnalytics.test.tsx
+?? frontend/src/Sso.test.tsx
+?? frontend/src/UsageConsumption.tsx
+?? frontend/src/UserPortal.test.tsx
+?? frontend/src/UserPortal.tsx
+?? frontend/src/WorkspaceSessions.tsx
+?? frontend/src/workspace.tsx
+?? scripts/contracts/
+?? scripts/diagnose_sql_preflight.py
+?? scripts/inspect_sso_worker.py
+?? scripts/manage_sso_membership.py
+?? scripts/phase6b_approval_a.py
+?? scripts/prepare_fresh_demo.py
+?? scripts/prepare_sso_rollout.py
+?? scripts/prepare_sso_rollout.sh
+?? scripts/runtime_layout.py
+?? scripts/sql_connection_confirmation.py
+?? scripts/sql_diagnostics.py
+?? scripts/sql_expiry_control.py
+?? scripts/sso_deployment_readiness.py
+?? scripts/tests/
+?? scripts/verify_hosted_runtime.py
+?? scripts/verify_hosted_runtime.sh
+?? scripts/verify_schema_compatibility.py
+?? scripts/verify_sso_deployment_readiness.sh
+?? scripts/webjobs_diagnostic.py
+?? scripts/webjobs_diagnostic_azure.py

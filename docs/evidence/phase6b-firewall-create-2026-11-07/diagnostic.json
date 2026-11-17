@@ -1,0 +1,22 @@
+{
+  "endpoint": "sql-governance-validator-dev-atiya.database.windows.net",
+  "port": 1433,
+  "database": "sqldb-governance-validator-dev",
+  "mutations": 0,
+  "checks": {
+    "subscription": "PASS",
+    "dns": "PASS",
+    "tcp1433": "PASS",
+    "odbc18": "PASS",
+    "secure_odbc_configuration": "PASS",
+    "token_acquisition": "PASS",
+    "sql_connect_tls_identity_pin": "PASS",
+    "readonly_database_revision005": "PASS"
+  },
+  "tls": {
+    "encrypt": true,
+    "trust_server_certificate": false
+  },
+  "status": "PASS",
+  "elapsed_seconds": 6.104
+}

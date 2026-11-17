@@ -1,0 +1,19 @@
+{
+  "stage": "E",
+  "observed_at_utc": "2026-11-04T16:32:00.025700+00:00",
+  "hosted_changes": false,
+  "approval_basis": "User explicitly approved Admin for this identity/workspace and previously confirmed control/ownership of independently managed project",
+  "identity": {
+    "accountEnabled": true,
+    "displayName": "atiya tabsum",
+    "objectId": "b5d8bfbe-f03a-4132-a13f-ab49aae834b7",
+    "userType": "Member"
+  },
+  "account_context": {
+    "subscription": "25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6",
+    "tenant": "4ac50105-0c66-404e-a107-7cbd8a9a6442",
+    "type": "user"
+  },
+  "status": "FAILED_STOP",
+  "error_kind": "TimeoutExpired"
+}

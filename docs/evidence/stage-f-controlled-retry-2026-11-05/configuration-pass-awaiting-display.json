@@ -1,0 +1,11 @@
+{
+  "configuration_worker_and_http": "PASS",
+  "new_worker_verified": true,
+  "sso_enabled": true,
+  "demo_login_enabled": true,
+  "health_readiness": "PASS",
+  "rollback_performed": false,
+  "login_choices_display": "AWAITING_USER_CONFIRMATION_NO_CONNECTED_BROWSER",
+  "stage_g_executed": false,
+  "observed_at_utc": "2026-11-05T05:58:06.088587+00:00"
+}

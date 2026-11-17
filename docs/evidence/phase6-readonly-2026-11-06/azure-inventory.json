@@ -1,0 +1,66 @@
+{
+  "account": {
+    "status": "VERIFIED",
+    "data": {
+      "state": "Enabled",
+      "subscription": "25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6",
+      "tenant": "4ac50105-0c66-404e-a107-7cbd8a9a6442"
+    }
+  },
+  "webapps": {
+    "status": "VERIFIED",
+    "data": [
+      {
+        "host": "app-governance-validator-atiya-1026.azurewebsites.net",
+        "httpsOnly": true,
+        "identity": "SystemAssigned",
+        "name": "app-governance-validator-atiya-1026",
+        "principal": "600447fe-5fea-4801-9033-ab4aafc474cc",
+        "resourceGroup": "rg_techdemo_Atiya_Tabsum_Shaik",
+        "state": "Running"
+      }
+    ]
+  },
+  "sql_servers": {
+    "status": "VERIFIED",
+    "data": [
+      {
+        "fqdn": "sql-governance-validator-dev-atiya.database.windows.net",
+        "name": "sql-governance-validator-dev-atiya",
+        "resourceGroup": "rg_techdemo_Atiya_Tabsum_Shaik",
+        "state": "Ready"
+      }
+    ]
+  },
+  "storage": {
+    "status": "VERIFIED",
+    "data": [
+      {
+        "hns": true,
+        "httpsOnly": true,
+        "name": "stgovvalidatoratiya1026",
+        "publicNetwork": null,
+        "resourceGroup": "rg_techdemo_Atiya_Tabsum_Shaik"
+      }
+    ]
+  },
+  "cognitive": {
+    "status": "VERIFIED",
+    "data": [
+      {
+        "endpoint": "https://atiyatabsum-6397-resource.cognitiveservices.azure.com/",
+        "kind": "AIServices",
+        "name": "atiyatabsum-6397-resource",
+        "publicNetwork": "Enabled",
+        "resourceGroup": "rg_techdemo_Atiya_Tabsum_Shaik"
+      },
+      {
+        "endpoint": "https://aoai-governance-validator-dev.openai.azure.com/",
+        "kind": "OpenAI",
+        "name": "aoai-governance-validator-dev",
+        "publicNetwork": "Enabled",
+        "resourceGroup": "rg_techdemo_Atiya_Tabsum_Shaik"
+      }
+    ]
+  }
+}

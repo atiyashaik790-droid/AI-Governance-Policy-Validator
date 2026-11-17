@@ -1,0 +1,24 @@
+{
+  "stage": "F",
+  "approval": "Explicit user configuration-only rollout approval",
+  "started_at_utc": "2026-11-04T18:24:13.876776+00:00",
+  "sso_activation_attempted": false,
+  "settings_changed_by_agent": false,
+  "status": "PREREQUISITES_VERIFIED_AWAITING_USER_SECRET_ENTRY",
+  "secret_setting_present": false,
+  "existing_demo_enabled": true,
+  "redirect_uris_before": [
+    "https://app-governance-validator-atiya-1026.azurewebsites.net/api/sso/callback"
+  ],
+  "redirect_uris_verified": [
+    "https://app-governance-validator-atiya-1026.azurewebsites.net/",
+    "https://app-governance-validator-atiya-1026.azurewebsites.net/api/sso/callback"
+  ],
+  "other_registration_properties_preserved": true,
+  "http_filesystem_logging_enabled": false,
+  "application_filesystem_logging_level": "Information",
+  "other_logging_properties_preserved": true,
+  "sso_enabled": false,
+  "demo_login_enabled": true,
+  "updated_at_utc": "2026-11-04T18:24:28.784054+00:00"
+}

@@ -1,0 +1,9 @@
+{
+  "docs/evidence/webjobs-one-listing-diagnostic-2026-11-08/new-startup-evidence.json": "1fa6c2f26300613d65c7467c6eab444bfa1e1c5f93092c9ed0e2cf8b45c5f90a",
+  "docs/evidence/webjobs-one-listing-diagnostic-2026-11-08/baseline-log-inventory.json": "6f52f5621ae320270117bb2ce375acda461590cc12edb5bab78751861f5b6db7",
+  "docs/evidence/webjobs-one-listing-diagnostic-2026-11-08/consumed.json": "0e3edc0afa8cf9baeceae8811a376693ddffc409640accaa787ab870f99226d6",
+  "docs/evidence/webjobs-one-listing-diagnostic-2026-11-08/execution.json": "76b714e72958e010ee30d73c7bd55728ced7b575a0b00111f314f9ea1c81365a",
+  "docs/evidence/webjobs-one-listing-diagnostic-2026-11-08/prechange-transport-interruption.json": "16ae9e581b54520ad50af1dbbf5d2d0cf0c9ac2b9cb3649d3b9f57c46c5783ed",
+  "docs/WEBJOBS_ONE_LISTING_DIAGNOSTIC_RESULT.md": "664002cc53d17b89c709c694b5098c78e1fe24aaa7fe522a3c7ca88de4342b3d",
+  "controller_source_sha256": "c27b896778c421ad9b29e100058ea3eaf9d2e026ba215a5a22af0d137bc31aeb"
+}

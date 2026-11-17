@@ -1,0 +1,28 @@
+{
+  "authorization": "Explicit user approval for ONLY the 15-minute disabled compatibility check in docs/WEBAPP_WATCHDOG_REVIEW.md",
+  "maximum_minutes": 15,
+  "allowed": [
+    "verify existing target/configuration",
+    "record original WebJobs setting",
+    "enable only WEBSITE_SKIP_RUNNING_KUDUAGENT",
+    "upload/run checksum-pinned disabled WebJob",
+    "inspect startup/Python/sanitized logs",
+    "stop WebJob",
+    "restore original setting as required",
+    "verify application health"
+  ],
+  "forbidden": [
+    "SQL database creation/deletion",
+    "SQL permission/data changes",
+    "watchdog arming",
+    "Azure SQL rehearsal",
+    "real Azure OpenAI/Moderation/ADLS calls",
+    "application release deployment",
+    "additional Azure services",
+    "Approval A retry-10",
+    "Recovery B",
+    "production Approvals C-F"
+  ],
+  "package_sha256": "fc4070ec948fd1465fa2226e7979357eec8def1f9dd9ab97fe2f3ef9bb2d7cd1",
+  "consumed_once": true
+}

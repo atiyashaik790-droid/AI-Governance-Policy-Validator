@@ -1,0 +1,19 @@
+{
+  "release": "1.2-5aad19f7eea45a42",
+  "auth_paths_reviewed": [
+    "/api/sso/status",
+    "/api/sso/me",
+    "/api/sso/logout",
+    "/api/auth/session",
+    "/api/auth/logout",
+    "/api/auth/sessions",
+    "/api/auth/sessions/synthetic/revoke"
+  ],
+  "post_disable_expected": {
+    "legacy_routes": 403,
+    "synthetic_bearer_protected_api": 401,
+    "unauthenticated_sso_me": 401
+  },
+  "real_login": "USER_MANUAL_ONLY",
+  "provider_calls": false
+}

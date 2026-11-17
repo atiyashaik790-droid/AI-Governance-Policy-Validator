@@ -1,0 +1,9 @@
+from pathlib import Path
+exec(compile(Path('/tmp/stage_f_readonly.py').read_text().split("attempt('account'")[0],'/tmp/stage_f_readonly.py','exec'))
+id='/subscriptions/'+sub+'/resourceGroups/'+group+'/providers/Microsoft.Web/sites/'+app
+attempt('diagnostic_settings',lambda:az(['rest','--method','GET','--url','https://management.azure.com'+id+'/providers/microsoft.insights/diagnosticSettings?api-version=2021-05-01-preview','--query','{settings:value[].{name:name,logs:properties.logs[].{category:category,categoryGroup:categoryGroup,enabled:enabled}}}']))
+try:
+ d=az(['webapp','config','appsettings','list','--subscription',sub,'-g',group,'-n',app]);d={x['name']:bool(x.get('value')) for x in d}
+ r['telemetry_setting_status']={k:('SET_NONEMPTY' if d[k] else 'PRESENT_EMPTY') if k in d else 'ABSENT' for k in ['APPLICATIONINSIGHTS_CONNECTION_STRING','APPINSIGHTS_INSTRUMENTATIONKEY','ApplicationInsightsAgent_EXTENSION_VERSION','OTEL_EXPORTER_OTLP_ENDPOINT']}
+except Exception as e:r['telemetry_setting_status']={'status':'BLOCKED','error_kind':type(e).__name__}
+(R/'docs/evidence/stage-f-readiness-2026-11-04/logging-readiness.json').write_text(json.dumps(r,indent=2)+'\n');print(json.dumps(r))

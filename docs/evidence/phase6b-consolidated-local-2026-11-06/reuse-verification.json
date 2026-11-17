@@ -1,0 +1,18 @@
+{
+  "candidate": "1.2-e4d3f0b8116eb37d",
+  "session_code_unchanged": true,
+  "prior_006_session_checks": [
+    200,
+    200,
+    401,
+    401
+  ],
+  "session_helper_unchanged": true,
+  "sqlite_revision": "003",
+  "sqlite_sha256": "0cad09a35e73ad70bb5ff5e522f783f9b59fdd5b3c31eb5b5dddd4d300795766",
+  "completed_local_suites_reused": [
+    223,
+    287
+  ],
+  "azure_mutations": 0
+}

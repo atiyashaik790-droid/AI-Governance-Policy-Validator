@@ -1,0 +1,11 @@
+{
+  "approval": "User explicitly approved consolidated Approval A retry-3 ONLY under prepared plan",
+  "candidate": "1.2-e4d3f0b8116eb37d",
+  "max_hours": 4,
+  "max_estimated_compute_usd": 1,
+  "max_incarnations": 2,
+  "tier": "S0 / 10 DTUs",
+  "production_mutations": false,
+  "deployment": false,
+  "B_through_F": false
+}

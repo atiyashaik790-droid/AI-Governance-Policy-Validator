@@ -1,0 +1,26 @@
+{"completed": true, "elapsed_seconds": 13.346, "event": "cleanup.startup", "healthy": true}
+{"attempted": 0, "elapsed_ms": 13345.75, "event": "cleanup.pass", "healthy": true, "reason": "COMPLETE", "removed": 0, "selected": 0, "stage": "backlog"}
+{"completed": true, "elapsed_seconds": 13.346, "event": "cleanup.startup", "healthy": true}
+{"attempted": 0, "elapsed_ms": 13345.75, "event": "cleanup.pass", "healthy": true, "reason": "COMPLETE", "removed": 0, "selected": 0, "stage": "backlog"}
+/home/sigmoid/AI governance policy validator/.venv/lib/python3.13/site-packages/authlib/integrations/httpx_client/assertion_client.py:5: AuthlibDeprecationWarning: The httpx module is deprecated; please use httpx2 instead.
+  from ._compat import httpx2
+/home/sigmoid/AI governance policy validator/.venv/lib/python3.13/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+  from starlette.testclient import TestClient as TestClient  # noqa
+{"event": "cleanup.pass", "stage": "backlog", "reason": "COMPLETE", "selected": 0, "attempted": 0, "removed": 0, "healthy": true, "elapsed_ms": 13345.75}
+{"event": "database.failed", "route": "/ready", "category": "DATABASE_OPERATION_FAILED", "sqlstate": "08S01"}
+{"event": "http.completed", "correlation_id": "9408bfac-1fb9-46f3-a5bd-57df1567552d", "route": "/ready", "method": "GET", "status": 503, "duration_ms": 24353.98}
+Traceback (most recent call last):
+  File "/home/sigmoid/AI governance policy validator/scripts/tests/phase6b_sql_package_probe.py", line 564, in <module>
+    probe(
+    ~~~~~^
+        args.directory,
+        ^^^^^^^^^^^^^^^
+    ...<3 lines>...
+        args.preserve_only,
+        ^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/sigmoid/AI governance policy validator/scripts/tests/phase6b_sql_package_probe.py", line 138, in probe
+    assert ready.status_code == 200, ready.text
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {"detail":"Database operation unavailable; nothing released"}

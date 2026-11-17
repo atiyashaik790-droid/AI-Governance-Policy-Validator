@@ -1,0 +1,21 @@
+{
+  "bootstrap": "PASS",
+  "runtime_sql_permissions": "PASS_EFFECTIVE_SQL_IMPERSONATION_AND_EXACT_CATALOG",
+  "admin_membership": "PASS",
+  "user_membership": "PASS",
+  "tenant_isolation": "PASS_APPROVED_TENANT_BINDINGS_AND_BACKEND_GUARDS",
+  "hosted_sso_or_mi_login": "NOT_VERIFIED",
+  "revision": "008",
+  "firewall_cleanup": "PASS",
+  "firewall_seconds": 71.92,
+  "production_unchanged": true,
+  "new_memberships": 2,
+  "new_membership_audit_rows": 2,
+  "policy_records": 0,
+  "source_permission_baseline_records_unchanged": 51,
+  "explicit_new_permission_rows": 85,
+  "real_provider_calls": 0,
+  "deployment": false,
+  "app_setting_changes": false,
+  "next_approval": "EIGHT_POLICY_SEED_ON_NEW_DATABASE_ONLY_WITH_FRESH_BOUNDED_SQL_ACCESS"
+}

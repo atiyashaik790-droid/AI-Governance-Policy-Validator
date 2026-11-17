@@ -1,0 +1,18 @@
+{
+  "before_sha256": "bb384fc79c9eb7068fc191ed68fb88d9d5183bbaca9ed5fd9427121782d93a29",
+  "after_sha256": "9e8742200028b9c5a99ffa560a64fc9b3545763d9c89a13f8d7f428ebe96b714",
+  "reason": "Static review before any package test: preserve hosting managed_identity configuration validation while injecting actual CLI-authenticated SQL EXECUTE AS transport, and isolate synthetic OIDC member per revision. No pinned package or migration changes.",
+  "expanded_007_checks": [
+    "RBAC",
+    "tenant negative",
+    "explicit assignment",
+    "stale version",
+    "reveal and access audit",
+    "disposition",
+    "expiry cleanup",
+    "BLOCK",
+    "REDACT"
+  ],
+  "final_probe_sha256": "c7c8742ae032a1ebaa3116a023d4bd3913a0143898d7779c63986e9e85324a4b",
+  "execution_source_note": "005 child executed the after_sha256 version, preserved in package-probe-005.executed.py. Expanded 007 checks were prepared while 005 was in flight and never executed; they are not test evidence."
+}

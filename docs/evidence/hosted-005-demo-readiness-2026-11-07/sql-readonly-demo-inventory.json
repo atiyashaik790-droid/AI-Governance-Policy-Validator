@@ -1,0 +1,107 @@
+{
+  "mode": "SELECT_ONLY_AGGREGATES_AND_POLICY_CONFIGURATION",
+  "writes_performed": false,
+  "revision": [
+    "005"
+  ],
+  "operator_membership": {
+    "exists": true,
+    "role": "Admin",
+    "enabled": true
+  },
+  "enabled_memberships_by_role": [
+    {
+      "role": "Admin",
+      "count": 1
+    }
+  ],
+  "active_policies": [
+    {
+      "policy_id": "a91e4994-c333-4c70-879e-21f20eb9c5b6",
+      "status": "PUBLISHED",
+      "enabled": true,
+      "published_version": 1,
+      "document_sha256": "36151c6e9eb6e90228f0fddd12bb65ea48167079049529d245bda8ca9a03699d",
+      "rules": {
+        "secret_detection": {
+          "enabled": true,
+          "action": "BLOCK",
+          "entities": null,
+          "categories": null,
+          "internal_only_keyword_present": null,
+          "keyword_count": null
+        },
+        "pii_detection": {
+          "enabled": true,
+          "action": "REDACT",
+          "entities": [
+            "EMAIL_ADDRESS",
+            "PHONE_NUMBER",
+            "CREDIT_CARD"
+          ],
+          "categories": null,
+          "internal_only_keyword_present": null,
+          "keyword_count": null
+        },
+        "moderation": {
+          "enabled": true,
+          "action": "BLOCK",
+          "entities": null,
+          "categories": [
+            "violence/graphic",
+            "violence",
+            "sexual/minors",
+            "sexual",
+            "self-harm/instructions",
+            "self-harm/intent",
+            "self-harm",
+            "illicit/violent",
+            "illicit",
+            "hate/threatening",
+            "hate",
+            "harassment/threatening",
+            "harassment"
+          ],
+          "internal_only_keyword_present": null,
+          "keyword_count": null
+        },
+        "blocked_keywords": {
+          "enabled": true,
+          "action": "BLOCK",
+          "entities": null,
+          "categories": null,
+          "internal_only_keyword_present": true,
+          "keyword_count": 7
+        }
+      }
+    }
+  ],
+  "record_counts": {
+    "policies": 8,
+    "policy_versions": 13,
+    "validation_executions": 58,
+    "audit_events": 247,
+    "human_review_cases": 1,
+    "evaluation_exports": 2
+  },
+  "historical_execution_decisions": [
+    {
+      "decision": "ALLOW",
+      "count": 24
+    },
+    {
+      "decision": "BLOCK",
+      "count": 26
+    },
+    {
+      "decision": "HUMAN_REVIEW",
+      "count": 1
+    },
+    {
+      "decision": "REDACT",
+      "count": 7
+    }
+  ],
+  "historical_successful_generations": 32,
+  "observed_utc": "2026-11-07T17:27:04.311441+00:00"
+}

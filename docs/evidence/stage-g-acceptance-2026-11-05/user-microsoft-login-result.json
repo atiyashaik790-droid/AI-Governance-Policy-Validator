@@ -1,0 +1,8 @@
+{
+  "result": "FAIL",
+  "source": "Explicit user reply: Microsoft sign-in or callback failed",
+  "failure_location": "UNDETERMINED_MICROSOFT_OR_APP_CALLBACK",
+  "credential_values_received": false,
+  "acceptance_tests_stopped": true,
+  "observed_at_utc": "2026-11-05T06:16:35.768743+00:00"
+}

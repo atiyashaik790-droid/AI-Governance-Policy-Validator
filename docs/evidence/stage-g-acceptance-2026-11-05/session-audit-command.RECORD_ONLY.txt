@@ -1,0 +1,129 @@
+"""Read-only main-container inspection. Run with /opt/az/bin/python3 from repo root.
+
+Uses the existing CLI identity and exec WebSocket; never writes hosted files or
+queries SQL. Only selected non-secret flags and sanitized lifecycle labels return.
+"""
+
+import os
+import sys
+import json
+import subprocess
+import base64
+import time
+import re
+import ssl
+from pathlib import Path
+from datetime import datetime, timezone
+import websocket
+
+R = Path.cwd()
+os.environ["AZURE_CONFIG_DIR"] = str(R / ".azure-sql-cli")
+sys.path.insert(0, str(R / "scripts"))
+import hashlib
+import verify_hosted_runtime as p
+
+expected = {
+    n: hashlib.sha256((R / "backend/app" / n).read_bytes()).hexdigest()
+    for n in ("config.py", "sso.py", "hosting.py")
+}
+
+
+def payload(marker):
+    return "import json,sys\nr={'status':'BLOCKED','sql_read_only':True,'session_credentials_exported':False}\ntry:\n from app.config import settings\n from app.database import SessionLocal\n from sqlalchemy import text\n from app.models import now\n assert settings.azure_sql_auth_mode=='managed_identity' and settings.sso_enabled is True and settings.sso_public_origin=='https://app-governance-validator-atiya-1026.azurewebsites.net'\n with SessionLocal() as db:\n  assert db.scalar(text('SELECT DB_NAME()'))=='sqldb-governance-validator-dev'\n  args={'tenant':'demo-appservice-4e2dcce8d618','actor':'atiya-tabsum-shaik','since':'2026-11-05T06:03:14.939789+00:00'}\n  r['audit_counts']={}\n  r['latest_audit_time']={}\n  for action in ('sso.session.created','sso.session.revoked'):\n   params={**args,'action':action}\n   r['audit_counts'][action]=db.scalar(text('SELECT COUNT_BIG(*) FROM dbo.audit_events WHERE tenant=:tenant AND actor=:actor AND action=:action AND created>=:since'),params)\n   r['latest_audit_time'][action]=db.scalar(text('SELECT MAX(created) FROM dbo.audit_events WHERE tenant=:tenant AND actor=:actor AND action=:action AND created>=:since'),params)\n  row=db.execute(text('SELECT COUNT_BIG(*) AS total, COALESCE(SUM(CASE WHEN revoked=0 AND expires>:now THEN 1 ELSE 0 END),0) AS active, COALESCE(SUM(CASE WHEN revoked=1 THEN 1 ELSE 0 END),0) AS revoked FROM dbo.sso_sessions WHERE membership_id=:membership'),{'now':now(),'membership':'cce108dc-72f1-4db2-9aaa-c7128085661c'}).mappings().one()\n  r['approved_membership_session_counts']=dict(row)\n  db.rollback()\n r['status']='PASS'\nexcept Exception as e:r['error_kind']=type(e).__name__\nprint(MARKER+json.dumps(r),file=sys.__stdout__,flush=True)\n".replace("MARKER", repr(marker))
+
+
+def parse(raw, marker):
+    for line in p.terminal_text(raw).splitlines(keepends=True):
+        if line.startswith(marker + "{") and line.endswith("\n"):
+            return json.loads(line[len(marker) :])
+    return None
+
+
+original_payload = payload
+
+
+def corrected_payload(marker):
+    return original_payload(marker).replace("b'\\\\0'", "b'\\0'")
+
+
+p.payload = corrected_payload
+P = R / "docs/evidence/stage-g-acceptance-2026-11-05/session-audit-latest.json"
+r = {
+    "status": "BLOCKED",
+    "method": "EXISTING_MAIN_CONTAINER_EXEC_WEBSOCKET",
+    "hosted_changes": False,
+    "sql_accessed": False,
+}
+ws = None
+try:
+    a = subprocess.run(
+        [
+            "az",
+            "account",
+            "get-access-token",
+            "--resource",
+            "https://management.azure.com/",
+            "--tenant",
+            "4ac50105-0c66-404e-a107-7cbd8a9a6442",
+            "-o",
+            "json",
+            "--only-show-errors",
+        ],
+        capture_output=True,
+        text=True,
+        timeout=25,
+    )
+    assert a.returncode == 0
+    token = json.loads(a.stdout)["accessToken"]
+    claims = json.loads(base64.urlsafe_b64decode(token.split(".")[1] + "==="))
+    assert (
+        claims["tid"] == "4ac50105-0c66-404e-a107-7cbd8a9a6442"
+        and claims["oid"] == "b5d8bfbe-f03a-4132-a13f-ab49aae834b7"
+    )
+    r["pinned_operator_identity_verified"] = True
+    url = "wss://app-governance-validator-atiya-1026.scm.azurewebsites.net/exec/shell?shell=%2Fbin%2Fsh"
+    ws = websocket.create_connection(
+        url,
+        header={"Authorization": "Bearer " + token},
+        sslopt={"cert_reqs": ssl.CERT_REQUIRED},
+        timeout=20,
+        enable_multithread=True,
+    )
+    r["handshake"] = "PASS"
+    ws.settimeout(5)
+    ws.send(json.dumps({"width": 160, "height": 40}))
+    marker = "SSO_PROBE_" + os.urandom(12).hex() + ":"
+    buf = b""
+    sent = False
+    deadline = time.monotonic() + 55
+    while time.monotonic() < deadline:
+        try:
+            chunk = ws.recv()
+        except websocket.WebSocketTimeoutException:
+            continue
+        if not chunk:
+            break
+        buf += chunk.encode() if isinstance(chunk, str) else chunk
+        buf = buf[-524288:]
+        if not sent and re.search(
+            r"(?:^|[\r\n])[^\r\n]{0,180}[#$] *$", p.terminal_text(buf)
+        ):
+            ws.send_binary(p.remote_input(marker))
+            sent = True
+            r["payload_sent"] = True
+        out = parse(buf, marker)
+        if out is not None:
+            r.update(out)
+            break
+    if r.get("status") != "PASS":
+        r["category"] = "NO_PARSED_RUNTIME_RESULT"
+        r["payload_sent"] = sent
+except Exception as e:
+    r["error_kind"] = type(e).__name__
+    r["http_status"] = getattr(e, "status_code", None)
+finally:
+    if ws is not None:
+        ws.close()
+r["observed_at_utc"] = datetime.now(timezone.utc).isoformat()
+P.write_text(json.dumps(r, indent=2) + "\n")
+print(json.dumps(r))

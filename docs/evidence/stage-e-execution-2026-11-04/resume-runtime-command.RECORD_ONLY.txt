@@ -1,0 +1,38 @@
+import sys,json
+from pathlib import Path
+from datetime import datetime,timezone
+R=Path.cwd();sys.path.insert(0,str(R/'scripts'))
+import verify_hosted_runtime as p
+def payload(marker):
+ return '''import json,sys,contextlib,io,logging
+r={'status':'BLOCKED','database_mutated':False,'actual_managed_identity_verified':False}
+try:
+ with contextlib.redirect_stdout(io.StringIO()),contextlib.redirect_stderr(io.StringIO()):
+  from app.config import settings
+  from app.database import SessionLocal
+  from sqlalchemy import text
+  from sqlalchemy.engine import make_url
+  assert settings.azure_sql_auth_mode=='managed_identity' and settings.azure_sql_tenant_id.lower()=='4ac50105-0c66-404e-a107-7cbd8a9a6442' and settings.azure_sql_user_object_id.lower()=='600447fe-5fea-4801-9033-ab4aafc474cc'
+  u=make_url(settings.database_url)
+  assert u.host=='sql-governance-validator-dev-atiya.database.windows.net' and u.database=='sqldb-governance-validator-dev'
+  with SessionLocal() as db:
+   assert db.scalar(text('SELECT DB_NAME()'))=='sqldb-governance-validator-dev' and db.scalar(text('SELECT USER_NAME()'))=='app-governance-validator-atiya-1026'
+   r['actual_managed_identity_verified']=True
+   r['membership_write_permissions']={v:db.scalar(text("SELECT HAS_PERMS_BY_NAME('dbo.sso_memberships','OBJECT',:p)"),{'p':v}) for v in ('INSERT','UPDATE','DELETE')}
+   r['sso_enabled']=settings.sso_enabled
+   r['demo_login_enabled']=settings.demo_browser_login_enabled
+   r['status']='PASS' if all(v==0 for v in r['membership_write_permissions'].values()) and not r['sso_enabled'] and r['demo_login_enabled'] else 'BLOCKED'
+except Exception as e:r['error_kind']=type(e).__name__
+print('''+repr(marker)+'''+json.dumps(r),file=sys.__stdout__,flush=True)
+'''
+def parse(raw,marker):
+ for line in p.terminal_text(raw).splitlines(keepends=True):
+  if line.startswith(marker+'{') and line.endswith('\n'):
+   d=json.loads(line[len(marker):]);assert d['status'] in ('PASS','BLOCKED') and d['database_mutated'] is False
+   return d
+ return None
+p.payload=payload;p.safe_result=parse
+try:r=p.shell_probe(['az','webapp','exec','--subscription','25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6','--resource-group','rg_techdemo_Atiya_Tabsum_Shaik','--name','app-governance-validator-atiya-1026','--mode','shell','--target','app','--shell','/bin/sh','--only-show-errors'],timeout=55)
+except Exception as e:r={'status':'BLOCKED','error_kind':type(e).__name__,'category':getattr(e,'category','unavailable')}
+r['observed_at_utc']=datetime.now(timezone.utc).isoformat()
+(R/'docs/evidence/stage-e-execution-2026-11-04/resume-runtime-write-denial.json').write_text(json.dumps(r,indent=2)+'\n');print(json.dumps(r))

@@ -1,0 +1,706 @@
+{
+  "scope": "Approval A ONLY",
+  "events": [
+    {
+      "utc": "2026-11-06T19:06:56.708721+00:00",
+      "kind": "budget_gate_pass",
+      "daily_usd": 0.4839,
+      "conservative_compute_10_billed_hours_usd": 0.20162500000000003,
+      "total_budget_usd": 1,
+      "testing_stop_hours": 3,
+      "cleanup_deadline_hours": 4,
+      "notes": "Bounded tiny synthetic data; local backups; estimate monitored from actual lifetime, not delayed Azure billing"
+    },
+    {
+      "utc": "2026-11-06T19:06:56.709954+00:00",
+      "kind": "cleanup_watchdog_started",
+      "pid": 88600,
+      "delete_after_hours": 3
+    },
+    {
+      "utc": "2026-11-06T19:07:00.142931+00:00",
+      "kind": "create_intent",
+      "resource_id": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/databases/sqldb-gpv-mig-20261106-a1",
+      "incarnation": 1
+    },
+    {
+      "utc": "2026-11-06T19:07:55.179102+00:00",
+      "kind": "created",
+      "resource_id": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/databases/sqldb-gpv-mig-20261106-a1",
+      "sku": {
+        "capacity": 10,
+        "family": null,
+        "name": "Standard",
+        "size": null,
+        "tier": "Standard"
+      },
+      "objective": "S0",
+      "max_size": 268435456000,
+      "backup": "Local"
+    },
+    {
+      "utc": "2026-11-06T19:08:34.498084+00:00",
+      "kind": "migration_pass",
+      "revision": "005"
+    },
+    {
+      "utc": "2026-11-06T19:08:40.336635+00:00",
+      "kind": "synthetic_seed_pass"
+    },
+    {
+      "utc": "2026-11-06T19:08:53.910460+00:00",
+      "kind": "temporary_grants_pass",
+      "revision": "005",
+      "identity": "app-governance-validator-atiya-1026",
+      "authentication": "SQL EXECUTE AS context only; no managed identity authentication claim"
+    },
+    {
+      "utc": "2026-11-06T19:09:13.806178+00:00",
+      "kind": "retained_baseline",
+      "revision": "005",
+      "tables": {
+        "active_policy_assignments": {
+          "count": 1,
+          "sha256": "c6c06ddfd463105234dfbbe2cec2d5509cc1f4fd411838ba9a0beb78192992eb"
+        },
+        "audit_events": {
+          "count": 1,
+          "sha256": "c0df736a765e339d528a25be15b905768413dab87c84338389eca3d4e4a04092"
+        },
+        "demo_sessions": {
+          "count": 1,
+          "sha256": "8a4cf639399091d8327ac068fe1d5ffef848dce623269081bac998972e792c36"
+        },
+        "evaluation_exports": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "export_jobs": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "feedback_records": {
+          "count": 1,
+          "sha256": "36a4af174356e08ec25a801214fd39013145c3ec9f8363b9118512c2d97fe504"
+        },
+        "human_review_cases": {
+          "count": 1,
+          "sha256": "02a3b848d1f5a9c913fc044c02b36bc049f146784ee5b328cc356e1924e07310"
+        },
+        "inference_rate_buckets": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "inference_usage": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "policies": {
+          "count": 1,
+          "sha256": "69f590af701190563067962740bb3fc3e23aa491d6a49dab553c27495a942057"
+        },
+        "policy_versions": {
+          "count": 1,
+          "sha256": "3aa23ac53e2c9f92b3764c9ce4ed3af2ab450a84feafb929e0d15df8d59a7936"
+        },
+        "review_assignments": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "review_notes": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "sso_memberships": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "sso_sessions": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "sso_transactions": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "validation_executions": {
+          "count": 1,
+          "sha256": "87f7ab8f518eb9c154c1880e2966b41cbaaa10abf40bbd54231b2e1c80677e39"
+        }
+      }
+    },
+    {
+      "utc": "2026-11-06T19:09:13.808471+00:00",
+      "kind": "prior_005_evidence_reused",
+      "evidence": "phase6b-approval-a-retry1-2026-11-06",
+      "new_candidate_005_azure_qualification": false
+    },
+    {
+      "utc": "2026-11-06T19:09:50.213458+00:00",
+      "kind": "migration_pass",
+      "revision": "006"
+    },
+    {
+      "utc": "2026-11-06T19:09:58.592065+00:00",
+      "kind": "retained_005_to_006_pass",
+      "tables": {
+        "active_policy_assignments": {
+          "count": 1,
+          "sha256": "c6c06ddfd463105234dfbbe2cec2d5509cc1f4fd411838ba9a0beb78192992eb"
+        },
+        "audit_events": {
+          "count": 1,
+          "sha256": "c0df736a765e339d528a25be15b905768413dab87c84338389eca3d4e4a04092"
+        },
+        "demo_sessions": {
+          "count": 1,
+          "sha256": "8a4cf639399091d8327ac068fe1d5ffef848dce623269081bac998972e792c36"
+        },
+        "evaluation_exports": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "export_jobs": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "feedback_records": {
+          "count": 1,
+          "sha256": "36a4af174356e08ec25a801214fd39013145c3ec9f8363b9118512c2d97fe504"
+        },
+        "human_review_cases": {
+          "count": 1,
+          "sha256": "02a3b848d1f5a9c913fc044c02b36bc049f146784ee5b328cc356e1924e07310"
+        },
+        "inference_rate_buckets": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "inference_usage": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "policies": {
+          "count": 1,
+          "sha256": "69f590af701190563067962740bb3fc3e23aa491d6a49dab553c27495a942057"
+        },
+        "policy_versions": {
+          "count": 1,
+          "sha256": "3aa23ac53e2c9f92b3764c9ce4ed3af2ab450a84feafb929e0d15df8d59a7936"
+        },
+        "review_assignments": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "review_notes": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "sso_memberships": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "sso_sessions": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "sso_transactions": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "validation_executions": {
+          "count": 1,
+          "sha256": "87f7ab8f518eb9c154c1880e2966b41cbaaa10abf40bbd54231b2e1c80677e39"
+        }
+      }
+    },
+    {
+      "utc": "2026-11-06T19:10:03.843583+00:00",
+      "kind": "temporary_grants_pass",
+      "revision": "006",
+      "identity": "app-governance-validator-atiya-1026",
+      "authentication": "SQL EXECUTE AS context only; no managed identity authentication claim"
+    },
+    {
+      "utc": "2026-11-06T19:11:59.899440+00:00",
+      "kind": "schema_contract_pass",
+      "revision": "006",
+      "result": {
+        "revision": "006",
+        "versioned": true,
+        "sso_schema": true
+      }
+    },
+    {
+      "utc": "2026-11-06T19:16:54.216146+00:00",
+      "kind": "package_probe_pass",
+      "artifact": "candidate",
+      "revision": "006",
+      "recovery": false,
+      "checks": [
+        "extracted hosting import",
+        "schema/readiness",
+        "release contract",
+        "SPA/auth boundary",
+        "prior Azure 006 session evidence reused with pinned unchanged session code; 007 session tested separately",
+        "policy lifecycle and LEGACY ALLOW/HUMAN_REVIEW",
+        "MULTI transition, execution and v1 guard",
+        "database integrity and retained foreign keys"
+      ],
+      "session_contract": null,
+      "passed": true,
+      "limits": "Azure SQL transport; SQL EXECUTE AS runtime context; synthetic keys/OIDC and fixture providers; no actual managed identity authentication"
+    },
+    {
+      "utc": "2026-11-06T19:18:08.935801+00:00",
+      "kind": "tenant_006_gate_pass"
+    },
+    {
+      "utc": "2026-11-06T19:18:42.951306+00:00",
+      "kind": "migration_pass",
+      "revision": "007"
+    },
+    {
+      "utc": "2026-11-06T19:18:53.988872+00:00",
+      "kind": "retained_006_to_007_pass",
+      "tables": {
+        "active_policy_assignments": {
+          "count": 2,
+          "sha256": "de60c3e9bce5c3459f694d95715cd3cfaa36a1add69a0e13ebbc05bced947c74"
+        },
+        "audit_events": {
+          "count": 17,
+          "sha256": "6c9e48454f968e0f6677624086593050e0df53585dec885f35924dd12d8204a8"
+        },
+        "demo_sessions": {
+          "count": 4,
+          "sha256": "b1964b089d248bc1cf0eecf55bdfb26b514544b4c7a3c14216831d7f02679a66"
+        },
+        "evaluation_exports": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "execution_policy_evidence": {
+          "count": 1,
+          "sha256": "35a228f892bd7e19c1b4ad66f708863e31a69baca02c6894c04a82f3c7787b34"
+        },
+        "export_jobs": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "feedback_records": {
+          "count": 1,
+          "sha256": "36a4af174356e08ec25a801214fd39013145c3ec9f8363b9118512c2d97fe504"
+        },
+        "human_review_cases": {
+          "count": 2,
+          "sha256": "82dba2b94963c4182252ea13a5a77d3077c4e16ec15ae0efa874c150dbdbdcb0"
+        },
+        "inference_rate_buckets": {
+          "count": 10,
+          "sha256": "8a8643c0946987eac001bfe329a2e606b3b6d4732071d64286d76c5731a2496e"
+        },
+        "inference_usage": {
+          "count": 3,
+          "sha256": "234cd51d53f3b4aa72904fb14949b3e369576ab2491162f2895e3da0f6727b07"
+        },
+        "policies": {
+          "count": 3,
+          "sha256": "d4f10953dcadd7e9509c3ec9b1afc403bc5c344520678eb8012b8c0885bf2b7e"
+        },
+        "policy_versions": {
+          "count": 3,
+          "sha256": "89795a9f8f774656fbd63204b7ec48363d0dd98e02e93de9f858260d2272dc21"
+        },
+        "review_assignments": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "review_notes": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "sso_memberships": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "sso_sessions": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "sso_transactions": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "validation_executions": {
+          "count": 4,
+          "sha256": "dae576fe31225ec4591ab19b3b352effb9999906621d4f1d3c0306666525bad2"
+        },
+        "workspace_policy_assignment_events": {
+          "count": 6,
+          "sha256": "61737b5fe2b8f6e5938145bc9c7071a2f59c014c6a7de0470f26067ad053a18c"
+        },
+        "workspace_policy_assignments": {
+          "count": 1,
+          "sha256": "9d2faae235bec9e9f575e95a3fab5f67778783e687925c9fce0e371a54c03a6c"
+        },
+        "workspace_policy_states": {
+          "count": 3,
+          "sha256": "356ea4432dfa451b72f8e1c224adb291efeb5796f7b556047ca7d9c8e5c9d09b"
+        }
+      }
+    },
+    {
+      "utc": "2026-11-06T19:18:58.402882+00:00",
+      "kind": "temporary_grants_pass",
+      "revision": "007",
+      "identity": "app-governance-validator-atiya-1026",
+      "authentication": "SQL EXECUTE AS context only; no managed identity authentication claim"
+    },
+    {
+      "utc": "2026-11-06T19:21:10.275870+00:00",
+      "kind": "schema_contract_pass",
+      "revision": "007",
+      "result": {
+        "revision": "007",
+        "versioned": true,
+        "sso_schema": true
+      }
+    },
+    {
+      "utc": "2026-11-06T19:21:44.344893+00:00",
+      "kind": "migration_pass",
+      "revision": "008"
+    },
+    {
+      "utc": "2026-11-06T19:21:55.198120+00:00",
+      "kind": "retained_007_to_008_pass",
+      "tables": {
+        "active_policy_assignments": {
+          "count": 2,
+          "sha256": "de60c3e9bce5c3459f694d95715cd3cfaa36a1add69a0e13ebbc05bced947c74"
+        },
+        "audit_events": {
+          "count": 17,
+          "sha256": "6c9e48454f968e0f6677624086593050e0df53585dec885f35924dd12d8204a8"
+        },
+        "demo_sessions": {
+          "count": 4,
+          "sha256": "b1964b089d248bc1cf0eecf55bdfb26b514544b4c7a3c14216831d7f02679a66"
+        },
+        "evaluation_exports": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "execution_policy_evidence": {
+          "count": 1,
+          "sha256": "35a228f892bd7e19c1b4ad66f708863e31a69baca02c6894c04a82f3c7787b34"
+        },
+        "export_jobs": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "feedback_records": {
+          "count": 1,
+          "sha256": "36a4af174356e08ec25a801214fd39013145c3ec9f8363b9118512c2d97fe504"
+        },
+        "human_review_cases": {
+          "count": 2,
+          "sha256": "82dba2b94963c4182252ea13a5a77d3077c4e16ec15ae0efa874c150dbdbdcb0"
+        },
+        "inference_rate_buckets": {
+          "count": 10,
+          "sha256": "8a8643c0946987eac001bfe329a2e606b3b6d4732071d64286d76c5731a2496e"
+        },
+        "inference_usage": {
+          "count": 3,
+          "sha256": "234cd51d53f3b4aa72904fb14949b3e369576ab2491162f2895e3da0f6727b07"
+        },
+        "policies": {
+          "count": 3,
+          "sha256": "d4f10953dcadd7e9509c3ec9b1afc403bc5c344520678eb8012b8c0885bf2b7e"
+        },
+        "policy_versions": {
+          "count": 3,
+          "sha256": "89795a9f8f774656fbd63204b7ec48363d0dd98e02e93de9f858260d2272dc21"
+        },
+        "review_assignments": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "review_notes": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "review_protected_content": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "sso_memberships": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "sso_sessions": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "sso_transactions": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "validation_executions": {
+          "count": 4,
+          "sha256": "dae576fe31225ec4591ab19b3b352effb9999906621d4f1d3c0306666525bad2"
+        },
+        "workspace_policy_assignment_events": {
+          "count": 6,
+          "sha256": "61737b5fe2b8f6e5938145bc9c7071a2f59c014c6a7de0470f26067ad053a18c"
+        },
+        "workspace_policy_assignments": {
+          "count": 1,
+          "sha256": "9d2faae235bec9e9f575e95a3fab5f67778783e687925c9fce0e371a54c03a6c"
+        },
+        "workspace_policy_states": {
+          "count": 3,
+          "sha256": "356ea4432dfa451b72f8e1c224adb291efeb5796f7b556047ca7d9c8e5c9d09b"
+        }
+      }
+    },
+    {
+      "utc": "2026-11-06T19:24:11.659843+00:00",
+      "kind": "schema_contract_pass",
+      "revision": "008",
+      "result": {
+        "revision": "008",
+        "versioned": true,
+        "sso_schema": true
+      }
+    },
+    {
+      "utc": "2026-11-06T19:24:12.482605+00:00",
+      "kind": "expected_sql_denial",
+      "statement": "UPDATE dbo.audit_events SET tenant=tenant",
+      "expected": "51000",
+      "sqlstate": "42000"
+    },
+    {
+      "utc": "2026-11-06T19:24:13.323735+00:00",
+      "kind": "expected_sql_denial",
+      "statement": "DELETE FROM dbo.audit_events",
+      "expected": "51000",
+      "sqlstate": "42000"
+    },
+    {
+      "utc": "2026-11-06T19:24:14.161322+00:00",
+      "kind": "expected_sql_denial",
+      "statement": "UPDATE dbo.policy_versions SET tenant=tenant",
+      "expected": "51000",
+      "sqlstate": "42000"
+    },
+    {
+      "utc": "2026-11-06T19:24:15.060187+00:00",
+      "kind": "expected_sql_denial",
+      "statement": "DELETE FROM dbo.policy_versions",
+      "expected": "51000",
+      "sqlstate": "42000"
+    },
+    {
+      "utc": "2026-11-06T19:24:15.889129+00:00",
+      "kind": "expected_sql_denial",
+      "statement": "UPDATE dbo.review_notes SET tenant=tenant",
+      "expected": "51000",
+      "sqlstate": "42000"
+    },
+    {
+      "utc": "2026-11-06T19:24:16.712130+00:00",
+      "kind": "expected_sql_denial",
+      "statement": "DELETE FROM dbo.review_notes",
+      "expected": "51000",
+      "sqlstate": "42000"
+    },
+    {
+      "utc": "2026-11-06T19:24:17.696188+00:00",
+      "kind": "expected_sql_denial",
+      "statement": "UPDATE dbo.validation_executions SET tenant=tenant",
+      "expected": "51000",
+      "sqlstate": "42000"
+    },
+    {
+      "utc": "2026-11-06T19:24:18.561099+00:00",
+      "kind": "expected_sql_denial",
+      "statement": "DELETE FROM dbo.validation_executions",
+      "expected": "51000",
+      "sqlstate": "42000"
+    },
+    {
+      "utc": "2026-11-06T19:24:19.440836+00:00",
+      "kind": "expected_sql_denial",
+      "statement": "UPDATE dbo.execution_policy_evidence SET tenant=tenant",
+      "expected": "51000",
+      "sqlstate": "42000"
+    },
+    {
+      "utc": "2026-11-06T19:24:20.354841+00:00",
+      "kind": "expected_sql_denial",
+      "statement": "DELETE FROM dbo.execution_policy_evidence",
+      "expected": "51000",
+      "sqlstate": "42000"
+    },
+    {
+      "utc": "2026-11-06T19:24:21.173772+00:00",
+      "kind": "expected_sql_denial",
+      "statement": "UPDATE dbo.workspace_policy_assignment_events SET tenant=tenant",
+      "expected": "51000",
+      "sqlstate": "42000"
+    },
+    {
+      "utc": "2026-11-06T19:24:22.015472+00:00",
+      "kind": "expected_sql_denial",
+      "statement": "DELETE FROM dbo.workspace_policy_assignment_events",
+      "expected": "51000",
+      "sqlstate": "42000"
+    },
+    {
+      "utc": "2026-11-06T19:24:22.838516+00:00",
+      "kind": "expected_sql_denial",
+      "statement": "INSERT INTO workspace_policy_states(tenant,mode,set_revision,updated_by) VALUES ('bad','BAD',1,'fixture')",
+      "expected": "547",
+      "sqlstate": "23000"
+    },
+    {
+      "utc": "2026-11-06T19:24:23.708386+00:00",
+      "kind": "expected_sql_denial",
+      "statement": "INSERT INTO workspace_policy_assignments(tenant,policy_id,version_id,active,changed_revision,updated_by) VALUES ('retained','missing','missing',1,1,'fixture')",
+      "expected": "547",
+      "sqlstate": "23000"
+    },
+    {
+      "utc": "2026-11-06T19:24:24.560650+00:00",
+      "kind": "expected_sql_denial",
+      "statement": "INSERT INTO review_protected_content(tenant,review_id,content_kind,format_version,key_id,nonce,ciphertext,created_at,expires_at) VALUES (:tenant,:review_id,:kind,:format,:key,:nonce,:ciphertext,:created,:expires)",
+      "expected": "547",
+      "sqlstate": "23000"
+    },
+    {
+      "utc": "2026-11-06T19:24:25.439610+00:00",
+      "kind": "expected_sql_denial",
+      "statement": "INSERT INTO review_protected_content(tenant,review_id,content_kind,format_version,key_id,nonce,ciphertext,created_at,expires_at) VALUES (:tenant,:review_id,:kind,:format,:key,:nonce,:ciphertext,:created,:expires)",
+      "expected": "547",
+      "sqlstate": "23000"
+    },
+    {
+      "utc": "2026-11-06T19:24:26.395997+00:00",
+      "kind": "expected_sql_denial",
+      "statement": "INSERT INTO review_protected_content(tenant,review_id,content_kind,format_version,key_id,nonce,ciphertext,created_at,expires_at) VALUES (:tenant,:review_id,:kind,:format,:key,:nonce,:ciphertext,:created,:expires)",
+      "expected": "547",
+      "sqlstate": "23000"
+    },
+    {
+      "utc": "2026-11-06T19:24:27.265564+00:00",
+      "kind": "expected_sql_denial",
+      "statement": "INSERT INTO review_protected_content(tenant,review_id,content_kind,format_version,key_id,nonce,ciphertext,created_at,expires_at) VALUES (:tenant,:review_id,:kind,:format,:key,:nonce,:ciphertext,:created,:expires)",
+      "expected": "547",
+      "sqlstate": "23000"
+    },
+    {
+      "utc": "2026-11-06T19:24:28.088408+00:00",
+      "kind": "expected_sql_denial",
+      "statement": "INSERT INTO review_protected_content(tenant,review_id,content_kind,format_version,key_id,nonce,ciphertext,created_at,expires_at) VALUES (:tenant,:review_id,:kind,:format,:key,:nonce,:ciphertext,:created,:expires)",
+      "expected": "547",
+      "sqlstate": "23000"
+    },
+    {
+      "utc": "2026-11-06T19:24:29.010084+00:00",
+      "kind": "expected_sql_denial",
+      "statement": "INSERT INTO review_protected_content(tenant,review_id,content_kind,format_version,key_id,nonce,ciphertext,created_at,expires_at) VALUES (:tenant,:review_id,:kind,:format,:key,:nonce,:ciphertext,:created,:expires)",
+      "expected": "547",
+      "sqlstate": "23000"
+    },
+    {
+      "utc": "2026-11-06T19:24:29.842141+00:00",
+      "kind": "expected_sql_denial",
+      "statement": "INSERT INTO review_protected_content(tenant,review_id,content_kind,format_version,key_id,nonce,ciphertext,created_at,expires_at) VALUES (:tenant,:review_id,:kind,:format,:key,:nonce,:ciphertext,:created,:expires)",
+      "expected": "547",
+      "sqlstate": "23000"
+    },
+    {
+      "utc": "2026-11-06T19:24:31.729391+00:00",
+      "kind": "expected_sql_denial",
+      "statement": "UPDATE review_protected_content SET expires_at=expires_at",
+      "expected": "51000",
+      "sqlstate": "42000"
+    },
+    {
+      "utc": "2026-11-06T19:24:33.462077+00:00",
+      "kind": "expected_sql_denial",
+      "statement": "INSERT INTO review_protected_content(tenant,review_id,content_kind,format_version,key_id,nonce,ciphertext,created_at,expires_at) VALUES (:tenant,:review_id,:kind,:format,:key,:nonce,:ciphertext,:created,:expires)",
+      "expected": "2601",
+      "sqlstate": "23000"
+    },
+    {
+      "utc": "2026-11-06T19:24:34.562135+00:00",
+      "kind": "protected_content_sql_constraints_pass"
+    },
+    {
+      "utc": "2026-11-06T19:24:51.622187+00:00",
+      "kind": "expected_sql_denial",
+      "statement": "UPDATE dbo.audit_events SET actor=actor",
+      "expected": "229",
+      "sqlstate": "42000"
+    },
+    {
+      "utc": "2026-11-06T19:24:52.486843+00:00",
+      "kind": "expected_sql_denial",
+      "statement": "UPDATE dbo.review_protected_content SET key_id=key_id",
+      "expected": "229",
+      "sqlstate": "42000"
+    },
+    {
+      "utc": "2026-11-06T19:24:53.100877+00:00",
+      "kind": "expected_sql_denial",
+      "statement": "CREATE TABLE dbo.must_be_denied(id int)",
+      "expected": "262",
+      "sqlstate": "42000"
+    },
+    {
+      "utc": "2026-11-06T19:24:53.102098+00:00",
+      "kind": "runtime_permission_negatives_pass"
+    },
+    {
+      "utc": "2026-11-06T19:25:09.088381+00:00",
+      "kind": "unexpected_stop",
+      "failure_type": "RuntimeError",
+      "schema_diagnostic": {
+        "category": "SCHEMA_QUERY_OR_IMPLEMENTATION_FAILURE"
+      },
+      "detail": "Extracted package probe failed: candidate/008"
+    },
+    {
+      "utc": "2026-11-06T19:25:12.634043+00:00",
+      "kind": "delete_intent",
+      "resource_id": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/databases/sqldb-gpv-mig-20261106-a1"
+    },
+    {
+      "utc": "2026-11-06T19:25:33.878924+00:00",
+      "kind": "cleanup_confirmed",
+      "arm_get": "ResourceNotFound",
+      "inventory": [
+        "sqldb-governance-validator-dev",
+        "master"
+      ],
+      "resource_id": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/databases/sqldb-gpv-mig-20261106-a1"
+    },
+    {
+      "utc": "2026-11-06T19:25:33.879909+00:00",
+      "kind": "execution_finished",
+      "status": "STOPPED",
+      "elapsed_seconds": 1117.18,
+      "sqlite_unchanged": true
+    }
+  ],
+  "incarnations": 1,
+  "created": false,
+  "status": "STOPPED",
+  "elapsed_seconds": 1117.18,
+  "sqlite_unchanged": true
+}

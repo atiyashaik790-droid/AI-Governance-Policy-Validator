@@ -1,0 +1,649 @@
+{
+  "sql_read_only": true,
+  "permission_subject": "executing_cli_identity",
+  "hosted_runtime_identity_verified": false,
+  "operator_database_permissions": {
+    "status": "VERIFIED",
+    "data": [
+      {
+        "permission_name": "ADMINISTER DATABASE BULK OPERATIONS"
+      },
+      {
+        "permission_name": "ALTER"
+      },
+      {
+        "permission_name": "ALTER ANY APPLICATION ROLE"
+      },
+      {
+        "permission_name": "ALTER ANY ASSEMBLY"
+      },
+      {
+        "permission_name": "ALTER ANY ASYMMETRIC KEY"
+      },
+      {
+        "permission_name": "ALTER ANY CERTIFICATE"
+      },
+      {
+        "permission_name": "ALTER ANY COLUMN ENCRYPTION KEY"
+      },
+      {
+        "permission_name": "ALTER ANY COLUMN MASTER KEY"
+      },
+      {
+        "permission_name": "ALTER ANY CONTRACT"
+      },
+      {
+        "permission_name": "ALTER ANY DATABASE AUDIT"
+      },
+      {
+        "permission_name": "ALTER ANY DATABASE DDL TRIGGER"
+      },
+      {
+        "permission_name": "ALTER ANY DATABASE EVENT NOTIFICATION"
+      },
+      {
+        "permission_name": "ALTER ANY DATABASE EVENT SESSION"
+      },
+      {
+        "permission_name": "ALTER ANY DATABASE EVENT SESSION ADD EVENT"
+      },
+      {
+        "permission_name": "ALTER ANY DATABASE EVENT SESSION ADD TARGET"
+      },
+      {
+        "permission_name": "ALTER ANY DATABASE EVENT SESSION DISABLE"
+      },
+      {
+        "permission_name": "ALTER ANY DATABASE EVENT SESSION DROP EVENT"
+      },
+      {
+        "permission_name": "ALTER ANY DATABASE EVENT SESSION DROP TARGET"
+      },
+      {
+        "permission_name": "ALTER ANY DATABASE EVENT SESSION ENABLE"
+      },
+      {
+        "permission_name": "ALTER ANY DATABASE EVENT SESSION OPTION"
+      },
+      {
+        "permission_name": "ALTER ANY DATABASE SCOPED CONFIGURATION"
+      },
+      {
+        "permission_name": "ALTER ANY DATASPACE"
+      },
+      {
+        "permission_name": "ALTER ANY EXTERNAL DATA SOURCE"
+      },
+      {
+        "permission_name": "ALTER ANY EXTERNAL FILE FORMAT"
+      },
+      {
+        "permission_name": "ALTER ANY EXTERNAL JOB"
+      },
+      {
+        "permission_name": "ALTER ANY EXTERNAL LANGUAGE"
+      },
+      {
+        "permission_name": "ALTER ANY EXTERNAL LIBRARY"
+      },
+      {
+        "permission_name": "ALTER ANY EXTERNAL MIRROR"
+      },
+      {
+        "permission_name": "ALTER ANY EXTERNAL MODEL"
+      },
+      {
+        "permission_name": "ALTER ANY EXTERNAL STREAM"
+      },
+      {
+        "permission_name": "ALTER ANY FULLTEXT CATALOG"
+      },
+      {
+        "permission_name": "ALTER ANY INFORMATION PROTECTION"
+      },
+      {
+        "permission_name": "ALTER ANY MASK"
+      },
+      {
+        "permission_name": "ALTER ANY MESSAGE TYPE"
+      },
+      {
+        "permission_name": "ALTER ANY REMOTE SERVICE BINDING"
+      },
+      {
+        "permission_name": "ALTER ANY ROLE"
+      },
+      {
+        "permission_name": "ALTER ANY ROUTE"
+      },
+      {
+        "permission_name": "ALTER ANY SCHEMA"
+      },
+      {
+        "permission_name": "ALTER ANY SECURITY POLICY"
+      },
+      {
+        "permission_name": "ALTER ANY SENSITIVITY CLASSIFICATION"
+      },
+      {
+        "permission_name": "ALTER ANY SERVICE"
+      },
+      {
+        "permission_name": "ALTER ANY SYMMETRIC KEY"
+      },
+      {
+        "permission_name": "ALTER ANY USER"
+      },
+      {
+        "permission_name": "ALTER LEDGER"
+      },
+      {
+        "permission_name": "ALTER LEDGER CONFIGURATION"
+      },
+      {
+        "permission_name": "AUTHENTICATE"
+      },
+      {
+        "permission_name": "BACKUP DATABASE"
+      },
+      {
+        "permission_name": "BACKUP LOG"
+      },
+      {
+        "permission_name": "CHECKPOINT"
+      },
+      {
+        "permission_name": "CONNECT"
+      },
+      {
+        "permission_name": "CONNECT REPLICATION"
+      },
+      {
+        "permission_name": "CONTROL"
+      },
+      {
+        "permission_name": "CREATE AGGREGATE"
+      },
+      {
+        "permission_name": "CREATE ANY DATABASE EVENT SESSION"
+      },
+      {
+        "permission_name": "CREATE ASSEMBLY"
+      },
+      {
+        "permission_name": "CREATE ASYMMETRIC KEY"
+      },
+      {
+        "permission_name": "CREATE CERTIFICATE"
+      },
+      {
+        "permission_name": "CREATE CONTRACT"
+      },
+      {
+        "permission_name": "CREATE DATABASE"
+      },
+      {
+        "permission_name": "CREATE DATABASE DDL EVENT NOTIFICATION"
+      },
+      {
+        "permission_name": "CREATE DEFAULT"
+      },
+      {
+        "permission_name": "CREATE EXTERNAL LANGUAGE"
+      },
+      {
+        "permission_name": "CREATE EXTERNAL LIBRARY"
+      },
+      {
+        "permission_name": "CREATE EXTERNAL MODEL"
+      },
+      {
+        "permission_name": "CREATE FULLTEXT CATALOG"
+      },
+      {
+        "permission_name": "CREATE FUNCTION"
+      },
+      {
+        "permission_name": "CREATE MESSAGE TYPE"
+      },
+      {
+        "permission_name": "CREATE PROCEDURE"
+      },
+      {
+        "permission_name": "CREATE QUEUE"
+      },
+      {
+        "permission_name": "CREATE REMOTE SERVICE BINDING"
+      },
+      {
+        "permission_name": "CREATE ROLE"
+      },
+      {
+        "permission_name": "CREATE ROUTE"
+      },
+      {
+        "permission_name": "CREATE RULE"
+      },
+      {
+        "permission_name": "CREATE SCHEMA"
+      },
+      {
+        "permission_name": "CREATE SERVICE"
+      },
+      {
+        "permission_name": "CREATE SYMMETRIC KEY"
+      },
+      {
+        "permission_name": "CREATE SYNONYM"
+      },
+      {
+        "permission_name": "CREATE TABLE"
+      },
+      {
+        "permission_name": "CREATE TYPE"
+      },
+      {
+        "permission_name": "CREATE USER"
+      },
+      {
+        "permission_name": "CREATE VIEW"
+      },
+      {
+        "permission_name": "CREATE XML SCHEMA COLLECTION"
+      },
+      {
+        "permission_name": "DELETE"
+      },
+      {
+        "permission_name": "DROP ANY DATABASE EVENT SESSION"
+      },
+      {
+        "permission_name": "ENABLE LEDGER"
+      },
+      {
+        "permission_name": "EXECUTE"
+      },
+      {
+        "permission_name": "EXECUTE ANY EXTERNAL ENDPOINT"
+      },
+      {
+        "permission_name": "EXECUTE ANY EXTERNAL SCRIPT"
+      },
+      {
+        "permission_name": "INSERT"
+      },
+      {
+        "permission_name": "KILL DATABASE CONNECTION"
+      },
+      {
+        "permission_name": "REFERENCES"
+      },
+      {
+        "permission_name": "SELECT"
+      },
+      {
+        "permission_name": "SHOWPLAN"
+      },
+      {
+        "permission_name": "SUBSCRIBE QUERY NOTIFICATIONS"
+      },
+      {
+        "permission_name": "TAKE OWNERSHIP"
+      },
+      {
+        "permission_name": "UNMASK"
+      },
+      {
+        "permission_name": "UPDATE"
+      },
+      {
+        "permission_name": "VIEW ANY COLUMN ENCRYPTION KEY DEFINITION"
+      },
+      {
+        "permission_name": "VIEW ANY COLUMN MASTER KEY DEFINITION"
+      },
+      {
+        "permission_name": "VIEW ANY SENSITIVITY CLASSIFICATION"
+      },
+      {
+        "permission_name": "VIEW CRYPTOGRAPHICALLY SECURED DEFINITION"
+      },
+      {
+        "permission_name": "VIEW DATABASE PERFORMANCE STATE"
+      },
+      {
+        "permission_name": "VIEW DATABASE SECURITY AUDIT"
+      },
+      {
+        "permission_name": "VIEW DATABASE SECURITY STATE"
+      },
+      {
+        "permission_name": "VIEW DATABASE STATE"
+      },
+      {
+        "permission_name": "VIEW DEFINITION"
+      },
+      {
+        "permission_name": "VIEW LEDGER CONTENT"
+      },
+      {
+        "permission_name": "VIEW PERFORMANCE DEFINITION"
+      },
+      {
+        "permission_name": "VIEW SECURITY DEFINITION"
+      }
+    ]
+  },
+  "membership_roles": {
+    "status": "VERIFIED",
+    "data": [
+      {
+        "role": "Admin",
+        "enabled": 1,
+        "count": 1
+      }
+    ]
+  },
+  "pending_reviews": {
+    "status": "VERIFIED",
+    "data": [
+      {
+        "count": 0
+      }
+    ]
+  },
+  "reserved_inference": {
+    "status": "VERIFIED",
+    "data": [
+      {
+        "count": 0
+      }
+    ]
+  },
+  "invalid_legacy_identities": {
+    "status": "VERIFIED",
+    "data": [
+      {
+        "count": 0
+      }
+    ]
+  },
+  "invalid_version_tenants": {
+    "status": "VERIFIED",
+    "data": [
+      {
+        "count": 0
+      }
+    ]
+  },
+  "invalid_assignment_tenants": {
+    "status": "VERIFIED",
+    "data": [
+      {
+        "count": 0
+      }
+    ]
+  },
+  "new_tables": {
+    "status": "VERIFIED",
+    "data": []
+  },
+  "runtime_role_membership": {
+    "status": "VERIFIED",
+    "data": [
+      {
+        "count": 1
+      }
+    ]
+  },
+  "runtime_role_grants": {
+    "status": "VERIFIED",
+    "data": [
+      {
+        "object_name": "active_policy_assignments",
+        "permission_name": "INSERT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "active_policy_assignments",
+        "permission_name": "SELECT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "active_policy_assignments",
+        "permission_name": "UPDATE",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "alembic_version",
+        "permission_name": "SELECT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "audit_events",
+        "permission_name": "INSERT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "audit_events",
+        "permission_name": "SELECT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "demo_sessions",
+        "permission_name": "INSERT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "demo_sessions",
+        "permission_name": "SELECT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "demo_sessions",
+        "permission_name": "UPDATE",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "evaluation_exports",
+        "permission_name": "INSERT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "evaluation_exports",
+        "permission_name": "SELECT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "evaluation_exports",
+        "permission_name": "UPDATE",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "export_jobs",
+        "permission_name": "INSERT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "export_jobs",
+        "permission_name": "SELECT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "export_jobs",
+        "permission_name": "UPDATE",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "feedback_records",
+        "permission_name": "INSERT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "feedback_records",
+        "permission_name": "SELECT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "human_review_cases",
+        "permission_name": "INSERT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "human_review_cases",
+        "permission_name": "SELECT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "human_review_cases",
+        "permission_name": "UPDATE",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "inference_rate_buckets",
+        "permission_name": "INSERT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "inference_rate_buckets",
+        "permission_name": "SELECT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "inference_rate_buckets",
+        "permission_name": "UPDATE",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "inference_usage",
+        "permission_name": "INSERT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "inference_usage",
+        "permission_name": "SELECT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "inference_usage",
+        "permission_name": "UPDATE",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "policies",
+        "permission_name": "DELETE",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "policies",
+        "permission_name": "INSERT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "policies",
+        "permission_name": "SELECT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "policies",
+        "permission_name": "UPDATE",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "policy_versions",
+        "permission_name": "INSERT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "policy_versions",
+        "permission_name": "SELECT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "review_assignments",
+        "permission_name": "INSERT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "review_assignments",
+        "permission_name": "SELECT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "review_assignments",
+        "permission_name": "UPDATE",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "review_notes",
+        "permission_name": "INSERT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "review_notes",
+        "permission_name": "SELECT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "sso_memberships",
+        "permission_name": "SELECT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "sso_memberships",
+        "permission_name": "VIEW DEFINITION",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "sso_sessions",
+        "permission_name": "INSERT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "sso_sessions",
+        "permission_name": "SELECT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "sso_sessions",
+        "permission_name": "UPDATE",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "sso_sessions",
+        "permission_name": "VIEW DEFINITION",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "sso_transactions",
+        "permission_name": "INSERT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "sso_transactions",
+        "permission_name": "SELECT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "sso_transactions",
+        "permission_name": "UPDATE",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "sso_transactions",
+        "permission_name": "VIEW DEFINITION",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "validation_executions",
+        "permission_name": "INSERT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "validation_executions",
+        "permission_name": "SELECT",
+        "state_desc": "GRANT"
+      }
+    ]
+  }
+}

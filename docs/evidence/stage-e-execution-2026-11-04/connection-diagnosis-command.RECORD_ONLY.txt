@@ -1,0 +1,27 @@
+import os,sys,json,socket,struct,re,subprocess
+from pathlib import Path
+R=Path.cwd();os.environ['AZURE_CONFIG_DIR']=str(R/'.azure-sql-cli');sys.path.insert(0,str(R/'backend'))
+from azure.identity import AzureCliCredential
+from app.azure_sql import verify_token_identity,build_azure_sql_url
+from sqlalchemy.engine import URL
+import pyodbc
+r={};host='sql-governance-validator-dev-atiya.database.windows.net'
+try:
+ a=subprocess.run(['az','account','show','--query','{tenant:tenantId,subscription:id,type:user.type}','-o','json'],capture_output=True,text=True,timeout=20);r['account']=json.loads(a.stdout)
+ r['drivers']=pyodbc.drivers()
+ r['dns']=bool(socket.getaddrinfo(host,1433))
+ try:
+  with socket.create_connection((host,1433),timeout=10):r['tcp_1433']='PASS'
+ except Exception as e:r['tcp_1433']=type(e).__name__
+ t=AzureCliCredential(tenant_id='4ac50105-0c66-404e-a107-7cbd8a9a6442').get_token('https://database.windows.net/.default')
+ verify_token_identity(t.token,t.expires_on,'4ac50105-0c66-404e-a107-7cbd8a9a6442','b5d8bfbe-f03a-4132-a13f-ab49aae834b7');r['pinned_sql_token_identity']='PASS'
+ u=build_azure_sql_url(URL.create('mssql+pyodbc',host=host,database='sqldb-governance-validator-dev'));b=t.token.encode('utf-16-le')
+ try:
+  c=pyodbc.connect(u.query['odbc_connect'],attrs_before={1256:struct.pack(f'<I{len(b)}s',len(b),b)},timeout=10)
+  r['direct_odbc']='PASS';r['database_user']=c.cursor().execute('SELECT USER_NAME()').fetchone()[0];c.close()
+ except Exception as e:
+  s=str(e);r['direct_odbc']='FAILED';r['sqlstate']=e.args[0] if e.args and re.fullmatch('[A-Z0-9]{5}',str(e.args[0])) else None
+  r['sql_error_numbers']=re.findall(r'\((\d+)\)',s)
+  r['categories']=[k for k,v in {'firewall':'firewall','client_ip_not_allowed':'not allowed to access','login_failed':'login failed','timeout':'timeout','certificate':'certificate','tcp':'tcp provider','driver_missing':'data source name not found','token_expired':'expired'}.items() if v in s.lower()]
+except Exception as e:r['error_kind']=type(e).__name__
+(R/'docs/evidence/stage-e-execution-2026-11-04/connection-diagnosis.json').write_text(json.dumps(r,indent=2)+'\n');print(json.dumps(r))

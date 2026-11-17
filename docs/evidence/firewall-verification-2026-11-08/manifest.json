@@ -1,0 +1,8 @@
+{
+  "docs/evidence/firewall-verification-2026-11-08/azure-reported-client-diagnostic.json": "919dcb6ff37250e339ed0ef13de91b719fb34860333c77a972500cd002c53475",
+  "docs/evidence/firewall-verification-2026-11-08/original-firewall-rules.json": "1f694ed10c76f89628fa79e6f4d104ccaa92e2b72c1c45930a3bb566115db729",
+  "docs/evidence/firewall-verification-2026-11-08/final-firewall-rules.json": "1f694ed10c76f89628fa79e6f4d104ccaa92e2b72c1c45930a3bb566115db729",
+  "docs/evidence/firewall-verification-2026-11-08/result.json": "faebca7ee7a1ef22b2ff51b9fade59a5e491632165cbac5787f50a0772dbff9b",
+  "docs/evidence/firewall-verification-2026-11-08/sql-select-results.json": "ece55ad30fdfb1105c07911f4e6c47296fcda1a82e9765d7ec55a3d87d98785a",
+  "docs/TEMPORARY_SQL_FIREWALL_VERIFICATION_RESULT.md": "8b1d61f0e95138d464639eda9d34bcc4440c5a6c16ab9209eb15d3fd1dcb4768"
+}

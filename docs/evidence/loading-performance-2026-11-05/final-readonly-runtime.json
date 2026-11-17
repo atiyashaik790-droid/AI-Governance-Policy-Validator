@@ -1,0 +1,19 @@
+[
+  {
+    "path": "/ready",
+    "curl_exit": 0,
+    "http_code": 200,
+    "time_starttransfer": 2.488814,
+    "time_total": 2.488878,
+    "release": "1.2-5aad19f7eea45a42",
+    "schema": "005",
+    "sso_available": true
+  },
+  {
+    "path": "/api/audit/executions?limit=1",
+    "curl_exit": 0,
+    "http_code": 401,
+    "time_starttransfer": 0.769685,
+    "time_total": 0.769759
+  }
+]

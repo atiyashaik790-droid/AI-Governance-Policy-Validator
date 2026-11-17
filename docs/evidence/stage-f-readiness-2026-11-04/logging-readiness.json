@@ -1,0 +1,13 @@
+{
+  "observed_at_utc": "2026-11-04T18:00:41.960197+00:00",
+  "hosted_changes": false,
+  "diagnostic_settings": {
+    "settings": []
+  },
+  "telemetry_setting_status": {
+    "APPLICATIONINSIGHTS_CONNECTION_STRING": "ABSENT",
+    "APPINSIGHTS_INSTRUMENTATIONKEY": "ABSENT",
+    "ApplicationInsightsAgent_EXTENSION_VERSION": "ABSENT",
+    "OTEL_EXPORTER_OTLP_ENDPOINT": "ABSENT"
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "platform_status_lines": [
+    "2026-11-08T09:18:20.6665441Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO"
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "status": "PARTIAL",
+  "execution": "STOPPED",
+  "candidate": "1.2-240cc70e239a595f",
+  "candidate_sha256": "274891fe4ce303d9b05751e1b19cd52e5eb535034ccfedb37eae30fb1c228e22",
+  "incarnations": 1,
+  "passed": [
+    "exact candidate/source/evidence/migration/SQLite integrity",
+    "account/server/firewall/connectivity/absence/restrictions/current S0 price",
+    "temporary005\u2192006\u2192007\u2192008 migrations/runtime grants/final008 readiness",
+    "retained hashes across all migration boundaries",
+    "candidate Settings passive unverified/null-timestamp/disabled real verification gate",
+    "synthetic encrypted capture and seven-day retention",
+    "unassigned403, valid assignment200, stale412, exact reveal200/no-store, committed access audit",
+    "disposition200, actual ciphertext purge and purge audit",
+    "actual SQL expiry eligibility/deletion/committed expiry audit: removed1 healthytrue",
+    "unexpired ciphertext exact decryptability within candidate",
+    "independent ARM404/ResourceNotFound and inventory absence",
+    "production005 metadata/grants, frozen migrations, source/artifacts, SQLite unchanged"
+  ],
+  "blockers": [
+    "compatible-copy /ready returned503 DATABASE_OPERATION_FAILED SQLSTATE08S01 before preservation assertions; watchdog deadline/deletion also occurred, causal ordering not proven",
+    "compatible-copy exact decryptability and final retained-row/catalog comparisons not completed",
+    "incarnation-two006 preflight denials and007 THROW rollback not reached",
+    "four-hour resource lifetime limit exceeded; wall-clock watchdog safeguard ineffective across observed UTC/monotonic discrepancy"
+  ],
+  "lifetime_and_cost": {
+    "control_plane_create_started_utc": "2026-11-07T10:11:24.610911+00:00",
+    "control_plane_delete_succeeded_utc": "2026-11-07T16:24:14.639641+00:00",
+    "control_plane_elapsed_seconds": 22370.02873,
+    "control_plane_elapsed_hours": 6.2138968694444445,
+    "four_hour_limit_met": false,
+    "harness_monotonic_elapsed_seconds": 674.44,
+    "utc_monotonic_discrepancy": true,
+    "watchdog_deadline_observed": true,
+    "watchdog_wall_clock_deadline_enforced": false,
+    "cause": "Unestablished; UTC/monotonic discrepancy and multi-hour log gap are observed. Do not infer a measured suspension root cause.",
+    "daily_usd": 0.4839,
+    "conservative_billed_hours": 8,
+    "conservative_compute_estimate_usd": 0.1613,
+    "supersedes": "independent-deletion.json conservative_compute_estimate_usd=0.040325 uses monotonic seconds and underestimates this run",
+    "billing_note": "Compute estimate only, not an invoice or Azure billing cap"
+  },
+  "cleanup_independently_verified": true,
+  "production_changes": false,
+  "deployment": false,
+  "real_providers": false,
+  "recovery_B_and_production_C_to_F": false,
+  "stop_after": "Approval A retry-9; window consumed, no further Azure test authorized"
+}

@@ -1,0 +1,4 @@
+{
+  "runtime_contained_user_sid_matches_graph_managed_identity_client_id": true,
+  "database_mutated": false
+}

@@ -1,0 +1,38 @@
+{"completed": true, "elapsed_seconds": 8.087, "event": "cleanup.startup", "healthy": true}
+{"configured_minutes": 120, "database_expires_utc": "2026-11-06T21:59:48.796839+00:00", "event": "session.observation", "expires_at": "2026-11-06T21:59:48.796839+00:00", "issued_after_utc": "2026-11-06T19:59:48.796867+00:00", "issued_before_utc": "2026-11-06T19:59:48.796777+00:00", "server_now": "2026-11-06T20:01:59.689341+00:00"}
+{"configured_minutes": 120, "cookie_expires_utc": "2026-11-06T21:59:48+00:00", "cookie_max_age_seconds": 7200, "database_expires_utc": "2026-11-06T21:59:48.796839+00:00", "event": "session.contract", "issued_after_utc": "2026-11-06T19:59:48.796867+00:00", "issued_before_utc": "2026-11-06T19:59:48.796777+00:00", "issued_duration_lower_seconds": 7199.999972, "issued_duration_upper_seconds": 7200.000062, "remaining_seconds": 7069.107498, "server_now_utc": "2026-11-06T20:01:59.689341+00:00"}
+  from ._compat import httpx2
+/home/sigmoid/AI governance policy validator/.venv/lib/python3.13/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+  from starlette.testclient import TestClient as TestClient  # noqa
+{"event": "http.completed", "correlation_id": "38f82d14-f067-4d90-9f97-9093bf86c1a1", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 243707.4}
+{"event": "http.completed", "correlation_id": "60ef35bb-963f-4c49-af04-6fe55499ef43", "route": "/{path:path}", "method": "GET", "status": 200, "duration_ms": 37.72}
+{"event": "http.completed", "correlation_id": "27cd46bc-461e-4bdd-bd9a-2d31b9c6040a", "route": "/api/policies", "method": "GET", "status": 401, "duration_ms": 2.6}
+{"event": "http.completed", "correlation_id": "21c3490b-f5a4-46ee-878d-9e41feee55a9", "route": "/api/sso/login", "method": "GET", "status": 302, "duration_ms": 127973.91}
+{"event": "http.completed", "correlation_id": "ce6cbcf5-3626-48ff-b782-3088afcf2903", "route": "/api/sso/callback", "method": "GET", "status": 303, "duration_ms": 128003.62}
+{"event": "http.completed", "correlation_id": "824b3d58-c485-43d2-ba0d-e500800becb7", "route": "/api/sso/me", "method": "GET", "status": 200, "duration_ms": 128528.19}
+{"event": "http.completed", "correlation_id": "60c5f659-0cc5-4850-afe5-cac94374b3c2", "route": "/api/sso/me", "method": "GET", "status": 200, "duration_ms": 123900.63}
+{"event": "http.completed", "correlation_id": "5529c479-63c0-40e8-b08a-c9136c8cd141", "route": "/api/sso/me", "method": "GET", "status": 401, "duration_ms": 123416.12}
+{"event": "http.completed", "correlation_id": "141421ea-bb7c-4103-8dab-c9d7bcccdf9c", "route": "/api/sso/me", "method": "GET", "status": 401, "duration_ms": 123909.24}
+{"event": "http.completed", "correlation_id": "498e81b8-a453-4103-a3a3-c801d66872f7", "route": "/api/auth/session", "method": "POST", "status": 201, "duration_ms": 4632.05}
+{"event": "http.completed", "correlation_id": "b92ea3b3-fd68-416a-8a77-1068c9289e59", "route": "/api/policies", "method": "POST", "status": 201, "duration_ms": 5440.63}
+{"event": "http.completed", "correlation_id": "57977320-7efe-4a3d-a018-432bb829a225", "route": "/api/policies/{policy_id}/submit", "method": "POST", "status": 200, "duration_ms": 12032.67}
+{"event": "http.completed", "correlation_id": "09d60029-acca-4a53-b4fc-0faeb2ae6486", "route": "/api/policies/{policy_id}/approve", "method": "POST", "status": 200, "duration_ms": 8888.31}
+{"event": "http.completed", "correlation_id": "16d47af8-1cd9-428d-9db5-3bbca7a1fe81", "route": "/api/policies/{policy_id}/publish", "method": "POST", "status": 200, "duration_ms": 10582.88}
+{"event": "http.completed", "correlation_id": "297be5c9-2de4-433e-8758-170a594afb5c", "route": "/api/policies/{policy_id}/activate", "method": "POST", "status": 200, "duration_ms": 12655.44}
+{"event": "http.completed", "correlation_id": "99973bf5-a1f3-40c1-a2a9-4e7d3105da33", "route": "/api/governance/generate", "method": "POST", "status": 200, "duration_ms": 154616.16}
+{"event": "http.completed", "correlation_id": "e3524a20-571c-4221-83be-e2f75aed4919", "route": "/api/governance/generate", "method": "POST", "status": 504, "duration_ms": 274791.87}
+Traceback (most recent call last):
+  File "/home/sigmoid/AI governance policy validator/scripts/tests/phase6b_sql_package_probe.py", line 521, in <module>
+    probe(
+    ~~~~~^
+        args.directory,
+        ^^^^^^^^^^^^^^^
+    ...<3 lines>...
+        args.preserve_only,
+        ^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/sigmoid/AI governance policy validator/scripts/tests/phase6b_sql_package_probe.py", line 306, in probe
+    assert held.status_code == 200 and held.json()["decision"] == "HUMAN_REVIEW", (
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {"detail":"Governance deadline exceeded; response withheld"}

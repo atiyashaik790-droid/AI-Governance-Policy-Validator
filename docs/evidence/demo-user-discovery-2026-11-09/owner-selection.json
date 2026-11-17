@@ -1,0 +1,18 @@
+{
+  "status": "OWNER_SELECTED_NO_PROVISIONING_AUTHORIZATION",
+  "selected_sign_in": "demo-user@Sigmoidanalytics.com",
+  "verified_object_id": "f4799f3f-703a-42b7-acf7-4cbbf55e7320",
+  "mapping": {
+    "directory_tenant": "4ac50105-0c66-404e-a107-7cbd8a9a6442",
+    "object_id": "f4799f3f-703a-42b7-acf7-4cbbf55e7320",
+    "tenant": "demo-appservice-4e2dcce8d618",
+    "actor": "gpv-demo-user",
+    "role": "User",
+    "enabled": true
+  },
+  "selection_source": "Explicit user reply to candidate choice",
+  "sql_membership_created": false,
+  "entra_changes": false,
+  "admin_mapping_unchanged": true,
+  "actual_interactive_sign_in_verified": false
+}

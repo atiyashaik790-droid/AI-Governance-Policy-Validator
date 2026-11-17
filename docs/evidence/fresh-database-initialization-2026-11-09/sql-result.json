@@ -1,0 +1,60 @@
+{
+  "status": "PASS",
+  "migrations_started": true,
+  "migration_execution": "PASS",
+  "final_revision": [
+    "008"
+  ],
+  "schema_qualification": "PASS",
+  "runtime_grants_changed": false,
+  "migration_hashes_match": true,
+  "sql_context": {
+    "database": "sqldb-gpv-demo-v008-20261108",
+    "server": "sql-governance-validator-dev-atiya",
+    "engine_edition": 5,
+    "database_control": 1,
+    "compatibility_level": 170
+  },
+  "tables_before": [],
+  "empty_database_verified": true,
+  "initial_revision": "ABSENT_EMPTY_DATABASE",
+  "migration_started_utc": "2026-11-08T19:19:18.626603+00:00",
+  "runtime_permission_qualification": "NOT_RUN_OPERATOR_SCHEMA_CHECK_ONLY_NO_RUNTIME_PRINCIPAL_PROVISIONED",
+  "schema_contract": {
+    "revision": "008",
+    "versioned": true,
+    "sso_schema": true
+  },
+  "schema_counts": {
+    "tables": 23,
+    "indexes": 37,
+    "foreign_keys": 19,
+    "check_constraints": 16,
+    "triggers": 7
+  },
+  "table_rows": {
+    "active_policy_assignments": 0,
+    "alembic_version": 1,
+    "audit_events": 0,
+    "demo_sessions": 0,
+    "evaluation_exports": 0,
+    "execution_policy_evidence": 0,
+    "export_jobs": 0,
+    "feedback_records": 0,
+    "human_review_cases": 0,
+    "inference_rate_buckets": 0,
+    "inference_usage": 0,
+    "policies": 0,
+    "policy_versions": 0,
+    "review_assignments": 0,
+    "review_notes": 0,
+    "review_protected_content": 0,
+    "sso_memberships": 0,
+    "sso_sessions": 0,
+    "sso_transactions": 0,
+    "validation_executions": 0,
+    "workspace_policy_assignment_events": 0,
+    "workspace_policy_assignments": 0,
+    "workspace_policy_states": 0
+  }
+}

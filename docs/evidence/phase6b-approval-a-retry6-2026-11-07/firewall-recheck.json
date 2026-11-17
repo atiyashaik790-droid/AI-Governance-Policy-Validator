@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "current_public_ip": "101.0.62.127",
+  "rule": "gpv-verifier-single-ip-20261107",
+  "start_ip": "101.0.62.127",
+  "end_ip": "101.0.62.127",
+  "mutations": 0
+}

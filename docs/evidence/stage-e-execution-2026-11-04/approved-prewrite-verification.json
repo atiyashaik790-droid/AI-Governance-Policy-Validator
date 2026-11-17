@@ -1,0 +1,27 @@
+{
+  "stage": "E",
+  "read_only": true,
+  "observed_at_utc": "2026-11-04T17:53:00.599012+00:00",
+  "database": "sqldb-governance-validator-dev",
+  "operator_user": "dbo",
+  "revision": [
+    "005"
+  ],
+  "memberships": [],
+  "provisioning_audits": [],
+  "audit_resource_schema": [
+    {
+      "DATA_TYPE": "varchar",
+      "CHARACTER_MAXIMUM_LENGTH": 80
+    }
+  ],
+  "operator_permissions": {
+    "sso_memberships.SELECT": 1,
+    "sso_memberships.INSERT": 1,
+    "sso_memberships.UPDATE": 1,
+    "audit_events.SELECT": 1,
+    "audit_events.INSERT": 1
+  },
+  "workspace_policy_count": 8,
+  "read_status": "PASS"
+}

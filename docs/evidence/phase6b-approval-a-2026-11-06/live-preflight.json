@@ -1,0 +1,220 @@
+{
+  "utc": "2026-11-06T10:48:28.545463+00:00",
+  "scope": "Approval A only; read-only live prerequisites",
+  "account": {
+    "id": "25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6",
+    "tenantId": "4ac50105-0c66-404e-a107-7cbd8a9a6442",
+    "userType": "user"
+  },
+  "server": {
+    "fqdn": "sql-governance-validator-dev-atiya.database.windows.net",
+    "id": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya",
+    "location": "westus2",
+    "state": "Ready"
+  },
+  "databases": [
+    {
+      "id": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/databases/sqldb-governance-validator-dev",
+      "name": "sqldb-governance-validator-dev",
+      "sku": {
+        "capacity": 10,
+        "family": null,
+        "name": "Standard",
+        "size": null,
+        "tier": "Standard"
+      },
+      "status": "Online"
+    },
+    {
+      "id": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/databases/master",
+      "name": "master",
+      "sku": {
+        "capacity": 4,
+        "family": "SYSTEM",
+        "name": "GP_SYSTEM",
+        "size": null,
+        "tier": "System"
+      },
+      "status": "Online"
+    }
+  ],
+  "subscription_locks": {
+    "value": []
+  },
+  "subscription_deny": {
+    "value": []
+  },
+  "subscription_permissions": {
+    "value": []
+  },
+  "group_locks": {
+    "value": []
+  },
+  "group_deny": {
+    "value": []
+  },
+  "group_permissions": {
+    "value": [
+      {
+        "actions": [
+          "*"
+        ],
+        "dataActions": [],
+        "notActions": [
+          "Microsoft.Authorization/*/Delete",
+          "Microsoft.Authorization/*/Write",
+          "Microsoft.Authorization/elevateAccess/Action",
+          "Microsoft.Blueprint/blueprintAssignments/write",
+          "Microsoft.Blueprint/blueprintAssignments/delete",
+          "Microsoft.Compute/galleries/share/action",
+          "Microsoft.Purview/consents/write",
+          "Microsoft.Purview/consents/delete",
+          "Microsoft.Resources/deploymentStacks/manageDenySetting/action",
+          "Microsoft.Subscription/cancel/action",
+          "Microsoft.Subscription/enable/action"
+        ],
+        "notDataActions": []
+      },
+      {
+        "actions": [
+          "*/read",
+          "Microsoft.Authorization/*",
+          "Microsoft.Support/*"
+        ],
+        "dataActions": [],
+        "notActions": [],
+        "notDataActions": []
+      },
+      {
+        "actions": [
+          "Microsoft.Authorization/*/read",
+          "Microsoft.CognitiveServices/*/read",
+          "Microsoft.CognitiveServices/accounts/listkeys/action",
+          "Microsoft.CognitiveServices/accounts/projects/connections/listsecrets/action",
+          "Microsoft.Insights/alertRules/read",
+          "Microsoft.Insights/diagnosticSettings/read",
+          "Microsoft.Insights/logDefinitions/read",
+          "Microsoft.Insights/metricdefinitions/read",
+          "Microsoft.Insights/metrics/read",
+          "Microsoft.PolicyInsights/*/read",
+          "Microsoft.ResourceHealth/availabilityStatuses/read",
+          "Microsoft.Resources/deployments/*",
+          "Microsoft.Resources/subscriptions/operationresults/read",
+          "Microsoft.Resources/subscriptions/read",
+          "Microsoft.Resources/subscriptions/resourceGroups/read",
+          "Microsoft.Support/*"
+        ],
+        "dataActions": [
+          "Microsoft.CognitiveServices/*"
+        ],
+        "notActions": [],
+        "notDataActions": [
+          "Microsoft.CognitiveServices/accounts/AIServices/agents/endpoints/UserIdentityImpersonation/action",
+          "Microsoft.CognitiveServices/accounts/OpenAI/fine-tunes-deployments/write",
+          "Microsoft.CognitiveServices/accounts/AIServices/fine_tuning_deployments/write"
+        ]
+      }
+    ]
+  },
+  "server_locks": {
+    "value": []
+  },
+  "server_deny": {
+    "value": []
+  },
+  "server_permissions": {
+    "value": [
+      {
+        "actions": [
+          "*"
+        ],
+        "dataActions": [],
+        "notActions": [
+          "Microsoft.Authorization/*/Delete",
+          "Microsoft.Authorization/*/Write",
+          "Microsoft.Authorization/elevateAccess/Action",
+          "Microsoft.Blueprint/blueprintAssignments/write",
+          "Microsoft.Blueprint/blueprintAssignments/delete",
+          "Microsoft.Compute/galleries/share/action",
+          "Microsoft.Purview/consents/write",
+          "Microsoft.Purview/consents/delete",
+          "Microsoft.Resources/deploymentStacks/manageDenySetting/action",
+          "Microsoft.Subscription/cancel/action",
+          "Microsoft.Subscription/enable/action"
+        ],
+        "notDataActions": []
+      },
+      {
+        "actions": [
+          "*/read",
+          "Microsoft.Authorization/*",
+          "Microsoft.Support/*"
+        ],
+        "dataActions": [],
+        "notActions": [],
+        "notDataActions": []
+      },
+      {
+        "actions": [
+          "Microsoft.Authorization/*/read",
+          "Microsoft.CognitiveServices/*/read",
+          "Microsoft.CognitiveServices/accounts/listkeys/action",
+          "Microsoft.CognitiveServices/accounts/projects/connections/listsecrets/action",
+          "Microsoft.Insights/alertRules/read",
+          "Microsoft.Insights/diagnosticSettings/read",
+          "Microsoft.Insights/logDefinitions/read",
+          "Microsoft.Insights/metricdefinitions/read",
+          "Microsoft.Insights/metrics/read",
+          "Microsoft.PolicyInsights/*/read",
+          "Microsoft.ResourceHealth/availabilityStatuses/read",
+          "Microsoft.Resources/deployments/*",
+          "Microsoft.Resources/subscriptions/operationresults/read",
+          "Microsoft.Resources/subscriptions/read",
+          "Microsoft.Resources/subscriptions/resourceGroups/read",
+          "Microsoft.Support/*"
+        ],
+        "dataActions": [
+          "Microsoft.CognitiveServices/*"
+        ],
+        "notActions": [],
+        "notDataActions": [
+          "Microsoft.CognitiveServices/accounts/AIServices/agents/endpoints/UserIdentityImpersonation/action",
+          "Microsoft.CognitiveServices/accounts/OpenAI/fine-tunes-deployments/write",
+          "Microsoft.CognitiveServices/accounts/AIServices/fine_tuning_deployments/write"
+        ]
+      }
+    ]
+  },
+  "s0_capability": [
+    {
+      "edition": null,
+      "serviceObjective": null,
+      "sku": null
+    }
+  ],
+  "retail_primary_s0": [],
+  "source_sql": {
+    "identity": [
+      {
+        "db": "sqldb-governance-validator-dev",
+        "principal": "dbo",
+        "default_schema": "dbo",
+        "collation": "SQL_Latin1_General_CP1_CI_AS"
+      }
+    ],
+    "revision": [
+      {
+        "version_num": "005"
+      }
+    ],
+    "runtime_mapping": [
+      {
+        "name": "app-governance-validator-atiya-1026",
+        "type": "E",
+        "sid": "0xCECABAF78A6968498ADDCBA221319A17",
+        "client_id": "F7BACACE-698A-4968-8ADD-CBA221319A17"
+      }
+    ]
+  },
+  "sqlite_sha256": "0cad09a35e73ad70bb5ff5e522f783f9b59fdd5b3c31eb5b5dddd4d300795766"
+}

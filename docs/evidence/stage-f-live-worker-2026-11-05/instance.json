@@ -1,0 +1,5 @@
+{
+  "name": "c04aa1d190c806a98365154610359be5f0b247a3d55e146cfd8e4942c8287e1c",
+  "state": "READY",
+  "source": "read-only az webapp list-instances"
+}

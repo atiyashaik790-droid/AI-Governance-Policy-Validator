@@ -1,0 +1,7 @@
+{
+  "mode": "SELECT_ONLY_AGGREGATES_AND_POLICY_CONFIGURATION",
+  "writes_performed": false,
+  "failure_type": "DatabaseConnectionError",
+  "detail": "Read-only query failed; no raw error or private rows exposed",
+  "observed_utc": "2026-11-08T08:00:19.592000+00:00"
+}

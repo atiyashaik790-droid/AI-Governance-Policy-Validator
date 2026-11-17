@@ -1,0 +1,14 @@
+{
+  "observed_at_utc": "2026-11-06T08:50:24.556883+00:00",
+  "status": "PARTIAL",
+  "recommendation": "NO-GO deployment; approval A only",
+  "hosted_release": "1.2-ca5df7c1dc19e525",
+  "hosted_revision": "005",
+  "retention_days": 7,
+  "restore_allow_metadata": "present; not exercised",
+  "A_name": "sqldb-gpv-mig-20261106-a1",
+  "B_name": "sqldb-gpv-pitr-20261106-b1",
+  "cloud_mutations": false,
+  "new_services": false,
+  "independent007_fallback": false
+}

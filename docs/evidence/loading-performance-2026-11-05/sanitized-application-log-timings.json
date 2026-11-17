@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "method": "EXISTING_MAIN_CONTAINER_EXEC_WEBSOCKET",
+  "hosted_changes": false,
+  "sql_accessed": false,
+  "pinned_operator_identity_verified": true,
+  "handshake": "PASS",
+  "payload_sent": true,
+  "matched_requests": [],
+  "files_examined": 3,
+  "observed_at_utc": "2026-11-05T08:30:20.260391+00:00"
+}

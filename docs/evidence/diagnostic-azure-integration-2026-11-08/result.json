@@ -1,0 +1,29 @@
+{
+  "observed_utc": "2026-11-08T14:42:42.689296+00:00",
+  "azure_integration": "BLOCKED_FOR_LIVE_WRITES",
+  "adapter_implementation": "COMPLETE_LOCAL_WIRING",
+  "new_adapter_tests": {
+    "passed": 28,
+    "seconds": 0.08,
+    "junit": "adapter-tests.xml"
+  },
+  "prior_controller_tests_reused": 30,
+  "ruff": "PASS",
+  "configuration_mutations": 0,
+  "webjobs_calls": 0,
+  "production_keys_generated": false,
+  "desktop_key_store_changed": false,
+  "new_readonly_azure_query": "One ARM appsettings list metadata read; HTTP200, no ETag header/body. No setting values saved.",
+  "conditional_write": "Requires exact-target/API reviewed capability evidence and strong response ETag. Default denies all writes. No unconditional fallback. Mock CAS success is not Azure enforcement proof.",
+  "independent_supervisor": "BLOCKED_NOT_VERIFIED",
+  "safe_live_diagnostic": "NO-GO",
+  "integration_files": [
+    "scripts/webjobs_diagnostic_azure.py",
+    "scripts/webjobs_diagnostic.py",
+    "scripts/tests/test_webjobs_diagnostic_azure.py",
+    "deployment/webjobs-diagnostic-conditional.REVIEW_ONLY.json",
+    "deployment/webjobs-diagnostic-supervisor.REVIEW_ONLY.json"
+  ],
+  "next_action": "Review a supported atomic conditional or explicitly enforced exclusive-writer mechanism and a verified existing independent recovery supervisor with separate-host journal/key/Azure access. No live diagnostic approval requested until those conditions are concretely verified.",
+  "azure_mutation_approval_inferred": false
+}

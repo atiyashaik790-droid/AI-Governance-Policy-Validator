@@ -1,0 +1,37 @@
+[
+  {
+    "cell": null,
+    "code": "E731",
+    "end_location": {
+      "column": 14,
+      "row": 295
+    },
+    "filename": "/home/sigmoid/AI governance policy validator/scripts/tests/phase6b_sql_package_probe.py",
+    "fix": {
+      "applicability": "unsafe",
+      "edits": [
+        {
+          "content": "def reveal(version):\n                return client.post(\n                            f\"/api/reviews/{rid}/content\",\n                            json={},\n                            headers={\"If-Match\": f'\"{version}\"'},\n                        )",
+          "end_location": {
+            "column": 14,
+            "row": 295
+          },
+          "location": {
+            "column": 13,
+            "row": 291
+          }
+        }
+      ],
+      "message": "Rewrite `reveal` as a `def`"
+    },
+    "location": {
+      "column": 13,
+      "row": 291
+    },
+    "message": "Do not assign a `lambda` expression, use a `def`",
+    "name": "lambda-assignment",
+    "noqa_row": 291,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/lambda-assignment"
+  }
+]

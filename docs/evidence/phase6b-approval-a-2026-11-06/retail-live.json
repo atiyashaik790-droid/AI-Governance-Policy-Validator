@@ -1,0 +1,31 @@
+{
+  "BillingCurrency": "USD",
+  "CustomerEntityId": "Default",
+  "CustomerEntityType": "Retail",
+  "Items": [
+    {
+      "currencyCode": "USD",
+      "tierMinimumUnits": 0.0,
+      "retailPrice": 0.4839,
+      "unitPrice": 0.4839,
+      "armRegionName": "westus2",
+      "location": "US West 2",
+      "effectiveStartDate": "2014-11-01T00:00:00Z",
+      "meterId": "a149966f-73b4-4e1d-b335-d2a572b1e6bd",
+      "meterName": "S0 DTUs",
+      "productId": "DZH318Z0BQHF",
+      "skuId": "DZH318Z0BQHF/00D8",
+      "productName": "SQL Database Single Standard",
+      "skuName": "S0",
+      "serviceName": "SQL Database",
+      "serviceId": "DZH3180HX10K",
+      "serviceFamily": "Databases",
+      "unitOfMeasure": "1/Day",
+      "type": "Consumption",
+      "isPrimaryMeterRegion": false,
+      "armSkuName": ""
+    }
+  ],
+  "NextPageLink": null,
+  "Count": 1
+}

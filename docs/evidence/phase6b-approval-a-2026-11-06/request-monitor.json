@@ -1,0 +1,10 @@
+[
+  {
+    "session_id": 90,
+    "status": "running",
+    "command": "SELECT",
+    "blocking_session_id": 0,
+    "wait_type": null,
+    "total_elapsed_time": 3
+  }
+]

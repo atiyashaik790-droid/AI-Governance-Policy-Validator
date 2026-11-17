@@ -1,0 +1,14 @@
+from pathlib import Path
+exec(compile(Path('/tmp/stage_f_readonly.py').read_text().split("attempt('account'")[0],'/tmp/stage_f_readonly.py','exec'))
+client='a1a7da0b-ad29-49ec-a9ea-c59219e60df5'
+attempt('service_principal',lambda:az(['ad','sp','show','--id',client,'--query','{objectId:id,clientId:appId,accountEnabled:accountEnabled,appRoleAssignmentRequired:appRoleAssignmentRequired,servicePrincipalType:servicePrincipalType}']))
+attempt('platform_auth',lambda:az(['webapp','auth','show','--subscription',sub,'-g',group,'-n',app,'--query','{enabled:platform.enabled,requireAuthentication:globalValidation.requireAuthentication,unauthenticatedClientAction:globalValidation.unauthenticatedClientAction,azureAdEnabled:identityProviders.azureActiveDirectory.enabled,tokenStoreEnabled:login.tokenStore.enabled}']))
+attempt('platform_logs',lambda:az(['webapp','log','show','--subscription',sub,'-g',group,'-n',app,'--query','{httpFilesystem: httpLogs.fileSystem,httpBlobEnabled:httpLogs.azureBlobStorage.enabled,applicationFilesystemLevel:applicationLogs.fileSystem.level,detailedErrorMessages:detailedErrorMessages.enabled,failedRequestsTracing:failedRequestsTracing.enabled}']))
+if isinstance(r.get('service_principal'),dict) and r['service_principal'].get('appRoleAssignmentRequired'):
+ oid=r['service_principal']['objectId'];user='b5d8bfbe-f03a-4132-a13f-ab49aae834b7'
+ attempt('direct_user_assignments',lambda:az(['rest','--method','GET','--url',f'https://graph.microsoft.com/v1.0/users/{user}/appRoleAssignments','--query',f"value[?resourceId=='{oid}'].{{resourceId:resourceId,appRoleId:appRoleId}}" ]))
+try:
+ with urllib.request.urlopen('https://login.microsoftonline.com/4ac50105-0c66-404e-a107-7cbd8a9a6442/v2.0/.well-known/openid-configuration',timeout=20) as response:
+  d=json.load(response);r['oidc_discovery']={k:d.get(k) for k in ['issuer','authorization_endpoint','token_endpoint','jwks_uri','end_session_endpoint']}
+except Exception as e:r['oidc_discovery']={'status':'BLOCKED','error_kind':type(e).__name__}
+(R/'docs/evidence/stage-f-readiness-2026-11-04/azure-read-only-supplement.json').write_text(json.dumps(r,indent=2)+'\n');print(json.dumps(r))

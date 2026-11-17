@@ -1,0 +1,16 @@
+{
+  "status": "PASS_LOCAL_STATIC_REVIEW",
+  "objects": 23,
+  "dml_grant_pairs": 59,
+  "metadata_visibility_grants": 23,
+  "extra_connect_grants": 1,
+  "required_execution_mutation_denials": [
+    "UPDATE",
+    "DELETE"
+  ],
+  "new_principal_type": "E",
+  "sid_guid": "f7bacace-698a-4968-8add-cba221319a17",
+  "sid_basis": "Current Graph client ID, existing source baseline, official CREATE USER service-principal example K",
+  "no_sequence_grants_needed": true,
+  "runtime_effective_permissions": "NOT_VERIFIED_UNTIL_APPROVED_SQL_PROVISIONING"
+}

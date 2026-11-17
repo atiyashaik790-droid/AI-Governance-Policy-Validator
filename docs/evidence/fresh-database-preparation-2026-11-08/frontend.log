@@ -1,0 +1,72 @@
+
+> governance-console@1.2.0 test
+> vitest run
+
+
+ RUN  v5.0.5 /home/sigmoid/AI governance policy validator/frontend
+
+ ↓ src/Backend.integration.test.jsx (1 test | 1 skipped)
+ ✓ src/ReviewContent.test.tsx (10 tests) 1077ms
+   ✓ automatically clears content at the server-provided reveal deadline 518ms
+ ✓ src/DecisionNotice.test.tsx (18 tests) 1128ms
+   ✓ integrates review guidance into the Playground for uploads=false without showing held content 418ms
+   ✓ integrates review guidance into the Playground for uploads=true without showing held content 401ms
+ ✓ src/MultiSelectDropdown.test.tsx (3 tests) 659ms
+   ✓ keeps a compact summary, supports multiple selections and restores focus on Escape 538ms
+ ✓ src/Sso.test.tsx (19 tests) 1545ms
+   ✓ Microsoft browser authentication (7)
+     ✓ shows accessible SSO login without manual token entry 375ms
+ ✓ src/CustomCategories.test.tsx (5 tests) 1391ms
+   ✓ adds, edits, disables and removes custom categories alongside built-in controls, then saves through the authenticated API 878ms
+ ✓ src/AttachmentPicker.test.tsx (5 tests) 1508ms
+   ✓ previews, replaces and submits one governed document request in LEGACY mode 715ms
+ ✓ src/UserPortal.test.tsx (19 tests) 2068ms
+   ✓ routes User from / to chatbot only 483ms
+ ✓ src/api.test.ts (8 tests) 22ms
+ ✓ src/LoadingPerformance.test.tsx (1 test) 222ms
+ ✓ src/IntegrationStatus.test.tsx (3 tests) 285ms
+ ✓ src/MultiPolicy.test.tsx (10 tests) 2575ms
+   ✓ requires an explicit version, sends a strong workspace precondition, and deactivates independently 1500ms
+ ✓ src/App.test.tsx (13 tests) 2648ms
+   ✓ real API boundary (3)
+     ✓ requires successful Microsoft session restoration 423ms
+   ✓ governed playground integration (2)
+     ✓ displays an inspected response with the fixture label 419ms
+     ✓ withholds rejected output 335ms
+   ✓ remove policies while retaining history (2)
+     ✓ deletes a disabled inactive policy with its version and retains active-policy protection 399ms
+ ✓ src/SettingsAnalytics.test.tsx (12 tests) 2677ms
+   ✓ distinguishes daily reservations, retained statuses and unavailable recorded tokens 380ms
+   ✓ preserves session pagination and refresh with page-scoped counts 384ms
+   ✓ moves usage out of Settings and gates analytics access for Admin in LEGACY 885ms
+ ✓ src/AuditFilters.test.tsx (7 tests) 2859ms
+   ✓ applies server filters, preserves them on every tab, and clears them (v2=false) 1660ms
+   ✓ applies server filters, preserves them on every tab, and clears them (v2=true) 718ms
+
+ Test Files  14 passed | 1 skipped (15)
+      Tests  133 passed | 1 skipped (134)
+   Start at  21:09:51
+   Duration  4.21s (tests 57%, environment 28%, import 6%, transform 6%, setup 3%)
+
+    Isolate  15 workers spawned · ~815ms startup each (spawn + environment, per file)
+             at least ~297ms faster with isolate: false — reuses workers across files instead of one per file
+
+
+> governance-console@1.2.0 lint
+> eslint src
+
+
+> governance-console@1.2.0 build
+> tsc -b && vite build
+
+vite v8.3.5 building client environment for production...
+transforming...
+✓ 2161 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                     1.01 kB │ gzip:   0.51 kB
+dist/assets/index-DcVWqT0G.css     20.17 kB │ gzip:   5.68 kB
+dist/assets/index-CwJGwHs6.js     340.04 kB │ gzip: 107.30 kB
+dist/assets/Overview-Bns9adhP.js  383.27 kB │ gzip: 110.41 kB
+
+✓ built in 367ms

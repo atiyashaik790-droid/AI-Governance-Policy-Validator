@@ -1,0 +1,25 @@
+{
+  "recorded_on": "2026-11-04",
+  "provenance": "USER_REPORTED_UBUNTU_AUTOMATION_RESULT_NOT_AGENT_RERUN",
+  "app_service": "PASS",
+  "managed_identity": "PASS",
+  "principal_id": "600447fe-5fea-4801-9033-ab4aafc474cc",
+  "azure_sql_schema004": "PASS",
+  "partial005_objects_absent": "PASS",
+  "compatibility_release": "PASS",
+  "release": "1.2-6749226f1af65b63",
+  "backup_metadata": "PASS",
+  "retention_days": 7,
+  "hosted_runtime_sql_permissions": "UNKNOWN",
+  "designated_recovery_operator": "UNKNOWN",
+  "recovery_drill": "UNKNOWN",
+  "overall_readiness": "UNKNOWN",
+  "agent_runtime_probe_attempt": {
+    "status": "UNKNOWN",
+    "category": "AZURE_NETWORK_OR_DNS_UNAVAILABLE",
+    "main_app_container_connected": false,
+    "database_mutated": false
+  },
+  "new_focused_tests": {"passed": 15, "scope": "runtime_probe_and_remaining_only_dispatch"},
+  "hosted_changes_performed": false
+}

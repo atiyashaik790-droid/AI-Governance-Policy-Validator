@@ -1,0 +1,2731 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="35" failures="0" skipped="0" tests="196" time="23.733" timestamp="2026-11-06T13:42:10.034468+05:30" hostname="sigmoid-ThinkPad-E14-Gen-4"><testcase classname="tests.test_migration_recovery" name="test_upgrade_existing_003_preserves_rows_and_protects_history" time="1.528" /><testcase classname="tests.test_migration_recovery" name="test_concurrent_export_same_key_one_upload" time="0.033" /><testcase classname="tests.test_migration_recovery" name="test_concurrent_reservations_never_exceed_quota" time="0.016" /><testcase classname="tests.test_migration_recovery" name="test_large_dataset_aggregation_and_bounded_exports" time="0.107" /><testcase classname="tests.test_migration_recovery" name="test_disposable_sqlite_backup_restore_drill" time="0.531" /><testcase classname="tests.test_sql_inventory" name="test_restricted_empty_metadata_is_unknown" time="0.007" /><testcase classname="tests.test_sql_inventory" name="test_missing_history_with_broad_visibility" time="0.004" /><testcase classname="tests.test_sql_inventory" name="test_visible_history_not_readable" time="0.005" /><testcase classname="tests.test_sql_inventory" name="test_readable_history_without_revision" time="0.004" /><testcase classname="tests.test_sql_inventory" name="test_existing_alembic_revision" time="0.004" /><testcase classname="tests.test_sql_inventory" name="test_metadata_permission_error_is_sanitized" time="0.004" /><testcase classname="tests.test_sql_inventory" name="test_wrong_database_stops_inspection" time="0.001" /><testcase classname="tests.test_sql_inventory" name="test_truncated_metadata_remains_unknown" time="0.004" /><testcase classname="tests.test_sql_inventory" name="test_non_allowlisted_sql_is_rejected" time="0.000" /><testcase classname="tests.test_sql_inventory" name="test_migration_inventory_matches_current_chain" time="0.004" /><testcase classname="tests.test_sql_inventory" name="test_required_columns_indexes_and_foreign_keys" time="0.009" /><testcase classname="tests.test_sql_inventory" name="test_column_compatibility" time="0.000" /><testcase classname="tests.test_sql_inventory" name="test_wall_clock_timeout_terminates_worker" time="0.001" /><testcase classname="tests.test_sql_inventory" name="test_cli_requires_explicit_connect" time="0.001" /><testcase classname="tests.test_sql_inventory" name="test_worker_sanitizes_errors_and_preserves_environment" time="0.001" /><testcase classname="tests.test_sql_inventory" name="test_installs_query_timeout" time="0.001" /><testcase classname="tests.test_sql_inventory" name="test_restricted_visible_table_details_are_not_assumed_missing" time="0.004" /><testcase classname="tests.test_sql_inventory" name="test_alembic_select_denied" time="0.004" /><testcase classname="tests.test_sql_inventory" name="test_standalone_cli_missing_cache_is_bounded_and_network_free" time="0.758" /><testcase classname="tests.test_multi_policy_phase_d" name="test_every_policy_has_evidence_and_unique_control_is_evaluated[1]" time="0.002" /><testcase classname="tests.test_multi_policy_phase_d" name="test_every_policy_has_evidence_and_unique_control_is_evaluated[6]" time="0.003" /><testcase classname="tests.test_multi_policy_phase_d" name="test_every_policy_has_evidence_and_unique_control_is_evaluated[105]" time="0.016" /><testcase classname="tests.test_multi_policy_phase_d" name="test_precedence_independence_and_original_holds[actions0-BLOCK]" time="0.003" /><testcase classname="tests.test_multi_policy_phase_d" name="test_precedence_independence_and_original_holds[actions1-HUMAN_REVIEW]" time="0.002" /><testcase classname="tests.test_multi_policy_phase_d" name="test_precedence_independence_and_original_holds[actions2-BLOCK]" time="0.003" /><testcase classname="tests.test_multi_policy_phase_d" name="test_precedence_independence_and_original_holds[actions3-REDACT]" time="0.004" /><testcase classname="tests.test_multi_policy_phase_d" name="test_common_cross_policy_redaction_reinspection_and_privacy" time="0.004" /><testcase classname="tests.test_multi_policy_phase_d" name="test_redaction_with_moderation_hold_is_not_marked_safe_revalidation" time="0.004" /><testcase classname="tests.test_multi_policy_phase_d" name="test_reinspection_new_cross_policy_violation_is_held" time="0.005" /><testcase classname="tests.test_multi_policy_phase_d" name="test_residual_redaction_is_not_repeated_or_released" time="0.004" /><testcase classname="tests.test_multi_policy_phase_d" name="test_all_local_controls_precede_external_and_holds_never_leave[BLOCK]" time="0.004" /><testcase classname="tests.test_multi_policy_phase_d" name="test_all_local_controls_precede_external_and_holds_never_leave[HUMAN_REVIEW]" time="0.003" /><testcase classname="tests.test_multi_policy_phase_d" name="test_missing_or_malformed_moderation_coverage_fails_closed[None]" time="0.003" /><testcase classname="tests.test_multi_policy_phase_d" name="test_missing_or_malformed_moderation_coverage_fails_closed[bad1]" time="0.001" /><testcase classname="tests.test_multi_policy_phase_d" name="test_missing_or_malformed_moderation_coverage_fails_closed[bad2]" time="0.002" /><testcase classname="tests.test_multi_policy_phase_d" name="test_missing_or_malformed_moderation_coverage_fails_closed[bad3]" time="0.001" /><testcase classname="tests.test_multi_policy_phase_d" name="test_missing_or_malformed_moderation_coverage_fails_closed[bad4]" time="0.001" /><testcase classname="tests.test_multi_policy_phase_d" name="test_default_moderation_requires_all_categories_and_union_is_complete" time="0.001" /><testcase classname="tests.test_multi_policy_phase_d" name="test_moderation_categories_have_independent_per_policy_decisions" time="0.001" /><testcase classname="tests.test_multi_policy_phase_d" name="test_missing_category_in_real_adapter_response_is_not_assumed_false" time="0.002" /><testcase classname="tests.test_multi_policy_phase_d" name="test_malformed_detector_result_fails_closed[None]" time="0.001" /><testcase classname="tests.test_multi_policy_phase_d" name="test_malformed_detector_result_fails_closed[bad1]" time="0.002" /><testcase classname="tests.test_multi_policy_phase_d" name="test_malformed_detector_result_fails_closed[bad2]" time="0.002" /><testcase classname="tests.test_multi_policy_phase_d" name="test_malformed_detector_result_fails_closed[bad3]" time="0.002" /><testcase classname="tests.test_multi_policy_phase_d" name="test_malformed_detector_result_fails_closed[invalid]" time="0.002" /><testcase classname="tests.test_multi_policy_phase_d" name="test_missing_detector_and_timeout_preserve_full_evidence_cardinality" time="0.003" /><testcase classname="tests.test_multi_policy_phase_d" name="test_detector_and_moderator_timeouts_fail_closed" time="0.042" /><testcase classname="tests.test_multi_policy_phase_d" name="test_only_equivalent_detector_work_is_reused_and_cache_is_request_scoped" time="0.008" /><testcase classname="tests.test_multi_policy_phase_d" name="test_invalid_snapshots_cannot_allow[empty]" time="0.002" /><testcase classname="tests.test_multi_policy_phase_d" name="test_invalid_snapshots_cannot_allow[duplicate]" time="0.002" /><testcase classname="tests.test_multi_policy_phase_d" name="test_invalid_snapshots_cannot_allow[digest]" time="0.001" /><testcase classname="tests.test_multi_policy_phase_d" name="test_generation_uses_same_explicit_version_pins_for_input_and_output" time="1.077" /><testcase classname="tests.test_multi_policy_phase_d" name="test_all_active_database_assignments_generate_once_and_persist_every_pin[1]" time="0.034" /><testcase classname="tests.test_multi_policy_phase_d" name="test_all_active_database_assignments_generate_once_and_persist_every_pin[6]" time="0.039" /><testcase classname="tests.test_multi_policy_phase_d" name="test_all_active_database_assignments_generate_once_and_persist_every_pin[105]" time="0.318" /><testcase classname="tests.test_multi_policy_phase_d" name="test_orchestration_releases_only_common_sanitized_text[input]" time="0.029" /><testcase classname="tests.test_multi_policy_phase_d" name="test_orchestration_releases_only_common_sanitized_text[output]" time="0.033" /><testcase classname="tests.test_multi_policy_phase_d" name="test_missing_selected_local_recognizer_blocks_without_external_call" time="0.002" /><testcase classname="tests.test_multi_policy_phase_d" name="test_malformed_adapter_flags_fail_closed[None]" time="0.001" /><testcase classname="tests.test_multi_policy_phase_d" name="test_malformed_adapter_flags_fail_closed[bad1]" time="0.001" /><testcase classname="tests.test_multi_policy_phase_d" name="test_malformed_adapter_flags_fail_closed[bad2]" time="0.001" /><testcase classname="tests.test_multi_policy_phase_d" name="test_malformed_adapter_flags_fail_closed[bad3]" time="0.001" /><testcase classname="tests.test_multi_policy_phase_d" name="test_malformed_adapter_flags_fail_closed[violence]" time="0.001" /><testcase classname="tests.test_multi_policy_phase_d" name="test_pii_selector_differences_are_not_reused" time="0.002" /><testcase classname="tests.test_multi_policy_phase_d" name="test_generation_failure_never_retries_or_releases[error]" time="0.024" /><testcase classname="tests.test_multi_policy_phase_d" name="test_generation_failure_never_retries_or_releases[timeout]" time="0.033" /><testcase classname="tests.test_multi_policy_phase_d" name="test_generation_failure_never_retries_or_releases[empty]" time="0.022" /><testcase classname="tests.test_multi_policy_phase_d" name="test_generation_failure_never_retries_or_releases[malformed]" time="0.027" /><testcase classname="tests.test_multi_policy_phase_d" name="test_concurrent_assignment_change_fences_dispatch_or_release[before_generation]" time="0.026" /><testcase classname="tests.test_multi_policy_phase_d" name="test_concurrent_assignment_change_fences_dispatch_or_release[before_release]" time="0.027" /><testcase classname="tests.test_multi_policy_phase_d" name="test_expired_or_reconciled_reservation_cannot_release[False]" time="0.026" /><testcase classname="tests.test_multi_policy_phase_d" name="test_expired_or_reconciled_reservation_cannot_release[True]" time="0.026" /><testcase classname="tests.test_multi_policy_phase_d" name="test_human_review_is_metadata_only_and_resubmission_rechecks" time="0.034" /><testcase classname="tests.test_multi_policy_phase_d" name="test_tenants_roles_and_public_boundaries" time="0.097" /><testcase classname="tests.test_multi_policy_phase_d" name="test_evidence_audit_and_reservation_commit_atomically" time="0.023" /><testcase classname="tests.test_multi_policy_phase_d" name="test_whole_request_deadline_cannot_release" time="0.032" /><testcase classname="tests.test_pagination" name="test_policy_flags_use_sql_server_scalar_case[False]" time="0.003" /><testcase classname="tests.test_pagination" name="test_policy_flags_use_sql_server_scalar_case[True]" time="0.002" /><testcase classname="tests.test_pagination" name="test_mssql_pagination_ordering[row_number-Policy]" time="0.001" /><testcase classname="tests.test_pagination" name="test_mssql_pagination_ordering[row_number-Audit]" time="0.001" /><testcase classname="tests.test_pagination" name="test_mssql_pagination_ordering[row_number-Execution]" time="0.002" /><testcase classname="tests.test_pagination" name="test_mssql_pagination_ordering[row_number-Review]" time="0.001" /><testcase classname="tests.test_pagination" name="test_mssql_pagination_ordering[row_number-Export]" time="0.001" /><testcase classname="tests.test_pagination" name="test_mssql_pagination_ordering[offset_fetch-Policy]" time="0.001" /><testcase classname="tests.test_pagination" name="test_mssql_pagination_ordering[offset_fetch-Audit]" time="0.001" /><testcase classname="tests.test_pagination" name="test_mssql_pagination_ordering[offset_fetch-Execution]" time="0.001" /><testcase classname="tests.test_pagination" name="test_mssql_pagination_ordering[offset_fetch-Review]" time="0.001" /><testcase classname="tests.test_pagination" name="test_mssql_pagination_ordering[offset_fetch-Export]" time="0.001" /><testcase classname="tests.test_pagination" name="test_pagination_empty_dataset[Policy-/api/policies]" time="0.027" /><testcase classname="tests.test_pagination" name="test_pagination_empty_dataset[Audit-/api/audit/events]" time="0.037" /><testcase classname="tests.test_pagination" name="test_pagination_multiple_records_and_tenant_isolation[Policy-/api/policies]" time="0.067" /><testcase classname="tests.test_pagination" name="test_pagination_multiple_records_and_tenant_isolation[Audit-/api/audit/events]" time="0.057" /><testcase classname="tests.test_sql_http_plan" name="test_default_is_offline" time="0.001" /><testcase classname="tests.test_sql_http_plan" name="test_manifest_permissions[420]" time="0.001" /><testcase classname="tests.test_sql_http_plan" name="test_manifest_permissions[432]" time="0.001" /><testcase classname="tests.test_sql_http_plan" name="test_manifest_permissions[256]" time="0.001" /><testcase classname="tests.test_sql_http_plan" name="test_manifest_permissions[448]" time="0.001" /><testcase classname="tests.test_sql_http_plan" name="test_manifest_owner" time="0.001" /><testcase classname="tests.test_sql_http_plan" name="test_manifest_link_rejection[symlink]" time="0.000" /><testcase classname="tests.test_sql_http_plan" name="test_manifest_link_rejection[parent_symlink]" time="0.000" /><testcase classname="tests.test_sql_http_plan" name="test_manifest_link_rejection[hardlink]" time="0.001" /><testcase classname="tests.test_sql_http_plan" name="test_any_previous_run_is_rejected[None]" time="0.001" /><testcase classname="tests.test_sql_http_plan" name="test_any_previous_run_is_rejected[status1]" time="0.001" /><testcase classname="tests.test_sql_http_plan" name="test_any_previous_run_is_rejected[]" time="0.001" /><testcase classname="tests.test_sql_http_plan" name="test_any_previous_run_is_rejected[status3]" time="0.001" /><testcase classname="tests.test_sql_http_plan" name="test_any_previous_run_is_rejected[status4]" time="0.001" /><testcase classname="tests.test_sql_http_plan" name="test_manifest_empty_provenance_and_unique_tokens" time="0.000" /><testcase classname="tests.test_sql_http_plan" name="test_manifest_lock_and_path_replacement" time="0.001" /><testcase classname="tests.test_sql_http_plan" name="test_manifest_checkpoint_failure_poisoned" time="0.001" /><testcase classname="tests.test_sql_http_plan" name="test_no_repository_manifests" time="0.001" /><testcase classname="tests.test_sql_http_plan" name="test_http_sequence_and_persisted_counts" time="0.540"><error message="failed on setup with &quot;sql_http_driver.SafetyStop: HTTP acceptance condition failed&quot;">client = &lt;starlette.testclient.TestClient object at 0x72547aa039b0&gt;
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x72547aa61080&gt;
+
+    @pytest.fixture
+    def local_workflow(client, monkeypatch):
+        from app import main
+        from app.config import settings
+        from app.models import Audit, Base, Policy
+        from app.providers import ProviderUnavailable
+        import app.azure_sql
+        import inventory_azure_sql
+        import test_azure_sql_writes
+    
+        data = manifest()
+        monkeypatch.setattr(settings, "demo_accounts_json", json.dumps(driver.demo_accounts(data["run_id"], data["tokens"])))
+        monkeypatch.setattr(settings, "adls_account_url", "")
+        monkeypatch.setattr(main.providers, "upload_report", Mock(side_effect=ProviderUnavailable("fixture disabled")))
+        dependency = main.app.dependency_overrides[main.get_database]()
+        session = next(dependency)
+        engine = session.bind
+        session.add_all(
+            [
+                Policy(id=str(uuid4()), tenant="preexisting", name="Existing fixture", draft="{}"),
+                Audit(id=str(uuid4()), tenant="preexisting", actor="fixture", action="fixture", resource="fixture"),
+            ]
+        )
+        session.commit()
+        session.close()
+        dependency.close()
+    
+        def existing_rows():
+            with engine.connect() as connection:
+                return {
+                    model.__tablename__: [
+                        dict(row)
+                        for row in connection.execute(select(*model.__table__.columns).where(model.tenant == "preexisting")).mappings()
+                    ]
+                    for model in test_azure_sql_writes.MODELS
+                }
+    
+        baseline = existing_rows()
+    
+        class LocalTransport:
+            def request(self, method, path, **kwargs):
+                response = client.request(method, path, **kwargs)
+                if path == "/api/settings" and response.status_code == 200:
+                    content = response.json()
+                    content.update(database="mssql", azure_generation="BLOCKED", moderation="BLOCKED")
+                    return driver.httpx.Response(200, json=content)
+                return response
+    
+        monkeypatch.setattr(app.azure_sql, "create_azure_sql_engine", lambda *_: engine)
+        monkeypatch.setattr(engine, "dispose", lambda: None)
+        monkeypatch.setattr(test_azure_sql_writes, "preflight", lambda *_: None)
+        monkeypatch.setattr(inventory_azure_sql, "install_query_timeout", lambda *_: None)
+        assert all(value == 0 for value in driver.sql_check(data, before=True).values())
+        data["http_test"] = {"operations": []}
+        snapshots = []
+        runner = driver.Driver(LocalTransport(), data, lambda: snapshots.append(copy.deepcopy(data)))
+        runner.workflows()
+&gt;       assert driver.sql_check(data, before=False) == driver.EXPECTED_COUNTS
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend/tests/test_sql_http_plan.py:196: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/test_azure_sql_http.py:734: in sql_check
+    verify_retained(connection, manifest, MODELS)
+scripts/test_azure_sql_http.py:222: in verify_retained
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False
+
+    def require(condition):
+        if not condition:
+&gt;           raise SafetyStop("HTTP acceptance condition failed")
+E           sql_http_driver.SafetyStop: HTTP acceptance condition failed
+
+scripts/test_azure_sql_http.py:31: SafetyStop</error></testcase><testcase classname="tests.test_sql_http_plan" name="test_core_mapping_matches_api_while_session_mapping_is_orm" time="0.382"><error message="failed on setup with &quot;sql_http_driver.SafetyStop: HTTP acceptance condition failed&quot;">client = &lt;starlette.testclient.TestClient object at 0x72547a86a580&gt;
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x72547aa63b60&gt;
+
+    @pytest.fixture
+    def local_workflow(client, monkeypatch):
+        from app import main
+        from app.config import settings
+        from app.models import Audit, Base, Policy
+        from app.providers import ProviderUnavailable
+        import app.azure_sql
+        import inventory_azure_sql
+        import test_azure_sql_writes
+    
+        data = manifest()
+        monkeypatch.setattr(settings, "demo_accounts_json", json.dumps(driver.demo_accounts(data["run_id"], data["tokens"])))
+        monkeypatch.setattr(settings, "adls_account_url", "")
+        monkeypatch.setattr(main.providers, "upload_report", Mock(side_effect=ProviderUnavailable("fixture disabled")))
+        dependency = main.app.dependency_overrides[main.get_database]()
+        session = next(dependency)
+        engine = session.bind
+        session.add_all(
+            [
+                Policy(id=str(uuid4()), tenant="preexisting", name="Existing fixture", draft="{}"),
+                Audit(id=str(uuid4()), tenant="preexisting", actor="fixture", action="fixture", resource="fixture"),
+            ]
+        )
+        session.commit()
+        session.close()
+        dependency.close()
+    
+        def existing_rows():
+            with engine.connect() as connection:
+                return {
+                    model.__tablename__: [
+                        dict(row)
+                        for row in connection.execute(select(*model.__table__.columns).where(model.tenant == "preexisting")).mappings()
+                    ]
+                    for model in test_azure_sql_writes.MODELS
+                }
+    
+        baseline = existing_rows()
+    
+        class LocalTransport:
+            def request(self, method, path, **kwargs):
+                response = client.request(method, path, **kwargs)
+                if path == "/api/settings" and response.status_code == 200:
+                    content = response.json()
+                    content.update(database="mssql", azure_generation="BLOCKED", moderation="BLOCKED")
+                    return driver.httpx.Response(200, json=content)
+                return response
+    
+        monkeypatch.setattr(app.azure_sql, "create_azure_sql_engine", lambda *_: engine)
+        monkeypatch.setattr(engine, "dispose", lambda: None)
+        monkeypatch.setattr(test_azure_sql_writes, "preflight", lambda *_: None)
+        monkeypatch.setattr(inventory_azure_sql, "install_query_timeout", lambda *_: None)
+        assert all(value == 0 for value in driver.sql_check(data, before=True).values())
+        data["http_test"] = {"operations": []}
+        snapshots = []
+        runner = driver.Driver(LocalTransport(), data, lambda: snapshots.append(copy.deepcopy(data)))
+        runner.workflows()
+&gt;       assert driver.sql_check(data, before=False) == driver.EXPECTED_COUNTS
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend/tests/test_sql_http_plan.py:196: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/test_azure_sql_http.py:734: in sql_check
+    verify_retained(connection, manifest, MODELS)
+scripts/test_azure_sql_http.py:222: in verify_retained
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False
+
+    def require(condition):
+        if not condition:
+&gt;           raise SafetyStop("HTTP acceptance condition failed")
+E           sql_http_driver.SafetyStop: HTTP acceptance condition failed
+
+scripts/test_azure_sql_http.py:31: SafetyStop</error></testcase><testcase classname="tests.test_sql_http_plan" name="test_version_mismatch_rejected[document-{}]" time="0.514"><error message="failed on setup with &quot;sql_http_driver.SafetyStop: HTTP acceptance condition failed&quot;">client = &lt;starlette.testclient.TestClient object at 0x72547a5af020&gt;
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x72547aa63070&gt;
+
+    @pytest.fixture
+    def local_workflow(client, monkeypatch):
+        from app import main
+        from app.config import settings
+        from app.models import Audit, Base, Policy
+        from app.providers import ProviderUnavailable
+        import app.azure_sql
+        import inventory_azure_sql
+        import test_azure_sql_writes
+    
+        data = manifest()
+        monkeypatch.setattr(settings, "demo_accounts_json", json.dumps(driver.demo_accounts(data["run_id"], data["tokens"])))
+        monkeypatch.setattr(settings, "adls_account_url", "")
+        monkeypatch.setattr(main.providers, "upload_report", Mock(side_effect=ProviderUnavailable("fixture disabled")))
+        dependency = main.app.dependency_overrides[main.get_database]()
+        session = next(dependency)
+        engine = session.bind
+        session.add_all(
+            [
+                Policy(id=str(uuid4()), tenant="preexisting", name="Existing fixture", draft="{}"),
+                Audit(id=str(uuid4()), tenant="preexisting", actor="fixture", action="fixture", resource="fixture"),
+            ]
+        )
+        session.commit()
+        session.close()
+        dependency.close()
+    
+        def existing_rows():
+            with engine.connect() as connection:
+                return {
+                    model.__tablename__: [
+                        dict(row)
+                        for row in connection.execute(select(*model.__table__.columns).where(model.tenant == "preexisting")).mappings()
+                    ]
+                    for model in test_azure_sql_writes.MODELS
+                }
+    
+        baseline = existing_rows()
+    
+        class LocalTransport:
+            def request(self, method, path, **kwargs):
+                response = client.request(method, path, **kwargs)
+                if path == "/api/settings" and response.status_code == 200:
+                    content = response.json()
+                    content.update(database="mssql", azure_generation="BLOCKED", moderation="BLOCKED")
+                    return driver.httpx.Response(200, json=content)
+                return response
+    
+        monkeypatch.setattr(app.azure_sql, "create_azure_sql_engine", lambda *_: engine)
+        monkeypatch.setattr(engine, "dispose", lambda: None)
+        monkeypatch.setattr(test_azure_sql_writes, "preflight", lambda *_: None)
+        monkeypatch.setattr(inventory_azure_sql, "install_query_timeout", lambda *_: None)
+        assert all(value == 0 for value in driver.sql_check(data, before=True).values())
+        data["http_test"] = {"operations": []}
+        snapshots = []
+        runner = driver.Driver(LocalTransport(), data, lambda: snapshots.append(copy.deepcopy(data)))
+        runner.workflows()
+&gt;       assert driver.sql_check(data, before=False) == driver.EXPECTED_COUNTS
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend/tests/test_sql_http_plan.py:196: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/test_azure_sql_http.py:734: in sql_check
+    verify_retained(connection, manifest, MODELS)
+scripts/test_azure_sql_http.py:222: in verify_retained
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False
+
+    def require(condition):
+        if not condition:
+&gt;           raise SafetyStop("HTTP acceptance condition failed")
+E           sql_http_driver.SafetyStop: HTTP acceptance condition failed
+
+scripts/test_azure_sql_http.py:31: SafetyStop</error></testcase><testcase classname="tests.test_sql_http_plan" name="test_version_mismatch_rejected[number-1]" time="0.576"><error message="failed on setup with &quot;sql_http_driver.SafetyStop: HTTP acceptance condition failed&quot;">client = &lt;starlette.testclient.TestClient object at 0x72547ab34f30&gt;
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x72547aa608a0&gt;
+
+    @pytest.fixture
+    def local_workflow(client, monkeypatch):
+        from app import main
+        from app.config import settings
+        from app.models import Audit, Base, Policy
+        from app.providers import ProviderUnavailable
+        import app.azure_sql
+        import inventory_azure_sql
+        import test_azure_sql_writes
+    
+        data = manifest()
+        monkeypatch.setattr(settings, "demo_accounts_json", json.dumps(driver.demo_accounts(data["run_id"], data["tokens"])))
+        monkeypatch.setattr(settings, "adls_account_url", "")
+        monkeypatch.setattr(main.providers, "upload_report", Mock(side_effect=ProviderUnavailable("fixture disabled")))
+        dependency = main.app.dependency_overrides[main.get_database]()
+        session = next(dependency)
+        engine = session.bind
+        session.add_all(
+            [
+                Policy(id=str(uuid4()), tenant="preexisting", name="Existing fixture", draft="{}"),
+                Audit(id=str(uuid4()), tenant="preexisting", actor="fixture", action="fixture", resource="fixture"),
+            ]
+        )
+        session.commit()
+        session.close()
+        dependency.close()
+    
+        def existing_rows():
+            with engine.connect() as connection:
+                return {
+                    model.__tablename__: [
+                        dict(row)
+                        for row in connection.execute(select(*model.__table__.columns).where(model.tenant == "preexisting")).mappings()
+                    ]
+                    for model in test_azure_sql_writes.MODELS
+                }
+    
+        baseline = existing_rows()
+    
+        class LocalTransport:
+            def request(self, method, path, **kwargs):
+                response = client.request(method, path, **kwargs)
+                if path == "/api/settings" and response.status_code == 200:
+                    content = response.json()
+                    content.update(database="mssql", azure_generation="BLOCKED", moderation="BLOCKED")
+                    return driver.httpx.Response(200, json=content)
+                return response
+    
+        monkeypatch.setattr(app.azure_sql, "create_azure_sql_engine", lambda *_: engine)
+        monkeypatch.setattr(engine, "dispose", lambda: None)
+        monkeypatch.setattr(test_azure_sql_writes, "preflight", lambda *_: None)
+        monkeypatch.setattr(inventory_azure_sql, "install_query_timeout", lambda *_: None)
+        assert all(value == 0 for value in driver.sql_check(data, before=True).values())
+        data["http_test"] = {"operations": []}
+        snapshots = []
+        runner = driver.Driver(LocalTransport(), data, lambda: snapshots.append(copy.deepcopy(data)))
+        runner.workflows()
+&gt;       assert driver.sql_check(data, before=False) == driver.EXPECTED_COUNTS
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend/tests/test_sql_http_plan.py:196: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/test_azure_sql_http.py:734: in sql_check
+    verify_retained(connection, manifest, MODELS)
+scripts/test_azure_sql_http.py:222: in verify_retained
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False
+
+    def require(condition):
+        if not condition:
+&gt;           raise SafetyStop("HTTP acceptance condition failed")
+E           sql_http_driver.SafetyStop: HTTP acceptance condition failed
+
+scripts/test_azure_sql_http.py:31: SafetyStop</error></testcase><testcase classname="tests.test_sql_http_plan" name="test_version_mismatch_rejected[number-2]" time="0.464"><error message="failed on setup with &quot;sql_http_driver.SafetyStop: HTTP acceptance condition failed&quot;">client = &lt;starlette.testclient.TestClient object at 0x72547ab356a0&gt;
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x725479d16900&gt;
+
+    @pytest.fixture
+    def local_workflow(client, monkeypatch):
+        from app import main
+        from app.config import settings
+        from app.models import Audit, Base, Policy
+        from app.providers import ProviderUnavailable
+        import app.azure_sql
+        import inventory_azure_sql
+        import test_azure_sql_writes
+    
+        data = manifest()
+        monkeypatch.setattr(settings, "demo_accounts_json", json.dumps(driver.demo_accounts(data["run_id"], data["tokens"])))
+        monkeypatch.setattr(settings, "adls_account_url", "")
+        monkeypatch.setattr(main.providers, "upload_report", Mock(side_effect=ProviderUnavailable("fixture disabled")))
+        dependency = main.app.dependency_overrides[main.get_database]()
+        session = next(dependency)
+        engine = session.bind
+        session.add_all(
+            [
+                Policy(id=str(uuid4()), tenant="preexisting", name="Existing fixture", draft="{}"),
+                Audit(id=str(uuid4()), tenant="preexisting", actor="fixture", action="fixture", resource="fixture"),
+            ]
+        )
+        session.commit()
+        session.close()
+        dependency.close()
+    
+        def existing_rows():
+            with engine.connect() as connection:
+                return {
+                    model.__tablename__: [
+                        dict(row)
+                        for row in connection.execute(select(*model.__table__.columns).where(model.tenant == "preexisting")).mappings()
+                    ]
+                    for model in test_azure_sql_writes.MODELS
+                }
+    
+        baseline = existing_rows()
+    
+        class LocalTransport:
+            def request(self, method, path, **kwargs):
+                response = client.request(method, path, **kwargs)
+                if path == "/api/settings" and response.status_code == 200:
+                    content = response.json()
+                    content.update(database="mssql", azure_generation="BLOCKED", moderation="BLOCKED")
+                    return driver.httpx.Response(200, json=content)
+                return response
+    
+        monkeypatch.setattr(app.azure_sql, "create_azure_sql_engine", lambda *_: engine)
+        monkeypatch.setattr(engine, "dispose", lambda: None)
+        monkeypatch.setattr(test_azure_sql_writes, "preflight", lambda *_: None)
+        monkeypatch.setattr(inventory_azure_sql, "install_query_timeout", lambda *_: None)
+        assert all(value == 0 for value in driver.sql_check(data, before=True).values())
+        data["http_test"] = {"operations": []}
+        snapshots = []
+        runner = driver.Driver(LocalTransport(), data, lambda: snapshots.append(copy.deepcopy(data)))
+        runner.workflows()
+&gt;       assert driver.sql_check(data, before=False) == driver.EXPECTED_COUNTS
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend/tests/test_sql_http_plan.py:196: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/test_azure_sql_http.py:734: in sql_check
+    verify_retained(connection, manifest, MODELS)
+scripts/test_azure_sql_http.py:222: in verify_retained
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False
+
+    def require(condition):
+        if not condition:
+&gt;           raise SafetyStop("HTTP acceptance condition failed")
+E           sql_http_driver.SafetyStop: HTTP acceptance condition failed
+
+scripts/test_azure_sql_http.py:31: SafetyStop</error></testcase><testcase classname="tests.test_sql_http_plan" name="test_version_mismatch_rejected[number-True]" time="0.475"><error message="failed on setup with &quot;sql_http_driver.SafetyStop: HTTP acceptance condition failed&quot;">client = &lt;starlette.testclient.TestClient object at 0x72547ab35bf0&gt;
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x725479a3ff50&gt;
+
+    @pytest.fixture
+    def local_workflow(client, monkeypatch):
+        from app import main
+        from app.config import settings
+        from app.models import Audit, Base, Policy
+        from app.providers import ProviderUnavailable
+        import app.azure_sql
+        import inventory_azure_sql
+        import test_azure_sql_writes
+    
+        data = manifest()
+        monkeypatch.setattr(settings, "demo_accounts_json", json.dumps(driver.demo_accounts(data["run_id"], data["tokens"])))
+        monkeypatch.setattr(settings, "adls_account_url", "")
+        monkeypatch.setattr(main.providers, "upload_report", Mock(side_effect=ProviderUnavailable("fixture disabled")))
+        dependency = main.app.dependency_overrides[main.get_database]()
+        session = next(dependency)
+        engine = session.bind
+        session.add_all(
+            [
+                Policy(id=str(uuid4()), tenant="preexisting", name="Existing fixture", draft="{}"),
+                Audit(id=str(uuid4()), tenant="preexisting", actor="fixture", action="fixture", resource="fixture"),
+            ]
+        )
+        session.commit()
+        session.close()
+        dependency.close()
+    
+        def existing_rows():
+            with engine.connect() as connection:
+                return {
+                    model.__tablename__: [
+                        dict(row)
+                        for row in connection.execute(select(*model.__table__.columns).where(model.tenant == "preexisting")).mappings()
+                    ]
+                    for model in test_azure_sql_writes.MODELS
+                }
+    
+        baseline = existing_rows()
+    
+        class LocalTransport:
+            def request(self, method, path, **kwargs):
+                response = client.request(method, path, **kwargs)
+                if path == "/api/settings" and response.status_code == 200:
+                    content = response.json()
+                    content.update(database="mssql", azure_generation="BLOCKED", moderation="BLOCKED")
+                    return driver.httpx.Response(200, json=content)
+                return response
+    
+        monkeypatch.setattr(app.azure_sql, "create_azure_sql_engine", lambda *_: engine)
+        monkeypatch.setattr(engine, "dispose", lambda: None)
+        monkeypatch.setattr(test_azure_sql_writes, "preflight", lambda *_: None)
+        monkeypatch.setattr(inventory_azure_sql, "install_query_timeout", lambda *_: None)
+        assert all(value == 0 for value in driver.sql_check(data, before=True).values())
+        data["http_test"] = {"operations": []}
+        snapshots = []
+        runner = driver.Driver(LocalTransport(), data, lambda: snapshots.append(copy.deepcopy(data)))
+        runner.workflows()
+&gt;       assert driver.sql_check(data, before=False) == driver.EXPECTED_COUNTS
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend/tests/test_sql_http_plan.py:196: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/test_azure_sql_http.py:734: in sql_check
+    verify_retained(connection, manifest, MODELS)
+scripts/test_azure_sql_http.py:222: in verify_retained
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False
+
+    def require(condition):
+        if not condition:
+&gt;           raise SafetyStop("HTTP acceptance condition failed")
+E           sql_http_driver.SafetyStop: HTTP acceptance condition failed
+
+scripts/test_azure_sql_http.py:31: SafetyStop</error></testcase><testcase classname="tests.test_sql_http_plan" name="test_version_mismatch_rejected[policy_id-00000000-0000-0000-0000-000000000000]" time="0.495"><error message="failed on setup with &quot;sql_http_driver.SafetyStop: HTTP acceptance condition failed&quot;">client = &lt;starlette.testclient.TestClient object at 0x72547ab35d00&gt;
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x725479b829e0&gt;
+
+    @pytest.fixture
+    def local_workflow(client, monkeypatch):
+        from app import main
+        from app.config import settings
+        from app.models import Audit, Base, Policy
+        from app.providers import ProviderUnavailable
+        import app.azure_sql
+        import inventory_azure_sql
+        import test_azure_sql_writes
+    
+        data = manifest()
+        monkeypatch.setattr(settings, "demo_accounts_json", json.dumps(driver.demo_accounts(data["run_id"], data["tokens"])))
+        monkeypatch.setattr(settings, "adls_account_url", "")
+        monkeypatch.setattr(main.providers, "upload_report", Mock(side_effect=ProviderUnavailable("fixture disabled")))
+        dependency = main.app.dependency_overrides[main.get_database]()
+        session = next(dependency)
+        engine = session.bind
+        session.add_all(
+            [
+                Policy(id=str(uuid4()), tenant="preexisting", name="Existing fixture", draft="{}"),
+                Audit(id=str(uuid4()), tenant="preexisting", actor="fixture", action="fixture", resource="fixture"),
+            ]
+        )
+        session.commit()
+        session.close()
+        dependency.close()
+    
+        def existing_rows():
+            with engine.connect() as connection:
+                return {
+                    model.__tablename__: [
+                        dict(row)
+                        for row in connection.execute(select(*model.__table__.columns).where(model.tenant == "preexisting")).mappings()
+                    ]
+                    for model in test_azure_sql_writes.MODELS
+                }
+    
+        baseline = existing_rows()
+    
+        class LocalTransport:
+            def request(self, method, path, **kwargs):
+                response = client.request(method, path, **kwargs)
+                if path == "/api/settings" and response.status_code == 200:
+                    content = response.json()
+                    content.update(database="mssql", azure_generation="BLOCKED", moderation="BLOCKED")
+                    return driver.httpx.Response(200, json=content)
+                return response
+    
+        monkeypatch.setattr(app.azure_sql, "create_azure_sql_engine", lambda *_: engine)
+        monkeypatch.setattr(engine, "dispose", lambda: None)
+        monkeypatch.setattr(test_azure_sql_writes, "preflight", lambda *_: None)
+        monkeypatch.setattr(inventory_azure_sql, "install_query_timeout", lambda *_: None)
+        assert all(value == 0 for value in driver.sql_check(data, before=True).values())
+        data["http_test"] = {"operations": []}
+        snapshots = []
+        runner = driver.Driver(LocalTransport(), data, lambda: snapshots.append(copy.deepcopy(data)))
+        runner.workflows()
+&gt;       assert driver.sql_check(data, before=False) == driver.EXPECTED_COUNTS
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend/tests/test_sql_http_plan.py:196: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/test_azure_sql_http.py:734: in sql_check
+    verify_retained(connection, manifest, MODELS)
+scripts/test_azure_sql_http.py:222: in verify_retained
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False
+
+    def require(condition):
+        if not condition:
+&gt;           raise SafetyStop("HTTP acceptance condition failed")
+E           sql_http_driver.SafetyStop: HTTP acceptance condition failed
+
+scripts/test_azure_sql_http.py:31: SafetyStop</error></testcase><testcase classname="tests.test_sql_http_plan" name="test_version_mismatch_rejected[id-00000000-0000-0000-0000-000000000000]" time="0.428"><error message="failed on setup with &quot;sql_http_driver.SafetyStop: HTTP acceptance condition failed&quot;">client = &lt;starlette.testclient.TestClient object at 0x7254799c6690&gt;
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x7254780f86e0&gt;
+
+    @pytest.fixture
+    def local_workflow(client, monkeypatch):
+        from app import main
+        from app.config import settings
+        from app.models import Audit, Base, Policy
+        from app.providers import ProviderUnavailable
+        import app.azure_sql
+        import inventory_azure_sql
+        import test_azure_sql_writes
+    
+        data = manifest()
+        monkeypatch.setattr(settings, "demo_accounts_json", json.dumps(driver.demo_accounts(data["run_id"], data["tokens"])))
+        monkeypatch.setattr(settings, "adls_account_url", "")
+        monkeypatch.setattr(main.providers, "upload_report", Mock(side_effect=ProviderUnavailable("fixture disabled")))
+        dependency = main.app.dependency_overrides[main.get_database]()
+        session = next(dependency)
+        engine = session.bind
+        session.add_all(
+            [
+                Policy(id=str(uuid4()), tenant="preexisting", name="Existing fixture", draft="{}"),
+                Audit(id=str(uuid4()), tenant="preexisting", actor="fixture", action="fixture", resource="fixture"),
+            ]
+        )
+        session.commit()
+        session.close()
+        dependency.close()
+    
+        def existing_rows():
+            with engine.connect() as connection:
+                return {
+                    model.__tablename__: [
+                        dict(row)
+                        for row in connection.execute(select(*model.__table__.columns).where(model.tenant == "preexisting")).mappings()
+                    ]
+                    for model in test_azure_sql_writes.MODELS
+                }
+    
+        baseline = existing_rows()
+    
+        class LocalTransport:
+            def request(self, method, path, **kwargs):
+                response = client.request(method, path, **kwargs)
+                if path == "/api/settings" and response.status_code == 200:
+                    content = response.json()
+                    content.update(database="mssql", azure_generation="BLOCKED", moderation="BLOCKED")
+                    return driver.httpx.Response(200, json=content)
+                return response
+    
+        monkeypatch.setattr(app.azure_sql, "create_azure_sql_engine", lambda *_: engine)
+        monkeypatch.setattr(engine, "dispose", lambda: None)
+        monkeypatch.setattr(test_azure_sql_writes, "preflight", lambda *_: None)
+        monkeypatch.setattr(inventory_azure_sql, "install_query_timeout", lambda *_: None)
+        assert all(value == 0 for value in driver.sql_check(data, before=True).values())
+        data["http_test"] = {"operations": []}
+        snapshots = []
+        runner = driver.Driver(LocalTransport(), data, lambda: snapshots.append(copy.deepcopy(data)))
+        runner.workflows()
+&gt;       assert driver.sql_check(data, before=False) == driver.EXPECTED_COUNTS
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend/tests/test_sql_http_plan.py:196: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/test_azure_sql_http.py:734: in sql_check
+    verify_retained(connection, manifest, MODELS)
+scripts/test_azure_sql_http.py:222: in verify_retained
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False
+
+    def require(condition):
+        if not condition:
+&gt;           raise SafetyStop("HTTP acceptance condition failed")
+E           sql_http_driver.SafetyStop: HTTP acceptance condition failed
+
+scripts/test_azure_sql_http.py:31: SafetyStop</error></testcase><testcase classname="tests.test_sql_http_plan" name="test_version_mismatch_rejected[tenant-foreign]" time="0.563"><error message="failed on setup with &quot;sql_http_driver.SafetyStop: HTTP acceptance condition failed&quot;">client = &lt;starlette.testclient.TestClient object at 0x7254799c7ac0&gt;
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x7254786ad780&gt;
+
+    @pytest.fixture
+    def local_workflow(client, monkeypatch):
+        from app import main
+        from app.config import settings
+        from app.models import Audit, Base, Policy
+        from app.providers import ProviderUnavailable
+        import app.azure_sql
+        import inventory_azure_sql
+        import test_azure_sql_writes
+    
+        data = manifest()
+        monkeypatch.setattr(settings, "demo_accounts_json", json.dumps(driver.demo_accounts(data["run_id"], data["tokens"])))
+        monkeypatch.setattr(settings, "adls_account_url", "")
+        monkeypatch.setattr(main.providers, "upload_report", Mock(side_effect=ProviderUnavailable("fixture disabled")))
+        dependency = main.app.dependency_overrides[main.get_database]()
+        session = next(dependency)
+        engine = session.bind
+        session.add_all(
+            [
+                Policy(id=str(uuid4()), tenant="preexisting", name="Existing fixture", draft="{}"),
+                Audit(id=str(uuid4()), tenant="preexisting", actor="fixture", action="fixture", resource="fixture"),
+            ]
+        )
+        session.commit()
+        session.close()
+        dependency.close()
+    
+        def existing_rows():
+            with engine.connect() as connection:
+                return {
+                    model.__tablename__: [
+                        dict(row)
+                        for row in connection.execute(select(*model.__table__.columns).where(model.tenant == "preexisting")).mappings()
+                    ]
+                    for model in test_azure_sql_writes.MODELS
+                }
+    
+        baseline = existing_rows()
+    
+        class LocalTransport:
+            def request(self, method, path, **kwargs):
+                response = client.request(method, path, **kwargs)
+                if path == "/api/settings" and response.status_code == 200:
+                    content = response.json()
+                    content.update(database="mssql", azure_generation="BLOCKED", moderation="BLOCKED")
+                    return driver.httpx.Response(200, json=content)
+                return response
+    
+        monkeypatch.setattr(app.azure_sql, "create_azure_sql_engine", lambda *_: engine)
+        monkeypatch.setattr(engine, "dispose", lambda: None)
+        monkeypatch.setattr(test_azure_sql_writes, "preflight", lambda *_: None)
+        monkeypatch.setattr(inventory_azure_sql, "install_query_timeout", lambda *_: None)
+        assert all(value == 0 for value in driver.sql_check(data, before=True).values())
+        data["http_test"] = {"operations": []}
+        snapshots = []
+        runner = driver.Driver(LocalTransport(), data, lambda: snapshots.append(copy.deepcopy(data)))
+        runner.workflows()
+&gt;       assert driver.sql_check(data, before=False) == driver.EXPECTED_COUNTS
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend/tests/test_sql_http_plan.py:196: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/test_azure_sql_http.py:734: in sql_check
+    verify_retained(connection, manifest, MODELS)
+scripts/test_azure_sql_http.py:222: in verify_retained
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False
+
+    def require(condition):
+        if not condition:
+&gt;           raise SafetyStop("HTTP acceptance condition failed")
+E           sql_http_driver.SafetyStop: HTTP acceptance condition failed
+
+scripts/test_azure_sql_http.py:31: SafetyStop</error></testcase><testcase classname="tests.test_sql_http_plan" name="test_version_mismatch_rejected[created-changed]" time="0.441"><error message="failed on setup with &quot;sql_http_driver.SafetyStop: HTTP acceptance condition failed&quot;">client = &lt;starlette.testclient.TestClient object at 0x7254799c49e0&gt;
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x7254780fbc40&gt;
+
+    @pytest.fixture
+    def local_workflow(client, monkeypatch):
+        from app import main
+        from app.config import settings
+        from app.models import Audit, Base, Policy
+        from app.providers import ProviderUnavailable
+        import app.azure_sql
+        import inventory_azure_sql
+        import test_azure_sql_writes
+    
+        data = manifest()
+        monkeypatch.setattr(settings, "demo_accounts_json", json.dumps(driver.demo_accounts(data["run_id"], data["tokens"])))
+        monkeypatch.setattr(settings, "adls_account_url", "")
+        monkeypatch.setattr(main.providers, "upload_report", Mock(side_effect=ProviderUnavailable("fixture disabled")))
+        dependency = main.app.dependency_overrides[main.get_database]()
+        session = next(dependency)
+        engine = session.bind
+        session.add_all(
+            [
+                Policy(id=str(uuid4()), tenant="preexisting", name="Existing fixture", draft="{}"),
+                Audit(id=str(uuid4()), tenant="preexisting", actor="fixture", action="fixture", resource="fixture"),
+            ]
+        )
+        session.commit()
+        session.close()
+        dependency.close()
+    
+        def existing_rows():
+            with engine.connect() as connection:
+                return {
+                    model.__tablename__: [
+                        dict(row)
+                        for row in connection.execute(select(*model.__table__.columns).where(model.tenant == "preexisting")).mappings()
+                    ]
+                    for model in test_azure_sql_writes.MODELS
+                }
+    
+        baseline = existing_rows()
+    
+        class LocalTransport:
+            def request(self, method, path, **kwargs):
+                response = client.request(method, path, **kwargs)
+                if path == "/api/settings" and response.status_code == 200:
+                    content = response.json()
+                    content.update(database="mssql", azure_generation="BLOCKED", moderation="BLOCKED")
+                    return driver.httpx.Response(200, json=content)
+                return response
+    
+        monkeypatch.setattr(app.azure_sql, "create_azure_sql_engine", lambda *_: engine)
+        monkeypatch.setattr(engine, "dispose", lambda: None)
+        monkeypatch.setattr(test_azure_sql_writes, "preflight", lambda *_: None)
+        monkeypatch.setattr(inventory_azure_sql, "install_query_timeout", lambda *_: None)
+        assert all(value == 0 for value in driver.sql_check(data, before=True).values())
+        data["http_test"] = {"operations": []}
+        snapshots = []
+        runner = driver.Driver(LocalTransport(), data, lambda: snapshots.append(copy.deepcopy(data)))
+        runner.workflows()
+&gt;       assert driver.sql_check(data, before=False) == driver.EXPECTED_COUNTS
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend/tests/test_sql_http_plan.py:196: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/test_azure_sql_http.py:734: in sql_check
+    verify_retained(connection, manifest, MODELS)
+scripts/test_azure_sql_http.py:222: in verify_retained
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False
+
+    def require(condition):
+        if not condition:
+&gt;           raise SafetyStop("HTTP acceptance condition failed")
+E           sql_http_driver.SafetyStop: HTTP acceptance condition failed
+
+scripts/test_azure_sql_http.py:31: SafetyStop</error></testcase><testcase classname="tests.test_sql_http_plan" name="test_changed_database_records_rejected[policy_versions-document-{}]" time="0.488"><error message="failed on setup with &quot;sql_http_driver.SafetyStop: HTTP acceptance condition failed&quot;">client = &lt;starlette.testclient.TestClient object at 0x7254799c7df0&gt;
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x7254780faf90&gt;
+
+    @pytest.fixture
+    def local_workflow(client, monkeypatch):
+        from app import main
+        from app.config import settings
+        from app.models import Audit, Base, Policy
+        from app.providers import ProviderUnavailable
+        import app.azure_sql
+        import inventory_azure_sql
+        import test_azure_sql_writes
+    
+        data = manifest()
+        monkeypatch.setattr(settings, "demo_accounts_json", json.dumps(driver.demo_accounts(data["run_id"], data["tokens"])))
+        monkeypatch.setattr(settings, "adls_account_url", "")
+        monkeypatch.setattr(main.providers, "upload_report", Mock(side_effect=ProviderUnavailable("fixture disabled")))
+        dependency = main.app.dependency_overrides[main.get_database]()
+        session = next(dependency)
+        engine = session.bind
+        session.add_all(
+            [
+                Policy(id=str(uuid4()), tenant="preexisting", name="Existing fixture", draft="{}"),
+                Audit(id=str(uuid4()), tenant="preexisting", actor="fixture", action="fixture", resource="fixture"),
+            ]
+        )
+        session.commit()
+        session.close()
+        dependency.close()
+    
+        def existing_rows():
+            with engine.connect() as connection:
+                return {
+                    model.__tablename__: [
+                        dict(row)
+                        for row in connection.execute(select(*model.__table__.columns).where(model.tenant == "preexisting")).mappings()
+                    ]
+                    for model in test_azure_sql_writes.MODELS
+                }
+    
+        baseline = existing_rows()
+    
+        class LocalTransport:
+            def request(self, method, path, **kwargs):
+                response = client.request(method, path, **kwargs)
+                if path == "/api/settings" and response.status_code == 200:
+                    content = response.json()
+                    content.update(database="mssql", azure_generation="BLOCKED", moderation="BLOCKED")
+                    return driver.httpx.Response(200, json=content)
+                return response
+    
+        monkeypatch.setattr(app.azure_sql, "create_azure_sql_engine", lambda *_: engine)
+        monkeypatch.setattr(engine, "dispose", lambda: None)
+        monkeypatch.setattr(test_azure_sql_writes, "preflight", lambda *_: None)
+        monkeypatch.setattr(inventory_azure_sql, "install_query_timeout", lambda *_: None)
+        assert all(value == 0 for value in driver.sql_check(data, before=True).values())
+        data["http_test"] = {"operations": []}
+        snapshots = []
+        runner = driver.Driver(LocalTransport(), data, lambda: snapshots.append(copy.deepcopy(data)))
+        runner.workflows()
+&gt;       assert driver.sql_check(data, before=False) == driver.EXPECTED_COUNTS
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend/tests/test_sql_http_plan.py:196: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/test_azure_sql_http.py:734: in sql_check
+    verify_retained(connection, manifest, MODELS)
+scripts/test_azure_sql_http.py:222: in verify_retained
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False
+
+    def require(condition):
+        if not condition:
+&gt;           raise SafetyStop("HTTP acceptance condition failed")
+E           sql_http_driver.SafetyStop: HTTP acceptance condition failed
+
+scripts/test_azure_sql_http.py:31: SafetyStop</error></testcase><testcase classname="tests.test_sql_http_plan" name="test_changed_database_records_rejected[policy_versions-number-9]" time="0.389"><error message="failed on setup with &quot;sql_http_driver.SafetyStop: HTTP acceptance condition failed&quot;">client = &lt;starlette.testclient.TestClient object at 0x7254799c69c0&gt;
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x7254780f87c0&gt;
+
+    @pytest.fixture
+    def local_workflow(client, monkeypatch):
+        from app import main
+        from app.config import settings
+        from app.models import Audit, Base, Policy
+        from app.providers import ProviderUnavailable
+        import app.azure_sql
+        import inventory_azure_sql
+        import test_azure_sql_writes
+    
+        data = manifest()
+        monkeypatch.setattr(settings, "demo_accounts_json", json.dumps(driver.demo_accounts(data["run_id"], data["tokens"])))
+        monkeypatch.setattr(settings, "adls_account_url", "")
+        monkeypatch.setattr(main.providers, "upload_report", Mock(side_effect=ProviderUnavailable("fixture disabled")))
+        dependency = main.app.dependency_overrides[main.get_database]()
+        session = next(dependency)
+        engine = session.bind
+        session.add_all(
+            [
+                Policy(id=str(uuid4()), tenant="preexisting", name="Existing fixture", draft="{}"),
+                Audit(id=str(uuid4()), tenant="preexisting", actor="fixture", action="fixture", resource="fixture"),
+            ]
+        )
+        session.commit()
+        session.close()
+        dependency.close()
+    
+        def existing_rows():
+            with engine.connect() as connection:
+                return {
+                    model.__tablename__: [
+                        dict(row)
+                        for row in connection.execute(select(*model.__table__.columns).where(model.tenant == "preexisting")).mappings()
+                    ]
+                    for model in test_azure_sql_writes.MODELS
+                }
+    
+        baseline = existing_rows()
+    
+        class LocalTransport:
+            def request(self, method, path, **kwargs):
+                response = client.request(method, path, **kwargs)
+                if path == "/api/settings" and response.status_code == 200:
+                    content = response.json()
+                    content.update(database="mssql", azure_generation="BLOCKED", moderation="BLOCKED")
+                    return driver.httpx.Response(200, json=content)
+                return response
+    
+        monkeypatch.setattr(app.azure_sql, "create_azure_sql_engine", lambda *_: engine)
+        monkeypatch.setattr(engine, "dispose", lambda: None)
+        monkeypatch.setattr(test_azure_sql_writes, "preflight", lambda *_: None)
+        monkeypatch.setattr(inventory_azure_sql, "install_query_timeout", lambda *_: None)
+        assert all(value == 0 for value in driver.sql_check(data, before=True).values())
+        data["http_test"] = {"operations": []}
+        snapshots = []
+        runner = driver.Driver(LocalTransport(), data, lambda: snapshots.append(copy.deepcopy(data)))
+        runner.workflows()
+&gt;       assert driver.sql_check(data, before=False) == driver.EXPECTED_COUNTS
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend/tests/test_sql_http_plan.py:196: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/test_azure_sql_http.py:734: in sql_check
+    verify_retained(connection, manifest, MODELS)
+scripts/test_azure_sql_http.py:222: in verify_retained
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False
+
+    def require(condition):
+        if not condition:
+&gt;           raise SafetyStop("HTTP acceptance condition failed")
+E           sql_http_driver.SafetyStop: HTTP acceptance condition failed
+
+scripts/test_azure_sql_http.py:31: SafetyStop</error></testcase><testcase classname="tests.test_sql_http_plan" name="test_changed_database_records_rejected[policy_versions-policy_id-foreign-policy]" time="0.452"><error message="failed on setup with &quot;sql_http_driver.SafetyStop: HTTP acceptance condition failed&quot;">client = &lt;starlette.testclient.TestClient object at 0x7254799c4af0&gt;
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x72547b141470&gt;
+
+    @pytest.fixture
+    def local_workflow(client, monkeypatch):
+        from app import main
+        from app.config import settings
+        from app.models import Audit, Base, Policy
+        from app.providers import ProviderUnavailable
+        import app.azure_sql
+        import inventory_azure_sql
+        import test_azure_sql_writes
+    
+        data = manifest()
+        monkeypatch.setattr(settings, "demo_accounts_json", json.dumps(driver.demo_accounts(data["run_id"], data["tokens"])))
+        monkeypatch.setattr(settings, "adls_account_url", "")
+        monkeypatch.setattr(main.providers, "upload_report", Mock(side_effect=ProviderUnavailable("fixture disabled")))
+        dependency = main.app.dependency_overrides[main.get_database]()
+        session = next(dependency)
+        engine = session.bind
+        session.add_all(
+            [
+                Policy(id=str(uuid4()), tenant="preexisting", name="Existing fixture", draft="{}"),
+                Audit(id=str(uuid4()), tenant="preexisting", actor="fixture", action="fixture", resource="fixture"),
+            ]
+        )
+        session.commit()
+        session.close()
+        dependency.close()
+    
+        def existing_rows():
+            with engine.connect() as connection:
+                return {
+                    model.__tablename__: [
+                        dict(row)
+                        for row in connection.execute(select(*model.__table__.columns).where(model.tenant == "preexisting")).mappings()
+                    ]
+                    for model in test_azure_sql_writes.MODELS
+                }
+    
+        baseline = existing_rows()
+    
+        class LocalTransport:
+            def request(self, method, path, **kwargs):
+                response = client.request(method, path, **kwargs)
+                if path == "/api/settings" and response.status_code == 200:
+                    content = response.json()
+                    content.update(database="mssql", azure_generation="BLOCKED", moderation="BLOCKED")
+                    return driver.httpx.Response(200, json=content)
+                return response
+    
+        monkeypatch.setattr(app.azure_sql, "create_azure_sql_engine", lambda *_: engine)
+        monkeypatch.setattr(engine, "dispose", lambda: None)
+        monkeypatch.setattr(test_azure_sql_writes, "preflight", lambda *_: None)
+        monkeypatch.setattr(inventory_azure_sql, "install_query_timeout", lambda *_: None)
+        assert all(value == 0 for value in driver.sql_check(data, before=True).values())
+        data["http_test"] = {"operations": []}
+        snapshots = []
+        runner = driver.Driver(LocalTransport(), data, lambda: snapshots.append(copy.deepcopy(data)))
+        runner.workflows()
+&gt;       assert driver.sql_check(data, before=False) == driver.EXPECTED_COUNTS
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend/tests/test_sql_http_plan.py:196: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/test_azure_sql_http.py:734: in sql_check
+    verify_retained(connection, manifest, MODELS)
+scripts/test_azure_sql_http.py:222: in verify_retained
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False
+
+    def require(condition):
+        if not condition:
+&gt;           raise SafetyStop("HTTP acceptance condition failed")
+E           sql_http_driver.SafetyStop: HTTP acceptance condition failed
+
+scripts/test_azure_sql_http.py:31: SafetyStop</error></testcase><testcase classname="tests.test_sql_http_plan" name="test_changed_database_records_rejected[active_policy_assignments-version_id-foreign-version]" time="0.541"><error message="failed on setup with &quot;sql_http_driver.SafetyStop: HTTP acceptance condition failed&quot;">client = &lt;starlette.testclient.TestClient object at 0x7254799c4160&gt;
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x72547c156e40&gt;
+
+    @pytest.fixture
+    def local_workflow(client, monkeypatch):
+        from app import main
+        from app.config import settings
+        from app.models import Audit, Base, Policy
+        from app.providers import ProviderUnavailable
+        import app.azure_sql
+        import inventory_azure_sql
+        import test_azure_sql_writes
+    
+        data = manifest()
+        monkeypatch.setattr(settings, "demo_accounts_json", json.dumps(driver.demo_accounts(data["run_id"], data["tokens"])))
+        monkeypatch.setattr(settings, "adls_account_url", "")
+        monkeypatch.setattr(main.providers, "upload_report", Mock(side_effect=ProviderUnavailable("fixture disabled")))
+        dependency = main.app.dependency_overrides[main.get_database]()
+        session = next(dependency)
+        engine = session.bind
+        session.add_all(
+            [
+                Policy(id=str(uuid4()), tenant="preexisting", name="Existing fixture", draft="{}"),
+                Audit(id=str(uuid4()), tenant="preexisting", actor="fixture", action="fixture", resource="fixture"),
+            ]
+        )
+        session.commit()
+        session.close()
+        dependency.close()
+    
+        def existing_rows():
+            with engine.connect() as connection:
+                return {
+                    model.__tablename__: [
+                        dict(row)
+                        for row in connection.execute(select(*model.__table__.columns).where(model.tenant == "preexisting")).mappings()
+                    ]
+                    for model in test_azure_sql_writes.MODELS
+                }
+    
+        baseline = existing_rows()
+    
+        class LocalTransport:
+            def request(self, method, path, **kwargs):
+                response = client.request(method, path, **kwargs)
+                if path == "/api/settings" and response.status_code == 200:
+                    content = response.json()
+                    content.update(database="mssql", azure_generation="BLOCKED", moderation="BLOCKED")
+                    return driver.httpx.Response(200, json=content)
+                return response
+    
+        monkeypatch.setattr(app.azure_sql, "create_azure_sql_engine", lambda *_: engine)
+        monkeypatch.setattr(engine, "dispose", lambda: None)
+        monkeypatch.setattr(test_azure_sql_writes, "preflight", lambda *_: None)
+        monkeypatch.setattr(inventory_azure_sql, "install_query_timeout", lambda *_: None)
+        assert all(value == 0 for value in driver.sql_check(data, before=True).values())
+        data["http_test"] = {"operations": []}
+        snapshots = []
+        runner = driver.Driver(LocalTransport(), data, lambda: snapshots.append(copy.deepcopy(data)))
+        runner.workflows()
+&gt;       assert driver.sql_check(data, before=False) == driver.EXPECTED_COUNTS
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend/tests/test_sql_http_plan.py:196: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/test_azure_sql_http.py:734: in sql_check
+    verify_retained(connection, manifest, MODELS)
+scripts/test_azure_sql_http.py:222: in verify_retained
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False
+
+    def require(condition):
+        if not condition:
+&gt;           raise SafetyStop("HTTP acceptance condition failed")
+E           sql_http_driver.SafetyStop: HTTP acceptance condition failed
+
+scripts/test_azure_sql_http.py:31: SafetyStop</error></testcase><testcase classname="tests.test_sql_http_plan" name="test_changed_database_records_rejected[validation_executions-policy_id-foreign-policy]" time="0.386"><error message="failed on setup with &quot;sql_http_driver.SafetyStop: HTTP acceptance condition failed&quot;">client = &lt;starlette.testclient.TestClient object at 0x72547a6ce360&gt;
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x72547b2b73f0&gt;
+
+    @pytest.fixture
+    def local_workflow(client, monkeypatch):
+        from app import main
+        from app.config import settings
+        from app.models import Audit, Base, Policy
+        from app.providers import ProviderUnavailable
+        import app.azure_sql
+        import inventory_azure_sql
+        import test_azure_sql_writes
+    
+        data = manifest()
+        monkeypatch.setattr(settings, "demo_accounts_json", json.dumps(driver.demo_accounts(data["run_id"], data["tokens"])))
+        monkeypatch.setattr(settings, "adls_account_url", "")
+        monkeypatch.setattr(main.providers, "upload_report", Mock(side_effect=ProviderUnavailable("fixture disabled")))
+        dependency = main.app.dependency_overrides[main.get_database]()
+        session = next(dependency)
+        engine = session.bind
+        session.add_all(
+            [
+                Policy(id=str(uuid4()), tenant="preexisting", name="Existing fixture", draft="{}"),
+                Audit(id=str(uuid4()), tenant="preexisting", actor="fixture", action="fixture", resource="fixture"),
+            ]
+        )
+        session.commit()
+        session.close()
+        dependency.close()
+    
+        def existing_rows():
+            with engine.connect() as connection:
+                return {
+                    model.__tablename__: [
+                        dict(row)
+                        for row in connection.execute(select(*model.__table__.columns).where(model.tenant == "preexisting")).mappings()
+                    ]
+                    for model in test_azure_sql_writes.MODELS
+                }
+    
+        baseline = existing_rows()
+    
+        class LocalTransport:
+            def request(self, method, path, **kwargs):
+                response = client.request(method, path, **kwargs)
+                if path == "/api/settings" and response.status_code == 200:
+                    content = response.json()
+                    content.update(database="mssql", azure_generation="BLOCKED", moderation="BLOCKED")
+                    return driver.httpx.Response(200, json=content)
+                return response
+    
+        monkeypatch.setattr(app.azure_sql, "create_azure_sql_engine", lambda *_: engine)
+        monkeypatch.setattr(engine, "dispose", lambda: None)
+        monkeypatch.setattr(test_azure_sql_writes, "preflight", lambda *_: None)
+        monkeypatch.setattr(inventory_azure_sql, "install_query_timeout", lambda *_: None)
+        assert all(value == 0 for value in driver.sql_check(data, before=True).values())
+        data["http_test"] = {"operations": []}
+        snapshots = []
+        runner = driver.Driver(LocalTransport(), data, lambda: snapshots.append(copy.deepcopy(data)))
+        runner.workflows()
+&gt;       assert driver.sql_check(data, before=False) == driver.EXPECTED_COUNTS
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend/tests/test_sql_http_plan.py:196: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/test_azure_sql_http.py:734: in sql_check
+    verify_retained(connection, manifest, MODELS)
+scripts/test_azure_sql_http.py:222: in verify_retained
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False
+
+    def require(condition):
+        if not condition:
+&gt;           raise SafetyStop("HTTP acceptance condition failed")
+E           sql_http_driver.SafetyStop: HTTP acceptance condition failed
+
+scripts/test_azure_sql_http.py:31: SafetyStop</error></testcase><testcase classname="tests.test_sql_http_plan" name="test_changed_database_records_rejected[validation_executions-version-9]" time="0.468"><error message="failed on setup with &quot;sql_http_driver.SafetyStop: HTTP acceptance condition failed&quot;">client = &lt;starlette.testclient.TestClient object at 0x72547b737130&gt;
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x72547850bee0&gt;
+
+    @pytest.fixture
+    def local_workflow(client, monkeypatch):
+        from app import main
+        from app.config import settings
+        from app.models import Audit, Base, Policy
+        from app.providers import ProviderUnavailable
+        import app.azure_sql
+        import inventory_azure_sql
+        import test_azure_sql_writes
+    
+        data = manifest()
+        monkeypatch.setattr(settings, "demo_accounts_json", json.dumps(driver.demo_accounts(data["run_id"], data["tokens"])))
+        monkeypatch.setattr(settings, "adls_account_url", "")
+        monkeypatch.setattr(main.providers, "upload_report", Mock(side_effect=ProviderUnavailable("fixture disabled")))
+        dependency = main.app.dependency_overrides[main.get_database]()
+        session = next(dependency)
+        engine = session.bind
+        session.add_all(
+            [
+                Policy(id=str(uuid4()), tenant="preexisting", name="Existing fixture", draft="{}"),
+                Audit(id=str(uuid4()), tenant="preexisting", actor="fixture", action="fixture", resource="fixture"),
+            ]
+        )
+        session.commit()
+        session.close()
+        dependency.close()
+    
+        def existing_rows():
+            with engine.connect() as connection:
+                return {
+                    model.__tablename__: [
+                        dict(row)
+                        for row in connection.execute(select(*model.__table__.columns).where(model.tenant == "preexisting")).mappings()
+                    ]
+                    for model in test_azure_sql_writes.MODELS
+                }
+    
+        baseline = existing_rows()
+    
+        class LocalTransport:
+            def request(self, method, path, **kwargs):
+                response = client.request(method, path, **kwargs)
+                if path == "/api/settings" and response.status_code == 200:
+                    content = response.json()
+                    content.update(database="mssql", azure_generation="BLOCKED", moderation="BLOCKED")
+                    return driver.httpx.Response(200, json=content)
+                return response
+    
+        monkeypatch.setattr(app.azure_sql, "create_azure_sql_engine", lambda *_: engine)
+        monkeypatch.setattr(engine, "dispose", lambda: None)
+        monkeypatch.setattr(test_azure_sql_writes, "preflight", lambda *_: None)
+        monkeypatch.setattr(inventory_azure_sql, "install_query_timeout", lambda *_: None)
+        assert all(value == 0 for value in driver.sql_check(data, before=True).values())
+        data["http_test"] = {"operations": []}
+        snapshots = []
+        runner = driver.Driver(LocalTransport(), data, lambda: snapshots.append(copy.deepcopy(data)))
+        runner.workflows()
+&gt;       assert driver.sql_check(data, before=False) == driver.EXPECTED_COUNTS
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend/tests/test_sql_http_plan.py:196: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/test_azure_sql_http.py:734: in sql_check
+    verify_retained(connection, manifest, MODELS)
+scripts/test_azure_sql_http.py:222: in verify_retained
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False
+
+    def require(condition):
+        if not condition:
+&gt;           raise SafetyStop("HTTP acceptance condition failed")
+E           sql_http_driver.SafetyStop: HTTP acceptance condition failed
+
+scripts/test_azure_sql_http.py:31: SafetyStop</error></testcase><testcase classname="tests.test_sql_http_plan" name="test_changed_database_records_rejected[human_review_cases-execution_id-foreign-execution]" time="0.440"><error message="failed on setup with &quot;sql_http_driver.SafetyStop: HTTP acceptance condition failed&quot;">client = &lt;starlette.testclient.TestClient object at 0x7254799c6be0&gt;
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x7254789122e0&gt;
+
+    @pytest.fixture
+    def local_workflow(client, monkeypatch):
+        from app import main
+        from app.config import settings
+        from app.models import Audit, Base, Policy
+        from app.providers import ProviderUnavailable
+        import app.azure_sql
+        import inventory_azure_sql
+        import test_azure_sql_writes
+    
+        data = manifest()
+        monkeypatch.setattr(settings, "demo_accounts_json", json.dumps(driver.demo_accounts(data["run_id"], data["tokens"])))
+        monkeypatch.setattr(settings, "adls_account_url", "")
+        monkeypatch.setattr(main.providers, "upload_report", Mock(side_effect=ProviderUnavailable("fixture disabled")))
+        dependency = main.app.dependency_overrides[main.get_database]()
+        session = next(dependency)
+        engine = session.bind
+        session.add_all(
+            [
+                Policy(id=str(uuid4()), tenant="preexisting", name="Existing fixture", draft="{}"),
+                Audit(id=str(uuid4()), tenant="preexisting", actor="fixture", action="fixture", resource="fixture"),
+            ]
+        )
+        session.commit()
+        session.close()
+        dependency.close()
+    
+        def existing_rows():
+            with engine.connect() as connection:
+                return {
+                    model.__tablename__: [
+                        dict(row)
+                        for row in connection.execute(select(*model.__table__.columns).where(model.tenant == "preexisting")).mappings()
+                    ]
+                    for model in test_azure_sql_writes.MODELS
+                }
+    
+        baseline = existing_rows()
+    
+        class LocalTransport:
+            def request(self, method, path, **kwargs):
+                response = client.request(method, path, **kwargs)
+                if path == "/api/settings" and response.status_code == 200:
+                    content = response.json()
+                    content.update(database="mssql", azure_generation="BLOCKED", moderation="BLOCKED")
+                    return driver.httpx.Response(200, json=content)
+                return response
+    
+        monkeypatch.setattr(app.azure_sql, "create_azure_sql_engine", lambda *_: engine)
+        monkeypatch.setattr(engine, "dispose", lambda: None)
+        monkeypatch.setattr(test_azure_sql_writes, "preflight", lambda *_: None)
+        monkeypatch.setattr(inventory_azure_sql, "install_query_timeout", lambda *_: None)
+        assert all(value == 0 for value in driver.sql_check(data, before=True).values())
+        data["http_test"] = {"operations": []}
+        snapshots = []
+        runner = driver.Driver(LocalTransport(), data, lambda: snapshots.append(copy.deepcopy(data)))
+        runner.workflows()
+&gt;       assert driver.sql_check(data, before=False) == driver.EXPECTED_COUNTS
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend/tests/test_sql_http_plan.py:196: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/test_azure_sql_http.py:734: in sql_check
+    verify_retained(connection, manifest, MODELS)
+scripts/test_azure_sql_http.py:222: in verify_retained
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False
+
+    def require(condition):
+        if not condition:
+&gt;           raise SafetyStop("HTTP acceptance condition failed")
+E           sql_http_driver.SafetyStop: HTTP acceptance condition failed
+
+scripts/test_azure_sql_http.py:31: SafetyStop</error></testcase><testcase classname="tests.test_sql_http_plan" name="test_changed_database_records_rejected[human_review_cases-row_version-9]" time="0.442"><error message="failed on setup with &quot;sql_http_driver.SafetyStop: HTTP acceptance condition failed&quot;">client = &lt;starlette.testclient.TestClient object at 0x7254799c7350&gt;
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x725478da2970&gt;
+
+    @pytest.fixture
+    def local_workflow(client, monkeypatch):
+        from app import main
+        from app.config import settings
+        from app.models import Audit, Base, Policy
+        from app.providers import ProviderUnavailable
+        import app.azure_sql
+        import inventory_azure_sql
+        import test_azure_sql_writes
+    
+        data = manifest()
+        monkeypatch.setattr(settings, "demo_accounts_json", json.dumps(driver.demo_accounts(data["run_id"], data["tokens"])))
+        monkeypatch.setattr(settings, "adls_account_url", "")
+        monkeypatch.setattr(main.providers, "upload_report", Mock(side_effect=ProviderUnavailable("fixture disabled")))
+        dependency = main.app.dependency_overrides[main.get_database]()
+        session = next(dependency)
+        engine = session.bind
+        session.add_all(
+            [
+                Policy(id=str(uuid4()), tenant="preexisting", name="Existing fixture", draft="{}"),
+                Audit(id=str(uuid4()), tenant="preexisting", actor="fixture", action="fixture", resource="fixture"),
+            ]
+        )
+        session.commit()
+        session.close()
+        dependency.close()
+    
+        def existing_rows():
+            with engine.connect() as connection:
+                return {
+                    model.__tablename__: [
+                        dict(row)
+                        for row in connection.execute(select(*model.__table__.columns).where(model.tenant == "preexisting")).mappings()
+                    ]
+                    for model in test_azure_sql_writes.MODELS
+                }
+    
+        baseline = existing_rows()
+    
+        class LocalTransport:
+            def request(self, method, path, **kwargs):
+                response = client.request(method, path, **kwargs)
+                if path == "/api/settings" and response.status_code == 200:
+                    content = response.json()
+                    content.update(database="mssql", azure_generation="BLOCKED", moderation="BLOCKED")
+                    return driver.httpx.Response(200, json=content)
+                return response
+    
+        monkeypatch.setattr(app.azure_sql, "create_azure_sql_engine", lambda *_: engine)
+        monkeypatch.setattr(engine, "dispose", lambda: None)
+        monkeypatch.setattr(test_azure_sql_writes, "preflight", lambda *_: None)
+        monkeypatch.setattr(inventory_azure_sql, "install_query_timeout", lambda *_: None)
+        assert all(value == 0 for value in driver.sql_check(data, before=True).values())
+        data["http_test"] = {"operations": []}
+        snapshots = []
+        runner = driver.Driver(LocalTransport(), data, lambda: snapshots.append(copy.deepcopy(data)))
+        runner.workflows()
+&gt;       assert driver.sql_check(data, before=False) == driver.EXPECTED_COUNTS
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend/tests/test_sql_http_plan.py:196: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/test_azure_sql_http.py:734: in sql_check
+    verify_retained(connection, manifest, MODELS)
+scripts/test_azure_sql_http.py:222: in verify_retained
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False
+
+    def require(condition):
+        if not condition:
+&gt;           raise SafetyStop("HTTP acceptance condition failed")
+E           sql_http_driver.SafetyStop: HTTP acceptance condition failed
+
+scripts/test_azure_sql_http.py:31: SafetyStop</error></testcase><testcase classname="tests.test_sql_http_plan" name="test_changed_database_records_rejected[feedback_records-execution_id-foreign-execution]" time="0.374"><error message="failed on setup with &quot;sql_http_driver.SafetyStop: HTTP acceptance condition failed&quot;">client = &lt;starlette.testclient.TestClient object at 0x7254799c6250&gt;
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x72547af651d0&gt;
+
+    @pytest.fixture
+    def local_workflow(client, monkeypatch):
+        from app import main
+        from app.config import settings
+        from app.models import Audit, Base, Policy
+        from app.providers import ProviderUnavailable
+        import app.azure_sql
+        import inventory_azure_sql
+        import test_azure_sql_writes
+    
+        data = manifest()
+        monkeypatch.setattr(settings, "demo_accounts_json", json.dumps(driver.demo_accounts(data["run_id"], data["tokens"])))
+        monkeypatch.setattr(settings, "adls_account_url", "")
+        monkeypatch.setattr(main.providers, "upload_report", Mock(side_effect=ProviderUnavailable("fixture disabled")))
+        dependency = main.app.dependency_overrides[main.get_database]()
+        session = next(dependency)
+        engine = session.bind
+        session.add_all(
+            [
+                Policy(id=str(uuid4()), tenant="preexisting", name="Existing fixture", draft="{}"),
+                Audit(id=str(uuid4()), tenant="preexisting", actor="fixture", action="fixture", resource="fixture"),
+            ]
+        )
+        session.commit()
+        session.close()
+        dependency.close()
+    
+        def existing_rows():
+            with engine.connect() as connection:
+                return {
+                    model.__tablename__: [
+                        dict(row)
+                        for row in connection.execute(select(*model.__table__.columns).where(model.tenant == "preexisting")).mappings()
+                    ]
+                    for model in test_azure_sql_writes.MODELS
+                }
+    
+        baseline = existing_rows()
+    
+        class LocalTransport:
+            def request(self, method, path, **kwargs):
+                response = client.request(method, path, **kwargs)
+                if path == "/api/settings" and response.status_code == 200:
+                    content = response.json()
+                    content.update(database="mssql", azure_generation="BLOCKED", moderation="BLOCKED")
+                    return driver.httpx.Response(200, json=content)
+                return response
+    
+        monkeypatch.setattr(app.azure_sql, "create_azure_sql_engine", lambda *_: engine)
+        monkeypatch.setattr(engine, "dispose", lambda: None)
+        monkeypatch.setattr(test_azure_sql_writes, "preflight", lambda *_: None)
+        monkeypatch.setattr(inventory_azure_sql, "install_query_timeout", lambda *_: None)
+        assert all(value == 0 for value in driver.sql_check(data, before=True).values())
+        data["http_test"] = {"operations": []}
+        snapshots = []
+        runner = driver.Driver(LocalTransport(), data, lambda: snapshots.append(copy.deepcopy(data)))
+        runner.workflows()
+&gt;       assert driver.sql_check(data, before=False) == driver.EXPECTED_COUNTS
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend/tests/test_sql_http_plan.py:196: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/test_azure_sql_http.py:734: in sql_check
+    verify_retained(connection, manifest, MODELS)
+scripts/test_azure_sql_http.py:222: in verify_retained
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False
+
+    def require(condition):
+        if not condition:
+&gt;           raise SafetyStop("HTTP acceptance condition failed")
+E           sql_http_driver.SafetyStop: HTTP acceptance condition failed
+
+scripts/test_azure_sql_http.py:31: SafetyStop</error></testcase><testcase classname="tests.test_sql_http_plan" name="test_changed_database_records_rejected[feedback_records-rating-4]" time="0.549"><error message="failed on setup with &quot;sql_http_driver.SafetyStop: HTTP acceptance condition failed&quot;">client = &lt;starlette.testclient.TestClient object at 0x7254799c69c0&gt;
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x725478b1cfa0&gt;
+
+    @pytest.fixture
+    def local_workflow(client, monkeypatch):
+        from app import main
+        from app.config import settings
+        from app.models import Audit, Base, Policy
+        from app.providers import ProviderUnavailable
+        import app.azure_sql
+        import inventory_azure_sql
+        import test_azure_sql_writes
+    
+        data = manifest()
+        monkeypatch.setattr(settings, "demo_accounts_json", json.dumps(driver.demo_accounts(data["run_id"], data["tokens"])))
+        monkeypatch.setattr(settings, "adls_account_url", "")
+        monkeypatch.setattr(main.providers, "upload_report", Mock(side_effect=ProviderUnavailable("fixture disabled")))
+        dependency = main.app.dependency_overrides[main.get_database]()
+        session = next(dependency)
+        engine = session.bind
+        session.add_all(
+            [
+                Policy(id=str(uuid4()), tenant="preexisting", name="Existing fixture", draft="{}"),
+                Audit(id=str(uuid4()), tenant="preexisting", actor="fixture", action="fixture", resource="fixture"),
+            ]
+        )
+        session.commit()
+        session.close()
+        dependency.close()
+    
+        def existing_rows():
+            with engine.connect() as connection:
+                return {
+                    model.__tablename__: [
+                        dict(row)
+                        for row in connection.execute(select(*model.__table__.columns).where(model.tenant == "preexisting")).mappings()
+                    ]
+                    for model in test_azure_sql_writes.MODELS
+                }
+    
+        baseline = existing_rows()
+    
+        class LocalTransport:
+            def request(self, method, path, **kwargs):
+                response = client.request(method, path, **kwargs)
+                if path == "/api/settings" and response.status_code == 200:
+                    content = response.json()
+                    content.update(database="mssql", azure_generation="BLOCKED", moderation="BLOCKED")
+                    return driver.httpx.Response(200, json=content)
+                return response
+    
+        monkeypatch.setattr(app.azure_sql, "create_azure_sql_engine", lambda *_: engine)
+        monkeypatch.setattr(engine, "dispose", lambda: None)
+        monkeypatch.setattr(test_azure_sql_writes, "preflight", lambda *_: None)
+        monkeypatch.setattr(inventory_azure_sql, "install_query_timeout", lambda *_: None)
+        assert all(value == 0 for value in driver.sql_check(data, before=True).values())
+        data["http_test"] = {"operations": []}
+        snapshots = []
+        runner = driver.Driver(LocalTransport(), data, lambda: snapshots.append(copy.deepcopy(data)))
+        runner.workflows()
+&gt;       assert driver.sql_check(data, before=False) == driver.EXPECTED_COUNTS
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend/tests/test_sql_http_plan.py:196: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/test_azure_sql_http.py:734: in sql_check
+    verify_retained(connection, manifest, MODELS)
+scripts/test_azure_sql_http.py:222: in verify_retained
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False
+
+    def require(condition):
+        if not condition:
+&gt;           raise SafetyStop("HTTP acceptance condition failed")
+E           sql_http_driver.SafetyStop: HTTP acceptance condition failed
+
+scripts/test_azure_sql_http.py:31: SafetyStop</error></testcase><testcase classname="tests.test_sql_http_plan" name="test_changed_database_records_rejected[evaluation_exports-status-SUCCEEDED]" time="0.447"><error message="failed on setup with &quot;sql_http_driver.SafetyStop: HTTP acceptance condition failed&quot;">client = &lt;starlette.testclient.TestClient object at 0x72547ab36be0&gt;
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x7254782681a0&gt;
+
+    @pytest.fixture
+    def local_workflow(client, monkeypatch):
+        from app import main
+        from app.config import settings
+        from app.models import Audit, Base, Policy
+        from app.providers import ProviderUnavailable
+        import app.azure_sql
+        import inventory_azure_sql
+        import test_azure_sql_writes
+    
+        data = manifest()
+        monkeypatch.setattr(settings, "demo_accounts_json", json.dumps(driver.demo_accounts(data["run_id"], data["tokens"])))
+        monkeypatch.setattr(settings, "adls_account_url", "")
+        monkeypatch.setattr(main.providers, "upload_report", Mock(side_effect=ProviderUnavailable("fixture disabled")))
+        dependency = main.app.dependency_overrides[main.get_database]()
+        session = next(dependency)
+        engine = session.bind
+        session.add_all(
+            [
+                Policy(id=str(uuid4()), tenant="preexisting", name="Existing fixture", draft="{}"),
+                Audit(id=str(uuid4()), tenant="preexisting", actor="fixture", action="fixture", resource="fixture"),
+            ]
+        )
+        session.commit()
+        session.close()
+        dependency.close()
+    
+        def existing_rows():
+            with engine.connect() as connection:
+                return {
+                    model.__tablename__: [
+                        dict(row)
+                        for row in connection.execute(select(*model.__table__.columns).where(model.tenant == "preexisting")).mappings()
+                    ]
+                    for model in test_azure_sql_writes.MODELS
+                }
+    
+        baseline = existing_rows()
+    
+        class LocalTransport:
+            def request(self, method, path, **kwargs):
+                response = client.request(method, path, **kwargs)
+                if path == "/api/settings" and response.status_code == 200:
+                    content = response.json()
+                    content.update(database="mssql", azure_generation="BLOCKED", moderation="BLOCKED")
+                    return driver.httpx.Response(200, json=content)
+                return response
+    
+        monkeypatch.setattr(app.azure_sql, "create_azure_sql_engine", lambda *_: engine)
+        monkeypatch.setattr(engine, "dispose", lambda: None)
+        monkeypatch.setattr(test_azure_sql_writes, "preflight", lambda *_: None)
+        monkeypatch.setattr(inventory_azure_sql, "install_query_timeout", lambda *_: None)
+        assert all(value == 0 for value in driver.sql_check(data, before=True).values())
+        data["http_test"] = {"operations": []}
+        snapshots = []
+        runner = driver.Driver(LocalTransport(), data, lambda: snapshots.append(copy.deepcopy(data)))
+        runner.workflows()
+&gt;       assert driver.sql_check(data, before=False) == driver.EXPECTED_COUNTS
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend/tests/test_sql_http_plan.py:196: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/test_azure_sql_http.py:734: in sql_check
+    verify_retained(connection, manifest, MODELS)
+scripts/test_azure_sql_http.py:222: in verify_retained
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False
+
+    def require(condition):
+        if not condition:
+&gt;           raise SafetyStop("HTTP acceptance condition failed")
+E           sql_http_driver.SafetyStop: HTTP acceptance condition failed
+
+scripts/test_azure_sql_http.py:31: SafetyStop</error></testcase><testcase classname="tests.test_sql_http_plan" name="test_changed_database_records_rejected[audit_events-resource-foreign-resource]" time="0.584"><error message="failed on setup with &quot;sql_http_driver.SafetyStop: HTTP acceptance condition failed&quot;">client = &lt;starlette.testclient.TestClient object at 0x72547b737130&gt;
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x72547960f8c0&gt;
+
+    @pytest.fixture
+    def local_workflow(client, monkeypatch):
+        from app import main
+        from app.config import settings
+        from app.models import Audit, Base, Policy
+        from app.providers import ProviderUnavailable
+        import app.azure_sql
+        import inventory_azure_sql
+        import test_azure_sql_writes
+    
+        data = manifest()
+        monkeypatch.setattr(settings, "demo_accounts_json", json.dumps(driver.demo_accounts(data["run_id"], data["tokens"])))
+        monkeypatch.setattr(settings, "adls_account_url", "")
+        monkeypatch.setattr(main.providers, "upload_report", Mock(side_effect=ProviderUnavailable("fixture disabled")))
+        dependency = main.app.dependency_overrides[main.get_database]()
+        session = next(dependency)
+        engine = session.bind
+        session.add_all(
+            [
+                Policy(id=str(uuid4()), tenant="preexisting", name="Existing fixture", draft="{}"),
+                Audit(id=str(uuid4()), tenant="preexisting", actor="fixture", action="fixture", resource="fixture"),
+            ]
+        )
+        session.commit()
+        session.close()
+        dependency.close()
+    
+        def existing_rows():
+            with engine.connect() as connection:
+                return {
+                    model.__tablename__: [
+                        dict(row)
+                        for row in connection.execute(select(*model.__table__.columns).where(model.tenant == "preexisting")).mappings()
+                    ]
+                    for model in test_azure_sql_writes.MODELS
+                }
+    
+        baseline = existing_rows()
+    
+        class LocalTransport:
+            def request(self, method, path, **kwargs):
+                response = client.request(method, path, **kwargs)
+                if path == "/api/settings" and response.status_code == 200:
+                    content = response.json()
+                    content.update(database="mssql", azure_generation="BLOCKED", moderation="BLOCKED")
+                    return driver.httpx.Response(200, json=content)
+                return response
+    
+        monkeypatch.setattr(app.azure_sql, "create_azure_sql_engine", lambda *_: engine)
+        monkeypatch.setattr(engine, "dispose", lambda: None)
+        monkeypatch.setattr(test_azure_sql_writes, "preflight", lambda *_: None)
+        monkeypatch.setattr(inventory_azure_sql, "install_query_timeout", lambda *_: None)
+        assert all(value == 0 for value in driver.sql_check(data, before=True).values())
+        data["http_test"] = {"operations": []}
+        snapshots = []
+        runner = driver.Driver(LocalTransport(), data, lambda: snapshots.append(copy.deepcopy(data)))
+        runner.workflows()
+&gt;       assert driver.sql_check(data, before=False) == driver.EXPECTED_COUNTS
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend/tests/test_sql_http_plan.py:196: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/test_azure_sql_http.py:734: in sql_check
+    verify_retained(connection, manifest, MODELS)
+scripts/test_azure_sql_http.py:222: in verify_retained
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False
+
+    def require(condition):
+        if not condition:
+&gt;           raise SafetyStop("HTTP acceptance condition failed")
+E           sql_http_driver.SafetyStop: HTTP acceptance condition failed
+
+scripts/test_azure_sql_http.py:31: SafetyStop</error></testcase><testcase classname="tests.test_sql_http_plan" name="test_changed_database_records_rejected[audit_events-tenant-foreign-tenant]" time="0.552"><error message="failed on setup with &quot;sql_http_driver.SafetyStop: HTTP acceptance condition failed&quot;">client = &lt;starlette.testclient.TestClient object at 0x72547b7356a0&gt;
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x7254795e7150&gt;
+
+    @pytest.fixture
+    def local_workflow(client, monkeypatch):
+        from app import main
+        from app.config import settings
+        from app.models import Audit, Base, Policy
+        from app.providers import ProviderUnavailable
+        import app.azure_sql
+        import inventory_azure_sql
+        import test_azure_sql_writes
+    
+        data = manifest()
+        monkeypatch.setattr(settings, "demo_accounts_json", json.dumps(driver.demo_accounts(data["run_id"], data["tokens"])))
+        monkeypatch.setattr(settings, "adls_account_url", "")
+        monkeypatch.setattr(main.providers, "upload_report", Mock(side_effect=ProviderUnavailable("fixture disabled")))
+        dependency = main.app.dependency_overrides[main.get_database]()
+        session = next(dependency)
+        engine = session.bind
+        session.add_all(
+            [
+                Policy(id=str(uuid4()), tenant="preexisting", name="Existing fixture", draft="{}"),
+                Audit(id=str(uuid4()), tenant="preexisting", actor="fixture", action="fixture", resource="fixture"),
+            ]
+        )
+        session.commit()
+        session.close()
+        dependency.close()
+    
+        def existing_rows():
+            with engine.connect() as connection:
+                return {
+                    model.__tablename__: [
+                        dict(row)
+                        for row in connection.execute(select(*model.__table__.columns).where(model.tenant == "preexisting")).mappings()
+                    ]
+                    for model in test_azure_sql_writes.MODELS
+                }
+    
+        baseline = existing_rows()
+    
+        class LocalTransport:
+            def request(self, method, path, **kwargs):
+                response = client.request(method, path, **kwargs)
+                if path == "/api/settings" and response.status_code == 200:
+                    content = response.json()
+                    content.update(database="mssql", azure_generation="BLOCKED", moderation="BLOCKED")
+                    return driver.httpx.Response(200, json=content)
+                return response
+    
+        monkeypatch.setattr(app.azure_sql, "create_azure_sql_engine", lambda *_: engine)
+        monkeypatch.setattr(engine, "dispose", lambda: None)
+        monkeypatch.setattr(test_azure_sql_writes, "preflight", lambda *_: None)
+        monkeypatch.setattr(inventory_azure_sql, "install_query_timeout", lambda *_: None)
+        assert all(value == 0 for value in driver.sql_check(data, before=True).values())
+        data["http_test"] = {"operations": []}
+        snapshots = []
+        runner = driver.Driver(LocalTransport(), data, lambda: snapshots.append(copy.deepcopy(data)))
+        runner.workflows()
+&gt;       assert driver.sql_check(data, before=False) == driver.EXPECTED_COUNTS
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend/tests/test_sql_http_plan.py:196: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/test_azure_sql_http.py:734: in sql_check
+    verify_retained(connection, manifest, MODELS)
+scripts/test_azure_sql_http.py:222: in verify_retained
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False
+
+    def require(condition):
+        if not condition:
+&gt;           raise SafetyStop("HTTP acceptance condition failed")
+E           sql_http_driver.SafetyStop: HTTP acceptance condition failed
+
+scripts/test_azure_sql_http.py:31: SafetyStop</error></testcase><testcase classname="tests.test_sql_http_plan" name="test_missing_expected_record_rejected[policies]" time="0.424"><error message="failed on setup with &quot;sql_http_driver.SafetyStop: HTTP acceptance condition failed&quot;">client = &lt;starlette.testclient.TestClient object at 0x72547b7346b0&gt;
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x7254795e4130&gt;
+
+    @pytest.fixture
+    def local_workflow(client, monkeypatch):
+        from app import main
+        from app.config import settings
+        from app.models import Audit, Base, Policy
+        from app.providers import ProviderUnavailable
+        import app.azure_sql
+        import inventory_azure_sql
+        import test_azure_sql_writes
+    
+        data = manifest()
+        monkeypatch.setattr(settings, "demo_accounts_json", json.dumps(driver.demo_accounts(data["run_id"], data["tokens"])))
+        monkeypatch.setattr(settings, "adls_account_url", "")
+        monkeypatch.setattr(main.providers, "upload_report", Mock(side_effect=ProviderUnavailable("fixture disabled")))
+        dependency = main.app.dependency_overrides[main.get_database]()
+        session = next(dependency)
+        engine = session.bind
+        session.add_all(
+            [
+                Policy(id=str(uuid4()), tenant="preexisting", name="Existing fixture", draft="{}"),
+                Audit(id=str(uuid4()), tenant="preexisting", actor="fixture", action="fixture", resource="fixture"),
+            ]
+        )
+        session.commit()
+        session.close()
+        dependency.close()
+    
+        def existing_rows():
+            with engine.connect() as connection:
+                return {
+                    model.__tablename__: [
+                        dict(row)
+                        for row in connection.execute(select(*model.__table__.columns).where(model.tenant == "preexisting")).mappings()
+                    ]
+                    for model in test_azure_sql_writes.MODELS
+                }
+    
+        baseline = existing_rows()
+    
+        class LocalTransport:
+            def request(self, method, path, **kwargs):
+                response = client.request(method, path, **kwargs)
+                if path == "/api/settings" and response.status_code == 200:
+                    content = response.json()
+                    content.update(database="mssql", azure_generation="BLOCKED", moderation="BLOCKED")
+                    return driver.httpx.Response(200, json=content)
+                return response
+    
+        monkeypatch.setattr(app.azure_sql, "create_azure_sql_engine", lambda *_: engine)
+        monkeypatch.setattr(engine, "dispose", lambda: None)
+        monkeypatch.setattr(test_azure_sql_writes, "preflight", lambda *_: None)
+        monkeypatch.setattr(inventory_azure_sql, "install_query_timeout", lambda *_: None)
+        assert all(value == 0 for value in driver.sql_check(data, before=True).values())
+        data["http_test"] = {"operations": []}
+        snapshots = []
+        runner = driver.Driver(LocalTransport(), data, lambda: snapshots.append(copy.deepcopy(data)))
+        runner.workflows()
+&gt;       assert driver.sql_check(data, before=False) == driver.EXPECTED_COUNTS
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend/tests/test_sql_http_plan.py:196: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/test_azure_sql_http.py:734: in sql_check
+    verify_retained(connection, manifest, MODELS)
+scripts/test_azure_sql_http.py:222: in verify_retained
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False
+
+    def require(condition):
+        if not condition:
+&gt;           raise SafetyStop("HTTP acceptance condition failed")
+E           sql_http_driver.SafetyStop: HTTP acceptance condition failed
+
+scripts/test_azure_sql_http.py:31: SafetyStop</error></testcase><testcase classname="tests.test_sql_http_plan" name="test_missing_expected_record_rejected[policy_versions]" time="0.481"><error message="failed on setup with &quot;sql_http_driver.SafetyStop: HTTP acceptance condition failed&quot;">client = &lt;starlette.testclient.TestClient object at 0x72547ab37020&gt;
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x7254795e40c0&gt;
+
+    @pytest.fixture
+    def local_workflow(client, monkeypatch):
+        from app import main
+        from app.config import settings
+        from app.models import Audit, Base, Policy
+        from app.providers import ProviderUnavailable
+        import app.azure_sql
+        import inventory_azure_sql
+        import test_azure_sql_writes
+    
+        data = manifest()
+        monkeypatch.setattr(settings, "demo_accounts_json", json.dumps(driver.demo_accounts(data["run_id"], data["tokens"])))
+        monkeypatch.setattr(settings, "adls_account_url", "")
+        monkeypatch.setattr(main.providers, "upload_report", Mock(side_effect=ProviderUnavailable("fixture disabled")))
+        dependency = main.app.dependency_overrides[main.get_database]()
+        session = next(dependency)
+        engine = session.bind
+        session.add_all(
+            [
+                Policy(id=str(uuid4()), tenant="preexisting", name="Existing fixture", draft="{}"),
+                Audit(id=str(uuid4()), tenant="preexisting", actor="fixture", action="fixture", resource="fixture"),
+            ]
+        )
+        session.commit()
+        session.close()
+        dependency.close()
+    
+        def existing_rows():
+            with engine.connect() as connection:
+                return {
+                    model.__tablename__: [
+                        dict(row)
+                        for row in connection.execute(select(*model.__table__.columns).where(model.tenant == "preexisting")).mappings()
+                    ]
+                    for model in test_azure_sql_writes.MODELS
+                }
+    
+        baseline = existing_rows()
+    
+        class LocalTransport:
+            def request(self, method, path, **kwargs):
+                response = client.request(method, path, **kwargs)
+                if path == "/api/settings" and response.status_code == 200:
+                    content = response.json()
+                    content.update(database="mssql", azure_generation="BLOCKED", moderation="BLOCKED")
+                    return driver.httpx.Response(200, json=content)
+                return response
+    
+        monkeypatch.setattr(app.azure_sql, "create_azure_sql_engine", lambda *_: engine)
+        monkeypatch.setattr(engine, "dispose", lambda: None)
+        monkeypatch.setattr(test_azure_sql_writes, "preflight", lambda *_: None)
+        monkeypatch.setattr(inventory_azure_sql, "install_query_timeout", lambda *_: None)
+        assert all(value == 0 for value in driver.sql_check(data, before=True).values())
+        data["http_test"] = {"operations": []}
+        snapshots = []
+        runner = driver.Driver(LocalTransport(), data, lambda: snapshots.append(copy.deepcopy(data)))
+        runner.workflows()
+&gt;       assert driver.sql_check(data, before=False) == driver.EXPECTED_COUNTS
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend/tests/test_sql_http_plan.py:196: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/test_azure_sql_http.py:734: in sql_check
+    verify_retained(connection, manifest, MODELS)
+scripts/test_azure_sql_http.py:222: in verify_retained
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False
+
+    def require(condition):
+        if not condition:
+&gt;           raise SafetyStop("HTTP acceptance condition failed")
+E           sql_http_driver.SafetyStop: HTTP acceptance condition failed
+
+scripts/test_azure_sql_http.py:31: SafetyStop</error></testcase><testcase classname="tests.test_sql_http_plan" name="test_missing_expected_record_rejected[active_policy_assignments]" time="0.700"><error message="failed on setup with &quot;sql_http_driver.SafetyStop: HTTP acceptance condition failed&quot;">client = &lt;starlette.testclient.TestClient object at 0x72547ab36140&gt;
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x725479260360&gt;
+
+    @pytest.fixture
+    def local_workflow(client, monkeypatch):
+        from app import main
+        from app.config import settings
+        from app.models import Audit, Base, Policy
+        from app.providers import ProviderUnavailable
+        import app.azure_sql
+        import inventory_azure_sql
+        import test_azure_sql_writes
+    
+        data = manifest()
+        monkeypatch.setattr(settings, "demo_accounts_json", json.dumps(driver.demo_accounts(data["run_id"], data["tokens"])))
+        monkeypatch.setattr(settings, "adls_account_url", "")
+        monkeypatch.setattr(main.providers, "upload_report", Mock(side_effect=ProviderUnavailable("fixture disabled")))
+        dependency = main.app.dependency_overrides[main.get_database]()
+        session = next(dependency)
+        engine = session.bind
+        session.add_all(
+            [
+                Policy(id=str(uuid4()), tenant="preexisting", name="Existing fixture", draft="{}"),
+                Audit(id=str(uuid4()), tenant="preexisting", actor="fixture", action="fixture", resource="fixture"),
+            ]
+        )
+        session.commit()
+        session.close()
+        dependency.close()
+    
+        def existing_rows():
+            with engine.connect() as connection:
+                return {
+                    model.__tablename__: [
+                        dict(row)
+                        for row in connection.execute(select(*model.__table__.columns).where(model.tenant == "preexisting")).mappings()
+                    ]
+                    for model in test_azure_sql_writes.MODELS
+                }
+    
+        baseline = existing_rows()
+    
+        class LocalTransport:
+            def request(self, method, path, **kwargs):
+                response = client.request(method, path, **kwargs)
+                if path == "/api/settings" and response.status_code == 200:
+                    content = response.json()
+                    content.update(database="mssql", azure_generation="BLOCKED", moderation="BLOCKED")
+                    return driver.httpx.Response(200, json=content)
+                return response
+    
+        monkeypatch.setattr(app.azure_sql, "create_azure_sql_engine", lambda *_: engine)
+        monkeypatch.setattr(engine, "dispose", lambda: None)
+        monkeypatch.setattr(test_azure_sql_writes, "preflight", lambda *_: None)
+        monkeypatch.setattr(inventory_azure_sql, "install_query_timeout", lambda *_: None)
+        assert all(value == 0 for value in driver.sql_check(data, before=True).values())
+        data["http_test"] = {"operations": []}
+        snapshots = []
+        runner = driver.Driver(LocalTransport(), data, lambda: snapshots.append(copy.deepcopy(data)))
+        runner.workflows()
+&gt;       assert driver.sql_check(data, before=False) == driver.EXPECTED_COUNTS
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend/tests/test_sql_http_plan.py:196: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/test_azure_sql_http.py:734: in sql_check
+    verify_retained(connection, manifest, MODELS)
+scripts/test_azure_sql_http.py:222: in verify_retained
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False
+
+    def require(condition):
+        if not condition:
+&gt;           raise SafetyStop("HTTP acceptance condition failed")
+E           sql_http_driver.SafetyStop: HTTP acceptance condition failed
+
+scripts/test_azure_sql_http.py:31: SafetyStop</error></testcase><testcase classname="tests.test_sql_http_plan" name="test_missing_expected_record_rejected[audit_events]" time="0.479"><error message="failed on setup with &quot;sql_http_driver.SafetyStop: HTTP acceptance condition failed&quot;">client = &lt;starlette.testclient.TestClient object at 0x72547a6ce250&gt;
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x72546bb59860&gt;
+
+    @pytest.fixture
+    def local_workflow(client, monkeypatch):
+        from app import main
+        from app.config import settings
+        from app.models import Audit, Base, Policy
+        from app.providers import ProviderUnavailable
+        import app.azure_sql
+        import inventory_azure_sql
+        import test_azure_sql_writes
+    
+        data = manifest()
+        monkeypatch.setattr(settings, "demo_accounts_json", json.dumps(driver.demo_accounts(data["run_id"], data["tokens"])))
+        monkeypatch.setattr(settings, "adls_account_url", "")
+        monkeypatch.setattr(main.providers, "upload_report", Mock(side_effect=ProviderUnavailable("fixture disabled")))
+        dependency = main.app.dependency_overrides[main.get_database]()
+        session = next(dependency)
+        engine = session.bind
+        session.add_all(
+            [
+                Policy(id=str(uuid4()), tenant="preexisting", name="Existing fixture", draft="{}"),
+                Audit(id=str(uuid4()), tenant="preexisting", actor="fixture", action="fixture", resource="fixture"),
+            ]
+        )
+        session.commit()
+        session.close()
+        dependency.close()
+    
+        def existing_rows():
+            with engine.connect() as connection:
+                return {
+                    model.__tablename__: [
+                        dict(row)
+                        for row in connection.execute(select(*model.__table__.columns).where(model.tenant == "preexisting")).mappings()
+                    ]
+                    for model in test_azure_sql_writes.MODELS
+                }
+    
+        baseline = existing_rows()
+    
+        class LocalTransport:
+            def request(self, method, path, **kwargs):
+                response = client.request(method, path, **kwargs)
+                if path == "/api/settings" and response.status_code == 200:
+                    content = response.json()
+                    content.update(database="mssql", azure_generation="BLOCKED", moderation="BLOCKED")
+                    return driver.httpx.Response(200, json=content)
+                return response
+    
+        monkeypatch.setattr(app.azure_sql, "create_azure_sql_engine", lambda *_: engine)
+        monkeypatch.setattr(engine, "dispose", lambda: None)
+        monkeypatch.setattr(test_azure_sql_writes, "preflight", lambda *_: None)
+        monkeypatch.setattr(inventory_azure_sql, "install_query_timeout", lambda *_: None)
+        assert all(value == 0 for value in driver.sql_check(data, before=True).values())
+        data["http_test"] = {"operations": []}
+        snapshots = []
+        runner = driver.Driver(LocalTransport(), data, lambda: snapshots.append(copy.deepcopy(data)))
+        runner.workflows()
+&gt;       assert driver.sql_check(data, before=False) == driver.EXPECTED_COUNTS
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend/tests/test_sql_http_plan.py:196: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/test_azure_sql_http.py:734: in sql_check
+    verify_retained(connection, manifest, MODELS)
+scripts/test_azure_sql_http.py:222: in verify_retained
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False
+
+    def require(condition):
+        if not condition:
+&gt;           raise SafetyStop("HTTP acceptance condition failed")
+E           sql_http_driver.SafetyStop: HTTP acceptance condition failed
+
+scripts/test_azure_sql_http.py:31: SafetyStop</error></testcase><testcase classname="tests.test_sql_http_plan" name="test_missing_expected_record_rejected[validation_executions]" time="0.537"><error message="failed on setup with &quot;sql_http_driver.SafetyStop: HTTP acceptance condition failed&quot;">client = &lt;starlette.testclient.TestClient object at 0x72547c176ad0&gt;
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x72546bb03ee0&gt;
+
+    @pytest.fixture
+    def local_workflow(client, monkeypatch):
+        from app import main
+        from app.config import settings
+        from app.models import Audit, Base, Policy
+        from app.providers import ProviderUnavailable
+        import app.azure_sql
+        import inventory_azure_sql
+        import test_azure_sql_writes
+    
+        data = manifest()
+        monkeypatch.setattr(settings, "demo_accounts_json", json.dumps(driver.demo_accounts(data["run_id"], data["tokens"])))
+        monkeypatch.setattr(settings, "adls_account_url", "")
+        monkeypatch.setattr(main.providers, "upload_report", Mock(side_effect=ProviderUnavailable("fixture disabled")))
+        dependency = main.app.dependency_overrides[main.get_database]()
+        session = next(dependency)
+        engine = session.bind
+        session.add_all(
+            [
+                Policy(id=str(uuid4()), tenant="preexisting", name="Existing fixture", draft="{}"),
+                Audit(id=str(uuid4()), tenant="preexisting", actor="fixture", action="fixture", resource="fixture"),
+            ]
+        )
+        session.commit()
+        session.close()
+        dependency.close()
+    
+        def existing_rows():
+            with engine.connect() as connection:
+                return {
+                    model.__tablename__: [
+                        dict(row)
+                        for row in connection.execute(select(*model.__table__.columns).where(model.tenant == "preexisting")).mappings()
+                    ]
+                    for model in test_azure_sql_writes.MODELS
+                }
+    
+        baseline = existing_rows()
+    
+        class LocalTransport:
+            def request(self, method, path, **kwargs):
+                response = client.request(method, path, **kwargs)
+                if path == "/api/settings" and response.status_code == 200:
+                    content = response.json()
+                    content.update(database="mssql", azure_generation="BLOCKED", moderation="BLOCKED")
+                    return driver.httpx.Response(200, json=content)
+                return response
+    
+        monkeypatch.setattr(app.azure_sql, "create_azure_sql_engine", lambda *_: engine)
+        monkeypatch.setattr(engine, "dispose", lambda: None)
+        monkeypatch.setattr(test_azure_sql_writes, "preflight", lambda *_: None)
+        monkeypatch.setattr(inventory_azure_sql, "install_query_timeout", lambda *_: None)
+        assert all(value == 0 for value in driver.sql_check(data, before=True).values())
+        data["http_test"] = {"operations": []}
+        snapshots = []
+        runner = driver.Driver(LocalTransport(), data, lambda: snapshots.append(copy.deepcopy(data)))
+        runner.workflows()
+&gt;       assert driver.sql_check(data, before=False) == driver.EXPECTED_COUNTS
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend/tests/test_sql_http_plan.py:196: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/test_azure_sql_http.py:734: in sql_check
+    verify_retained(connection, manifest, MODELS)
+scripts/test_azure_sql_http.py:222: in verify_retained
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False
+
+    def require(condition):
+        if not condition:
+&gt;           raise SafetyStop("HTTP acceptance condition failed")
+E           sql_http_driver.SafetyStop: HTTP acceptance condition failed
+
+scripts/test_azure_sql_http.py:31: SafetyStop</error></testcase><testcase classname="tests.test_sql_http_plan" name="test_missing_expected_record_rejected[human_review_cases]" time="0.590"><error message="failed on setup with &quot;sql_http_driver.SafetyStop: HTTP acceptance condition failed&quot;">client = &lt;starlette.testclient.TestClient object at 0x72547a6ce360&gt;
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x72546bdbb460&gt;
+
+    @pytest.fixture
+    def local_workflow(client, monkeypatch):
+        from app import main
+        from app.config import settings
+        from app.models import Audit, Base, Policy
+        from app.providers import ProviderUnavailable
+        import app.azure_sql
+        import inventory_azure_sql
+        import test_azure_sql_writes
+    
+        data = manifest()
+        monkeypatch.setattr(settings, "demo_accounts_json", json.dumps(driver.demo_accounts(data["run_id"], data["tokens"])))
+        monkeypatch.setattr(settings, "adls_account_url", "")
+        monkeypatch.setattr(main.providers, "upload_report", Mock(side_effect=ProviderUnavailable("fixture disabled")))
+        dependency = main.app.dependency_overrides[main.get_database]()
+        session = next(dependency)
+        engine = session.bind
+        session.add_all(
+            [
+                Policy(id=str(uuid4()), tenant="preexisting", name="Existing fixture", draft="{}"),
+                Audit(id=str(uuid4()), tenant="preexisting", actor="fixture", action="fixture", resource="fixture"),
+            ]
+        )
+        session.commit()
+        session.close()
+        dependency.close()
+    
+        def existing_rows():
+            with engine.connect() as connection:
+                return {
+                    model.__tablename__: [
+                        dict(row)
+                        for row in connection.execute(select(*model.__table__.columns).where(model.tenant == "preexisting")).mappings()
+                    ]
+                    for model in test_azure_sql_writes.MODELS
+                }
+    
+        baseline = existing_rows()
+    
+        class LocalTransport:
+            def request(self, method, path, **kwargs):
+                response = client.request(method, path, **kwargs)
+                if path == "/api/settings" and response.status_code == 200:
+                    content = response.json()
+                    content.update(database="mssql", azure_generation="BLOCKED", moderation="BLOCKED")
+                    return driver.httpx.Response(200, json=content)
+                return response
+    
+        monkeypatch.setattr(app.azure_sql, "create_azure_sql_engine", lambda *_: engine)
+        monkeypatch.setattr(engine, "dispose", lambda: None)
+        monkeypatch.setattr(test_azure_sql_writes, "preflight", lambda *_: None)
+        monkeypatch.setattr(inventory_azure_sql, "install_query_timeout", lambda *_: None)
+        assert all(value == 0 for value in driver.sql_check(data, before=True).values())
+        data["http_test"] = {"operations": []}
+        snapshots = []
+        runner = driver.Driver(LocalTransport(), data, lambda: snapshots.append(copy.deepcopy(data)))
+        runner.workflows()
+&gt;       assert driver.sql_check(data, before=False) == driver.EXPECTED_COUNTS
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend/tests/test_sql_http_plan.py:196: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/test_azure_sql_http.py:734: in sql_check
+    verify_retained(connection, manifest, MODELS)
+scripts/test_azure_sql_http.py:222: in verify_retained
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False
+
+    def require(condition):
+        if not condition:
+&gt;           raise SafetyStop("HTTP acceptance condition failed")
+E           sql_http_driver.SafetyStop: HTTP acceptance condition failed
+
+scripts/test_azure_sql_http.py:31: SafetyStop</error></testcase><testcase classname="tests.test_sql_http_plan" name="test_missing_expected_record_rejected[feedback_records]" time="0.560"><error message="failed on setup with &quot;sql_http_driver.SafetyStop: HTTP acceptance condition failed&quot;">client = &lt;starlette.testclient.TestClient object at 0x72547b735590&gt;
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x72546bc816a0&gt;
+
+    @pytest.fixture
+    def local_workflow(client, monkeypatch):
+        from app import main
+        from app.config import settings
+        from app.models import Audit, Base, Policy
+        from app.providers import ProviderUnavailable
+        import app.azure_sql
+        import inventory_azure_sql
+        import test_azure_sql_writes
+    
+        data = manifest()
+        monkeypatch.setattr(settings, "demo_accounts_json", json.dumps(driver.demo_accounts(data["run_id"], data["tokens"])))
+        monkeypatch.setattr(settings, "adls_account_url", "")
+        monkeypatch.setattr(main.providers, "upload_report", Mock(side_effect=ProviderUnavailable("fixture disabled")))
+        dependency = main.app.dependency_overrides[main.get_database]()
+        session = next(dependency)
+        engine = session.bind
+        session.add_all(
+            [
+                Policy(id=str(uuid4()), tenant="preexisting", name="Existing fixture", draft="{}"),
+                Audit(id=str(uuid4()), tenant="preexisting", actor="fixture", action="fixture", resource="fixture"),
+            ]
+        )
+        session.commit()
+        session.close()
+        dependency.close()
+    
+        def existing_rows():
+            with engine.connect() as connection:
+                return {
+                    model.__tablename__: [
+                        dict(row)
+                        for row in connection.execute(select(*model.__table__.columns).where(model.tenant == "preexisting")).mappings()
+                    ]
+                    for model in test_azure_sql_writes.MODELS
+                }
+    
+        baseline = existing_rows()
+    
+        class LocalTransport:
+            def request(self, method, path, **kwargs):
+                response = client.request(method, path, **kwargs)
+                if path == "/api/settings" and response.status_code == 200:
+                    content = response.json()
+                    content.update(database="mssql", azure_generation="BLOCKED", moderation="BLOCKED")
+                    return driver.httpx.Response(200, json=content)
+                return response
+    
+        monkeypatch.setattr(app.azure_sql, "create_azure_sql_engine", lambda *_: engine)
+        monkeypatch.setattr(engine, "dispose", lambda: None)
+        monkeypatch.setattr(test_azure_sql_writes, "preflight", lambda *_: None)
+        monkeypatch.setattr(inventory_azure_sql, "install_query_timeout", lambda *_: None)
+        assert all(value == 0 for value in driver.sql_check(data, before=True).values())
+        data["http_test"] = {"operations": []}
+        snapshots = []
+        runner = driver.Driver(LocalTransport(), data, lambda: snapshots.append(copy.deepcopy(data)))
+        runner.workflows()
+&gt;       assert driver.sql_check(data, before=False) == driver.EXPECTED_COUNTS
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend/tests/test_sql_http_plan.py:196: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/test_azure_sql_http.py:734: in sql_check
+    verify_retained(connection, manifest, MODELS)
+scripts/test_azure_sql_http.py:222: in verify_retained
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False
+
+    def require(condition):
+        if not condition:
+&gt;           raise SafetyStop("HTTP acceptance condition failed")
+E           sql_http_driver.SafetyStop: HTTP acceptance condition failed
+
+scripts/test_azure_sql_http.py:31: SafetyStop</error></testcase><testcase classname="tests.test_sql_http_plan" name="test_missing_expected_record_rejected[evaluation_exports]" time="0.465"><error message="failed on setup with &quot;sql_http_driver.SafetyStop: HTTP acceptance condition failed&quot;">client = &lt;starlette.testclient.TestClient object at 0x72547b7346b0&gt;
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x72546bff0440&gt;
+
+    @pytest.fixture
+    def local_workflow(client, monkeypatch):
+        from app import main
+        from app.config import settings
+        from app.models import Audit, Base, Policy
+        from app.providers import ProviderUnavailable
+        import app.azure_sql
+        import inventory_azure_sql
+        import test_azure_sql_writes
+    
+        data = manifest()
+        monkeypatch.setattr(settings, "demo_accounts_json", json.dumps(driver.demo_accounts(data["run_id"], data["tokens"])))
+        monkeypatch.setattr(settings, "adls_account_url", "")
+        monkeypatch.setattr(main.providers, "upload_report", Mock(side_effect=ProviderUnavailable("fixture disabled")))
+        dependency = main.app.dependency_overrides[main.get_database]()
+        session = next(dependency)
+        engine = session.bind
+        session.add_all(
+            [
+                Policy(id=str(uuid4()), tenant="preexisting", name="Existing fixture", draft="{}"),
+                Audit(id=str(uuid4()), tenant="preexisting", actor="fixture", action="fixture", resource="fixture"),
+            ]
+        )
+        session.commit()
+        session.close()
+        dependency.close()
+    
+        def existing_rows():
+            with engine.connect() as connection:
+                return {
+                    model.__tablename__: [
+                        dict(row)
+                        for row in connection.execute(select(*model.__table__.columns).where(model.tenant == "preexisting")).mappings()
+                    ]
+                    for model in test_azure_sql_writes.MODELS
+                }
+    
+        baseline = existing_rows()
+    
+        class LocalTransport:
+            def request(self, method, path, **kwargs):
+                response = client.request(method, path, **kwargs)
+                if path == "/api/settings" and response.status_code == 200:
+                    content = response.json()
+                    content.update(database="mssql", azure_generation="BLOCKED", moderation="BLOCKED")
+                    return driver.httpx.Response(200, json=content)
+                return response
+    
+        monkeypatch.setattr(app.azure_sql, "create_azure_sql_engine", lambda *_: engine)
+        monkeypatch.setattr(engine, "dispose", lambda: None)
+        monkeypatch.setattr(test_azure_sql_writes, "preflight", lambda *_: None)
+        monkeypatch.setattr(inventory_azure_sql, "install_query_timeout", lambda *_: None)
+        assert all(value == 0 for value in driver.sql_check(data, before=True).values())
+        data["http_test"] = {"operations": []}
+        snapshots = []
+        runner = driver.Driver(LocalTransport(), data, lambda: snapshots.append(copy.deepcopy(data)))
+        runner.workflows()
+&gt;       assert driver.sql_check(data, before=False) == driver.EXPECTED_COUNTS
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend/tests/test_sql_http_plan.py:196: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/test_azure_sql_http.py:734: in sql_check
+    verify_retained(connection, manifest, MODELS)
+scripts/test_azure_sql_http.py:222: in verify_retained
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False
+
+    def require(condition):
+        if not condition:
+&gt;           raise SafetyStop("HTTP acceptance condition failed")
+E           sql_http_driver.SafetyStop: HTTP acceptance condition failed
+
+scripts/test_azure_sql_http.py:31: SafetyStop</error></testcase><testcase classname="tests.test_sql_http_plan" name="test_wrong_relationship_even_if_api_and_sql_agree" time="0.424"><error message="failed on setup with &quot;sql_http_driver.SafetyStop: HTTP acceptance condition failed&quot;">client = &lt;starlette.testclient.TestClient object at 0x72547b735d00&gt;
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x72546b9430e0&gt;
+
+    @pytest.fixture
+    def local_workflow(client, monkeypatch):
+        from app import main
+        from app.config import settings
+        from app.models import Audit, Base, Policy
+        from app.providers import ProviderUnavailable
+        import app.azure_sql
+        import inventory_azure_sql
+        import test_azure_sql_writes
+    
+        data = manifest()
+        monkeypatch.setattr(settings, "demo_accounts_json", json.dumps(driver.demo_accounts(data["run_id"], data["tokens"])))
+        monkeypatch.setattr(settings, "adls_account_url", "")
+        monkeypatch.setattr(main.providers, "upload_report", Mock(side_effect=ProviderUnavailable("fixture disabled")))
+        dependency = main.app.dependency_overrides[main.get_database]()
+        session = next(dependency)
+        engine = session.bind
+        session.add_all(
+            [
+                Policy(id=str(uuid4()), tenant="preexisting", name="Existing fixture", draft="{}"),
+                Audit(id=str(uuid4()), tenant="preexisting", actor="fixture", action="fixture", resource="fixture"),
+            ]
+        )
+        session.commit()
+        session.close()
+        dependency.close()
+    
+        def existing_rows():
+            with engine.connect() as connection:
+                return {
+                    model.__tablename__: [
+                        dict(row)
+                        for row in connection.execute(select(*model.__table__.columns).where(model.tenant == "preexisting")).mappings()
+                    ]
+                    for model in test_azure_sql_writes.MODELS
+                }
+    
+        baseline = existing_rows()
+    
+        class LocalTransport:
+            def request(self, method, path, **kwargs):
+                response = client.request(method, path, **kwargs)
+                if path == "/api/settings" and response.status_code == 200:
+                    content = response.json()
+                    content.update(database="mssql", azure_generation="BLOCKED", moderation="BLOCKED")
+                    return driver.httpx.Response(200, json=content)
+                return response
+    
+        monkeypatch.setattr(app.azure_sql, "create_azure_sql_engine", lambda *_: engine)
+        monkeypatch.setattr(engine, "dispose", lambda: None)
+        monkeypatch.setattr(test_azure_sql_writes, "preflight", lambda *_: None)
+        monkeypatch.setattr(inventory_azure_sql, "install_query_timeout", lambda *_: None)
+        assert all(value == 0 for value in driver.sql_check(data, before=True).values())
+        data["http_test"] = {"operations": []}
+        snapshots = []
+        runner = driver.Driver(LocalTransport(), data, lambda: snapshots.append(copy.deepcopy(data)))
+        runner.workflows()
+&gt;       assert driver.sql_check(data, before=False) == driver.EXPECTED_COUNTS
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend/tests/test_sql_http_plan.py:196: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/test_azure_sql_http.py:734: in sql_check
+    verify_retained(connection, manifest, MODELS)
+scripts/test_azure_sql_http.py:222: in verify_retained
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False
+
+    def require(condition):
+        if not condition:
+&gt;           raise SafetyStop("HTTP acceptance condition failed")
+E           sql_http_driver.SafetyStop: HTTP acceptance condition failed
+
+scripts/test_azure_sql_http.py:31: SafetyStop</error></testcase><testcase classname="tests.test_sql_http_plan" name="test_checkpoint_failure_stops_transmission_and_future_calls[before]" time="0.001" /><testcase classname="tests.test_sql_http_plan" name="test_checkpoint_failure_stops_transmission_and_future_calls[after]" time="0.000" /><testcase classname="tests.test_sql_http_plan" name="test_timeout_records_unknown_without_retry" time="0.000" /><testcase classname="tests.test_sql_http_plan" name="test_main_failure_is_sanitized_and_not_reusable[exception]" time="0.001" /><testcase classname="tests.test_sql_http_plan" name="test_main_failure_is_sanitized_and_not_reusable[sigterm]" time="0.001" /><testcase classname="tests.test_sql_http_plan" name="test_main_failure_is_sanitized_and_not_reusable[deadline]" time="0.001" /><testcase classname="tests.test_sql_http_plan" name="test_main_failure_is_sanitized_and_not_reusable[keyboard]" time="0.001" /><testcase classname="tests.test_sql_http_plan" name="test_main_failure_is_sanitized_and_not_reusable[checkpoint]" time="0.001" /><testcase classname="tests.test_sql_http_plan" name="test_foreign_identity_and_hashes" time="0.000" /><testcase classname="tests.test_sql_http_plan" name="test_manifest_lock_uses_same_descriptor" time="0.001" /><testcase classname="tests.test_sql_http_plan" name="test_authentication_mismatch_stops_before_http_mutations[foreign_tenant]" time="0.000" /><testcase classname="tests.test_sql_http_plan" name="test_authentication_mismatch_stops_before_http_mutations[developer_role]" time="0.000" /><testcase classname="tests.test_sql_http_plan" name="test_authentication_mismatch_stops_before_http_mutations[missing_auth]" time="0.000" /><testcase classname="tests.test_sql_http_plan" name="test_local_invalid_authentication_is_401" time="0.016" /><testcase classname="tests.test_sql_http_plan" name="test_main_never_promotes_failed_independent_verification" time="0.019" /><testcase classname="tests.test_sql_http_plan" name="test_snapshot_agreement_does_not_hide_wrong_immutable_document" time="0.625"><error message="failed on setup with &quot;sql_http_driver.SafetyStop: HTTP acceptance condition failed&quot;">client = &lt;starlette.testclient.TestClient object at 0x72547af8bac0&gt;
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x72546b3427b0&gt;
+
+    @pytest.fixture
+    def local_workflow(client, monkeypatch):
+        from app import main
+        from app.config import settings
+        from app.models import Audit, Base, Policy
+        from app.providers import ProviderUnavailable
+        import app.azure_sql
+        import inventory_azure_sql
+        import test_azure_sql_writes
+    
+        data = manifest()
+        monkeypatch.setattr(settings, "demo_accounts_json", json.dumps(driver.demo_accounts(data["run_id"], data["tokens"])))
+        monkeypatch.setattr(settings, "adls_account_url", "")
+        monkeypatch.setattr(main.providers, "upload_report", Mock(side_effect=ProviderUnavailable("fixture disabled")))
+        dependency = main.app.dependency_overrides[main.get_database]()
+        session = next(dependency)
+        engine = session.bind
+        session.add_all(
+            [
+                Policy(id=str(uuid4()), tenant="preexisting", name="Existing fixture", draft="{}"),
+                Audit(id=str(uuid4()), tenant="preexisting", actor="fixture", action="fixture", resource="fixture"),
+            ]
+        )
+        session.commit()
+        session.close()
+        dependency.close()
+    
+        def existing_rows():
+            with engine.connect() as connection:
+                return {
+                    model.__tablename__: [
+                        dict(row)
+                        for row in connection.execute(select(*model.__table__.columns).where(model.tenant == "preexisting")).mappings()
+                    ]
+                    for model in test_azure_sql_writes.MODELS
+                }
+    
+        baseline = existing_rows()
+    
+        class LocalTransport:
+            def request(self, method, path, **kwargs):
+                response = client.request(method, path, **kwargs)
+                if path == "/api/settings" and response.status_code == 200:
+                    content = response.json()
+                    content.update(database="mssql", azure_generation="BLOCKED", moderation="BLOCKED")
+                    return driver.httpx.Response(200, json=content)
+                return response
+    
+        monkeypatch.setattr(app.azure_sql, "create_azure_sql_engine", lambda *_: engine)
+        monkeypatch.setattr(engine, "dispose", lambda: None)
+        monkeypatch.setattr(test_azure_sql_writes, "preflight", lambda *_: None)
+        monkeypatch.setattr(inventory_azure_sql, "install_query_timeout", lambda *_: None)
+        assert all(value == 0 for value in driver.sql_check(data, before=True).values())
+        data["http_test"] = {"operations": []}
+        snapshots = []
+        runner = driver.Driver(LocalTransport(), data, lambda: snapshots.append(copy.deepcopy(data)))
+        runner.workflows()
+&gt;       assert driver.sql_check(data, before=False) == driver.EXPECTED_COUNTS
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend/tests/test_sql_http_plan.py:196: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/test_azure_sql_http.py:734: in sql_check
+    verify_retained(connection, manifest, MODELS)
+scripts/test_azure_sql_http.py:222: in verify_retained
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False
+
+    def require(condition):
+        if not condition:
+&gt;           raise SafetyStop("HTTP acceptance condition failed")
+E           sql_http_driver.SafetyStop: HTTP acceptance condition failed
+
+scripts/test_azure_sql_http.py:31: SafetyStop</error></testcase><testcase classname="tests.test_sql_http_plan" name="test_private_manifest_creation_is_exclusive_and_0600" time="0.002" /><testcase classname="tests.test_sql_http_plan" name="test_bearers_absent_from_http_logs" time="0.672"><error message="failed on setup with &quot;sql_http_driver.SafetyStop: HTTP acceptance condition failed&quot;">client = &lt;starlette.testclient.TestClient object at 0x72547af8b790&gt;
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x72546b0edef0&gt;
+
+    @pytest.fixture
+    def local_workflow(client, monkeypatch):
+        from app import main
+        from app.config import settings
+        from app.models import Audit, Base, Policy
+        from app.providers import ProviderUnavailable
+        import app.azure_sql
+        import inventory_azure_sql
+        import test_azure_sql_writes
+    
+        data = manifest()
+        monkeypatch.setattr(settings, "demo_accounts_json", json.dumps(driver.demo_accounts(data["run_id"], data["tokens"])))
+        monkeypatch.setattr(settings, "adls_account_url", "")
+        monkeypatch.setattr(main.providers, "upload_report", Mock(side_effect=ProviderUnavailable("fixture disabled")))
+        dependency = main.app.dependency_overrides[main.get_database]()
+        session = next(dependency)
+        engine = session.bind
+        session.add_all(
+            [
+                Policy(id=str(uuid4()), tenant="preexisting", name="Existing fixture", draft="{}"),
+                Audit(id=str(uuid4()), tenant="preexisting", actor="fixture", action="fixture", resource="fixture"),
+            ]
+        )
+        session.commit()
+        session.close()
+        dependency.close()
+    
+        def existing_rows():
+            with engine.connect() as connection:
+                return {
+                    model.__tablename__: [
+                        dict(row)
+                        for row in connection.execute(select(*model.__table__.columns).where(model.tenant == "preexisting")).mappings()
+                    ]
+                    for model in test_azure_sql_writes.MODELS
+                }
+    
+        baseline = existing_rows()
+    
+        class LocalTransport:
+            def request(self, method, path, **kwargs):
+                response = client.request(method, path, **kwargs)
+                if path == "/api/settings" and response.status_code == 200:
+                    content = response.json()
+                    content.update(database="mssql", azure_generation="BLOCKED", moderation="BLOCKED")
+                    return driver.httpx.Response(200, json=content)
+                return response
+    
+        monkeypatch.setattr(app.azure_sql, "create_azure_sql_engine", lambda *_: engine)
+        monkeypatch.setattr(engine, "dispose", lambda: None)
+        monkeypatch.setattr(test_azure_sql_writes, "preflight", lambda *_: None)
+        monkeypatch.setattr(inventory_azure_sql, "install_query_timeout", lambda *_: None)
+        assert all(value == 0 for value in driver.sql_check(data, before=True).values())
+        data["http_test"] = {"operations": []}
+        snapshots = []
+        runner = driver.Driver(LocalTransport(), data, lambda: snapshots.append(copy.deepcopy(data)))
+        runner.workflows()
+&gt;       assert driver.sql_check(data, before=False) == driver.EXPECTED_COUNTS
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend/tests/test_sql_http_plan.py:196: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/test_azure_sql_http.py:734: in sql_check
+    verify_retained(connection, manifest, MODELS)
+scripts/test_azure_sql_http.py:222: in verify_retained
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False
+
+    def require(condition):
+        if not condition:
+&gt;           raise SafetyStop("HTTP acceptance condition failed")
+E           sql_http_driver.SafetyStop: HTTP acceptance condition failed
+
+scripts/test_azure_sql_http.py:31: SafetyStop</error></testcase><testcase classname="tests.test_sql_http_plan" name="test_swapped_review_dispositions_even_if_api_and_sql_agree" time="0.468"><error message="failed on setup with &quot;sql_http_driver.SafetyStop: HTTP acceptance condition failed&quot;">client = &lt;starlette.testclient.TestClient object at 0x7254799c5260&gt;
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x72546b5cf070&gt;
+
+    @pytest.fixture
+    def local_workflow(client, monkeypatch):
+        from app import main
+        from app.config import settings
+        from app.models import Audit, Base, Policy
+        from app.providers import ProviderUnavailable
+        import app.azure_sql
+        import inventory_azure_sql
+        import test_azure_sql_writes
+    
+        data = manifest()
+        monkeypatch.setattr(settings, "demo_accounts_json", json.dumps(driver.demo_accounts(data["run_id"], data["tokens"])))
+        monkeypatch.setattr(settings, "adls_account_url", "")
+        monkeypatch.setattr(main.providers, "upload_report", Mock(side_effect=ProviderUnavailable("fixture disabled")))
+        dependency = main.app.dependency_overrides[main.get_database]()
+        session = next(dependency)
+        engine = session.bind
+        session.add_all(
+            [
+                Policy(id=str(uuid4()), tenant="preexisting", name="Existing fixture", draft="{}"),
+                Audit(id=str(uuid4()), tenant="preexisting", actor="fixture", action="fixture", resource="fixture"),
+            ]
+        )
+        session.commit()
+        session.close()
+        dependency.close()
+    
+        def existing_rows():
+            with engine.connect() as connection:
+                return {
+                    model.__tablename__: [
+                        dict(row)
+                        for row in connection.execute(select(*model.__table__.columns).where(model.tenant == "preexisting")).mappings()
+                    ]
+                    for model in test_azure_sql_writes.MODELS
+                }
+    
+        baseline = existing_rows()
+    
+        class LocalTransport:
+            def request(self, method, path, **kwargs):
+                response = client.request(method, path, **kwargs)
+                if path == "/api/settings" and response.status_code == 200:
+                    content = response.json()
+                    content.update(database="mssql", azure_generation="BLOCKED", moderation="BLOCKED")
+                    return driver.httpx.Response(200, json=content)
+                return response
+    
+        monkeypatch.setattr(app.azure_sql, "create_azure_sql_engine", lambda *_: engine)
+        monkeypatch.setattr(engine, "dispose", lambda: None)
+        monkeypatch.setattr(test_azure_sql_writes, "preflight", lambda *_: None)
+        monkeypatch.setattr(inventory_azure_sql, "install_query_timeout", lambda *_: None)
+        assert all(value == 0 for value in driver.sql_check(data, before=True).values())
+        data["http_test"] = {"operations": []}
+        snapshots = []
+        runner = driver.Driver(LocalTransport(), data, lambda: snapshots.append(copy.deepcopy(data)))
+        runner.workflows()
+&gt;       assert driver.sql_check(data, before=False) == driver.EXPECTED_COUNTS
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend/tests/test_sql_http_plan.py:196: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/test_azure_sql_http.py:734: in sql_check
+    verify_retained(connection, manifest, MODELS)
+scripts/test_azure_sql_http.py:222: in verify_retained
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False
+
+    def require(condition):
+        if not condition:
+&gt;           raise SafetyStop("HTTP acceptance condition failed")
+E           sql_http_driver.SafetyStop: HTTP acceptance condition failed
+
+scripts/test_azure_sql_http.py:31: SafetyStop</error></testcase><testcase classname="tests.test_deployment_preparation" name="test_explicit_sql_identity_selection_without_network[cli]" time="0.001" /><testcase classname="tests.test_deployment_preparation" name="test_explicit_sql_identity_selection_without_network[managed_identity]" time="0.001" /><testcase classname="tests.test_deployment_preparation" name="test_managed_identity_factory_failure_cannot_use_cli" time="0.000" /><testcase classname="tests.test_deployment_preparation" name="test_database_routes_managed_identity_explicitly" time="0.002" /><testcase classname="tests.test_deployment_preparation" name="test_hosting_rejects_incomplete_or_local_configuration[changes0]" time="0.001" /><testcase classname="tests.test_deployment_preparation" name="test_hosting_rejects_incomplete_or_local_configuration[changes1]" time="0.001" /><testcase classname="tests.test_deployment_preparation" name="test_hosting_rejects_incomplete_or_local_configuration[changes2]" time="0.001" /><testcase classname="tests.test_deployment_preparation" name="test_hosting_rejects_incomplete_or_local_configuration[changes3]" time="0.001" /><testcase classname="tests.test_deployment_preparation" name="test_hosting_rejects_incomplete_or_local_configuration[changes4]" time="0.001" /><testcase classname="tests.test_deployment_preparation" name="test_hosting_rejects_incomplete_or_local_configuration[changes5]" time="0.001" /><testcase classname="tests.test_deployment_preparation" name="test_hosting_rejects_incomplete_or_local_configuration[changes6]" time="0.001" /><testcase classname="tests.test_deployment_preparation" name="test_hosting_rejects_incomplete_or_local_configuration[changes7]" time="0.001" /><testcase classname="tests.test_deployment_preparation" name="test_hosting_rejects_incomplete_or_local_configuration[changes8]" time="0.001" /><testcase classname="tests.test_deployment_preparation" name="test_hosting_rejects_incomplete_or_local_configuration[changes9]" time="0.001" /><testcase classname="tests.test_deployment_preparation" name="test_hosting_rejects_incomplete_or_local_configuration[changes10]" time="0.001" /><testcase classname="tests.test_deployment_preparation" name="test_hosting_rejects_incomplete_or_local_configuration[changes11]" time="0.001" /><testcase classname="tests.test_deployment_preparation" name="test_hosting_rejects_incomplete_or_local_configuration[changes12]" time="0.001" /><testcase classname="tests.test_deployment_preparation" name="test_hosting_rejects_incomplete_or_local_configuration[changes13]" time="0.001" /><testcase classname="tests.test_deployment_preparation" name="test_hosting_rejects_incomplete_or_local_configuration[changes14]" time="0.001" /><testcase classname="tests.test_deployment_preparation" name="test_valid_hosting_configuration_does_not_connect" time="0.003" /><testcase classname="tests.test_deployment_preparation" name="test_static_spa_does_not_capture_api_or_private_paths" time="0.021" /><testcase classname="tests.test_deployment_preparation" name="test_hosting_preserves_existing_api_auth" time="0.015" /><testcase classname="tests.test_deployment_preparation" name="test_missing_assets_fail_before_serving" time="0.001" /><testcase classname="tests.test_deployment_preparation" name="test_package_allowlist_excludes_secrets_data_and_migrations" time="0.016" /><testcase classname="tests.test_deployment_preparation" name="test_adls_new_date_directories_are_conditional_and_not_overwritten" time="0.049" /><testcase classname="tests.test_deployment_preparation" name="test_adls_invalid_path_does_not_authenticate[../fixture.json]" time="0.000" /><testcase classname="tests.test_deployment_preparation" name="test_adls_invalid_path_does_not_authenticate[/fixture.json]" time="0.000" /><testcase classname="tests.test_deployment_preparation" name="test_adls_invalid_path_does_not_authenticate[reports//fixture.json]" time="0.000" /><testcase classname="tests.test_deployment_preparation" name="test_adls_invalid_path_does_not_authenticate[reports/./fixture.json]" time="0.000" /><testcase classname="tests.test_deployment_preparation" name="test_adls_parent_file_conflict_cannot_upload" time="0.001" /></testsuite></testsuites>

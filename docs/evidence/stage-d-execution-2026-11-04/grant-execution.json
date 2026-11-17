@@ -1,0 +1,30 @@
+{
+  "stage": "D",
+  "status": "COMMITTED_APPROVED_SEVEN_PERMISSIONS",
+  "started_at_utc": "2026-11-04T16:28:32.528249+00:00",
+  "approval": "Explicit user Stage D only",
+  "database_permission_changes_committed": true,
+  "schema_changed": false,
+  "memberships_provisioned": false,
+  "approved_sql_sha256": "379cdb13d45722129d90c99000e2ca4a435bc3f2d4c4dfdcba48af256001d79a",
+  "exact_added_permissions": {
+    "sso_memberships": [
+      "SELECT"
+    ],
+    "sso_transactions": [
+      "SELECT",
+      "INSERT",
+      "UPDATE"
+    ],
+    "sso_sessions": [
+      "SELECT",
+      "INSERT",
+      "UPDATE"
+    ]
+  },
+  "other_database_permissions_unchanged": true,
+  "sql_role_memberships_unchanged": true,
+  "sso_membership_count_unchanged": true,
+  "committed_at_utc": "2026-11-04T16:28:43.495675+00:00",
+  "finished_at_utc": "2026-11-04T16:28:43.496170+00:00"
+}

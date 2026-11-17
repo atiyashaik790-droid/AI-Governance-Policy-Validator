@@ -1,0 +1,74 @@
+{
+  "status": "PASS",
+  "qualification": "PARTIAL: fresh Approval A retry9 pending",
+  "candidate": "1.2-240cc70e239a595f",
+  "candidate_sha256": "274891fe4ce303d9b05751e1b19cd52e5eb535034ccfedb37eae30fb1c228e22",
+  "independent_repaired_rollback": {
+    "candidate": "1.2-230d63e0c546e0ba",
+    "artifact": "artifacts/master-repair-2026-11-07/rollback-cleanup-fixed.zip",
+    "sha256": "b52287bbf048a66a9f7233753a3fb95730397016f03074d4deb399c1e74c0d29",
+    "extracted_directory": "/tmp/gpv-repaired-independent-rollback-scsf4ugs",
+    "provenance": "Preserved independent 1.2-677a11e4b649fa7d bytes plus only protected_reviews cleanup/purge correction; old artifact unchanged",
+    "changed_packaged_members": [
+      "app/protected_reviews.py"
+    ],
+    "shared_fix_limit": "Cleanup correction shared; core shared defects still require recovery B"
+  },
+  "batches_overlap": true,
+  "tests": {
+    "backend-focused": {
+      "passed": 170,
+      "seconds": 26.219
+    },
+    "cleanup-diagnostics": {
+      "passed": 1,
+      "seconds": 0.168
+    },
+    "cleanup-reproduction": {
+      "passed": 8,
+      "seconds": 0.877
+    },
+    "cross-release-ciphertext": {
+      "passed": 2,
+      "seconds": 1.934
+    },
+    "extracted-candidate": {
+      "passed": 36,
+      "seconds": 8.323
+    },
+    "independent-rollback": {
+      "passed": 19,
+      "seconds": 3.596
+    },
+    "release-transition": {
+      "passed": 50,
+      "seconds": 37.468
+    },
+    "remaining-assertions": {
+      "passed": 112,
+      "seconds": 7.757
+    },
+    "remaining-targeted": {
+      "passed": 1,
+      "seconds": 0.809
+    }
+  },
+  "migration_and_sqlite_preservation": true,
+  "source_artifact_prior_evidence_pins": true,
+  "package_members_match_source_manifest": true,
+  "independent_rollback_distinct": true,
+  "local_socket_denial": "seccomp AF_INET/AF_INET6 denied",
+  "frontend": "unchanged, prior evidence reused",
+  "retry9_execution_started": false,
+  "azure_calls_this_repair": 0,
+  "azure_mutations_this_repair": 0,
+  "provider_calls_this_repair": 0,
+  "next_approval": "Approval A retry-9 ONLY; Recovery B and production C\u2013F unauthorized",
+  "test_source_sha256": {
+    "backend/tests/test_cleanup_sql_semantics.py": "07198d1d51583d74e80510989f4edd6a57020198e08013af11488d7ddd932b8f",
+    "backend/tests/test_remaining_targeted_probe.py": "32625b9c2928e992b89f2c9ca825c1e6b8004da1a3dad1d774972d5f5682311e",
+    "backend/tests/test_qualification_catalog.py": "9cf08e05abad0d305b3bb267000d54dd92eb0030c598cda4e6dee4f6444e02b9",
+    "backend/tests/test_distinct_rollback_preservation.py": "8d372fdc3817f88fcdc17d01c86ba66a56eaf882fe78afc4ab9ae87fc8207f50",
+    "backend/tests/test_migration_recovery.py": "b1e1e5af7c6dfd5debd8baf52935f1f0fbb90a5035588a35f6f09d788ac31364"
+  }
+}

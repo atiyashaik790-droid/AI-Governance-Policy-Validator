@@ -1,0 +1,6325 @@
+{
+  "legacy_004_metadata_identical": true,
+  "legacy_005_metadata_identical": true,
+  "approved": {
+    "004": {
+      "active_policy_assignments": {
+        "columns": {
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "version_id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [],
+        "constraints": [
+          "ForeignKeyConstraint:version_id",
+          "PrimaryKeyConstraint:tenant"
+        ]
+      },
+      "audit_events": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "actor": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "action": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "resource": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "created": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_audit_events_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "demo_sessions": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(64)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "actor": {
+            "type": "VARCHAR(100)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "role": {
+            "type": "VARCHAR(30)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "credential_hash": {
+            "type": "VARCHAR(64)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "expires": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "revoked": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "created": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_demo_sessions_expires",
+            "columns": [
+              "expires"
+            ],
+            "unique": false
+          },
+          {
+            "name": "ix_demo_sessions_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "evaluation_exports": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "status": {
+            "type": "VARCHAR(20)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "path": {
+            "type": "VARCHAR(300)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "created": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_evaluation_exports_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "export_jobs": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "idempotency_key": {
+            "type": "VARCHAR(100)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "request_hash": {
+            "type": "VARCHAR(64)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "content_hash": {
+            "type": "VARCHAR(64)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "content": {
+            "type": "TEXT",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "state": {
+            "type": "VARCHAR(20)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "attempts": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "lease_until": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "error_code": {
+            "type": "VARCHAR(50)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "created": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "updated": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_export_jobs_state",
+            "columns": [
+              "state"
+            ],
+            "unique": false
+          },
+          {
+            "name": "ix_export_jobs_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "ForeignKeyConstraint:id",
+          "PrimaryKeyConstraint:id",
+          "UniqueConstraint:tenant,idempotency_key"
+        ]
+      },
+      "feedback_records": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "execution_id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "rating": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_feedback_records_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "ForeignKeyConstraint:execution_id",
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "human_review_cases": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "execution_id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "status": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "created": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "row_version": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_human_review_cases_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "ForeignKeyConstraint:execution_id",
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "inference_rate_buckets": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(64)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "used": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "expires": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_inference_rate_buckets_expires",
+            "columns": [
+              "expires"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "inference_usage": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "actor": {
+            "type": "VARCHAR(100)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "status": {
+            "type": "VARCHAR(30)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "expires": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "created": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "finished": {
+            "type": "VARCHAR(40)",
+            "nullable": true,
+            "primary_key": false,
+            "server_default": null
+          },
+          "prompt_tokens": {
+            "type": "INTEGER",
+            "nullable": true,
+            "primary_key": false,
+            "server_default": null
+          },
+          "completion_tokens": {
+            "type": "INTEGER",
+            "nullable": true,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_inference_usage_actor",
+            "columns": [
+              "actor"
+            ],
+            "unique": false
+          },
+          {
+            "name": "ix_inference_usage_expires",
+            "columns": [
+              "expires"
+            ],
+            "unique": false
+          },
+          {
+            "name": "ix_inference_usage_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "policies": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "name": {
+            "type": "VARCHAR(120)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "draft": {
+            "type": "TEXT",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "status": {
+            "type": "VARCHAR(20)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "enabled": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "revision": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "row_version": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_policies_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "policy_versions": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "policy_id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "number": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "document": {
+            "type": "TEXT",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "created": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_policy_versions_policy_id",
+            "columns": [
+              "policy_id"
+            ],
+            "unique": false
+          },
+          {
+            "name": "ix_policy_versions_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "ForeignKeyConstraint:policy_id",
+          "PrimaryKeyConstraint:id",
+          "UniqueConstraint:policy_id,number"
+        ]
+      },
+      "review_assignments": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "assigned_reviewer": {
+            "type": "VARCHAR(100)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "reason": {
+            "type": "VARCHAR(1000)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "updated": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_review_assignments_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "ForeignKeyConstraint:id",
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "review_notes": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "review_id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "actor": {
+            "type": "VARCHAR(100)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "action": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "reason": {
+            "type": "VARCHAR(1000)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "created": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_review_notes_review_id",
+            "columns": [
+              "review_id"
+            ],
+            "unique": false
+          },
+          {
+            "name": "ix_review_notes_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "ForeignKeyConstraint:review_id",
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "validation_executions": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "actor": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "policy_id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "version": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "model": {
+            "type": "VARCHAR(120)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "decision": {
+            "type": "VARCHAR(20)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "metadata_json": {
+            "type": "TEXT",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "created": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_execution_tenant_created",
+            "columns": [
+              "tenant",
+              "created",
+              "id"
+            ],
+            "unique": false
+          },
+          {
+            "name": "ix_validation_executions_decision",
+            "columns": [
+              "decision"
+            ],
+            "unique": false
+          },
+          {
+            "name": "ix_validation_executions_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "PrimaryKeyConstraint:id"
+        ]
+      }
+    },
+    "005": {
+      "active_policy_assignments": {
+        "columns": {
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "version_id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [],
+        "constraints": [
+          "ForeignKeyConstraint:version_id",
+          "PrimaryKeyConstraint:tenant"
+        ]
+      },
+      "audit_events": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "actor": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "action": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "resource": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "created": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_audit_events_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "demo_sessions": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(64)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "actor": {
+            "type": "VARCHAR(100)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "role": {
+            "type": "VARCHAR(30)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "credential_hash": {
+            "type": "VARCHAR(64)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "expires": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "revoked": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "created": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_demo_sessions_expires",
+            "columns": [
+              "expires"
+            ],
+            "unique": false
+          },
+          {
+            "name": "ix_demo_sessions_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "evaluation_exports": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "status": {
+            "type": "VARCHAR(20)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "path": {
+            "type": "VARCHAR(300)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "created": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_evaluation_exports_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "export_jobs": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "idempotency_key": {
+            "type": "VARCHAR(100)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "request_hash": {
+            "type": "VARCHAR(64)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "content_hash": {
+            "type": "VARCHAR(64)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "content": {
+            "type": "TEXT",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "state": {
+            "type": "VARCHAR(20)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "attempts": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "lease_until": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "error_code": {
+            "type": "VARCHAR(50)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "created": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "updated": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_export_jobs_state",
+            "columns": [
+              "state"
+            ],
+            "unique": false
+          },
+          {
+            "name": "ix_export_jobs_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "ForeignKeyConstraint:id",
+          "PrimaryKeyConstraint:id",
+          "UniqueConstraint:tenant,idempotency_key"
+        ]
+      },
+      "feedback_records": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "execution_id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "rating": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_feedback_records_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "ForeignKeyConstraint:execution_id",
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "human_review_cases": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "execution_id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "status": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "created": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "row_version": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_human_review_cases_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "ForeignKeyConstraint:execution_id",
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "inference_rate_buckets": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(64)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "used": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "expires": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_inference_rate_buckets_expires",
+            "columns": [
+              "expires"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "inference_usage": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "actor": {
+            "type": "VARCHAR(100)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "status": {
+            "type": "VARCHAR(30)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "expires": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "created": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "finished": {
+            "type": "VARCHAR(40)",
+            "nullable": true,
+            "primary_key": false,
+            "server_default": null
+          },
+          "prompt_tokens": {
+            "type": "INTEGER",
+            "nullable": true,
+            "primary_key": false,
+            "server_default": null
+          },
+          "completion_tokens": {
+            "type": "INTEGER",
+            "nullable": true,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_inference_usage_actor",
+            "columns": [
+              "actor"
+            ],
+            "unique": false
+          },
+          {
+            "name": "ix_inference_usage_expires",
+            "columns": [
+              "expires"
+            ],
+            "unique": false
+          },
+          {
+            "name": "ix_inference_usage_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "policies": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "name": {
+            "type": "VARCHAR(120)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "draft": {
+            "type": "TEXT",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "status": {
+            "type": "VARCHAR(20)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "enabled": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "revision": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "row_version": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_policies_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "policy_versions": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "policy_id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "number": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "document": {
+            "type": "TEXT",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "created": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_policy_versions_policy_id",
+            "columns": [
+              "policy_id"
+            ],
+            "unique": false
+          },
+          {
+            "name": "ix_policy_versions_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "ForeignKeyConstraint:policy_id",
+          "PrimaryKeyConstraint:id",
+          "UniqueConstraint:policy_id,number"
+        ]
+      },
+      "review_assignments": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "assigned_reviewer": {
+            "type": "VARCHAR(100)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "reason": {
+            "type": "VARCHAR(1000)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "updated": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_review_assignments_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "ForeignKeyConstraint:id",
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "review_notes": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "review_id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "actor": {
+            "type": "VARCHAR(100)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "action": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "reason": {
+            "type": "VARCHAR(1000)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "created": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_review_notes_review_id",
+            "columns": [
+              "review_id"
+            ],
+            "unique": false
+          },
+          {
+            "name": "ix_review_notes_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "ForeignKeyConstraint:review_id",
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "sso_memberships": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "directory_tenant": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "object_id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "actor": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "role": {
+            "type": "VARCHAR(30)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "enabled": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [],
+        "constraints": [
+          "PrimaryKeyConstraint:id",
+          "UniqueConstraint:directory_tenant,object_id",
+          "UniqueConstraint:tenant,actor"
+        ]
+      },
+      "sso_sessions": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(64)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "membership_id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "expires": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "revoked": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_sso_sessions_expires",
+            "columns": [
+              "expires"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "ForeignKeyConstraint:membership_id",
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "sso_transactions": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(64)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "binding_hash": {
+            "type": "VARCHAR(64)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "nonce": {
+            "type": "VARCHAR(100)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "verifier": {
+            "type": "VARCHAR(128)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "return_path": {
+            "type": "VARCHAR(500)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "expires": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "consumed": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_sso_transactions_expires",
+            "columns": [
+              "expires"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "validation_executions": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "actor": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "policy_id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "version": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "model": {
+            "type": "VARCHAR(120)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "decision": {
+            "type": "VARCHAR(20)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "metadata_json": {
+            "type": "TEXT",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "created": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_execution_tenant_created",
+            "columns": [
+              "tenant",
+              "created",
+              "id"
+            ],
+            "unique": false
+          },
+          {
+            "name": "ix_validation_executions_decision",
+            "columns": [
+              "decision"
+            ],
+            "unique": false
+          },
+          {
+            "name": "ix_validation_executions_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "PrimaryKeyConstraint:id"
+        ]
+      }
+    }
+  },
+  "current": {
+    "004": {
+      "active_policy_assignments": {
+        "columns": {
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "version_id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [],
+        "constraints": [
+          "ForeignKeyConstraint:version_id",
+          "PrimaryKeyConstraint:tenant"
+        ]
+      },
+      "audit_events": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "actor": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "action": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "resource": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "created": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_audit_events_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "demo_sessions": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(64)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "actor": {
+            "type": "VARCHAR(100)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "role": {
+            "type": "VARCHAR(30)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "credential_hash": {
+            "type": "VARCHAR(64)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "expires": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "revoked": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "created": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_demo_sessions_expires",
+            "columns": [
+              "expires"
+            ],
+            "unique": false
+          },
+          {
+            "name": "ix_demo_sessions_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "evaluation_exports": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "status": {
+            "type": "VARCHAR(20)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "path": {
+            "type": "VARCHAR(300)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "created": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_evaluation_exports_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "export_jobs": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "idempotency_key": {
+            "type": "VARCHAR(100)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "request_hash": {
+            "type": "VARCHAR(64)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "content_hash": {
+            "type": "VARCHAR(64)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "content": {
+            "type": "TEXT",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "state": {
+            "type": "VARCHAR(20)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "attempts": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "lease_until": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "error_code": {
+            "type": "VARCHAR(50)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "created": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "updated": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_export_jobs_state",
+            "columns": [
+              "state"
+            ],
+            "unique": false
+          },
+          {
+            "name": "ix_export_jobs_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "ForeignKeyConstraint:id",
+          "PrimaryKeyConstraint:id",
+          "UniqueConstraint:tenant,idempotency_key"
+        ]
+      },
+      "feedback_records": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "execution_id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "rating": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_feedback_records_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "ForeignKeyConstraint:execution_id",
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "human_review_cases": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "execution_id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "status": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "created": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "row_version": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_human_review_cases_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "ForeignKeyConstraint:execution_id",
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "inference_rate_buckets": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(64)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "used": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "expires": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_inference_rate_buckets_expires",
+            "columns": [
+              "expires"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "inference_usage": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "actor": {
+            "type": "VARCHAR(100)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "status": {
+            "type": "VARCHAR(30)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "expires": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "created": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "finished": {
+            "type": "VARCHAR(40)",
+            "nullable": true,
+            "primary_key": false,
+            "server_default": null
+          },
+          "prompt_tokens": {
+            "type": "INTEGER",
+            "nullable": true,
+            "primary_key": false,
+            "server_default": null
+          },
+          "completion_tokens": {
+            "type": "INTEGER",
+            "nullable": true,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_inference_usage_actor",
+            "columns": [
+              "actor"
+            ],
+            "unique": false
+          },
+          {
+            "name": "ix_inference_usage_expires",
+            "columns": [
+              "expires"
+            ],
+            "unique": false
+          },
+          {
+            "name": "ix_inference_usage_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "policies": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "name": {
+            "type": "VARCHAR(120)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "draft": {
+            "type": "TEXT",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "status": {
+            "type": "VARCHAR(20)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "enabled": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "revision": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "row_version": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_policies_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "policy_versions": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "policy_id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "number": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "document": {
+            "type": "TEXT",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "created": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_policy_versions_policy_id",
+            "columns": [
+              "policy_id"
+            ],
+            "unique": false
+          },
+          {
+            "name": "ix_policy_versions_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "ForeignKeyConstraint:policy_id",
+          "PrimaryKeyConstraint:id",
+          "UniqueConstraint:policy_id,number"
+        ]
+      },
+      "review_assignments": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "assigned_reviewer": {
+            "type": "VARCHAR(100)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "reason": {
+            "type": "VARCHAR(1000)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "updated": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_review_assignments_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "ForeignKeyConstraint:id",
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "review_notes": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "review_id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "actor": {
+            "type": "VARCHAR(100)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "action": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "reason": {
+            "type": "VARCHAR(1000)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "created": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_review_notes_review_id",
+            "columns": [
+              "review_id"
+            ],
+            "unique": false
+          },
+          {
+            "name": "ix_review_notes_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "ForeignKeyConstraint:review_id",
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "validation_executions": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "actor": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "policy_id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "version": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "model": {
+            "type": "VARCHAR(120)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "decision": {
+            "type": "VARCHAR(20)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "metadata_json": {
+            "type": "TEXT",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "created": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_execution_tenant_created",
+            "columns": [
+              "tenant",
+              "created",
+              "id"
+            ],
+            "unique": false
+          },
+          {
+            "name": "ix_validation_executions_decision",
+            "columns": [
+              "decision"
+            ],
+            "unique": false
+          },
+          {
+            "name": "ix_validation_executions_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "PrimaryKeyConstraint:id"
+        ]
+      }
+    },
+    "005": {
+      "active_policy_assignments": {
+        "columns": {
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "version_id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [],
+        "constraints": [
+          "ForeignKeyConstraint:version_id",
+          "PrimaryKeyConstraint:tenant"
+        ]
+      },
+      "audit_events": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "actor": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "action": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "resource": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "created": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_audit_events_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "demo_sessions": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(64)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "actor": {
+            "type": "VARCHAR(100)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "role": {
+            "type": "VARCHAR(30)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "credential_hash": {
+            "type": "VARCHAR(64)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "expires": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "revoked": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "created": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_demo_sessions_expires",
+            "columns": [
+              "expires"
+            ],
+            "unique": false
+          },
+          {
+            "name": "ix_demo_sessions_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "evaluation_exports": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "status": {
+            "type": "VARCHAR(20)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "path": {
+            "type": "VARCHAR(300)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "created": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_evaluation_exports_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "export_jobs": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "idempotency_key": {
+            "type": "VARCHAR(100)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "request_hash": {
+            "type": "VARCHAR(64)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "content_hash": {
+            "type": "VARCHAR(64)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "content": {
+            "type": "TEXT",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "state": {
+            "type": "VARCHAR(20)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "attempts": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "lease_until": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "error_code": {
+            "type": "VARCHAR(50)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "created": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "updated": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_export_jobs_state",
+            "columns": [
+              "state"
+            ],
+            "unique": false
+          },
+          {
+            "name": "ix_export_jobs_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "ForeignKeyConstraint:id",
+          "PrimaryKeyConstraint:id",
+          "UniqueConstraint:tenant,idempotency_key"
+        ]
+      },
+      "feedback_records": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "execution_id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "rating": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_feedback_records_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "ForeignKeyConstraint:execution_id",
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "human_review_cases": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "execution_id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "status": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "created": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "row_version": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_human_review_cases_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "ForeignKeyConstraint:execution_id",
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "inference_rate_buckets": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(64)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "used": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "expires": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_inference_rate_buckets_expires",
+            "columns": [
+              "expires"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "inference_usage": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "actor": {
+            "type": "VARCHAR(100)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "status": {
+            "type": "VARCHAR(30)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "expires": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "created": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "finished": {
+            "type": "VARCHAR(40)",
+            "nullable": true,
+            "primary_key": false,
+            "server_default": null
+          },
+          "prompt_tokens": {
+            "type": "INTEGER",
+            "nullable": true,
+            "primary_key": false,
+            "server_default": null
+          },
+          "completion_tokens": {
+            "type": "INTEGER",
+            "nullable": true,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_inference_usage_actor",
+            "columns": [
+              "actor"
+            ],
+            "unique": false
+          },
+          {
+            "name": "ix_inference_usage_expires",
+            "columns": [
+              "expires"
+            ],
+            "unique": false
+          },
+          {
+            "name": "ix_inference_usage_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "policies": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "name": {
+            "type": "VARCHAR(120)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "draft": {
+            "type": "TEXT",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "status": {
+            "type": "VARCHAR(20)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "enabled": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "revision": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "row_version": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_policies_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "policy_versions": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "policy_id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "number": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "document": {
+            "type": "TEXT",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "created": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_policy_versions_policy_id",
+            "columns": [
+              "policy_id"
+            ],
+            "unique": false
+          },
+          {
+            "name": "ix_policy_versions_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "ForeignKeyConstraint:policy_id",
+          "PrimaryKeyConstraint:id",
+          "UniqueConstraint:policy_id,number"
+        ]
+      },
+      "review_assignments": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "assigned_reviewer": {
+            "type": "VARCHAR(100)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "reason": {
+            "type": "VARCHAR(1000)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "updated": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_review_assignments_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "ForeignKeyConstraint:id",
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "review_notes": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "review_id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "actor": {
+            "type": "VARCHAR(100)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "action": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "reason": {
+            "type": "VARCHAR(1000)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "created": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_review_notes_review_id",
+            "columns": [
+              "review_id"
+            ],
+            "unique": false
+          },
+          {
+            "name": "ix_review_notes_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "ForeignKeyConstraint:review_id",
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "sso_memberships": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "directory_tenant": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "object_id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "actor": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "role": {
+            "type": "VARCHAR(30)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "enabled": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [],
+        "constraints": [
+          "PrimaryKeyConstraint:id",
+          "UniqueConstraint:directory_tenant,object_id",
+          "UniqueConstraint:tenant,actor"
+        ]
+      },
+      "sso_sessions": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(64)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "membership_id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "expires": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "revoked": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_sso_sessions_expires",
+            "columns": [
+              "expires"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "ForeignKeyConstraint:membership_id",
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "sso_transactions": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(64)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "binding_hash": {
+            "type": "VARCHAR(64)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "nonce": {
+            "type": "VARCHAR(100)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "verifier": {
+            "type": "VARCHAR(128)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "return_path": {
+            "type": "VARCHAR(500)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "expires": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "consumed": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_sso_transactions_expires",
+            "columns": [
+              "expires"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "validation_executions": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "actor": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "policy_id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "version": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "model": {
+            "type": "VARCHAR(120)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "decision": {
+            "type": "VARCHAR(20)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "metadata_json": {
+            "type": "TEXT",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "created": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_execution_tenant_created",
+            "columns": [
+              "tenant",
+              "created",
+              "id"
+            ],
+            "unique": false
+          },
+          {
+            "name": "ix_validation_executions_decision",
+            "columns": [
+              "decision"
+            ],
+            "unique": false
+          },
+          {
+            "name": "ix_validation_executions_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "PrimaryKeyConstraint:id"
+        ]
+      }
+    },
+    "006": {
+      "active_policy_assignments": {
+        "columns": {
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "version_id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [],
+        "constraints": [
+          "ForeignKeyConstraint:version_id",
+          "PrimaryKeyConstraint:tenant"
+        ]
+      },
+      "audit_events": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "actor": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "action": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "resource": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "created": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_audit_events_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "demo_sessions": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(64)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "actor": {
+            "type": "VARCHAR(100)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "role": {
+            "type": "VARCHAR(30)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "credential_hash": {
+            "type": "VARCHAR(64)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "expires": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "revoked": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "created": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_demo_sessions_expires",
+            "columns": [
+              "expires"
+            ],
+            "unique": false
+          },
+          {
+            "name": "ix_demo_sessions_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "evaluation_exports": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "status": {
+            "type": "VARCHAR(20)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "path": {
+            "type": "VARCHAR(300)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "created": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_evaluation_exports_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "execution_policy_evidence": {
+        "columns": {
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "execution_id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "policy_id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "version_id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "set_revision": {
+            "type": "BIGINT",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "document_sha256": {
+            "type": "CHAR(64)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "effective_decision": {
+            "type": "VARCHAR(12)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "inspection_status": {
+            "type": "VARCHAR(16)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "evidence_json": {
+            "type": "TEXT",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "created_at": {
+            "type": "DATETIME",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": "CURRENT_TIMESTAMP"
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_epe_tenant_policy_created",
+            "columns": [
+              "tenant",
+              "policy_id",
+              "created_at",
+              "execution_id"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "ForeignKeyConstraint:tenant,execution_id",
+          "ForeignKeyConstraint:tenant,policy_id",
+          "ForeignKeyConstraint:tenant,policy_id,version_id",
+          "ISJSON(evidence_json) = 1",
+          "PrimaryKeyConstraint:tenant,execution_id,policy_id",
+          "effective_decision IN ('ALLOW','REDACT','HUMAN_REVIEW','BLOCK')",
+          "inspection_status IN ('COMPLETE','INCOMPLETE','NOT_RUN')",
+          "json_valid(evidence_json) = 1",
+          "set_revision >= 1"
+        ]
+      },
+      "export_jobs": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "idempotency_key": {
+            "type": "VARCHAR(100)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "request_hash": {
+            "type": "VARCHAR(64)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "content_hash": {
+            "type": "VARCHAR(64)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "content": {
+            "type": "TEXT",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "state": {
+            "type": "VARCHAR(20)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "attempts": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "lease_until": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "error_code": {
+            "type": "VARCHAR(50)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "created": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "updated": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_export_jobs_state",
+            "columns": [
+              "state"
+            ],
+            "unique": false
+          },
+          {
+            "name": "ix_export_jobs_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "ForeignKeyConstraint:id",
+          "PrimaryKeyConstraint:id",
+          "UniqueConstraint:tenant,idempotency_key"
+        ]
+      },
+      "feedback_records": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "execution_id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "rating": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_feedback_records_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "ForeignKeyConstraint:execution_id",
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "human_review_cases": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "execution_id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "status": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "created": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "row_version": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_human_review_cases_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "ForeignKeyConstraint:execution_id",
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "inference_rate_buckets": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(64)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "used": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "expires": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_inference_rate_buckets_expires",
+            "columns": [
+              "expires"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "inference_usage": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "actor": {
+            "type": "VARCHAR(100)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "status": {
+            "type": "VARCHAR(30)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "expires": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "created": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "finished": {
+            "type": "VARCHAR(40)",
+            "nullable": true,
+            "primary_key": false,
+            "server_default": null
+          },
+          "prompt_tokens": {
+            "type": "INTEGER",
+            "nullable": true,
+            "primary_key": false,
+            "server_default": null
+          },
+          "completion_tokens": {
+            "type": "INTEGER",
+            "nullable": true,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_inference_usage_actor",
+            "columns": [
+              "actor"
+            ],
+            "unique": false
+          },
+          {
+            "name": "ix_inference_usage_expires",
+            "columns": [
+              "expires"
+            ],
+            "unique": false
+          },
+          {
+            "name": "ix_inference_usage_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "policies": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "name": {
+            "type": "VARCHAR(120)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "draft": {
+            "type": "TEXT",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "status": {
+            "type": "VARCHAR(20)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "enabled": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "revision": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "row_version": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_policies_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          },
+          {
+            "name": "ux_policies_tenant_id",
+            "columns": [
+              "tenant",
+              "id"
+            ],
+            "unique": true
+          }
+        ],
+        "constraints": [
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "policy_versions": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "policy_id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "number": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "document": {
+            "type": "TEXT",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "created": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_policy_versions_policy_id",
+            "columns": [
+              "policy_id"
+            ],
+            "unique": false
+          },
+          {
+            "name": "ix_policy_versions_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          },
+          {
+            "name": "ux_policy_versions_tenant_policy_id",
+            "columns": [
+              "tenant",
+              "policy_id",
+              "id"
+            ],
+            "unique": true
+          }
+        ],
+        "constraints": [
+          "ForeignKeyConstraint:policy_id",
+          "PrimaryKeyConstraint:id",
+          "UniqueConstraint:policy_id,number"
+        ]
+      },
+      "review_assignments": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "assigned_reviewer": {
+            "type": "VARCHAR(100)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "reason": {
+            "type": "VARCHAR(1000)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "updated": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_review_assignments_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "ForeignKeyConstraint:id",
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "review_notes": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "review_id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "actor": {
+            "type": "VARCHAR(100)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "action": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "reason": {
+            "type": "VARCHAR(1000)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "created": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_review_notes_review_id",
+            "columns": [
+              "review_id"
+            ],
+            "unique": false
+          },
+          {
+            "name": "ix_review_notes_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "ForeignKeyConstraint:review_id",
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "sso_memberships": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "directory_tenant": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "object_id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "actor": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "role": {
+            "type": "VARCHAR(30)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "enabled": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [],
+        "constraints": [
+          "PrimaryKeyConstraint:id",
+          "UniqueConstraint:directory_tenant,object_id",
+          "UniqueConstraint:tenant,actor"
+        ]
+      },
+      "sso_sessions": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(64)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "membership_id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "expires": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "revoked": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_sso_sessions_expires",
+            "columns": [
+              "expires"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "ForeignKeyConstraint:membership_id",
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "sso_transactions": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(64)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "binding_hash": {
+            "type": "VARCHAR(64)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "nonce": {
+            "type": "VARCHAR(100)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "verifier": {
+            "type": "VARCHAR(128)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "return_path": {
+            "type": "VARCHAR(500)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "expires": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "consumed": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_sso_transactions_expires",
+            "columns": [
+              "expires"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "validation_executions": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "actor": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "policy_id": {
+            "type": "VARCHAR(36)",
+            "nullable": true,
+            "primary_key": false,
+            "server_default": null
+          },
+          "version": {
+            "type": "INTEGER",
+            "nullable": true,
+            "primary_key": false,
+            "server_default": null
+          },
+          "model": {
+            "type": "VARCHAR(120)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "decision": {
+            "type": "VARCHAR(20)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "metadata_json": {
+            "type": "TEXT",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "created": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "execution_mode": {
+            "type": "VARCHAR(6)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": "LEGACY"
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_execution_tenant_created",
+            "columns": [
+              "tenant",
+              "created",
+              "id"
+            ],
+            "unique": false
+          },
+          {
+            "name": "ix_validation_executions_decision",
+            "columns": [
+              "decision"
+            ],
+            "unique": false
+          },
+          {
+            "name": "ix_validation_executions_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          },
+          {
+            "name": "ux_validation_executions_tenant_id",
+            "columns": [
+              "tenant",
+              "id"
+            ],
+            "unique": true
+          }
+        ],
+        "constraints": [
+          "PrimaryKeyConstraint:id",
+          "execution_mode IN ('LEGACY','MULTI') AND (\n (execution_mode = 'LEGACY' AND policy_id IS NOT NULL AND version IS NOT NULL AND version >= 1)\n OR (execution_mode = 'MULTI' AND policy_id IS NULL AND version IS NULL))"
+        ]
+      },
+      "workspace_policy_assignment_events": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "set_revision": {
+            "type": "BIGINT",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "event_ordinal": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "event_type": {
+            "type": "VARCHAR(16)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "policy_id": {
+            "type": "VARCHAR(36)",
+            "nullable": true,
+            "primary_key": false,
+            "server_default": null
+          },
+          "old_version_id": {
+            "type": "VARCHAR(36)",
+            "nullable": true,
+            "primary_key": false,
+            "server_default": null
+          },
+          "new_version_id": {
+            "type": "VARCHAR(36)",
+            "nullable": true,
+            "primary_key": false,
+            "server_default": null
+          },
+          "old_active": {
+            "type": "BOOLEAN",
+            "nullable": true,
+            "primary_key": false,
+            "server_default": null
+          },
+          "new_active": {
+            "type": "BOOLEAN",
+            "nullable": true,
+            "primary_key": false,
+            "server_default": null
+          },
+          "old_mode": {
+            "type": "VARCHAR(6)",
+            "nullable": true,
+            "primary_key": false,
+            "server_default": null
+          },
+          "new_mode": {
+            "type": "VARCHAR(6)",
+            "nullable": true,
+            "primary_key": false,
+            "server_default": null
+          },
+          "actor": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "created_at": {
+            "type": "DATETIME",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": "CURRENT_TIMESTAMP"
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_wpae_tenant_created_id",
+            "columns": [
+              "tenant",
+              "created_at",
+              "id"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "(\n event_type IN ('INITIALIZE','SET_MODE') AND policy_id IS NULL\n AND old_version_id IS NULL AND new_version_id IS NULL\n AND old_active IS NULL AND new_active IS NULL\n AND new_mode IS NOT NULL AND new_mode IN ('LEGACY','MULTI')\n AND ((event_type = 'INITIALIZE' AND old_mode IS NULL)\n OR (event_type = 'SET_MODE' AND old_mode IS NOT NULL\n AND old_mode IN ('LEGACY','MULTI') AND old_mode <> new_mode))\n) OR (\n event_type IN ('ACTIVATE','DEACTIVATE','REPIN') AND policy_id IS NOT NULL\n AND new_version_id IS NOT NULL AND new_active IS NOT NULL\n AND old_mode IS NULL AND new_mode IS NULL\n AND ((event_type = 'ACTIVATE' AND new_active = 1\n       AND ((old_version_id IS NULL AND old_active IS NULL)\n            OR (old_version_id IS NOT NULL AND old_active IS NOT NULL AND old_active = 0)))\n OR (event_type = 'DEACTIVATE' AND old_version_id IS NOT NULL\n     AND old_active IS NOT NULL AND old_active = 1 AND new_active = 0\n     AND old_version_id = new_version_id)\n OR (event_type = 'REPIN' AND old_version_id IS NOT NULL\n     AND old_active IS NOT NULL AND old_active = 1 AND new_active = 1\n     AND old_version_id <> new_version_id))\n)",
+          "ForeignKeyConstraint:tenant",
+          "ForeignKeyConstraint:tenant,policy_id",
+          "ForeignKeyConstraint:tenant,policy_id,new_version_id",
+          "ForeignKeyConstraint:tenant,policy_id,old_version_id",
+          "PrimaryKeyConstraint:id",
+          "UniqueConstraint:tenant,set_revision,event_ordinal",
+          "new_active IS NULL OR new_active IN (0,1)",
+          "old_active IS NULL OR old_active IN (0,1)",
+          "set_revision >= 1 AND event_ordinal >= 1"
+        ]
+      },
+      "workspace_policy_assignments": {
+        "columns": {
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "policy_id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "version_id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "active": {
+            "type": "BOOLEAN",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "changed_revision": {
+            "type": "BIGINT",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "updated_at": {
+            "type": "DATETIME",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": "CURRENT_TIMESTAMP"
+          },
+          "updated_by": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_wpa_tenant_active_policy",
+            "columns": [
+              "tenant",
+              "active",
+              "policy_id"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "ForeignKeyConstraint:tenant",
+          "ForeignKeyConstraint:tenant,policy_id",
+          "ForeignKeyConstraint:tenant,policy_id,version_id",
+          "PrimaryKeyConstraint:tenant,policy_id",
+          "active IN (0,1)",
+          "changed_revision >= 1"
+        ]
+      },
+      "workspace_policy_states": {
+        "columns": {
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "mode": {
+            "type": "VARCHAR(6)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": "LEGACY"
+          },
+          "set_revision": {
+            "type": "BIGINT",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": "1"
+          },
+          "updated_at": {
+            "type": "DATETIME",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": "CURRENT_TIMESTAMP"
+          },
+          "updated_by": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [],
+        "constraints": [
+          "PrimaryKeyConstraint:tenant",
+          "mode IN ('LEGACY','MULTI')",
+          "set_revision >= 1"
+        ]
+      }
+    },
+    "007": {
+      "active_policy_assignments": {
+        "columns": {
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "version_id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [],
+        "constraints": [
+          "ForeignKeyConstraint:version_id",
+          "PrimaryKeyConstraint:tenant"
+        ]
+      },
+      "audit_events": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "actor": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "action": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "resource": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "created": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_audit_events_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "demo_sessions": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(64)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "actor": {
+            "type": "VARCHAR(100)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "role": {
+            "type": "VARCHAR(30)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "credential_hash": {
+            "type": "VARCHAR(64)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "expires": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "revoked": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "created": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_demo_sessions_expires",
+            "columns": [
+              "expires"
+            ],
+            "unique": false
+          },
+          {
+            "name": "ix_demo_sessions_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "evaluation_exports": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "status": {
+            "type": "VARCHAR(20)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "path": {
+            "type": "VARCHAR(300)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "created": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_evaluation_exports_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "execution_policy_evidence": {
+        "columns": {
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "execution_id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "policy_id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "version_id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "set_revision": {
+            "type": "BIGINT",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "document_sha256": {
+            "type": "CHAR(64)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "effective_decision": {
+            "type": "VARCHAR(12)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "inspection_status": {
+            "type": "VARCHAR(16)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "evidence_json": {
+            "type": "TEXT",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "created_at": {
+            "type": "DATETIME",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": "CURRENT_TIMESTAMP"
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_epe_tenant_policy_created",
+            "columns": [
+              "tenant",
+              "policy_id",
+              "created_at",
+              "execution_id"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "ForeignKeyConstraint:tenant,execution_id",
+          "ForeignKeyConstraint:tenant,policy_id",
+          "ForeignKeyConstraint:tenant,policy_id,version_id",
+          "ISJSON(evidence_json) = 1",
+          "PrimaryKeyConstraint:tenant,execution_id,policy_id",
+          "effective_decision IN ('ALLOW','REDACT','HUMAN_REVIEW','BLOCK')",
+          "inspection_status IN ('COMPLETE','INCOMPLETE','NOT_RUN')",
+          "json_valid(evidence_json) = 1",
+          "set_revision >= 1"
+        ]
+      },
+      "export_jobs": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "idempotency_key": {
+            "type": "VARCHAR(100)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "request_hash": {
+            "type": "VARCHAR(64)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "content_hash": {
+            "type": "VARCHAR(64)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "content": {
+            "type": "TEXT",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "state": {
+            "type": "VARCHAR(20)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "attempts": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "lease_until": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "error_code": {
+            "type": "VARCHAR(50)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "created": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "updated": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_export_jobs_state",
+            "columns": [
+              "state"
+            ],
+            "unique": false
+          },
+          {
+            "name": "ix_export_jobs_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "ForeignKeyConstraint:id",
+          "PrimaryKeyConstraint:id",
+          "UniqueConstraint:tenant,idempotency_key"
+        ]
+      },
+      "feedback_records": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "execution_id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "rating": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_feedback_records_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "ForeignKeyConstraint:execution_id",
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "human_review_cases": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "execution_id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "status": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "created": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "row_version": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_human_review_cases_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          },
+          {
+            "name": "ux_review_cases_tenant_id",
+            "columns": [
+              "tenant",
+              "id"
+            ],
+            "unique": true
+          }
+        ],
+        "constraints": [
+          "ForeignKeyConstraint:execution_id",
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "inference_rate_buckets": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(64)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "used": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "expires": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_inference_rate_buckets_expires",
+            "columns": [
+              "expires"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "inference_usage": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "actor": {
+            "type": "VARCHAR(100)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "status": {
+            "type": "VARCHAR(30)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "expires": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "created": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "finished": {
+            "type": "VARCHAR(40)",
+            "nullable": true,
+            "primary_key": false,
+            "server_default": null
+          },
+          "prompt_tokens": {
+            "type": "INTEGER",
+            "nullable": true,
+            "primary_key": false,
+            "server_default": null
+          },
+          "completion_tokens": {
+            "type": "INTEGER",
+            "nullable": true,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_inference_usage_actor",
+            "columns": [
+              "actor"
+            ],
+            "unique": false
+          },
+          {
+            "name": "ix_inference_usage_expires",
+            "columns": [
+              "expires"
+            ],
+            "unique": false
+          },
+          {
+            "name": "ix_inference_usage_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "policies": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "name": {
+            "type": "VARCHAR(120)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "draft": {
+            "type": "TEXT",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "status": {
+            "type": "VARCHAR(20)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "enabled": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "revision": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "row_version": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_policies_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          },
+          {
+            "name": "ux_policies_tenant_id",
+            "columns": [
+              "tenant",
+              "id"
+            ],
+            "unique": true
+          }
+        ],
+        "constraints": [
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "policy_versions": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "policy_id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "number": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "document": {
+            "type": "TEXT",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "created": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_policy_versions_policy_id",
+            "columns": [
+              "policy_id"
+            ],
+            "unique": false
+          },
+          {
+            "name": "ix_policy_versions_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          },
+          {
+            "name": "ux_policy_versions_tenant_policy_id",
+            "columns": [
+              "tenant",
+              "policy_id",
+              "id"
+            ],
+            "unique": true
+          }
+        ],
+        "constraints": [
+          "ForeignKeyConstraint:policy_id",
+          "PrimaryKeyConstraint:id",
+          "UniqueConstraint:policy_id,number"
+        ]
+      },
+      "review_assignments": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "assigned_reviewer": {
+            "type": "VARCHAR(100)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "reason": {
+            "type": "VARCHAR(1000)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "updated": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_review_assignments_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "ForeignKeyConstraint:id",
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "review_notes": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "review_id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "actor": {
+            "type": "VARCHAR(100)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "action": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "reason": {
+            "type": "VARCHAR(1000)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "created": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_review_notes_review_id",
+            "columns": [
+              "review_id"
+            ],
+            "unique": false
+          },
+          {
+            "name": "ix_review_notes_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "ForeignKeyConstraint:review_id",
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "review_protected_content": {
+        "columns": {
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "review_id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "content_kind": {
+            "type": "VARCHAR(20)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "format_version": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "key_id": {
+            "type": "VARCHAR(64)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "nonce": {
+            "type": "BLOB",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "ciphertext": {
+            "type": "BLOB",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "created_at": {
+            "type": "BIGINT",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "expires_at": {
+            "type": "BIGINT",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_rpc_expiry",
+            "columns": [
+              "expires_at",
+              "tenant",
+              "review_id"
+            ],
+            "unique": false
+          },
+          {
+            "name": "ux_rpc_key_nonce",
+            "columns": [
+              "key_id",
+              "nonce"
+            ],
+            "unique": true
+          }
+        ],
+        "constraints": [
+          "DATALENGTH(nonce) = 12 AND DATALENGTH(ciphertext) >= 16 AND DATALENGTH(ciphertext) <= 48016",
+          "ForeignKeyConstraint:tenant,review_id",
+          "PrimaryKeyConstraint:tenant,review_id",
+          "content_kind = 'original_prompt' AND format_version = 1",
+          "expires_at > created_at AND expires_at <= created_at + 604800",
+          "length(nonce) = 12 AND length(ciphertext) >= 16 AND length(ciphertext) <= 48016"
+        ]
+      },
+      "sso_memberships": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "directory_tenant": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "object_id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "actor": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "role": {
+            "type": "VARCHAR(30)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "enabled": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [],
+        "constraints": [
+          "PrimaryKeyConstraint:id",
+          "UniqueConstraint:directory_tenant,object_id",
+          "UniqueConstraint:tenant,actor"
+        ]
+      },
+      "sso_sessions": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(64)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "membership_id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "expires": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "revoked": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_sso_sessions_expires",
+            "columns": [
+              "expires"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "ForeignKeyConstraint:membership_id",
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "sso_transactions": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(64)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "binding_hash": {
+            "type": "VARCHAR(64)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "nonce": {
+            "type": "VARCHAR(100)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "verifier": {
+            "type": "VARCHAR(128)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "return_path": {
+            "type": "VARCHAR(500)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "expires": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "consumed": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_sso_transactions_expires",
+            "columns": [
+              "expires"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "PrimaryKeyConstraint:id"
+        ]
+      },
+      "validation_executions": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "actor": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "policy_id": {
+            "type": "VARCHAR(36)",
+            "nullable": true,
+            "primary_key": false,
+            "server_default": null
+          },
+          "version": {
+            "type": "INTEGER",
+            "nullable": true,
+            "primary_key": false,
+            "server_default": null
+          },
+          "model": {
+            "type": "VARCHAR(120)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "decision": {
+            "type": "VARCHAR(20)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "metadata_json": {
+            "type": "TEXT",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "created": {
+            "type": "VARCHAR(40)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "execution_mode": {
+            "type": "VARCHAR(6)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": "LEGACY"
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_execution_tenant_created",
+            "columns": [
+              "tenant",
+              "created",
+              "id"
+            ],
+            "unique": false
+          },
+          {
+            "name": "ix_validation_executions_decision",
+            "columns": [
+              "decision"
+            ],
+            "unique": false
+          },
+          {
+            "name": "ix_validation_executions_tenant",
+            "columns": [
+              "tenant"
+            ],
+            "unique": false
+          },
+          {
+            "name": "ux_validation_executions_tenant_id",
+            "columns": [
+              "tenant",
+              "id"
+            ],
+            "unique": true
+          }
+        ],
+        "constraints": [
+          "PrimaryKeyConstraint:id",
+          "execution_mode IN ('LEGACY','MULTI') AND (\n (execution_mode = 'LEGACY' AND policy_id IS NOT NULL AND version IS NOT NULL AND version >= 1)\n OR (execution_mode = 'MULTI' AND policy_id IS NULL AND version IS NULL))"
+        ]
+      },
+      "workspace_policy_assignment_events": {
+        "columns": {
+          "id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "set_revision": {
+            "type": "BIGINT",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "event_ordinal": {
+            "type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "event_type": {
+            "type": "VARCHAR(16)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "policy_id": {
+            "type": "VARCHAR(36)",
+            "nullable": true,
+            "primary_key": false,
+            "server_default": null
+          },
+          "old_version_id": {
+            "type": "VARCHAR(36)",
+            "nullable": true,
+            "primary_key": false,
+            "server_default": null
+          },
+          "new_version_id": {
+            "type": "VARCHAR(36)",
+            "nullable": true,
+            "primary_key": false,
+            "server_default": null
+          },
+          "old_active": {
+            "type": "BOOLEAN",
+            "nullable": true,
+            "primary_key": false,
+            "server_default": null
+          },
+          "new_active": {
+            "type": "BOOLEAN",
+            "nullable": true,
+            "primary_key": false,
+            "server_default": null
+          },
+          "old_mode": {
+            "type": "VARCHAR(6)",
+            "nullable": true,
+            "primary_key": false,
+            "server_default": null
+          },
+          "new_mode": {
+            "type": "VARCHAR(6)",
+            "nullable": true,
+            "primary_key": false,
+            "server_default": null
+          },
+          "actor": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "created_at": {
+            "type": "DATETIME",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": "CURRENT_TIMESTAMP"
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_wpae_tenant_created_id",
+            "columns": [
+              "tenant",
+              "created_at",
+              "id"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "(\n event_type IN ('INITIALIZE','SET_MODE') AND policy_id IS NULL\n AND old_version_id IS NULL AND new_version_id IS NULL\n AND old_active IS NULL AND new_active IS NULL\n AND new_mode IS NOT NULL AND new_mode IN ('LEGACY','MULTI')\n AND ((event_type = 'INITIALIZE' AND old_mode IS NULL)\n OR (event_type = 'SET_MODE' AND old_mode IS NOT NULL\n AND old_mode IN ('LEGACY','MULTI') AND old_mode <> new_mode))\n) OR (\n event_type IN ('ACTIVATE','DEACTIVATE','REPIN') AND policy_id IS NOT NULL\n AND new_version_id IS NOT NULL AND new_active IS NOT NULL\n AND old_mode IS NULL AND new_mode IS NULL\n AND ((event_type = 'ACTIVATE' AND new_active = 1\n       AND ((old_version_id IS NULL AND old_active IS NULL)\n            OR (old_version_id IS NOT NULL AND old_active IS NOT NULL AND old_active = 0)))\n OR (event_type = 'DEACTIVATE' AND old_version_id IS NOT NULL\n     AND old_active IS NOT NULL AND old_active = 1 AND new_active = 0\n     AND old_version_id = new_version_id)\n OR (event_type = 'REPIN' AND old_version_id IS NOT NULL\n     AND old_active IS NOT NULL AND old_active = 1 AND new_active = 1\n     AND old_version_id <> new_version_id))\n)",
+          "ForeignKeyConstraint:tenant",
+          "ForeignKeyConstraint:tenant,policy_id",
+          "ForeignKeyConstraint:tenant,policy_id,new_version_id",
+          "ForeignKeyConstraint:tenant,policy_id,old_version_id",
+          "PrimaryKeyConstraint:id",
+          "UniqueConstraint:tenant,set_revision,event_ordinal",
+          "new_active IS NULL OR new_active IN (0,1)",
+          "old_active IS NULL OR old_active IN (0,1)",
+          "set_revision >= 1 AND event_ordinal >= 1"
+        ]
+      },
+      "workspace_policy_assignments": {
+        "columns": {
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "policy_id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "version_id": {
+            "type": "VARCHAR(36)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "active": {
+            "type": "BOOLEAN",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "changed_revision": {
+            "type": "BIGINT",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          },
+          "updated_at": {
+            "type": "DATETIME",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": "CURRENT_TIMESTAMP"
+          },
+          "updated_by": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [
+          {
+            "name": "ix_wpa_tenant_active_policy",
+            "columns": [
+              "tenant",
+              "active",
+              "policy_id"
+            ],
+            "unique": false
+          }
+        ],
+        "constraints": [
+          "ForeignKeyConstraint:tenant",
+          "ForeignKeyConstraint:tenant,policy_id",
+          "ForeignKeyConstraint:tenant,policy_id,version_id",
+          "PrimaryKeyConstraint:tenant,policy_id",
+          "active IN (0,1)",
+          "changed_revision >= 1"
+        ]
+      },
+      "workspace_policy_states": {
+        "columns": {
+          "tenant": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": true,
+            "server_default": null
+          },
+          "mode": {
+            "type": "VARCHAR(6)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": "LEGACY"
+          },
+          "set_revision": {
+            "type": "BIGINT",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": "1"
+          },
+          "updated_at": {
+            "type": "DATETIME",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": "CURRENT_TIMESTAMP"
+          },
+          "updated_by": {
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "primary_key": false,
+            "server_default": null
+          }
+        },
+        "indexes": [],
+        "constraints": [
+          "PrimaryKeyConstraint:tenant",
+          "mode IN ('LEGACY','MULTI')",
+          "set_revision >= 1"
+        ]
+      }
+    }
+  }
+}

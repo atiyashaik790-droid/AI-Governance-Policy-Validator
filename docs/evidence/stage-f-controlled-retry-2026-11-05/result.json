@@ -1,0 +1,21 @@
+{
+  "stage": "F",
+  "status": "PASS",
+  "new_worker_verified": true,
+  "sso_enabled": true,
+  "demo_login_enabled": true,
+  "health_and_readiness": "PASS",
+  "rollback_performed": false,
+  "release": "1.2-6749226f1af65b63",
+  "schema": "005",
+  "worker_pid": 1966,
+  "worker_started_at_utc": "2026-11-05T05:55:59.363805+00:00",
+  "secret_present": true,
+  "secret_value_logged": false,
+  "source_matches_reviewed": true,
+  "public_page_and_assets": "PASS",
+  "login_choices": "USER_CONFIRMED_BOTH_VISIBLE",
+  "stage_g_executed": false,
+  "next_step": "Stage G only after Stage F PASS and separate Stage G authorization",
+  "observed_at_utc": "2026-11-05T06:01:11.368924+00:00"
+}

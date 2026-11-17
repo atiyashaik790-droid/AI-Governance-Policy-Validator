@@ -1,0 +1,10 @@
+{
+  "source": "Successful exec outputs recorded during this preparation",
+  "test_command": "npm test -- src/IntegrationStatus.test.tsx src/ReviewContent.test.tsx src/SettingsAnalytics.test.tsx src/UserPortal.test.tsx src/Sso.test.tsx",
+  "test_files_passed": 5,
+  "tests_passed": 63,
+  "duration_seconds": 3.44,
+  "typescript_and_production_build": "PASS",
+  "eslint_changed_files": "PASS",
+  "real_provider_calls": 0
+}

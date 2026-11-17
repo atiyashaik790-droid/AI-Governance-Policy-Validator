@@ -1,0 +1,38 @@
+{
+  "stage": "G",
+  "observed_at_utc": "2026-11-05T06:03:14.939789+00:00",
+  "sessions_created_by_agent": 0,
+  "changes_by_agent": false,
+  "checks": {
+    "/health": {
+      "http_status": 200,
+      "transport_exit_code": 0,
+      "status": "ok"
+    },
+    "/ready": {
+      "http_status": 200,
+      "transport_exit_code": 0,
+      "status": "ready",
+      "revision": "005",
+      "release": "1.2-6749226f1af65b63",
+      "sso_available": true
+    },
+    "/api/sso/status": {
+      "http_status": 200,
+      "transport_exit_code": 0,
+      "sso_enabled": true,
+      "configured": true,
+      "demo_login_enabled": true
+    },
+    "/api/policies?limit=1": {
+      "http_status": 401,
+      "transport_exit_code": 0
+    },
+    "/api/sso/me": {
+      "http_status": 401,
+      "transport_exit_code": 0
+    }
+  },
+  "status": "PASS",
+  "unauthenticated_denial": "PASS"
+}

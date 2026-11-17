@@ -1,0 +1,107 @@
+[
+  {
+    "feature": "Health/readiness/version005",
+    "status": "VERIFIED",
+    "evidence_or_limit": "Fresh public200; exact served release and direct SELECT revision005"
+  },
+  {
+    "feature": "Hosted UI shell and assets",
+    "status": "VERIFIED",
+    "evidence_or_limit": "HTML +3 assets exactly match preserved deployed ZIP; browser rendering is NOT VERIFIED"
+  },
+  {
+    "feature": "API routes/authentication boundary",
+    "status": "VERIFIED",
+    "evidence_or_limit": "OpenAPI present; nine unauthenticated protected GETs401 after four original network errors were explicitly rechecked"
+  },
+  {
+    "feature": "Microsoft-only sign-in configuration",
+    "status": "VERIFIED",
+    "evidence_or_limit": "SSO enabled/configured; demo and legacy credentials disabled; sign-in button in matched assets"
+  },
+  {
+    "feature": "Admin account provisioned",
+    "status": "VERIFIED",
+    "evidence_or_limit": "Enabled Admin was confirmed by SELECT on 7 November. A fresh 8 November operator SQL check failed; interactive login remains unverified."
+  },
+  {
+    "feature": "Interactive Admin SSO session",
+    "status": "NOT VERIFIED",
+    "evidence_or_limit": "Login creates transaction/session/audit records and needs approval; no connected browser"
+  },
+  {
+    "feature": "Non-admin account access",
+    "status": "NOT VERIFIED",
+    "evidence_or_limit": "On 7 November only one enabled Admin and no enabled non-admin memberships were found. The 8 November recheck failed; no current membership grant is authorized."
+  },
+  {
+    "feature": "Dedicated User role/User Chatbot portal",
+    "status": "UNAVAILABLE",
+    "evidence_or_limit": "005 release supports Admin/Developer/Reviewer/Auditor/Policy Owner; no User role or separate User portal"
+  },
+  {
+    "feature": "Active policy configuration",
+    "status": "VERIFIED",
+    "evidence_or_limit": "On 7 November an enabled published version1 had secret BLOCK, PII REDACT, moderation BLOCK and internal-only BLOCK. The 8 November recheck failed; reconfirm before live use."
+  },
+  {
+    "feature": "Policy management/versions/lifecycle UI/API",
+    "status": "NOT VERIFIED",
+    "evidence_or_limit": "Routes and matching packaged code are verified; authenticated policy views and write transitions have not been freshly verified."
+  },
+  {
+    "feature": "Fresh authenticated policy/analytics/history UI workflows",
+    "status": "NOT VERIFIED",
+    "evidence_or_limit": "Requires approved login; direct aggregate inventory is separately verified"
+  },
+  {
+    "feature": "PII/secret/keyword live enforcement",
+    "status": "NOT VERIFIED",
+    "evidence_or_limit": "Present in exact deployed code and active policy; fresh execution not authorized"
+  },
+  {
+    "feature": "Azure OpenAI generation and output inspection",
+    "status": "NOT VERIFIED",
+    "evidence_or_limit": "gpt-5-mini configured;32 historical successful-generation metadata records; no new call"
+  },
+  {
+    "feature": "Real moderation",
+    "status": "NOT VERIFIED",
+    "evidence_or_limit": "Credentials/configuration only; no new real operation"
+  },
+  {
+    "feature": "Historical data availability",
+    "status": "VERIFIED",
+    "evidence_or_limit": "Read-only SQL on 7 November counted58 executions/247 audits/1 review/2 exports; current counts not verified after 8 November SQL connection failed."
+  },
+  {
+    "feature": "Basic Human Review metadata/assignment/resolution",
+    "status": "NOT VERIFIED",
+    "evidence_or_limit": "005 routes and existing case present; authenticated runtime workflow not rerun; original content is not retained"
+  },
+  {
+    "feature": "Encrypted review capture/reveal/retention007",
+    "status": "UNAVAILABLE",
+    "evidence_or_limit": "Not shipped on005; keys not required for existing metadata-only review demonstration"
+  },
+  {
+    "feature": "Multiple simultaneously active policies006",
+    "status": "UNAVAILABLE",
+    "evidence_or_limit": "Exactly one active version per workspace in this release"
+  },
+  {
+    "feature": "ADLS export/read-back",
+    "status": "NOT VERIFIED",
+    "evidence_or_limit": "Configured and two export metadata rows; no object read/upload performed"
+  },
+  {
+    "feature": "Truthful Settings configured-not-verified labels",
+    "status": "NOT VERIFIED",
+    "evidence_or_limit": "Deployed code defines configured-not-verified labels; no authenticated current Settings view or provider operation was run."
+  },
+  {
+    "feature": "New integration verification workflow/latest008 audit guarantees",
+    "status": "UNAVAILABLE",
+    "evidence_or_limit": "Not part of deployed005; preserve baseline history without claiming008 trigger proof"
+  }
+]

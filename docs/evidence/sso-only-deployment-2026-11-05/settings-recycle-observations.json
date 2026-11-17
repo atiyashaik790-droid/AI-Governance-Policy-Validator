@@ -1,0 +1,80 @@
+[
+  {
+    "status": "BLOCKED",
+    "error_kind": "WebSocketBadStatusException",
+    "http_status": 503,
+    "source_matches_reviewed": null,
+    "reconstructed_settings": null,
+    "attempt": 1,
+    "worker_start_times": []
+  },
+  {
+    "status": "BLOCKED",
+    "error_kind": "WebSocketBadStatusException",
+    "http_status": 503,
+    "source_matches_reviewed": null,
+    "reconstructed_settings": null,
+    "attempt": 2,
+    "worker_start_times": []
+  },
+  {
+    "status": "BLOCKED",
+    "error_kind": "WebSocketBadStatusException",
+    "http_status": 503,
+    "source_matches_reviewed": null,
+    "reconstructed_settings": null,
+    "attempt": 3,
+    "worker_start_times": []
+  },
+  {
+    "status": "BLOCKED",
+    "error_kind": "WebSocketBadStatusException",
+    "http_status": 503,
+    "source_matches_reviewed": null,
+    "reconstructed_settings": null,
+    "attempt": 4,
+    "worker_start_times": []
+  },
+  {
+    "status": "BLOCKED",
+    "error_kind": "WebSocketBadStatusException",
+    "http_status": 503,
+    "source_matches_reviewed": null,
+    "reconstructed_settings": null,
+    "attempt": 5,
+    "worker_start_times": []
+  },
+  {
+    "status": "BLOCKED",
+    "error_kind": "WebSocketBadStatusException",
+    "http_status": 503,
+    "source_matches_reviewed": null,
+    "reconstructed_settings": null,
+    "attempt": 6,
+    "worker_start_times": []
+  },
+  {
+    "status": "BLOCKED",
+    "error_kind": "WebSocketBadStatusException",
+    "http_status": 503,
+    "source_matches_reviewed": null,
+    "reconstructed_settings": null,
+    "attempt": 7,
+    "worker_start_times": []
+  },
+  {
+    "status": "PASS",
+    "error_kind": null,
+    "http_status": null,
+    "source_matches_reviewed": true,
+    "reconstructed_settings": {
+      "sso_enabled": true,
+      "demo_enabled": false,
+      "secret_present": true
+    },
+    "attempt": 8,
+    "worker_start_times": [
+      "2026-11-05T08:12:09.294699+00:00"
+    ]
+  }
+]

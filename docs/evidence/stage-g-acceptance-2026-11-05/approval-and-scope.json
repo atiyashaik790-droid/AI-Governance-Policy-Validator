@@ -1,0 +1,13 @@
+{
+  "stage": "G",
+  "approval": "Explicit user approval of one bounded real-account end-to-end acceptance test",
+  "manual_credential_entry_only": true,
+  "normal_app_auth_session_audit_writes": "Implicitly authorized by approved login/logout acceptance; no direct database writes",
+  "configuration_changes_allowed": false,
+  "code_changes_allowed": false,
+  "sql_or_membership_changes_allowed": false,
+  "restart_or_deployment_allowed": false,
+  "billable_provider_operations_allowed": false,
+  "real_microsoft_login_by_agent": false,
+  "current_phase": "AWAITING_USER_LOGIN_IDENTITY_NAVIGATION_REFRESH_OBSERVATION"
+}

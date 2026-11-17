@@ -1,0 +1,72 @@
+{
+  "ip_reconfirmed": "101.0.62.148",
+  "before_rules": {
+    "ClientIp-2026-10-28_20-51-52": [
+      "180.151.36.234",
+      "180.151.36.234"
+    ],
+    "gv-appservice-1": [
+      "4.149.94.83",
+      "4.149.94.83"
+    ],
+    "gv-appservice-10": [
+      "20.29.153.35",
+      "20.29.153.35"
+    ],
+    "gv-appservice-11": [
+      "172.179.21.221",
+      "172.179.21.221"
+    ],
+    "gv-appservice-12": [
+      "40.125.96.221",
+      "40.125.96.221"
+    ],
+    "gv-appservice-13": [
+      "20.42.128.126",
+      "20.42.128.126"
+    ],
+    "gv-appservice-2": [
+      "20.115.168.211",
+      "20.115.168.211"
+    ],
+    "gv-appservice-3": [
+      "4.246.17.123",
+      "4.246.17.123"
+    ],
+    "gv-appservice-4": [
+      "48.202.41.174",
+      "48.202.41.174"
+    ],
+    "gv-appservice-5": [
+      "4.149.162.59",
+      "4.149.162.59"
+    ],
+    "gv-appservice-6": [
+      "20.72.205.216",
+      "20.72.205.216"
+    ],
+    "gv-appservice-7": [
+      "51.143.50.106",
+      "51.143.50.106"
+    ],
+    "gv-appservice-8": [
+      "20.72.231.40",
+      "20.72.231.40"
+    ],
+    "gv-appservice-9": [
+      "20.72.198.201",
+      "20.72.198.201"
+    ],
+    "local-laptop-temp-20261031-101-0-62-145": [
+      "101.0.62.145",
+      "101.0.62.145"
+    ]
+  },
+  "create_attempted": true,
+  "approval": "Explicit user approval for exact single-IP temporary rule",
+  "started_at_utc": "2026-11-04T17:52:49.457945+00:00",
+  "created_and_other_rules_unchanged": true,
+  "updated_at_utc": "2026-11-04T17:54:20.336779+00:00",
+  "cleanup_verified": true,
+  "other_rules_unchanged_after_cleanup": true
+}

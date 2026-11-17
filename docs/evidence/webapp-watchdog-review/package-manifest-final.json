@@ -1,0 +1,26 @@
+{
+  "status": "PARTIAL",
+  "azure_creation": "BLOCKED",
+  "deployed": false,
+  "watchdog_armed": false,
+  "azure_changes": false,
+  "zip_sha256": "fc4070ec948fd1465fa2226e7979357eec8def1f9dd9ab97fe2f3ef9bb2d7cd1",
+  "zip_bytes": 5215,
+  "files": {
+    "run.sh": "5954667c23ed1e4151741893aeb0e2e66a9c1b3d381aa24b088b24ad04976ab7",
+    "settings.job": "108054656fff79679f948b8d2a8574cacc6b9851b8ba21e30b7aa63b47a604a4",
+    "policy.json": "1566ae45bd1553c5a45367042eed1cb8637d0534f7ec8320c74c483bc54c7630",
+    "watchdog.py": "31bb10e8ba91f46828c809a884d4d71e55db3151f7f3bd900726b9f3d2cc3fc5"
+  },
+  "review_files": {
+    "role-assignment.REVIEW_ONLY.json": "7eccfe74872d0f0792d825fcb17733e96f1e14f5f31f3c3b6d58ad2bba05f614",
+    "azure-changes.REVIEW_ONLY.json": "084739a9bf3945fcaa1e3ef5676a6182eef2a88994c461b56bd16805fff77a5c",
+    "role-definition.REVIEW_ONLY.json": "aff8fc475c4f2f28e87e8cfd9724ad6bc1f4435203b827c6105ba81f6c68c7e9"
+  },
+  "observer_sha256": "73d906e867b9ba8d3ade5e668dfc83b7dd569c727d0b775aa7ff1001dfc34f12",
+  "test_sha256": "d757d37cf7880f0fa75df16c51cc03a4f72098b40c9bc3e099af2dd3518d9f1e",
+  "extracted_disabled_package_smoke": "PASS",
+  "prior_application_operator_migration_artifacts_unchanged": true,
+  "sqlite_unchanged": true,
+  "supersedes_unreleased_local_archive": "webjob-disabled.zip"
+}

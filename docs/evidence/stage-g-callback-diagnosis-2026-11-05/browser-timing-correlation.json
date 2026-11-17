@@ -1,0 +1,11 @@
+{
+  "source": "USER_REPORTED_ORIGINAL_ERROR_PAGE_PERFORMANCE_TIME_ORIGIN",
+  "page_navigation_time_utc": "2026-11-05T06:14:57.564000+00:00",
+  "transaction_expires_utc": "2026-11-05T06:14:52.085478+00:00",
+  "difference_seconds": 5.478522,
+  "transaction_consumed": 0,
+  "interpretation": "EXPIRATION_STRONGLY_SUPPORTED_NOT_CONCLUSIVELY_CONFIRMED",
+  "limitation": "Browser navigation time is not a server callback guard timestamp; retained logs do not record the guard reason.",
+  "login_retry_performed": false,
+  "hosted_changes": false
+}

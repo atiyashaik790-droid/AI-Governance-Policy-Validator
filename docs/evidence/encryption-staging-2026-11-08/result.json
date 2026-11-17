@@ -1,0 +1,81 @@
+{
+  "status": "PASS",
+  "started_utc": "2026-11-08T08:05:50.578843+00:00",
+  "target": "app-governance-validator-atiya-1026",
+  "cloud_scope": [
+    "REVIEW_CONTENT_ACTIVE_KEY_ID",
+    "REVIEW_CONTENT_KEYS_JSON"
+  ],
+  "sql_mutations": false,
+  "deployment": false,
+  "provider_calls": false,
+  "keys_exposed": false,
+  "baseline_health": {
+    "health": true,
+    "readiness": true,
+    "release": "1.2-ca5df7c1dc19e525",
+    "database_revision": "005"
+  },
+  "original_setting_presence": {
+    "REVIEW_CONTENT_ACTIVE_KEY_ID": false,
+    "REVIEW_CONTENT_KEYS_JSON": false
+  },
+  "baseline_setting_names": [
+    "ADLS_ACCOUNT_URL",
+    "ADLS_FILE_SYSTEM",
+    "ALLOW_LEGACY_API_CREDENTIALS",
+    "AZURE_OPENAI_API_KEY",
+    "AZURE_OPENAI_API_VERSION",
+    "AZURE_OPENAI_DEPLOYMENT",
+    "AZURE_OPENAI_ENDPOINT",
+    "AZURE_SQL_AUTH_MODE",
+    "AZURE_SQL_TENANT_ID",
+    "AZURE_SQL_USER_OBJECT_ID",
+    "CORS_ORIGIN",
+    "DATABASE_URL",
+    "DEMO_ACCOUNTS_JSON",
+    "DEMO_BROWSER_LOGIN_ENABLED",
+    "ENTRA_CLIENT_ID",
+    "ENTRA_CLIENT_SECRET",
+    "ENTRA_TENANT_ID",
+    "OPENAI_API_KEY",
+    "PII_MODE",
+    "PROVIDER_MODE",
+    "SCM_DO_BUILD_DURING_DEPLOYMENT",
+    "SSO_ENABLED",
+    "SSO_PUBLIC_ORIGIN",
+    "SSO_SESSION_MINUTES",
+    "WEBSITE_HTTPLOGGING_RETENTION_DAYS"
+  ],
+  "backup_path": "/home/sigmoid/.local/share/gpv-review-key-backups/review-20261108T080339Z-v1.encrypted.json",
+  "backup_mode": "0600; parent0700",
+  "recovery_secret_store": "existing unlocked desktop login keyring",
+  "backup_round_trip": true,
+  "key_format_valid": true,
+  "key_id": "review-20261108T080339Z-v1",
+  "production_key_generated": false,
+  "reused_original_approved_key": true,
+  "stage": "complete",
+  "configuration_round_trip": true,
+  "unrelated_settings_unchanged": true,
+  "capture_cleanup_and_verification_disabled": true,
+  "post_health": {
+    "health": true,
+    "readiness": true,
+    "release": "1.2-ca5df7c1dc19e525",
+    "database_revision": "005"
+  },
+  "azure_settings_changed": [
+    "REVIEW_CONTENT_ACTIVE_KEY_ID",
+    "REVIEW_CONTENT_KEYS_JSON"
+  ],
+  "finished_utc": "2026-11-08T08:07:01.374670+00:00",
+  "elapsed_seconds": 208.046,
+  "within_15_minutes": true,
+  "approval_window_started_utc": "2026-11-08T08:03:33.329195+00:00",
+  "production_key_generated_this_approved_window": true,
+  "production_keys_generated_count": 1,
+  "prior_readonly_network_interruptions": 2,
+  "rollback_required": false,
+  "backup_disaster_recovery_boundary": "Encrypted backup and recovery secret are on this existing workstation; not off-host disaster recovery."
+}

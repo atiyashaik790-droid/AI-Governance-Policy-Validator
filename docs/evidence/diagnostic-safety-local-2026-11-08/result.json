@@ -1,0 +1,27 @@
+{
+  "status": "PASS_LOCAL_TESTS_ONLY",
+  "cloud_calls": 0,
+  "azure_mutations": 0,
+  "tests": {
+    "passed": 30,
+    "seconds": 0.37,
+    "command": ".venv/bin/python -m pytest scripts/tests/test_webjobs_diagnostic.py -q --tb=short -o asyncio_default_fixture_loop_scope=function --junitxml=docs/evidence/diagnostic-safety-local-2026-11-08/tests.xml"
+  },
+  "ruff": "PASS",
+  "root_cause": "One shared expired deadline guarded both new diagnostic work and rollback; finally therefore could not issue restoration reads/PUT. Original full configuration existed only in process memory.",
+  "historical_wall_seconds": 17431.155,
+  "historical_monotonic_seconds": 175.703,
+  "unexplained_clock_gap_seconds": 17255.452,
+  "gap_origin": "UNKNOWN: no process suspension/host/approval dependency traces establish the cause. Later cleanup approval timeout is separately recorded and cannot explain this earlier gap.",
+  "recovery": "Encrypted fsynced original configuration and mutation/listing intent; fresh-process cleanup-only recovery; own bounded cleanup work budget independent of original authorization expiry.",
+  "test_interruption": "Actual child os._exit(42) after mock mutation, bypassing finally; fresh controller recovered durable journal.",
+  "live_transport": "NOT INCLUDED. Conditional-update adapter and durable secret-store key provider must be reviewed before live wiring. Tests use mock CAS; Azure support for atomic conditional app-settings updates has NOT been verified.",
+  "remaining_limits": [
+    "No finally block or local recovery function runs while host/process is dead or suspended",
+    "Durable state, wrapping key access and Azure credentials/platform must remain recoverable",
+    "No strict 15minute cleanup guarantee without independent operator/executor",
+    "Missing/corrupt journal, lost key, drift of the same setting, identity mismatch, inaccessible Azure or failed compare-and-swap fail closed and report BLOCKED",
+    "Cleanup can restore our flag while preserving unrelated drift, but does not claim full baseline equality when drift exists"
+  ],
+  "another_live_diagnostic": "New evidence could be obtained after local transport/key-provider integration and independent recovery supervision; not requested or executed now."
+}

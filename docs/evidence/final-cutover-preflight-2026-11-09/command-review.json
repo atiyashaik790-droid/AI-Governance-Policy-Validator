@@ -1,0 +1,308 @@
+{
+  "mode": "REVIEW_ONLY_NO_EXECUTOR_NO_CLOUD_ACCESS",
+  "decision": "NO_GO",
+  "artifacts": {
+    "candidate": {
+      "path": "/home/sigmoid/AI governance policy validator/artifacts/master-repair-2026-11-07/candidate.zip",
+      "release": "1.2-240cc70e239a595f",
+      "sha256": "274891fe4ce303d9b05751e1b19cd52e5eb535034ccfedb37eae30fb1c228e22"
+    },
+    "paired_rollback": {
+      "path": "/home/sigmoid/AI governance policy validator/artifacts/structural-only-candidate-2026-11-05/production/governance-structural-only.zip",
+      "release": "1.2-ca5df7c1dc19e525",
+      "sha256": "6a6a265bc2d27f9965a1a3abb33eaf61a4bd433a1257b241c183a871c12a57db"
+    }
+  },
+  "verified_bootstrap": {
+    "bootstrap": "PASS",
+    "runtime_sql_permissions": "PASS_EFFECTIVE_SQL_IMPERSONATION_AND_EXACT_CATALOG",
+    "admin_membership": "PASS",
+    "user_membership": "PASS",
+    "tenant_isolation": "PASS_APPROVED_TENANT_BINDINGS_AND_BACKEND_GUARDS",
+    "hosted_sso_or_mi_login": "NOT_VERIFIED",
+    "revision": "008",
+    "firewall_cleanup": "PASS",
+    "firewall_seconds": 71.92,
+    "production_unchanged": true,
+    "new_memberships": 2,
+    "new_membership_audit_rows": 2,
+    "policy_records": 0,
+    "source_permission_baseline_records_unchanged": 51,
+    "explicit_new_permission_rows": 85,
+    "real_provider_calls": 0,
+    "deployment": false,
+    "app_setting_changes": false,
+    "next_approval": "EIGHT_POLICY_SEED_ON_NEW_DATABASE_ONLY_WITH_FRESH_BOUNDED_SQL_ACCESS"
+  },
+  "policy_latest_verified_count": 0,
+  "policy_current_hosted_count": "NOT_REQUERIED_NO_ACTIVE_SQL_WINDOW",
+  "gates_still_required": [
+    "Approved eight-policy seeding and actual8published/8active receipt",
+    "Actual App Service managed-identity authentication to new DB (SQL impersonation is not this proof)",
+    "Mandatory actual recovery/controlled-failure qualification evidence",
+    "Approved exclusive config-writer boundary, drift protection, encrypted original-settings snapshot and available recovery operator",
+    "Reconfirmed key recovery custody and exact absent/present original settings before restoration",
+    "Fresh pre-deployment health/target checks plus explicit pinned cutover approval"
+  ],
+  "execution_order_after_approval_only": [
+    {
+      "stage": "stop_main_site_after_all_gates",
+      "command": [
+        "az",
+        "webapp",
+        "stop",
+        "--subscription",
+        "25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6",
+        "--resource-group",
+        "rg_techdemo_Atiya_Tabsum_Shaik",
+        "--name",
+        "app-governance-validator-atiya-1026",
+        "--only-show-errors",
+        "--output",
+        "none"
+      ]
+    },
+    {
+      "stage": "deploy_pinned_candidate_main_site_must_stay_stopped",
+      "command": [
+        "az",
+        "webapp",
+        "deploy",
+        "--subscription",
+        "25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6",
+        "--resource-group",
+        "rg_techdemo_Atiya_Tabsum_Shaik",
+        "--name",
+        "app-governance-validator-atiya-1026",
+        "--src-path",
+        "/home/sigmoid/AI governance policy validator/artifacts/master-repair-2026-11-07/candidate.zip",
+        "--type",
+        "zip",
+        "--clean",
+        "true",
+        "--restart",
+        "false",
+        "--async",
+        "false",
+        "--track-status",
+        "false",
+        "--enable-kudu-warmup",
+        "false",
+        "--timeout",
+        "600000",
+        "--only-show-errors",
+        "--output",
+        "none"
+      ]
+    },
+    {
+      "stage": "verify_deployment_success_and_main_site_still_stopped",
+      "command": null,
+      "required": true
+    },
+    {
+      "stage": "apply_only_reviewed_setting_changes_under_exclusive_writer_guard",
+      "command": [
+        "az",
+        "webapp",
+        "config",
+        "appsettings",
+        "set",
+        "--subscription",
+        "25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6",
+        "--resource-group",
+        "rg_techdemo_Atiya_Tabsum_Shaik",
+        "--name",
+        "app-governance-validator-atiya-1026",
+        "--settings",
+        "DATABASE_URL=mssql+pyodbc://@sql-governance-validator-dev-atiya.database.windows.net/sqldb-gpv-demo-v008-20261108",
+        "REVIEW_CLEANUP_ENABLED=true",
+        "REVIEW_CAPTURE_ENABLED=false",
+        "--only-show-errors",
+        "--output",
+        "none"
+      ]
+    },
+    {
+      "stage": "start_exact_candidate_with_new008_connection",
+      "command": [
+        "az",
+        "webapp",
+        "start",
+        "--subscription",
+        "25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6",
+        "--resource-group",
+        "rg_techdemo_Atiya_Tabsum_Shaik",
+        "--name",
+        "app-governance-validator-atiya-1026",
+        "--only-show-errors",
+        "--output",
+        "none"
+      ]
+    },
+    {
+      "stage": "warmup_then_three_health_ready_pairs_plus_successful_cleanup_worker_pass",
+      "command": null,
+      "required": true
+    },
+    {
+      "stage": "only_after_worker_pass_enable_capture_if_explicitly_approved",
+      "command": [
+        "az",
+        "webapp",
+        "config",
+        "appsettings",
+        "set",
+        "--subscription",
+        "25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6",
+        "--resource-group",
+        "rg_techdemo_Atiya_Tabsum_Shaik",
+        "--name",
+        "app-governance-validator-atiya-1026",
+        "--settings",
+        "REVIEW_CAPTURE_ENABLED=true",
+        "--only-show-errors",
+        "--output",
+        "none"
+      ]
+    },
+    {
+      "stage": "repeat_readiness_after_recycle_and_begin_only_approved_acceptance",
+      "command": null,
+      "required": true
+    }
+  ],
+  "paired_rollback_review_only": [
+    {
+      "stage": "stop_writers_and_main_site",
+      "command": [
+        "az",
+        "webapp",
+        "stop",
+        "--subscription",
+        "25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6",
+        "--resource-group",
+        "rg_techdemo_Atiya_Tabsum_Shaik",
+        "--name",
+        "app-governance-validator-atiya-1026",
+        "--only-show-errors",
+        "--output",
+        "none"
+      ]
+    },
+    {
+      "stage": "restore_exact_original005_artifact",
+      "command": [
+        "az",
+        "webapp",
+        "deploy",
+        "--subscription",
+        "25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6",
+        "--resource-group",
+        "rg_techdemo_Atiya_Tabsum_Shaik",
+        "--name",
+        "app-governance-validator-atiya-1026",
+        "--src-path",
+        "/home/sigmoid/AI governance policy validator/artifacts/structural-only-candidate-2026-11-05/production/governance-structural-only.zip",
+        "--type",
+        "zip",
+        "--clean",
+        "true",
+        "--restart",
+        "false",
+        "--async",
+        "false",
+        "--track-status",
+        "false",
+        "--enable-kudu-warmup",
+        "false",
+        "--timeout",
+        "600000",
+        "--only-show-errors",
+        "--output",
+        "none"
+      ]
+    },
+    {
+      "stage": "restore_original005_connection_under_exclusive_writer_guard",
+      "command": [
+        "az",
+        "webapp",
+        "config",
+        "appsettings",
+        "set",
+        "--subscription",
+        "25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6",
+        "--resource-group",
+        "rg_techdemo_Atiya_Tabsum_Shaik",
+        "--name",
+        "app-governance-validator-atiya-1026",
+        "--settings",
+        "DATABASE_URL=mssql+pyodbc://@sql-governance-validator-dev-atiya.database.windows.net/sqldb-governance-validator-dev",
+        "--only-show-errors",
+        "--output",
+        "none"
+      ]
+    },
+    {
+      "stage": "remove_only_two_flags_if_original_absence_is_freshly_confirmed",
+      "command": [
+        "az",
+        "webapp",
+        "config",
+        "appsettings",
+        "delete",
+        "--subscription",
+        "25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6",
+        "--resource-group",
+        "rg_techdemo_Atiya_Tabsum_Shaik",
+        "--name",
+        "app-governance-validator-atiya-1026",
+        "--setting-names",
+        "REVIEW_CAPTURE_ENABLED",
+        "REVIEW_CLEANUP_ENABLED",
+        "--only-show-errors",
+        "--output",
+        "none"
+      ]
+    },
+    {
+      "stage": "verify_old_pair_before_start",
+      "command": null,
+      "required": true
+    },
+    {
+      "stage": "start_restored005_pair",
+      "command": [
+        "az",
+        "webapp",
+        "start",
+        "--subscription",
+        "25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6",
+        "--resource-group",
+        "rg_techdemo_Atiya_Tabsum_Shaik",
+        "--name",
+        "app-governance-validator-atiya-1026",
+        "--only-show-errors",
+        "--output",
+        "none"
+      ]
+    },
+    {
+      "stage": "verify005_release_and_readiness_keep_new008_db_and_keys",
+      "command": null,
+      "required": true
+    }
+  ],
+  "critical_command_limits": [
+    "This tool has no execute/apply switch and does not authorize printed commands.",
+    "App settings CLI merges into a whole-map update without verified CAS; never execute without the approved writer/restore guards.",
+    "Clean deployment replaces deployed release files; confirm no unrelated persistent business files in webroot before approval.",
+    "Linux deployment may have platform side effects despite restart=false; verify Stopped after deployment before connection change, abort/recover if it did not remain stopped.",
+    "Disable Kudu warmup fallback to avoid the installed CLI's exception-driven deployment POST replay; ambiguous outcomes still require read-only reconciliation, no blind retry.",
+    "A command timeout is not evidence that deployment stopped remotely; reconcile before retry or rollback.",
+    "Original full settings must be backed up encrypted outside the repository; do not print, export plaintext, or reset encryption keys.",
+    "No old005 application may start against008; rollback new008-only writes stay in the preserved new DB and are absent from005.",
+    "Missing command=None checkpoints are mandatory gates, not instructions to skip checks."
+  ]
+}

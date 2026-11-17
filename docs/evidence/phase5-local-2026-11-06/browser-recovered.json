@@ -1,0 +1,13 @@
+{
+  "scope": "real headless Chrome, isolated HTTPS revision 007, mocked OIDC/providers; no external services",
+  "passed": 0,
+  "failed": 1,
+  "checks": [],
+  "failures": [
+    {
+      "name": "User bookmark login route /chat and clean login",
+      "message": "locator.waitFor: Timeout 30000ms exceeded."
+    }
+  ],
+  "errors": []
+}

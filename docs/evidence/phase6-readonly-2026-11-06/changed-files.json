@@ -1,0 +1,18 @@
+{
+  "report": "docs/PHASE6_AZURE_READINESS_REPORT.md",
+  "evidence": [
+    "docs/evidence/phase6-readonly-2026-11-06/azure-inventory.json",
+    "docs/evidence/phase6-readonly-2026-11-06/azure-metadata.json",
+    "docs/evidence/phase6-readonly-2026-11-06/hosted-readiness-and-roles.json",
+    "docs/evidence/phase6-readonly-2026-11-06/local-database-preserved.json",
+    "docs/evidence/phase6-readonly-2026-11-06/managed-identity-roles.json",
+    "docs/evidence/phase6-readonly-2026-11-06/public-health.json",
+    "docs/evidence/phase6-readonly-2026-11-06/required-runtime-permissions.json",
+    "docs/evidence/phase6-readonly-2026-11-06/rollback-artifact.json",
+    "docs/evidence/phase6-readonly-2026-11-06/sql-detail.json",
+    "docs/evidence/phase6-readonly-2026-11-06/sql-readonly.json",
+    "docs/evidence/phase6-readonly-2026-11-06/summary.json",
+    "docs/evidence/phase6-readonly-2026-11-06/changed-files.json"
+  ],
+  "application_source_changes": []
+}

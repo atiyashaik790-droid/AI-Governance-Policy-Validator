@@ -1,0 +1,27 @@
+{
+  "provenance": "USER_REPORTED_UBUNTU_TERMINAL_RESULT",
+  "recorded_date": "2026-11-04",
+  "independently_rerun_by_agent": false,
+  "result": {
+    "status": "PASS",
+    "database": "sqldb-governance-validator-dev",
+    "revision": "004",
+    "versioned": true,
+    "sso_schema": false,
+    "database_mutated": false,
+    "permission_subject": "executing_cli_identity",
+    "hosted_runtime_identity_verified": false
+  },
+  "interpretation": {
+    "reviewed_004_contract": "PASS_UNDER_EXECUTING_CLI_IDENTITY",
+    "partial_005_objects": "ABSENT_PER_SUCCESSFUL_004_VERIFIER_CONTRACT",
+    "app_service_runtime_permissions": "NOT_VERIFIED",
+    "current_backup_policy": "NOT_VERIFIED"
+  },
+  "read_only_arm_lookup": {
+    "status": "BLOCKED",
+    "reason": "DNS/network unavailable",
+    "identity_context": "existing project-local Azure CLI context",
+    "hosted_changes": false
+  }
+}

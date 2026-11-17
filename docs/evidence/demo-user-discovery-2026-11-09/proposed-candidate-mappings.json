@@ -1,0 +1,37 @@
+{
+  "status": "REVIEW_ONLY_NO_SELECTION_NO_WRITES",
+  "choices": [
+    {
+      "sign_in": "demo@Sigmoidanalytics.com",
+      "display_name": "Demo",
+      "object_id": "03773d13-51ea-4231-97de-26c941e71d48",
+      "mapping_file": "deployment/user-demo.PROPOSED.json",
+      "mapping": {
+        "directory_tenant": "4ac50105-0c66-404e-a107-7cbd8a9a6442",
+        "object_id": "03773d13-51ea-4231-97de-26c941e71d48",
+        "tenant": "demo-appservice-4e2dcce8d618",
+        "actor": "gpv-demo",
+        "role": "User",
+        "enabled": true
+      },
+      "owner_selection_and_control": "PENDING",
+      "sql_apply_authorized": false
+    },
+    {
+      "sign_in": "demo-user@Sigmoidanalytics.com",
+      "display_name": "demo-user citizen",
+      "object_id": "f4799f3f-703a-42b7-acf7-4cbbf55e7320",
+      "mapping_file": "deployment/user-demo-user.PROPOSED.json",
+      "mapping": {
+        "directory_tenant": "4ac50105-0c66-404e-a107-7cbd8a9a6442",
+        "object_id": "f4799f3f-703a-42b7-acf7-4cbbf55e7320",
+        "tenant": "demo-appservice-4e2dcce8d618",
+        "actor": "gpv-demo-user",
+        "role": "User",
+        "enabled": true
+      },
+      "owner_selection_and_control": "PENDING",
+      "sql_apply_authorized": false
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "status": "PARTIAL_APPROVAL_BOUNDARY",
+  "azure_mutations_this_preparation": 0,
+  "real_provider_calls": 0,
+  "backend_affected_tests_passed": 68,
+  "frontend_targeted_tests_passed": 19,
+  "typescript": "PASS",
+  "lint_changed_files_and_frontend": "PASS",
+  "frontend_build": "PASS",
+  "candidate_unchanged": true,
+  "exact_hosted_rollback_located_and_digests_validated": true,
+  "new_database_008": "PASS_REUSED_AZURE_EVIDENCE",
+  "runtime_grants": "BLOCKED_APPROVAL_REQUIRED",
+  "standard_user": "BLOCKED_OWNER_DESIGNATION_REQUIRED",
+  "deployment": "NO_GO",
+  "next_approval": "EXACT_NEW_DATABASE_RUNTIME_AND_EXISTING_ADMIN_BOOTSTRAP",
+  "report": "docs/FINAL_END_TO_END_COMPLETION_PREPARATION_RESULT.md"
+}

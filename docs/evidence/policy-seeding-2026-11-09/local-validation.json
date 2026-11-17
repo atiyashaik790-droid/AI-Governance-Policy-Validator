@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "atomic_interruption_rollback": "PASS",
+  "committed_readback": "PASS",
+  "idempotence_no_extra_audits": "PASS",
+  "audit_events": 41,
+  "synthetic_evaluation_cases": 10,
+  "external_http": "BLOCKED_DURING_EVALUATION",
+  "lint": "PASS"
+}

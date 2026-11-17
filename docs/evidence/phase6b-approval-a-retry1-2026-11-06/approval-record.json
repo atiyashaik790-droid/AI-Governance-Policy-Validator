@@ -1,0 +1,10 @@
+{
+  "approval": "User explicitly approved new Phase6B Approval A retry ONLY under documented exact scope",
+  "temporary_name": "sqldb-gpv-mig-20261106-a1",
+  "max_incarnations": 2,
+  "max_hours": 4,
+  "max_estimated_compute_usd": 1,
+  "production_writes": false,
+  "deploy": false,
+  "approvals_B_through_F": false
+}

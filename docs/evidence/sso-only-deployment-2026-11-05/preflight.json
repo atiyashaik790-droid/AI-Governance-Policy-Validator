@@ -1,0 +1,23 @@
+{
+  "status": "PASS",
+  "baseline_release": "1.2-6749226f1af65b63",
+  "candidate_release": "1.2-5aad19f7eea45a42",
+  "schema": "005",
+  "health": "PASS",
+  "readiness": "PASS",
+  "sso_enabled": true,
+  "sso_configured": true,
+  "demo_enabled": true,
+  "rollback_sha256": "9d81fa9b7700557eac2cb41edd5ab861d19a6b8c4f9052e55068e5eab784df80",
+  "candidate_sha256": "a82a1323a2a7a1a081a914e15b8a4e13c58f4fd14fbc6e7d99ab52db43190a8f",
+  "rollback_archive_integrity": "PASS",
+  "baseline_worker_matches_rollback": true,
+  "backend_tests_passed": 561,
+  "frontend_tests_passed": 31,
+  "backend_changed_files": [
+    "app/security.py",
+    "app/sessions.py"
+  ],
+  "sql_migration_required": false,
+  "secrets_changed": false
+}

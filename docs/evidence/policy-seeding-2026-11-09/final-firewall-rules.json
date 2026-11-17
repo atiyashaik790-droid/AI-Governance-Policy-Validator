@@ -1,0 +1,82 @@
+[
+  {
+    "name": "ClientIp-2026-10-28_20-51-52",
+    "start_ip": "180.151.36.234",
+    "end_ip": "180.151.36.234"
+  },
+  {
+    "name": "gpv-verifier-single-ip-20261107",
+    "start_ip": "101.0.62.127",
+    "end_ip": "101.0.62.127"
+  },
+  {
+    "name": "gv-appservice-1",
+    "start_ip": "4.149.94.83",
+    "end_ip": "4.149.94.83"
+  },
+  {
+    "name": "gv-appservice-10",
+    "start_ip": "20.29.153.35",
+    "end_ip": "20.29.153.35"
+  },
+  {
+    "name": "gv-appservice-11",
+    "start_ip": "172.179.21.221",
+    "end_ip": "172.179.21.221"
+  },
+  {
+    "name": "gv-appservice-12",
+    "start_ip": "40.125.96.221",
+    "end_ip": "40.125.96.221"
+  },
+  {
+    "name": "gv-appservice-13",
+    "start_ip": "20.42.128.126",
+    "end_ip": "20.42.128.126"
+  },
+  {
+    "name": "gv-appservice-2",
+    "start_ip": "20.115.168.211",
+    "end_ip": "20.115.168.211"
+  },
+  {
+    "name": "gv-appservice-3",
+    "start_ip": "4.246.17.123",
+    "end_ip": "4.246.17.123"
+  },
+  {
+    "name": "gv-appservice-4",
+    "start_ip": "48.202.41.174",
+    "end_ip": "48.202.41.174"
+  },
+  {
+    "name": "gv-appservice-5",
+    "start_ip": "4.149.162.59",
+    "end_ip": "4.149.162.59"
+  },
+  {
+    "name": "gv-appservice-6",
+    "start_ip": "20.72.205.216",
+    "end_ip": "20.72.205.216"
+  },
+  {
+    "name": "gv-appservice-7",
+    "start_ip": "51.143.50.106",
+    "end_ip": "51.143.50.106"
+  },
+  {
+    "name": "gv-appservice-8",
+    "start_ip": "20.72.231.40",
+    "end_ip": "20.72.231.40"
+  },
+  {
+    "name": "gv-appservice-9",
+    "start_ip": "20.72.198.201",
+    "end_ip": "20.72.198.201"
+  },
+  {
+    "name": "local-laptop-temp-20261031-101-0-62-145",
+    "start_ip": "101.0.62.145",
+    "end_ip": "101.0.62.145"
+  }
+]

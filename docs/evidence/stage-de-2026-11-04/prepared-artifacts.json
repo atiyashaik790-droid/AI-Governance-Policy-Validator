@@ -1,0 +1,9 @@
+{
+  "grants_file": "deployment/stage-d-sso-data-permissions.REVIEW_ONLY.sql",
+  "grants_sha256": "379cdb13d45722129d90c99000e2ca4a435bc3f2d4c4dfdcba48af256001d79a",
+  "membership_mapping_file": "deployment/stage-e-atiya-membership.PROPOSED.json",
+  "membership_mapping_approved": false,
+  "membership_role_is_proposal": "Reviewer",
+  "grants_executed": false,
+  "membership_applied": false
+}

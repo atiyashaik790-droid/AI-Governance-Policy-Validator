@@ -1,0 +1,29 @@
+{
+  "azure_openai": {
+    "scope": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.CognitiveServices/accounts/aoai-governance-validator-dev",
+    "assignments": [
+      {
+        "principal": "600447fe-5fea-4801-9033-ab4aafc474cc",
+        "role": "Cognitive Services OpenAI User",
+        "scope": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.CognitiveServices/accounts/aoai-governance-validator-dev"
+      }
+    ],
+    "live_provider_verified": false
+  },
+  "adls": {
+    "scope": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Storage/storageAccounts/stgovvalidatoratiya1026",
+    "assignments": [],
+    "live_provider_verified": false
+  },
+  "adls_container": {
+    "scope": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Storage/storageAccounts/stgovvalidatoratiya1026/blobServices/default/containers/governance-reports",
+    "assignments": [
+      {
+        "principal": "600447fe-5fea-4801-9033-ab4aafc474cc",
+        "role": "Storage Blob Data Contributor",
+        "scope": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Storage/storageAccounts/stgovvalidatoratiya1026/blobServices/default/containers/governance-reports"
+      }
+    ],
+    "data_plane_or_acl_verified": false
+  }
+}

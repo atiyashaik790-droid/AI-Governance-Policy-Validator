@@ -1,0 +1,15 @@
+{
+  "candidate_keyring_valid_format_and_aes_round_trip": true,
+  "invalid_configuration_fails_closed": true,
+  "production_keys_generated": false,
+  "packaged_source_and_frontend_match": 68,
+  "candidate_sha256": "274891fe4ce303d9b05751e1b19cd52e5eb535034ccfedb37eae30fb1c228e22",
+  "rollback_sha256": "b52287bbf048a66a9f7233753a3fb95730397016f03074d4deb399c1e74c0d29",
+  "migration_sha256": {
+    "006_multi_policy.py": "e9627d8f1b4c1f6385e1573df9bbd9280beef4f7d93bb2b1c3f6ef8a9fbfe9dc",
+    "007_protected_review_content.py": "f451e1e83c735b333d5c10b012772cbfa1bf3fd9efe59c1dfbc8c8e2f9f7a8ce",
+    "008_execution_immutability.py": "d95c0644a256e7a029e0f43e6fc594391b9846c7a5f469755ae581acc3641eb6"
+  },
+  "status": "PASS_LOCAL_REVALIDATION_ONLY",
+  "cloud_mutations": false
+}

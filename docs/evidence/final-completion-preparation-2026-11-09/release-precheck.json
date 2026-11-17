@@ -1,0 +1,30 @@
+{
+  "git_head": "60fa94ef9ec01be0d0b4af347a3251255cf7565c",
+  "working_tree": "DIRTY_EXISTING_WORK_PRESERVED",
+  "candidate_sha256": "274891fe4ce303d9b05751e1b19cd52e5eb535034ccfedb37eae30fb1c228e22",
+  "rollback_sha256": "b52287bbf048a66a9f7233753a3fb95730397016f03074d4deb399c1e74c0d29",
+  "rebuild_needed": false,
+  "backend_source_matches_candidate": true,
+  "backend_mismatches": [],
+  "feature_members": {
+    "app/user_access.py": true,
+    "app/engine_multi_policy.py": true,
+    "app/protected_reviews.py": true,
+    "app/sso.py": true
+  },
+  "frontend_members": [
+    "static/assets/Overview-Bns9adhP.js",
+    "static/assets/index-CwJGwHs6.js",
+    "static/assets/index-DcVWqT0G.css",
+    "static/index.html"
+  ],
+  "frontend_candidate_files": [
+    "static/assets/Overview-Bns9adhP.js",
+    "static/assets/index-CwJGwHs6.js",
+    "static/assets/index-DcVWqT0G.css",
+    "static/index.html"
+  ],
+  "frontend_build_matches_candidate": true,
+  "source_includes_local_tool_changes_only": true,
+  "frontend_file_count": 4
+}

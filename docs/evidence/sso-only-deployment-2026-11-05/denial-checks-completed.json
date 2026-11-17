@@ -1,0 +1,159 @@
+{
+  "status": "PASS",
+  "retained_checks": [
+    {
+      "case": "unauthenticated",
+      "method": "POST",
+      "path": "/api/auth/session",
+      "expected": 403,
+      "actual": 403,
+      "pass": true
+    },
+    {
+      "case": "unauthenticated",
+      "method": "POST",
+      "path": "/api/auth/logout",
+      "expected": 403,
+      "actual": 403,
+      "pass": true
+    },
+    {
+      "case": "unauthenticated",
+      "method": "GET",
+      "path": "/api/auth/sessions",
+      "expected": 403,
+      "actual": 403,
+      "pass": true
+    },
+    {
+      "case": "unauthenticated",
+      "method": "POST",
+      "path": "/api/auth/sessions/synthetic/revoke",
+      "expected": 403,
+      "actual": 403,
+      "pass": true
+    },
+    {
+      "case": "unauthenticated",
+      "method": "GET",
+      "path": "/api/policies?limit=1",
+      "expected": 401,
+      "actual": 401,
+      "pass": true
+    }
+  ],
+  "repeated_previously_incomplete_checks": [
+    {
+      "case": "unauthenticated",
+      "method": "GET",
+      "path": "/api/sso/me",
+      "expected": 401,
+      "actual": 401,
+      "pass": true
+    },
+    {
+      "case": "synthetic_provisioned_credential",
+      "method": "POST",
+      "path": "/api/auth/session",
+      "expected": 403,
+      "actual": 403,
+      "pass": true
+    },
+    {
+      "case": "synthetic_provisioned_credential",
+      "method": "POST",
+      "path": "/api/auth/logout",
+      "expected": 403,
+      "actual": 403,
+      "pass": true
+    },
+    {
+      "case": "synthetic_provisioned_credential",
+      "method": "GET",
+      "path": "/api/auth/sessions",
+      "expected": 403,
+      "actual": 403,
+      "pass": true
+    },
+    {
+      "case": "synthetic_provisioned_credential",
+      "method": "POST",
+      "path": "/api/auth/sessions/synthetic/revoke",
+      "expected": 403,
+      "actual": 403,
+      "pass": true
+    },
+    {
+      "case": "synthetic_provisioned_credential",
+      "method": "GET",
+      "path": "/api/policies?limit=1",
+      "expected": 401,
+      "actual": 401,
+      "pass": true
+    },
+    {
+      "case": "synthetic_provisioned_credential",
+      "method": "GET",
+      "path": "/api/sso/me",
+      "expected": 401,
+      "actual": 401,
+      "pass": true
+    },
+    {
+      "case": "synthetic_preissued_session",
+      "method": "POST",
+      "path": "/api/auth/session",
+      "expected": 403,
+      "actual": 403,
+      "pass": true
+    },
+    {
+      "case": "synthetic_preissued_session",
+      "method": "POST",
+      "path": "/api/auth/logout",
+      "expected": 403,
+      "actual": 403,
+      "pass": true
+    },
+    {
+      "case": "synthetic_preissued_session",
+      "method": "GET",
+      "path": "/api/auth/sessions",
+      "expected": 403,
+      "actual": 403,
+      "pass": true
+    },
+    {
+      "case": "synthetic_preissued_session",
+      "method": "POST",
+      "path": "/api/auth/sessions/synthetic/revoke",
+      "expected": 403,
+      "actual": 403,
+      "pass": true
+    },
+    {
+      "case": "synthetic_preissued_session",
+      "method": "GET",
+      "path": "/api/policies?limit=1",
+      "expected": 401,
+      "actual": 401,
+      "pass": true
+    },
+    {
+      "case": "synthetic_preissued_session",
+      "method": "GET",
+      "path": "/api/sso/me",
+      "expected": 401,
+      "actual": 401,
+      "pass": true
+    }
+  ],
+  "total_passed": 18,
+  "new_checks": 13,
+  "timeouts_this_retest": 0,
+  "retries_used": 0,
+  "historical_timeout_preserved_in": "denial-checks.json",
+  "real_credentials_used": false,
+  "human_acceptance": "PENDING",
+  "finished_at_utc": "2026-11-05T08:18:29.629050+00:00"
+}

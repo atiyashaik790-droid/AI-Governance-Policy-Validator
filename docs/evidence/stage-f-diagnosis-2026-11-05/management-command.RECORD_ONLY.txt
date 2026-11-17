@@ -1,0 +1,12 @@
+from pathlib import Path
+exec(compile(Path('/tmp/stage_f_readonly.py').read_text().split("attempt('account'")[0],'/tmp/stage_f_readonly.py','exec'))
+id='/subscriptions/'+sub+'/resourceGroups/'+group+'/providers/Microsoft.Web/sites/'+app
+attempt('app',lambda:az(['webapp','show','--subscription',sub,'-g',group,'-n',app,'--query','{id:id,state:state,defaultHostName:defaultHostName,lastModifiedTimeUtc:lastModifiedTimeUtc,enabled:enabled}']))
+attempt('slots',lambda:az(['webapp','deployment','slot','list','--subscription',sub,'-g',group,'-n',app,'--query','[].{id:id,name:name,defaultHostName:defaultHostName,state:state}']))
+try:
+ c=az(['webapp','config','show','--subscription',sub,'-g',group,'-n',app]);r['startup']={'command_matches_reviewed':c.get('appCommandLine')=='sh startup.sh','runtime':c.get('linuxFxVersion'),'always_on':c.get('alwaysOn')}
+ d=az(['webapp','config','appsettings','list','--subscription',sub,'-g',group,'-n',app]);d={x['name']:x.get('value','') for x in d}
+ r['saved_configuration']={'sso_enabled':d.get('SSO_ENABLED','false'),'demo_enabled':d.get('DEMO_BROWSER_LOGIN_ENABLED','true'),'secret_present':bool(d.get('ENTRA_CLIENT_SECRET')),'tenant_matches':d.get('ENTRA_TENANT_ID')=='4ac50105-0c66-404e-a107-7cbd8a9a6442','client_matches':d.get('ENTRA_CLIENT_ID')=='a1a7da0b-ad29-49ec-a9ea-c59219e60df5','origin_matches':d.get('SSO_PUBLIC_ORIGIN')==origin}
+except Exception as e:r['configuration_error_kind']=type(e).__name__
+attempt('activity',lambda:az(['monitor','activity-log','list','--subscription',sub,'--resource-id',id,'--start-time','2026-11-04T18:20:00Z','--end-time','2026-11-04T18:50:00Z','--max-events','100','--query','[].{time:eventTimestamp,operation:operationName.value,status:status.value,correlationId:correlationId}']))
+(R/'docs/evidence/stage-f-diagnosis-2026-11-05/management.json').write_text(json.dumps(r,indent=2)+'\n');print(json.dumps(r))

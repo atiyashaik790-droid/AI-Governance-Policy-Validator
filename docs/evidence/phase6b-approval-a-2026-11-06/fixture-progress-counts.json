@@ -1,0 +1,8 @@
+{
+  "sso_memberships": 1,
+  "sso_sessions": 0,
+  "sso_transactions": 1,
+  "policies": 1,
+  "audit_events": 1,
+  "validation_executions": 1
+}

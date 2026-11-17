@@ -1,0 +1,137 @@
+[
+  {
+    "correlationId": "2dd58ad3-955a-42ce-bcf7-c8994d734835",
+    "operation": "Microsoft.Sql/servers/databases/delete",
+    "resourceId": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourcegroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/databases/sqldb-gpv-mig-20261106-a1",
+    "status": "Succeeded",
+    "submission": "2026-11-07T16:25:46Z",
+    "substatus": "",
+    "time": "2026-11-07T16:24:14.6396413Z"
+  },
+  {
+    "correlationId": "2dd58ad3-955a-42ce-bcf7-c8994d734835",
+    "operation": "Microsoft.Sql/servers/databases/delete",
+    "resourceId": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/databases/sqldb-gpv-mig-20261106-a1",
+    "status": "Accepted",
+    "submission": "2026-11-07T16:25:10Z",
+    "substatus": "Accepted",
+    "time": "2026-11-07T16:23:58.7620859Z"
+  },
+  {
+    "correlationId": "2dd58ad3-955a-42ce-bcf7-c8994d734835",
+    "operation": "Microsoft.Sql/servers/databases/delete",
+    "resourceId": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/databases/sqldb-gpv-mig-20261106-a1",
+    "status": "Started",
+    "submission": "2026-11-07T16:25:10Z",
+    "substatus": "",
+    "time": "2026-11-07T16:23:58.433972Z"
+  },
+  {
+    "correlationId": "c60ed700-63a6-4677-91de-7df8ee64083e",
+    "operation": "Microsoft.Authorization/policies/auditIfNotExists/action",
+    "resourceId": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/databases/sqldb-gpv-mig-20261106-a1",
+    "status": "Succeeded",
+    "submission": "2026-11-07T10:23:01Z",
+    "substatus": "",
+    "time": "2026-11-07T10:21:54.6153274Z"
+  },
+  {
+    "correlationId": "c60ed700-63a6-4677-91de-7df8ee64083e",
+    "operation": "Microsoft.Authorization/policies/auditIfNotExists/action",
+    "resourceId": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/databases/sqldb-gpv-mig-20261106-a1",
+    "status": "Succeeded",
+    "submission": "2026-11-07T10:23:23Z",
+    "substatus": "",
+    "time": "2026-11-07T10:21:48.4684907Z"
+  },
+  {
+    "correlationId": "c60ed700-63a6-4677-91de-7df8ee64083e",
+    "operation": "Microsoft.Authorization/policies/audit/action",
+    "resourceId": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/databases/sqldb-gpv-mig-20261106-a1",
+    "status": "Succeeded",
+    "submission": "2026-11-07T10:23:23Z",
+    "substatus": "",
+    "time": "2026-11-07T10:21:48.4684907Z"
+  },
+  {
+    "correlationId": "5B8E2889-356A-4352-A12E-0C1B18489C4A",
+    "operation": "Microsoft.Sql/servers/databases/write",
+    "resourceId": "/SUBSCRIPTIONS/25DDF5D2-6E0B-4A34-82FC-BFC91415E7A6/RESOURCEGROUPS/RG_TECHDEMO_ATIYA_TABSUM_SHAIK/PROVIDERS/MICROSOFT.SQL/SERVERS/SQL-GOVERNANCE-VALIDATOR-DEV-ATIYA/DATABASES/SQLDB-GPV-MIG-20261106-A1",
+    "status": "Succeeded",
+    "submission": "2026-11-07T10:12:35.8069452Z",
+    "substatus": "",
+    "time": "2026-11-07T10:12:35.8069452Z"
+  },
+  {
+    "correlationId": "c60ed700-63a6-4677-91de-7df8ee64083e",
+    "operation": "Microsoft.Sql/servers/databases/write",
+    "resourceId": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourcegroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/databases/sqldb-gpv-mig-20261106-a1",
+    "status": "Succeeded",
+    "submission": "2026-11-07T10:14:44Z",
+    "substatus": "",
+    "time": "2026-11-07T10:12:27.4183277Z"
+  },
+  {
+    "correlationId": "c60ed700-63a6-4677-91de-7df8ee64083e",
+    "operation": "Microsoft.Sql/servers/databases/read",
+    "resourceId": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourcegroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/databases/sqldb-gpv-mig-20261106-a1",
+    "status": "Running",
+    "submission": "2026-11-07T10:14:28Z",
+    "substatus": "",
+    "time": "2026-11-07T10:12:10.9043216Z"
+  },
+  {
+    "correlationId": "c60ed700-63a6-4677-91de-7df8ee64083e",
+    "operation": "Microsoft.Sql/servers/databases/read",
+    "resourceId": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourcegroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/databases/sqldb-gpv-mig-20261106-a1",
+    "status": "Running",
+    "submission": "2026-11-07T10:13:54Z",
+    "substatus": "",
+    "time": "2026-11-07T10:11:55.637275Z"
+  },
+  {
+    "correlationId": "c60ed700-63a6-4677-91de-7df8ee64083e",
+    "operation": "Microsoft.Sql/servers/databases/read",
+    "resourceId": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourcegroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/databases/sqldb-gpv-mig-20261106-a1",
+    "status": "Running",
+    "submission": "2026-11-07T10:13:56Z",
+    "substatus": "",
+    "time": "2026-11-07T10:11:40.2508291Z"
+  },
+  {
+    "correlationId": "5B8E2889-356A-4352-A12E-0C1B18489C4A",
+    "operation": "Microsoft.Sql/servers/databases/write",
+    "resourceId": "/SUBSCRIPTIONS/25DDF5D2-6E0B-4A34-82FC-BFC91415E7A6/RESOURCEGROUPS/RG_TECHDEMO_ATIYA_TABSUM_SHAIK/PROVIDERS/MICROSOFT.SQL/SERVERS/SQL-GOVERNANCE-VALIDATOR-DEV-ATIYA/DATABASES/SQLDB-GPV-MIG-20261106-A1",
+    "status": "Started",
+    "submission": "2026-11-07T10:11:35.8046725Z",
+    "substatus": "",
+    "time": "2026-11-07T10:11:35.8046725Z"
+  },
+  {
+    "correlationId": "c60ed700-63a6-4677-91de-7df8ee64083e",
+    "operation": "Microsoft.Sql/servers/databases/write",
+    "resourceId": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/databases/sqldb-gpv-mig-20261106-a1",
+    "status": "Accepted",
+    "submission": "2026-11-07T10:12:35Z",
+    "substatus": "Accepted",
+    "time": "2026-11-07T10:11:25.1265068Z"
+  },
+  {
+    "correlationId": "c60ed700-63a6-4677-91de-7df8ee64083e",
+    "operation": "Microsoft.Authorization/policies/auditIfNotExists/action",
+    "resourceId": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/databases/sqldb-gpv-mig-20261106-a1",
+    "status": "Started",
+    "submission": "2026-11-07T10:12:35Z",
+    "substatus": "",
+    "time": "2026-11-07T10:11:25.0952624Z"
+  },
+  {
+    "correlationId": "c60ed700-63a6-4677-91de-7df8ee64083e",
+    "operation": "Microsoft.Sql/servers/databases/write",
+    "resourceId": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/databases/sqldb-gpv-mig-20261106-a1",
+    "status": "Started",
+    "submission": "2026-11-07T10:12:35Z",
+    "substatus": "",
+    "time": "2026-11-07T10:11:24.6109112Z"
+  }
+]

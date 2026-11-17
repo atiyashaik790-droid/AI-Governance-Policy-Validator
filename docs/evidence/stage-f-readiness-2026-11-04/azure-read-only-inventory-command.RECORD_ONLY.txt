@@ -1,0 +1,31 @@
+import os,json,subprocess,urllib.request
+from pathlib import Path
+from datetime import datetime,timezone
+R=Path.cwd();os.environ['AZURE_CONFIG_DIR']=str(R/'.azure-sql-cli');r={'observed_at_utc':datetime.now(timezone.utc).isoformat(),'hosted_changes':False};sub='25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6';group='rg_techdemo_Atiya_Tabsum_Shaik';app='app-governance-validator-atiya-1026';origin='https://'+app+'.azurewebsites.net'
+def az(args):
+ x=subprocess.run(['az']+args+['-o','json','--only-show-errors'],capture_output=True,text=True,timeout=45)
+ if x.returncode:raise RuntimeError('Read-only Azure CLI request failed')
+ return json.loads(x.stdout)
+def attempt(key,fn):
+ try:r[key]=fn()
+ except Exception as e:r[key]={'status':'BLOCKED','error_kind':type(e).__name__}
+attempt('account',lambda:az(['account','show','--query','{tenant:tenantId,subscription:id,type:user.type}']))
+attempt('app',lambda:az(['webapp','show','--subscription',sub,'-g',group,'-n',app,'--query','{id:id,state:state,httpsOnly:httpsOnly,defaultHostName:defaultHostName,identity:identity,enabledHostNames:enabledHostNames}']))
+settings={}
+try:
+ raw=az(['webapp','config','appsettings','list','--subscription',sub,'-g',group,'-n',app]);settings={x['name']:x.get('value','') for x in raw};del raw
+ names=['SSO_ENABLED','DEMO_BROWSER_LOGIN_ENABLED','ENTRA_TENANT_ID','ENTRA_CLIENT_ID','ENTRA_CLIENT_SECRET','SSO_PUBLIC_ORIGIN','SSO_SESSION_MINUTES','CORS_ORIGIN','AZURE_SQL_AUTH_MODE','AZURE_SQL_TENANT_ID','AZURE_SQL_USER_OBJECT_ID','DATABASE_URL','DEMO_ACCOUNTS_JSON','ALLOW_LEGACY_API_CREDENTIALS','WEBSITE_HTTPLOGGING_RETENTION_DAYS']
+ r['setting_status']={n:('SET_NONEMPTY' if settings.get(n) else 'PRESENT_EMPTY' if n in settings else 'ABSENT') for n in names}
+ r['safe_config_checks']={'tenant_matches_approved':settings.get('ENTRA_TENANT_ID','').lower()=='4ac50105-0c66-404e-a107-7cbd8a9a6442','origin_matches_exact':settings.get('SSO_PUBLIC_ORIGIN')==origin,'cors_matches_exact':settings.get('CORS_ORIGIN')==origin,'sso_explicitly_disabled':settings.get('SSO_ENABLED','false').lower()=='false','demo_enabled':settings.get('DEMO_BROWSER_LOGIN_ENABLED','true').lower()=='true','sql_managed_identity':settings.get('AZURE_SQL_AUTH_MODE')=='managed_identity','secret_is_keyvault_reference':settings.get('ENTRA_CLIENT_SECRET','').startswith('@Microsoft.KeyVault('),'effective_session_minutes':int(settings.get('SSO_SESSION_MINUTES','60'))}
+except Exception as e:r['setting_status']={'status':'BLOCKED','error_kind':type(e).__name__}
+query='[].{objectId:id,clientId:appId,displayName:displayName,signInAudience:signInAudience,web:web,spa:spa,publicClient:publicClient,passwordCredentials:passwordCredentials[].{keyId:keyId,displayName:displayName,startDateTime:startDateTime,endDateTime:endDateTime},keyCredentials:keyCredentials[].{keyId:keyId,type:type,endDateTime:endDateTime},requiredResourceAccess:requiredResourceAccess}'
+attempt('registration_candidates',lambda:az(['ad','app','list','--display-name','Governance-Studio-SSO','--query',query]))
+client=settings.get('ENTRA_CLIENT_ID','')
+if client:
+ attempt('configured_registration',lambda:az(['ad','app','show','--id',client,'--query',query.removeprefix('[].')]))
+attempt('web_config',lambda:az(['webapp','config','show','--subscription',sub,'-g',group,'-n',app,'--query','{alwaysOn:alwaysOn,ftpsState:ftpsState,httpLoggingEnabled:httpLoggingEnabled,requestTracingEnabled:requestTracingEnabled,detailedErrorLoggingEnabled:detailedErrorLoggingEnabled,appCommandLine:appCommandLine,linuxFxVersion:linuxFxVersion,cors:cors}']))
+for route in ('/health','/ready','/api/sso/status'):
+ def fetch(route=route):
+  with urllib.request.urlopen(origin+route,timeout=20) as response:return {'http_status':response.status,'body':json.load(response)}
+ attempt('http'+route,fetch)
+(R/'docs/evidence/stage-f-readiness-2026-11-04/azure-read-only-inventory.json').write_text(json.dumps(r,indent=2)+'\n');print(json.dumps(r))

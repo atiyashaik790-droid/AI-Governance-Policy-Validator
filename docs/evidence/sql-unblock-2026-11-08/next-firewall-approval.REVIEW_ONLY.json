@@ -1,0 +1,34 @@
+{
+  "status": "REVIEW_ONLY_NOT_AUTHORIZED",
+  "target_server": "sql-governance-validator-dev-atiya",
+  "resource_group": "rg_techdemo_Atiya_Tabsum_Shaik",
+  "subscription": "25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6",
+  "new_rule": "gpv-operator-20261108-readonly",
+  "start_ip": "45.127.46.209",
+  "end_ip": "45.127.46.209",
+  "source": "Azure SQL native40615 response; existing ARM rule comparison confirms absence",
+  "maximum_window_minutes": 15,
+  "steps": [
+    "Reconfirm exact Azure account/server and current Azure-SQL-reported client IP; stop if drift or rule name already exists",
+    "Add only the exact single-IP rule after explicit approval",
+    "Run bounded SELECT-only revision005/catalog/runtime-principal/grant verification",
+    "Remove only the newly created rule and verify its absence"
+  ],
+  "sql_mutations": false,
+  "grants_or_identity_changes": false,
+  "other_firewall_changes": false,
+  "deployment": false,
+  "temporary_databases": false,
+  "expected_application_downtime_minutes": 0,
+  "estimated_incremental_azure_service_cost_usd": 0,
+  "rollback": "Remove only this new exact rule; preserve all pre-existing rules",
+  "stop_conditions": [
+    "Identity/IP/target drift",
+    "Unexpected existing rule",
+    "Read-only query failure",
+    "Cannot verify rule removal"
+  ],
+  "boundary": "Server firewall network access is server-wide; existing SQL authentication and permissions remain unchanged. The executed verification is SELECT-only.",
+  "production_readiness": "NO-GO: independent expiry, recovery and remaining qualification still blocked",
+  "automatic_review_note": "Third-party public IP lookup rejected; completed safer Azure-SQL-derived IP and ARM-rule checks. No third-party lookup executed."
+}

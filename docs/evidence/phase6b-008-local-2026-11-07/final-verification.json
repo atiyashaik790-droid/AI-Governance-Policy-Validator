@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "focused_passed": 201,
+  "focused_failed": 0,
+  "candidate": "1.2-0b51806b794e3d00",
+  "candidate_sha256": "e6e8531e0c28a8fca921e56a38014c9b369b5e9b170c36055f08f7ca5c14eb23",
+  "all_packaged_application_sources_match": true,
+  "frozen_migrations_unchanged": true,
+  "sqlite_revision": "003",
+  "sqlite_unchanged": true,
+  "harness_pins_match": true,
+  "azure_operations_this_task": 0,
+  "approval_gate": "retry-5 requires fresh approval including migration008"
+}

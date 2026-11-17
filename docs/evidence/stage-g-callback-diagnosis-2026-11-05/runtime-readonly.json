@@ -1,0 +1,51 @@
+{
+  "status": "PASS",
+  "method": "EXISTING_MAIN_CONTAINER_EXEC_WEBSOCKET",
+  "hosted_changes": false,
+  "sql_accessed": true,
+  "pinned_operator_identity_verified": true,
+  "handshake": "PASS",
+  "payload_sent": true,
+  "sql_read_only": true,
+  "hosted_files_written": false,
+  "raw_log_text_exported": false,
+  "effective_config": {
+    "sso_enabled": true,
+    "demo_enabled": true,
+    "secret_present": true,
+    "secret_has_surrounding_whitespace": false,
+    "secret_is_uuid_format": false,
+    "tenant_matches": true,
+    "client_matches": true,
+    "origin_matches": true
+  },
+  "transactions": [
+    {
+      "expires": "2026-11-05T06:14:52.085478+00:00",
+      "consumed": 0,
+      "nonce_shape_valid": 1,
+      "pkce_length_valid": 1
+    }
+  ],
+  "sso_permissions": {
+    "sso_transactions.SELECT": 1,
+    "sso_transactions.INSERT": 1,
+    "sso_transactions.UPDATE": 1,
+    "sso_memberships.SELECT": 1,
+    "sso_sessions.SELECT": 1,
+    "sso_sessions.INSERT": 1,
+    "sso_sessions.UPDATE": 1,
+    "audit_events.INSERT": 1
+  },
+  "membership_matches": 1,
+  "session_count": 0,
+  "safe_log_events": [],
+  "log_coverage": [
+    {
+      "name": "2026_11_05_lw0sdlwk0003R4_docker.log",
+      "last_timestamp": "2026-11-05T05:56:45.9905007"
+    }
+  ],
+  "observed_at_utc": "2026-11-05T06:20:30.943119+00:00",
+  "direct_database_writes": false
+}

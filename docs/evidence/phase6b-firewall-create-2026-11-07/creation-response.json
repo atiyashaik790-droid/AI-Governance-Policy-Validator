@@ -1,0 +1,8 @@
+{
+  "endIpAddress": "101.0.62.127",
+  "id": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/firewallRules/gpv-verifier-single-ip-20261107",
+  "name": "gpv-verifier-single-ip-20261107",
+  "resourceGroup": "rg_techdemo_Atiya_Tabsum_Shaik",
+  "startIpAddress": "101.0.62.127",
+  "type": "Microsoft.Sql/servers/firewallRules"
+}

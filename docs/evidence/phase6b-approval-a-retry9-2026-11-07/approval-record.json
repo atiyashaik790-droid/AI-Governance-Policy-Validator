@@ -1,0 +1,22 @@
+{
+  "utc": "2026-11-07T10:10:54.422217+00:00",
+  "scope": "Approval A retry-9 ONLY",
+  "candidate": "1.2-240cc70e239a595f",
+  "candidate_sha256": "274891fe4ce303d9b05751e1b19cd52e5eb535034ccfedb37eae30fb1c228e22",
+  "subscription": "25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6",
+  "server": "sql-governance-validator-dev-atiya",
+  "database": "sqldb-gpv-mig-20261106-a1",
+  "max_hours": 4,
+  "max_estimated_usd": 1,
+  "max_sequential_incarnations": 2,
+  "max_sku": "S0 / 10 DTUs",
+  "synthetic_only": true,
+  "deployment": false,
+  "production_writes": false,
+  "production_permission_or_configuration_changes": false,
+  "real_providers": false,
+  "additional_services": false,
+  "recovery_B_and_production_C_to_F": false,
+  "authorization": "Explicit user approval in current conversation; docs/FINAL_DEMO_SQL_QUALIFICATION_PLAN.md",
+  "stop_after": "Approval A retry-9"
+}

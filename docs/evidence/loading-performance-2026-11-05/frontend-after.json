@@ -1,0 +1,22 @@
+{
+  "immediateLoginPanel": true,
+  "restoredAt120": true,
+  "calls": [
+    {
+      "path": "http://localhost:8000/api/sso/status",
+      "at": 0
+    },
+    {
+      "path": "http://localhost:8000/api/sso/me",
+      "at": 0
+    },
+    {
+      "path": "http://localhost:8000/api/usage",
+      "at": 120
+    },
+    {
+      "path": "http://localhost:8000/api/settings",
+      "at": 120
+    }
+  ]
+}

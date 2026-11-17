@@ -1,0 +1,97 @@
+{
+  "stage": "F",
+  "status": "WORKER_AND_PUBLIC_CHECKS_PASS_LOGIN_CHOICES_PENDING",
+  "activation_submitted": true,
+  "rollback_performed": false,
+  "hosted_deployment": false,
+  "sql_modified": false,
+  "stage_g_executed": false,
+  "started_at_utc": "2026-11-05T05:49:32.792135+00:00",
+  "secret_setting_present": true,
+  "updated_at_utc": "2026-11-05T05:57:43.707983+00:00",
+  "phase": "activation",
+  "last_probe_error_kind": "AssertionError",
+  "last_worker_observation": {
+    "phase": "activation",
+    "attempt": 9,
+    "pid": 1966,
+    "started_at_utc": "2026-11-05T05:55:59.363805+00:00",
+    "new_worker": true,
+    "flags_match": true,
+    "identifiers_match": true,
+    "reconstructed_settings_match": true,
+    "platform_startup_confirmed": true
+  },
+  "secret_worker_verified": true,
+  "secret_worker_identity": [
+    1966,
+    "2026-11-05T05:51:35"
+  ],
+  "secret_phase_public_checks": {
+    "/health": {
+      "status": "ok"
+    },
+    "/ready": {
+      "status": "ready",
+      "provider_mode": "live",
+      "release": {
+        "git_commit": "60fa94ef9ec01be0d0b4af347a3251255cf7565c",
+        "build_version": "1.2-6749226f1af65b63",
+        "built_utc": "2026-11-04T12:18:02.616350+00:00",
+        "frontend_sha256": "5bef17e44c53f3652b72f143fffbed00c4c3e77d0395654c7a9497e2a2b7f132",
+        "backend_sha256": "00e764d9e2d2ef88872a0546c63b771e9c5c53dae34b7f97419f53e610c52db4",
+        "required_migration": "004",
+        "supported_migrations": [
+          "004",
+          "005"
+        ],
+        "sso_required_migration": "005"
+      },
+      "database_revision": "005",
+      "schema_versioned": true,
+      "sso_available": false
+    },
+    "/api/sso/status": {
+      "sso_enabled": false,
+      "configured": false,
+      "demo_login_enabled": true
+    }
+  },
+  "activation_submitted_at_utc": "2026-11-05T05:52:59.845541+00:00",
+  "unrelated_settings_and_secret_preserved": true,
+  "new_worker_verified": true,
+  "activation_worker_identity": [
+    1966,
+    "2026-11-05T05:55:59"
+  ],
+  "public_checks": {
+    "/health": {
+      "status": "ok"
+    },
+    "/ready": {
+      "status": "ready",
+      "provider_mode": "live",
+      "release": {
+        "git_commit": "60fa94ef9ec01be0d0b4af347a3251255cf7565c",
+        "build_version": "1.2-6749226f1af65b63",
+        "built_utc": "2026-11-04T12:18:02.616350+00:00",
+        "frontend_sha256": "5bef17e44c53f3652b72f143fffbed00c4c3e77d0395654c7a9497e2a2b7f132",
+        "backend_sha256": "00e764d9e2d2ef88872a0546c63b771e9c5c53dae34b7f97419f53e610c52db4",
+        "required_migration": "004",
+        "supported_migrations": [
+          "004",
+          "005"
+        ],
+        "sso_required_migration": "005"
+      },
+      "database_revision": "005",
+      "schema_versioned": true,
+      "sso_available": true
+    },
+    "/api/sso/status": {
+      "sso_enabled": true,
+      "configured": true,
+      "demo_login_enabled": true
+    }
+  }
+}

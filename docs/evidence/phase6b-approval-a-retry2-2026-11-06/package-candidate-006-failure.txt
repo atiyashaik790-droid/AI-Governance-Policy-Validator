@@ -1,0 +1,37 @@
+{"configured_minutes": 120, "database_expires_utc": "2026-11-06T16:22:43.994036+00:00", "event": "session.observation", "expires_at": "2026-11-06T16:22:43.994036+00:00", "issued_after_utc": "2026-11-06T14:22:43.994074+00:00", "issued_before_utc": "2026-11-06T14:22:43.993959+00:00", "server_now": "2026-11-06T14:25:09.787119+00:00"}
+{"configured_minutes": 120, "cookie_expires_utc": "2026-11-06T16:22:43+00:00", "cookie_max_age_seconds": 7200, "database_expires_utc": "2026-11-06T16:22:43.994036+00:00", "event": "session.contract", "issued_after_utc": "2026-11-06T14:22:43.994074+00:00", "issued_before_utc": "2026-11-06T14:22:43.993959+00:00", "issued_duration_lower_seconds": 7199.999962, "issued_duration_upper_seconds": 7200.000077, "remaining_seconds": 7054.206917, "server_now_utc": "2026-11-06T14:25:09.787119+00:00"}
+  from starlette.testclient import TestClient as TestClient  # noqa
+{"event": "http.completed", "correlation_id": "beedb2ef-edad-499a-8ae2-eac60f8da92d", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 147769.64}
+{"event": "http.completed", "correlation_id": "f8fd6b51-6be3-4994-b5ab-ca2aab79d9f2", "route": "/{path:path}", "method": "GET", "status": 200, "duration_ms": 26.49}
+{"event": "http.completed", "correlation_id": "80800d69-4905-4724-86e6-967690bab554", "route": "/api/policies", "method": "GET", "status": 401, "duration_ms": 1.81}
+{"event": "http.completed", "correlation_id": "b2e948c4-4784-40c0-ba69-6681c4db6caa", "route": "/api/sso/login", "method": "GET", "status": 302, "duration_ms": 141777.19}
+{"event": "http.completed", "correlation_id": "d75cc278-d3da-46f2-bef7-68c877791132", "route": "/api/sso/callback", "method": "GET", "status": 303, "duration_ms": 143936.46}
+{"event": "http.completed", "correlation_id": "eac80f33-89df-46cb-b145-fc0954f4128d", "route": "/api/sso/me", "method": "GET", "status": 200, "duration_ms": 143022.79}
+{"event": "http.completed", "correlation_id": "37cecf63-07b6-4505-8fcd-ec363f0576bc", "route": "/api/sso/me", "method": "GET", "status": 200, "duration_ms": 144382.13}
+{"event": "http.completed", "correlation_id": "7737fd82-949a-4c49-a6fa-6de8a97c59fa", "route": "/api/sso/me", "method": "GET", "status": 401, "duration_ms": 142021.86}
+{"event": "http.completed", "correlation_id": "2521774b-8a25-4d3b-83a2-415b6e4690f6", "route": "/api/sso/me", "method": "GET", "status": 401, "duration_ms": 142535.83}
+{"event": "http.completed", "correlation_id": "202726cf-d2a2-4e9b-8d46-1c291edbd98f", "route": "/api/auth/session", "method": "POST", "status": 201, "duration_ms": 6038.0}
+{"event": "http.completed", "correlation_id": "48092921-747a-4c2f-b291-710345325ec7", "route": "/api/policies", "method": "POST", "status": 201, "duration_ms": 7470.57}
+{"event": "http.completed", "correlation_id": "7de34293-c8d1-4de4-bab1-7eb4103c9d8e", "route": "/api/policies/{policy_id}/submit", "method": "POST", "status": 200, "duration_ms": 16274.63}
+{"event": "http.completed", "correlation_id": "a329b6d1-c321-4427-9d18-6d2ffd9fe678", "route": "/api/policies/{policy_id}/approve", "method": "POST", "status": 200, "duration_ms": 11871.44}
+{"event": "http.completed", "correlation_id": "37abf36e-c481-46f6-ac67-8986b3ae470e", "route": "/api/policies/{policy_id}/publish", "method": "POST", "status": 200, "duration_ms": 13918.65}
+{"event": "http.completed", "correlation_id": "2a7f82d8-b9f7-4132-8ba9-834e88550830", "route": "/api/policies/{policy_id}/activate", "method": "POST", "status": 200, "duration_ms": 17710.45}
+{"event": "http.completed", "correlation_id": "51200ce2-a165-4dad-b4ce-5d19155da618", "route": "/api/governance/generate", "method": "POST", "status": 200, "duration_ms": 43311.14}
+{"event": "http.completed", "correlation_id": "7c8e60ad-73e8-4472-b8b5-8396ac06aae9", "route": "/api/governance/generate", "method": "POST", "status": 200, "duration_ms": 37088.66}
+{"event": "http.completed", "correlation_id": "11c311d0-ad1c-4021-9468-9eee230c7ddb", "route": "/api/v2/workspace/policy-state", "method": "GET", "status": 200, "duration_ms": 4574.59}
+{"event": "http.completed", "correlation_id": "5b5d324c-0821-48f3-995d-43d0e212a2f0", "route": "/api/v2/workspace/policy-mode", "method": "PUT", "status": 503, "duration_ms": 6957.76}
+Traceback (most recent call last):
+  File "/home/sigmoid/AI governance policy validator/scripts/tests/phase6b_sql_package_probe.py", line 505, in <module>
+    probe(
+    ~~~~~^
+        args.directory,
+        ^^^^^^^^^^^^^^^
+    ...<3 lines>...
+        args.preserve_only,
+        ^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/sigmoid/AI governance policy validator/scripts/tests/phase6b_sql_package_probe.py", line 461, in probe
+    assert switched.status_code == 200, switched.text
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {"detail":"Database operation unavailable; nothing released"}

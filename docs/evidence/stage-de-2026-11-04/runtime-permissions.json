@@ -1,0 +1,29 @@
+{
+  "status": "FAIL",
+  "category": "D_RUNTIME_PERMISSIONS_MISSING_OR_EXCESSIVE",
+  "database_mutated": false,
+  "permission_subject": "actual_app_service_managed_identity",
+  "hosted_runtime_identity_verified": true,
+  "required_permissions": {
+    "sso_memberships.SELECT": 0,
+    "sso_transactions.SELECT": 0,
+    "sso_transactions.INSERT": 0,
+    "sso_transactions.UPDATE": 0,
+    "sso_sessions.SELECT": 0,
+    "sso_sessions.INSERT": 0,
+    "sso_sessions.UPDATE": 0
+  },
+  "metadata_visibility": {
+    "sso_memberships": 1,
+    "sso_transactions": 1,
+    "sso_sessions": 1
+  },
+  "unexpected_write_permissions": {
+    "sso_memberships.INSERT": 0,
+    "sso_memberships.UPDATE": 0,
+    "sso_memberships.DELETE": 0,
+    "sso_transactions.DELETE": 0,
+    "sso_sessions.DELETE": 0
+  },
+  "observed_at_utc": "2026-11-04T16:23:33.564981+00:00"
+}

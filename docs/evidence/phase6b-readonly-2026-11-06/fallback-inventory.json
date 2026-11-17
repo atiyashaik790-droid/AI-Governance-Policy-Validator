@@ -1,0 +1,159 @@
+[
+  {
+    "artifact": "artifacts/governance-sso-005-compatible-rollback-20261104.zip",
+    "version": "1.2-6749226f1af65b63",
+    "supported_migrations": [
+      "004",
+      "005"
+    ],
+    "backend_sha256": "00e764d9e2d2ef88872a0546c63b771e9c5c53dae34b7f97419f53e610c52db4",
+    "sha256": "9d81fa9b7700557eac2cb41edd5ab861d19a6b8c4f9052e55068e5eab784df80"
+  },
+  {
+    "artifact": "artifacts/phase6a-2026-11-06/fallback007.zip",
+    "version": "1.2-7d572934f2b78aeb",
+    "supported_migrations": [
+      "004",
+      "005",
+      "006",
+      "007"
+    ],
+    "backend_sha256": "12e0a5ffc478687bdf4007bff67af07461f8107547145bcf4e69f2ad65628cf9",
+    "sha256": "a0a53d4899bd5672043420550fdbe01c7beca2a409b710fe180f8f52d516eb28"
+  },
+  {
+    "artifact": "artifacts/phase6a-2026-11-06/candidate.zip",
+    "version": "1.2-7d572934f2b78aeb",
+    "supported_migrations": [
+      "004",
+      "005",
+      "006",
+      "007"
+    ],
+    "backend_sha256": "12e0a5ffc478687bdf4007bff67af07461f8107547145bcf4e69f2ad65628cf9",
+    "sha256": "a0a53d4899bd5672043420550fdbe01c7beca2a409b710fe180f8f52d516eb28"
+  },
+  {
+    "artifact": "artifacts/final-implementation-20261031/governance-reliability.zip",
+    "version": "1.1-e8e21c909e39311e",
+    "supported_migrations": null,
+    "backend_sha256": "d2490a598a0e41569c1a0feeaf396c1caa35477283a28f90641d5326af453696",
+    "sha256": "97ec727e7062e2a08fc600f76e99b29e96923fc65ea77bd09c428a5b03f6cbaa"
+  },
+  {
+    "artifact": "artifacts/final-implementation-20261031/governance-reliability-final.zip",
+    "version": "1.1-544cbf32d11a251a",
+    "supported_migrations": null,
+    "backend_sha256": "7e2dd1d182461af24365d7d0fc08785b5d57c7a8135bd3a7c20375a6347bdef7",
+    "sha256": "3d81bdfca85f4df3b4786562283bce4d599d34662993f2c21623eeb6d3286992"
+  },
+  {
+    "artifact": "artifacts/sso-only-20261105/rollback-1.2-6749226f1af65b63.zip",
+    "version": "1.2-6749226f1af65b63",
+    "supported_migrations": [
+      "004",
+      "005"
+    ],
+    "backend_sha256": "00e764d9e2d2ef88872a0546c63b771e9c5c53dae34b7f97419f53e610c52db4",
+    "sha256": "9d81fa9b7700557eac2cb41edd5ab861d19a6b8c4f9052e55068e5eab784df80"
+  },
+  {
+    "artifact": "artifacts/sso-only-20261105/governance-sso-only.zip",
+    "version": "1.2-5aad19f7eea45a42",
+    "supported_migrations": [
+      "004",
+      "005"
+    ],
+    "backend_sha256": "1112eb26744d01e87434210c40cacdb42bca6cdf791a9dc4d1ca0f36655706d9",
+    "sha256": "a82a1323a2a7a1a081a914e15b8a4e13c58f4fd14fbc6e7d99ab52db43190a8f"
+  },
+  {
+    "artifact": "artifacts/restricted-demo-20261101/governance-restricted-demo-1.2-sql-portable.zip",
+    "version": "1.2-fd9d6fee6af8aa17",
+    "supported_migrations": null,
+    "backend_sha256": "23a0b8848b06c5168b81e32955d1a6a2e9012b34e19596b40128dbef1878ee20",
+    "sha256": "390ca1e896a740754e93f7aa7b3881e8ce32912776c2c1b44b2307715c7d88a9"
+  },
+  {
+    "artifact": "artifacts/restricted-demo-20261101/governance-separate-audit-histories.zip",
+    "version": "1.2-bcba8e97a8b84793",
+    "supported_migrations": null,
+    "backend_sha256": "66790536252fe519591fd42ce91335ffede0970a1ee376f1cc42e5f666c99932",
+    "sha256": "1695c3c88a2434cfd6fae6cd8ca258da2b64385a9c65adb87761c31852d7c169"
+  },
+  {
+    "artifact": "artifacts/restricted-demo-20261101/governance-policy-dropdowns-responsive.zip",
+    "version": "1.2-38d43c3690160556",
+    "supported_migrations": null,
+    "backend_sha256": "66790536252fe519591fd42ce91335ffede0970a1ee376f1cc42e5f666c99932",
+    "sha256": "589c034c696342bceab68c15d2ce69dda74bf550d9298ce95351ec33e45fbc7b"
+  },
+  {
+    "artifact": "artifacts/restricted-demo-20261101/governance-workspace-policy-delete.zip",
+    "version": "1.2-5e8064f901573795",
+    "supported_migrations": null,
+    "backend_sha256": "9b9926cad53bee95d6acb9d3097c4b07bb63366688dbb118208a1b0d9b50aeab",
+    "sha256": "b44afedb721ae8ed5b4d48c9ea50fe3aab6a586ed8325af7c08ca93969abf776"
+  },
+  {
+    "artifact": "artifacts/restricted-demo-20261101/governance-restricted-demo-1.2.zip",
+    "version": "1.2-b67467d215710f03",
+    "supported_migrations": null,
+    "backend_sha256": "b8cebfa6f7288fb4081f60f5eb738586d7f7531544219bf9b2234eaa2049fae5",
+    "sha256": "92fcea24b8ab87c1879d7ec0ae22947d1eacf3755f4d80d4c1ae23e80c221805"
+  },
+  {
+    "artifact": "artifacts/restricted-demo-20261101/governance-policy-dropdowns.zip",
+    "version": "1.2-5b1a8b2282d8fccf",
+    "supported_migrations": null,
+    "backend_sha256": "66790536252fe519591fd42ce91335ffede0970a1ee376f1cc42e5f666c99932",
+    "sha256": "171e4d7359c3678b6c91488c5190b42da46aa65a997e0375adf3f5b630fdf786"
+  },
+  {
+    "artifact": "artifacts/restricted-demo-20261101/governance-policy-list-fix.zip",
+    "version": "1.2-37d875d722719d8a",
+    "supported_migrations": null,
+    "backend_sha256": "8c72d02737f3e4f11f443ff25dc021ed33558ca5974b9d3715a9656e05bce82f",
+    "sha256": "6d54ac74740dfacde4e55c284996a06d3b3c465d2a86afa63d99d3e5f05efb85"
+  },
+  {
+    "artifact": "artifacts/structural-only-candidate-2026-11-05/production/governance-structural-only.zip",
+    "version": "1.2-ca5df7c1dc19e525",
+    "supported_migrations": [
+      "004",
+      "005"
+    ],
+    "backend_sha256": "ad2e4af6c958f24e27e8838cccf8ca9dc46c76fb430c583d2c6737cd3034a813",
+    "sha256": "6a6a265bc2d27f9965a1a3abb33eaf61a4bd433a1257b241c183a871c12a57db"
+  },
+  {
+    "artifact": "artifacts/refactor-phase3-2026-11-05/stages/10-packaging/application.zip",
+    "version": "1.2-d424e5da6c279372",
+    "supported_migrations": [
+      "004",
+      "005"
+    ],
+    "backend_sha256": "007e9812ffc88fba0929484a3248f95a08a19fe912183bc107b94e4f3f793e12",
+    "sha256": "9c480d89146b65be632505933cf0cc2f2509bbbc4c1fca0ad0dfe7afd2da202e"
+  },
+  {
+    "artifact": "artifacts/refactor-phase4-2026-11-05/stages/10-packaging/application.zip",
+    "version": "1.2-d424e5da6c279372",
+    "supported_migrations": [
+      "004",
+      "005"
+    ],
+    "backend_sha256": "007e9812ffc88fba0929484a3248f95a08a19fe912183bc107b94e4f3f793e12",
+    "sha256": "adcf96f4d7b0dd3ee8adb93122f8a1c90baeed457afdad35c0b5999f79b800a5"
+  },
+  {
+    "artifact": "artifacts/refactor-baseline-2026-11-05/disposable/backend-pytest/test_package_allowlist_exclude0/application.zip",
+    "version": "1.2-bdd01a72db282964",
+    "supported_migrations": [
+      "004",
+      "005"
+    ],
+    "backend_sha256": "51926f3358c60b64cae99af3c7cd98884e8574927d9aeab31c248e757dcfcf03",
+    "sha256": "15a283a411d46961a73685277668eeed3fb0738f7ded9afd4d831baa4f693061"
+  }
+]

@@ -1,0 +1,47 @@
+{
+  "observed_at_utc": "2026-11-04T15:44:03.200570+00:00",
+  "database_mutated": false,
+  "permission_subject": "executing_cli_identity",
+  "status": "PASS_READ_ONLY_OBSERVATION",
+  "migration_identity": {
+    "tenant_id": "4ac50105-0c66-404e-a107-7cbd8a9a6442",
+    "object_id": "b5d8bfbe-f03a-4132-a13f-ab49aae834b7",
+    "auth_mode": "cli",
+    "hosted_runtime_identity": false
+  },
+  "revision": [
+    "004"
+  ],
+  "default_schema": "dbo",
+  "is_db_owner": 1,
+  "effective_migration_permissions": {
+    "create_table": 1,
+    "alter_dbo_schema": 1,
+    "references_dbo_schema": 1,
+    "view_database_definition": 1,
+    "select_alembic_history": 1,
+    "update_alembic_history": 1
+  },
+  "partial005_objects": [],
+  "runtime_inherited_database_schema_permissions": [
+    {
+      "grantee": "app-governance-validator-atiya-1026",
+      "class_desc": "DATABASE",
+      "state_desc": "GRANT",
+      "permission_name": "CONNECT",
+      "scope_name": "sqldb-governance-validator-dev"
+    },
+    {
+      "grantee": "governance_validator_web_runtime",
+      "class_desc": "DATABASE",
+      "state_desc": "GRANT",
+      "permission_name": "CONNECT",
+      "scope_name": "sqldb-governance-validator-dev"
+    }
+  ],
+  "runtime_ancestor_roles": [
+    "app-governance-validator-atiya-1026",
+    "governance_validator_web_runtime"
+  ],
+  "runtime_owned_dbo_schema": false
+}

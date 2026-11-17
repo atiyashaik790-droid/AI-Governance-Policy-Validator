@@ -1,0 +1,13 @@
+{
+  "status": "EXISTING_CANDIDATES_FOUND_PENDING_OWNER_SELECTION",
+  "enabled_member_candidates": 2,
+  "object_ids_verified": true,
+  "enterprise_app_assignment_required": false,
+  "admin_unchanged": true,
+  "directory_or_sql_changes": 0,
+  "candidate_plan_only_validation": "PASS_BOTH_NO_DATABASE_ACCESS",
+  "routing_authorization": "PASS_LOCAL_EVIDENCE_REUSED",
+  "hosted_user_sign_in": "NOT_VERIFIED",
+  "next_action": "OWNER_SELECTS_AUTHORIZED_ACCOUNT_THEN_EXPLICIT_SQL_MEMBERSHIP_APPROVAL",
+  "new_account_needed": "NOT_IF_EXISTING_CANDIDATE_IS_USABLE"
+}

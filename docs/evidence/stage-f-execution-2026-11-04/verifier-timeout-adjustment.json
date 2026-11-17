@@ -1,0 +1,5 @@
+{
+  "local_verifier_stopped": true,
+  "reason": "Readiness HTTP timeout increased after observed 19.5-second response; reconcile saved and serving state before any further settings change",
+  "hosted_stop_or_restart": false
+}

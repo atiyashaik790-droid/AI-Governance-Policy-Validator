@@ -1,0 +1,40 @@
+{
+  "observed_utc": "2026-11-08T15:48:36.608345+00:00",
+  "mode": "READ_ONLY_NO_PROVIDER_CALLS",
+  "checks": {
+    "/health": {
+      "http_status": 200,
+      "body": {
+        "status": "ok"
+      }
+    },
+    "/ready": {
+      "http_status": 200,
+      "body": {
+        "status": "ready",
+        "release": {
+          "git_commit": "unavailable",
+          "build_version": "1.2-ca5df7c1dc19e525",
+          "built_utc": "2026-11-05T12:09:33.571692+00:00",
+          "frontend_sha256": "beb38c3485b8abfb672e5a2bf851f1f178c1a8049f367b450708e5abbe7581d4",
+          "backend_sha256": "ad2e4af6c958f24e27e8838cccf8ca9dc46c76fb430c583d2c6737cd3034a813",
+          "required_migration": "004",
+          "supported_migrations": [
+            "004",
+            "005"
+          ],
+          "sso_required_migration": "005"
+        },
+        "database_revision": "005"
+      }
+    }
+  },
+  "app": {
+    "alwaysOn": true,
+    "id": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Web/sites/app-governance-validator-atiya-1026",
+    "identity": "600447fe-5fea-4801-9033-ab4aafc474cc",
+    "kind": "app,linux",
+    "linuxFxVersion": "PYTHON|3.13",
+    "state": "Running"
+  }
+}

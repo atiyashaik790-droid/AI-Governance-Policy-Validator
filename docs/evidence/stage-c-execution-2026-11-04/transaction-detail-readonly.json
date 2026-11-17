@@ -1,0 +1,7 @@
+{
+  "observed_at_utc": "2026-11-04T16:13:09.814887+00:00",
+  "database_mutated": false,
+  "other_transactions": [],
+  "other_write_locks": 0,
+  "status": "READ_ONLY_OBSERVATION"
+}

@@ -1,0 +1,30 @@
+{
+  "status": "PASS",
+  "observed_at_utc": "2026-11-04T15:17:50.727351+00:00",
+  "resource_group": "rg_techdemo_Atiya_Tabsum_Shaik",
+  "app": "app-governance-validator-atiya-1026",
+  "principal_id": "600447fe-5fea-4801-9033-ab4aafc474cc",
+  "saved_flags_present": {
+    "SSO_ENABLED": false,
+    "DEMO_BROWSER_LOGIN_ENABLED": false
+  },
+  "effective_flags": {
+    "SSO_ENABLED": "false",
+    "DEMO_BROWSER_LOGIN_ENABLED": "true"
+  },
+  "flag_basis": "Absent saved flags use checksum-pinned package defaults; no packaged .env",
+  "approved_demo_accounts_match_existing_saved_hashes": [
+    "Admin",
+    "Developer"
+  ],
+  "candidate_checksum": "PASS",
+  "original_rollback_checksum": "PASS",
+  "original_package_preserved": true,
+  "azure_configuration_changed": false,
+  "subscription": "25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6",
+  "resource_id": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Web/sites/app-governance-validator-atiya-1026",
+  "app_state": "Running",
+  "baseline_public_readiness": "PASS",
+  "baseline_release": "1.2-5e8064f901573795",
+  "baseline_required_migration": "004"
+}

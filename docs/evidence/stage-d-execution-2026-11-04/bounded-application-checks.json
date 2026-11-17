@@ -1,0 +1,63 @@
+{
+  "stage": "D",
+  "status": "PASS",
+  "started_at_utc": "2026-11-04T16:29:07.398715+00:00",
+  "checks": [
+    {
+      "name": "GET /health",
+      "passed": true
+    },
+    {
+      "name": "GET /ready",
+      "passed": true
+    },
+    {
+      "name": "Expected release and005 remain ready; SSO unavailable",
+      "passed": true
+    },
+    {
+      "name": "GET /api/sso/status",
+      "passed": true
+    },
+    {
+      "name": "SSO off/demo on",
+      "passed": true
+    },
+    {
+      "name": "POST /api/auth/session",
+      "passed": true
+    },
+    {
+      "name": "GET /api/policies?limit=1",
+      "passed": true
+    },
+    {
+      "name": "Existing tenant-scoped governance policy read",
+      "passed": true
+    },
+    {
+      "name": "POST /api/auth/logout",
+      "passed": true
+    },
+    {
+      "name": "GET /api/policies",
+      "passed": true
+    }
+  ],
+  "demo_sessions_created": 1,
+  "provider_storage_calls": false,
+  "policy_mutations": false,
+  "readiness": {
+    "status": "ready",
+    "database_revision": "005",
+    "schema_versioned": true,
+    "sso_available": false
+  },
+  "release": "1.2-6749226f1af65b63",
+  "authentication_flags": {
+    "sso_enabled": false,
+    "configured": false,
+    "demo_login_enabled": true
+  },
+  "finished_at_utc": "2026-11-04T16:29:12.148882+00:00"
+}

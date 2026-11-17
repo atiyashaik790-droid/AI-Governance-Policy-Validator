@@ -1,0 +1,85 @@
+{
+  "observed_at_utc": "2026-11-04T15:51:24.349951+00:00",
+  "permission_subject": "executing_cli_identity_not_designated_recovery_owner",
+  "hosted_changes": false,
+  "cli_context": {
+    "subscription": "25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6",
+    "tenant": "4ac50105-0c66-404e-a107-7cbd8a9a6442",
+    "type": "user"
+  },
+  "permission_metadata_readable": true,
+  "management_allow_metadata": {
+    "Microsoft.Sql/servers/read": true,
+    "Microsoft.Sql/servers/databases/read": true,
+    "Microsoft.Sql/servers/databases/write": true,
+    "Microsoft.Sql/servers/databases/restorePoints/read": true,
+    "Microsoft.Sql/servers/databases/readBackups/action": true
+  },
+  "deny_assignments": {
+    "subscription": {
+      "status": "READ",
+      "count": 0
+    },
+    "resource_group": {
+      "status": "READ",
+      "count": 0
+    },
+    "server": {
+      "status": "READ",
+      "count": 0
+    },
+    "database": {
+      "status": "READ",
+      "count": 0
+    }
+  },
+  "locks": {
+    "subscription": {
+      "status": "READ",
+      "count": 0
+    },
+    "resource_group": {
+      "status": "READ",
+      "count": 0
+    },
+    "server": {
+      "status": "READ",
+      "count": 0
+    },
+    "database": {
+      "status": "READ",
+      "count": 0
+    }
+  },
+  "restore_points": [
+    {
+      "earliestRestoreDate": "2026-10-28T15:55:06Z",
+      "type": "CONTINUOUS"
+    }
+  ],
+  "source_databases": [
+    {
+      "name": "sqldb-governance-validator-dev",
+      "status": "Online"
+    },
+    {
+      "name": "master",
+      "status": "Online"
+    }
+  ],
+  "database_metadata": {
+    "currentServiceObjectiveName": "S0",
+    "earliestRestoreDate": "2026-10-28T15:55:06+00:00",
+    "name": "sqldb-governance-validator-dev",
+    "status": "Online"
+  },
+  "retention": {
+    "diffBackupIntervalInHours": 24,
+    "retentionDays": 7
+  },
+  "finished_at_utc": "2026-11-04T15:51:39.453191+00:00",
+  "recovery_operator_designated_for005": false,
+  "restore_target_authorized": false,
+  "restore_authority_fully_verified": false,
+  "restore_executed": false
+}

@@ -1,0 +1,28 @@
+import os,sys,json,subprocess,ipaddress
+from pathlib import Path
+from datetime import datetime,timezone
+R=Path.cwd();os.environ['AZURE_CONFIG_DIR']=str(R/'.azure-sql-cli');P=R/'docs/evidence/stage-e-execution-2026-11-04/firewall-approved-execution.json'
+base=['az','sql','server','firewall-rule'];args=['--subscription','25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6','--resource-group','rg_techdemo_Atiya_Tabsum_Shaik','--server','sql-governance-validator-dev-atiya'];name='stage-e-temp-20261104-101-0-62-148'
+def az(op,extra=[]):
+ p=subprocess.run(base+[op]+args+extra+['-o','json','--only-show-errors'],capture_output=True,text=True,timeout=45)
+ if p.returncode:raise RuntimeError('Azure CLI operation failed; no raw output logged')
+ return json.loads(p.stdout) if p.stdout.strip() else None
+r=json.loads(P.read_text()) if P.exists() else {}
+try:
+ if sys.argv[1]=='create':
+  ip=subprocess.run(['curl','--fail','--silent','--show-error','--ipv4','--max-time','15','https://api.ipify.org'],capture_output=True,text=True,timeout=20).stdout.strip();assert ip=='101.0.62.148'
+  before={x['name']:(x['startIpAddress'],x['endIpAddress']) for x in az('list')};assert name not in before
+  r={'ip_reconfirmed':ip,'before_rules':before,'create_attempted':True,'approval':'Explicit user approval for exact single-IP temporary rule','started_at_utc':datetime.now(timezone.utc).isoformat()};P.write_text(json.dumps(r,indent=2)+'\n')
+  az('create',['--name',name,'--start-ip-address',ip,'--end-ip-address',ip]);after={x['name']:(x['startIpAddress'],x['endIpAddress']) for x in az('list')}
+  assert after.pop(name)==(ip,ip) and after==before
+  r['created_and_other_rules_unchanged']=True
+ else:
+  assert r.get('create_attempted') and 'before_rules' in r
+  current={x['name']:(x['startIpAddress'],x['endIpAddress']) for x in az('list')}
+  if name in current:
+   assert current[name]==('101.0.62.148','101.0.62.148');az('delete',['--name',name])
+  after={x['name']:[x['startIpAddress'],x['endIpAddress']] for x in az('list')};assert name not in after
+  r['cleanup_verified']=True;r['other_rules_unchanged_after_cleanup']=after==r['before_rules']
+ r['updated_at_utc']=datetime.now(timezone.utc).isoformat()
+except Exception as e:r['error_kind']=type(e).__name__
+P.write_text(json.dumps(r,indent=2)+'\n');print(json.dumps({k:v for k,v in r.items() if k!='before_rules'}))

@@ -1,0 +1,5 @@
+{
+  "alwaysOn": true,
+  "linuxFxVersion": "PYTHON|3.13",
+  "numberOfWorkers": 1
+}

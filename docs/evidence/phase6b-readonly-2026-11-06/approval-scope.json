@@ -1,0 +1,39 @@
+{
+  "approved": false,
+  "subscription": "25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6",
+  "resource_group": "rg_techdemo_Atiya_Tabsum_Shaik",
+  "server": "sql-governance-validator-dev-atiya",
+  "source_database": "sqldb-governance-validator-dev",
+  "A": {
+    "destination": "sqldb-gpv-mig-20261106-a1",
+    "resource_id": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/databases/sqldb-gpv-mig-20261106-a1",
+    "source": "empty database; synthetic data only",
+    "service_objective": "S0",
+    "dtu": 10,
+    "max_size_bytes": 268435456000,
+    "collation": "SQL_Latin1_General_CP1_CI_AS",
+    "backup_redundancy": "Local",
+    "max_elapsed_hours": 4,
+    "max_incarnations": 2,
+    "budget_usd": 1,
+    "cleanup": "Delete only the exact named synthetic database; confirm ARM GET 404 and server list absence. Never touch source.",
+    "production_data_copied": false
+  },
+  "B": {
+    "destination": "sqldb-gpv-pitr-20261106-b1",
+    "resource_id": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/databases/sqldb-gpv-pitr-20261106-b1",
+    "source_resource_id": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/databases/sqldb-governance-validator-dev",
+    "create_mode": "PointInTimeRestore",
+    "proposed_restore_point_utc": "2026-11-06T08:00:00Z",
+    "restore_time_requires_revalidation": true,
+    "service_objective": "S0",
+    "max_size_bytes": 268435456000,
+    "backup_redundancy": "Local",
+    "max_elapsed_hours": 4,
+    "budget_usd": 1,
+    "production_data_copied": true,
+    "no_cutover": true,
+    "no_source_backup_changes": true,
+    "cleanup": "Delete only the exact named restored database; verify deletion. Automatic retained backups may persist under service policy."
+  }
+}

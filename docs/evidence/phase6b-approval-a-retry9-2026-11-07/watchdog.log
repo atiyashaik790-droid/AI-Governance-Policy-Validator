@@ -1,0 +1,2 @@
+{"kind": "WATCHDOG_DEADLINE"}
+{"kind": "delete_intent", "resource_id": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/databases/sqldb-gpv-mig-20261106-a1"}

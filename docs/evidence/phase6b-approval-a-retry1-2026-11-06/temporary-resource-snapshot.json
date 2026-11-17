@@ -1,0 +1,21 @@
+{
+  "collation": "SQL_Latin1_General_CP1_CI_AS",
+  "creationDate": "2026-11-06T13:23:03.677000+00:00",
+  "currentBackupStorageRedundancy": "Local",
+  "currentServiceObjectiveName": "S0",
+  "id": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/databases/sqldb-gpv-mig-20261106-a1",
+  "maxSizeBytes": 268435456000,
+  "sku": {
+    "capacity": 10,
+    "family": null,
+    "name": "Standard",
+    "size": null,
+    "tier": "Standard"
+  },
+  "status": "Online",
+  "tags": {
+    "expiresUtc": "2026-11-06T17:22:12.502940+00:00",
+    "owner": "approved-operator",
+    "purpose": "phase6b-approval-a-synthetic"
+  }
+}

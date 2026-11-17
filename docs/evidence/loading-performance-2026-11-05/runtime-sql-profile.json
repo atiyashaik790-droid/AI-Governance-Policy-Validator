@@ -1,0 +1,32 @@
+{
+  "status": "PASS",
+  "method": "EXISTING_MAIN_CONTAINER_EXEC_WEBSOCKET",
+  "hosted_changes": false,
+  "sql_accessed": true,
+  "pinned_operator_identity_verified": true,
+  "handshake": "PASS",
+  "payload_sent": true,
+  "sql_read_only": true,
+  "hosted_writes": false,
+  "phases": [
+    {
+      "name": "sql_ping",
+      "elapsed_ms": 2012.54,
+      "sql_statements": 1,
+      "sql_execution_ms": 1.01
+    },
+    {
+      "name": "schema_contract",
+      "elapsed_ms": 1496.58,
+      "sql_statements": 164,
+      "sql_execution_ms": 784.19
+    }
+  ],
+  "schema": {
+    "revision": "005",
+    "versioned": true,
+    "sso_schema": true
+  },
+  "observed_at_utc": "2026-11-05T08:29:20.718106+00:00",
+  "wrapper_correction": "Inherited inspector flag corrected: this explicit SELECT-only profile accessed SQL; no writes performed."
+}

@@ -1,0 +1,475 @@
+{
+  "utc": "2026-11-07T09:26:16.360870+00:00",
+  "mutations": 0,
+  "account": {
+    "id": "25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6",
+    "tenantId": "4ac50105-0c66-404e-a107-7cbd8a9a6442"
+  },
+  "server": {
+    "fqdn": "sql-governance-validator-dev-atiya.database.windows.net",
+    "id": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya",
+    "location": "westus2"
+  },
+  "databases": [
+    {
+      "id": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/databases/sqldb-governance-validator-dev",
+      "name": "sqldb-governance-validator-dev",
+      "sku": {
+        "capacity": 10,
+        "family": null,
+        "name": "Standard",
+        "size": null,
+        "tier": "Standard"
+      },
+      "status": "Online"
+    },
+    {
+      "id": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/databases/master",
+      "name": "master",
+      "sku": {
+        "capacity": 4,
+        "family": "SYSTEM",
+        "name": "GP_SYSTEM",
+        "size": null,
+        "tier": "System"
+      },
+      "status": "Online"
+    }
+  ],
+  "s0_capability": [
+    {
+      "name": "Standard",
+      "readScale": {
+        "maxNumberOfReplicas": 0,
+        "reason": null,
+        "status": null
+      },
+      "reason": null,
+      "status": "Available",
+      "supportedServiceLevelObjectives": [
+        {
+          "computeModel": null,
+          "id": "f1173c43-91bd-4aaa-973c-54e79e15235b",
+          "includedMaxSize": {
+            "limit": 250,
+            "unit": "Gigabytes"
+          },
+          "name": "S0",
+          "performanceLevel": {
+            "unit": "DTU",
+            "value": 10.0
+          },
+          "reason": null,
+          "sku": {
+            "capacity": 10,
+            "family": null,
+            "name": "Standard",
+            "size": null,
+            "tier": "Standard"
+          },
+          "status": "Default",
+          "supportedAutoPauseDelay": null,
+          "supportedFreeLimitExhaustionBehaviors": null,
+          "supportedLicenseTypes": [],
+          "supportedMaintenanceConfigurations": [
+            {
+              "name": "SQL_Default",
+              "reason": null,
+              "status": "Default",
+              "zoneRedundant": false
+            }
+          ],
+          "supportedMaxSizes": [],
+          "supportedMinCapacities": null,
+          "supportedZones": [],
+          "zonePinning": false,
+          "zoneRedundant": false
+        }
+      ],
+      "supportedStorageCapabilities": [
+        {
+          "reason": null,
+          "status": "Default",
+          "storageAccountType": "GRS"
+        },
+        {
+          "reason": null,
+          "status": "Available",
+          "storageAccountType": "LRS"
+        },
+        {
+          "reason": "ZRS is available in multi-az regions",
+          "status": "Available",
+          "storageAccountType": "ZRS"
+        },
+        {
+          "reason": "GZRS is available in multi-az regions",
+          "status": "Available",
+          "storageAccountType": "GZRS"
+        }
+      ],
+      "zonePinning": false,
+      "zoneRedundant": false
+    }
+  ],
+  "subscription_locks": {
+    "value": []
+  },
+  "subscription_deny": {
+    "value": []
+  },
+  "group_locks": {
+    "value": []
+  },
+  "group_deny": {
+    "value": []
+  },
+  "server_locks": {
+    "value": []
+  },
+  "server_deny": {
+    "value": []
+  },
+  "daily_usd": 0.4839,
+  "conservative_10_billed_hours_usd": 0.20162500000000003,
+  "sqlite_sha256": "0cad09a35e73ad70bb5ff5e522f783f9b59fdd5b3c31eb5b5dddd4d300795766",
+  "source_sql": {
+    "identity": [
+      {
+        "db": "sqldb-governance-validator-dev",
+        "principal": "dbo",
+        "default_schema": "dbo",
+        "collation": "SQL_Latin1_General_CP1_CI_AS"
+      }
+    ],
+    "revision": [
+      {
+        "version_num": "005"
+      }
+    ],
+    "runtime_mapping": [
+      {
+        "name": "app-governance-validator-atiya-1026",
+        "type": "E",
+        "sid": "0xCECABAF78A6968498ADDCBA221319A17",
+        "client_id": "F7BACACE-698A-4968-8ADD-CBA221319A17"
+      }
+    ],
+    "new_tables": [],
+    "runtime_grants": [
+      {
+        "principal": "app-governance-validator-atiya-1026",
+        "state_desc": "GRANT",
+        "permission_name": "CONNECT",
+        "object_name": null
+      },
+      {
+        "principal": "governance_validator_web_runtime",
+        "state_desc": "GRANT",
+        "permission_name": "CONNECT",
+        "object_name": null
+      },
+      {
+        "principal": "governance_validator_web_runtime",
+        "state_desc": "GRANT",
+        "permission_name": "INSERT",
+        "object_name": "active_policy_assignments"
+      },
+      {
+        "principal": "governance_validator_web_runtime",
+        "state_desc": "GRANT",
+        "permission_name": "SELECT",
+        "object_name": "active_policy_assignments"
+      },
+      {
+        "principal": "governance_validator_web_runtime",
+        "state_desc": "GRANT",
+        "permission_name": "UPDATE",
+        "object_name": "active_policy_assignments"
+      },
+      {
+        "principal": "governance_validator_web_runtime",
+        "state_desc": "GRANT",
+        "permission_name": "SELECT",
+        "object_name": "alembic_version"
+      },
+      {
+        "principal": "governance_validator_web_runtime",
+        "state_desc": "GRANT",
+        "permission_name": "INSERT",
+        "object_name": "audit_events"
+      },
+      {
+        "principal": "governance_validator_web_runtime",
+        "state_desc": "GRANT",
+        "permission_name": "SELECT",
+        "object_name": "audit_events"
+      },
+      {
+        "principal": "governance_validator_web_runtime",
+        "state_desc": "GRANT",
+        "permission_name": "INSERT",
+        "object_name": "demo_sessions"
+      },
+      {
+        "principal": "governance_validator_web_runtime",
+        "state_desc": "GRANT",
+        "permission_name": "SELECT",
+        "object_name": "demo_sessions"
+      },
+      {
+        "principal": "governance_validator_web_runtime",
+        "state_desc": "GRANT",
+        "permission_name": "UPDATE",
+        "object_name": "demo_sessions"
+      },
+      {
+        "principal": "governance_validator_web_runtime",
+        "state_desc": "GRANT",
+        "permission_name": "INSERT",
+        "object_name": "evaluation_exports"
+      },
+      {
+        "principal": "governance_validator_web_runtime",
+        "state_desc": "GRANT",
+        "permission_name": "SELECT",
+        "object_name": "evaluation_exports"
+      },
+      {
+        "principal": "governance_validator_web_runtime",
+        "state_desc": "GRANT",
+        "permission_name": "UPDATE",
+        "object_name": "evaluation_exports"
+      },
+      {
+        "principal": "governance_validator_web_runtime",
+        "state_desc": "GRANT",
+        "permission_name": "INSERT",
+        "object_name": "export_jobs"
+      },
+      {
+        "principal": "governance_validator_web_runtime",
+        "state_desc": "GRANT",
+        "permission_name": "SELECT",
+        "object_name": "export_jobs"
+      },
+      {
+        "principal": "governance_validator_web_runtime",
+        "state_desc": "GRANT",
+        "permission_name": "UPDATE",
+        "object_name": "export_jobs"
+      },
+      {
+        "principal": "governance_validator_web_runtime",
+        "state_desc": "GRANT",
+        "permission_name": "INSERT",
+        "object_name": "feedback_records"
+      },
+      {
+        "principal": "governance_validator_web_runtime",
+        "state_desc": "GRANT",
+        "permission_name": "SELECT",
+        "object_name": "feedback_records"
+      },
+      {
+        "principal": "governance_validator_web_runtime",
+        "state_desc": "GRANT",
+        "permission_name": "INSERT",
+        "object_name": "human_review_cases"
+      },
+      {
+        "principal": "governance_validator_web_runtime",
+        "state_desc": "GRANT",
+        "permission_name": "SELECT",
+        "object_name": "human_review_cases"
+      },
+      {
+        "principal": "governance_validator_web_runtime",
+        "state_desc": "GRANT",
+        "permission_name": "UPDATE",
+        "object_name": "human_review_cases"
+      },
+      {
+        "principal": "governance_validator_web_runtime",
+        "state_desc": "GRANT",
+        "permission_name": "INSERT",
+        "object_name": "inference_rate_buckets"
+      },
+      {
+        "principal": "governance_validator_web_runtime",
+        "state_desc": "GRANT",
+        "permission_name": "SELECT",
+        "object_name": "inference_rate_buckets"
+      },
+      {
+        "principal": "governance_validator_web_runtime",
+        "state_desc": "GRANT",
+        "permission_name": "UPDATE",
+        "object_name": "inference_rate_buckets"
+      },
+      {
+        "principal": "governance_validator_web_runtime",
+        "state_desc": "GRANT",
+        "permission_name": "INSERT",
+        "object_name": "inference_usage"
+      },
+      {
+        "principal": "governance_validator_web_runtime",
+        "state_desc": "GRANT",
+        "permission_name": "SELECT",
+        "object_name": "inference_usage"
+      },
+      {
+        "principal": "governance_validator_web_runtime",
+        "state_desc": "GRANT",
+        "permission_name": "UPDATE",
+        "object_name": "inference_usage"
+      },
+      {
+        "principal": "governance_validator_web_runtime",
+        "state_desc": "GRANT",
+        "permission_name": "DELETE",
+        "object_name": "policies"
+      },
+      {
+        "principal": "governance_validator_web_runtime",
+        "state_desc": "GRANT",
+        "permission_name": "INSERT",
+        "object_name": "policies"
+      },
+      {
+        "principal": "governance_validator_web_runtime",
+        "state_desc": "GRANT",
+        "permission_name": "SELECT",
+        "object_name": "policies"
+      },
+      {
+        "principal": "governance_validator_web_runtime",
+        "state_desc": "GRANT",
+        "permission_name": "UPDATE",
+        "object_name": "policies"
+      },
+      {
+        "principal": "governance_validator_web_runtime",
+        "state_desc": "GRANT",
+        "permission_name": "INSERT",
+        "object_name": "policy_versions"
+      },
+      {
+        "principal": "governance_validator_web_runtime",
+        "state_desc": "GRANT",
+        "permission_name": "SELECT",
+        "object_name": "policy_versions"
+      },
+      {
+        "principal": "governance_validator_web_runtime",
+        "state_desc": "GRANT",
+        "permission_name": "INSERT",
+        "object_name": "review_assignments"
+      },
+      {
+        "principal": "governance_validator_web_runtime",
+        "state_desc": "GRANT",
+        "permission_name": "SELECT",
+        "object_name": "review_assignments"
+      },
+      {
+        "principal": "governance_validator_web_runtime",
+        "state_desc": "GRANT",
+        "permission_name": "UPDATE",
+        "object_name": "review_assignments"
+      },
+      {
+        "principal": "governance_validator_web_runtime",
+        "state_desc": "GRANT",
+        "permission_name": "INSERT",
+        "object_name": "review_notes"
+      },
+      {
+        "principal": "governance_validator_web_runtime",
+        "state_desc": "GRANT",
+        "permission_name": "SELECT",
+        "object_name": "review_notes"
+      },
+      {
+        "principal": "governance_validator_web_runtime",
+        "state_desc": "GRANT",
+        "permission_name": "SELECT",
+        "object_name": "sso_memberships"
+      },
+      {
+        "principal": "governance_validator_web_runtime",
+        "state_desc": "GRANT",
+        "permission_name": "VIEW DEFINITION",
+        "object_name": "sso_memberships"
+      },
+      {
+        "principal": "governance_validator_web_runtime",
+        "state_desc": "GRANT",
+        "permission_name": "INSERT",
+        "object_name": "sso_sessions"
+      },
+      {
+        "principal": "governance_validator_web_runtime",
+        "state_desc": "GRANT",
+        "permission_name": "SELECT",
+        "object_name": "sso_sessions"
+      },
+      {
+        "principal": "governance_validator_web_runtime",
+        "state_desc": "GRANT",
+        "permission_name": "UPDATE",
+        "object_name": "sso_sessions"
+      },
+      {
+        "principal": "governance_validator_web_runtime",
+        "state_desc": "GRANT",
+        "permission_name": "VIEW DEFINITION",
+        "object_name": "sso_sessions"
+      },
+      {
+        "principal": "governance_validator_web_runtime",
+        "state_desc": "GRANT",
+        "permission_name": "INSERT",
+        "object_name": "sso_transactions"
+      },
+      {
+        "principal": "governance_validator_web_runtime",
+        "state_desc": "GRANT",
+        "permission_name": "SELECT",
+        "object_name": "sso_transactions"
+      },
+      {
+        "principal": "governance_validator_web_runtime",
+        "state_desc": "GRANT",
+        "permission_name": "UPDATE",
+        "object_name": "sso_transactions"
+      },
+      {
+        "principal": "governance_validator_web_runtime",
+        "state_desc": "GRANT",
+        "permission_name": "VIEW DEFINITION",
+        "object_name": "sso_transactions"
+      },
+      {
+        "principal": "governance_validator_web_runtime",
+        "state_desc": "GRANT",
+        "permission_name": "INSERT",
+        "object_name": "validation_executions"
+      },
+      {
+        "principal": "governance_validator_web_runtime",
+        "state_desc": "GRANT",
+        "permission_name": "SELECT",
+        "object_name": "validation_executions"
+      }
+    ],
+    "runtime_roles": [
+      {
+        "role_name": "governance_validator_web_runtime",
+        "member_name": "app-governance-validator-atiya-1026"
+      }
+    ]
+  },
+  "sql_metadata_utc": "2026-11-07T09:26:39.910254+00:00"
+}

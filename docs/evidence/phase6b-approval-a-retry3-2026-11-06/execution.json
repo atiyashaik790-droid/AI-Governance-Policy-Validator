@@ -1,0 +1,22 @@
+{
+  "scope": "Approval A retry-3 ONLY",
+  "status": "BLOCKED_BEFORE_CREATE",
+  "harness_launched": false,
+  "events": [
+    {
+      "utc": "2026-11-06T18:27:09.985748+00:00",
+      "kind": "mandatory_readonly_sql_preflight_failed",
+      "failure_type": "DatabaseConnectionError",
+      "detail": "Azure SQL connection failed; verify driver, network, TLS and database identity permissions",
+      "underlying_cause": "Not exposed by sanitized connection wrapper"
+    }
+  ],
+  "incarnations": 0,
+  "created": false,
+  "resource_mutations": 0,
+  "cleanup_required": false,
+  "watchdog_started": false,
+  "migrations_run": [],
+  "estimated_incremental_compute_usd": 0,
+  "sqlite_unchanged": true
+}

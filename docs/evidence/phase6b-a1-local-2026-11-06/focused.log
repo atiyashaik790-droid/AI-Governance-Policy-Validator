@@ -1,0 +1,158 @@
+.{"event": "http.completed", "correlation_id": "c19267a9-fccd-4b8e-a1da-98a7e7c69c6f", "route": "/api/sso/login", "method": "GET", "status": 302, "duration_ms": 38.72}
+{"event": "http.completed", "correlation_id": "e42a1231-3d89-41cd-9529-7417388a241c", "route": "/api/sso/callback", "method": "GET", "status": 303, "duration_ms": 14.49}
+{"event": "http.completed", "correlation_id": "484de3de-c099-4f27-a15f-feff0aa8970a", "route": "/api/sso/me", "method": "GET", "status": 200, "duration_ms": 12.06}
+.{"event": "http.completed", "correlation_id": "a3f5a47b-1580-4110-9d8b-edb3747fd4a1", "route": "/api/sso/login", "method": "GET", "status": 302, "duration_ms": 22.11}
+{"event": "http.completed", "correlation_id": "13d8b73e-5a27-4956-afaf-a1dd128cf3d8", "route": "/api/sso/callback", "method": "GET", "status": 303, "duration_ms": 12.44}
+{"event": "http.completed", "correlation_id": "623f24f7-3ba8-4da0-80a6-e73b98d21b8a", "route": "/api/sso/me", "method": "GET", "status": 200, "duration_ms": 10.46}
+.{"event": "http.completed", "correlation_id": "50187ab8-839b-4d0a-a0c2-0d522c8bcb2f", "route": "/api/sso/login", "method": "GET", "status": 302, "duration_ms": 17.07}
+{"event": "http.completed", "correlation_id": "ba0767e2-122b-4ebb-abc3-1885be94a924", "route": "/api/sso/callback", "method": "GET", "status": 303, "duration_ms": 10.95}
+{"event": "http.completed", "correlation_id": "fbe4bc59-ddbc-42ac-add8-5da7ad24551f", "route": "/api/sso/me", "method": "GET", "status": 200, "duration_ms": 10.62}
+{"event": "http.completed", "correlation_id": "2952038d-1051-40e8-8a7d-4b57332ebc23", "route": "/api/policies", "method": "GET", "status": 200, "duration_ms": 15.3}
+{"event": "http.completed", "correlation_id": "f8d0c331-004e-4aaf-b8f6-6eb23df52263", "route": "/api/sso/me", "method": "GET", "status": 200, "duration_ms": 12.19}
+{"event": "http.completed", "correlation_id": "cf1064ec-8209-4c57-8357-112812559d6e", "route": "/api/policies", "method": "GET", "status": 200, "duration_ms": 10.3}
+{"event": "http.completed", "correlation_id": "19ff62f2-f5f8-4a3f-826f-a0e2679465c5", "route": "/api/sso/me", "method": "GET", "status": 200, "duration_ms": 8.81}
+{"event": "http.completed", "correlation_id": "bd903430-51e0-4702-a8f9-55f97412c80f", "route": "/api/policies", "method": "GET", "status": 200, "duration_ms": 9.94}
+{"event": "http.completed", "correlation_id": "44b9614e-23c4-4a47-b843-a1c0360c4a5b", "route": "/api/sso/me", "method": "GET", "status": 200, "duration_ms": 8.87}
+{"event": "http.completed", "correlation_id": "4d650890-9b6a-483e-acdd-5d284a6d0f45", "route": "/api/policies", "method": "GET", "status": 200, "duration_ms": 9.64}
+{"event": "http.completed", "correlation_id": "ea320581-6960-4065-97bb-19284783046b", "route": "/api/sso/me", "method": "GET", "status": 200, "duration_ms": 8.72}
+{"event": "http.completed", "correlation_id": "09baa893-cc3b-4f76-9a08-3e11594667ea", "route": "/api/sso/me", "method": "GET", "status": 401, "duration_ms": 9.06}
+{"event": "http.completed", "correlation_id": "7287745a-f51d-4284-95fd-40556eb37cc6", "route": "/api/policies", "method": "GET", "status": 401, "duration_ms": 8.84}
+.{"event": "http.completed", "correlation_id": "2383d086-9ee0-445c-a1ac-8e4fa7e27ef5", "route": "/api/sso/login", "method": "GET", "status": 302, "duration_ms": 18.67}
+{"event": "http.completed", "correlation_id": "63140ac6-e114-4dd7-99c1-3c92c31fadfa", "route": "/api/sso/callback", "method": "GET", "status": 303, "duration_ms": 13.42}
+{"event": "http.completed", "correlation_id": "c2340565-5c53-4321-87f9-162c201b1513", "route": "/api/sso/me", "method": "GET", "status": 200, "duration_ms": 10.63}
+{"event": "http.completed", "correlation_id": "5624176a-448d-4ab1-9f38-e65de94e28d3", "route": "/api/policies", "method": "GET", "status": 200, "duration_ms": 11.57}
+{"event": "http.completed", "correlation_id": "cc977da5-457c-4b52-a198-969ae5abb416", "route": "/api/sso/me", "method": "GET", "status": 200, "duration_ms": 9.6}
+{"event": "http.completed", "correlation_id": "b2e99bdb-a31d-4d8a-adad-03600c2e061b", "route": "/api/policies", "method": "GET", "status": 200, "duration_ms": 11.7}
+{"event": "http.completed", "correlation_id": "a65c40a5-b6b6-4efe-8745-de410be3d099", "route": "/api/sso/me", "method": "GET", "status": 200, "duration_ms": 9.62}
+{"event": "http.completed", "correlation_id": "7e2fe966-d20f-45d0-8628-903666ea469e", "route": "/api/policies", "method": "GET", "status": 200, "duration_ms": 10.42}
+{"event": "http.completed", "correlation_id": "5add0f31-5c7a-4802-a7f4-e297da4e5111", "route": "/api/sso/me", "method": "GET", "status": 200, "duration_ms": 8.9}
+{"event": "http.completed", "correlation_id": "a9692b81-a5ee-4194-ade6-c1c580267f44", "route": "/api/policies", "method": "GET", "status": 200, "duration_ms": 9.72}
+{"event": "http.completed", "correlation_id": "867c5a4c-4c0b-413b-96f0-22dce654cdb2", "route": "/api/sso/me", "method": "GET", "status": 200, "duration_ms": 8.75}
+{"event": "http.completed", "correlation_id": "aa639719-3292-4ef0-bebe-4c6ae2be2395", "route": "/api/sso/me", "method": "GET", "status": 401, "duration_ms": 8.7}
+{"event": "http.completed", "correlation_id": "f323c864-3490-4984-be40-3709932b165f", "route": "/api/policies", "method": "GET", "status": 401, "duration_ms": 8.65}
+.{"event": "http.completed", "correlation_id": "6198dd78-12f4-4db0-ba27-0b980e803ade", "route": "/api/sso/login", "method": "GET", "status": 302, "duration_ms": 17.31}
+{"event": "http.completed", "correlation_id": "51a53295-9611-4b22-b17a-ef3c1d960af9", "route": "/api/sso/callback", "method": "GET", "status": 303, "duration_ms": 11.12}
+{"event": "http.completed", "correlation_id": "d7f88ca8-a26f-44f1-9198-7a5729286ae3", "route": "/api/sso/me", "method": "GET", "status": 200, "duration_ms": 10.4}
+{"event": "http.completed", "correlation_id": "c41f2428-c2bf-4cd2-8085-792519219dcf", "route": "/api/sso/me", "method": "GET", "status": 401, "duration_ms": 9.25}
+.{"event": "http.completed", "correlation_id": "468611ee-db46-44ca-b7e7-970fda4a0290", "route": "/api/sso/login", "method": "GET", "status": 302, "duration_ms": 25.86}
+{"event": "http.completed", "correlation_id": "b10281ff-8601-4ebb-b729-2be10ac0eee0", "route": "/api/sso/callback", "method": "GET", "status": 303, "duration_ms": 15.89}
+{"event": "http.completed", "correlation_id": "1c83029f-f2e4-4401-ba0b-36eb2568b0e5", "route": "/api/sso/me", "method": "GET", "status": 200, "duration_ms": 12.2}
+{"event": "http.completed", "correlation_id": "16ff0ea6-9619-416f-99f9-eafca6d320d4", "route": "/api/sso/me", "method": "GET", "status": 401, "duration_ms": 9.95}
+.{"event": "http.completed", "correlation_id": "0a01d8be-54e4-4dcc-b95a-2129bb4b1b7f", "route": "/api/sso/login", "method": "GET", "status": 302, "duration_ms": 21.29}
+{"event": "http.completed", "correlation_id": "c9e1b163-5349-402b-879c-29c9a492a565", "route": "/api/sso/callback", "method": "GET", "status": 303, "duration_ms": 12.56}
+{"event": "http.completed", "correlation_id": "abb93108-e5e4-466c-8d96-70e823e32c41", "route": "/api/sso/me", "method": "GET", "status": 401, "duration_ms": 12.75}
+.{"event": "http.completed", "correlation_id": "7ba2951b-4e3a-479b-b7e0-f07b10042dbf", "route": "/api/sso/login", "method": "GET", "status": 302, "duration_ms": 20.72}
+{"event": "http.completed", "correlation_id": "8f7afabc-a140-400b-bc50-938b84fbd045", "route": "/api/sso/callback", "method": "GET", "status": 303, "duration_ms": 11.27}
+{"event": "http.completed", "correlation_id": "b8a36283-ffad-445a-8d78-afc1a7340499", "route": "/api/sso/me", "method": "GET", "status": 401, "duration_ms": 10.8}
+.{"event": "http.completed", "correlation_id": "e314f055-72aa-4b97-816e-f864cb94360c", "route": "/api/sso/login", "method": "GET", "status": 302, "duration_ms": 17.62}
+{"event": "http.completed", "correlation_id": "91df59de-c2bb-46bb-8fc4-5cc4f71bb07a", "route": "/api/sso/callback", "method": "GET", "status": 303, "duration_ms": 12.11}
+{"event": "http.completed", "correlation_id": "f8a6ed08-654b-4672-8828-fe6e7e73399e", "route": "/api/sso/me", "method": "GET", "status": 401, "duration_ms": 10.85}
+.{"event": "http.completed", "correlation_id": "20ec2d16-54d1-4576-aef0-66c048454eb1", "route": "/api/sso/login", "method": "GET", "status": 302, "duration_ms": 15.83}
+{"event": "http.completed", "correlation_id": "1da0c741-eb9f-4db5-bf54-01fc1f78a90d", "route": "/api/sso/callback", "method": "GET", "status": 303, "duration_ms": 13.05}
+{"event": "http.completed", "correlation_id": "2dafc381-3218-4692-a368-cee870e8d74a", "route": "/api/sso/me", "method": "GET", "status": 401, "duration_ms": 9.94}
+.{"event": "http.completed", "correlation_id": "bb73d5a9-a5e2-48fa-9e79-26d2b834d174", "route": "/api/sso/me", "method": "GET", "status": 401, "duration_ms": 1.53}
+{"event": "http.completed", "correlation_id": "3d8b7e75-3d30-4eef-b6e6-b5b274868d4f", "route": "/api/sso/login", "method": "GET", "status": 302, "duration_ms": 24.14}
+{"event": "http.completed", "correlation_id": "31beec0e-c589-4d44-b909-e20c3fc1e5c4", "route": "/api/sso/callback", "method": "GET", "status": 303, "duration_ms": 13.27}
+{"event": "http.completed", "correlation_id": "c1e51d95-cedc-4ca9-9917-0c9aa914e28f", "route": "/api/sso/me", "method": "GET", "status": 200, "duration_ms": 11.0}
+{"event": "http.completed", "correlation_id": "576cb0d9-3d5e-443d-8d4c-cdf2f2fb6f2d", "route": "/api/sso/logout", "method": "POST", "status": 200, "duration_ms": 9.8}
+{"event": "http.completed", "correlation_id": "095b1d2d-d0f0-4b0b-b301-71f01ef24254", "route": "/api/sso/me", "method": "GET", "status": 401, "duration_ms": 0.94}
+{"event": "http.completed", "correlation_id": "8f8420c4-9aed-46a5-aa9e-5c51a59cffb1", "route": "/api/sso/login", "method": "GET", "status": 302, "duration_ms": 13.15}
+{"event": "http.completed", "correlation_id": "c5d32054-f647-446e-8fbd-add4cf32e41a", "route": "/api/sso/callback", "method": "GET", "status": 303, "duration_ms": 10.21}
+{"event": "http.completed", "correlation_id": "1b651545-f673-4972-9e67-1075b34981d0", "route": "/api/sso/me", "method": "GET", "status": 200, "duration_ms": 11.41}
+{"event": "http.completed", "correlation_id": "4a378b37-9aef-4d8b-b3a0-20561338d16f", "route": "/api/sso/sessions/{session_id}/revoke", "method": "POST", "status": 200, "duration_ms": 10.79}
+{"event": "http.completed", "correlation_id": "4a002986-5b79-4736-b71f-81958e9efbb7", "route": "/api/sso/me", "method": "GET", "status": 401, "duration_ms": 9.25}
+.{"event": "http.completed", "correlation_id": "6ce782ab-ed24-45e7-81cb-f998bc70fe63", "route": "/api/sso/me", "method": "GET", "status": 401, "duration_ms": 1.22}
+{"event": "http.completed", "correlation_id": "89767c8d-d010-4620-ad99-bb985ddae0ed", "route": "/api/sso/login", "method": "GET", "status": 302, "duration_ms": 20.15}
+{"event": "http.completed", "correlation_id": "0f7cac1f-ce9f-4f2e-9e19-154caa9b9b11", "route": "/api/sso/callback", "method": "GET", "status": 303, "duration_ms": 10.97}
+{"event": "http.completed", "correlation_id": "1f09b9c8-8b6d-499f-bd74-e6e9e6c8eb99", "route": "/api/sso/me", "method": "GET", "status": 200, "duration_ms": 10.79}
+{"event": "http.completed", "correlation_id": "89473f9d-32b6-4c88-ae7e-8f0b4f574590", "route": "/api/sso/logout", "method": "POST", "status": 200, "duration_ms": 10.0}
+{"event": "http.completed", "correlation_id": "110432ce-4ae5-455d-8b2d-609aa102e140", "route": "/api/sso/me", "method": "GET", "status": 401, "duration_ms": 0.93}
+{"event": "http.completed", "correlation_id": "0b012533-ea14-4658-a03b-8269f227fba7", "route": "/api/sso/login", "method": "GET", "status": 302, "duration_ms": 13.66}
+{"event": "http.completed", "correlation_id": "0ad69494-ca44-462c-831f-fc6ee3ad45b6", "route": "/api/sso/callback", "method": "GET", "status": 303, "duration_ms": 10.2}
+{"event": "http.completed", "correlation_id": "f3c52c98-2c6c-4c5d-8b1f-d82407a4dfbe", "route": "/api/sso/me", "method": "GET", "status": 200, "duration_ms": 10.28}
+{"event": "http.completed", "correlation_id": "82ab5c7c-a230-4f42-9285-e0b6bcf9c0de", "route": "/api/sso/sessions/{session_id}/revoke", "method": "POST", "status": 200, "duration_ms": 10.05}
+{"event": "http.completed", "correlation_id": "70f6a3ec-6e96-44e5-9c30-a4c0f41c82c6", "route": "/api/sso/me", "method": "GET", "status": 401, "duration_ms": 8.78}
+.{"event": "http.completed", "correlation_id": "32ab2c48-aa25-4a06-92ad-46266a3463a3", "route": "/api/sso/login", "method": "GET", "status": 302, "duration_ms": 22.4}
+{"event": "http.completed", "correlation_id": "030af3ea-005e-43df-80e7-e47f37d2ba91", "route": "/api/sso/callback", "method": "GET", "status": 303, "duration_ms": 11.23}
+{"event": "http.completed", "correlation_id": "7fb420a8-b987-440d-818e-f14274dd0fc7", "route": "/api/sso/login", "method": "GET", "status": 302, "duration_ms": 14.02}
+{"event": "http.completed", "correlation_id": "700e4a46-5b75-4f81-b4e9-ce3ffb5ace00", "route": "/api/sso/callback", "method": "GET", "status": 303, "duration_ms": 10.62}
+{"event": "http.completed", "correlation_id": "fb9c9a53-428c-4cd6-af88-f25538702d55", "route": "/api/sso/me", "method": "GET", "status": 200, "duration_ms": 13.55}
+.{"event": "http.completed", "correlation_id": "870f9a86-2f50-489b-aad4-5a734641f722", "route": "/api/sso/login", "method": "GET", "status": 302, "duration_ms": 20.06}
+{"event": "http.completed", "correlation_id": "c2505c9e-fffc-40a2-94ae-84860a847bde", "route": "/api/sso/callback", "method": "GET", "status": 303, "duration_ms": 11.84}
+{"event": "http.completed", "correlation_id": "637848fc-2475-4e26-a0fe-de5ecf1f3381", "route": "/api/sso/login", "method": "GET", "status": 302, "duration_ms": 14.09}
+{"event": "http.completed", "correlation_id": "1763032c-a297-4c53-b613-1d96a62fe927", "route": "/api/sso/callback", "method": "GET", "status": 303, "duration_ms": 10.89}
+{"event": "http.completed", "correlation_id": "b93e1e4a-2203-4613-8f68-cb2285ea4bc5", "route": "/api/sso/me", "method": "GET", "status": 200, "duration_ms": 9.15}
+.{"event": "http.completed", "correlation_id": "b1949b3d-0bfe-4b04-9127-412f65c25e3a", "route": "/api/sso/login", "method": "GET", "status": 302, "duration_ms": 18.11}
+{"event": "http.completed", "correlation_id": "4215eca2-11aa-4c71-a65e-91a349672fe3", "route": "/api/sso/callback", "method": "GET", "status": 303, "duration_ms": 12.06}
+{"event": "http.completed", "correlation_id": "1b56dd5d-8e85-4d9a-9ff6-49fd183eb212", "route": "/api/sso/me", "method": "GET", "status": 200, "duration_ms": 10.58}
+{"event": "http.completed", "correlation_id": "a76d221e-2021-4091-b7ea-917b875d2e95", "route": "/api/sso/me", "method": "GET", "status": 200, "duration_ms": 11.72}
+SESSION_REPRODUCTION {"configured_minutes": 60, "cookie_expires_utc": "2035-01-02T13:30:00+00:00", "cookie_max_age_seconds": 3600, "database_expires_utc": "2035-01-02T13:30:00+00:00", "issued_after_utc": "2035-01-02T12:30:00+00:00", "issued_before_utc": "2035-01-02T12:30:00+00:00", "issued_duration_lower_seconds": 3600.0, "issued_duration_upper_seconds": 3600.0, "remaining_seconds": 3600.0, "server_now_utc": "2035-01-02T12:30:00+00:00"}
+.{"event": "http.completed", "correlation_id": "06379bc0-8443-4803-bd5b-f6f9428ba10b", "route": "/api/sso/login", "method": "GET", "status": 302, "duration_ms": 22.58}
+{"event": "http.completed", "correlation_id": "8af6c5fe-8b67-4077-a265-a992ac1e23cc", "route": "/api/sso/callback", "method": "GET", "status": 303, "duration_ms": 13.43}
+{"event": "http.completed", "correlation_id": "01f511d7-c214-4aa3-a9c7-a93db0dea7d6", "route": "/api/sso/me", "method": "GET", "status": 200, "duration_ms": 11.41}
+{"event": "http.completed", "correlation_id": "959beb86-39ef-43fe-8843-f73f535936c5", "route": "/api/sso/me", "method": "GET", "status": 200, "duration_ms": 17.11}
+SESSION_REPRODUCTION {"configured_minutes": 60, "cookie_expires_utc": "2035-01-02T13:30:00+00:00", "cookie_max_age_seconds": 3600, "database_expires_utc": "2035-01-02T13:30:00+00:00", "issued_after_utc": "2035-01-02T12:30:00+00:00", "issued_before_utc": "2035-01-02T12:30:00+00:00", "issued_duration_lower_seconds": 3600.0, "issued_duration_upper_seconds": 3600.0, "remaining_seconds": 3492.79206, "server_now_utc": "2035-01-02T12:31:47.207940+00:00"}
+.{"event": "http.completed", "correlation_id": "25807b60-8059-4ef4-81a1-6cda72447554", "route": "/api/sso/login", "method": "GET", "status": 302, "duration_ms": 22.69}
+{"event": "http.completed", "correlation_id": "a22a3f68-9343-4d7a-ab97-030f7b13c5e9", "route": "/api/sso/callback", "method": "GET", "status": 303, "duration_ms": 13.91}
+{"event": "http.completed", "correlation_id": "e3681836-5ffa-4046-8d12-22ef8c65e052", "route": "/api/sso/me", "method": "GET", "status": 200, "duration_ms": 11.21}
+{"event": "http.completed", "correlation_id": "c3351bd7-a095-47b2-87f3-14aebf19e253", "route": "/api/sso/me", "method": "GET", "status": 200, "duration_ms": 17.31}
+SESSION_REPRODUCTION {"configured_minutes": 120, "cookie_expires_utc": "2035-01-02T14:30:00+00:00", "cookie_max_age_seconds": 7200, "database_expires_utc": "2035-01-02T14:30:00+00:00", "issued_after_utc": "2035-01-02T12:30:00+00:00", "issued_before_utc": "2035-01-02T12:30:00+00:00", "issued_duration_lower_seconds": 7200.0, "issued_duration_upper_seconds": 7200.0, "remaining_seconds": 7200.0, "server_now_utc": "2035-01-02T12:30:00+00:00"}
+.{"event": "http.completed", "correlation_id": "49b14802-b6ab-4de3-8d0b-27f9e3010446", "route": "/api/sso/login", "method": "GET", "status": 302, "duration_ms": 23.5}
+{"event": "http.completed", "correlation_id": "74827284-90e0-404c-a0e8-62016f31e504", "route": "/api/sso/callback", "method": "GET", "status": 303, "duration_ms": 12.15}
+{"event": "http.completed", "correlation_id": "a510f517-7af6-4672-ac5c-4f3e5beeba56", "route": "/api/sso/me", "method": "GET", "status": 200, "duration_ms": 11.36}
+{"event": "http.completed", "correlation_id": "9da97b1f-44d7-4369-a715-47433ad3cf8d", "route": "/api/sso/me", "method": "GET", "status": 200, "duration_ms": 12.51}
+SESSION_REPRODUCTION {"configured_minutes": 120, "cookie_expires_utc": "2035-01-02T14:30:00+00:00", "cookie_max_age_seconds": 7200, "database_expires_utc": "2035-01-02T14:30:00+00:00", "issued_after_utc": "2035-01-02T12:30:00+00:00", "issued_before_utc": "2035-01-02T12:30:00+00:00", "issued_duration_lower_seconds": 7200.0, "issued_duration_upper_seconds": 7200.0, "remaining_seconds": 7092.79206, "server_now_utc": "2035-01-02T12:31:47.207940+00:00"}
+.{"event": "http.completed", "correlation_id": "8f0de91a-e0f8-4f30-8cf2-49b1098e788b", "route": "/api/sso/login", "method": "GET", "status": 302, "duration_ms": 19.34}
+{"event": "http.completed", "correlation_id": "e4f6b2b7-9cfa-438c-8072-45f49b19bc26", "route": "/api/sso/callback", "method": "GET", "status": 303, "duration_ms": 12.6}
+.{"event": "http.completed", "correlation_id": "246556d1-fae5-4d39-842f-2db769d8059e", "route": "/api/sso/login", "method": "GET", "status": 302, "duration_ms": 22.12}
+{"event": "http.completed", "correlation_id": "7ff50a26-c7ec-4a28-acab-0f12d30a5966", "route": "/api/sso/callback", "method": "GET", "status": 303, "duration_ms": 12.58}
+.{"event": "http.completed", "correlation_id": "b2507d61-020e-45ef-a628-30995cd014c6", "route": "/api/sso/login", "method": "GET", "status": 302, "duration_ms": 26.16}
+{"event": "http.completed", "correlation_id": "5e9b0f03-17fe-424e-9145-8e34b30c4c10", "route": "/api/sso/callback", "method": "GET", "status": 303, "duration_ms": 12.88}
+.{"event": "http.completed", "correlation_id": "de670e7c-86eb-4947-9046-410fb7b36733", "route": "/api/sso/login", "method": "GET", "status": 302, "duration_ms": 26.44}
+{"event": "http.completed", "correlation_id": "a5872d66-5850-4c07-8228-2b9f94759ef7", "route": "/api/sso/callback", "method": "GET", "status": 303, "duration_ms": 16.1}
+.{"event": "http.completed", "correlation_id": "8bd72e97-07fc-4691-9335-a8be70151c1d", "route": "/api/sso/login", "method": "GET", "status": 302, "duration_ms": 19.73}
+{"event": "http.completed", "correlation_id": "bde52818-c7a2-4487-9d36-c303902f70a6", "route": "/api/sso/callback", "method": "GET", "status": 303, "duration_ms": 16.03}
+.{"event": "http.completed", "correlation_id": "ce5015f8-4033-48c6-b492-6d360b38edd6", "route": "/api/sso/login", "method": "GET", "status": 302, "duration_ms": 26.98}
+{"event": "http.completed", "correlation_id": "4325c810-075e-42e4-b4db-2b3d0ea9bdfd", "route": "/api/sso/callback", "method": "GET", "status": 303, "duration_ms": 17.17}
+.{"event": "http.completed", "correlation_id": "95adf271-479d-41f7-8b1e-81767aca98ae", "route": "/api/sso/login", "method": "GET", "status": 302, "duration_ms": 24.37}
+{"event": "http.completed", "correlation_id": "eef3d44f-2986-4f3b-971f-bf7b6062b965", "route": "/api/sso/callback", "method": "GET", "status": 303, "duration_ms": 11.8}
+.{"event": "http.completed", "correlation_id": "7f944026-7f55-4057-970d-427290120011", "route": "/api/sso/login", "method": "GET", "status": 302, "duration_ms": 22.76}
+{"event": "http.completed", "correlation_id": "f4b4db88-4f0b-46d2-b183-8836e55f3e09", "route": "/api/sso/callback", "method": "GET", "status": 303, "duration_ms": 12.49}
+.{"event": "http.completed", "correlation_id": "bdb228b3-6a10-477d-a961-bb0fe46416b6", "route": "/api/sso/login", "method": "GET", "status": 302, "duration_ms": 20.92}
+{"event": "http.completed", "correlation_id": "1d0573a8-c7b6-4984-951a-c68ae89960ca", "route": "/api/sso/callback", "method": "GET", "status": 303, "duration_ms": 12.47}
+.{"event": "http.completed", "correlation_id": "06ec74e7-d295-43aa-927a-8c3f6795c08d", "route": "/api/sso/login", "method": "GET", "status": 302, "duration_ms": 25.26}
+{"event": "http.completed", "correlation_id": "cd9febbe-f1ee-4d0e-b2fb-dae54141a397", "route": "/api/sso/callback", "method": "GET", "status": 303, "duration_ms": 13.67}
+.{"event": "http.completed", "correlation_id": "95ef751d-cae5-498c-8c22-4e70d12b642f", "route": "/api/sso/login", "method": "GET", "status": 302, "duration_ms": 23.21}
+{"event": "http.completed", "correlation_id": "e9e7354e-b24f-448c-9379-73d0ad45a5c5", "route": "/api/sso/callback", "method": "GET", "status": 303, "duration_ms": 12.02}
+.{"event": "http.completed", "correlation_id": "07f7c757-0399-4c7c-bfd4-c072210b6604", "route": "/api/sso/login", "method": "GET", "status": 302, "duration_ms": 21.41}
+{"event": "http.completed", "correlation_id": "cd2cdfa1-571d-49d3-a048-ee92e4f49928", "route": "/api/sso/callback", "method": "GET", "status": 303, "duration_ms": 12.37}
+.{"event": "http.completed", "correlation_id": "aa3087fd-dc29-4a35-8c2a-f7011f50ec35", "route": "/api/sso/login", "method": "GET", "status": 302, "duration_ms": 19.76}
+{"event": "http.completed", "correlation_id": "35d54cfb-6e23-4cef-aa33-4cc0754168df", "route": "/api/sso/callback", "method": "GET", "status": 303, "duration_ms": 12.39}
+.{"event": "http.completed", "correlation_id": "9f7b9f56-bd4a-4d0d-8b4e-a501e69605eb", "route": "/api/sso/login", "method": "GET", "status": 302, "duration_ms": 20.33}
+{"event": "http.completed", "correlation_id": "db6cb782-c325-4107-a802-bf56cafb5790", "route": "/api/sso/callback", "method": "GET", "status": 303, "duration_ms": 12.48}
+..{"event": "http.completed", "correlation_id": "1a580bac-4453-4e47-a07f-1adb5c52b1a2", "route": "/api/sso/login", "method": "GET", "status": 302, "duration_ms": 17.88}
+{"event": "http.completed", "correlation_id": "0243fda4-73ce-492d-bbb1-db4d02a9f0ed", "route": "/api/sso/callback", "method": "GET", "status": 303, "duration_ms": 12.69}
+.{"event": "http.completed", "correlation_id": "ae9990bb-6ea4-47e4-b0e8-9120dde4ed17", "route": "/api/sso/login", "method": "GET", "status": 302, "duration_ms": 18.86}
+{"event": "http.completed", "correlation_id": "691bb9a1-9e6e-43f2-b8ea-134e05ce3f42", "route": "/api/sso/callback", "method": "GET", "status": 303, "duration_ms": 13.22}
+.{"event": "http.completed", "correlation_id": "453e3eaa-21a7-4b60-900e-0bce93cb314e", "route": "/api/auth/session", "method": "POST", "status": 201, "duration_ms": 7.04}
+{"event": "http.completed", "correlation_id": "94b0baa6-b1b6-445f-b17d-6c3c44607fe0", "route": "/api/policies", "method": "GET", "status": 200, "duration_ms": 4.2}
+{"event": "http.completed", "correlation_id": "39c9d21c-e3ea-41f9-afa9-f3ed0c40e153", "route": "/api/policies", "method": "GET", "status": 401, "duration_ms": 1.33}
+{"event": "http.completed", "correlation_id": "ec1998ec-23f7-47bf-bcc9-f5b359efe2de", "route": "/api/auth/logout", "method": "POST", "status": 200, "duration_ms": 2.74}
+{"event": "http.completed", "correlation_id": "1b0136af-ec38-434b-abd2-3ec679100d24", "route": "/api/policies", "method": "GET", "status": 401, "duration_ms": 1.33}
+.{"event": "http.completed", "correlation_id": "c182ab14-a951-46ef-9422-ab46ceaa6e46", "route": "/api/auth/session", "method": "POST", "status": 201, "duration_ms": 5.94}
+{"event": "http.completed", "correlation_id": "f81f88d6-d962-4ef8-b4fc-ed3c6d88a534", "route": "/api/policies", "method": "GET", "status": 200, "duration_ms": 4.32}
+{"event": "http.completed", "correlation_id": "4ff40b95-3bc8-42a2-8e5a-4052af786ae1", "route": "/api/policies", "method": "GET", "status": 401, "duration_ms": 1.03}
+{"event": "http.completed", "correlation_id": "19a313c5-0ba1-4695-9664-53cd4c948228", "route": "/api/auth/logout", "method": "POST", "status": 200, "duration_ms": 2.23}
+{"event": "http.completed", "correlation_id": "3f91beac-4c38-4338-ba8b-bfdb0579a215", "route": "/api/policies", "method": "GET", "status": 401, "duration_ms": 1.61}
+.
+=============================== warnings summary ===============================
+.venv/lib/python3.13/site-packages/fastapi/testclient.py:1
+  /home/sigmoid/AI governance policy validator/.venv/lib/python3.13/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+.venv/lib/python3.13/site-packages/authlib/integrations/httpx_client/assertion_client.py:5
+  /home/sigmoid/AI governance policy validator/.venv/lib/python3.13/site-packages/authlib/integrations/httpx_client/assertion_client.py:5: AuthlibDeprecationWarning: The httpx module is deprecated; please use httpx2 instead.
+    from ._compat import httpx2
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+38 passed, 2 warnings in 3.19s

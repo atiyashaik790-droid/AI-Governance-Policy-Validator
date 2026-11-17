@@ -1,0 +1,30 @@
+{
+  "observed_at_utc": "2026-11-04T15:48:42.275079+00:00",
+  "stage": "C",
+  "status": "PREPARED_BLOCKED_NO_EXECUTION",
+  "migration005_executed": false,
+  "permissions_changed": false,
+  "credentials_rotated": false,
+  "azure_configuration_changed": false,
+  "sso_enabled": false,
+  "stage_b_acceptance_repeated": false,
+  "test_suites_rerun": false,
+  "verified": [
+    "Deployed Stage B evidence supports 004 and 005",
+    "Offline 004:005 SQL matches existing reviewed artifact exactly",
+    "Actual pinned migration identity has required SQL permissions",
+    "Current database Online and seven-day continuous PITR metadata",
+    "Current CLI restore-management allow metadata and no enumerated applicable locks/denies",
+    "Runtime lacks inherited future-table metadata visibility"
+  ],
+  "blockers": [
+    "Explicit current005 recovery operator assignment",
+    "Numeric RTO and RPO",
+    "Usable exact pre-DDL recovery point satisfying RPO at execution boundary",
+    "Authorized incident restore destination, capacity/cost review and separately approved cutover path or validated alternative",
+    "Quiet-window owner and schedule",
+    "Separate explicit approval of three object VIEW DEFINITION grants atomically with C"
+  ],
+  "rotation_plan": "Prepared only; five affected roles; secure replacement delivery; two narrow DEMO_ACCOUNTS_JSON saves with bounded overlap then old-hash removal; no rollback to exposed hashes",
+  "approval_request_scope": "Conditional C only, contingent on recovery gates and separately approved D-visibility; bounded postmigration demo acceptance; no SSO activation or operational SSO data grants"
+}

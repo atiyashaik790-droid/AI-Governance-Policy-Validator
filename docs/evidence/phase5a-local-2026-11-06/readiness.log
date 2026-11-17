@@ -1,0 +1,533 @@
+/home/sigmoid/AI governance policy validator/.venv/lib/python3.13/site-packages/pytest_asyncio/plugin.py:300: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the "fixture" caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to "function" scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: "function", "class", "module", "package", "session"
+
+  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))
+......F....F......F..FFFFFFFFF.......F................................   [100%]
+=================================== FAILURES ===================================
+_________ test_payload_is_pinned_in_memory_and_uses_read_only_session __________
+
+    def test_payload_is_pinned_in_memory_and_uses_read_only_session():
+>       source = runtime.payload("MARK:")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^
+
+scripts/tests/test_hosted_runtime_probe.py:61: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/verify_hosted_runtime.py:60: in payload
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, category = 'REVIEWED_SCHEMA_CONTRACT_CHANGED'
+
+    def require(condition, category):
+        if not condition:
+>           raise Stop("FAIL", category)
+E           sso_deployment_readiness.Stop: ('FAIL', 'REVIEWED_SCHEMA_CONTRACT_CHANGED')
+
+scripts/sso_deployment_readiness.py:111: Stop
+___________ test_pty_probe_collects_only_completed_sanitized_result ____________
+
+    def test_pty_probe_collects_only_completed_sanitized_result():
+        # A local fake CLI shell exercises PTY input/output; it never executes payload SQL.
+        source = """
+    import ast, base64, json, re, sys
+    print("banner password=SENSITIVE", flush=True)
+    print("$ ", end="", flush=True)
+    body = []
+    collect = False
+    for line in sys.stdin:
+        if line.strip() == "import base64":
+            collect = True
+        if collect:
+            if line.strip() == "SSO_READ_ONLY_PROBE":
+                break
+            body.append(line)
+    node = ast.parse("".join(body)).body[1].value.args[0].args[0]
+    payload = base64.b64decode(ast.literal_eval(node)).decode()
+    marker = re.search(r"SSO_PROBE_[0-9a-f]+:", payload).group()
+    print(marker + json.dumps(RESULT), flush=True)
+    """.replace("RESULT", repr(success()))
+>       result = runtime.shell_probe([sys.executable, "-c", source], timeout=5)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+scripts/tests/test_hosted_runtime_probe.py:184: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/verify_hosted_runtime.py:465: in shell_probe
+    pending = remote_input(marker, layout_only=layout_only)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/verify_hosted_runtime.py:180: in remote_input
+    layout_bootstrap(marker, layout_only=layout_only).encode()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/verify_hosted_runtime.py:160: in layout_bootstrap
+    runtime = "" if layout_only else payload(marker)
+                                     ^^^^^^^^^^^^^^^
+scripts/verify_hosted_runtime.py:60: in payload
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, category = 'REVIEWED_SCHEMA_CONTRACT_CHANGED'
+
+    def require(condition, category):
+        if not condition:
+>           raise Stop("FAIL", category)
+E           sso_deployment_readiness.Stop: ('FAIL', 'REVIEWED_SCHEMA_CONTRACT_CHANGED')
+
+scripts/sso_deployment_readiness.py:111: Stop
+___________ test_colored_prompt_and_final_queued_output_are_handled ____________
+
+    def test_colored_prompt_and_final_queued_output_are_handled():
+        source = """
+    import ast, base64, json, re, sys
+    print("\\x1b[32mroot@host:# \\x1b[0m", end="", flush=True)
+    body = []
+    for line in sys.stdin:
+        if line.strip() == "import base64" or body:
+            if line.strip() == "SSO_READ_ONLY_PROBE": break
+            body.append(line)
+    node = ast.parse("".join(body)).body[1].value.args[0].args[0]
+    marker = re.search(r"SSO_PROBE_[0-9a-f]+:", base64.b64decode(ast.literal_eval(node)).decode()).group()
+    print(marker + "STAGE:sql_connect", flush=True)
+    print("noise" * 10000, flush=True)
+    print(marker + json.dumps(RESULT), flush=True)
+    """.replace("RESULT", repr(success()))
+>       assert runtime.shell_probe([sys.executable, "-c", source], timeout=5) == success()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+scripts/tests/test_hosted_runtime_probe.py:265: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/verify_hosted_runtime.py:465: in shell_probe
+    pending = remote_input(marker, layout_only=layout_only)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/verify_hosted_runtime.py:180: in remote_input
+    layout_bootstrap(marker, layout_only=layout_only).encode()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/verify_hosted_runtime.py:160: in layout_bootstrap
+    runtime = "" if layout_only else payload(marker)
+                                     ^^^^^^^^^^^^^^^
+scripts/verify_hosted_runtime.py:60: in payload
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, category = 'REVIEWED_SCHEMA_CONTRACT_CHANGED'
+
+    def require(condition, category):
+        if not condition:
+>           raise Stop("FAIL", category)
+E           sso_deployment_readiness.Stop: ('FAIL', 'REVIEWED_SCHEMA_CONTRACT_CHANGED')
+
+scripts/sso_deployment_readiness.py:111: Stop
+_ test_real_payload_error_handling_no_sql_writes[permission-SQL_PERMISSION_DENIED-schema_permissions] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7af6d19b1e10>
+fault = 'permission', category = 'SQL_PERMISSION_DENIED'
+stage = 'schema_permissions'
+
+    @pytest.mark.parametrize(
+        "fault,category,stage",
+        [
+            ("permission", "SQL_PERMISSION_DENIED", "schema_permissions"),
+            ("identity", "RUNTIME_IDENTITY_CONFIGURATION_MISMATCH", "configuration"),
+            ("imports", "RUNTIME_IMPORT_UNAVAILABLE", "runtime_imports"),
+            ("connection", "SQL_CONNECTION_TIMEOUT", "sql_connect"),
+            (None, "RUNTIME_004_CONTRACT_VERIFIED", "complete"),
+        ],
+    )
+    def test_real_payload_error_handling_no_sql_writes(monkeypatch, fault, category, stage):
+        import io
+        import types
+    
+>       code = runtime.payload("MARK:")
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+
+scripts/tests/test_hosted_runtime_probe.py:305: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/verify_hosted_runtime.py:60: in payload
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, category = 'REVIEWED_SCHEMA_CONTRACT_CHANGED'
+
+    def require(condition, category):
+        if not condition:
+>           raise Stop("FAIL", category)
+E           sso_deployment_readiness.Stop: ('FAIL', 'REVIEWED_SCHEMA_CONTRACT_CHANGED')
+
+scripts/sso_deployment_readiness.py:111: Stop
+_ test_real_payload_error_handling_no_sql_writes[identity-RUNTIME_IDENTITY_CONFIGURATION_MISMATCH-configuration] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7af6d19c1850>
+fault = 'identity', category = 'RUNTIME_IDENTITY_CONFIGURATION_MISMATCH'
+stage = 'configuration'
+
+    @pytest.mark.parametrize(
+        "fault,category,stage",
+        [
+            ("permission", "SQL_PERMISSION_DENIED", "schema_permissions"),
+            ("identity", "RUNTIME_IDENTITY_CONFIGURATION_MISMATCH", "configuration"),
+            ("imports", "RUNTIME_IMPORT_UNAVAILABLE", "runtime_imports"),
+            ("connection", "SQL_CONNECTION_TIMEOUT", "sql_connect"),
+            (None, "RUNTIME_004_CONTRACT_VERIFIED", "complete"),
+        ],
+    )
+    def test_real_payload_error_handling_no_sql_writes(monkeypatch, fault, category, stage):
+        import io
+        import types
+    
+>       code = runtime.payload("MARK:")
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+
+scripts/tests/test_hosted_runtime_probe.py:305: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/verify_hosted_runtime.py:60: in payload
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, category = 'REVIEWED_SCHEMA_CONTRACT_CHANGED'
+
+    def require(condition, category):
+        if not condition:
+>           raise Stop("FAIL", category)
+E           sso_deployment_readiness.Stop: ('FAIL', 'REVIEWED_SCHEMA_CONTRACT_CHANGED')
+
+scripts/sso_deployment_readiness.py:111: Stop
+_ test_real_payload_error_handling_no_sql_writes[imports-RUNTIME_IMPORT_UNAVAILABLE-runtime_imports] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7af6d19c2550>
+fault = 'imports', category = 'RUNTIME_IMPORT_UNAVAILABLE'
+stage = 'runtime_imports'
+
+    @pytest.mark.parametrize(
+        "fault,category,stage",
+        [
+            ("permission", "SQL_PERMISSION_DENIED", "schema_permissions"),
+            ("identity", "RUNTIME_IDENTITY_CONFIGURATION_MISMATCH", "configuration"),
+            ("imports", "RUNTIME_IMPORT_UNAVAILABLE", "runtime_imports"),
+            ("connection", "SQL_CONNECTION_TIMEOUT", "sql_connect"),
+            (None, "RUNTIME_004_CONTRACT_VERIFIED", "complete"),
+        ],
+    )
+    def test_real_payload_error_handling_no_sql_writes(monkeypatch, fault, category, stage):
+        import io
+        import types
+    
+>       code = runtime.payload("MARK:")
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+
+scripts/tests/test_hosted_runtime_probe.py:305: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/verify_hosted_runtime.py:60: in payload
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, category = 'REVIEWED_SCHEMA_CONTRACT_CHANGED'
+
+    def require(condition, category):
+        if not condition:
+>           raise Stop("FAIL", category)
+E           sso_deployment_readiness.Stop: ('FAIL', 'REVIEWED_SCHEMA_CONTRACT_CHANGED')
+
+scripts/sso_deployment_readiness.py:111: Stop
+_ test_real_payload_error_handling_no_sql_writes[connection-SQL_CONNECTION_TIMEOUT-sql_connect] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7af6d1986120>
+fault = 'connection', category = 'SQL_CONNECTION_TIMEOUT', stage = 'sql_connect'
+
+    @pytest.mark.parametrize(
+        "fault,category,stage",
+        [
+            ("permission", "SQL_PERMISSION_DENIED", "schema_permissions"),
+            ("identity", "RUNTIME_IDENTITY_CONFIGURATION_MISMATCH", "configuration"),
+            ("imports", "RUNTIME_IMPORT_UNAVAILABLE", "runtime_imports"),
+            ("connection", "SQL_CONNECTION_TIMEOUT", "sql_connect"),
+            (None, "RUNTIME_004_CONTRACT_VERIFIED", "complete"),
+        ],
+    )
+    def test_real_payload_error_handling_no_sql_writes(monkeypatch, fault, category, stage):
+        import io
+        import types
+    
+>       code = runtime.payload("MARK:")
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+
+scripts/tests/test_hosted_runtime_probe.py:305: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/verify_hosted_runtime.py:60: in payload
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, category = 'REVIEWED_SCHEMA_CONTRACT_CHANGED'
+
+    def require(condition, category):
+        if not condition:
+>           raise Stop("FAIL", category)
+E           sso_deployment_readiness.Stop: ('FAIL', 'REVIEWED_SCHEMA_CONTRACT_CHANGED')
+
+scripts/sso_deployment_readiness.py:111: Stop
+_ test_real_payload_error_handling_no_sql_writes[None-RUNTIME_004_CONTRACT_VERIFIED-complete] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7af6d19876b0>
+fault = None, category = 'RUNTIME_004_CONTRACT_VERIFIED', stage = 'complete'
+
+    @pytest.mark.parametrize(
+        "fault,category,stage",
+        [
+            ("permission", "SQL_PERMISSION_DENIED", "schema_permissions"),
+            ("identity", "RUNTIME_IDENTITY_CONFIGURATION_MISMATCH", "configuration"),
+            ("imports", "RUNTIME_IMPORT_UNAVAILABLE", "runtime_imports"),
+            ("connection", "SQL_CONNECTION_TIMEOUT", "sql_connect"),
+            (None, "RUNTIME_004_CONTRACT_VERIFIED", "complete"),
+        ],
+    )
+    def test_real_payload_error_handling_no_sql_writes(monkeypatch, fault, category, stage):
+        import io
+        import types
+    
+>       code = runtime.payload("MARK:")
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+
+scripts/tests/test_hosted_runtime_probe.py:305: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/verify_hosted_runtime.py:60: in payload
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, category = 'REVIEWED_SCHEMA_CONTRACT_CHANGED'
+
+    def require(condition, category):
+        if not condition:
+>           raise Stop("FAIL", category)
+E           sso_deployment_readiness.Stop: ('FAIL', 'REVIEWED_SCHEMA_CONTRACT_CHANGED')
+
+scripts/sso_deployment_readiness.py:111: Stop
+___________ test_manual_fallback_is_self_contained_read_only_command ___________
+
+    def test_manual_fallback_is_self_contained_read_only_command():
+>       command = runtime.remote_input("SSO_MANUAL:", close_shell=False).decode()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+scripts/tests/test_hosted_runtime_probe.py:374: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/verify_hosted_runtime.py:180: in remote_input
+    layout_bootstrap(marker, layout_only=layout_only).encode()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/verify_hosted_runtime.py:160: in layout_bootstrap
+    runtime = "" if layout_only else payload(marker)
+                                     ^^^^^^^^^^^^^^^
+scripts/verify_hosted_runtime.py:60: in payload
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, category = 'REVIEWED_SCHEMA_CONTRACT_CHANGED'
+
+    def require(condition, category):
+        if not condition:
+>           raise Stop("FAIL", category)
+E           sso_deployment_readiness.Stop: ('FAIL', 'REVIEWED_SCHEMA_CONTRACT_CHANGED')
+
+scripts/sso_deployment_readiness.py:111: Stop
+_ test_shell_pre_python_failures_are_reported[directory-APP_WORKING_DIRECTORY_UNAVAILABLE] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7af6d1a01c50>
+tmp_path = PosixPath('/tmp/pytest-of-sigmoid/pytest-31/test_shell_pre_python_failures0')
+fault = 'directory', category = 'APP_WORKING_DIRECTORY_UNAVAILABLE'
+
+    @pytest.mark.parametrize(
+        "fault,category",
+        [
+            ("directory", "APP_WORKING_DIRECTORY_UNAVAILABLE"),
+            ("package", "RUNTIME_APP_PACKAGE_UNAVAILABLE"),
+            ("python", "RUNTIME_PYTHON_EXECUTABLE_UNAVAILABLE"),
+        ],
+    )
+    def test_shell_pre_python_failures_are_reported(monkeypatch, tmp_path, fault, category):
+        import os
+        import subprocess
+    
+        path = tmp_path / "app-root"
+        if fault != "directory":
+            path.mkdir()
+        if fault == "python":
+            (path / "app").mkdir()
+            (path / "app/database.py").touch()
+        env = {
+            **os.environ,
+            "APP_PATH": str(path),
+            "VIRTUAL_ENV": "",
+            "PATH": str(tmp_path / "empty"),
+        }
+        output = subprocess.run(
+>           ["/bin/sh"], input=runtime.remote_input("MARK:"), env=env, capture_output=True
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+
+scripts/tests/test_hosted_runtime_probe.py:406: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/verify_hosted_runtime.py:180: in remote_input
+    layout_bootstrap(marker, layout_only=layout_only).encode()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/verify_hosted_runtime.py:160: in layout_bootstrap
+    runtime = "" if layout_only else payload(marker)
+                                     ^^^^^^^^^^^^^^^
+scripts/verify_hosted_runtime.py:60: in payload
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, category = 'REVIEWED_SCHEMA_CONTRACT_CHANGED'
+
+    def require(condition, category):
+        if not condition:
+>           raise Stop("FAIL", category)
+E           sso_deployment_readiness.Stop: ('FAIL', 'REVIEWED_SCHEMA_CONTRACT_CHANGED')
+
+scripts/sso_deployment_readiness.py:111: Stop
+_ test_shell_pre_python_failures_are_reported[package-RUNTIME_APP_PACKAGE_UNAVAILABLE] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7af6d1a02dd0>
+tmp_path = PosixPath('/tmp/pytest-of-sigmoid/pytest-31/test_shell_pre_python_failures1')
+fault = 'package', category = 'RUNTIME_APP_PACKAGE_UNAVAILABLE'
+
+    @pytest.mark.parametrize(
+        "fault,category",
+        [
+            ("directory", "APP_WORKING_DIRECTORY_UNAVAILABLE"),
+            ("package", "RUNTIME_APP_PACKAGE_UNAVAILABLE"),
+            ("python", "RUNTIME_PYTHON_EXECUTABLE_UNAVAILABLE"),
+        ],
+    )
+    def test_shell_pre_python_failures_are_reported(monkeypatch, tmp_path, fault, category):
+        import os
+        import subprocess
+    
+        path = tmp_path / "app-root"
+        if fault != "directory":
+            path.mkdir()
+        if fault == "python":
+            (path / "app").mkdir()
+            (path / "app/database.py").touch()
+        env = {
+            **os.environ,
+            "APP_PATH": str(path),
+            "VIRTUAL_ENV": "",
+            "PATH": str(tmp_path / "empty"),
+        }
+        output = subprocess.run(
+>           ["/bin/sh"], input=runtime.remote_input("MARK:"), env=env, capture_output=True
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+
+scripts/tests/test_hosted_runtime_probe.py:406: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/verify_hosted_runtime.py:180: in remote_input
+    layout_bootstrap(marker, layout_only=layout_only).encode()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/verify_hosted_runtime.py:160: in layout_bootstrap
+    runtime = "" if layout_only else payload(marker)
+                                     ^^^^^^^^^^^^^^^
+scripts/verify_hosted_runtime.py:60: in payload
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, category = 'REVIEWED_SCHEMA_CONTRACT_CHANGED'
+
+    def require(condition, category):
+        if not condition:
+>           raise Stop("FAIL", category)
+E           sso_deployment_readiness.Stop: ('FAIL', 'REVIEWED_SCHEMA_CONTRACT_CHANGED')
+
+scripts/sso_deployment_readiness.py:111: Stop
+_ test_shell_pre_python_failures_are_reported[python-RUNTIME_PYTHON_EXECUTABLE_UNAVAILABLE] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7af6d1648ae0>
+tmp_path = PosixPath('/tmp/pytest-of-sigmoid/pytest-31/test_shell_pre_python_failures2')
+fault = 'python', category = 'RUNTIME_PYTHON_EXECUTABLE_UNAVAILABLE'
+
+    @pytest.mark.parametrize(
+        "fault,category",
+        [
+            ("directory", "APP_WORKING_DIRECTORY_UNAVAILABLE"),
+            ("package", "RUNTIME_APP_PACKAGE_UNAVAILABLE"),
+            ("python", "RUNTIME_PYTHON_EXECUTABLE_UNAVAILABLE"),
+        ],
+    )
+    def test_shell_pre_python_failures_are_reported(monkeypatch, tmp_path, fault, category):
+        import os
+        import subprocess
+    
+        path = tmp_path / "app-root"
+        if fault != "directory":
+            path.mkdir()
+        if fault == "python":
+            (path / "app").mkdir()
+            (path / "app/database.py").touch()
+        env = {
+            **os.environ,
+            "APP_PATH": str(path),
+            "VIRTUAL_ENV": "",
+            "PATH": str(tmp_path / "empty"),
+        }
+        output = subprocess.run(
+>           ["/bin/sh"], input=runtime.remote_input("MARK:"), env=env, capture_output=True
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+
+scripts/tests/test_hosted_runtime_probe.py:406: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/verify_hosted_runtime.py:180: in remote_input
+    layout_bootstrap(marker, layout_only=layout_only).encode()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/verify_hosted_runtime.py:160: in layout_bootstrap
+    runtime = "" if layout_only else payload(marker)
+                                     ^^^^^^^^^^^^^^^
+scripts/verify_hosted_runtime.py:60: in payload
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, category = 'REVIEWED_SCHEMA_CONTRACT_CHANGED'
+
+    def require(condition, category):
+        if not condition:
+>           raise Stop("FAIL", category)
+E           sso_deployment_readiness.Stop: ('FAIL', 'REVIEWED_SCHEMA_CONTRACT_CHANGED')
+
+scripts/sso_deployment_readiness.py:111: Stop
+__________ test_bootstrap_switches_to_discovered_root_and_interpreter __________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7af6d18a84d0>
+tmp_path = PosixPath('/tmp/pytest-of-sigmoid/pytest-31/test_bootstrap_switches_to_dis0')
+
+    def test_bootstrap_switches_to_discovered_root_and_interpreter(monkeypatch, tmp_path):
+        root = package(tmp_path / "backend")
+>       source = runtime.layout_bootstrap("MARK:")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+scripts/tests/test_runtime_layout.py:106: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/verify_hosted_runtime.py:160: in layout_bootstrap
+    runtime = "" if layout_only else payload(marker)
+                                     ^^^^^^^^^^^^^^^
+scripts/verify_hosted_runtime.py:60: in payload
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, category = 'REVIEWED_SCHEMA_CONTRACT_CHANGED'
+
+    def require(condition, category):
+        if not condition:
+>           raise Stop("FAIL", category)
+E           sso_deployment_readiness.Stop: ('FAIL', 'REVIEWED_SCHEMA_CONTRACT_CHANGED')
+
+scripts/sso_deployment_readiness.py:111: Stop
+=========================== short test summary info ============================
+FAILED scripts/tests/test_hosted_runtime_probe.py::test_payload_is_pinned_in_memory_and_uses_read_only_session
+FAILED scripts/tests/test_hosted_runtime_probe.py::test_pty_probe_collects_only_completed_sanitized_result
+FAILED scripts/tests/test_hosted_runtime_probe.py::test_colored_prompt_and_final_queued_output_are_handled
+FAILED scripts/tests/test_hosted_runtime_probe.py::test_real_payload_error_handling_no_sql_writes[permission-SQL_PERMISSION_DENIED-schema_permissions]
+FAILED scripts/tests/test_hosted_runtime_probe.py::test_real_payload_error_handling_no_sql_writes[identity-RUNTIME_IDENTITY_CONFIGURATION_MISMATCH-configuration]
+FAILED scripts/tests/test_hosted_runtime_probe.py::test_real_payload_error_handling_no_sql_writes[imports-RUNTIME_IMPORT_UNAVAILABLE-runtime_imports]
+FAILED scripts/tests/test_hosted_runtime_probe.py::test_real_payload_error_handling_no_sql_writes[connection-SQL_CONNECTION_TIMEOUT-sql_connect]
+FAILED scripts/tests/test_hosted_runtime_probe.py::test_real_payload_error_handling_no_sql_writes[None-RUNTIME_004_CONTRACT_VERIFIED-complete]
+FAILED scripts/tests/test_hosted_runtime_probe.py::test_manual_fallback_is_self_contained_read_only_command
+FAILED scripts/tests/test_hosted_runtime_probe.py::test_shell_pre_python_failures_are_reported[directory-APP_WORKING_DIRECTORY_UNAVAILABLE]
+FAILED scripts/tests/test_hosted_runtime_probe.py::test_shell_pre_python_failures_are_reported[package-RUNTIME_APP_PACKAGE_UNAVAILABLE]
+FAILED scripts/tests/test_hosted_runtime_probe.py::test_shell_pre_python_failures_are_reported[python-RUNTIME_PYTHON_EXECUTABLE_UNAVAILABLE]
+FAILED scripts/tests/test_runtime_layout.py::test_bootstrap_switches_to_discovered_root_and_interpreter
+13 failed, 57 passed in 0.49s

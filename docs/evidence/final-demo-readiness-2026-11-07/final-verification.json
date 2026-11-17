@@ -1,0 +1,22 @@
+{
+  "verdict": "PARTIAL",
+  "candidate": "1.2-597d9528f2d018aa",
+  "sha256": "b2166855d3bfddf879e1a7fc5af35d70538f6a7bdf96125c4ca3f05ed99b3c6f",
+  "backend_focused_passed": 173,
+  "frontend_passed": 63,
+  "extracted_candidate_passed": 15,
+  "distinct_rollback_passed": 8,
+  "cross_release_ciphertext_passed": 1,
+  "sqlite_preserved": true,
+  "frozen_migrations_preserved": true,
+  "prior_cloud_evidence_preserved": true,
+  "real_provider_calls": 0,
+  "azure_mutations": 0,
+  "deployment": false,
+  "readonly_preflight": "PASS",
+  "next_approval": "Approval A retry-8 ONLY",
+  "compute_estimate_usd": 0.20162500000000003,
+  "recovery_B": "NOT APPROVED / NOT EXECUTED",
+  "production_C_to_F": "NOT APPROVED / NOT EXECUTED",
+  "hosted_acceptance": "NOT COMPLETE"
+}

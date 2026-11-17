@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "subscription": "25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6",
+  "server": "sql-governance-validator-dev-atiya",
+  "outbound_ip": "101.0.62.127",
+  "ip_checked_utc": "2026-11-06T18:35:41.550697+00:00",
+  "rule_name": "gpv-verifier-single-ip-20261107",
+  "start_ip": "101.0.62.127",
+  "end_ip": "101.0.62.127",
+  "existing_rules_unchanged": true,
+  "only_change": "gpv-verifier-single-ip-20261107",
+  "before_count": 15,
+  "after_count": 16,
+  "broad_azure_services_rule_added": false,
+  "approval_a_run": false
+}

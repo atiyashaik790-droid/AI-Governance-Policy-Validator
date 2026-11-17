@@ -1,0 +1,310 @@
+{
+  "backend/governance.db": {
+    "matches_previous": true,
+    "sha256": "0cad09a35e73ad70bb5ff5e522f783f9b59fdd5b3c31eb5b5dddd4d300795766"
+  },
+  "artifacts/refactor-baseline-2026-11-05/disposable/diagnostic-pytest/test_workflows_persist_across_0/application.db": {
+    "matches_previous": true,
+    "sha256": "e9a165e3caea05132030d029ab9abe352458e32faf67fada9d8f491ff42ec8af"
+  },
+  "artifacts/refactor-baseline-2026-11-05/disposable/backend-pytest/test_review_persistence_and_re1/application.db": {
+    "matches_previous": true,
+    "sha256": "84c54820c909a4e1acd80fdf34e70b362fe98062c8eedfc28b967c95613f4b9e"
+  },
+  "artifacts/refactor-baseline-2026-11-05/disposable/backend-pytest/test_adls_failure_and_no_overw0/integration.db": {
+    "matches_previous": true,
+    "sha256": "9118046158c89883d94e388daae73a99dde14593595687a7eafe7d8ed583712c"
+  },
+  "artifacts/refactor-baseline-2026-11-05/disposable/backend-pytest/test_dependency_commit_failure0/application.db": {
+    "matches_previous": true,
+    "sha256": "407194c8bf361bd42bfb188c97b58e3e981b191c831391eef3ef94a2c98ac0eb"
+  },
+  "artifacts/refactor-baseline-2026-11-05/disposable/backend-pytest/test_complete_workflow_with_re0/integration.db": {
+    "matches_previous": true,
+    "sha256": "fcc172d96adfe3343e409e352dc610324c73e4c95ddfd2e6122a0f597f9f30e3"
+  },
+  "artifacts/refactor-baseline-2026-11-05/disposable/backend-pytest/test_review_persistence_and_re0/application.db": {
+    "matches_previous": true,
+    "sha256": "077e1d8ae7847930fcb5c861263be4c9dca98411e1d1b0fffce8bde9749f28e7"
+  },
+  "artifacts/refactor-baseline-2026-11-05/disposable/backend-pytest/test_dependency_commit_failure2/application.db": {
+    "matches_previous": true,
+    "sha256": "407194c8bf361bd42bfb188c97b58e3e981b191c831391eef3ef94a2c98ac0eb"
+  },
+  "artifacts/refactor-baseline-2026-11-05/disposable/backend-pytest/test_concurrent_reservations_n0/limits.db": {
+    "matches_previous": true,
+    "sha256": "665c94f9027b487f228564157efa77e45eedac9b9fcabe3973c3792d6d01f047"
+  },
+  "artifacts/refactor-baseline-2026-11-05/disposable/backend-pytest/test_dependency_commit_failure3/application.db": {
+    "matches_previous": true,
+    "sha256": "407194c8bf361bd42bfb188c97b58e3e981b191c831391eef3ef94a2c98ac0eb"
+  },
+  "artifacts/refactor-baseline-2026-11-05/disposable/backend-pytest/test_workflows_persist_across_1/application.db": {
+    "matches_previous": true,
+    "sha256": "60a7284c4474899d26d9e9a1091bd452f996b1cfb1620213ffef12ed10980749"
+  },
+  "artifacts/refactor-baseline-2026-11-05/disposable/backend-pytest/test_concurrent_export_same_ke0/exports.db": {
+    "matches_previous": true,
+    "sha256": "04904f5fb6a6b6893f3f7c3b266d4db9856f120e5b0085de0a810acb78771781"
+  },
+  "artifacts/refactor-baseline-2026-11-05/disposable/backend-pytest/test_stale_activation_cannot_r0/activation.db": {
+    "matches_previous": true,
+    "sha256": "9aaa700bd9879f72e7c45d936f71f0edbbc30de4adc9e4d2081b3a78f477253d"
+  },
+  "artifacts/refactor-baseline-2026-11-05/disposable/backend-pytest/test_dependency_commit_failure1/application.db": {
+    "matches_previous": true,
+    "sha256": "407194c8bf361bd42bfb188c97b58e3e981b191c831391eef3ef94a2c98ac0eb"
+  },
+  "artifacts/refactor-baseline-2026-11-05/disposable/backend-pytest/test_workflows_persist_across_0/application.db": {
+    "matches_previous": true,
+    "sha256": "ecf42828e2f980d3a98269dd383c4e810865f91269c3e919cefb55a4639aa666"
+  },
+  "artifacts/refactor-baseline-2026-11-05/disposable/backend-pytest/test_malformed_empty_moderatio0/integration.db": {
+    "matches_previous": true,
+    "sha256": "4b9675e5c72e7a752e19028c0e81c90a371cedea54b76d201b77d6e6ffa2ab95"
+  },
+  "artifacts/refactor-baseline-2026-11-05/disposable/backend-pytest/test_package_allowlist_exclude0/dist/private.db": {
+    "matches_previous": true,
+    "sha256": "0155158ff1c6ba7f41ff5f4de1d7987cd0f1dc6d7dfc93a8126cdc5ff922c192"
+  },
+  "backend/app/maintenance.py": {
+    "matches_previous": true,
+    "sha256": "3b8103a81fcfa00b3efef4ed33ec804c6087a8203a66a42c17f8fd7c7f3b611b"
+  },
+  "backend/app/schemas.py": {
+    "matches_previous": true,
+    "sha256": "4c02fd8c1d95ea20c2641a374918e2977af09601dd46798f7d2fa11c93e340a3"
+  },
+  "backend/app/security.py": {
+    "matches_previous": true,
+    "sha256": "3a7093966ced1233f5ede580226a0b383ec08793b0cff8db2c93a37595d3f15e"
+  },
+  "backend/app/repositories.py": {
+    "matches_previous": true,
+    "sha256": "37a436d3143f5d65a65aa9f998f62a4dc0e9777c51b71337fdcea5483e2d4d5f"
+  },
+  "backend/app/engine.py": {
+    "matches_previous": true,
+    "sha256": "604c3dd4cd649ba14dcd192fde3c6c1055d801d6cd266f8b77468aeeef023ef6"
+  },
+  "backend/app/engine_multi_policy.py": {
+    "matches_previous": true,
+    "sha256": "1af3bc463add064fe54ced9fff05077a045f90a6b0f95625b95706efa1a4d3cc"
+  },
+  "backend/app/custom_rules.py": {
+    "matches_previous": true,
+    "sha256": "22e0ea1e8c0ba8ce208335912ab9875dbc90f8eaa2ec96a62029fcc293f7f080"
+  },
+  "backend/app/web_assets.py": {
+    "matches_previous": true,
+    "sha256": "464f0b82667da246005f574d9fa28ae3203d6dd123c212c888217d9be02a413a"
+  },
+  "backend/app/__init__.py": {
+    "matches_previous": true,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "backend/app/release.py": {
+    "matches_previous": true,
+    "sha256": "b53becf86265d73199c3bf25d30a503daad30c4851a0724cb1406b7d1073c111"
+  },
+  "backend/app/protected_reviews.py": {
+    "matches_previous": true,
+    "sha256": "8693fcfea2c9ea1adc8586f4cb8733742910b4b3cd9a4d19ec60e719e0aa9dd3"
+  },
+  "backend/app/user_access.py": {
+    "matches_previous": true,
+    "sha256": "88d02497937e9cd4dc3c12dfc1453e0bc02e86472df647f98d7729b10be5d710"
+  },
+  "backend/app/schema_006_verification.py": {
+    "matches_previous": true,
+    "sha256": "5e8e1ef44793e544b99f3ec0a32c651edcd9799f7f33c4f55c983c74d3ee1d4f"
+  },
+  "backend/app/decision_messages.py": {
+    "matches_previous": true,
+    "sha256": "f27f0bee2ee1a61bd8422f4adb10c638435f6f5842a6552a86bea4be477396e2"
+  },
+  "backend/app/models_review_content.py": {
+    "matches_previous": true,
+    "sha256": "888c202609c0e4fe53cd400b5bade1e610830f481cb586952b979e0c2522d4dc"
+  },
+  "backend/app/sso.py": {
+    "matches_previous": true,
+    "sha256": "dbd01e9ee15ada674617c8fd51118b82be49633132d6559b30326aff0fc5b040"
+  },
+  "backend/app/execution_identity.py": {
+    "matches_previous": true,
+    "sha256": "22aac195c51a0528e713fa3499ce976bf7a9a4195524719effda237e42978592"
+  },
+  "backend/app/pii.py": {
+    "matches_previous": true,
+    "sha256": "5a917bc3e82da0f801dfcea5f71168ee74bce63dcb7f857a6a099db229da3d61"
+  },
+  "backend/app/sessions.py": {
+    "matches_previous": true,
+    "sha256": "82df997fe7b3317659dda1465e9c76f13ebcae1eaa90e6124829ea5d4bb6de9c"
+  },
+  "backend/app/analytics.py": {
+    "matches_previous": true,
+    "sha256": "c54075727d51510bf1d90713374dcb71ac6a4dff353af3935dbd8b2fc47189bb"
+  },
+  "backend/app/models_multi_policy.py": {
+    "matches_previous": true,
+    "sha256": "45c615bf0641687dfc0881c682215d711f74735bb66bc35d37d9c612ff6bc873"
+  },
+  "backend/app/azure_sql.py": {
+    "matches_previous": true,
+    "sha256": "b351cdb247e7a5ae635c890c0ed0d63c93ba3769a369bfefff55fe856fffb7b6"
+  },
+  "backend/app/usage.py": {
+    "matches_previous": true,
+    "sha256": "11f3fd96dad98a10494ee3a2dfec5a0244ac3e59be06c784d1c9b6d2a37faf5b"
+  },
+  "backend/app/document_worker.py": {
+    "matches_previous": true,
+    "sha256": "abf23c864658d13c5fb7727a46845054fe97c6d0b35a12b84060f542a743decd"
+  },
+  "backend/app/providers.py": {
+    "matches_previous": true,
+    "sha256": "017e30895e132af3ec7092d8848eb0955a8711ddc0ead7dca5afdbdddba501ce"
+  },
+  "backend/app/schema_compatibility.py": {
+    "matches_previous": true,
+    "sha256": "b5da9f6e2f593f98be3750fe964260a54802bc375910b2b12312d926d08119e2"
+  },
+  "backend/app/main.py": {
+    "matches_previous": true,
+    "sha256": "689a10d8191953dfe68e0f29cf43ba54587986afb27a0e36bfc7faf48f5950ad"
+  },
+  "backend/app/multi_policy_contracts.py": {
+    "matches_previous": true,
+    "sha256": "d1336a54c2dea3d93f8fc75f9db8ecec8c760b252f4a4219bd692e5898ff4bb1"
+  },
+  "backend/app/hosting.py": {
+    "matches_previous": true,
+    "sha256": "9a30fea705f04feb5eca26d713da1732b489c9f76fad631fb5263c4e26d9e8d3"
+  },
+  "backend/app/schema_manifests.py": {
+    "matches_previous": true,
+    "sha256": "c6850817eccb14ece07166d748df28bdea5533f88d17a969ff715e73b8682a60"
+  },
+  "backend/app/exception_handlers.py": {
+    "matches_previous": true,
+    "sha256": "603eae70c2e56a28ebb02a18a87a51d8a1d81c38d86364c26614fef825d9e169"
+  },
+  "backend/app/models.py": {
+    "matches_previous": true,
+    "sha256": "91d8980abb23371f2142ff06d456fe3a318fc87f7042c7f8c8c711774b1d3f99"
+  },
+  "backend/app/middleware.py": {
+    "matches_previous": true,
+    "sha256": "4f45cff6796ec9de8fa24189989e418c981a2cbeb5f85f1c0a9e8ed99c5154f4"
+  },
+  "backend/app/exports.py": {
+    "matches_previous": true,
+    "sha256": "d69ff7ee8a24b4aa3ac7e6a685c20110608988e24f17cfc8d2772c59beeb4183"
+  },
+  "backend/app/database.py": {
+    "matches_previous": true,
+    "sha256": "3dff3bfb8d59e11f70d1722b7bb70d571c89711adce3c3a556e0ec55ac81f79e"
+  },
+  "backend/app/config.py": {
+    "matches_previous": true,
+    "sha256": "2d1374cdaba81aee982a3c0f2bc099a7006c6f7416339a24841fb9ca83eb0789"
+  },
+  "backend/app/dependencies.py": {
+    "matches_previous": true,
+    "sha256": "a7cfa4f6ab92deb0a6f23c978650392e2b7f6ea0835434e1ee56291440dcbfbd"
+  },
+  "backend/app/routers/reporting_v2.py": {
+    "matches_previous": true,
+    "sha256": "56a7d74898fb01875d678e8c39dc0ba650160a78b6e021d278ed689d88c84649"
+  },
+  "backend/app/routers/__init__.py": {
+    "matches_previous": true,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "backend/app/routers/protected_reviews.py": {
+    "matches_previous": true,
+    "sha256": "081f49fe46af84b2aeb8b4ad537d7fbe77988e2a2ea2f874fd5eb556a89764fd"
+  },
+  "backend/app/routers/system.py": {
+    "matches_previous": true,
+    "sha256": "6a7f15ec048c4842b10a4a44ec8e02849fafbb11b72fa052a73d3c7731c32ac1"
+  },
+  "backend/app/routers/governance.py": {
+    "matches_previous": true,
+    "sha256": "88d01bf3997c69cadc0eb205ceefe3a87611252bf828739e24364cbb2d391015"
+  },
+  "backend/app/routers/document_uploads.py": {
+    "matches_previous": true,
+    "sha256": "85db70e3ee110cd97e361355c9c4bb6ba3847470a8cb860b1a8e557147bf3eb7"
+  },
+  "backend/app/routers/governance_v2.py": {
+    "matches_previous": true,
+    "sha256": "04aadc9a256ba201e71e04b3729eec43ea32050119b787b8ab6f2d278f1b5f8d"
+  },
+  "backend/app/routers/audit.py": {
+    "matches_previous": true,
+    "sha256": "89d741cdb56b953a3ecec5a6e12ee683537033f1d922af6b21284abc78bbd7a7"
+  },
+  "backend/app/routers/reports.py": {
+    "matches_previous": true,
+    "sha256": "317246f1d762f790985770c9d91a1ea5769adce3b734a3b16401e206b3bd11e4"
+  },
+  "backend/app/routers/reviews.py": {
+    "matches_previous": true,
+    "sha256": "fbde06ecea6504423ef5f7e533950e26f87f34b3c853eec3cb0a277f139cc7d5"
+  },
+  "backend/app/routers/feedback.py": {
+    "matches_previous": true,
+    "sha256": "6234d85d503872061c27e967a6666f02c619176c1db99be7b483cffa906245a1"
+  },
+  "backend/app/routers/workspace_v2.py": {
+    "matches_previous": true,
+    "sha256": "549e472d8dfeaf40939a542147c8bccb567b44823be62ce15fd24aa808e40799"
+  },
+  "backend/app/routers/policies.py": {
+    "matches_previous": true,
+    "sha256": "e162aca2f8cb3502a022ca045557134503dd275c4837f8346f0a9a5b36bccef4"
+  },
+  "backend/app/services/multi_policy_governance.py": {
+    "matches_previous": true,
+    "sha256": "18130ccd464c38f99479f0ad8b9f0461d59505720d26b95aeb03cd6a263d553b"
+  },
+  "backend/app/services/reporting_v2.py": {
+    "matches_previous": true,
+    "sha256": "45a7d34bc723e5badc3fd31d884bfbfa9c837e859cb77c8bf7a35eb63b0127ce"
+  },
+  "backend/app/services/__init__.py": {
+    "matches_previous": true,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "backend/app/services/exports_v2.py": {
+    "matches_previous": true,
+    "sha256": "4be87ac236b07307f2e26191dd271547be89774a539be4a13cc807c75dac1791"
+  },
+  "backend/app/services/policy_sets.py": {
+    "matches_previous": true,
+    "sha256": "f58821706b11a86b9a508bc9f80826905356abda67327b2a56b1654dc202ee47"
+  },
+  "backend/app/services/governance.py": {
+    "matches_previous": true,
+    "sha256": "abf02ba9fa532237e2c347e93f0e409dbdfe376431873970e4b7682defa06b4a"
+  },
+  "backend/app/services/audit_attribution.py": {
+    "matches_previous": true,
+    "sha256": "344906b8f33bdf321d5e839f5eebc8ea91ba9df44e75572da2f689f9179c63f9"
+  },
+  "backend/app/services/reviews.py": {
+    "matches_previous": true,
+    "sha256": "5b00b7f5265091ed98f7afb806e8c41ea3cc17747766a2808088fd89e6508c05"
+  },
+  "backend/app/services/multi_policy_evidence.py": {
+    "matches_previous": true,
+    "sha256": "eebda5ed7458c105faca572b05a6fb3ff91b74f0d7f4f9427a39fecc5503d5df"
+  },
+  "backend/app/services/policies.py": {
+    "matches_previous": true,
+    "sha256": "022949b524b8836848d1ae3cde25b58fa33dc2aaf95ea219cb4fa38d1a5948db"
+  }
+}

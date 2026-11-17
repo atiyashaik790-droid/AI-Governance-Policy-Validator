@@ -1,0 +1,26 @@
+{
+  "hosted_readiness": {
+    "status": "ready",
+    "database_revision": "005",
+    "schema_versioned": true,
+    "sso_available": true,
+    "provider_mode": "live",
+    "release": {
+      "git_commit": "unavailable",
+      "build_version": "1.2-ca5df7c1dc19e525",
+      "built_utc": "2026-11-05T12:09:33.571692+00:00",
+      "frontend_sha256": "beb38c3485b8abfb672e5a2bf851f1f178c1a8049f367b450708e5abbe7581d4",
+      "backend_sha256": "ad2e4af6c958f24e27e8838cccf8ca9dc46c76fb430c583d2c6737cd3034a813",
+      "required_migration": "004",
+      "supported_migrations": [
+        "004",
+        "005"
+      ],
+      "sso_required_migration": "005"
+    }
+  },
+  "managed_identity_roles": {
+    "status": "UNVERIFIED",
+    "category": "READ_ONLY_COMMAND_UNAVAILABLE"
+  }
+}

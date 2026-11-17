@@ -1,0 +1,44 @@
+{
+  "read_only": true,
+  "observed_at_utc": "2026-11-04T17:54:25.550782+00:00",
+  "checks": {
+    "/health": {
+      "http_status": 200,
+      "response": {
+        "status": "ok"
+      }
+    },
+    "/ready": {
+      "http_status": 200,
+      "response": {
+        "status": "ready",
+        "provider_mode": "live",
+        "release": {
+          "git_commit": "60fa94ef9ec01be0d0b4af347a3251255cf7565c",
+          "build_version": "1.2-6749226f1af65b63",
+          "built_utc": "2026-11-04T12:18:02.616350+00:00",
+          "frontend_sha256": "5bef17e44c53f3652b72f143fffbed00c4c3e77d0395654c7a9497e2a2b7f132",
+          "backend_sha256": "00e764d9e2d2ef88872a0546c63b771e9c5c53dae34b7f97419f53e610c52db4",
+          "required_migration": "004",
+          "supported_migrations": [
+            "004",
+            "005"
+          ],
+          "sso_required_migration": "005"
+        },
+        "database_revision": "005",
+        "schema_versioned": true,
+        "sso_available": false
+      }
+    },
+    "/api/sso/status": {
+      "http_status": 200,
+      "response": {
+        "sso_enabled": false,
+        "configured": false,
+        "demo_login_enabled": true
+      }
+    }
+  },
+  "status": "PASS"
+}

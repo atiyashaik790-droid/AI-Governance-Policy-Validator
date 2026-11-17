@@ -1,0 +1,18 @@
+{
+  "status": "BLOCKED_APPROVAL_BOUNDARY",
+  "immediate_blocker": "POLICY_SEED_NO_APPROVAL_OR_AZURE_RECEIPT",
+  "latest_verified_policy_count": 0,
+  "current_policy_state": "NOT_REQUERIED_NO_AUTHORIZED_ACCESS_WINDOW",
+  "production_health": "PASS_005_ORIGINAL_RELEASE",
+  "candidate_and_exact_rollback_hashes": "PASS_REVALIDATED",
+  "runtime_sql_effective_permissions": "PASS_PRIOR_AZURE_PROOF",
+  "runtime_actual_hosted_new_db_mi_authentication": "NOT_VERIFIED",
+  "mandatory_recovery": "BLOCKED_UNPROVED",
+  "configuration_concurrency_and_restoration": "BLOCKED_UNVERIFIED",
+  "azure_mutations_this_task": 0,
+  "sql_mutations_this_task": 0,
+  "provider_calls_this_task": 0,
+  "cutover_approval_ready": false,
+  "commands": "REVIEW_ONLY_NO_EXECUTION",
+  "next_approval": "EIGHT_POLICY_SEED_ONLY_WITH_NEW_BOUNDED_SINGLE_IP_WINDOW"
+}

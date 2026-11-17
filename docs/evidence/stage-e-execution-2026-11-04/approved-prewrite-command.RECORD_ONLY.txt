@@ -1,0 +1,26 @@
+import sys,json,logging,os
+from pathlib import Path
+from datetime import datetime,timezone
+R=Path.cwd();sys.path.insert(0,str(R/'backend'))
+os.environ['AZURE_CONFIG_DIR']=str(R/'.azure-sql-cli')
+for n in ('azure','msal','sqlalchemy.engine'):logging.getLogger(n).setLevel(logging.CRITICAL)
+from app.azure_sql import create_azure_sql_engine
+from sqlalchemy.engine import URL
+from sqlalchemy import text
+r={'stage':'E','read_only':True,'observed_at_utc':datetime.now(timezone.utc).isoformat()}
+e=create_azure_sql_engine(URL.create('mssql+pyodbc',host='sql-governance-validator-dev-atiya.database.windows.net',database='sqldb-governance-validator-dev'),'4ac50105-0c66-404e-a107-7cbd8a9a6442','b5d8bfbe-f03a-4132-a13f-ab49aae834b7',auth_mode='cli')
+try:
+ with e.connect() as c:
+  r['database']=c.scalar(text('SELECT DB_NAME()'));assert r['database']=='sqldb-governance-validator-dev'
+  r['operator_user']=c.scalar(text('SELECT USER_NAME()'))
+  r['revision']=list(c.execute(text('SELECT version_num FROM dbo.alembic_version')).scalars());assert r['revision']==['005']
+  r['memberships']=[dict(x) for x in c.execute(text('SELECT id,directory_tenant,object_id,tenant,actor,role,enabled FROM dbo.sso_memberships WHERE object_id=:oid OR (tenant=:tenant AND actor=:actor)'),{'oid':'b5d8bfbe-f03a-4132-a13f-ab49aae834b7','tenant':'demo-appservice-4e2dcce8d618','actor':'atiya-tabsum-shaik'}).mappings()]
+  r['provisioning_audits']=[dict(x) for x in c.execute(text("SELECT id,tenant,actor,action,resource,created FROM dbo.audit_events WHERE action='sso.membership.provisioned' AND tenant=:t"),{'t':'demo-appservice-4e2dcce8d618'}).mappings()]
+  r['audit_resource_schema']=[dict(x) for x in c.execute(text("SELECT DATA_TYPE,CHARACTER_MAXIMUM_LENGTH FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA='dbo' AND TABLE_NAME='audit_events' AND COLUMN_NAME='resource'")).mappings()]
+  r['operator_permissions']={t+'.'+p:c.scalar(text("SELECT HAS_PERMS_BY_NAME(:o,'OBJECT',:p)"),{'o':'dbo.'+t,'p':p}) for t,ps in {'sso_memberships':['SELECT','INSERT','UPDATE'],'audit_events':['SELECT','INSERT']}.items() for p in ps}
+  r['workspace_policy_count']=c.scalar(text('SELECT COUNT_BIG(*) FROM dbo.policies WHERE tenant=:t'),{'t':'demo-appservice-4e2dcce8d618'})
+  c.rollback()
+ r['read_status']='PASS'
+except Exception as x:r['read_status']='BLOCKED';r['error_kind']=type(x).__name__
+finally:e.dispose()
+p=R/'docs/evidence/stage-e-execution-2026-11-04/approved-prewrite-verification.json';p.write_text(json.dumps(r,indent=2)+'\n');print(json.dumps(r))

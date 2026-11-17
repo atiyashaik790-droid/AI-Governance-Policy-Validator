@@ -1,0 +1,37 @@
+[
+  {
+    "archive": "artifacts/governance-sso-005-compatible-rollback-20261104.zip",
+    "member": "app/schema_compatibility.py",
+    "sha256": "e5d365b7efc59e5414817f890ee919af11369273b1be09293f2e88d9459e6bf8"
+  },
+  {
+    "archive": "artifacts/sso-only-20261105/rollback-1.2-6749226f1af65b63.zip",
+    "member": "app/schema_compatibility.py",
+    "sha256": "e5d365b7efc59e5414817f890ee919af11369273b1be09293f2e88d9459e6bf8"
+  },
+  {
+    "archive": "artifacts/sso-only-20261105/governance-sso-only.zip",
+    "member": "app/schema_compatibility.py",
+    "sha256": "e5d365b7efc59e5414817f890ee919af11369273b1be09293f2e88d9459e6bf8"
+  },
+  {
+    "archive": "artifacts/structural-only-candidate-2026-11-05/production/governance-structural-only.zip",
+    "member": "app/schema_compatibility.py",
+    "sha256": "e5d365b7efc59e5414817f890ee919af11369273b1be09293f2e88d9459e6bf8"
+  },
+  {
+    "archive": "artifacts/refactor-phase3-2026-11-05/stages/10-packaging/application.zip",
+    "member": "app/schema_compatibility.py",
+    "sha256": "e3530bb5af9199ee850f54f71984da4643dbd458c791dcd5b2c9a5b4e7612497"
+  },
+  {
+    "archive": "artifacts/refactor-phase4-2026-11-05/stages/10-packaging/application.zip",
+    "member": "app/schema_compatibility.py",
+    "sha256": "e3530bb5af9199ee850f54f71984da4643dbd458c791dcd5b2c9a5b4e7612497"
+  },
+  {
+    "archive": "artifacts/refactor-baseline-2026-11-05/disposable/backend-pytest/test_package_allowlist_exclude0/application.zip",
+    "member": "app/schema_compatibility.py",
+    "sha256": "e3530bb5af9199ee850f54f71984da4643dbd458c791dcd5b2c9a5b4e7612497"
+  }
+]

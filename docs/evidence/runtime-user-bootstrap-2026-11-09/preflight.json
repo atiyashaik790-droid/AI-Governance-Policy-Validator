@@ -1,0 +1,200 @@
+{
+  "status": "PASS",
+  "azure_writes": 0,
+  "sql_writes": 0,
+  "directory_writes": 0,
+  "started_utc": "2026-11-08T19:59:01.215797+00:00",
+  "proposal_hashes": {
+    "deployment/fresh-runtime-provision.REVIEW_ONLY.sql": "99f61353fc47791d419fd2e0dd808efa224cc7dcc7815e3fa1fd3ef8709cfb59",
+    "deployment/fresh-database-permissions.REVIEW_ONLY.json": "08c82dd56efd125626a787155206c7bb7815ad8bd799ed14f46fd2aec2f8c24c",
+    "deployment/fresh-runtime-and-memberships.REVIEW_ONLY.json": "0badd456cc1125d21a6eb5be20560f3f4018c090ebbaef30ceb7a2f28abff3ce"
+  },
+  "approved_admin_mapping": {
+    "directory_tenant": "4ac50105-0c66-404e-a107-7cbd8a9a6442",
+    "object_id": "b5d8bfbe-f03a-4132-a13f-ab49aae834b7",
+    "tenant": "demo-appservice-4e2dcce8d618",
+    "actor": "atiya-tabsum-shaik",
+    "role": "Admin",
+    "enabled": true
+  },
+  "approved_user_mapping": {
+    "directory_tenant": "4ac50105-0c66-404e-a107-7cbd8a9a6442",
+    "object_id": "f4799f3f-703a-42b7-acf7-4cbbf55e7320",
+    "tenant": "demo-appservice-4e2dcce8d618",
+    "actor": "gpv-demo-user",
+    "role": "User",
+    "enabled": true
+  },
+  "subscription": {
+    "id": "25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6",
+    "name": "Devops_Azure_SV",
+    "state": "Enabled",
+    "tenantId": "4ac50105-0c66-404e-a107-7cbd8a9a6442"
+  },
+  "admin_directory": {
+    "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users(id,userPrincipalName,accountEnabled,userType)/$entity",
+    "accountEnabled": true,
+    "id": "b5d8bfbe-f03a-4132-a13f-ab49aae834b7",
+    "userPrincipalName": "atiya.tabsum@Sigmoidanalytics.com",
+    "userType": "Member"
+  },
+  "user_directory": {
+    "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users(id,userPrincipalName,accountEnabled,userType)/$entity",
+    "accountEnabled": true,
+    "id": "f4799f3f-703a-42b7-acf7-4cbbf55e7320",
+    "userPrincipalName": "demo-user@Sigmoidanalytics.com",
+    "userType": "Member"
+  },
+  "runtime_directory": {
+    "appId": "f7bacace-698a-4968-8add-cba221319a17",
+    "displayName": "app-governance-validator-atiya-1026",
+    "id": "600447fe-5fea-4801-9033-ab4aafc474cc",
+    "servicePrincipalType": "ManagedIdentity"
+  },
+  "target": {
+    "id": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/databases/sqldb-gpv-demo-v008-20261108",
+    "database_id": "80dd1ba9-74e5-4d26-8463-081572c9c22e",
+    "status": "Online",
+    "last_verified_revision": "008_FROM_COMPLETED_SCHEMA_QUALIFICATION_RECHECK_AFTER_ACCESS"
+  },
+  "firewall_before": [
+    {
+      "name": "ClientIp-2026-10-28_20-51-52",
+      "start_ip": "180.151.36.234",
+      "end_ip": "180.151.36.234"
+    },
+    {
+      "name": "gpv-verifier-single-ip-20261107",
+      "start_ip": "101.0.62.127",
+      "end_ip": "101.0.62.127"
+    },
+    {
+      "name": "gv-appservice-1",
+      "start_ip": "4.149.94.83",
+      "end_ip": "4.149.94.83"
+    },
+    {
+      "name": "gv-appservice-10",
+      "start_ip": "20.29.153.35",
+      "end_ip": "20.29.153.35"
+    },
+    {
+      "name": "gv-appservice-11",
+      "start_ip": "172.179.21.221",
+      "end_ip": "172.179.21.221"
+    },
+    {
+      "name": "gv-appservice-12",
+      "start_ip": "40.125.96.221",
+      "end_ip": "40.125.96.221"
+    },
+    {
+      "name": "gv-appservice-13",
+      "start_ip": "20.42.128.126",
+      "end_ip": "20.42.128.126"
+    },
+    {
+      "name": "gv-appservice-2",
+      "start_ip": "20.115.168.211",
+      "end_ip": "20.115.168.211"
+    },
+    {
+      "name": "gv-appservice-3",
+      "start_ip": "4.246.17.123",
+      "end_ip": "4.246.17.123"
+    },
+    {
+      "name": "gv-appservice-4",
+      "start_ip": "48.202.41.174",
+      "end_ip": "48.202.41.174"
+    },
+    {
+      "name": "gv-appservice-5",
+      "start_ip": "4.149.162.59",
+      "end_ip": "4.149.162.59"
+    },
+    {
+      "name": "gv-appservice-6",
+      "start_ip": "20.72.205.216",
+      "end_ip": "20.72.205.216"
+    },
+    {
+      "name": "gv-appservice-7",
+      "start_ip": "51.143.50.106",
+      "end_ip": "51.143.50.106"
+    },
+    {
+      "name": "gv-appservice-8",
+      "start_ip": "20.72.231.40",
+      "end_ip": "20.72.231.40"
+    },
+    {
+      "name": "gv-appservice-9",
+      "start_ip": "20.72.198.201",
+      "end_ip": "20.72.198.201"
+    },
+    {
+      "name": "local-laptop-temp-20261031-101-0-62-145",
+      "start_ip": "101.0.62.145",
+      "end_ip": "101.0.62.145"
+    }
+  ],
+  "firewall_effective_management_actions": {
+    "Microsoft.Sql/servers/firewallRules/read": true,
+    "Microsoft.Sql/servers/firewallRules/write": true,
+    "Microsoft.Sql/servers/firewallRules/delete": true
+  },
+  "source_before": {
+    "id": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/databases/sqldb-governance-validator-dev",
+    "name": "sqldb-governance-validator-dev",
+    "location": "westus2",
+    "sku": {
+      "name": "Standard",
+      "tier": "Standard",
+      "capacity": 10
+    },
+    "properties": {
+      "databaseId": "7e5a90aa-ec16-46cc-8298-9d27ead9a27e",
+      "creationDate": "2026-10-28T15:24:20.563Z",
+      "status": "Online",
+      "collation": "SQL_Latin1_General_CP1_CI_AS",
+      "maxSizeBytes": 268435456000,
+      "currentServiceObjectiveName": "S0",
+      "requestedServiceObjectiveName": "S0",
+      "currentBackupStorageRedundancy": "Local",
+      "requestedBackupStorageRedundancy": "Local",
+      "elasticPoolId": null,
+      "zoneRedundant": false,
+      "readScale": "Disabled"
+    },
+    "retention": {
+      "retentionDays": 7,
+      "diffBackupIntervalInHours": 24
+    }
+  },
+  "app_before": {
+    "id": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Web/sites/app-governance-validator-atiya-1026",
+    "state": "Running",
+    "identity_principal": "600447fe-5fea-4801-9033-ab4aafc474cc",
+    "web_config_sha256": "031a5a5e141fe953e6adfb022270cbb629a1566259c4fcad2bedddc47f924921"
+  },
+  "hosted_before": {
+    "/health": {
+      "http_status": 200,
+      "status": "ok"
+    },
+    "/ready": {
+      "http_status": 200,
+      "status": "ready",
+      "release": "1.2-ca5df7c1dc19e525",
+      "revision": "005"
+    }
+  },
+  "verified_blocked_client_ip": "45.127.46.209",
+  "firewall_rule": "gpv-runtime-init-20261109",
+  "safe_cleanup_procedure": "TESTED_EXACT_RULE_DELETE_WITH_DEADLINE_EXEMPT_RESTORATION_AND_VERIFIED_ARM_DELETE_PERMISSION",
+  "independent_supervisor": "NOT_VERIFIED",
+  "preflight_finished_utc": "2026-11-08T20:02:13.894871+00:00",
+  "connection_reconciliation": "Connect return alone was insufficient; SELECT-only reconciliation confirmed actual Azure SQL error40615 and approved IP; no writes",
+  "reconciliation_evidence": "connection-reconciliation.json"
+}

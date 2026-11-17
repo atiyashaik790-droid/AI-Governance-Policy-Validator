@@ -1,0 +1,59 @@
+import sys,json
+from pathlib import Path
+from datetime import datetime,timezone
+R=Path.cwd();sys.path.insert(0,str(R/'scripts'))
+import verify_hosted_runtime as p
+required={'sso_memberships':['SELECT'],'sso_transactions':['SELECT','INSERT','UPDATE'],'sso_sessions':['SELECT','INSERT','UPDATE']}
+def payload(marker):
+ return '''import contextlib,io,json,logging,sys
+for n in ('azure','msal','sqlalchemy.engine'):logging.getLogger(n).setLevel(logging.CRITICAL)
+r={'status':'UNKNOWN','category':'D_RUNTIME_UNAVAILABLE','database_mutated':False,'permission_subject':'actual_app_service_managed_identity','hosted_runtime_identity_verified':False}
+try:
+ with contextlib.redirect_stdout(io.StringIO()),contextlib.redirect_stderr(io.StringIO()):
+  from app.config import settings
+  from app.database import SessionLocal
+  from sqlalchemy import text
+  from sqlalchemy.engine import make_url
+  assert settings.azure_sql_auth_mode=='managed_identity' and settings.azure_sql_tenant_id.lower()=='4ac50105-0c66-404e-a107-7cbd8a9a6442' and settings.azure_sql_user_object_id.lower()=='600447fe-5fea-4801-9033-ab4aafc474cc'
+  url=make_url(settings.database_url)
+  assert url.host=='sql-governance-validator-dev-atiya.database.windows.net' and url.database=='sqldb-governance-validator-dev'
+  with SessionLocal() as db:
+   assert db.scalar(text('SELECT DB_NAME()'))=='sqldb-governance-validator-dev' and db.scalar(text('SELECT USER_NAME()'))=='app-governance-validator-atiya-1026'
+   assert list(db.execute(text('SELECT version_num FROM dbo.alembic_version')).scalars())==['005']
+   assert db.scalar(text("SELECT IS_ROLEMEMBER('governance_validator_web_runtime')"))==1
+   r['hosted_runtime_identity_verified']=True
+   r['required_permissions']={}
+   for table,perms in '''+repr(required)+'''.items():
+    for permission in perms:
+     value=db.scalar(text("SELECT HAS_PERMS_BY_NAME(:o,'OBJECT',:p)"),{'o':'dbo.'+table,'p':permission})
+     r['required_permissions'][table+'.'+permission]=value
+   r['metadata_visibility']={t:db.scalar(text("SELECT HAS_PERMS_BY_NAME(:o,'OBJECT','VIEW DEFINITION')"),{'o':'dbo.'+t}) for t in '''+repr(list(required))+'''}
+   r['unexpected_write_permissions']={}
+   for table,perms in {'sso_memberships':['INSERT','UPDATE','DELETE'],'sso_transactions':['DELETE'],'sso_sessions':['DELETE']}.items():
+    for permission in perms:r['unexpected_write_permissions'][table+'.'+permission]=db.scalar(text("SELECT HAS_PERMS_BY_NAME(:o,'OBJECT',:p)"),{'o':'dbo.'+table,'p':permission})
+   r['status']='PASS' if all(v==1 for v in r['required_permissions'].values()) and all(v==1 for v in r['metadata_visibility'].values()) and all(v==0 for v in r['unexpected_write_permissions'].values()) else 'FAIL'
+   r['category']='D_RUNTIME_PERMISSIONS_COMPLETE' if r['status']=='PASS' else 'D_RUNTIME_PERMISSIONS_MISSING_OR_EXCESSIVE'
+except Exception as e:r['category']='D_RUNTIME_READ_ONLY_CHECK_UNAVAILABLE'
+print('''+repr(marker)+'''+json.dumps(r),file=sys.__stdout__,flush=True)
+'''
+def parse(raw,marker):
+ for line in p.terminal_text(raw).splitlines(keepends=True):
+  if not line.startswith(marker+'{') or not line.endswith('\n'):continue
+  d=json.loads(line[len(marker):]);out={}
+  allowed={'status':{'PASS','FAIL','UNKNOWN'},'category':{'D_RUNTIME_PERMISSIONS_COMPLETE','D_RUNTIME_PERMISSIONS_MISSING_OR_EXCESSIVE','D_RUNTIME_READ_ONLY_CHECK_UNAVAILABLE','D_RUNTIME_UNAVAILABLE'},'database_mutated':{False},'permission_subject':{'actual_app_service_managed_identity'},'hosted_runtime_identity_verified':{True,False}}
+  for k,v in allowed.items():
+   if d.get(k) not in v:raise ValueError('Invalid result')
+   out[k]=d[k]
+  maps={'required_permissions':{t+'.'+v for t,ps in required.items() for v in ps},'metadata_visibility':set(required),'unexpected_write_permissions':{'sso_memberships.INSERT','sso_memberships.UPDATE','sso_memberships.DELETE','sso_transactions.DELETE','sso_sessions.DELETE'}}
+  for key,keys in maps.items():
+   if key in d:
+    if set(d[key])!=keys or any(type(v) not in (int,type(None)) or v not in (0,1,None) for v in d[key].values()):raise ValueError('Invalid permission map')
+    out[key]=d[key]
+  return out
+ return None
+p.payload=payload;p.safe_result=parse
+try:
+ r=p.shell_probe(['az','webapp','exec','--subscription','25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6','--resource-group','rg_techdemo_Atiya_Tabsum_Shaik','--name','app-governance-validator-atiya-1026','--mode','shell','--target','app','--shell','/bin/sh','--only-show-errors'])
+except Exception as e:r={'status':'UNKNOWN','category':getattr(e,'category','D_RUNTIME_READ_ONLY_CHECK_UNAVAILABLE'),'database_mutated':False,'hosted_runtime_identity_verified':False}
+r['observed_at_utc']=datetime.now(timezone.utc).isoformat()
+(R/'docs/evidence/stage-d-execution-2026-11-04/runtime-permissions.json').write_text(json.dumps(r,indent=2)+'\n');print(json.dumps(r))

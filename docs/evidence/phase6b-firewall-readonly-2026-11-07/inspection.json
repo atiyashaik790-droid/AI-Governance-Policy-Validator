@@ -1,0 +1,122 @@
+{
+  "utc": "2026-11-06T18:32:52.682656+00:00",
+  "subscription": "25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6",
+  "server": {
+    "fullyQualifiedDomainName": "sql-governance-validator-dev-atiya.database.windows.net",
+    "id": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya",
+    "location": "westus2",
+    "publicNetworkAccess": "Enabled"
+  },
+  "public_outbound_ipv4": "101.0.62.127",
+  "ip_observation_source": "https://api.ipify.org?format=json",
+  "firewall_rules": [
+    {
+      "endIpAddress": "180.151.36.234",
+      "id": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/firewallRules/ClientIp-2026-10-28_20-51-52",
+      "name": "ClientIp-2026-10-28_20-51-52",
+      "startIpAddress": "180.151.36.234"
+    },
+    {
+      "endIpAddress": "4.149.94.83",
+      "id": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/firewallRules/gv-appservice-1",
+      "name": "gv-appservice-1",
+      "startIpAddress": "4.149.94.83"
+    },
+    {
+      "endIpAddress": "20.29.153.35",
+      "id": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/firewallRules/gv-appservice-10",
+      "name": "gv-appservice-10",
+      "startIpAddress": "20.29.153.35"
+    },
+    {
+      "endIpAddress": "172.179.21.221",
+      "id": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/firewallRules/gv-appservice-11",
+      "name": "gv-appservice-11",
+      "startIpAddress": "172.179.21.221"
+    },
+    {
+      "endIpAddress": "40.125.96.221",
+      "id": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/firewallRules/gv-appservice-12",
+      "name": "gv-appservice-12",
+      "startIpAddress": "40.125.96.221"
+    },
+    {
+      "endIpAddress": "20.42.128.126",
+      "id": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/firewallRules/gv-appservice-13",
+      "name": "gv-appservice-13",
+      "startIpAddress": "20.42.128.126"
+    },
+    {
+      "endIpAddress": "20.115.168.211",
+      "id": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/firewallRules/gv-appservice-2",
+      "name": "gv-appservice-2",
+      "startIpAddress": "20.115.168.211"
+    },
+    {
+      "endIpAddress": "4.246.17.123",
+      "id": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/firewallRules/gv-appservice-3",
+      "name": "gv-appservice-3",
+      "startIpAddress": "4.246.17.123"
+    },
+    {
+      "endIpAddress": "48.202.41.174",
+      "id": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/firewallRules/gv-appservice-4",
+      "name": "gv-appservice-4",
+      "startIpAddress": "48.202.41.174"
+    },
+    {
+      "endIpAddress": "4.149.162.59",
+      "id": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/firewallRules/gv-appservice-5",
+      "name": "gv-appservice-5",
+      "startIpAddress": "4.149.162.59"
+    },
+    {
+      "endIpAddress": "20.72.205.216",
+      "id": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/firewallRules/gv-appservice-6",
+      "name": "gv-appservice-6",
+      "startIpAddress": "20.72.205.216"
+    },
+    {
+      "endIpAddress": "51.143.50.106",
+      "id": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/firewallRules/gv-appservice-7",
+      "name": "gv-appservice-7",
+      "startIpAddress": "51.143.50.106"
+    },
+    {
+      "endIpAddress": "20.72.231.40",
+      "id": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/firewallRules/gv-appservice-8",
+      "name": "gv-appservice-8",
+      "startIpAddress": "20.72.231.40"
+    },
+    {
+      "endIpAddress": "20.72.198.201",
+      "id": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/firewallRules/gv-appservice-9",
+      "name": "gv-appservice-9",
+      "startIpAddress": "20.72.198.201"
+    },
+    {
+      "endIpAddress": "101.0.62.145",
+      "id": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/firewallRules/local-laptop-temp-20261031-101-0-62-145",
+      "name": "local-laptop-temp-20261031-101-0-62-145",
+      "startIpAddress": "101.0.62.145"
+    }
+  ],
+  "matching_explicit_rules": [],
+  "azure_services_zero_rule_names": [],
+  "public_ip_explicitly_permitted": false,
+  "proposal": {
+    "name": "gpv-verifier-single-ip-20261107",
+    "startIpAddress": "101.0.62.127",
+    "endIpAddress": "101.0.62.127",
+    "cidrEquivalent": "101.0.62.127/32",
+    "scope": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/firewallRules/gpv-verifier-single-ip-20261107",
+    "nameAvailable": true
+  },
+  "mutations": 0,
+  "sql_connections": 0,
+  "approval_a_run": false,
+  "egress_caveat": "HTTPS egress observation; NAT/proxy routing to SQL may differ. No SQL connection was attempted under this inspection-only approval.",
+  "direct_https_outbound_ipv4": "101.0.62.127",
+  "direct_and_default_https_egress_match": true,
+  "proxy_environment_present": false
+}

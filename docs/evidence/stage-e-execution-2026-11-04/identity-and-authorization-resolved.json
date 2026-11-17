@@ -1,0 +1,25 @@
+{
+  "stage": "E",
+  "observed_at_utc": "2026-11-04T16:33:51.160027+00:00",
+  "hosted_changes": false,
+  "approval_basis": "User explicitly approved Admin for this identity/workspace and previously confirmed control/ownership of independently managed project",
+  "identity": {
+    "accountEnabled": true,
+    "displayName": "atiya tabsum",
+    "objectId": "b5d8bfbe-f03a-4132-a13f-ab49aae834b7",
+    "userType": "Member"
+  },
+  "account_context": {
+    "subscription": "25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6",
+    "tenant": "4ac50105-0c66-404e-a107-7cbd8a9a6442",
+    "type": "user"
+  },
+  "exact_app_read_authority": true,
+  "exact_app_saved_config_read_authority": true,
+  "existing_resource_control_basis": "Current exact-scope management permissions plus preserved verified resource-group Contributor assignment; application Admin assignment remains based on explicit project-owner approval.",
+  "sso_enabled": false,
+  "demo_login_enabled": true,
+  "existing_approved_workspace_admin_credential_matches_saved_enabled_account": true,
+  "status": "PASS_IDENTITY_AND_PROJECT_WORKSPACE_AUTHORIZATION_PRECHECK",
+  "admin_not_inferred_from_azure_rbac": "Explicit project-owner authorization is the application role authority; Azure RBAC verifies control, not automatic SSO privilege."
+}

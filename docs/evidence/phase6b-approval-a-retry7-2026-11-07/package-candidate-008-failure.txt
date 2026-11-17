@@ -1,0 +1,37 @@
+{"completed": true, "elapsed_seconds": 8.838, "event": "cleanup.startup", "healthy": true}
+{"decision": "HUMAN_REVIEW", "event": "human_review.confirmation", "governance_execution_ms": 66079.636, "model_invoked": false, "precommit_remaining_ms": 29038.186, "status": 200}
+{"event": "governance.stage", "stage": "policy.admission", "outcome": "ok", "connection_acquire_ms": 0.023, "duration_ms": 15934.008, "sql_count": 26, "catalog_count": 2, "sql_ms": 11587.838, "correlation_id": "2cac2365-66eb-40fd-8ac4-4574486523b6"}
+{"event": "governance.stage", "stage": "policy.selection", "outcome": "ok", "connection_acquire_ms": 0.03, "duration_ms": 0.3, "sql_count": 0, "catalog_count": 0, "sql_ms": 0, "deadline_remaining_ms": 89796.098, "correlation_id": "2cac2365-66eb-40fd-8ac4-4574486523b6"}
+{"event": "governance.stage", "stage": "inspection", "outcome": "ok", "connection_acquire_ms": 0.015, "duration_ms": 1.998, "sql_count": 0, "catalog_count": 0, "sql_ms": 0, "deadline_remaining_ms": 89793.852, "correlation_id": "2cac2365-66eb-40fd-8ac4-4574486523b6"}
+{"event": "governance.stage", "stage": "execution.persistence", "outcome": "ok", "connection_acquire_ms": 0.042, "duration_ms": 629.367, "sql_count": 1, "catalog_count": 0, "sql_ms": 423.371, "deadline_remaining_ms": 82210.744, "correlation_id": "2cac2365-66eb-40fd-8ac4-4574486523b6"}
+{"event": "governance.stage", "stage": "deadline.precommit", "outcome": "ok", "connection_acquire_ms": 0.028, "duration_ms": 0.203, "sql_count": 0, "catalog_count": 0, "sql_ms": 0, "deadline_remaining_ms": 82210.221, "correlation_id": "2cac2365-66eb-40fd-8ac4-4574486523b6"}
+{"event": "governance.stage", "stage": "execution.commit", "outcome": "ok", "connection_acquire_ms": 0.033, "duration_ms": 270.398, "sql_count": 0, "catalog_count": 0, "sql_ms": 0, "deadline_remaining_ms": 75473.317, "correlation_id": "2cac2365-66eb-40fd-8ac4-4574486523b6"}
+{"event": "governance.stage", "stage": "governance.execution", "outcome": "ok", "connection_acquire_ms": 202.997, "duration_ms": 14527.177, "sql_count": 5, "catalog_count": 0, "sql_ms": 2386.129, "deadline_remaining_ms": 75472.79, "correlation_id": "2cac2365-66eb-40fd-8ac4-4574486523b6"}
+{"event": "http.completed", "correlation_id": "2cac2365-66eb-40fd-8ac4-4574486523b6", "route": "/api/governance/generate", "method": "POST", "status": 200, "duration_ms": 86054.94}
+{"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.156, "correlation_id": "2db7c788-ab3d-42e3-a5a4-ea34d7d27834"}
+{"event": "http.completed", "correlation_id": "2db7c788-ab3d-42e3-a5a4-ea34d7d27834", "route": "/api/auth/session", "method": "POST", "status": 201, "duration_ms": 6450.61}
+{"event": "governance.stage", "stage": "authentication", "outcome": "error", "duration_ms": 1054.848, "correlation_id": "90d83484-fb8c-475f-9c3b-44b877084911"}
+{"event": "http.completed", "correlation_id": "90d83484-fb8c-475f-9c3b-44b877084911", "route": "/api/policies", "method": "GET", "status": 403, "duration_ms": 1330.2}
+{"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.119, "correlation_id": "58ba6f9c-c62b-48af-937d-7c3b019f7aab"}
+{"event": "http.completed", "correlation_id": "58ba6f9c-c62b-48af-937d-7c3b019f7aab", "route": "/api/auth/session", "method": "POST", "status": 201, "duration_ms": 6940.05}
+{"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 1412.749, "correlation_id": "141b7e1b-7f90-44e0-a096-cb90077b74ab"}
+{"event": "http.completed", "correlation_id": "141b7e1b-7f90-44e0-a096-cb90077b74ab", "route": "/api/policies/{policy_id}", "method": "GET", "status": 404, "duration_ms": 2661.0}
+{"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 981.223, "correlation_id": "424c386c-8065-4a79-96ad-85eae1a47938"}
+{"event": "http.completed", "correlation_id": "424c386c-8065-4a79-96ad-85eae1a47938", "route": "/api/reviews/{review_id}/content", "method": "POST", "status": 403, "duration_ms": 3860.11}
+{"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 831.531, "correlation_id": "39fa204d-8d06-40ba-a799-53c3a8d6f922"}
+{"event": "http.completed", "correlation_id": "39fa204d-8d06-40ba-a799-53c3a8d6f922", "route": "/api/reviews/{review_id}/assignment", "method": "PUT", "status": 422, "duration_ms": 3534.58}
+Traceback (most recent call last):
+  File "/home/sigmoid/AI governance policy validator/scripts/tests/phase6b_sql_package_probe.py", line 543, in <module>
+    probe(
+    ~~~~~^
+        args.directory,
+        ^^^^^^^^^^^^^^^
+    ...<3 lines>...
+        args.preserve_only,
+        ^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/sigmoid/AI governance policy validator/scripts/tests/phase6b_sql_package_probe.py", line 396, in probe
+    assert assigned.status_code == 200, assigned.text
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {"detail":"Select a structured review reason; free-form sensitive commentary is not accepted"}

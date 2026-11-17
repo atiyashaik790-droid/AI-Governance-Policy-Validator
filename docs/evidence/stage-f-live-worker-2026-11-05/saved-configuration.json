@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "sso_enabled": false,
+  "sso_flag_present": true,
+  "demo_enabled": true,
+  "secret_present": false,
+  "case_variant_sso_names": [
+    "SSO_ENABLED"
+  ]
+}

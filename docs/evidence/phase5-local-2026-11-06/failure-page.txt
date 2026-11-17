@@ -1,0 +1,49 @@
+Governance
+STUDIO
+WORKSPACE
+Overview
+Policy management
+Policy simulator
+AI playground
+Validation history
+Human review
+Compliance analytics
+Audit & reports
+Settings
+Govern with confidence
+
+Policy enforcement at every step of the AI lifecycle.
+
+DEMO WORKSPACE · v1.1
+Workspace
+AI Governance
+Synthetic User · Admin · browser-fixture
+GV
+TRACEABLE BY DESIGN
+Audit & reports
+
+Sanitized metadata, persisted by the governance gateway.
+
+History date filter
+
+Dates use UTC, including the entire end date. With one date omitted, the end defaults to today and the start to 89 days before the end. Maximum range: 366 days.
+
+Start date
+End date
+Apply Filter
+Clear Filter
+Policy history
+Governance execution history
+Administrative history
+Policy history
+RECORD	TIMESTAMP	POLICY NAME(S)	ACTOR	ROLE AT EVENT TIME	STATUS / EVENT	DETAILS
+Previous
+Page 1
+Next
+Export attempts
+Show all prior export attempts, including legacy snapshots
+Previous exports
+Page 1
+Next exports
+null
+Governance signals are heuristic controls, not legal compliance certification.

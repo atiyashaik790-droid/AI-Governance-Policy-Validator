@@ -1,0 +1,28 @@
+{
+  "status": "BLOCKED_NOT_SUBMITTED",
+  "case_id": null,
+  "authorization": "User explicitly approved only free support submission using existing sanitized draft",
+  "draft": "docs/WEBJOBS_SUPPORT_REQUEST_DRAFT.md",
+  "draft_sha256": "ea1a422adf0af63b6b20137f209fb187e08f2b6bb20fe16d458333dce029cde6",
+  "sanitization": {
+    "jwt_absent": true,
+    "bearer_credential_absent": true,
+    "connection_string_absent": true,
+    "private_support_only": true,
+    "raw_trace_attachments": false,
+    "public_post_authorized_or_made": false
+  },
+  "free_support_entitlement": "NOT_VERIFIED",
+  "paid_support_required_for_this_account": "UNKNOWN; not inferred from general documentation",
+  "documented_technical_ticket_requirement": "A support plan is required; not proof of current account entitlement or incremental price",
+  "support_provider_registration_readonly": "Registered",
+  "azure_portal_access": "No connected browser; attempted in-app browser reports Browser is not available: iab",
+  "submission_attempt_sent": false,
+  "paid_support_purchased": false,
+  "cloud_configuration_or_permissions_changed": false,
+  "webjobs_api_retried": false,
+  "sql_resources_created_or_deleted": false,
+  "real_provider_calls": false,
+  "next_required": "Authenticated Azure support portal access to verify a no-cost entitlement before submission; do not buy support without separate approval",
+  "reference": "https://learn.microsoft.com/en-us/azure/azure-portal/supportability/how-to-create-azure-support-request"
+}

@@ -1,0 +1,135 @@
+{
+  "status": "PASS",
+  "phase": "preflight",
+  "started_at_utc": "2026-11-05T08:17:16.593139+00:00",
+  "socket_timeout_seconds": 20,
+  "max_attempts_per_request": 2,
+  "attempts": [
+    {
+      "method": "GET",
+      "path": "/health",
+      "attempt": 1,
+      "started_at_utc": "2026-11-05T08:17:16.593168+00:00",
+      "outcome": "HTTP_RESPONSE",
+      "http_status": 200,
+      "elapsed_seconds": 1.125
+    },
+    {
+      "method": "GET",
+      "path": "/ready",
+      "attempt": 1,
+      "started_at_utc": "2026-11-05T08:17:17.719090+00:00",
+      "outcome": "HTTP_RESPONSE",
+      "http_status": 200,
+      "elapsed_seconds": 3.585
+    },
+    {
+      "method": "GET",
+      "path": "/api/sso/status",
+      "attempt": 1,
+      "started_at_utc": "2026-11-05T08:17:21.307067+00:00",
+      "outcome": "HTTP_RESPONSE",
+      "http_status": 200,
+      "elapsed_seconds": 3.623
+    },
+    {
+      "method": "GET",
+      "path": "/assets/Overview-B-qW9UWe.js",
+      "attempt": 1,
+      "started_at_utc": "2026-11-05T08:17:24.935167+00:00",
+      "outcome": "HTTP_RESPONSE",
+      "http_status": 200,
+      "elapsed_seconds": 4.494
+    },
+    {
+      "method": "GET",
+      "path": "/assets/index-BAiYczn7.js",
+      "attempt": 1,
+      "started_at_utc": "2026-11-05T08:17:29.436476+00:00",
+      "outcome": "HTTP_RESPONSE",
+      "http_status": 200,
+      "elapsed_seconds": 3.05
+    },
+    {
+      "method": "GET",
+      "path": "/assets/index-BMnV77cm.css",
+      "attempt": 1,
+      "started_at_utc": "2026-11-05T08:17:32.492577+00:00",
+      "outcome": "HTTP_RESPONSE",
+      "http_status": 200,
+      "elapsed_seconds": 0.915
+    },
+    {
+      "method": "GET",
+      "path": "/",
+      "attempt": 1,
+      "started_at_utc": "2026-11-05T08:17:33.410886+00:00",
+      "outcome": "HTTP_RESPONSE",
+      "http_status": 200,
+      "elapsed_seconds": 0.917
+    }
+  ],
+  "checks": [],
+  "hosted_changes": false,
+  "microsoft_login_started": false,
+  "public": {
+    "/health": {
+      "status": 200,
+      "body": {
+        "status": "ok"
+      }
+    },
+    "/ready": {
+      "status": 200,
+      "body": {
+        "status": "ready",
+        "provider_mode": "live",
+        "release": {
+          "git_commit": "60fa94ef9ec01be0d0b4af347a3251255cf7565c",
+          "build_version": "1.2-5aad19f7eea45a42",
+          "built_utc": "2026-11-05T07:58:19.172526+00:00",
+          "frontend_sha256": "beb38c3485b8abfb672e5a2bf851f1f178c1a8049f367b450708e5abbe7581d4",
+          "backend_sha256": "1112eb26744d01e87434210c40cacdb42bca6cdf791a9dc4d1ca0f36655706d9",
+          "required_migration": "004",
+          "supported_migrations": [
+            "004",
+            "005"
+          ],
+          "sso_required_migration": "005"
+        },
+        "database_revision": "005",
+        "schema_versioned": true,
+        "sso_available": true
+      }
+    },
+    "/api/sso/status": {
+      "status": 200,
+      "body": {
+        "sso_enabled": true,
+        "configured": true,
+        "demo_login_enabled": false
+      }
+    }
+  },
+  "frontend_assets": [
+    {
+      "path": "/assets/Overview-B-qW9UWe.js",
+      "checksum_match": true
+    },
+    {
+      "path": "/assets/index-BAiYczn7.js",
+      "checksum_match": true
+    },
+    {
+      "path": "/assets/index-BMnV77cm.css",
+      "checksum_match": true
+    },
+    {
+      "path": "/",
+      "checksum_match": true
+    }
+  ],
+  "microsoft_only_served_frontend": true,
+  "browser_visual_confirmation": "PENDING_USER_NO_CONNECTED_BROWSER",
+  "finished_at_utc": "2026-11-05T08:17:34.336599+00:00"
+}

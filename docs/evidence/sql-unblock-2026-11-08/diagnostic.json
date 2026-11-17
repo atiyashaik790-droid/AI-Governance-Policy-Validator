@@ -1,0 +1,29 @@
+{
+  "endpoint": "sql-governance-validator-dev-atiya.database.windows.net",
+  "port": 1433,
+  "database": "sqldb-governance-validator-dev",
+  "mutations": 0,
+  "checks": {
+    "subscription": "PASS",
+    "dns": "PASS",
+    "tcp1433": "PASS",
+    "odbc18": "PASS",
+    "secure_odbc_configuration": "PASS",
+    "token_acquisition": "PASS"
+  },
+  "tls": {
+    "encrypt": true,
+    "trust_server_certificate": false
+  },
+  "status": "BLOCKED",
+  "diagnostic": {
+    "category": "SQL_FIREWALL_DENIED",
+    "stage": "sql_connect",
+    "detail": "Azure SQL rejected this client's network access.",
+    "sqlstates": [
+      "42000"
+    ],
+    "native_code": 40615
+  },
+  "elapsed_seconds": 3.097
+}

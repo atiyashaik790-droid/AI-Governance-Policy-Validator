@@ -1,0 +1,61 @@
+...................................Timeout (0:00:45)!
+Thread 0x000076c4340bc6c0 (most recent call first):
+  File "/usr/lib/python3.13/selectors.py", line 452 in select
+  File "/usr/lib/python3.13/asyncio/base_events.py", line 2012 in _run_once
+  File "/usr/lib/python3.13/asyncio/base_events.py", line 683 in run_forever
+  File "/usr/lib/python3.13/asyncio/base_events.py", line 712 in run_until_complete
+  File "/usr/lib/python3.13/asyncio/runners.py", line 118 in run
+  File "/home/sigmoid/AI governance policy validator/.venv/lib/python3.13/site-packages/anyio/_backends/_asyncio.py", line 2548 in run
+  File "/home/sigmoid/AI governance policy validator/.venv/lib/python3.13/site-packages/anyio/_core/_eventloop.py", line 83 in run
+  File "/home/sigmoid/AI governance policy validator/.venv/lib/python3.13/site-packages/anyio/from_thread.py", line 538 in run_blocking_portal
+  File "/usr/lib/python3.13/threading.py", line 994 in run
+  File "/usr/lib/python3.13/threading.py", line 1043 in _bootstrap_inner
+  File "/usr/lib/python3.13/threading.py", line 1014 in _bootstrap
+
+Thread 0x000076c43ba03140 (most recent call first):
+  File "/usr/lib/python3.13/threading.py", line 359 in wait
+  File "/usr/lib/python3.13/concurrent/futures/_base.py", line 451 in result
+  File "/home/sigmoid/AI governance policy validator/.venv/lib/python3.13/site-packages/anyio/_backends/_asyncio.py", line 2780 in run_sync_from_thread
+  File "/home/sigmoid/AI governance policy validator/.venv/lib/python3.13/site-packages/anyio/from_thread.py", line 119 in run_sync
+  File "/home/sigmoid/AI governance policy validator/.venv/lib/python3.13/site-packages/anyio/from_thread.py", line 303 in _spawn_task_from_thread
+  File "/home/sigmoid/AI governance policy validator/.venv/lib/python3.13/site-packages/anyio/from_thread.py", line 384 in start_task_soon
+  File "/home/sigmoid/AI governance policy validator/.venv/lib/python3.13/site-packages/starlette/testclient.py", line 571 in __enter__
+  File "/home/sigmoid/AI governance policy validator/backend/tests/conftest.py", line 46 in client
+  File "/home/sigmoid/AI governance policy validator/.venv/lib/python3.13/site-packages/_pytest/fixtures.py", line 1067 in call_fixture_func
+  File "/home/sigmoid/AI governance policy validator/.venv/lib/python3.13/site-packages/_pytest/fixtures.py", line 1407 in pytest_fixture_setup
+  File "/home/sigmoid/AI governance policy validator/.venv/lib/python3.13/site-packages/pluggy/_execution.py", line 147 in _multicall
+  File "/home/sigmoid/AI governance policy validator/.venv/lib/python3.13/site-packages/pluggy/_manager.py", line 183 in _hookexec
+  File "/home/sigmoid/AI governance policy validator/.venv/lib/python3.13/site-packages/pluggy/_caller.py", line 197 in __call__
+  File "/home/sigmoid/AI governance policy validator/.venv/lib/python3.13/site-packages/_pytest/fixtures.py", line 1301 in execute
+  File "/home/sigmoid/AI governance policy validator/.venv/lib/python3.13/site-packages/_pytest/fixtures.py", line 797 in _get_active_fixturedef
+  File "/home/sigmoid/AI governance policy validator/.venv/lib/python3.13/site-packages/_pytest/fixtures.py", line 701 in getfixturevalue
+  File "/home/sigmoid/AI governance policy validator/.venv/lib/python3.13/site-packages/_pytest/fixtures.py", line 877 in _fillfixtures
+  File "/home/sigmoid/AI governance policy validator/.venv/lib/python3.13/site-packages/_pytest/python.py", line 1801 in setup
+  File "/home/sigmoid/AI governance policy validator/.venv/lib/python3.13/site-packages/_pytest/runner.py", line 536 in setup
+  File "/home/sigmoid/AI governance policy validator/.venv/lib/python3.13/site-packages/_pytest/runner.py", line 170 in pytest_runtest_setup
+  File "/home/sigmoid/AI governance policy validator/.venv/lib/python3.13/site-packages/pluggy/_execution.py", line 147 in _multicall
+  File "/home/sigmoid/AI governance policy validator/.venv/lib/python3.13/site-packages/pluggy/_manager.py", line 183 in _hookexec
+  File "/home/sigmoid/AI governance policy validator/.venv/lib/python3.13/site-packages/pluggy/_caller.py", line 197 in __call__
+  File "/home/sigmoid/AI governance policy validator/.venv/lib/python3.13/site-packages/_pytest/runner.py", line 250 in <lambda>
+  File "/home/sigmoid/AI governance policy validator/.venv/lib/python3.13/site-packages/_pytest/runner.py", line 361 in from_call
+  File "/home/sigmoid/AI governance policy validator/.venv/lib/python3.13/site-packages/_pytest/runner.py", line 249 in call_and_report
+  File "/home/sigmoid/AI governance policy validator/.venv/lib/python3.13/site-packages/_pytest/runner.py", line 132 in runtestprotocol
+  File "/home/sigmoid/AI governance policy validator/.venv/lib/python3.13/site-packages/_pytest/runner.py", line 118 in pytest_runtest_protocol
+  File "/home/sigmoid/AI governance policy validator/.venv/lib/python3.13/site-packages/pluggy/_execution.py", line 147 in _multicall
+  File "/home/sigmoid/AI governance policy validator/.venv/lib/python3.13/site-packages/pluggy/_manager.py", line 183 in _hookexec
+  File "/home/sigmoid/AI governance policy validator/.venv/lib/python3.13/site-packages/pluggy/_caller.py", line 197 in __call__
+  File "/home/sigmoid/AI governance policy validator/.venv/lib/python3.13/site-packages/_pytest/main.py", line 411 in pytest_runtestloop
+  File "/home/sigmoid/AI governance policy validator/.venv/lib/python3.13/site-packages/pluggy/_execution.py", line 147 in _multicall
+  File "/home/sigmoid/AI governance policy validator/.venv/lib/python3.13/site-packages/pluggy/_manager.py", line 183 in _hookexec
+  File "/home/sigmoid/AI governance policy validator/.venv/lib/python3.13/site-packages/pluggy/_caller.py", line 197 in __call__
+  File "/home/sigmoid/AI governance policy validator/.venv/lib/python3.13/site-packages/_pytest/main.py", line 387 in _main
+  File "/home/sigmoid/AI governance policy validator/.venv/lib/python3.13/site-packages/_pytest/main.py", line 333 in wrap_session
+  File "/home/sigmoid/AI governance policy validator/.venv/lib/python3.13/site-packages/_pytest/main.py", line 380 in pytest_cmdline_main
+  File "/home/sigmoid/AI governance policy validator/.venv/lib/python3.13/site-packages/pluggy/_execution.py", line 147 in _multicall
+  File "/home/sigmoid/AI governance policy validator/.venv/lib/python3.13/site-packages/pluggy/_manager.py", line 183 in _hookexec
+  File "/home/sigmoid/AI governance policy validator/.venv/lib/python3.13/site-packages/pluggy/_caller.py", line 197 in __call__
+  File "/home/sigmoid/AI governance policy validator/.venv/lib/python3.13/site-packages/_pytest/config/__init__.py", line 262 in _main
+  File "/home/sigmoid/AI governance policy validator/.venv/lib/python3.13/site-packages/_pytest/config/__init__.py", line 286 in _console_main
+  File "/home/sigmoid/AI governance policy validator/.venv/lib/python3.13/site-packages/pytest/__main__.py", line 9 in <module>
+  File "<frozen runpy>", line 88 in _run_code
+  File "<frozen runpy>", line 198 in _run_module_as_main

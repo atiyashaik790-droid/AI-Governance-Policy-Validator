@@ -1,0 +1,444 @@
+[
+  {
+    "event": "governance.stage",
+    "stage": "review.schema",
+    "outcome": "ok",
+    "duration_ms": 52912.823,
+    "sql_count": 80,
+    "catalog_count": 76,
+    "sql_ms": 36149.14,
+    "connection_acquire_ms": 0.036,
+    "correlation_id": "e98e9452-c659-4fa9-ac6e-6f6c9b0e724a"
+  },
+  {
+    "event": "governance.stage",
+    "stage": "authentication",
+    "outcome": "error",
+    "duration_ms": 0.016,
+    "correlation_id": "4688e51d-7955-4374-9732-2a21c418ee83"
+  },
+  {
+    "event": "governance.stage",
+    "stage": "authentication",
+    "outcome": "ok",
+    "duration_ms": 0.069,
+    "correlation_id": "1b9d9e24-1c17-4eaf-ac54-52f08f922b46"
+  },
+  {
+    "event": "governance.stage",
+    "stage": "authentication",
+    "outcome": "ok",
+    "duration_ms": 885.592,
+    "correlation_id": "23e07646-6a46-4cea-9a4f-f49b5500ecb7"
+  },
+  {
+    "event": "governance.stage",
+    "stage": "authentication",
+    "outcome": "ok",
+    "duration_ms": 861.674,
+    "correlation_id": "9d20bb3f-78c6-4ee9-a828-4378ed1c69af"
+  },
+  {
+    "event": "governance.stage",
+    "stage": "authentication",
+    "outcome": "ok",
+    "duration_ms": 852.517,
+    "correlation_id": "2ef894d2-f17e-45bd-8d18-612db618aea5"
+  },
+  {
+    "event": "governance.stage",
+    "stage": "authentication",
+    "outcome": "ok",
+    "duration_ms": 845.523,
+    "correlation_id": "0bc963c9-cbbb-434f-bb3c-21484f2eaf1a"
+  },
+  {
+    "event": "governance.stage",
+    "stage": "authentication",
+    "outcome": "ok",
+    "duration_ms": 846.039,
+    "correlation_id": "1071d874-8d98-4e38-b21c-4211c148851b"
+  },
+  {
+    "event": "governance.stage",
+    "stage": "authentication",
+    "outcome": "ok",
+    "duration_ms": 846.827,
+    "correlation_id": "c116ee80-3116-4321-9f97-8c5e45255684"
+  },
+  {
+    "event": "governance.stage",
+    "stage": "authentication",
+    "outcome": "ok",
+    "duration_ms": 931.086,
+    "correlation_id": "2b04a4cb-5eb1-4384-81f4-a6e7079d38c0"
+  },
+  {
+    "event": "governance.stage",
+    "stage": "authentication",
+    "outcome": "ok",
+    "duration_ms": 859.8,
+    "correlation_id": "b2eb2c3e-532d-44b4-92e0-892507d8dcfa"
+  },
+  {
+    "event": "governance.stage",
+    "stage": "review.schema",
+    "outcome": "ok",
+    "duration_ms": 53184.716,
+    "sql_count": 80,
+    "catalog_count": 76,
+    "sql_ms": 36637.728,
+    "connection_acquire_ms": 0.016,
+    "correlation_id": "b2eb2c3e-532d-44b4-92e0-892507d8dcfa"
+  },
+  {
+    "event": "governance.stage",
+    "stage": "governance.preflight",
+    "outcome": "ok",
+    "duration_ms": 54223.79,
+    "sql_count": 82,
+    "catalog_count": 77,
+    "sql_ms": 37470.329,
+    "connection_acquire_ms": 0.039,
+    "correlation_id": "b2eb2c3e-532d-44b4-92e0-892507d8dcfa"
+  },
+  {
+    "event": "governance.stage",
+    "stage": "policy.admission",
+    "outcome": "ok",
+    "duration_ms": 17322.385,
+    "sql_count": 29,
+    "catalog_count": 2,
+    "sql_ms": 12678.411,
+    "connection_acquire_ms": 0.032,
+    "correlation_id": "b2eb2c3e-532d-44b4-92e0-892507d8dcfa"
+  },
+  {
+    "event": "governance.stage",
+    "stage": "policy.selection",
+    "outcome": "ok",
+    "duration_ms": 0.252,
+    "sql_count": 0,
+    "catalog_count": 0,
+    "sql_ms": 0,
+    "connection_acquire_ms": 0.022,
+    "deadline_remaining_ms": 89730.196,
+    "correlation_id": "b2eb2c3e-532d-44b4-92e0-892507d8dcfa"
+  },
+  {
+    "event": "governance.stage",
+    "stage": "inspection",
+    "outcome": "ok",
+    "duration_ms": 7.455,
+    "sql_count": 0,
+    "catalog_count": 0,
+    "sql_ms": 0,
+    "connection_acquire_ms": 0.013,
+    "deadline_remaining_ms": 89722.519,
+    "correlation_id": "b2eb2c3e-532d-44b4-92e0-892507d8dcfa"
+  },
+  {
+    "event": "governance.stage",
+    "stage": "execution.persistence",
+    "outcome": "ok",
+    "duration_ms": 652.096,
+    "sql_count": 1,
+    "catalog_count": 0,
+    "sql_ms": 442.789,
+    "connection_acquire_ms": 0.027,
+    "deadline_remaining_ms": 86012.218,
+    "correlation_id": "b2eb2c3e-532d-44b4-92e0-892507d8dcfa"
+  },
+  {
+    "event": "governance.stage",
+    "stage": "review.persistence",
+    "outcome": "ok",
+    "duration_ms": 1342.534,
+    "sql_count": 2,
+    "catalog_count": 0,
+    "sql_ms": 923.193,
+    "connection_acquire_ms": 0.012,
+    "deadline_remaining_ms": 84669.513,
+    "correlation_id": "b2eb2c3e-532d-44b4-92e0-892507d8dcfa"
+  },
+  {
+    "event": "governance.stage",
+    "stage": "review.schema",
+    "outcome": "ok",
+    "duration_ms": 54108.817,
+    "sql_count": 80,
+    "catalog_count": 76,
+    "sql_ms": 37746.384,
+    "connection_acquire_ms": 0.012,
+    "correlation_id": "b2eb2c3e-532d-44b4-92e0-892507d8dcfa"
+  },
+  {
+    "event": "governance.stage",
+    "stage": "review.capture",
+    "outcome": "ok",
+    "duration_ms": 56891.949,
+    "sql_count": 85,
+    "catalog_count": 77,
+    "sql_ms": 39831.066,
+    "connection_acquire_ms": 0.018,
+    "deadline_remaining_ms": 27777.242,
+    "correlation_id": "b2eb2c3e-532d-44b4-92e0-892507d8dcfa"
+  },
+  {
+    "event": "governance.stage",
+    "stage": "deadline.precommit",
+    "outcome": "ok",
+    "duration_ms": 0.125,
+    "sql_count": 0,
+    "catalog_count": 0,
+    "sql_ms": 0,
+    "connection_acquire_ms": 0.018,
+    "deadline_remaining_ms": 27776.886,
+    "correlation_id": "b2eb2c3e-532d-44b4-92e0-892507d8dcfa"
+  },
+  {
+    "event": "governance.stage",
+    "stage": "execution.commit",
+    "outcome": "ok",
+    "duration_ms": 219.365,
+    "sql_count": 0,
+    "catalog_count": 0,
+    "sql_ms": 0,
+    "connection_acquire_ms": 0.029,
+    "deadline_remaining_ms": 22818.0,
+    "correlation_id": "b2eb2c3e-532d-44b4-92e0-892507d8dcfa"
+  },
+  {
+    "event": "governance.stage",
+    "stage": "governance.execution",
+    "outcome": "ok",
+    "duration_ms": 67182.31,
+    "sql_count": 101,
+    "catalog_count": 77,
+    "sql_ms": 46887.817,
+    "connection_acquire_ms": 269.224,
+    "deadline_remaining_ms": 22817.658,
+    "correlation_id": "b2eb2c3e-532d-44b4-92e0-892507d8dcfa"
+  },
+  {
+    "event": "governance.stage",
+    "stage": "authentication",
+    "outcome": "ok",
+    "duration_ms": 0.128,
+    "correlation_id": "f3a62b5b-27d0-4a42-b07d-866c10bb6bff"
+  },
+  {
+    "event": "governance.stage",
+    "stage": "authentication",
+    "outcome": "error",
+    "duration_ms": 836.936,
+    "correlation_id": "735a71de-06c4-48fa-9e87-b9aacd2df9b4"
+  },
+  {
+    "event": "governance.stage",
+    "stage": "authentication",
+    "outcome": "ok",
+    "duration_ms": 0.113,
+    "correlation_id": "f2ec6bf6-95eb-4d25-bbd8-9c01ebd9eda9"
+  },
+  {
+    "event": "governance.stage",
+    "stage": "authentication",
+    "outcome": "ok",
+    "duration_ms": 831.465,
+    "correlation_id": "6e1410a4-8bc5-43f4-838b-b58c269c0df4"
+  },
+  {
+    "event": "governance.stage",
+    "stage": "authentication",
+    "outcome": "ok",
+    "duration_ms": 825.1,
+    "correlation_id": "7a7d4616-0b2c-4dbf-b11a-0ad21f45d051"
+  },
+  {
+    "event": "governance.stage",
+    "stage": "authentication",
+    "outcome": "ok",
+    "duration_ms": 890.666,
+    "correlation_id": "53e37ebe-c8bb-4cea-910b-c9e7eb3ea409"
+  },
+  {
+    "event": "governance.stage",
+    "stage": "authentication",
+    "outcome": "ok",
+    "duration_ms": 832.069,
+    "correlation_id": "4917c42a-20eb-4668-9a99-e8141a255afa"
+  },
+  {
+    "event": "governance.stage",
+    "stage": "authentication",
+    "outcome": "ok",
+    "duration_ms": 832.818,
+    "correlation_id": "943fae4a-526a-4e11-9195-3a4e40a790d2"
+  },
+  {
+    "event": "governance.stage",
+    "stage": "review.schema",
+    "outcome": "ok",
+    "duration_ms": 51660.681,
+    "sql_count": 80,
+    "catalog_count": 76,
+    "sql_ms": 35741.862,
+    "connection_acquire_ms": 0.03,
+    "correlation_id": "943fae4a-526a-4e11-9195-3a4e40a790d2"
+  },
+  {
+    "event": "governance.stage",
+    "stage": "authentication",
+    "outcome": "ok",
+    "duration_ms": 903.173,
+    "correlation_id": "d7db8a29-6622-4c8f-8c45-826939646a10"
+  },
+  {
+    "event": "governance.stage",
+    "stage": "authentication",
+    "outcome": "ok",
+    "duration_ms": 844.674,
+    "correlation_id": "2b09df8c-d5b4-443a-94f1-01e2d58b592c"
+  },
+  {
+    "event": "governance.stage",
+    "stage": "review.schema",
+    "outcome": "ok",
+    "duration_ms": 52040.434,
+    "sql_count": 80,
+    "catalog_count": 76,
+    "sql_ms": 36050.036,
+    "connection_acquire_ms": 0.013,
+    "correlation_id": "2b09df8c-d5b4-443a-94f1-01e2d58b592c"
+  },
+  {
+    "event": "governance.stage",
+    "stage": "governance.preflight",
+    "outcome": "ok",
+    "duration_ms": 53483.944,
+    "sql_count": 82,
+    "catalog_count": 77,
+    "sql_ms": 37223.007,
+    "connection_acquire_ms": 0.024,
+    "correlation_id": "2b09df8c-d5b4-443a-94f1-01e2d58b592c"
+  },
+  {
+    "event": "governance.stage",
+    "stage": "policy.admission",
+    "outcome": "ok",
+    "duration_ms": 15636.879,
+    "sql_count": 26,
+    "catalog_count": 2,
+    "sql_ms": 11275.061,
+    "connection_acquire_ms": 0.027,
+    "correlation_id": "2b09df8c-d5b4-443a-94f1-01e2d58b592c"
+  },
+  {
+    "event": "governance.stage",
+    "stage": "policy.selection",
+    "outcome": "ok",
+    "duration_ms": 0.493,
+    "sql_count": 0,
+    "catalog_count": 0,
+    "sql_ms": 0,
+    "connection_acquire_ms": 0.039,
+    "deadline_remaining_ms": 89747.481,
+    "correlation_id": "2b09df8c-d5b4-443a-94f1-01e2d58b592c"
+  },
+  {
+    "event": "governance.stage",
+    "stage": "inspection",
+    "outcome": "ok",
+    "duration_ms": 2.783,
+    "sql_count": 0,
+    "catalog_count": 0,
+    "sql_ms": 0,
+    "connection_acquire_ms": 0.061,
+    "deadline_remaining_ms": 89744.37,
+    "correlation_id": "2b09df8c-d5b4-443a-94f1-01e2d58b592c"
+  },
+  {
+    "event": "governance.stage",
+    "stage": "execution.persistence",
+    "outcome": "ok",
+    "duration_ms": 623.307,
+    "sql_count": 1,
+    "catalog_count": 0,
+    "sql_ms": 416.406,
+    "connection_acquire_ms": 0.023,
+    "deadline_remaining_ms": 86206.454,
+    "correlation_id": "2b09df8c-d5b4-443a-94f1-01e2d58b592c"
+  },
+  {
+    "event": "governance.stage",
+    "stage": "review.persistence",
+    "outcome": "ok",
+    "duration_ms": 1251.806,
+    "sql_count": 2,
+    "catalog_count": 0,
+    "sql_ms": 832.468,
+    "connection_acquire_ms": 0.02,
+    "deadline_remaining_ms": 84954.443,
+    "correlation_id": "2b09df8c-d5b4-443a-94f1-01e2d58b592c"
+  },
+  {
+    "event": "governance.stage",
+    "stage": "review.schema",
+    "outcome": "ok",
+    "duration_ms": 52221.522,
+    "sql_count": 80,
+    "catalog_count": 76,
+    "sql_ms": 36332.168,
+    "connection_acquire_ms": 0.145,
+    "correlation_id": "2b09df8c-d5b4-443a-94f1-01e2d58b592c"
+  },
+  {
+    "event": "governance.stage",
+    "stage": "review.capture",
+    "outcome": "ok",
+    "duration_ms": 54946.057,
+    "sql_count": 85,
+    "catalog_count": 77,
+    "sql_ms": 38422.482,
+    "connection_acquire_ms": 0.015,
+    "deadline_remaining_ms": 30008.181,
+    "correlation_id": "2b09df8c-d5b4-443a-94f1-01e2d58b592c"
+  },
+  {
+    "event": "governance.stage",
+    "stage": "deadline.precommit",
+    "outcome": "ok",
+    "duration_ms": 0.143,
+    "sql_count": 0,
+    "catalog_count": 0,
+    "sql_ms": 0,
+    "connection_acquire_ms": 0.014,
+    "deadline_remaining_ms": 30007.816,
+    "correlation_id": "2b09df8c-d5b4-443a-94f1-01e2d58b592c"
+  },
+  {
+    "event": "governance.stage",
+    "stage": "execution.commit",
+    "outcome": "ok",
+    "duration_ms": 215.539,
+    "sql_count": 0,
+    "catalog_count": 0,
+    "sql_ms": 0,
+    "connection_acquire_ms": 0.027,
+    "deadline_remaining_ms": 24921.729,
+    "correlation_id": "2b09df8c-d5b4-443a-94f1-01e2d58b592c"
+  },
+  {
+    "event": "governance.stage",
+    "stage": "governance.execution",
+    "outcome": "ok",
+    "duration_ms": 65078.742,
+    "sql_count": 101,
+    "catalog_count": 77,
+    "sql_ms": 45250.809,
+    "connection_acquire_ms": 251.4,
+    "deadline_remaining_ms": 24921.233,
+    "correlation_id": "2b09df8c-d5b4-443a-94f1-01e2d58b592c"
+  }
+]

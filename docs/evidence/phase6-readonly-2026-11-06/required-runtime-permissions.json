@@ -1,0 +1,107 @@
+{
+  "policies": [
+    "SELECT",
+    "INSERT",
+    "UPDATE",
+    "DELETE"
+  ],
+  "policy_versions": [
+    "SELECT",
+    "INSERT"
+  ],
+  "active_policy_assignments": [
+    "SELECT",
+    "INSERT",
+    "UPDATE"
+  ],
+  "audit_events": [
+    "SELECT",
+    "INSERT"
+  ],
+  "validation_executions": [
+    "SELECT",
+    "INSERT"
+  ],
+  "human_review_cases": [
+    "SELECT",
+    "INSERT",
+    "UPDATE"
+  ],
+  "feedback_records": [
+    "SELECT",
+    "INSERT"
+  ],
+  "evaluation_exports": [
+    "SELECT",
+    "INSERT",
+    "UPDATE"
+  ],
+  "alembic_version": [
+    "SELECT"
+  ],
+  "demo_sessions": [
+    "SELECT",
+    "INSERT",
+    "UPDATE"
+  ],
+  "inference_rate_buckets": [
+    "SELECT",
+    "INSERT",
+    "UPDATE"
+  ],
+  "inference_usage": [
+    "SELECT",
+    "INSERT",
+    "UPDATE"
+  ],
+  "export_jobs": [
+    "SELECT",
+    "INSERT",
+    "UPDATE"
+  ],
+  "review_assignments": [
+    "SELECT",
+    "INSERT",
+    "UPDATE"
+  ],
+  "review_notes": [
+    "SELECT",
+    "INSERT"
+  ],
+  "sso_memberships": [
+    "SELECT"
+  ],
+  "sso_transactions": [
+    "SELECT",
+    "INSERT",
+    "UPDATE"
+  ],
+  "sso_sessions": [
+    "SELECT",
+    "INSERT",
+    "UPDATE"
+  ],
+  "workspace_policy_states": [
+    "SELECT",
+    "INSERT",
+    "UPDATE"
+  ],
+  "workspace_policy_assignments": [
+    "SELECT",
+    "INSERT",
+    "UPDATE"
+  ],
+  "workspace_policy_assignment_events": [
+    "SELECT",
+    "INSERT"
+  ],
+  "execution_policy_evidence": [
+    "SELECT",
+    "INSERT"
+  ],
+  "review_protected_content": [
+    "SELECT",
+    "INSERT",
+    "DELETE"
+  ]
+}

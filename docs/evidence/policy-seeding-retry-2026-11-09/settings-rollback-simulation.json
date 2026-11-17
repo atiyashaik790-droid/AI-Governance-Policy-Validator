@@ -1,0 +1,1 @@
+{"actual_azure_conditional_write_verified": false, "azure_settings_written": false, "exclusive_writer_boundary_verified": false, "original_changed_fields_matched": true, "original_setting_count": 27, "rollback_restored_all_original_values_in_memory": true, "secret_values_logged_or_saved": false, "status": "PASS_LOCAL_SIMULATION_ONLY"}

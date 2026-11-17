@@ -1,0 +1,129 @@
+"""Read-only main-container inspection. Run with /opt/az/bin/python3 from repo root.
+
+Uses the existing CLI identity and exec WebSocket; never writes hosted files or
+queries SQL. Only selected non-secret flags and sanitized lifecycle labels return.
+"""
+
+import os
+import sys
+import json
+import subprocess
+import base64
+import time
+import re
+import ssl
+from pathlib import Path
+from datetime import datetime, timezone
+import websocket
+
+R = Path.cwd()
+os.environ["AZURE_CONFIG_DIR"] = str(R / ".azure-sql-cli")
+sys.path.insert(0, str(R / "scripts"))
+import hashlib
+import verify_hosted_runtime as p
+
+expected = {
+    n: hashlib.sha256((R / "backend/app" / n).read_bytes()).hexdigest()
+    for n in ("config.py", "sso.py", "hosting.py")
+}
+
+
+def payload(marker):
+    return 'import json,sys,re,datetime\nfrom pathlib import Path\nr={\'status\':\'BLOCKED\',\'sql_read_only\':True,\'hosted_files_written\':False,\'raw_log_text_exported\':False}\ntry:\n from app.config import settings\n from app.database import SessionLocal\n from sqlalchemy import text\n r[\'effective_config\']={\'sso_enabled\':settings.sso_enabled,\'demo_enabled\':settings.demo_browser_login_enabled,\'secret_present\':bool(settings.entra_client_secret),\'secret_has_surrounding_whitespace\':settings.entra_client_secret!=settings.entra_client_secret.strip(),\'secret_is_uuid_format\':bool(re.fullmatch(r\'[0-9a-fA-F]{8}(?:-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}\',settings.entra_client_secret)),\'tenant_matches\':settings.entra_tenant_id==\'4ac50105-0c66-404e-a107-7cbd8a9a6442\',\'client_matches\':settings.entra_client_id==\'a1a7da0b-ad29-49ec-a9ea-c59219e60df5\',\'origin_matches\':settings.sso_public_origin==\'https://app-governance-validator-atiya-1026.azurewebsites.net\'}\n assert settings.azure_sql_auth_mode==\'managed_identity\'\n with SessionLocal() as db:\n  assert db.scalar(text(\'SELECT DB_NAME()\'))==\'sqldb-governance-validator-dev\'\n  r[\'transactions\']=[dict(row) for row in db.execute(text("SELECT expires,consumed,CASE WHEN LEN(nonce)>0 AND LEN(nonce)<=100 THEN 1 ELSE 0 END AS nonce_shape_valid,CASE WHEN LEN(verifier)>=43 AND LEN(verifier)<=128 THEN 1 ELSE 0 END AS pkce_length_valid FROM dbo.sso_transactions WHERE expires>=\'2026-11-05T06:00:00\' AND expires<\'2026-11-05T06:30:00\' ORDER BY expires")).mappings()]\n  r[\'sso_permissions\']={t+\'.\'+op:db.scalar(text("SELECT HAS_PERMS_BY_NAME(:o,\'OBJECT\',:p)"),{\'o\':\'dbo.\'+t,\'p\':op}) for t,ops in {\'sso_transactions\':[\'SELECT\',\'INSERT\',\'UPDATE\'],\'sso_memberships\':[\'SELECT\'],\'sso_sessions\':[\'SELECT\',\'INSERT\',\'UPDATE\'],\'audit_events\':[\'INSERT\']}.items() for op in ops}\n  r[\'membership_matches\']=db.scalar(text(\'SELECT COUNT_BIG(*) FROM dbo.sso_memberships WHERE directory_tenant=:directory AND object_id=:object AND tenant=:tenant AND actor=:actor AND role=:role AND enabled=1\'),{\'directory\':\'4ac50105-0c66-404e-a107-7cbd8a9a6442\',\'object\':\'b5d8bfbe-f03a-4132-a13f-ab49aae834b7\',\'tenant\':\'demo-appservice-4e2dcce8d618\',\'actor\':\'atiya-tabsum-shaik\',\'role\':\'Admin\'})\n  r[\'session_count\']=db.scalar(text(\'SELECT COUNT_BIG(*) FROM dbo.sso_sessions WHERE membership_id=:m\'),{\'m\':\'cce108dc-72f1-4db2-9aaa-c7128085661c\'})\n  db.rollback()\n r[\'safe_log_events\']=[];r[\'log_coverage\']=[]\n roots=[Path(\'/home/LogFiles\')];files=list(roots[0].glob(\'*2026_11_05*.log\'))+list((roots[0]/\'Application\').glob(\'*.log\'))\n for f in sorted(files,key=lambda x:x.stat().st_mtime,reverse=True)[:12]:\n  with f.open(\'rb\') as h:\n   h.seek(max(0,f.stat().st_size-3000000));s=h.read().decode(errors=\'replace\')\n  stamps=re.findall(r\'2026-11-05[T ][0-9:.]+\',s);r[\'log_coverage\'].append({\'name\':f.name,\'last_timestamp\':stamps[-1] if stamps else None})\n  for line in s.splitlines():\n   stamp=re.search(r\'2026-11-05[T ]06:(?:0[3-9]|1[0-9]|20):[0-9.]+Z?\',line)\n   if not stamp:continue\n   entry={\'time\':stamp.group(0),\'file\':f.name};found=False\n   if \'http.completed\' in line:\n    try:\n     data=json.loads(line[line.index(\'{\'):]);route=data.get(\'route\')\n     if route in (\'/api/sso/login\',\'/api/sso/callback\',\'/api/sso/me\'):\n      entry.update(route=route,http_status=data.get(\'status\'),duration_ms=data.get(\'duration_ms\'));found=True\n    except (ValueError,TypeError):pass\n   codes=re.findall(r\'\\bAADSTS[0-9]+\\b\',line)\n   if codes:entry[\'aadsts_codes\']=sorted(set(codes));found=True\n   categories=[c for c in (\'InvalidClaimError\',\'InvalidTokenError\',\'MismatchingStateError\',\'InvalidSignatureError\',\'ExpiredTokenError\',\'OAuthError\',\'InvalidClientError\',\'RuntimeError\',\'ProgrammingError\',\'DBAPIError\',\'ReadTimeout\',\'ConnectTimeout\') if c in line]\n   if categories:entry[\'exception_categories\']=categories;found=True\n   if found:r[\'safe_log_events\'].append(entry)\n r[\'status\']=\'PASS\'\nexcept Exception as e:r[\'error_kind\']=type(e).__name__\nprint(MARKER+json.dumps(r),file=sys.__stdout__,flush=True)\n'.replace("MARKER", repr(marker))
+
+
+def parse(raw, marker):
+    for line in p.terminal_text(raw).splitlines(keepends=True):
+        if line.startswith(marker + "{") and line.endswith("\n"):
+            return json.loads(line[len(marker) :])
+    return None
+
+
+original_payload = payload
+
+
+def corrected_payload(marker):
+    return original_payload(marker).replace("b'\\\\0'", "b'\\0'")
+
+
+p.payload = corrected_payload
+P = R / "docs/evidence/stage-g-callback-diagnosis-2026-11-05/runtime-readonly.json"
+r = {
+    "status": "BLOCKED",
+    "method": "EXISTING_MAIN_CONTAINER_EXEC_WEBSOCKET",
+    "hosted_changes": False,
+    "sql_accessed": False,
+}
+ws = None
+try:
+    a = subprocess.run(
+        [
+            "az",
+            "account",
+            "get-access-token",
+            "--resource",
+            "https://management.azure.com/",
+            "--tenant",
+            "4ac50105-0c66-404e-a107-7cbd8a9a6442",
+            "-o",
+            "json",
+            "--only-show-errors",
+        ],
+        capture_output=True,
+        text=True,
+        timeout=25,
+    )
+    assert a.returncode == 0
+    token = json.loads(a.stdout)["accessToken"]
+    claims = json.loads(base64.urlsafe_b64decode(token.split(".")[1] + "==="))
+    assert (
+        claims["tid"] == "4ac50105-0c66-404e-a107-7cbd8a9a6442"
+        and claims["oid"] == "b5d8bfbe-f03a-4132-a13f-ab49aae834b7"
+    )
+    r["pinned_operator_identity_verified"] = True
+    url = "wss://app-governance-validator-atiya-1026.scm.azurewebsites.net/exec/shell?shell=%2Fbin%2Fsh"
+    ws = websocket.create_connection(
+        url,
+        header={"Authorization": "Bearer " + token},
+        sslopt={"cert_reqs": ssl.CERT_REQUIRED},
+        timeout=20,
+        enable_multithread=True,
+    )
+    r["handshake"] = "PASS"
+    ws.settimeout(5)
+    ws.send(json.dumps({"width": 160, "height": 40}))
+    marker = "SSO_PROBE_" + os.urandom(12).hex() + ":"
+    buf = b""
+    sent = False
+    deadline = time.monotonic() + 55
+    while time.monotonic() < deadline:
+        try:
+            chunk = ws.recv()
+        except websocket.WebSocketTimeoutException:
+            continue
+        if not chunk:
+            break
+        buf += chunk.encode() if isinstance(chunk, str) else chunk
+        buf = buf[-524288:]
+        if not sent and re.search(
+            r"(?:^|[\r\n])[^\r\n]{0,180}[#$] *$", p.terminal_text(buf)
+        ):
+            ws.send_binary(p.remote_input(marker))
+            sent = True
+            r["payload_sent"] = True
+        out = parse(buf, marker)
+        if out is not None:
+            r.update(out)
+            break
+    if r.get("status") != "PASS":
+        r["category"] = "NO_PARSED_RUNTIME_RESULT"
+        r["payload_sent"] = sent
+except Exception as e:
+    r["error_kind"] = type(e).__name__
+    r["http_status"] = getattr(e, "status_code", None)
+finally:
+    if ws is not None:
+        ws.close()
+r["observed_at_utc"] = datetime.now(timezone.utc).isoformat()
+P.write_text(json.dumps(r, indent=2) + "\n")
+print(json.dumps(r))

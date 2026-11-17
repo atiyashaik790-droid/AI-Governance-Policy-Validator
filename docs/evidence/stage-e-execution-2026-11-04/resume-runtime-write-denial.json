@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "database_mutated": false,
+  "actual_managed_identity_verified": true,
+  "membership_write_permissions": {
+    "INSERT": 0,
+    "UPDATE": 0,
+    "DELETE": 0
+  },
+  "sso_enabled": false,
+  "demo_login_enabled": true,
+  "observed_at_utc": "2026-11-04T17:48:02.284684+00:00"
+}

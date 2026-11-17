@@ -1,0 +1,73 @@
+{
+  "date": "2026-11-04",
+  "timezone": "Asia/Kolkata",
+  "baseline": {
+    "backend": {
+      "passed": 443,
+      "failed": 0,
+      "skipped": 0
+    },
+    "frontend": {
+      "passed": 21,
+      "failed": 0,
+      "skipped": 1
+    },
+    "lint": "PASS",
+    "typecheck": "PASS",
+    "production_build": "PASS",
+    "formatting": "PRE_EXISTING_FAILURES: two Markdown examples and frontend/src/Backend.integration.test.jsx"
+  },
+  "final": {
+    "backend": {
+      "passed": 500,
+      "failed": 0,
+      "skipped": 0,
+      "warnings": 2
+    },
+    "frontend_including_disposable_integration": {
+      "passed": 29,
+      "failed": 0,
+      "skipped": 0
+    },
+    "chrome_synthetic_oidc": {
+      "passed": 11,
+      "failed": 0,
+      "skipped": 0
+    },
+    "python_lint": "PASS",
+    "python_source_formatting": "PASS",
+    "frontend_lint": "PASS",
+    "changed_frontend_formatting": "PASS",
+    "typescript": "PASS",
+    "production_build": "PASS",
+    "sql_server_005_offline_compilation": "PASS_NOT_EXECUTED",
+    "sqlite_migration_recovery": "PASS_IN_BACKEND_SUITE",
+    "package_hash_and_source_integrity": "PASS"
+  },
+  "entra_lookup": {
+    "display_name": "Governance-Studio-SSO",
+    "matches": 0,
+    "tenant_id": "4ac50105-0c66-404e-a107-7cbd8a9a6442",
+    "client_id_available": false,
+    "registration_modified": false
+  },
+  "candidate": {
+    "path": "/tmp/governance-entra-sso-candidate-final.zip",
+    "build_version": "1.2-f3f4b3e96adb50e7",
+    "sha256": "32118d219b85fd0a386625f6bde05faf6616885a0c833fd2aa49c76e15b3f165",
+    "required_migration": "005",
+    "files": 27,
+    "deployed": false
+  },
+  "external": {
+    "real_microsoft_authentication": "NOT_VERIFIED_BLOCKED",
+    "hosted_migration": "NOT_EXECUTED_APPROVAL_REQUIRED",
+    "hosted_configuration": "NOT_CHANGED",
+    "approved_user_role_mapping": "NOT_SUPPLIED",
+    "deployment": "NOT_AUTHORIZED_OR_EXECUTED",
+    "docker": "NOT_VERIFIED",
+    "paid_ai_moderation_exports": "NOT_EXECUTED"
+  },
+  "secret_values_printed": false,
+  "existing_env_modified": false
+}

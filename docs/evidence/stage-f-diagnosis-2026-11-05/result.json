@@ -1,0 +1,22 @@
+{
+  "root_cause": "UNKNOWN",
+  "production_target_verified": true,
+  "slots": 0,
+  "activation_saved_value_verified_from_evidence": "true",
+  "current_saved_sso": "false",
+  "current_saved_demo": "true",
+  "secret_present": false,
+  "worker_environment": "NOT_VERIFIED_SHELL_CHANNEL_EXITED_BEFORE_PROMPT",
+  "worker_restart": "NOT_VERIFIED",
+  "status_and_auth_share_settings": "PASS_LOCAL_SOURCE_AND_ISOLATED_CHECK",
+  "isolated_enabled_status": "PASS",
+  "product_code_change": false,
+  "local_verifier_timeout_correction": "PREPARED_45_SECONDS_NOT_EXECUTED",
+  "hosted_changes": false,
+  "direct_sql_access": false,
+  "restart_necessity": "NOT_ESTABLISHED",
+  "deployment_necessity": "NO_EVIDENCE_REQUIRES_DEPLOYMENT",
+  "secret_reentry": "REQUIRED_ONLY_BEFORE_FUTURE_APPROVED_ACTIVATION",
+  "fresh_public_http": "TIMEOUT",
+  "next_requirement": "Working read-only main-container process inspection; already authorized"
+}

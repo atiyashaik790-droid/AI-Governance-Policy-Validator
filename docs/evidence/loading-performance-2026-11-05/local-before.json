@@ -1,0 +1,115 @@
+{
+  "environment": "disposable SQLite and synthetic SSO",
+  "rows": [
+    {
+      "name": "session_anonymous",
+      "path": "/api/sso/me",
+      "samples": [
+        {
+          "elapsed_ms": 19.531,
+          "sql_statements": 396,
+          "schema_inspections": 2
+        },
+        {
+          "elapsed_ms": 20.359,
+          "sql_statements": 396,
+          "schema_inspections": 2
+        },
+        {
+          "elapsed_ms": 20.039,
+          "sql_statements": 396,
+          "schema_inspections": 2
+        }
+      ],
+      "median_ms": 20.039
+    },
+    {
+      "name": "session_authenticated",
+      "path": "/api/sso/me",
+      "samples": [
+        {
+          "elapsed_ms": 34.289,
+          "sql_statements": 398,
+          "schema_inspections": 2
+        },
+        {
+          "elapsed_ms": 30.218,
+          "sql_statements": 398,
+          "schema_inspections": 2
+        },
+        {
+          "elapsed_ms": 21.504,
+          "sql_statements": 398,
+          "schema_inspections": 2
+        }
+      ],
+      "median_ms": 30.218
+    },
+    {
+      "name": "overview",
+      "path": "/api/analytics/overview",
+      "samples": [
+        {
+          "elapsed_ms": 22.872,
+          "sql_statements": 209,
+          "schema_inspections": 1
+        },
+        {
+          "elapsed_ms": 20.857,
+          "sql_statements": 209,
+          "schema_inspections": 1
+        },
+        {
+          "elapsed_ms": 17.772,
+          "sql_statements": 209,
+          "schema_inspections": 1
+        }
+      ],
+      "median_ms": 20.857
+    },
+    {
+      "name": "policies",
+      "path": "/api/policies?limit=20",
+      "samples": [
+        {
+          "elapsed_ms": 18.725,
+          "sql_statements": 201,
+          "schema_inspections": 1
+        },
+        {
+          "elapsed_ms": 21.62,
+          "sql_statements": 201,
+          "schema_inspections": 1
+        },
+        {
+          "elapsed_ms": 20.342,
+          "sql_statements": 201,
+          "schema_inspections": 1
+        }
+      ],
+      "median_ms": 20.342
+    },
+    {
+      "name": "history",
+      "path": "/api/audit/executions?limit=20",
+      "samples": [
+        {
+          "elapsed_ms": 20.073,
+          "sql_statements": 201,
+          "schema_inspections": 1
+        },
+        {
+          "elapsed_ms": 19.2,
+          "sql_statements": 201,
+          "schema_inspections": 1
+        },
+        {
+          "elapsed_ms": 19.011,
+          "sql_statements": 201,
+          "schema_inspections": 1
+        }
+      ],
+      "median_ms": 19.2
+    }
+  ]
+}

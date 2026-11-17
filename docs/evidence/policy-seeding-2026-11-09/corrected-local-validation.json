@@ -1,0 +1,8 @@
+{
+  "atomic_rollback": "PASS",
+  "committed_readback": "PASS",
+  "idempotence_without_extra_audit": "PASS",
+  "tenant_gate_bucket_count_one": "PASS",
+  "unapproved_tables_remain_empty": "PASS",
+  "lint": "PASS"
+}

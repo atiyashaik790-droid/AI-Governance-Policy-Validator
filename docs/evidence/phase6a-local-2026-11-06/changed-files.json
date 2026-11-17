@@ -1,0 +1,45 @@
+{
+  "source_tests_proposals_report": [
+    "scripts/prepare_app_service.py",
+    "backend/tests/test_release_transition.py",
+    "scripts/tests/phase6a_package_probe.py",
+    "scripts/tests/verify_phase6a_artifacts.py",
+    "scripts/tests/test_phase6a_permissions.py",
+    "deployment/phase6a-runtime-006-grants.REVIEW_ONLY.sql",
+    "deployment/phase6a-runtime-007-grants.REVIEW_ONLY.sql",
+    "deployment/phase6a-runtime-permissions.READ_ONLY.sql",
+    "deployment/phase6a-session120.REVIEW_ONLY.json",
+    "docs/PHASE6A_PREDEPLOYMENT_HARDENING.md"
+  ],
+  "artifacts": [
+    "artifacts/phase6a-2026-11-06/artifacts.json",
+    "artifacts/phase6a-2026-11-06/candidate-manifest.json",
+    "artifacts/phase6a-2026-11-06/candidate.zip",
+    "artifacts/phase6a-2026-11-06/fallback007-settings.REVIEW_ONLY.json",
+    "artifacts/phase6a-2026-11-06/fallback007.zip"
+  ],
+  "evidence": [
+    "docs/evidence/phase6a-local-2026-11-06/artifact-verification.json",
+    "docs/evidence/phase6a-local-2026-11-06/artifact-verification.log",
+    "docs/evidence/phase6a-local-2026-11-06/backend.log",
+    "docs/evidence/phase6a-local-2026-11-06/backend.xml",
+    "docs/evidence/phase6a-local-2026-11-06/diff-check.log",
+    "docs/evidence/phase6a-local-2026-11-06/final-followup.log",
+    "docs/evidence/phase6a-local-2026-11-06/final-followup.xml",
+    "docs/evidence/phase6a-local-2026-11-06/frontend-build.log",
+    "docs/evidence/phase6a-local-2026-11-06/frontend-lint.log",
+    "docs/evidence/phase6a-local-2026-11-06/frontend.log",
+    "docs/evidence/phase6a-local-2026-11-06/frontend.xml",
+    "docs/evidence/phase6a-local-2026-11-06/readiness.log",
+    "docs/evidence/phase6a-local-2026-11-06/readiness.xml",
+    "docs/evidence/phase6a-local-2026-11-06/ruff-all.log",
+    "docs/evidence/phase6a-local-2026-11-06/ruff.log",
+    "docs/evidence/phase6a-local-2026-11-06/test-summary.json",
+    "docs/evidence/phase6a-local-2026-11-06/transition-final.log",
+    "docs/evidence/phase6a-local-2026-11-06/transition-final.xml",
+    "docs/evidence/phase6a-local-2026-11-06/transition.log",
+    "docs/evidence/phase6a-local-2026-11-06/transition.xml",
+    "docs/evidence/phase6a-local-2026-11-06/changed-files.json"
+  ],
+  "ignored_build_output": "frontend/dist and TypeScript incremental build cache regenerated"
+}

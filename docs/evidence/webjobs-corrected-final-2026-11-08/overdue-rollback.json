@@ -1,0 +1,22 @@
+{
+  "purpose": "Overdue authorized restoration only; no diagnostic continuation",
+  "started_utc": "2026-11-08T14:19:16.271581+00:00",
+  "status": "PASS_CLEANUP_ONLY",
+  "listing_requests": 0,
+  "flag_present_before_cleanup": true,
+  "flag_value_before_cleanup": "false",
+  "rollback_put_attempted": true,
+  "flag_absent": true,
+  "other_settings_preserved_during_cleanup": true,
+  "web_config": {
+    "alwaysOn": true,
+    "linuxFxVersion": "PYTHON|3.13",
+    "numberOfWorkers": 1,
+    "webJobsEnabled": false
+  },
+  "health_pass": true,
+  "release": "1.2-ca5df7c1dc19e525",
+  "revision": "005",
+  "finished_utc": "2026-11-08T14:19:28.150189+00:00",
+  "elapsed_seconds": 11.879
+}

@@ -1,0 +1,213 @@
+{
+  "status": "PASS",
+  "subscription": {
+    "id": "25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6",
+    "name": "Devops_Azure_SV",
+    "state": "Enabled",
+    "tenantId": "4ac50105-0c66-404e-a107-7cbd8a9a6442"
+  },
+  "server": "sql-governance-validator-dev-atiya",
+  "target_database": "sqldb-gpv-demo-v008-20261108",
+  "location": "westus2",
+  "inventory_before": [
+    "sqldb-governance-validator-dev",
+    "master"
+  ],
+  "source_before": {
+    "id": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/databases/sqldb-governance-validator-dev",
+    "name": "sqldb-governance-validator-dev",
+    "location": "westus2",
+    "sku": {
+      "name": "Standard",
+      "tier": "Standard",
+      "capacity": 10
+    },
+    "properties": {
+      "databaseId": "7e5a90aa-ec16-46cc-8298-9d27ead9a27e",
+      "creationDate": "2026-10-28T15:24:20.563Z",
+      "status": "Online",
+      "collation": "SQL_Latin1_General_CP1_CI_AS",
+      "maxSizeBytes": 268435456000,
+      "currentServiceObjectiveName": "S0",
+      "requestedServiceObjectiveName": "S0",
+      "currentBackupStorageRedundancy": "Local",
+      "requestedBackupStorageRedundancy": "Local",
+      "elasticPoolId": null,
+      "zoneRedundant": false,
+      "readScale": "Disabled"
+    },
+    "retention": {
+      "retentionDays": 7,
+      "diffBackupIntervalInHours": 24
+    }
+  },
+  "app_before": {
+    "id": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Web/sites/app-governance-validator-atiya-1026",
+    "state": "Running",
+    "identity_principal": "600447fe-5fea-4801-9033-ab4aafc474cc",
+    "web_config_sha256": "031a5a5e141fe953e6adfb022270cbb629a1566259c4fcad2bedddc47f924921"
+  },
+  "hosted_before": {
+    "/health": {
+      "http_status": 200,
+      "status": "ok"
+    },
+    "/ready": {
+      "http_status": 200,
+      "status": "ready",
+      "release": "1.2-ca5df7c1dc19e525",
+      "revision": "005"
+    }
+  },
+  "target_confirmed_absent": true,
+  "preflight_utc": "2026-11-08T16:02:14.926270+00:00",
+  "authorization": "USER_APPROVED_PERSISTENT_EMPTY_DATABASE_CREATION_ONLY",
+  "sql_data_plane_operations": 0,
+  "webapp_mutations": 0,
+  "source_database_mutations": 0,
+  "firewall_permission_mutations": 0,
+  "provider_calls": 0,
+  "requested": {
+    "sku": {
+      "name": "Standard",
+      "tier": "Standard",
+      "capacity": 10
+    },
+    "service_objective": "S0",
+    "backup_redundancy": "Local",
+    "retention_days": 7,
+    "create_mode": "Default",
+    "persistent": true
+  },
+  "events": [
+    {
+      "utc": "2026-11-08T16:02:14.926332+00:00",
+      "event": "PREFLIGHT_PASS"
+    },
+    {
+      "utc": "2026-11-08T16:02:32.429637+00:00",
+      "event": "CREATION_INTENT_DURABLE"
+    },
+    {
+      "utc": "2026-11-08T16:02:33.432953+00:00",
+      "event": "CREATION_HTTP_RESPONSE"
+    },
+    {
+      "utc": "2026-11-08T16:03:27.711396+00:00",
+      "event": "TARGET_OBSERVED"
+    },
+    {
+      "utc": "2026-11-08T16:03:36.344713+00:00",
+      "event": "POSTCHECKS_RECORDED"
+    },
+    {
+      "utc": "2026-11-08T16:03:36.351972+00:00",
+      "event": "VERIFICATION_PASS"
+    },
+    {
+      "utc": "2026-11-08T16:04:26.141015+00:00",
+      "event": "LOCAL_OWNER_REVIEW_ALIGNED_TO_AZURE_CREATION_DATE"
+    }
+  ],
+  "creation_request_utc": "2026-11-08T16:02:32.429588+00:00",
+  "creation_request_body": {
+    "location": "westus2",
+    "sku": {
+      "name": "Standard",
+      "tier": "Standard",
+      "capacity": 10
+    },
+    "properties": {
+      "createMode": "Default",
+      "requestedServiceObjectiveName": "S0",
+      "requestedBackupStorageRedundancy": "Local"
+    }
+  },
+  "creation_requests": 1,
+  "creation_http_status": 202,
+  "creation_response": {
+    "request_id": "244d2e7a-4c5c-4874-9ce1-e3e505e9aefb"
+  },
+  "actual": {
+    "id": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/databases/sqldb-gpv-demo-v008-20261108",
+    "name": "sqldb-gpv-demo-v008-20261108",
+    "location": "westus2",
+    "sku": {
+      "name": "Standard",
+      "tier": "Standard",
+      "capacity": 10
+    },
+    "status": "Online",
+    "database_id": "80dd1ba9-74e5-4d26-8463-081572c9c22e",
+    "creation_date": "2026-11-08T16:03:25.447Z",
+    "service_objective": "S0",
+    "requested_backup_redundancy": "Local",
+    "current_backup_redundancy": "Local"
+  },
+  "retention": {
+    "retentionDays": 7,
+    "diffBackupIntervalInHours": 24
+  },
+  "inventory_after": [
+    "master",
+    "sqldb-governance-validator-dev",
+    "sqldb-gpv-demo-v008-20261108"
+  ],
+  "source_after": {
+    "id": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/databases/sqldb-governance-validator-dev",
+    "name": "sqldb-governance-validator-dev",
+    "location": "westus2",
+    "sku": {
+      "name": "Standard",
+      "tier": "Standard",
+      "capacity": 10
+    },
+    "properties": {
+      "databaseId": "7e5a90aa-ec16-46cc-8298-9d27ead9a27e",
+      "creationDate": "2026-10-28T15:24:20.563Z",
+      "status": "Online",
+      "collation": "SQL_Latin1_General_CP1_CI_AS",
+      "maxSizeBytes": 268435456000,
+      "currentServiceObjectiveName": "S0",
+      "requestedServiceObjectiveName": "S0",
+      "currentBackupStorageRedundancy": "Local",
+      "requestedBackupStorageRedundancy": "Local",
+      "elasticPoolId": null,
+      "zoneRedundant": false,
+      "readScale": "Disabled"
+    },
+    "retention": {
+      "retentionDays": 7,
+      "diffBackupIntervalInHours": 24
+    }
+  },
+  "source_metadata_unchanged": true,
+  "app_after": {
+    "id": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Web/sites/app-governance-validator-atiya-1026",
+    "state": "Running",
+    "identity_principal": "600447fe-5fea-4801-9033-ab4aafc474cc",
+    "web_config_sha256": "031a5a5e141fe953e6adfb022270cbb629a1566259c4fcad2bedddc47f924921"
+  },
+  "app_config_unchanged": true,
+  "hosted_after": {
+    "/health": {
+      "http_status": 200,
+      "status": "ok"
+    },
+    "/ready": {
+      "http_status": 200,
+      "status": "ready",
+      "release": "1.2-ca5df7c1dc19e525",
+      "revision": "005"
+    }
+  },
+  "verified_utc": "2026-11-08T16:03:36.351940+00:00",
+  "owner_review_due_utc": "2026-11-15T16:03:25.447000+00:00",
+  "owner_review_calendar": "owner-review.ics",
+  "reminder_delivery": "NOT_INSTALLED_NO_CONNECTED_CALENDAR_SCHEDULER",
+  "deletion_scheduled": false,
+  "empty_database_basis": "Default create mode without source or sample; no SQL connections or schema/data writes",
+  "backup_restore_proof": "NOT_PERFORMED",
+  "owner_review_due_asia_kolkata": "2026-11-15T21:33:25.447000+05:30",
+  "owner_review_basis": "Azure-reported actual database creationDate plus seven days"
+}

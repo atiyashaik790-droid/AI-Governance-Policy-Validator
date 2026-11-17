@@ -1,0 +1,304 @@
+{
+  "status": "PASS",
+  "phase": "denial",
+  "started_at_utc": "2026-11-05T08:18:01.287412+00:00",
+  "socket_timeout_seconds": 20,
+  "max_attempts_per_request": 2,
+  "attempts": [
+    {
+      "method": "GET",
+      "path": "/api/sso/me",
+      "attempt": 1,
+      "started_at_utc": "2026-11-05T08:18:01.287640+00:00",
+      "outcome": "HTTP_RESPONSE",
+      "http_status": 401,
+      "elapsed_seconds": 5.807
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/session",
+      "attempt": 1,
+      "started_at_utc": "2026-11-05T08:18:07.095451+00:00",
+      "outcome": "HTTP_RESPONSE",
+      "http_status": 403,
+      "elapsed_seconds": 0.872
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/logout",
+      "attempt": 1,
+      "started_at_utc": "2026-11-05T08:18:07.970602+00:00",
+      "outcome": "HTTP_RESPONSE",
+      "http_status": 403,
+      "elapsed_seconds": 0.816
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/sessions",
+      "attempt": 1,
+      "started_at_utc": "2026-11-05T08:18:08.789829+00:00",
+      "outcome": "HTTP_RESPONSE",
+      "http_status": 403,
+      "elapsed_seconds": 0.867
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/sessions/synthetic/revoke",
+      "attempt": 1,
+      "started_at_utc": "2026-11-05T08:18:09.657996+00:00",
+      "outcome": "HTTP_RESPONSE",
+      "http_status": 403,
+      "elapsed_seconds": 0.803
+    },
+    {
+      "method": "GET",
+      "path": "/api/policies?limit=1",
+      "attempt": 1,
+      "started_at_utc": "2026-11-05T08:18:10.464374+00:00",
+      "outcome": "HTTP_RESPONSE",
+      "http_status": 401,
+      "elapsed_seconds": 0.931
+    },
+    {
+      "method": "GET",
+      "path": "/api/sso/me",
+      "attempt": 1,
+      "started_at_utc": "2026-11-05T08:18:11.397049+00:00",
+      "outcome": "HTTP_RESPONSE",
+      "http_status": 401,
+      "elapsed_seconds": 4.101
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/session",
+      "attempt": 1,
+      "started_at_utc": "2026-11-05T08:18:15.501175+00:00",
+      "outcome": "HTTP_RESPONSE",
+      "http_status": 403,
+      "elapsed_seconds": 0.853
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/logout",
+      "attempt": 1,
+      "started_at_utc": "2026-11-05T08:18:16.356345+00:00",
+      "outcome": "HTTP_RESPONSE",
+      "http_status": 403,
+      "elapsed_seconds": 0.877
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/sessions",
+      "attempt": 1,
+      "started_at_utc": "2026-11-05T08:18:17.234329+00:00",
+      "outcome": "HTTP_RESPONSE",
+      "http_status": 403,
+      "elapsed_seconds": 0.872
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/sessions/synthetic/revoke",
+      "attempt": 1,
+      "started_at_utc": "2026-11-05T08:18:18.109203+00:00",
+      "outcome": "HTTP_RESPONSE",
+      "http_status": 403,
+      "elapsed_seconds": 0.801
+    },
+    {
+      "method": "GET",
+      "path": "/api/policies?limit=1",
+      "attempt": 1,
+      "started_at_utc": "2026-11-05T08:18:18.912676+00:00",
+      "outcome": "HTTP_RESPONSE",
+      "http_status": 401,
+      "elapsed_seconds": 0.823
+    },
+    {
+      "method": "GET",
+      "path": "/api/sso/me",
+      "attempt": 1,
+      "started_at_utc": "2026-11-05T08:18:19.739015+00:00",
+      "outcome": "HTTP_RESPONSE",
+      "http_status": 401,
+      "elapsed_seconds": 4.199
+    },
+    {
+      "method": "GET",
+      "path": "/health",
+      "attempt": 1,
+      "started_at_utc": "2026-11-05T08:18:23.941140+00:00",
+      "outcome": "HTTP_RESPONSE",
+      "http_status": 200,
+      "elapsed_seconds": 0.869
+    },
+    {
+      "method": "GET",
+      "path": "/ready",
+      "attempt": 1,
+      "started_at_utc": "2026-11-05T08:18:24.813532+00:00",
+      "outcome": "HTTP_RESPONSE",
+      "http_status": 200,
+      "elapsed_seconds": 2.425
+    },
+    {
+      "method": "GET",
+      "path": "/api/sso/status",
+      "attempt": 1,
+      "started_at_utc": "2026-11-05T08:18:27.241644+00:00",
+      "outcome": "HTTP_RESPONSE",
+      "http_status": 200,
+      "elapsed_seconds": 2.382
+    }
+  ],
+  "checks": [
+    {
+      "case": "unauthenticated",
+      "method": "GET",
+      "path": "/api/sso/me",
+      "expected": 401,
+      "actual": 401,
+      "pass": true
+    },
+    {
+      "case": "synthetic_provisioned_credential",
+      "method": "POST",
+      "path": "/api/auth/session",
+      "expected": 403,
+      "actual": 403,
+      "pass": true
+    },
+    {
+      "case": "synthetic_provisioned_credential",
+      "method": "POST",
+      "path": "/api/auth/logout",
+      "expected": 403,
+      "actual": 403,
+      "pass": true
+    },
+    {
+      "case": "synthetic_provisioned_credential",
+      "method": "GET",
+      "path": "/api/auth/sessions",
+      "expected": 403,
+      "actual": 403,
+      "pass": true
+    },
+    {
+      "case": "synthetic_provisioned_credential",
+      "method": "POST",
+      "path": "/api/auth/sessions/synthetic/revoke",
+      "expected": 403,
+      "actual": 403,
+      "pass": true
+    },
+    {
+      "case": "synthetic_provisioned_credential",
+      "method": "GET",
+      "path": "/api/policies?limit=1",
+      "expected": 401,
+      "actual": 401,
+      "pass": true
+    },
+    {
+      "case": "synthetic_provisioned_credential",
+      "method": "GET",
+      "path": "/api/sso/me",
+      "expected": 401,
+      "actual": 401,
+      "pass": true
+    },
+    {
+      "case": "synthetic_preissued_session",
+      "method": "POST",
+      "path": "/api/auth/session",
+      "expected": 403,
+      "actual": 403,
+      "pass": true
+    },
+    {
+      "case": "synthetic_preissued_session",
+      "method": "POST",
+      "path": "/api/auth/logout",
+      "expected": 403,
+      "actual": 403,
+      "pass": true
+    },
+    {
+      "case": "synthetic_preissued_session",
+      "method": "GET",
+      "path": "/api/auth/sessions",
+      "expected": 403,
+      "actual": 403,
+      "pass": true
+    },
+    {
+      "case": "synthetic_preissued_session",
+      "method": "POST",
+      "path": "/api/auth/sessions/synthetic/revoke",
+      "expected": 403,
+      "actual": 403,
+      "pass": true
+    },
+    {
+      "case": "synthetic_preissued_session",
+      "method": "GET",
+      "path": "/api/policies?limit=1",
+      "expected": 401,
+      "actual": 401,
+      "pass": true
+    },
+    {
+      "case": "synthetic_preissued_session",
+      "method": "GET",
+      "path": "/api/sso/me",
+      "expected": 401,
+      "actual": 401,
+      "pass": true
+    }
+  ],
+  "hosted_changes": false,
+  "microsoft_login_started": false,
+  "public": {
+    "/health": {
+      "status": 200,
+      "body": {
+        "status": "ok"
+      }
+    },
+    "/ready": {
+      "status": 200,
+      "body": {
+        "status": "ready",
+        "provider_mode": "live",
+        "release": {
+          "git_commit": "60fa94ef9ec01be0d0b4af347a3251255cf7565c",
+          "build_version": "1.2-5aad19f7eea45a42",
+          "built_utc": "2026-11-05T07:58:19.172526+00:00",
+          "frontend_sha256": "beb38c3485b8abfb672e5a2bf851f1f178c1a8049f367b450708e5abbe7581d4",
+          "backend_sha256": "1112eb26744d01e87434210c40cacdb42bca6cdf791a9dc4d1ca0f36655706d9",
+          "required_migration": "004",
+          "supported_migrations": [
+            "004",
+            "005"
+          ],
+          "sso_required_migration": "005"
+        },
+        "database_revision": "005",
+        "schema_versioned": true,
+        "sso_available": true
+      }
+    },
+    "/api/sso/status": {
+      "status": 200,
+      "body": {
+        "sso_enabled": true,
+        "configured": true,
+        "demo_login_enabled": false
+      }
+    }
+  },
+  "completed_prior_checks_retained": 5,
+  "new_denial_checks_passed": 13,
+  "total_denial_checks_passed": 18,
+  "finished_at_utc": "2026-11-05T08:18:29.629050+00:00"
+}

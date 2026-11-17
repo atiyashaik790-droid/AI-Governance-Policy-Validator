@@ -1,0 +1,12 @@
+import subprocess,json
+from pathlib import Path
+from datetime import datetime,timezone
+p=subprocess.run(['curl','--silent','--show-error','--connect-timeout','5','--max-time','35','-D','-','-o','/dev/null','https://app-governance-validator-atiya-1026.azurewebsites.net/api/sso/status'],capture_output=True,text=True,timeout=40)
+headers={}
+for line in p.stdout.splitlines():
+ if ':' in line:
+  k,v=line.split(':',1)
+  if k.lower() in ('cache-control','referrer-policy','x-content-type-options','x-frame-options'):headers[k.lower()]=v.strip()
+r={'transport_exit_code':p.returncode,'headers':headers,'observed_at_utc':datetime.now(timezone.utc).isoformat()}
+r['status']='PASS' if p.returncode==0 and headers.get('cache-control')=='no-store' and headers.get('referrer-policy')=='no-referrer' else 'FAIL_STOP'
+Path('docs/evidence/stage-g-acceptance-2026-11-05/security-headers.json').write_text(json.dumps(r,indent=2)+'\n');print(json.dumps(r))

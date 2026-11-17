@@ -1,0 +1,104 @@
+{
+  "web_config": {
+    "status": "VERIFIED",
+    "data": {
+      "alwaysOn": true,
+      "ftps": "Disabled",
+      "runtime": "PYTHON|3.13",
+      "startup": "sh startup.sh",
+      "tls": "1.2"
+    }
+  },
+  "sql_database": {
+    "status": "VERIFIED",
+    "data": {
+      "backupRedundancy": "Local",
+      "earliestRestoreDate": "2026-10-30T08:22:41.524243+00:00",
+      "name": "sqldb-governance-validator-dev",
+      "sku": "Standard",
+      "status": "Online"
+    }
+  },
+  "backup_policy": {
+    "status": "VERIFIED",
+    "data": {
+      "diffBackupIntervalInHours": 24,
+      "retentionDays": 7
+    }
+  },
+  "openai_deployments": {
+    "status": "VERIFIED",
+    "data": [
+      {
+        "model": "gpt-5-mini",
+        "name": "gpt-5-mini",
+        "state": "Succeeded",
+        "version": "2025-08-07"
+      }
+    ]
+  },
+  "storage_containers": {
+    "status": "VERIFIED",
+    "data": [
+      {
+        "name": "governance-reports",
+        "publicAccess": "None"
+      }
+    ]
+  },
+  "hosted_settings": {
+    "status": "CONFIGURED_NOT_VERIFIED",
+    "data": {
+      "SSO_ENABLED": "true",
+      "DEMO_BROWSER_LOGIN_ENABLED": "false",
+      "SSO_SESSION_MINUTES": "60",
+      "DEMO_SESSION_MINUTES": "UNSET",
+      "ALLOW_LEGACY_API_CREDENTIALS": "false",
+      "PROVIDER_MODE": "live",
+      "PII_MODE": "presidio",
+      "REVIEW_CAPTURE_ENABLED": "UNSET",
+      "REVIEW_CLEANUP_ENABLED": "UNSET",
+      "AZURE_SQL_AUTH_MODE": "managed_identity",
+      "SCM_DO_BUILD_DURING_DEPLOYMENT": "true",
+      "ENABLE_ORYX_BUILD": "UNSET",
+      "presence": {
+        "ENTRA_TENANT_ID": true,
+        "ENTRA_CLIENT_ID": true,
+        "ENTRA_CLIENT_SECRET": true,
+        "SSO_PUBLIC_ORIGIN": true,
+        "CORS_ORIGIN": true,
+        "DATABASE_URL": true,
+        "AZURE_OPENAI_ENDPOINT": true,
+        "AZURE_OPENAI_DEPLOYMENT": true,
+        "AZURE_OPENAI_API_KEY": false,
+        "OPENAI_API_KEY": true,
+        "ADLS_ACCOUNT_URL": true,
+        "ADLS_FILE_SYSTEM": true,
+        "REVIEW_CONTENT_ACTIVE_KEY_ID": false,
+        "REVIEW_CONTENT_KEYS_JSON": false,
+        "WEBSITE_RUN_FROM_PACKAGE": false
+      },
+      "sso_origin_matches_target": true,
+      "cors_origin_matches_target": true,
+      "entra_tenant_matches_expected": true,
+      "azure_openai_deployment": "gpt-5-mini",
+      "adls_filesystem": "governance-reports"
+    }
+  },
+  "entra_registration": {
+    "status": "VERIFIED",
+    "data": {
+      "appId": "a1a7da0b-ad29-49ec-a9ea-c59219e60df5",
+      "audience": "AzureADMyOrg",
+      "credentialExpiry": [
+        "2027-05-03T11:10:28.038Z"
+      ],
+      "displayName": "Governance-Studio-SSO",
+      "logoutUrl": null,
+      "redirectUris": [
+        "https://app-governance-validator-atiya-1026.azurewebsites.net/",
+        "https://app-governance-validator-atiya-1026.azurewebsites.net/api/sso/callback"
+      ]
+    }
+  }
+}

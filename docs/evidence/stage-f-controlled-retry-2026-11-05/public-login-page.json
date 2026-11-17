@@ -1,0 +1,17 @@
+{
+  "observed_at_utc": "2026-11-05T05:58:04.889665+00:00",
+  "method": "READ_ONLY_HTTP_PAGE_AND_SCRIPT_INSPECTION",
+  "rendered_browser_check": "UNAVAILABLE_NO_CONNECTED_BROWSER",
+  "sso_login_endpoint_called": false,
+  "page_http_status": 200,
+  "scripts": [
+    {
+      "path": "/assets/index-Cyc25r-X.js",
+      "matches_verified_release": true,
+      "sha256": "f942473876fbe8a2dcfd9865100b8ba6f30a32429aef3294139b8335fc229444"
+    }
+  ],
+  "microsoft_choice_in_served_code": true,
+  "demo_choice_in_served_code": true,
+  "status": "PASS_SERVED_PAGE_AND_CHOICES_CODE"
+}

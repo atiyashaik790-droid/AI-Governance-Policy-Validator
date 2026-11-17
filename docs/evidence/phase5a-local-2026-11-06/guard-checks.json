@@ -1,0 +1,17 @@
+[
+  {
+    "case": "approved",
+    "result": "payload constructed, never executed",
+    "length": 18137
+  },
+  {
+    "case": "current",
+    "result": "rejected",
+    "category": "REVIEWED_SCHEMA_CONTRACT_CHANGED"
+  },
+  {
+    "case": "deliberately_mismatched",
+    "result": "rejected",
+    "category": "REVIEWED_SCHEMA_CONTRACT_CHANGED"
+  }
+]

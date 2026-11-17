@@ -1,0 +1,118 @@
+--- approved-e3530bb5/schema_compatibility.py
++++ current-b5da9f6e/schema_compatibility.py
+@@ -2,9 +2,9 @@
+ 
+ from sqlalchemy import inspect, text
+ from fastapi import HTTPException
+-from .models import Base
++from .schema_manifests import metadata_for_revision, history_for_revision, MULTI_TABLES, MULTI_PERMISSIONS
+ 
+-SUPPORTED_REVISIONS = ("004", "005")
++SUPPORTED_REVISIONS = ("004", "005", "006", "007")
+ SSO_TABLES = {"sso_memberships", "sso_transactions", "sso_sessions"}
+ RUNTIME_PERMISSIONS = {
+     "policies": ("SELECT", "INSERT", "UPDATE", "DELETE"),
+@@ -39,11 +39,14 @@
+     return HTTPException(503, "Reviewed schema objects and runtime permissions are required")
+ 
+ 
+-def verify_runtime_permissions(connection, *, require_sso):
++def verify_runtime_permissions(connection, *, require_sso, revision="005"):
+     # Evaluate every grant on every check, in one round trip. NULL and
+     # missing permissions fail closed; nothing is cached across requests.
+     predicates, parameters = [], {}
+-    for table, permissions in RUNTIME_PERMISSIONS.items():
++    permissions_by_table = {**RUNTIME_PERMISSIONS, **(MULTI_PERMISSIONS if revision in {"006", "007"} else {})}
++    if revision == "007":
++        permissions_by_table["review_protected_content"] = ("SELECT", "INSERT", "DELETE")
++    for table, permissions in permissions_by_table.items():
+         if table in SSO_TABLES and not require_sso:
+             continue
+         for permission in permissions:
+@@ -79,15 +82,20 @@
+                 raise SchemaCheckError("ALEMBIC_REVISION_UNSUPPORTED_OR_AMBIGUOUS", "alembic_version")
+             revision = rows[0]
+         else:
+-            revision = "005" if SSO_TABLES <= present else "004"
+-        if require_sso and (revision != "005" or not versioned and dialect != "sqlite"):
++            # Only disposable, unversioned SQLite may infer a fixture contract.
++            revision = "006" if MULTI_TABLES <= present else ("005" if SSO_TABLES <= present else "004")
++        if require_sso and (revision not in {"005", "006", "007"} or not versioned and dialect != "sqlite"):
+             raise SchemaCheckError("SSO_REQUIRES_REVISION_005")
+-        expected = {n: t for n, t in Base.metadata.tables.items() if revision == "005" or n not in SSO_TABLES}
++        expected = metadata_for_revision(revision).tables
+         if not set(expected) <= present:
+             raise SchemaCheckError("REQUIRED_TABLE_MISSING_OR_NOT_VISIBLE", sorted(set(expected) - present)[0])
+         # Partial 005 creation with a 004 marker is not a clean migration boundary.
+         if revision == "004" and present & SSO_TABLES:
+             raise SchemaCheckError("PARTIAL_005_OBJECTS_AT_REVISION_004")
++        if revision not in {"006", "007"} and present & MULTI_TABLES:
++            raise SchemaCheckError("PARTIAL_006_OBJECTS_AT_LEGACY_REVISION")
++        if revision not in {"006", "007"} and "execution_mode" in {c["name"] for c in inspector.get_columns("validation_executions", schema=schema)}:
++            raise SchemaCheckError("PARTIAL_006_EXECUTION_AT_LEGACY_REVISION")
+         for name, model in expected.items():
+             columns = {c["name"]: c for c in inspector.get_columns(name, schema=schema)}
+             for column in model.columns:
+@@ -95,7 +103,7 @@
+                 if not actual or actual["type"]._type_affinity is not column.type._type_affinity:
+                     raise SchemaCheckError("COLUMN_MISSING_OR_TYPE_MISMATCH", name + "." + column.name)
+                 length = getattr(column.type, "length", None)
+-                if length and getattr(actual["type"], "length", 0) != length:
++                if length and not (dialect == "sqlite" and name == "review_protected_content" and column.name == "nonce") and getattr(actual["type"], "length", 0) != length:
+                     raise SchemaCheckError("COLUMN_LENGTH_MISMATCH", name + "." + column.name)
+                 if not column.nullable and actual["nullable"]:
+                     raise SchemaCheckError("COLUMN_NULLABILITY_MISMATCH", name + "." + column.name)
+@@ -137,12 +145,13 @@
+                 ):
+                     raise SchemaCheckError("FOREIGN_KEY_MISMATCH", name)
+         if versioned:
++            history = history_for_revision(revision)
+             if dialect == "sqlite":
+                 triggers = {r[0] for r in connection.execute(text("SELECT name FROM sqlite_master WHERE type='trigger'"))}
+-                if not all(f"immutable_{t}_{a}" in triggers for t in HISTORY_TABLES for a in ("update", "delete")):
++                if not all(f"immutable_{t}_{a}" in triggers for t in history for a in ("update", "delete")):
+                     raise SchemaCheckError("HISTORY_TRIGGER_MISSING")
+             else:
+-                for table in HISTORY_TABLES:
++                for table in history:
+                     enabled = connection.scalar(
+                         text("SELECT COUNT(*) FROM sys.triggers WHERE parent_id=OBJECT_ID(:object) AND name=:name AND is_disabled=0"),
+                         {"object": "dbo." + table, "name": "immutable_" + table},
+@@ -154,8 +163,35 @@
+                 )
+                 if invalid:
+                     raise SchemaCheckError("DISABLED_OR_UNTRUSTED_FOREIGN_KEY")
++        if revision == "007":
++            checks = {c["name"]: c["sqltext"] for c in inspector.get_check_constraints("review_protected_content", schema=schema)}
++            from .schema_006_verification import canonical_check
++            if canonical_check(checks.get("ck_rpc_format", "")) != canonical_check("content_kind = 'original_prompt' AND format_version = 1"):
++                raise SchemaCheckError("007_FORMAT_CHECK_MISMATCH")
++            import re
++            retention = re.sub(r"[\s\[\]()]", "", checks.get("ck_rpc_retention", "")).lower()
++            if retention != "expires_at>created_atandexpires_at<=created_at+604800":
++                raise SchemaCheckError("007_RETENTION_CHECK_MISMATCH")
++            function = "length" if dialect == "sqlite" else "DATALENGTH"
++            expected_bytes = f"{function}(nonce) = 12 AND {function}(ciphertext) >= 16 AND {function}(ciphertext) <= 48016"
++            if canonical_check(checks.get("ck_rpc_bytes", "")) != canonical_check(expected_bytes):
++                raise SchemaCheckError("007_BINARY_BOUNDS_MISMATCH")
++            if dialect == "sqlite":
++                if not connection.scalar(text("SELECT COUNT(*) FROM sqlite_master WHERE type='trigger' AND name='immutable_review_content_update'")):
++                    raise SchemaCheckError("007_IMMUTABILITY_TRIGGER_MISSING")
++            elif connection.scalar(text("SELECT COUNT(*) FROM sys.triggers WHERE parent_id=OBJECT_ID('dbo.review_protected_content') AND name='immutable_review_content_update' AND is_disabled=0")) != 1:
++                raise SchemaCheckError("007_IMMUTABILITY_TRIGGER_MISSING")
++            if dialect == "mssql":
++                protected_columns = {c["name"]: c for c in inspector.get_columns("review_protected_content", schema=schema)}
++                if str(protected_columns["nonce"]["type"].compile(dialect=connection.dialect)).upper() != "VARBINARY(12)" or str(protected_columns["ciphertext"]["type"].compile(dialect=connection.dialect)).upper() != "VARBINARY(MAX)":
++                    raise SchemaCheckError("007_BINARY_TYPE_MISMATCH")
++                if connection.scalar(text("SELECT COUNT(*) FROM sys.check_constraints WHERE parent_object_id=OBJECT_ID('dbo.review_protected_content') AND (is_disabled=1 OR is_not_trusted=1)")):
++                    raise SchemaCheckError("007_CHECK_DISABLED_OR_UNTRUSTED")
+         if dialect == "mssql":
+-            verify_runtime_permissions(connection, require_sso=require_sso)
+-        return {"revision": revision if versioned else "UNVERSIONED_LOCAL", "versioned": versioned, "sso_schema": revision == "005"}
++            verify_runtime_permissions(connection, require_sso=require_sso, revision=revision)
++        if revision in {"006", "007"}:
++            from .schema_006_verification import verify_details
++            verify_details(connection, inspector, expected, schema)
++        return {"revision": revision if versioned else "UNVERSIONED_LOCAL", "versioned": versioned, "sso_schema": revision in {"005", "006", "007"}}
+     except Exception:
+         raise unavailable() from None

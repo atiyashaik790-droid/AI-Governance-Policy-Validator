@@ -1,0 +1,45 @@
+{
+  "artifacts/phase6a-2026-11-06/candidate.zip": {
+    "sha256": "a0a53d4899bd5672043420550fdbe01c7beca2a409b710fe180f8f52d516eb28",
+    "release": {
+      "backend_sha256": "12e0a5ffc478687bdf4007bff67af07461f8107547145bcf4e69f2ad65628cf9",
+      "build_version": "1.2-7d572934f2b78aeb",
+      "built_utc": "2026-11-06T08:34:18.163923+00:00",
+      "frontend_sha256": "258c37caa9637ec75f437d1ceff53bc8a3e82776a4b6a3066db103aaa7d13c10",
+      "git_commit": "60fa94ef9ec01be0d0b4af347a3251255cf7565c",
+      "required_migration": "004",
+      "sso_required_migration": "005",
+      "supported_migrations": [
+        "004",
+        "005",
+        "006",
+        "007"
+      ]
+    },
+    "crc_ok": true
+  },
+  "artifacts/phase6a-2026-11-06/fallback007.zip": {
+    "sha256": "a0a53d4899bd5672043420550fdbe01c7beca2a409b710fe180f8f52d516eb28",
+    "release": {
+      "backend_sha256": "12e0a5ffc478687bdf4007bff67af07461f8107547145bcf4e69f2ad65628cf9",
+      "build_version": "1.2-7d572934f2b78aeb",
+      "built_utc": "2026-11-06T08:34:18.163923+00:00",
+      "frontend_sha256": "258c37caa9637ec75f437d1ceff53bc8a3e82776a4b6a3066db103aaa7d13c10",
+      "git_commit": "60fa94ef9ec01be0d0b4af347a3251255cf7565c",
+      "required_migration": "004",
+      "sso_required_migration": "005",
+      "supported_migrations": [
+        "004",
+        "005",
+        "006",
+        "007"
+      ]
+    },
+    "crc_ok": true
+  },
+  "migration_hashes": {
+    "backend/migrations/versions/005_entra_sso.py": "325a1fc4e0f7f415d102d340e2b737e1734ecdb119c76f78e61a1e4a4658618a",
+    "backend/migrations/versions/006_multi_policy.py": "e9627d8f1b4c1f6385e1573df9bbd9280beef4f7d93bb2b1c3f6ef8a9fbfe9dc",
+    "backend/migrations/versions/007_protected_review_content.py": "f451e1e83c735b333d5c10b012772cbfa1bf3fd9efe59c1dfbc8c8e2f9f7a8ce"
+  }
+}

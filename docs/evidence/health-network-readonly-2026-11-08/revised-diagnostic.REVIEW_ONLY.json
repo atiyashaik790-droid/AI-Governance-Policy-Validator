@@ -1,0 +1,54 @@
+{
+  "review_only": true,
+  "execution_authorized": false,
+  "window_minutes": 15,
+  "allowed_setting": "WEBSITE_SKIP_RUNNING_KUDUAGENT=false; restore original absence",
+  "storage_unchanged": true,
+  "startup_gate": {
+    "require": "Current-container top-level startup-probe success followed by top-level Site started, both after configuration update",
+    "anchored_probe_pattern": "^\\d{4}-\\d\\d-\\d\\dT\\d\\d:\\d\\d:\\d\\d(?:\\.\\d+)?Z\\s+Site startup probe succeeded after [0-9.]+ seconds\\.$",
+    "reject": "Warmup waiting/probing/initialization and historical Details fields",
+    "old_false_positive_reproduced": true,
+    "corrected_matching_checked_against_actual_lines": true
+  },
+  "readiness_gate": {
+    "startup_plus_readiness_fixed_total_seconds": 300,
+    "clock_origin": "configuration update; never reset",
+    "required_consecutive_pairs": 3,
+    "maximum_pairs": 10,
+    "interval_seconds": 10,
+    "per_request_timeout_seconds": 10,
+    "timeout_limited_by_remaining_deadline": true,
+    "routes": [
+      "/health",
+      "/ready"
+    ],
+    "require": "200 ok/ready; exact approved release metadata/revision005",
+    "retryable": "Transport/DNS/timeout errors or transient startup502/503 reset streak; never count as success",
+    "stop_immediately": "TLS certificate verification error,401/403,wrong identity/revision/release,configuration drift,explicit current startup failure or critical schema/security fault",
+    "telemetry": [
+      "route",
+      "UTC start/end",
+      "elapsed_ms",
+      "outer and reason/cause types",
+      "errno",
+      "TLS verification code",
+      "HTTP status if received"
+    ],
+    "no_raw_exceptions_headers_keys_or_application_data": true
+  },
+  "listing_request_maximum": 1,
+  "listing_only_after_both_gates": true,
+  "listing_retries": false,
+  "rollback_reserve_seconds": 300,
+  "rollback_required_on_all_exits": true,
+  "rollback_success_requires": "original flag absent; all unrelated settings and web configuration unchanged; stable original-release/revision health",
+  "incomplete_rollback_result": "BLOCKED",
+  "not_authorized": [
+    "jobs",
+    "SQL",
+    "deployment",
+    "providers",
+    "new services"
+  ]
+}

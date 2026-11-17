@@ -1,0 +1,14 @@
+from pathlib import Path
+exec(compile(Path('/tmp/stage_f_readonly.py').read_text().split("attempt('account'")[0],'/tmp/stage_f_readonly.py','exec'))
+from dotenv import dotenv_values
+r['local_secret_availability']={'process_environment_nonempty':bool(os.environ.get('ENTRA_CLIENT_SECRET','').strip()),'workspace_dotenv_nonempty':bool((dotenv_values(R/'.env').get('ENTRA_CLIENT_SECRET') or '').strip()),'external_secure_custody':'NOT_ACCESSIBLE_OR_CONFIRMED'}
+attempt('registration',lambda:az(['ad','app','show','--id','a1a7da0b-ad29-49ec-a9ea-c59219e60df5','--query','{clientId:appId,objectId:id,signInAudience:signInAudience,webRedirectUris:web.redirectUris,frontChannelLogoutUrl:web.logoutUrl,passwordCredentials:passwordCredentials[].{keyId:keyId,endDateTime:endDateTime}}']))
+attempt('logging',lambda:az(['webapp','log','show','--subscription',sub,'-g',group,'-n',app,'--query','{httpFilesystemEnabled:httpLogs.fileSystem.enabled,httpBlobEnabled:httpLogs.azureBlobStorage.enabled,applicationFilesystemLevel:applicationLogs.fileSystem.level,detailedErrors:detailedErrorMessages.enabled,failedRequestTracing:failedRequestsTracing.enabled}']))
+try:
+ raw=az(['webapp','config','appsettings','list','--subscription',sub,'-g',group,'-n',app]);d={x['name']:x.get('value','') for x in raw};del raw
+ names=['SSO_ENABLED','DEMO_BROWSER_LOGIN_ENABLED','ENTRA_CLIENT_SECRET','ENTRA_CLIENT_ID','ENTRA_TENANT_ID','SSO_PUBLIC_ORIGIN','SSO_SESSION_MINUTES','CORS_ORIGIN','DEMO_ACCOUNTS_JSON']
+ r['setting_status']={n:'SET_NONEMPTY' if d.get(n) else 'PRESENT_EMPTY' if n in d else 'ABSENT' for n in names}
+ r['effective_flags']={'sso_enabled':d.get('SSO_ENABLED','false').lower()=='true','demo_login_enabled':d.get('DEMO_BROWSER_LOGIN_ENABLED','true').lower()=='true','cors_matches_reviewed_origin':d.get('CORS_ORIGIN')==origin}
+except Exception as e:r['setting_status']={'status':'BLOCKED','error_kind':type(e).__name__}
+r['membership']='STAGE_E_ACCEPTED_NO_SQL_READ_OR_WRITE_PERFORMED'
+(R/'docs/evidence/stage-f-readiness-2026-11-04/final-configuration-precheck.json').write_text(json.dumps(r,indent=2)+'\n');print(json.dumps(r))

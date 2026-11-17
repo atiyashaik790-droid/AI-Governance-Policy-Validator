@@ -1,0 +1,23 @@
+{
+  "stage": "shell_connect",
+  "payload_sent": false,
+  "timed_out": false,
+  "cli_exit_code": 1,
+  "keywords": {
+    "ssl": false,
+    "certificate": false,
+    "502": false,
+    "503": false,
+    "404": false,
+    "session": false,
+    "websocket": false,
+    "preview": false,
+    "error": false,
+    "timeout": false,
+    "connection closed": false,
+    "eof": false,
+    "traceback": false,
+    "detached": false,
+    "ssh": false
+  }
+}

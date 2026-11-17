@@ -1,0 +1,7 @@
+import os,subprocess,json
+from pathlib import Path
+os.environ['AZURE_CONFIG_DIR']=str(Path.cwd()/'.azure-sql-cli')
+u='https://management.azure.com/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Web/sites/app-governance-validator-atiya-1026/config/authsettingsV2?api-version=2024-11-01'
+x=subprocess.run(['az','rest','--method','GET','--url',u,'--query','{enabled:properties.platform.enabled,requireAuthentication:properties.globalValidation.requireAuthentication,azureAdEnabled:properties.identityProviders.azureActiveDirectory.enabled,unauthenticatedClientAction:properties.globalValidation.unauthenticatedClientAction}','-o','json','--only-show-errors'],capture_output=True,text=True,timeout=40)
+r=json.loads(x.stdout) if x.returncode==0 else {'status':'BLOCKED','read_only_request_failed':True}
+Path('docs/evidence/stage-f-readiness-2026-11-04/platform-auth-confirmation.json').write_text(json.dumps(r,indent=2)+'\n');print(json.dumps(r))

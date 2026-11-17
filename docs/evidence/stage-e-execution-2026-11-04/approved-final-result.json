@@ -1,0 +1,20 @@
+{
+  "stage": "E",
+  "status": "PASS",
+  "operator_sql_connection": "PASS_DURING_APPROVED_TEMPORARY_WINDOW",
+  "membership": "CREATED",
+  "role": "Admin",
+  "enabled": true,
+  "membership_id": "cce108dc-72f1-4db2-9aaa-c7128085661c",
+  "audit_event": "VERIFIED",
+  "audit_id": "5992685e-0f10-44c1-a98a-19e1e4d84137",
+  "duplicate_membership_check": "PASS",
+  "temporary_firewall_cleanup": "REMOVED_AND_VERIFIED",
+  "other_firewall_rules_unchanged": true,
+  "sso_enabled": false,
+  "demo_login_enabled": true,
+  "app_service": "HEALTHY_AND_READY_AFTER_CLEANUP",
+  "database_revision": "005",
+  "stage_f_executed": false,
+  "observed_at_utc": "2026-11-04T17:54:57.846262+00:00"
+}

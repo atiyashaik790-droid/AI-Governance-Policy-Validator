@@ -1,0 +1,45 @@
+import os,sys,json,hashlib,logging
+from pathlib import Path
+from datetime import datetime,timezone
+R=Path.cwd();os.environ['AZURE_CONFIG_DIR']=str(R/'.azure-sql-cli')
+os.environ.update(DATABASE_URL='mssql+pyodbc://sql-governance-validator-dev-atiya.database.windows.net/sqldb-governance-validator-dev',AZURE_SQL_AUTH_MODE='cli',AZURE_SQL_TENANT_ID='4ac50105-0c66-404e-a107-7cbd8a9a6442',AZURE_SQL_USER_OBJECT_ID='b5d8bfbe-f03a-4132-a13f-ab49aae834b7',ENTRA_TENANT_ID='4ac50105-0c66-404e-a107-7cbd8a9a6442')
+sys.path[:0]=[str(R/'scripts'),str(R/'backend')]
+for n in ('azure','msal','sqlalchemy.engine'):logging.getLogger(n).setLevel(logging.CRITICAL)
+from sqlalchemy import text
+from sqlalchemy.orm import Session
+from app.database import engine
+from app.models import Audit,SsoMembership
+from manage_sso_membership import apply_mapping,validate_mapping
+P=R/'docs/evidence/stage-e-execution-2026-11-04/approved-guarded-provisioning.json'
+r={'stage':'E','status':'PREPARING','started_at_utc':datetime.now(timezone.utc).isoformat(),'commit_confirmed':False,'approval_ref':'stage-e-20261104-admin','approval_basis':'Explicit user approval of exact Admin mapping and conditional provisioning; shorter reference preserves approval linkage while fitting existing audit field','workflow_modified':False,'schema_modified':False}
+def save():P.write_text(json.dumps(r,indent=2)+'\n')
+try:
+ assert hashlib.sha256((R/'scripts/manage_sso_membership.py').read_bytes()).hexdigest()=='e24095f392edb22d4ae070fc0f1e139353da78ee461c232cbf8fdb8ac6f9374b'
+ b=(R/'deployment/stage-e-atiya-admin-membership.APPROVED.json').read_bytes();assert hashlib.sha256(b).hexdigest()=='24f916c8062f1bf2da22d40617006ecc5a891ad6ec89e3555fdc8102e4bbb689'
+ data=validate_mapping(json.loads(b));assert data=={'directory_tenant':'4ac50105-0c66-404e-a107-7cbd8a9a6442','object_id':'b5d8bfbe-f03a-4132-a13f-ab49aae834b7','tenant':'demo-appservice-4e2dcce8d618','actor':'atiya-tabsum-shaik','role':'Admin','enabled':True}
+ with engine.connect().execution_options(isolation_level='SERIALIZABLE') as c:
+  with c.begin():
+   c.exec_driver_sql('SET XACT_ABORT ON; SET LOCK_TIMEOUT 15000;')
+   assert c.scalar(text('SELECT DB_NAME()'))=='sqldb-governance-validator-dev'
+   assert list(c.execute(text('SELECT version_num FROM dbo.alembic_version')).scalars())==['005']
+   assert all(c.scalar(text("SELECT HAS_PERMS_BY_NAME(:o,'OBJECT',:p)"),{'o':o,'p':p})==1 for o,p in [('dbo.sso_memberships','SELECT'),('dbo.sso_memberships','INSERT'),('dbo.audit_events','SELECT'),('dbo.audit_events','INSERT')])
+   rows=list(c.execute(text('SELECT id FROM dbo.sso_memberships WITH (UPDLOCK,HOLDLOCK) WHERE object_id=:object_id OR (tenant=:tenant AND actor=:actor)'),data));assert not rows,'State drift: stop without retry'
+   assert c.scalar(text("SELECT COUNT_BIG(*) FROM dbo.audit_events WHERE action='sso.membership.provisioned' AND tenant=:tenant"),data)==0,'Audit inconsistency: stop'
+   assert c.scalar(text('SELECT COUNT_BIG(*) FROM dbo.policies WHERE tenant=:tenant'),data)==8
+   limit=c.scalar(text("SELECT CHARACTER_MAXIMUM_LENGTH FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA='dbo' AND TABLE_NAME='audit_events' AND COLUMN_NAME='resource'"))
+   assert len('0'*36+':Admin:True:'+r['approval_ref'])<=limit
+   counts={t:c.scalar(text('SELECT COUNT_BIG(*) FROM dbo.'+t)) for t in ('sso_memberships','audit_events')}
+   r['status']='APPLYING_APPROVED_MAPPING';save()
+   with Session(bind=c,join_transaction_mode='rollback_only',expire_on_commit=False) as db:
+    apply_mapping(db,data,'Atiya Tabsum Shaik',r['approval_ref']);db.flush()
+    membership=db.query(SsoMembership).filter_by(directory_tenant=data['directory_tenant'],object_id=data['object_id']).one()
+    assert all(getattr(membership,k)==v for k,v in data.items())
+    r['membership_id']=membership.id
+    resource=f"{membership.id}:Admin:True:{r['approval_ref']}"
+    audit=db.query(Audit).filter_by(tenant=data['tenant'],action='sso.membership.provisioned',resource=resource).one();assert audit.actor=='Atiya Tabsum Shaik'
+    r['audit_id']=audit.id;r['audit_resource']=resource
+    assert all(c.scalar(text('SELECT COUNT_BIG(*) FROM dbo.'+t))==n+1 for t,n in counts.items())
+   r['status']='TRANSACTION_VERIFIED_AWAITING_COMMIT';save()
+  r['commit_confirmed']=True;r['status']='COMMITTED'
+except Exception as e:r['status']='BLOCKED_STOP_INSPECT_NO_RETRY';r['error_kind']=type(e).__name__
+finally:engine.dispose();r['finished_at_utc']=datetime.now(timezone.utc).isoformat();save();print(json.dumps(r))

@@ -1,0 +1,106 @@
+{
+  "scope": "local extracted production assets, SQLite SQL transport, synthetic OIDC/keys and fixture providers",
+  "checks": [
+    {
+      "artifact": "candidate",
+      "revision": "004",
+      "recovery": false,
+      "checks": [
+        "extracted hosting import",
+        "schema/readiness",
+        "release contract",
+        "SPA/auth boundary",
+        "policy lifecycle and LEGACY ALLOW/HUMAN_REVIEW",
+        "database integrity and retained foreign keys"
+      ],
+      "passed": true,
+      "limits": "SQLite transport, synthetic keys/OIDC, fixture providers; no Azure SQL execution"
+    },
+    {
+      "artifact": "candidate",
+      "revision": "005",
+      "recovery": false,
+      "checks": [
+        "extracted hosting import",
+        "schema/readiness",
+        "release contract",
+        "SPA/auth boundary",
+        "mock SSO /chat callback and secure 120-minute session",
+        "policy lifecycle and LEGACY ALLOW/HUMAN_REVIEW",
+        "database integrity and retained foreign keys"
+      ],
+      "passed": true,
+      "limits": "SQLite transport, synthetic keys/OIDC, fixture providers; no Azure SQL execution"
+    },
+    {
+      "artifact": "candidate",
+      "revision": "006",
+      "recovery": false,
+      "checks": [
+        "extracted hosting import",
+        "schema/readiness",
+        "release contract",
+        "SPA/auth boundary",
+        "mock SSO /chat callback and secure 120-minute session",
+        "policy lifecycle and LEGACY ALLOW/HUMAN_REVIEW",
+        "MULTI transition, execution and v1 guard",
+        "database integrity and retained foreign keys"
+      ],
+      "passed": true,
+      "limits": "SQLite transport, synthetic keys/OIDC, fixture providers; no Azure SQL execution"
+    },
+    {
+      "artifact": "candidate",
+      "revision": "007",
+      "recovery": false,
+      "checks": [
+        "extracted hosting import",
+        "schema/readiness",
+        "release contract",
+        "SPA/auth boundary",
+        "mock SSO /chat callback and secure 120-minute session",
+        "policy lifecycle and LEGACY ALLOW/HUMAN_REVIEW",
+        "encrypted capture, expiry and audit",
+        "MULTI transition, execution and v1 guard",
+        "database integrity and retained foreign keys"
+      ],
+      "passed": true,
+      "limits": "SQLite transport, synthetic keys/OIDC, fixture providers; no Azure SQL execution"
+    },
+    {
+      "artifact": "fallback",
+      "revision": "007",
+      "recovery": true,
+      "passed": true,
+      "checks": [
+        "extracted hosting import",
+        "schema/readiness",
+        "release contract",
+        "SPA/auth boundary",
+        "retained ciphertext decryptable with stable synthetic key; capture disabled; cleanup healthy"
+      ]
+    },
+    {
+      "artifact": "fallback",
+      "revision": "007",
+      "recovery": true,
+      "checks": [
+        "extracted hosting import",
+        "schema/readiness",
+        "release contract",
+        "SPA/auth boundary",
+        "mock SSO /chat callback and secure 120-minute session",
+        "policy lifecycle and LEGACY ALLOW/HUMAN_REVIEW",
+        "capture disabled with healthy cleanup",
+        "MULTI transition, execution and v1 guard",
+        "database integrity and retained foreign keys"
+      ],
+      "passed": true,
+      "limits": "SQLite transport, synthetic keys/OIDC, fixture providers; no Azure SQL execution"
+    }
+  ],
+  "deployed": false,
+  "package_integrity": "PASS: exact allowlist and member hashes for both ZIPs",
+  "retained_ciphertext_and_audit": "PASS: unchanged across separate extracted fallback process",
+  "status": "PASS"
+}

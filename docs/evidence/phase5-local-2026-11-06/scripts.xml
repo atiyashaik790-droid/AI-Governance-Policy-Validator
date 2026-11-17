@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="13" skipped="0" tests="70" time="0.498" timestamp="2026-11-06T13:44:11.290811+05:30" hostname="sigmoid-ThinkPad-E14-Gen-4"><testcase classname="scripts.tests.test_hosted_runtime_probe" name="test_complete_results_only_and_no_raw_output" time="0.001" /><testcase classname="scripts.tests.test_hosted_runtime_probe" name="test_incomplete_or_wrong_identity_never_passes[principal_id]" time="0.000" /><testcase classname="scripts.tests.test_hosted_runtime_probe" name="test_incomplete_or_wrong_identity_never_passes[tenant_id]" time="0.000" /><testcase classname="scripts.tests.test_hosted_runtime_probe" name="test_incomplete_or_wrong_identity_never_passes[database]" time="0.000" /><testcase classname="scripts.tests.test_hosted_runtime_probe" name="test_incomplete_or_wrong_identity_never_passes[permission_subject]" time="0.000" /><testcase classname="scripts.tests.test_hosted_runtime_probe" name="test_incomplete_or_wrong_identity_never_passes[hosted_runtime_identity_verified]" time="0.000" /><testcase classname="scripts.tests.test_hosted_runtime_probe" name="test_payload_is_pinned_in_memory_and_uses_read_only_session" time="0.000"><failure message="sso_deployment_readiness.Stop: ('FAIL', 'REVIEWED_SCHEMA_CONTRACT_CHANGED')">def test_payload_is_pinned_in_memory_and_uses_read_only_session():
+&gt;       source = runtime.payload("MARK:")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^
+
+scripts/tests/test_hosted_runtime_probe.py:61: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/verify_hosted_runtime.py:60: in payload
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, category = 'REVIEWED_SCHEMA_CONTRACT_CHANGED'
+
+    def require(condition, category):
+        if not condition:
+&gt;           raise Stop("FAIL", category)
+E           sso_deployment_readiness.Stop: ('FAIL', 'REVIEWED_SCHEMA_CONTRACT_CHANGED')
+
+scripts/sso_deployment_readiness.py:111: Stop</failure></testcase><testcase classname="scripts.tests.test_hosted_runtime_probe" name="test_notactions_and_wildcards_are_allow_metadata_only" time="0.000" /><testcase classname="scripts.tests.test_hosted_runtime_probe" name="test_existing_main_app_channel_only_and_no_restore_claim" time="0.001" /><testcase classname="scripts.tests.test_hosted_runtime_probe" name="test_identity_drift_stops_before_channel_or_recovery" time="0.000" /><testcase classname="scripts.tests.test_hosted_runtime_probe" name="test_channel_unavailable_preserves_permission_metadata" time="0.000" /><testcase classname="scripts.tests.test_hosted_runtime_probe" name="test_pty_probe_collects_only_completed_sanitized_result" time="0.017"><failure message="sso_deployment_readiness.Stop: ('FAIL', 'REVIEWED_SCHEMA_CONTRACT_CHANGED')">def test_pty_probe_collects_only_completed_sanitized_result():
+        # A local fake CLI shell exercises PTY input/output; it never executes payload SQL.
+        source = """
+    import ast, base64, json, re, sys
+    print("banner password=SENSITIVE", flush=True)
+    print("$ ", end="", flush=True)
+    body = []
+    collect = False
+    for line in sys.stdin:
+        if line.strip() == "import base64":
+            collect = True
+        if collect:
+            if line.strip() == "SSO_READ_ONLY_PROBE":
+                break
+            body.append(line)
+    node = ast.parse("".join(body)).body[1].value.args[0].args[0]
+    payload = base64.b64decode(ast.literal_eval(node)).decode()
+    marker = re.search(r"SSO_PROBE_[0-9a-f]+:", payload).group()
+    print(marker + json.dumps(RESULT), flush=True)
+    """.replace("RESULT", repr(success()))
+&gt;       result = runtime.shell_probe([sys.executable, "-c", source], timeout=5)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+scripts/tests/test_hosted_runtime_probe.py:184: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/verify_hosted_runtime.py:465: in shell_probe
+    pending = remote_input(marker, layout_only=layout_only)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/verify_hosted_runtime.py:180: in remote_input
+    layout_bootstrap(marker, layout_only=layout_only).encode()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/verify_hosted_runtime.py:160: in layout_bootstrap
+    runtime = "" if layout_only else payload(marker)
+                                     ^^^^^^^^^^^^^^^
+scripts/verify_hosted_runtime.py:60: in payload
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, category = 'REVIEWED_SCHEMA_CONTRACT_CHANGED'
+
+    def require(condition, category):
+        if not condition:
+&gt;           raise Stop("FAIL", category)
+E           sso_deployment_readiness.Stop: ('FAIL', 'REVIEWED_SCHEMA_CONTRACT_CHANGED')
+
+scripts/sso_deployment_readiness.py:111: Stop</failure></testcase><testcase classname="scripts.tests.test_hosted_runtime_probe" name="test_pty_no_prompt_times_out_without_printing_banner" time="0.217" /><testcase classname="scripts.tests.test_hosted_runtime_probe" name="test_existing_wrapper_dispatch_skips_already_passing_checks" time="0.002" /><testcase classname="scripts.tests.test_hosted_runtime_probe" name="test_stage_b_keeps_runtime_and_rollback_gate_without_database_restore_drill" time="0.001" /><testcase classname="scripts.tests.test_hosted_runtime_probe" name="test_cli_shell_failures_are_precise_and_sanitized[ERROR AuthorizationFailed 403 password=SENSITIVE-MAIN_APP_SHELL_AUTHORIZATION_DENIED]" time="0.019" /><testcase classname="scripts.tests.test_hosted_runtime_probe" name="test_cli_shell_failures_are_precise_and_sanitized[ERROR 'exec' is misspelled token=SENSITIVE-AZURE_CLI_EXEC_UNSUPPORTED]" time="0.015" /><testcase classname="scripts.tests.test_hosted_runtime_probe" name="test_cli_shell_failures_are_precise_and_sanitized[Could not connect websocket password=SENSITIVE-MAIN_APP_SHELL_CONNECTION_FAILED]" time="0.013" /><testcase classname="scripts.tests.test_hosted_runtime_probe" name="test_colored_prompt_and_final_queued_output_are_handled" time="0.020"><failure message="sso_deployment_readiness.Stop: ('FAIL', 'REVIEWED_SCHEMA_CONTRACT_CHANGED')">def test_colored_prompt_and_final_queued_output_are_handled():
+        source = """
+    import ast, base64, json, re, sys
+    print("\\x1b[32mroot@host:# \\x1b[0m", end="", flush=True)
+    body = []
+    for line in sys.stdin:
+        if line.strip() == "import base64" or body:
+            if line.strip() == "SSO_READ_ONLY_PROBE": break
+            body.append(line)
+    node = ast.parse("".join(body)).body[1].value.args[0].args[0]
+    marker = re.search(r"SSO_PROBE_[0-9a-f]+:", base64.b64decode(ast.literal_eval(node)).decode()).group()
+    print(marker + "STAGE:sql_connect", flush=True)
+    print("noise" * 10000, flush=True)
+    print(marker + json.dumps(RESULT), flush=True)
+    """.replace("RESULT", repr(success()))
+&gt;       assert runtime.shell_probe([sys.executable, "-c", source], timeout=5) == success()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+scripts/tests/test_hosted_runtime_probe.py:265: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/verify_hosted_runtime.py:465: in shell_probe
+    pending = remote_input(marker, layout_only=layout_only)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/verify_hosted_runtime.py:180: in remote_input
+    layout_bootstrap(marker, layout_only=layout_only).encode()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/verify_hosted_runtime.py:160: in layout_bootstrap
+    runtime = "" if layout_only else payload(marker)
+                                     ^^^^^^^^^^^^^^^
+scripts/verify_hosted_runtime.py:60: in payload
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, category = 'REVIEWED_SCHEMA_CONTRACT_CHANGED'
+
+    def require(condition, category):
+        if not condition:
+&gt;           raise Stop("FAIL", category)
+E           sso_deployment_readiness.Stop: ('FAIL', 'REVIEWED_SCHEMA_CONTRACT_CHANGED')
+
+scripts/sso_deployment_readiness.py:111: Stop</failure></testcase><testcase classname="scripts.tests.test_hosted_runtime_probe" name="test_incomplete_and_malformed_json_are_distinct" time="0.000" /><testcase classname="scripts.tests.test_hosted_runtime_probe" name="test_runtime_timeout_reports_last_safe_stage" time="0.000" /><testcase classname="scripts.tests.test_hosted_runtime_probe" name="test_real_payload_error_handling_no_sql_writes[permission-SQL_PERMISSION_DENIED-schema_permissions]" time="0.000"><failure message="sso_deployment_readiness.Stop: ('FAIL', 'REVIEWED_SCHEMA_CONTRACT_CHANGED')">monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x777cf4f79e10&gt;
+fault = 'permission', category = 'SQL_PERMISSION_DENIED'
+stage = 'schema_permissions'
+
+    @pytest.mark.parametrize(
+        "fault,category,stage",
+        [
+            ("permission", "SQL_PERMISSION_DENIED", "schema_permissions"),
+            ("identity", "RUNTIME_IDENTITY_CONFIGURATION_MISMATCH", "configuration"),
+            ("imports", "RUNTIME_IMPORT_UNAVAILABLE", "runtime_imports"),
+            ("connection", "SQL_CONNECTION_TIMEOUT", "sql_connect"),
+            (None, "RUNTIME_004_CONTRACT_VERIFIED", "complete"),
+        ],
+    )
+    def test_real_payload_error_handling_no_sql_writes(monkeypatch, fault, category, stage):
+        import io
+        import types
+    
+&gt;       code = runtime.payload("MARK:")
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+
+scripts/tests/test_hosted_runtime_probe.py:305: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/verify_hosted_runtime.py:60: in payload
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, category = 'REVIEWED_SCHEMA_CONTRACT_CHANGED'
+
+    def require(condition, category):
+        if not condition:
+&gt;           raise Stop("FAIL", category)
+E           sso_deployment_readiness.Stop: ('FAIL', 'REVIEWED_SCHEMA_CONTRACT_CHANGED')
+
+scripts/sso_deployment_readiness.py:111: Stop</failure></testcase><testcase classname="scripts.tests.test_hosted_runtime_probe" name="test_real_payload_error_handling_no_sql_writes[identity-RUNTIME_IDENTITY_CONFIGURATION_MISMATCH-configuration]" time="0.000"><failure message="sso_deployment_readiness.Stop: ('FAIL', 'REVIEWED_SCHEMA_CONTRACT_CHANGED')">monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x777cf4f89850&gt;
+fault = 'identity', category = 'RUNTIME_IDENTITY_CONFIGURATION_MISMATCH'
+stage = 'configuration'
+
+    @pytest.mark.parametrize(
+        "fault,category,stage",
+        [
+            ("permission", "SQL_PERMISSION_DENIED", "schema_permissions"),
+            ("identity", "RUNTIME_IDENTITY_CONFIGURATION_MISMATCH", "configuration"),
+            ("imports", "RUNTIME_IMPORT_UNAVAILABLE", "runtime_imports"),
+            ("connection", "SQL_CONNECTION_TIMEOUT", "sql_connect"),
+            (None, "RUNTIME_004_CONTRACT_VERIFIED", "complete"),
+        ],
+    )
+    def test_real_payload_error_handling_no_sql_writes(monkeypatch, fault, category, stage):
+        import io
+        import types
+    
+&gt;       code = runtime.payload("MARK:")
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+
+scripts/tests/test_hosted_runtime_probe.py:305: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/verify_hosted_runtime.py:60: in payload
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, category = 'REVIEWED_SCHEMA_CONTRACT_CHANGED'
+
+    def require(condition, category):
+        if not condition:
+&gt;           raise Stop("FAIL", category)
+E           sso_deployment_readiness.Stop: ('FAIL', 'REVIEWED_SCHEMA_CONTRACT_CHANGED')
+
+scripts/sso_deployment_readiness.py:111: Stop</failure></testcase><testcase classname="scripts.tests.test_hosted_runtime_probe" name="test_real_payload_error_handling_no_sql_writes[imports-RUNTIME_IMPORT_UNAVAILABLE-runtime_imports]" time="0.000"><failure message="sso_deployment_readiness.Stop: ('FAIL', 'REVIEWED_SCHEMA_CONTRACT_CHANGED')">monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x777cf4f8a550&gt;
+fault = 'imports', category = 'RUNTIME_IMPORT_UNAVAILABLE'
+stage = 'runtime_imports'
+
+    @pytest.mark.parametrize(
+        "fault,category,stage",
+        [
+            ("permission", "SQL_PERMISSION_DENIED", "schema_permissions"),
+            ("identity", "RUNTIME_IDENTITY_CONFIGURATION_MISMATCH", "configuration"),
+            ("imports", "RUNTIME_IMPORT_UNAVAILABLE", "runtime_imports"),
+            ("connection", "SQL_CONNECTION_TIMEOUT", "sql_connect"),
+            (None, "RUNTIME_004_CONTRACT_VERIFIED", "complete"),
+        ],
+    )
+    def test_real_payload_error_handling_no_sql_writes(monkeypatch, fault, category, stage):
+        import io
+        import types
+    
+&gt;       code = runtime.payload("MARK:")
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+
+scripts/tests/test_hosted_runtime_probe.py:305: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/verify_hosted_runtime.py:60: in payload
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, category = 'REVIEWED_SCHEMA_CONTRACT_CHANGED'
+
+    def require(condition, category):
+        if not condition:
+&gt;           raise Stop("FAIL", category)
+E           sso_deployment_readiness.Stop: ('FAIL', 'REVIEWED_SCHEMA_CONTRACT_CHANGED')
+
+scripts/sso_deployment_readiness.py:111: Stop</failure></testcase><testcase classname="scripts.tests.test_hosted_runtime_probe" name="test_real_payload_error_handling_no_sql_writes[connection-SQL_CONNECTION_TIMEOUT-sql_connect]" time="0.000"><failure message="sso_deployment_readiness.Stop: ('FAIL', 'REVIEWED_SCHEMA_CONTRACT_CHANGED')">monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x777cf4f4e120&gt;
+fault = 'connection', category = 'SQL_CONNECTION_TIMEOUT', stage = 'sql_connect'
+
+    @pytest.mark.parametrize(
+        "fault,category,stage",
+        [
+            ("permission", "SQL_PERMISSION_DENIED", "schema_permissions"),
+            ("identity", "RUNTIME_IDENTITY_CONFIGURATION_MISMATCH", "configuration"),
+            ("imports", "RUNTIME_IMPORT_UNAVAILABLE", "runtime_imports"),
+            ("connection", "SQL_CONNECTION_TIMEOUT", "sql_connect"),
+            (None, "RUNTIME_004_CONTRACT_VERIFIED", "complete"),
+        ],
+    )
+    def test_real_payload_error_handling_no_sql_writes(monkeypatch, fault, category, stage):
+        import io
+        import types
+    
+&gt;       code = runtime.payload("MARK:")
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+
+scripts/tests/test_hosted_runtime_probe.py:305: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/verify_hosted_runtime.py:60: in payload
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, category = 'REVIEWED_SCHEMA_CONTRACT_CHANGED'
+
+    def require(condition, category):
+        if not condition:
+&gt;           raise Stop("FAIL", category)
+E           sso_deployment_readiness.Stop: ('FAIL', 'REVIEWED_SCHEMA_CONTRACT_CHANGED')
+
+scripts/sso_deployment_readiness.py:111: Stop</failure></testcase><testcase classname="scripts.tests.test_hosted_runtime_probe" name="test_real_payload_error_handling_no_sql_writes[None-RUNTIME_004_CONTRACT_VERIFIED-complete]" time="0.000"><failure message="sso_deployment_readiness.Stop: ('FAIL', 'REVIEWED_SCHEMA_CONTRACT_CHANGED')">monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x777cf4f4f6b0&gt;
+fault = None, category = 'RUNTIME_004_CONTRACT_VERIFIED', stage = 'complete'
+
+    @pytest.mark.parametrize(
+        "fault,category,stage",
+        [
+            ("permission", "SQL_PERMISSION_DENIED", "schema_permissions"),
+            ("identity", "RUNTIME_IDENTITY_CONFIGURATION_MISMATCH", "configuration"),
+            ("imports", "RUNTIME_IMPORT_UNAVAILABLE", "runtime_imports"),
+            ("connection", "SQL_CONNECTION_TIMEOUT", "sql_connect"),
+            (None, "RUNTIME_004_CONTRACT_VERIFIED", "complete"),
+        ],
+    )
+    def test_real_payload_error_handling_no_sql_writes(monkeypatch, fault, category, stage):
+        import io
+        import types
+    
+&gt;       code = runtime.payload("MARK:")
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+
+scripts/tests/test_hosted_runtime_probe.py:305: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/verify_hosted_runtime.py:60: in payload
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, category = 'REVIEWED_SCHEMA_CONTRACT_CHANGED'
+
+    def require(condition, category):
+        if not condition:
+&gt;           raise Stop("FAIL", category)
+E           sso_deployment_readiness.Stop: ('FAIL', 'REVIEWED_SCHEMA_CONTRACT_CHANGED')
+
+scripts/sso_deployment_readiness.py:111: Stop</failure></testcase><testcase classname="scripts.tests.test_hosted_runtime_probe" name="test_manual_fallback_is_self_contained_read_only_command" time="0.000"><failure message="sso_deployment_readiness.Stop: ('FAIL', 'REVIEWED_SCHEMA_CONTRACT_CHANGED')">def test_manual_fallback_is_self_contained_read_only_command():
+&gt;       command = runtime.remote_input("SSO_MANUAL:", close_shell=False).decode()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+scripts/tests/test_hosted_runtime_probe.py:374: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/verify_hosted_runtime.py:180: in remote_input
+    layout_bootstrap(marker, layout_only=layout_only).encode()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/verify_hosted_runtime.py:160: in layout_bootstrap
+    runtime = "" if layout_only else payload(marker)
+                                     ^^^^^^^^^^^^^^^
+scripts/verify_hosted_runtime.py:60: in payload
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, category = 'REVIEWED_SCHEMA_CONTRACT_CHANGED'
+
+    def require(condition, category):
+        if not condition:
+&gt;           raise Stop("FAIL", category)
+E           sso_deployment_readiness.Stop: ('FAIL', 'REVIEWED_SCHEMA_CONTRACT_CHANGED')
+
+scripts/sso_deployment_readiness.py:111: Stop</failure></testcase><testcase classname="scripts.tests.test_hosted_runtime_probe" name="test_shell_pre_python_failures_are_reported[directory-APP_WORKING_DIRECTORY_UNAVAILABLE]" time="0.001"><failure message="sso_deployment_readiness.Stop: ('FAIL', 'REVIEWED_SCHEMA_CONTRACT_CHANGED')">monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x777cf4fcdc50&gt;
+tmp_path = PosixPath('/tmp/pytest-of-sigmoid/pytest-30/test_shell_pre_python_failures0')
+fault = 'directory', category = 'APP_WORKING_DIRECTORY_UNAVAILABLE'
+
+    @pytest.mark.parametrize(
+        "fault,category",
+        [
+            ("directory", "APP_WORKING_DIRECTORY_UNAVAILABLE"),
+            ("package", "RUNTIME_APP_PACKAGE_UNAVAILABLE"),
+            ("python", "RUNTIME_PYTHON_EXECUTABLE_UNAVAILABLE"),
+        ],
+    )
+    def test_shell_pre_python_failures_are_reported(monkeypatch, tmp_path, fault, category):
+        import os
+        import subprocess
+    
+        path = tmp_path / "app-root"
+        if fault != "directory":
+            path.mkdir()
+        if fault == "python":
+            (path / "app").mkdir()
+            (path / "app/database.py").touch()
+        env = {
+            **os.environ,
+            "APP_PATH": str(path),
+            "VIRTUAL_ENV": "",
+            "PATH": str(tmp_path / "empty"),
+        }
+        output = subprocess.run(
+&gt;           ["/bin/sh"], input=runtime.remote_input("MARK:"), env=env, capture_output=True
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+
+scripts/tests/test_hosted_runtime_probe.py:406: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/verify_hosted_runtime.py:180: in remote_input
+    layout_bootstrap(marker, layout_only=layout_only).encode()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/verify_hosted_runtime.py:160: in layout_bootstrap
+    runtime = "" if layout_only else payload(marker)
+                                     ^^^^^^^^^^^^^^^
+scripts/verify_hosted_runtime.py:60: in payload
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, category = 'REVIEWED_SCHEMA_CONTRACT_CHANGED'
+
+    def require(condition, category):
+        if not condition:
+&gt;           raise Stop("FAIL", category)
+E           sso_deployment_readiness.Stop: ('FAIL', 'REVIEWED_SCHEMA_CONTRACT_CHANGED')
+
+scripts/sso_deployment_readiness.py:111: Stop</failure></testcase><testcase classname="scripts.tests.test_hosted_runtime_probe" name="test_shell_pre_python_failures_are_reported[package-RUNTIME_APP_PACKAGE_UNAVAILABLE]" time="0.001"><failure message="sso_deployment_readiness.Stop: ('FAIL', 'REVIEWED_SCHEMA_CONTRACT_CHANGED')">monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x777cf4fcedd0&gt;
+tmp_path = PosixPath('/tmp/pytest-of-sigmoid/pytest-30/test_shell_pre_python_failures1')
+fault = 'package', category = 'RUNTIME_APP_PACKAGE_UNAVAILABLE'
+
+    @pytest.mark.parametrize(
+        "fault,category",
+        [
+            ("directory", "APP_WORKING_DIRECTORY_UNAVAILABLE"),
+            ("package", "RUNTIME_APP_PACKAGE_UNAVAILABLE"),
+            ("python", "RUNTIME_PYTHON_EXECUTABLE_UNAVAILABLE"),
+        ],
+    )
+    def test_shell_pre_python_failures_are_reported(monkeypatch, tmp_path, fault, category):
+        import os
+        import subprocess
+    
+        path = tmp_path / "app-root"
+        if fault != "directory":
+            path.mkdir()
+        if fault == "python":
+            (path / "app").mkdir()
+            (path / "app/database.py").touch()
+        env = {
+            **os.environ,
+            "APP_PATH": str(path),
+            "VIRTUAL_ENV": "",
+            "PATH": str(tmp_path / "empty"),
+        }
+        output = subprocess.run(
+&gt;           ["/bin/sh"], input=runtime.remote_input("MARK:"), env=env, capture_output=True
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+
+scripts/tests/test_hosted_runtime_probe.py:406: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/verify_hosted_runtime.py:180: in remote_input
+    layout_bootstrap(marker, layout_only=layout_only).encode()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/verify_hosted_runtime.py:160: in layout_bootstrap
+    runtime = "" if layout_only else payload(marker)
+                                     ^^^^^^^^^^^^^^^
+scripts/verify_hosted_runtime.py:60: in payload
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, category = 'REVIEWED_SCHEMA_CONTRACT_CHANGED'
+
+    def require(condition, category):
+        if not condition:
+&gt;           raise Stop("FAIL", category)
+E           sso_deployment_readiness.Stop: ('FAIL', 'REVIEWED_SCHEMA_CONTRACT_CHANGED')
+
+scripts/sso_deployment_readiness.py:111: Stop</failure></testcase><testcase classname="scripts.tests.test_hosted_runtime_probe" name="test_shell_pre_python_failures_are_reported[python-RUNTIME_PYTHON_EXECUTABLE_UNAVAILABLE]" time="0.001"><failure message="sso_deployment_readiness.Stop: ('FAIL', 'REVIEWED_SCHEMA_CONTRACT_CHANGED')">monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x777cf4c14600&gt;
+tmp_path = PosixPath('/tmp/pytest-of-sigmoid/pytest-30/test_shell_pre_python_failures2')
+fault = 'python', category = 'RUNTIME_PYTHON_EXECUTABLE_UNAVAILABLE'
+
+    @pytest.mark.parametrize(
+        "fault,category",
+        [
+            ("directory", "APP_WORKING_DIRECTORY_UNAVAILABLE"),
+            ("package", "RUNTIME_APP_PACKAGE_UNAVAILABLE"),
+            ("python", "RUNTIME_PYTHON_EXECUTABLE_UNAVAILABLE"),
+        ],
+    )
+    def test_shell_pre_python_failures_are_reported(monkeypatch, tmp_path, fault, category):
+        import os
+        import subprocess
+    
+        path = tmp_path / "app-root"
+        if fault != "directory":
+            path.mkdir()
+        if fault == "python":
+            (path / "app").mkdir()
+            (path / "app/database.py").touch()
+        env = {
+            **os.environ,
+            "APP_PATH": str(path),
+            "VIRTUAL_ENV": "",
+            "PATH": str(tmp_path / "empty"),
+        }
+        output = subprocess.run(
+&gt;           ["/bin/sh"], input=runtime.remote_input("MARK:"), env=env, capture_output=True
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+
+scripts/tests/test_hosted_runtime_probe.py:406: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/verify_hosted_runtime.py:180: in remote_input
+    layout_bootstrap(marker, layout_only=layout_only).encode()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/verify_hosted_runtime.py:160: in layout_bootstrap
+    runtime = "" if layout_only else payload(marker)
+                                     ^^^^^^^^^^^^^^^
+scripts/verify_hosted_runtime.py:60: in payload
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, category = 'REVIEWED_SCHEMA_CONTRACT_CHANGED'
+
+    def require(condition, category):
+        if not condition:
+&gt;           raise Stop("FAIL", category)
+E           sso_deployment_readiness.Stop: ('FAIL', 'REVIEWED_SCHEMA_CONTRACT_CHANGED')
+
+scripts/sso_deployment_readiness.py:111: Stop</failure></testcase><testcase classname="scripts.tests.test_hosted_runtime_probe" name="test_arm_failure_names_external_stage" time="0.001" /><testcase classname="scripts.tests.test_runtime_layout" name="test_flat_and_backend_layout[False]" time="0.001" /><testcase classname="scripts.tests.test_runtime_layout" name="test_flat_and_backend_layout[True]" time="0.001" /><testcase classname="scripts.tests.test_runtime_layout" name="test_live_process_cwd_overrides_stale_app_path" time="0.001" /><testcase classname="scripts.tests.test_runtime_layout" name="test_app_dir_option_and_venv_selection" time="0.001" /><testcase classname="scripts.tests.test_runtime_layout" name="test_missing_and_ambiguous_are_specific" time="0.001" /><testcase classname="scripts.tests.test_runtime_layout" name="test_bounded_proc_reads_never_expose_command_or_environment" time="0.001" /><testcase classname="scripts.tests.test_runtime_layout" name="test_bootstrap_switches_to_discovered_root_and_interpreter" time="0.000"><failure message="sso_deployment_readiness.Stop: ('FAIL', 'REVIEWED_SCHEMA_CONTRACT_CHANGED')">monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x777cf4e68290&gt;
+tmp_path = PosixPath('/tmp/pytest-of-sigmoid/pytest-30/test_bootstrap_switches_to_dis0')
+
+    def test_bootstrap_switches_to_discovered_root_and_interpreter(monkeypatch, tmp_path):
+        root = package(tmp_path / "backend")
+&gt;       source = runtime.layout_bootstrap("MARK:")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+scripts/tests/test_runtime_layout.py:106: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/verify_hosted_runtime.py:160: in layout_bootstrap
+    runtime = "" if layout_only else payload(marker)
+                                     ^^^^^^^^^^^^^^^
+scripts/verify_hosted_runtime.py:60: in payload
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, category = 'REVIEWED_SCHEMA_CONTRACT_CHANGED'
+
+    def require(condition, category):
+        if not condition:
+&gt;           raise Stop("FAIL", category)
+E           sso_deployment_readiness.Stop: ('FAIL', 'REVIEWED_SCHEMA_CONTRACT_CHANGED')
+
+scripts/sso_deployment_readiness.py:111: Stop</failure></testcase><testcase classname="scripts.tests.test_runtime_layout" name="test_layout_only_bootstrap_never_imports_runtime_or_connects" time="0.006" /><testcase classname="scripts.tests.test_runtime_layout" name="test_no_python_is_specific" time="0.001" /><testcase classname="scripts.tests.test_runtime_layout" name="test_layout_record_cannot_become_runtime_proof" time="0.000" /><testcase classname="scripts.tests.test_sso_readiness" name="test_successful_cli_checks_never_prove_runtime_or_recovery" time="0.001" /><testcase classname="scripts.tests.test_sso_readiness" name="test_fail_closed_and_stop[subscription]" time="0.001" /><testcase classname="scripts.tests.test_sso_readiness" name="test_fail_closed_and_stop[tenant]" time="0.001" /><testcase classname="scripts.tests.test_sso_readiness" name="test_fail_closed_and_stop[stopped]" time="0.000" /><testcase classname="scripts.tests.test_sso_readiness" name="test_fail_closed_and_stop[ambiguous]" time="0.000" /><testcase classname="scripts.tests.test_sso_readiness" name="test_fail_closed_and_stop[identity]" time="0.000" /><testcase classname="scripts.tests.test_sso_readiness" name="test_fail_closed_and_stop[database]" time="0.000" /><testcase classname="scripts.tests.test_sso_readiness" name="test_sql_contract_stops_before_backup[revision-005]" time="0.001" /><testcase classname="scripts.tests.test_sso_readiness" name="test_sql_contract_stops_before_backup[sso_schema-True]" time="0.001" /><testcase classname="scripts.tests.test_sso_readiness" name="test_sql_contract_stops_before_backup[versioned-False]" time="0.001" /><testcase classname="scripts.tests.test_sso_readiness" name="test_sql_contract_stops_before_backup[database_mutated-True]" time="0.001" /><testcase classname="scripts.tests.test_sso_readiness" name="test_sql_contract_stops_before_backup[permission_subject-runtime]" time="0.001" /><testcase classname="scripts.tests.test_sso_readiness" name="test_raw_errors_and_extra_response_fields_are_not_reported" time="0.001" /><testcase classname="scripts.tests.test_sso_readiness" name="test_subprocess_failure_and_timeout_sanitized" time="0.000" /><testcase classname="scripts.tests.test_sso_readiness" name="test_missing_context_stops_before_cloud" time="0.000" /><testcase classname="scripts.tests.test_sso_readiness" name="test_artifact_tamper_and_missing_stop_before_cloud" time="0.000" /><testcase classname="scripts.tests.test_sso_readiness" name="test_later_stages_cannot_execute_or_cascade[B]" time="0.001" /><testcase classname="scripts.tests.test_sso_readiness" name="test_later_stages_cannot_execute_or_cascade[C]" time="0.001" /><testcase classname="scripts.tests.test_sso_readiness" name="test_later_stages_cannot_execute_or_cascade[D]" time="0.001" /><testcase classname="scripts.tests.test_sso_readiness" name="test_later_stages_cannot_execute_or_cascade[E]" time="0.001" /><testcase classname="scripts.tests.test_sso_readiness" name="test_later_stages_cannot_execute_or_cascade[F]" time="0.001" /><testcase classname="scripts.tests.test_sso_readiness" name="test_later_stages_cannot_execute_or_cascade[G]" time="0.001" /><testcase classname="scripts.tests.test_sso_readiness" name="test_default_is_a_only" time="0.000" /><testcase classname="scripts.tests.test_sso_readiness" name="test_backup_metadata_failure_stops_permissions_check[retention]" time="0.001" /><testcase classname="scripts.tests.test_sso_readiness" name="test_backup_metadata_failure_stops_permissions_check[future]" time="0.001" /><testcase classname="scripts.tests.test_sso_readiness" name="test_backup_metadata_failure_stops_permissions_check[missing]" time="0.000" /><testcase classname="scripts.tests.test_sso_readiness" name="test_read_only_errors_categorized_without_disclosure[Temporary failure in name resolution-AZURE_NETWORK_OR_DNS_UNAVAILABLE]" time="0.000" /><testcase classname="scripts.tests.test_sso_readiness" name="test_read_only_errors_categorized_without_disclosure[Please run az login-EXISTING_CLI_AUTHENTICATION_UNAVAILABLE]" time="0.000" /><testcase classname="scripts.tests.test_sso_readiness" name="test_read_only_errors_categorized_without_disclosure[AuthorizationFailed-EXISTING_READ_PERMISSION_UNAVAILABLE]" time="0.000" /></testsuite></testsuites>

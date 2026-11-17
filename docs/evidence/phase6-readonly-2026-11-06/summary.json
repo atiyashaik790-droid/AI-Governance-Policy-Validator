@@ -1,0 +1,16 @@
+{
+  "observed_at_utc": "2026-11-06T08:27:24.395135+00:00",
+  "overall": "PARTIAL",
+  "deployment": "BLOCKED",
+  "hosted_release": "1.2-ca5df7c1dc19e525",
+  "hosted_database_revision": "005",
+  "pending_migrations": [
+    "006",
+    "007"
+  ],
+  "hosted_sso_session_minutes": 60,
+  "human_review_keys_present": false,
+  "cloud_mutations": false,
+  "provider_calls": false,
+  "migrations_executed": false
+}

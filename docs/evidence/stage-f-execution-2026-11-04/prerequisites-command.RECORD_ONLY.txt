@@ -1,0 +1,44 @@
+import os,json,subprocess,copy
+from pathlib import Path
+from datetime import datetime,timezone
+R=Path.cwd();os.environ['AZURE_CONFIG_DIR']=str(R/'.azure-sql-cli');P=R/'docs/evidence/stage-f-execution-2026-11-04/prerequisites.json'
+sub='25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6';group='rg_techdemo_Atiya_Tabsum_Shaik';app='app-governance-validator-atiya-1026';tenant='4ac50105-0c66-404e-a107-7cbd8a9a6442';client='a1a7da0b-ad29-49ec-a9ea-c59219e60df5';oid='53ae1688-20af-403d-89e2-c33ab08a36e0';origin='https://'+app+'.azurewebsites.net';root=origin+'/';callback=origin+'/api/sso/callback'
+arm='https://management.azure.com/subscriptions/'+sub+'/resourceGroups/'+group+'/providers/Microsoft.Web/sites/'+app
+r={'stage':'F','approval':'Explicit user configuration-only rollout approval','started_at_utc':datetime.now(timezone.utc).isoformat(),'sso_activation_attempted':False,'settings_changed_by_agent':False,'status':'PRECHECK'}
+def save():P.write_text(json.dumps(r,indent=2)+'\n')
+def az(args,body=None):
+ command=['az']+args+['-o','json','--only-show-errors'];data=None
+ if body is not None:command+=['--body','@/dev/stdin'];data=json.dumps(body)
+ p=subprocess.run(command,input=data,capture_output=True,text=True,timeout=50)
+ if p.returncode:raise RuntimeError('Azure operation failed; raw response withheld')
+ return json.loads(p.stdout) if p.stdout.strip() else None
+def rest(method,url,body=None):return az(['rest','--method',method,'--url',url],body)
+try:
+ a=az(['account','show','--query','{subscription:id,tenant:tenantId}']);assert a=={'subscription':sub,'tenant':tenant}
+ raw=az(['webapp','config','appsettings','list','--subscription',sub,'-g',group,'-n',app]);settings={x['name']:x.get('value','') for x in raw};del raw
+ assert settings.get('SSO_ENABLED','false').lower()=='false' and settings.get('DEMO_BROWSER_LOGIN_ENABLED','true').lower()=='true'
+ r['secret_setting_present']=bool(settings.get('ENTRA_CLIENT_SECRET'));r['existing_demo_enabled']=True
+ graph='https://graph.microsoft.com/v1.0/applications/'+oid
+ before=rest('GET',graph+'?$select=id,appId,signInAudience,web,spa,publicClient')
+ assert before['appId']==client and before['id']==oid and before['signInAudience']=='AzureADMyOrg'
+ uris=before['web'].get('redirectUris',[]);assert callback in uris and set(uris).issubset({callback,root})
+ r['redirect_uris_before']=uris;r['status']='APPLYING_APPROVED_PREREQUISITES';save()
+ if root not in uris:
+  rest('PATCH',graph,{'web':{'redirectUris':uris+[root]}})
+ after=rest('GET',graph+'?$select=id,appId,signInAudience,web,spa,publicClient')
+ assert set(after['web']['redirectUris'])=={root,callback}
+ expected=copy.deepcopy(before);expected['web']['redirectUris']=after['web']['redirectUris']
+ # Graph may add corresponding redirectUriSettings; compare all other Web properties.
+ wb={k:v for k,v in before['web'].items() if k not in ('redirectUris','redirectUriSettings')};wa={k:v for k,v in after['web'].items() if k not in ('redirectUris','redirectUriSettings')}
+ assert wb==wa and all(before[k]==after[k] for k in ('id','appId','signInAudience','spa','publicClient'))
+ r['redirect_uris_verified']=after['web']['redirectUris'];r['other_registration_properties_preserved']=True;save()
+ logsurl=arm+'/config/logs?api-version=2024-11-01';logs=rest('GET',logsurl)['properties'];old=copy.deepcopy(logs)
+ assert logs['applicationLogs']['fileSystem']['level']=='Information'
+ if logs['httpLogs']['fileSystem']['enabled']:
+  logs['httpLogs']['fileSystem']['enabled']=False;rest('PUT',logsurl,{'properties':logs})
+ final=rest('GET',logsurl)['properties'];expect=copy.deepcopy(old);expect['httpLogs']['fileSystem']['enabled']=False
+ assert final==expect
+ r['http_filesystem_logging_enabled']=False;r['application_filesystem_logging_level']=final['applicationLogs']['fileSystem']['level'];r['other_logging_properties_preserved']=True
+ r['status']='PREREQUISITES_VERIFIED_AWAITING_USER_SECRET_ENTRY';r['sso_enabled']=False;r['demo_login_enabled']=True
+except Exception as e:r['status']='BLOCKED_STOP_INSPECT';r['error_kind']=type(e).__name__
+r['updated_at_utc']=datetime.now(timezone.utc).isoformat();save();print(json.dumps(r))

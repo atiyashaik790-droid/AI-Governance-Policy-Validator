@@ -1,0 +1,7 @@
+{
+  "source": "Exact platform status lines observed in read-only SCM response; timing independently present in read-only-findings.json",
+  "platform_status_lines": [
+    "2026-11-08T09:18:55.7788308Z Site startup probe succeeded after 35.0939857 seconds.",
+    "2026-11-08T09:18:56.3157902Z Site started."
+  ]
+}

@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="131" failures="0" errors="0" time="29.662809108">
+    <testsuite name="src/App.test.tsx" timestamp="2026-11-06T08:31:50.664Z" hostname="sigmoid-ThinkPad-E14-Gen-4" tests="13" failures="0" errors="0" skipped="0" time="3.10088575">
+        <testcase classname="src/App.test.tsx" name="real API boundary &gt; sends authenticated request bodies" time="0.013065275">
+        </testcase>
+        <testcase classname="src/App.test.tsx" name="real API boundary &gt; propagates backend rejection" time="0.003018377">
+        </testcase>
+        <testcase classname="src/App.test.tsx" name="real API boundary &gt; requires successful Microsoft session restoration" time="0.462749572">
+        </testcase>
+        <testcase classname="src/App.test.tsx" name="governed playground integration &gt; displays an inspected response with the fixture label" time="0.439953059">
+        </testcase>
+        <testcase classname="src/App.test.tsx" name="governed playground integration &gt; withholds rejected output" time="0.300305694">
+        </testcase>
+        <testcase classname="src/App.test.tsx" name="same-origin deployment API &gt; uses a single leading slash when VITE_API_URL is /" time="0.005120196">
+        </testcase>
+        <testcase classname="src/App.test.tsx" name="truthful generation diagnostics &gt; renders FAILED without implying successful release" time="0.407915316">
+        </testcase>
+        <testcase classname="src/App.test.tsx" name="truthful generation diagnostics &gt; renders NOT_INVOKED without implying successful release" time="0.202723727">
+        </testcase>
+        <testcase classname="src/App.test.tsx" name="truthful generation diagnostics &gt; renders SUCCEEDED without implying successful release" time="0.247031659">
+        </testcase>
+        <testcase classname="src/App.test.tsx" name="separate audit histories &gt; loads policy and governance histories independently and clears old metadata" time="0.239200187">
+        </testcase>
+        <testcase classname="src/App.test.tsx" name="remove policies while retaining history &gt; deletes a disabled inactive policy with its version and retains active-policy protection" time="0.413957718">
+        </testcase>
+        <testcase classname="src/App.test.tsx" name="remove policies while retaining history &gt; shows retained published versions from policy history without restore controls" time="0.160092035">
+        </testcase>
+        <testcase classname="src/App.test.tsx" name="shows actor attribution, safe categories and pinned names/versions in separate audit histories" time="0.202717263">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/AttachmentPicker.test.tsx" timestamp="2026-11-06T08:31:50.667Z" hostname="sigmoid-ThinkPad-E14-Gen-4" tests="5" failures="0" errors="0" skipped="0" time="1.921775857">
+        <testcase classname="src/AttachmentPicker.test.tsx" name="previews, replaces and submits one governed document request in LEGACY mode" time="0.98073582">
+        </testcase>
+        <testcase classname="src/AttachmentPicker.test.tsx" name="previews, replaces and submits one governed document request in MULTI mode" time="0.273106072">
+        </testcase>
+        <testcase classname="src/AttachmentPicker.test.tsx" name="removes an attachment and preserves prompt-only routing" time="0.361379184">
+        </testcase>
+        <testcase classname="src/AttachmentPicker.test.tsx" name="rejects unsupported and oversized files before submission" time="0.107793357">
+        </testcase>
+        <testcase classname="src/AttachmentPicker.test.tsx" name="shows extraction errors without retrying the governed request" time="0.193291993">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/AuditFilters.test.tsx" timestamp="2026-11-06T08:31:50.668Z" hostname="sigmoid-ThinkPad-E14-Gen-4" tests="7" failures="0" errors="0" skipped="0" time="3.159877931">
+        <testcase classname="src/AuditFilters.test.tsx" name="applies server filters, preserves them on every tab, and clears them (v2=false)" time="1.624224183">
+        </testcase>
+        <testcase classname="src/AuditFilters.test.tsx" name="applies server filters, preserves them on every tab, and clears them (v2=true)" time="0.983980569">
+        </testcase>
+        <testcase classname="src/AuditFilters.test.tsx" name="keeps filters on subsequent server pages and resets pagination on Apply" time="0.232898656">
+        </testcase>
+        <testcase classname="src/AuditFilters.test.tsx" name="rejects reversed and overlong ranges before any history request" time="0.0648139">
+        </testcase>
+        <testcase classname="src/AuditFilters.test.tsx" name="shows a filtered error and retains the applied range for Retry" time="0.068858794">
+        </testcase>
+        <testcase classname="src/AuditFilters.test.tsx" name="removes the provider banner and export creation buttons while preserving diagnostics and export history" time="0.137965212">
+        </testcase>
+        <testcase classname="src/AuditFilters.test.tsx" name="shows filtered loading and the explicit date-range empty state" time="0.045377109">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/Backend.integration.test.jsx" timestamp="2026-11-06T08:31:50.668Z" hostname="sigmoid-ThinkPad-E14-Gen-4" tests="1" failures="0" errors="0" skipped="0" time="6.313904016">
+        <testcase classname="src/Backend.integration.test.jsx" name="React to disposable FastAPI integration &gt; completes policy, simulation, decisions, review, feedback and failed offline export through existing screens" time="3.600094728">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/CustomCategories.test.tsx" timestamp="2026-11-06T08:31:50.668Z" hostname="sigmoid-ThinkPad-E14-Gen-4" tests="5" failures="0" errors="0" skipped="0" time="1.639427729">
+        <testcase classname="src/CustomCategories.test.tsx" name="adds, edits, disables and removes custom categories alongside built-in controls, then saves through the authenticated API" time="1.02426077">
+        </testcase>
+        <testcase classname="src/CustomCategories.test.tsx" name="does not offer custom configuration to Policy Owner" time="0.175124899">
+        </testcase>
+        <testcase classname="src/CustomCategories.test.tsx" name="does not offer custom configuration to Developer" time="0.137918392">
+        </testcase>
+        <testcase classname="src/CustomCategories.test.tsx" name="does not offer custom configuration to Reviewer" time="0.186464837">
+        </testcase>
+        <testcase classname="src/CustomCategories.test.tsx" name="does not offer custom configuration to Auditor" time="0.113181091">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/DecisionNotice.test.tsx" timestamp="2026-11-06T08:31:50.669Z" hostname="sigmoid-ThinkPad-E14-Gen-4" tests="18" failures="0" errors="0" skipped="0" time="1.646877385">
+        <testcase classname="src/DecisionNotice.test.tsx" name="shows accessible default BLOCK guidance with a next action" time="0.444211355">
+        </testcase>
+        <testcase classname="src/DecisionNotice.test.tsx" name="shows accessible default HUMAN_REVIEW guidance with a next action" time="0.070871231">
+        </testcase>
+        <testcase classname="src/DecisionNotice.test.tsx" name="shows accessible default REDACT guidance with a next action" time="0.040394189">
+        </testcase>
+        <testcase classname="src/DecisionNotice.test.tsx" name="shows accessible default ALLOW guidance with a next action" time="0.028646024">
+        </testcase>
+        <testcase classname="src/DecisionNotice.test.tsx" name="distinguishes output review and technical failures" time="0.002388527">
+        </testcase>
+        <testcase classname="src/DecisionNotice.test.tsx" name="never releases a response without successful output governance: {&quot;decision&quot;:&quot;BLOCK&quot;,&quot;output&quot;:{&quot;decision&quot;:&quot;ALLOW&quot;}}" time="0.000801959">
+        </testcase>
+        <testcase classname="src/DecisionNotice.test.tsx" name="never releases a response without successful output governance: {&quot;decision&quot;:&quot;HUMAN_REVIEW&quot;,&quot;output&quot;:{&quot;decision&quot;:&quot;ALLOW&quot;}}" time="0.000961335">
+        </testcase>
+        <testcase classname="src/DecisionNotice.test.tsx" name="never releases a response without successful output governance: {&quot;decision&quot;:&quot;REDACT&quot;,&quot;output&quot;:null}" time="0.000397322">
+        </testcase>
+        <testcase classname="src/DecisionNotice.test.tsx" name="never releases a response without successful output governance: {&quot;decision&quot;:&quot;REDACT&quot;,&quot;output&quot;:{&quot;decision&quot;:&quot;BLOCK&quot;}}" time="0.000496642">
+        </testcase>
+        <testcase classname="src/DecisionNotice.test.tsx" name="never releases a response without successful output governance: {&quot;decision&quot;:&quot;REDACT&quot;,&quot;output&quot;:{&quot;decision&quot;:&quot;REDACT&quot;,&quot;revalidated&quot;:false}}" time="0.000529685">
+        </testcase>
+        <testcase classname="src/DecisionNotice.test.tsx" name="never releases a response without successful output governance: {&quot;decision&quot;:&quot;REDACT&quot;,&quot;output&quot;:{&quot;decision&quot;:&quot;ALLOW&quot;,&quot;inspection_status&quot;:&quot;INCOMPLETE&quot;}}" time="0.000345911">
+        </testcase>
+        <testcase classname="src/DecisionNotice.test.tsx" name="never releases a response without successful output governance: {&quot;decision&quot;:&quot;ALLOW&quot;,&quot;output&quot;:{&quot;decision&quot;:&quot;ALLOW&quot;,&quot;breakdown&quot;:{&quot;secret_detection&quot;:&quot;UNKNOWN&quot;}}}" time="0.000231628">
+        </testcase>
+        <testcase classname="src/DecisionNotice.test.tsx" name="never releases a response without successful output governance: {&quot;decision&quot;:&quot;BLOCK&quot;,&quot;generation_status&quot;:&quot;FAILED&quot;,&quot;output&quot;:{&quot;decision&quot;:&quot;ALLOW&quot;}}" time="0.000222086">
+        </testcase>
+        <testcase classname="src/DecisionNotice.test.tsx" name="renders message text without executing HTML or exposing other result fields" time="0.007549102">
+        </testcase>
+        <testcase classname="src/DecisionNotice.test.tsx" name="offers safe Admin message templates and read-only controls to other roles" time="0.053138398">
+        </testcase>
+        <testcase classname="src/DecisionNotice.test.tsx" name="integrates review guidance into the Playground for uploads=false without showing held content" time="0.574974675">
+        </testcase>
+        <testcase classname="src/DecisionNotice.test.tsx" name="integrates review guidance into the Playground for uploads=true without showing held content" time="0.414694583">
+        </testcase>
+        <testcase classname="src/DecisionNotice.test.tsx" name="releases ALLOW and REDACT only after successful output inspection" time="0.003131685">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/LoadingPerformance.test.tsx" timestamp="2026-11-06T08:31:50.670Z" hostname="sigmoid-ThinkPad-E14-Gen-4" tests="1" failures="0" errors="0" skipped="0" time="0.207188128">
+        <testcase classname="src/LoadingPerformance.test.tsx" name="records the bootstrap waterfall under identical deterministic delays" time="0.205797763">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/MultiPolicy.test.tsx" timestamp="2026-11-06T08:31:50.670Z" hostname="sigmoid-ThinkPad-E14-Gen-4" tests="10" failures="0" errors="0" skipped="0" time="2.838609098">
+        <testcase classname="src/MultiPolicy.test.tsx" name="requires an explicit version, sends a strong workspace precondition, and deactivates independently" time="1.340866337">
+        </testcase>
+        <testcase classname="src/MultiPolicy.test.tsx" name="surfaces stale ETags and refreshes without replaying the mutation" time="0.404018231">
+        </testcase>
+        <testcase classname="src/MultiPolicy.test.tsx" name="hides activation and mode mutation for Policy Owner" time="0.180189417">
+        </testcase>
+        <testcase classname="src/MultiPolicy.test.tsx" name="hides activation and mode mutation for Developer" time="0.15901364">
+        </testcase>
+        <testcase classname="src/MultiPolicy.test.tsx" name="hides activation and mode mutation for Reviewer" time="0.101063246">
+        </testcase>
+        <testcase classname="src/MultiPolicy.test.tsx" name="hides activation and mode mutation for Auditor" time="0.123387417">
+        </testcase>
+        <testcase classname="src/MultiPolicy.test.tsx" name="uses one v2 request, renders all per-policy input/output results and keeps the precondition" time="0.154253235">
+        </testcase>
+        <testcase classname="src/MultiPolicy.test.tsx" name="retains schema-005 legacy routing and clearly marks MULTI unavailable" time="0.119142357">
+        </testcase>
+        <testcase classname="src/MultiPolicy.test.tsx" name="uses versioned history even after returning to LEGACY and displays sanitized evidence" time="0.101124264">
+        </testcase>
+        <testcase classname="src/MultiPolicy.test.tsx" name="preserves LEGACY activation controls for Policy Owners" time="0.153580358">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/MultiSelectDropdown.test.tsx" timestamp="2026-11-06T08:31:50.670Z" hostname="sigmoid-ThinkPad-E14-Gen-4" tests="3" failures="0" errors="0" skipped="0" time="0.458554326">
+        <testcase classname="src/MultiSelectDropdown.test.tsx" name="keeps a compact summary, supports multiple selections and restores focus on Escape" time="0.38324928">
+        </testcase>
+        <testcase classname="src/MultiSelectDropdown.test.tsx" name="searches without submitting the policy form and closes on outside click" time="0.057062267">
+        </testcase>
+        <testcase classname="src/MultiSelectDropdown.test.tsx" name="prevents editing in read-only mode" time="0.015805092">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/ReviewContent.test.tsx" timestamp="2026-11-06T08:31:50.671Z" hostname="sigmoid-ThinkPad-E14-Gen-4" tests="10" failures="0" errors="0" skipped="0" time="1.295479535">
+        <testcase classname="src/ReviewContent.test.tsx" name="shows professional metadata and never prefetches protected content" time="0.355856513">
+        </testcase>
+        <testcase classname="src/ReviewContent.test.tsx" name="reveals exact whitespace as plain text only, sends version and hides on request" time="0.130772875">
+        </testcase>
+        <testcase classname="src/ReviewContent.test.tsx" name="never reveals EXPIRED content" time="0.031782556">
+        </testcase>
+        <testcase classname="src/ReviewContent.test.tsx" name="never reveals PURGED content" time="0.054266019">
+        </testcase>
+        <testcase classname="src/ReviewContent.test.tsx" name="never reveals NEVER_RETAINED content" time="0.027141795">
+        </testcase>
+        <testcase classname="src/ReviewContent.test.tsx" name="never reveals UNAVAILABLE content" time="0.028283783">
+        </testcase>
+        <testcase classname="src/ReviewContent.test.tsx" name="clears on signout and never displays late response after unmount" time="0.043934895">
+        </testcase>
+        <testcase classname="src/ReviewContent.test.tsx" name="distinguishes retrieval failure and shows no held text" time="0.043118483">
+        </testcase>
+        <testcase classname="src/ReviewContent.test.tsx" name="clears revealed text when reassignment or resolution changes the case" time="0.05935546">
+        </testcase>
+        <testcase classname="src/ReviewContent.test.tsx" name="automatically clears content at the server-provided reveal deadline" time="0.5187451">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/SettingsAnalytics.test.tsx" timestamp="2026-11-06T08:31:50.671Z" hostname="sigmoid-ThinkPad-E14-Gen-4" tests="12" failures="0" errors="0" skipped="0" time="2.906602825">
+        <testcase classname="src/SettingsAnalytics.test.tsx" name="distinguishes daily reservations, retained statuses and unavailable recorded tokens" time="0.58732845">
+        </testcase>
+        <testcase classname="src/SettingsAnalytics.test.tsx" name="handles empty usage without inventing token records or dividing by zero" time="0.047561035">
+        </testcase>
+        <testcase classname="src/SettingsAnalytics.test.tsx" name="shows usage loading and retries a failed request" time="0.085083892">
+        </testcase>
+        <testcase classname="src/SettingsAnalytics.test.tsx" name="renders truthful page summaries and missing session identity fields" time="0.139648514">
+        </testcase>
+        <testcase classname="src/SettingsAnalytics.test.tsx" name="requires confirmation and only revokes a synthetic session through mocked fetch" time="0.186530109">
+        </testcase>
+        <testcase classname="src/SettingsAnalytics.test.tsx" name="preserves session pagination and refresh with page-scoped counts" time="0.396657767">
+        </testcase>
+        <testcase classname="src/SettingsAnalytics.test.tsx" name="handles session load failure and empty recovery" time="0.070833054">
+        </testcase>
+        <testcase classname="src/SettingsAnalytics.test.tsx" name="moves usage out of Settings and gates analytics access for Admin in LEGACY" time="0.6446037">
+        </testcase>
+        <testcase classname="src/SettingsAnalytics.test.tsx" name="moves usage out of Settings and gates analytics access for Auditor in LEGACY" time="0.255157971">
+        </testcase>
+        <testcase classname="src/SettingsAnalytics.test.tsx" name="moves usage out of Settings and gates analytics access for Reviewer in LEGACY" time="0.204124002">
+        </testcase>
+        <testcase classname="src/SettingsAnalytics.test.tsx" name="moves usage out of Settings and gates analytics access for Admin in MULTI" time="0.223531332">
+        </testcase>
+        <testcase classname="src/SettingsAnalytics.test.tsx" name="surfaces synthetic revocation errors and leaves the session available" time="0.06317722">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/Sso.test.tsx" timestamp="2026-11-06T08:31:50.672Z" hostname="sigmoid-ThinkPad-E14-Gen-4" tests="19" failures="0" errors="0" skipped="0" time="1.750437086">
+        <testcase classname="src/Sso.test.tsx" name="Microsoft browser authentication &gt; shows accessible SSO login without manual token entry" time="0.375112994">
+        </testcase>
+        <testcase classname="src/Sso.test.tsx" name="Microsoft browser authentication &gt; restores a cookie session and displays approved membership" time="0.112604269">
+        </testcase>
+        <testcase classname="src/Sso.test.tsx" name="Microsoft browser authentication &gt; shows access denial without reflecting provider error details" time="0.018724874">
+        </testcase>
+        <testcase classname="src/Sso.test.tsx" name="Microsoft browser authentication &gt; disables login when server configuration is incomplete" time="0.047195762">
+        </testcase>
+        <testcase classname="src/Sso.test.tsx" name="Microsoft browser authentication &gt; sends cookies and CSRF with no browser bearer token" time="0.004386109">
+        </testcase>
+        <testcase classname="src/Sso.test.tsx" name="Microsoft browser authentication &gt; returns expired sessions to sign-in" time="0.103407236">
+        </testcase>
+        <testcase classname="src/Sso.test.tsx" name="Microsoft browser authentication &gt; preserves the requested route in login initiation" time="0.001460846">
+        </testcase>
+        <testcase classname="src/Sso.test.tsx" name="SSO-only interactive login &gt; never offers token login when configured=true" time="0.049468639">
+        </testcase>
+        <testcase classname="src/Sso.test.tsx" name="SSO-only interactive login &gt; never offers token login when configured=false" time="0.075213658">
+        </testcase>
+        <testcase classname="src/Sso.test.tsx" name="responsive fail-closed session bootstrap &gt; shows the login panel immediately but never loads workspace data before authentication" time="0.035308638">
+        </testcase>
+        <testcase classname="src/Sso.test.tsx" name="responsive fail-closed session bootstrap &gt; restores a verified session without waiting for public availability" time="0.232969294">
+        </testcase>
+        <testcase classname="src/Sso.test.tsx" name="responsive fail-closed session bootstrap &gt; treats anonymous bootstrap denial as sign-in, not an expired-session alert" time="0.073847043">
+        </testcase>
+        <testcase classname="src/Sso.test.tsx" name="responsive fail-closed session bootstrap &gt; bounds stalled restoration and permits an explicit retry without automatic retries" time="0.11039728">
+        </testcase>
+        <testcase classname="src/Sso.test.tsx" name="precise session ending and simplified login &gt; shows only the server-confirmed expired reason after restore" time="0.030708937">
+        </testcase>
+        <testcase classname="src/Sso.test.tsx" name="precise session ending and simplified login &gt; shows only the server-confirmed ended reason after restore" time="0.028570874">
+        </testcase>
+        <testcase classname="src/Sso.test.tsx" name="precise session ending and simplified login &gt; keeps first/anonymous visits clean even if an unrelated 401 event arrives" time="0.064166058">
+        </testcase>
+        <testcase classname="src/Sso.test.tsx" name="precise session ending and simplified login &gt; handles a protected API expired response without exposing server details" time="0.053611695">
+        </testcase>
+        <testcase classname="src/Sso.test.tsx" name="precise session ending and simplified login &gt; handles a protected API ended response without exposing server details" time="0.049833294">
+        </testcase>
+        <testcase classname="src/Sso.test.tsx" name="precise session ending and simplified login &gt; manual logout returns to clean login and ignores subsequent stale session events" time="0.115038872">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/UserPortal.test.tsx" timestamp="2026-11-06T08:31:50.673Z" hostname="sigmoid-ThinkPad-E14-Gen-4" tests="19" failures="0" errors="0" skipped="0" time="2.396077955">
+        <testcase classname="src/UserPortal.test.tsx" name="routes User from / to chatbot only" time="0.493223803">
+        </testcase>
+        <testcase classname="src/UserPortal.test.tsx" name="routes User from /policies to chatbot only" time="0.086291986">
+        </testcase>
+        <testcase classname="src/UserPortal.test.tsx" name="routes User from /reports to chatbot only" time="0.062048869">
+        </testcase>
+        <testcase classname="src/UserPortal.test.tsx" name="routes User from /reviews to chatbot only" time="0.133173197">
+        </testcase>
+        <testcase classname="src/UserPortal.test.tsx" name="routes User from /settings to chatbot only" time="0.068102643">
+        </testcase>
+        <testcase classname="src/UserPortal.test.tsx" name="routes User from /simulator to chatbot only" time="0.090493798">
+        </testcase>
+        <testcase classname="src/UserPortal.test.tsx" name="routes User from /playground to chatbot only" time="0.073218842">
+        </testcase>
+        <testcase classname="src/UserPortal.test.tsx" name="preserves existing Studio routing for Admin" time="0.140628677">
+        </testcase>
+        <testcase classname="src/UserPortal.test.tsx" name="preserves existing Studio routing for Policy Owner" time="0.11258311">
+        </testcase>
+        <testcase classname="src/UserPortal.test.tsx" name="preserves existing Studio routing for Reviewer" time="0.086581513">
+        </testcase>
+        <testcase classname="src/UserPortal.test.tsx" name="preserves existing Studio routing for Auditor" time="0.069080872">
+        </testcase>
+        <testcase classname="src/UserPortal.test.tsx" name="preserves existing Studio routing for Developer" time="0.065824636">
+        </testcase>
+        <testcase classname="src/UserPortal.test.tsx" name="fails closed on unknown or missing roles" time="0.025341481">
+        </testcase>
+        <testcase classname="src/UserPortal.test.tsx" name="sends independent governed turns with CSRF in LEGACY and never resends history" time="0.249373013">
+        </testcase>
+        <testcase classname="src/UserPortal.test.tsx" name="sends independent governed turns with CSRF in MULTI and never resends history" time="0.194842272">
+        </testcase>
+        <testcase classname="src/UserPortal.test.tsx" name="preserves friendly BLOCK guidance for an attachment turn" time="0.154281571">
+        </testcase>
+        <testcase classname="src/UserPortal.test.tsx" name="preserves friendly HUMAN_REVIEW guidance for an attachment turn" time="0.109149324">
+        </testcase>
+        <testcase classname="src/UserPortal.test.tsx" name="preserves friendly REDACT guidance for an attachment turn" time="0.124900193">
+        </testcase>
+        <testcase classname="src/UserPortal.test.tsx" name="shows extraction errors without replaying a request or adding a failed turn" time="0.050960658">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/api.test.ts" timestamp="2026-11-06T08:31:50.675Z" hostname="sigmoid-ThinkPad-E14-Gen-4" tests="8" failures="0" errors="0" skipped="0" time="0.027111487">
+        <testcase classname="src/api.test.ts" name="reliable API transport &gt; handles HTML proxy errors safely" time="0.007636384">
+        </testcase>
+        <testcase classname="src/api.test.ts" name="reliable API transport &gt; reports validation locations" time="0.0012074">
+        </testcase>
+        <testcase classname="src/api.test.ts" name="reliable API transport &gt; clears revoked sessions and dispatches sign-in event" time="0.002191395">
+        </testcase>
+        <testcase classname="src/api.test.ts" name="reliable API transport &gt; times out mutations without retrying" time="0.007173386">
+        </testcase>
+        <testcase classname="src/api.test.ts" name="reliable API transport &gt; accepts caller cancellation" time="0.000918515">
+        </testcase>
+        <testcase classname="src/api.test.ts" name="reliable API transport &gt; handles a network outage without retry" time="0.000690384">
+        </testcase>
+        <testcase classname="src/api.test.ts" name="bounded read waits &gt; times out GETs after 20 seconds without retrying" time="0.003310437">
+        </testcase>
+        <testcase classname="src/api.test.ts" name="preserves session reason codes and never treats a permission denial as sign-out" time="0.001830128">
+        </testcase>
+    </testsuite>
+</testsuites>

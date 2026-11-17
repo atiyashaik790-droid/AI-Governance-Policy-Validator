@@ -1,0 +1,18 @@
+{
+  "status": "PROPOSED_AWAITING_EXPLICIT_USER_APPROVAL",
+  "subscription": "25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6",
+  "resource_group": "rg_techdemo_Atiya_Tabsum_Shaik",
+  "server": "sql-governance-validator-dev-atiya",
+  "rule_name": "stage-e-temp-20261104-101-0-62-148",
+  "start_ip_address": "101.0.62.148",
+  "end_ip_address": "101.0.62.148",
+  "ip_confirmation": "HTTPS IPv4 lookup and SQL error 40615 independently report the same client IPv4",
+  "existing_rules_count": 15,
+  "existing_matching_rule": false,
+  "public_network_access": "Enabled",
+  "private_endpoint_connections": [],
+  "existing_operator_route": "No usable approved route identified; existing App Service route uses runtime identity rather than operator credentials",
+  "security_impact": "Permit SQL network connection attempts from this single public IPv4, including any hosts sharing its NAT. Existing SQL authentication and database authorization still required. Server-level network rule applies across this logical SQL server.",
+  "cleanup": "Delete only this newly created rule after verification; no automatic expiry. Attempt cleanup even if provisioning or verification fails.",
+  "firewall_changed": false
+}

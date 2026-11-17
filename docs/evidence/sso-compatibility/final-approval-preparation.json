@@ -1,0 +1,21 @@
+{
+  "status": "PREPARED_BLOCKED_PENDING_RUNTIME_AND_RECOVERY",
+  "date": "2026-11-04",
+  "operator_sql_revision": "004",
+  "operator_contract": "PASS_USER_REPORTED",
+  "hosted_runtime_identity_verified": false,
+  "live_arm_identity_lookup": "BLOCKED_DNS",
+  "backup_recovery_policy": "PENDING",
+  "candidate_release": "1.2-6749226f1af65b63",
+  "candidate_sha256": "9d81fa9b7700557eac2cb41edd5ab861d19a6b8c4f9052e55068e5eab784df80",
+  "candidate_integrity": "PASS",
+  "candidate_includes_mssql_reflection_fix": true,
+  "candidate_required_migration": "004",
+  "candidate_supported_migrations": [
+    "004",
+    "005"
+  ],
+  "new_tests_run_this_task": false,
+  "hosted_changes": false,
+  "secret_access": false
+}

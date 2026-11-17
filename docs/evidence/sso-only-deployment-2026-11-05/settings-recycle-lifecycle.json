@@ -1,0 +1,47 @@
+{
+  "status": "PASS",
+  "events": [
+    {
+      "timestamp": "2026-11-05T08:10:26.6209109Z",
+      "categories": [
+        "starting container"
+      ]
+    },
+    {
+      "timestamp": "2026-11-05T08:10:27.1374582Z",
+      "categories": [
+        "container start method finished"
+      ]
+    },
+    {
+      "timestamp": "2026-11-05T08:10:27.1389900Z",
+      "categories": [
+        "container is ready"
+      ]
+    },
+    {
+      "timestamp": "2026-11-05T08:12:36.5696619Z",
+      "categories": [
+        "site startup probe succeeded"
+      ]
+    },
+    {
+      "timestamp": "2026-11-05T08:12:37.7770247Z",
+      "categories": [
+        "site startup probe succeeded"
+      ]
+    },
+    {
+      "timestamp": "2026-11-05T08:12:40.2678317Z",
+      "categories": [
+        "site is running"
+      ]
+    },
+    {
+      "timestamp": "2026-11-05T08:12:40.3589561Z",
+      "categories": [
+        "site is running"
+      ]
+    }
+  ]
+}

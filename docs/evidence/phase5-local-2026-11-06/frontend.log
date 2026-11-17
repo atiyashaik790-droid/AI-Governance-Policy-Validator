@@ -1,0 +1,55 @@
+
+> governance-console@1.2.0 test
+> vitest run --reporter=default --reporter=junit --outputFile.junit=/tmp/governance-phase5.3AynYc/frontend.xml
+
+
+ RUN  v5.0.5 /home/sigmoid/AI governance policy validator/frontend
+
+ ✓ src/AttachmentPicker.test.tsx (5 tests) 1232ms
+   ✓ previews, replaces and submits one governed document request in LEGACY mode 668ms
+ ✓ src/DecisionNotice.test.tsx (18 tests) 1425ms
+   ✓ shows accessible default BLOCK guidance with a next action 396ms
+   ✓ integrates review guidance into the Playground for uploads=false without showing held content 408ms
+   ✓ integrates review guidance into the Playground for uploads=true without showing held content 357ms
+ ✓ src/ReviewContent.test.tsx (10 tests) 1261ms
+   ✓ shows professional metadata and never prefetches protected content 330ms
+   ✓ automatically clears content at the server-provided reveal deadline 522ms
+ ✓ src/Sso.test.tsx (19 tests) 1629ms
+   ✓ Microsoft browser authentication (7)
+     ✓ shows accessible SSO login without manual token entry 362ms
+ ✓ src/CustomCategories.test.tsx (5 tests) 1676ms
+   ✓ adds, edits, disables and removes custom categories alongside built-in controls, then saves through the authenticated API 1111ms
+ ✓ src/api.test.ts (8 tests) 26ms
+ ✓ src/UserPortal.test.tsx (19 tests) 2321ms
+   ✓ routes User from / to chatbot only 596ms
+ ✓ src/MultiSelectDropdown.test.tsx (3 tests) 320ms
+ ✓ src/LoadingPerformance.test.tsx (1 test) 309ms
+   ✓ records the bootstrap waterfall under identical deterministic delays 307ms
+ ✓ src/App.test.tsx (13 tests) 2868ms
+   ✓ real API boundary (3)
+     ✓ requires successful Microsoft session restoration 316ms
+   ✓ governed playground integration (2)
+     ✓ displays an inspected response with the fixture label 339ms
+   ✓ remove policies while retaining history (2)
+     ✓ deletes a disabled inactive policy with its version and retains active-policy protection 599ms
+ ✓ src/MultiPolicy.test.tsx (10 tests) 2732ms
+   ✓ requires an explicit version, sends a strong workspace precondition, and deactivates independently 1386ms
+   ✓ surfaces stale ETags and refreshes without replaying the mutation 353ms
+ ✓ src/SettingsAnalytics.test.tsx (12 tests) 2877ms
+   ✓ distinguishes daily reservations, retained statuses and unavailable recorded tokens 344ms
+   ✓ preserves session pagination and refresh with page-scoped counts 376ms
+   ✓ moves usage out of Settings and gates analytics access for Admin in LEGACY 859ms
+   ✓ moves usage out of Settings and gates analytics access for Auditor in LEGACY 315ms
+ ✓ src/AuditFilters.test.tsx (7 tests) 3251ms
+   ✓ applies server filters, preserves them on every tab, and clears them (v2=false) 1792ms
+   ✓ applies server filters, preserves them on every tab, and clears them (v2=true) 969ms
+ ✓ src/Backend.integration.test.jsx (1 test) 6491ms
+   ✓ React to disposable FastAPI integration (1)
+     ✓ completes policy, simulation, decisions, review, feedback and failed offline export through existing screens 4226ms
+
+ Test Files  14 passed (14)
+      Tests  131 passed (131)
+   Start at  13:32:51
+   Duration  7.52s (tests 69%, environment 22%, import 6%, setup 2%, transform 1%)
+
+JUNIT report written to /tmp/governance-phase5.3AynYc/frontend.xml

@@ -1,0 +1,21 @@
+{
+  "observed_utc": "2026-11-08T07:56:07.665291+00:00",
+  "read_only": true,
+  "restore_performed": false,
+  "status": "Online",
+  "earliestRestoreDate": "2026-11-01T07:56:08.0867047Z",
+  "backupRedundancy": "Local",
+  "sku": {
+    "name": "Standard",
+    "tier": "Standard",
+    "capacity": 10
+  },
+  "retention": {
+    "retentionDays": 7,
+    "diffBackupIntervalInHours": 24
+  },
+  "inventory": [
+    "sqldb-governance-validator-dev",
+    "master"
+  ]
+}

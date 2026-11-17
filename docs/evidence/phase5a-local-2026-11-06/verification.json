@@ -1,0 +1,84 @@
+{
+  "original_failures": [
+    {
+      "nodeid": "scripts.tests.test_hosted_runtime_probe::test_payload_is_pinned_in_memory_and_uses_read_only_session",
+      "original_message": "sso_deployment_readiness.Stop: ('FAIL', 'REVIEWED_SCHEMA_CONTRACT_CHANGED')",
+      "corrected_result": "passed"
+    },
+    {
+      "nodeid": "scripts.tests.test_hosted_runtime_probe::test_pty_probe_collects_only_completed_sanitized_result",
+      "original_message": "sso_deployment_readiness.Stop: ('FAIL', 'REVIEWED_SCHEMA_CONTRACT_CHANGED')",
+      "corrected_result": "passed"
+    },
+    {
+      "nodeid": "scripts.tests.test_hosted_runtime_probe::test_colored_prompt_and_final_queued_output_are_handled",
+      "original_message": "sso_deployment_readiness.Stop: ('FAIL', 'REVIEWED_SCHEMA_CONTRACT_CHANGED')",
+      "corrected_result": "passed"
+    },
+    {
+      "nodeid": "scripts.tests.test_hosted_runtime_probe::test_real_payload_error_handling_no_sql_writes[permission-SQL_PERMISSION_DENIED-schema_permissions]",
+      "original_message": "sso_deployment_readiness.Stop: ('FAIL', 'REVIEWED_SCHEMA_CONTRACT_CHANGED')",
+      "corrected_result": "passed"
+    },
+    {
+      "nodeid": "scripts.tests.test_hosted_runtime_probe::test_real_payload_error_handling_no_sql_writes[identity-RUNTIME_IDENTITY_CONFIGURATION_MISMATCH-configuration]",
+      "original_message": "sso_deployment_readiness.Stop: ('FAIL', 'REVIEWED_SCHEMA_CONTRACT_CHANGED')",
+      "corrected_result": "passed"
+    },
+    {
+      "nodeid": "scripts.tests.test_hosted_runtime_probe::test_real_payload_error_handling_no_sql_writes[imports-RUNTIME_IMPORT_UNAVAILABLE-runtime_imports]",
+      "original_message": "sso_deployment_readiness.Stop: ('FAIL', 'REVIEWED_SCHEMA_CONTRACT_CHANGED')",
+      "corrected_result": "passed"
+    },
+    {
+      "nodeid": "scripts.tests.test_hosted_runtime_probe::test_real_payload_error_handling_no_sql_writes[connection-SQL_CONNECTION_TIMEOUT-sql_connect]",
+      "original_message": "sso_deployment_readiness.Stop: ('FAIL', 'REVIEWED_SCHEMA_CONTRACT_CHANGED')",
+      "corrected_result": "passed"
+    },
+    {
+      "nodeid": "scripts.tests.test_hosted_runtime_probe::test_real_payload_error_handling_no_sql_writes[None-RUNTIME_004_CONTRACT_VERIFIED-complete]",
+      "original_message": "sso_deployment_readiness.Stop: ('FAIL', 'REVIEWED_SCHEMA_CONTRACT_CHANGED')",
+      "corrected_result": "passed"
+    },
+    {
+      "nodeid": "scripts.tests.test_hosted_runtime_probe::test_manual_fallback_is_self_contained_read_only_command",
+      "original_message": "sso_deployment_readiness.Stop: ('FAIL', 'REVIEWED_SCHEMA_CONTRACT_CHANGED')",
+      "corrected_result": "passed"
+    },
+    {
+      "nodeid": "scripts.tests.test_hosted_runtime_probe::test_shell_pre_python_failures_are_reported[directory-APP_WORKING_DIRECTORY_UNAVAILABLE]",
+      "original_message": "sso_deployment_readiness.Stop: ('FAIL', 'REVIEWED_SCHEMA_CONTRACT_CHANGED')",
+      "corrected_result": "passed"
+    },
+    {
+      "nodeid": "scripts.tests.test_hosted_runtime_probe::test_shell_pre_python_failures_are_reported[package-RUNTIME_APP_PACKAGE_UNAVAILABLE]",
+      "original_message": "sso_deployment_readiness.Stop: ('FAIL', 'REVIEWED_SCHEMA_CONTRACT_CHANGED')",
+      "corrected_result": "passed"
+    },
+    {
+      "nodeid": "scripts.tests.test_hosted_runtime_probe::test_shell_pre_python_failures_are_reported[python-RUNTIME_PYTHON_EXECUTABLE_UNAVAILABLE]",
+      "original_message": "sso_deployment_readiness.Stop: ('FAIL', 'REVIEWED_SCHEMA_CONTRACT_CHANGED')",
+      "corrected_result": "passed"
+    },
+    {
+      "nodeid": "scripts.tests.test_runtime_layout::test_bootstrap_switches_to_discovered_root_and_interpreter",
+      "original_message": "sso_deployment_readiness.Stop: ('FAIL', 'REVIEWED_SCHEMA_CONTRACT_CHANGED')",
+      "corrected_result": "passed"
+    }
+  ],
+  "approved_fingerprint": "e3530bb5af9199ee850f54f71984da4643dbd458c791dcd5b2c9a5b4e7612497",
+  "frozen_contract_sha256": "e3530bb5af9199ee850f54f71984da4643dbd458c791dcd5b2c9a5b4e7612497",
+  "application_helper_sha256": "b5da9f6e2f593f98be3750fe964260a54802bc375910b2b12312d926d08119e2",
+  "readiness": {
+    "passed": 57,
+    "failure": 13
+  },
+  "readiness-corrected": {
+    "passed": 74
+  },
+  "backend-regression": {
+    "passed": 24
+  },
+  "local_database_sha256": "0cad09a35e73ad70bb5ff5e522f783f9b59fdd5b3c31eb5b5dddd4d300795766",
+  "local_database_revision": "003"
+}

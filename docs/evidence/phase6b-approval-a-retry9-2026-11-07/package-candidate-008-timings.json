@@ -1,0 +1,87 @@
+[
+  {
+    "event": "governance.stage",
+    "stage": "review.schema",
+    "outcome": "ok",
+    "duration_ms": 52693.105,
+    "sql_count": 80,
+    "catalog_count": 76,
+    "sql_ms": 36845.165,
+    "connection_acquire_ms": 0.029,
+    "correlation_id": "185bb78b-68ef-4d42-99b1-54cfb83a4060"
+  },
+  {
+    "event": "governance.stage",
+    "stage": "authentication",
+    "outcome": "error",
+    "duration_ms": 0.015,
+    "correlation_id": "93962385-8cfc-4a2b-8ad5-b959ef8bc10f"
+  },
+  {
+    "event": "governance.stage",
+    "stage": "authentication",
+    "outcome": "ok",
+    "duration_ms": 0.06,
+    "correlation_id": "7248f1e2-2f4f-4dac-87cf-ba15dff19d53"
+  },
+  {
+    "event": "governance.stage",
+    "stage": "authentication",
+    "outcome": "ok",
+    "duration_ms": 868.589,
+    "correlation_id": "3b479003-39fc-46df-9386-851cd86a00b9"
+  },
+  {
+    "event": "governance.stage",
+    "stage": "authentication",
+    "outcome": "ok",
+    "duration_ms": 813.294,
+    "correlation_id": "69122510-9b8c-4d6f-8c01-68e33b6563fc"
+  },
+  {
+    "event": "governance.stage",
+    "stage": "authentication",
+    "outcome": "ok",
+    "duration_ms": 813.0,
+    "correlation_id": "faf700a7-0657-4df0-8dd8-687ca88dc906"
+  },
+  {
+    "event": "governance.stage",
+    "stage": "authentication",
+    "outcome": "ok",
+    "duration_ms": 898.341,
+    "correlation_id": "d8ac74db-bdb5-4aea-9c5e-d8e9a71455f2"
+  },
+  {
+    "event": "governance.stage",
+    "stage": "authentication",
+    "outcome": "ok",
+    "duration_ms": 810.646,
+    "correlation_id": "03dcd53d-7a47-4812-acc5-dd26be0ed108"
+  },
+  {
+    "event": "governance.stage",
+    "stage": "authentication",
+    "outcome": "ok",
+    "duration_ms": 816.14,
+    "correlation_id": "9b3cabf6-2894-4e97-b9a2-d963a970e55d"
+  },
+  {
+    "event": "governance.stage",
+    "stage": "review.schema",
+    "outcome": "ok",
+    "duration_ms": 51770.724,
+    "sql_count": 80,
+    "catalog_count": 76,
+    "sql_ms": 36340.618,
+    "connection_acquire_ms": 0.019,
+    "correlation_id": "9b3cabf6-2894-4e97-b9a2-d963a970e55d"
+  },
+  {
+    "event": "governance.stage",
+    "stage": "authentication",
+    "outcome": "ok",
+    "duration_ms": 816.855,
+    "correlation_id": "2727f7e5-831a-4db2-8f75-8faf2439f2fe"
+  }
+]

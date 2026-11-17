@@ -1,0 +1,18 @@
+{
+  "provider": "SYNTHETIC_NOT_MICROSOFT",
+  "passed": 11,
+  "failed": 0,
+  "checks": [
+    "Protected API denies missing cookie",
+    "Production login exposes Microsoft button only",
+    "Authorization redirect and callback restore original route",
+    "Session cookie attributes and no browser token storage",
+    "Refresh restores server session",
+    "CSRF missing denied",
+    "Logout revokes session before Microsoft signout",
+    "Sign-in succeeds again",
+    "Expired cookie returns protected navigation to login",
+    "Mobile login fits viewport",
+    "No browser runtime errors"
+  ]
+}

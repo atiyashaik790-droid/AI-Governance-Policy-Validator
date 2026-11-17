@@ -1,0 +1,45 @@
+import sys,json,hashlib,logging
+from pathlib import Path
+from datetime import datetime,timezone
+R=Path.cwd();sys.path.insert(0,str(R/'backend'))
+for n in ('azure','msal','sqlalchemy.engine'):logging.getLogger(n).setLevel(logging.CRITICAL)
+r={'stage':'D','status':'PREPARING','started_at_utc':datetime.now(timezone.utc).isoformat(),'approval':'Explicit user Stage D only','database_permission_changes_committed':False,'schema_changed':False,'memberships_provisioned':False}
+p=R/'docs/evidence/stage-d-execution-2026-11-04/grant-execution.json';e=None
+try:
+ from app.config import settings
+ from app.azure_sql import create_azure_sql_engine
+ from sqlalchemy.engine import URL
+ from sqlalchemy import text
+ assert settings.azure_sql_tenant_id=='4ac50105-0c66-404e-a107-7cbd8a9a6442' and settings.azure_sql_user_object_id=='b5d8bfbe-f03a-4132-a13f-ab49aae834b7'
+ batch=(R/'deployment/stage-d-sso-data-permissions.REVIEW_ONLY.sql').read_bytes()
+ r['approved_sql_sha256']=hashlib.sha256(batch).hexdigest();assert r['approved_sql_sha256']=='379cdb13d45722129d90c99000e2ca4a435bc3f2d4c4dfdcba48af256001d79a'
+ e=create_azure_sql_engine(URL.create('mssql+pyodbc',host='sql-governance-validator-dev-atiya.database.windows.net',database='sqldb-governance-validator-dev'),settings.azure_sql_tenant_id,settings.azure_sql_user_object_id,auth_mode='cli')
+ with e.begin() as c:
+  c.exec_driver_sql('SET XACT_ABORT ON; SET LOCK_TIMEOUT 15000; SET NOCOUNT ON;')
+  assert c.scalar(text('SELECT DB_NAME()'))=='sqldb-governance-validator-dev'
+  assert list(c.execute(text('SELECT version_num FROM dbo.alembic_version')).scalars())==['005']
+  role=c.scalar(text("SELECT principal_id FROM sys.database_principals WHERE name='governance_validator_web_runtime' AND type='R' AND is_fixed_role=0"));assert role
+  required={'sso_memberships':['SELECT'],'sso_transactions':['SELECT','INSERT','UPDATE'],'sso_sessions':['SELECT','INSERT','UPDATE']}
+  ids={n:c.scalar(text('SELECT OBJECT_ID(:n)'),{'n':'dbo.'+n}) for n in required};assert all(ids.values())
+  snapshot=text('SELECT class,major_id,minor_id,grantee_principal_id,grantor_principal_id,permission_name,state FROM sys.database_permissions')
+  before=set(tuple(x) for x in c.execute(snapshot));roles_before=set(tuple(x) for x in c.execute(text('SELECT role_principal_id,member_principal_id FROM sys.database_role_members')))
+  expected={(ids[n],perm) for n,ps in required.items() for perm in ps}
+  existing={(x[1],x[5]) for x in before if x[0]==1 and x[2]==0 and x[3]==role and x[6] in ('G','W')}
+  assert not existing.intersection(expected), 'Permission drift; stop rather than repeat grants'
+  membership_count=c.scalar(text('SELECT COUNT_BIG(*) FROM dbo.sso_memberships'))
+  r['status']='SUBMITTING_APPROVED_GRANTS';p.write_text(json.dumps(r,indent=2)+'\n')
+  c.exec_driver_sql(batch.decode()).close()
+  after=set(tuple(x) for x in c.execute(snapshot));added=after-before;removed=before-after
+  assert not removed and len(added)==7
+  assert all(x[0]==1 and x[2]==0 and x[3]==role and x[6]=='G' for x in added)
+  assert {(x[1],x[5]) for x in added}==expected
+  assert set(tuple(x) for x in c.execute(text('SELECT role_principal_id,member_principal_id FROM sys.database_role_members')))==roles_before
+  assert c.scalar(text('SELECT COUNT_BIG(*) FROM dbo.sso_memberships'))==membership_count
+  assert list(c.execute(text('SELECT version_num FROM dbo.alembic_version')).scalars())==['005']
+  r['exact_added_permissions']={n:ps for n,ps in required.items()};r['other_database_permissions_unchanged']=True;r['sql_role_memberships_unchanged']=True;r['sso_membership_count_unchanged']=True
+ r['status']='COMMITTED_APPROVED_SEVEN_PERMISSIONS';r['database_permission_changes_committed']=True;r['committed_at_utc']=datetime.now(timezone.utc).isoformat()
+except Exception as x:r['status']='STOP_AND_INSPECT_NO_RETRY';r['error_kind']=type(x).__name__;r['commit_outcome']='Inspect fresh state if submitted; do not blindly retry'
+finally:
+ if e is not None:e.dispose()
+ r['finished_at_utc']=datetime.now(timezone.utc).isoformat();p.write_text(json.dumps(r,indent=2)+'\n');print(json.dumps(r))
+raise SystemExit(0 if r['database_permission_changes_committed'] else 1)

@@ -1,0 +1,317 @@
+{
+  "sql_read_only": true,
+  "permission_subject": "executing_cli_identity",
+  "hosted_runtime_identity_verified": false,
+  "membership_roles": {
+    "status": "VERIFIED",
+    "data": [
+      {
+        "role": "Admin",
+        "enabled": 1,
+        "count": 1
+      }
+    ]
+  },
+  "pending_reviews": {
+    "status": "VERIFIED",
+    "data": [
+      {
+        "count": 0
+      }
+    ]
+  },
+  "reserved_inference": {
+    "status": "VERIFIED",
+    "data": [
+      {
+        "count": 0
+      }
+    ]
+  },
+  "invalid_legacy_identities": {
+    "status": "VERIFIED",
+    "data": [
+      {
+        "count": 0
+      }
+    ]
+  },
+  "invalid_version_tenants": {
+    "status": "VERIFIED",
+    "data": [
+      {
+        "count": 0
+      }
+    ]
+  },
+  "invalid_assignment_tenants": {
+    "status": "VERIFIED",
+    "data": [
+      {
+        "count": 0
+      }
+    ]
+  },
+  "new_tables": {
+    "status": "VERIFIED",
+    "data": []
+  },
+  "runtime_role_membership": {
+    "status": "VERIFIED",
+    "data": [
+      {
+        "count": 1
+      }
+    ]
+  },
+  "runtime_role_grants": {
+    "status": "VERIFIED",
+    "data": [
+      {
+        "object_name": "active_policy_assignments",
+        "permission_name": "INSERT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "active_policy_assignments",
+        "permission_name": "SELECT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "active_policy_assignments",
+        "permission_name": "UPDATE",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "alembic_version",
+        "permission_name": "SELECT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "audit_events",
+        "permission_name": "INSERT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "audit_events",
+        "permission_name": "SELECT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "demo_sessions",
+        "permission_name": "INSERT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "demo_sessions",
+        "permission_name": "SELECT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "demo_sessions",
+        "permission_name": "UPDATE",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "evaluation_exports",
+        "permission_name": "INSERT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "evaluation_exports",
+        "permission_name": "SELECT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "evaluation_exports",
+        "permission_name": "UPDATE",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "export_jobs",
+        "permission_name": "INSERT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "export_jobs",
+        "permission_name": "SELECT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "export_jobs",
+        "permission_name": "UPDATE",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "feedback_records",
+        "permission_name": "INSERT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "feedback_records",
+        "permission_name": "SELECT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "human_review_cases",
+        "permission_name": "INSERT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "human_review_cases",
+        "permission_name": "SELECT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "human_review_cases",
+        "permission_name": "UPDATE",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "inference_rate_buckets",
+        "permission_name": "INSERT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "inference_rate_buckets",
+        "permission_name": "SELECT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "inference_rate_buckets",
+        "permission_name": "UPDATE",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "inference_usage",
+        "permission_name": "INSERT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "inference_usage",
+        "permission_name": "SELECT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "inference_usage",
+        "permission_name": "UPDATE",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "policies",
+        "permission_name": "DELETE",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "policies",
+        "permission_name": "INSERT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "policies",
+        "permission_name": "SELECT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "policies",
+        "permission_name": "UPDATE",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "policy_versions",
+        "permission_name": "INSERT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "policy_versions",
+        "permission_name": "SELECT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "review_assignments",
+        "permission_name": "INSERT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "review_assignments",
+        "permission_name": "SELECT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "review_assignments",
+        "permission_name": "UPDATE",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "review_notes",
+        "permission_name": "INSERT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "review_notes",
+        "permission_name": "SELECT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "sso_memberships",
+        "permission_name": "SELECT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "sso_memberships",
+        "permission_name": "VIEW DEFINITION",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "sso_sessions",
+        "permission_name": "INSERT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "sso_sessions",
+        "permission_name": "SELECT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "sso_sessions",
+        "permission_name": "UPDATE",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "sso_sessions",
+        "permission_name": "VIEW DEFINITION",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "sso_transactions",
+        "permission_name": "INSERT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "sso_transactions",
+        "permission_name": "SELECT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "sso_transactions",
+        "permission_name": "UPDATE",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "sso_transactions",
+        "permission_name": "VIEW DEFINITION",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "validation_executions",
+        "permission_name": "INSERT",
+        "state_desc": "GRANT"
+      },
+      {
+        "object_name": "validation_executions",
+        "permission_name": "SELECT",
+        "state_desc": "GRANT"
+      }
+    ]
+  }
+}

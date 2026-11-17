@@ -1,0 +1,49 @@
+{
+  "observed_utc": "2026-11-08T15:40:33.182044+00:00",
+  "mode": "ARM_GET_ONLY_PLUS_PUBLIC_AZURE_RETAIL_PRICE",
+  "account": {
+    "id": "25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6",
+    "name": "Devops_Azure_SV",
+    "state": "Enabled",
+    "tenantId": "4ac50105-0c66-404e-a107-7cbd8a9a6442"
+  },
+  "changes": false,
+  "direct_sql_queries": false,
+  "source": {
+    "name": "sqldb-governance-validator-dev",
+    "location": "westus2",
+    "sku": {
+      "name": "Standard",
+      "tier": "Standard",
+      "capacity": 10
+    },
+    "status": "Online",
+    "earliestRestoreDate": "2026-11-01T15:40:34.3119929Z",
+    "backupRedundancy": "Local"
+  },
+  "backup_policy": {
+    "retentionDays": 7,
+    "diffBackupIntervalInHours": 24
+  },
+  "inventory": [
+    "sqldb-governance-validator-dev",
+    "master"
+  ],
+  "proposed_persistent_database": "sqldb-gpv-demo-v008-20261108",
+  "proposed_name_absent": true,
+  "retail_price_items": [
+    {
+      "currencyCode": "USD",
+      "retailPrice": 0.4839,
+      "unitOfMeasure": "1/Day",
+      "armRegionName": "westus2",
+      "productName": "SQL Database Single Standard",
+      "skuName": "S0",
+      "meterName": "S0 DTUs",
+      "type": "Consumption",
+      "effectiveStartDate": "2014-11-01T00:00:00Z"
+    }
+  ],
+  "retail_has_more_pages": false,
+  "retail_pricing_source": "https://prices.azure.com/api/retail/prices"
+}

@@ -1,0 +1,739 @@
+........................................................................ [  4%]
+........................................................................ [  9%]
+........................................................................ [ 14%]
+........................................................................ [ 19%]
+........................................................................ [ 24%]
+........................................................................ [ 29%]
+........................................................................ [ 34%]
+........................................................................ [ 39%]
+........................................................................ [ 43%]
+........................................................................ [ 48%]
+........................................................................ [ 53%]
+........................................................................ [ 58%]
+........................................................................ [ 63%]
+........................................................................ [ 68%]
+........................................................................ [ 73%]
+....................EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE...............E.EE [ 78%]
+....F....F.............................................................. [ 83%]
+........................................................................ [ 87%]
+........................................................................ [ 92%]
+........................................................................ [ 97%]
+..................................                                       [100%]
+==================================== ERRORS ====================================
+__________ ERROR at setup of test_http_sequence_and_persisted_counts ___________
+backend/tests/test_sql_http_plan.py:195: in local_workflow
+    runner.workflows()
+scripts/test_azure_sql_http.py:507: in workflows
+    require(
+scripts/test_azure_sql_http.py:31: in require
+    raise SafetyStop("HTTP acceptance condition failed")
+E   sql_http_driver.SafetyStop: HTTP acceptance condition failed
+---------------------------- Captured stderr setup -----------------------------
+{"event": "http.completed", "correlation_id": "04b6fd79-b191-4270-b354-035a4258a682", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.87}
+{"event": "http.completed", "correlation_id": "d494de70-b4aa-4cab-9ff7-12c151d0fc58", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 13.89}
+{"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.066, "correlation_id": "57d9e780-596b-4827-ac5b-46443e9eb868"}
+{"event": "http.completed", "correlation_id": "57d9e780-596b-4827-ac5b-46443e9eb868", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 2.46}
+------------------------------ Captured log setup ------------------------------
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "04b6fd79-b191-4270-b354-035a4258a682", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.87}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "d494de70-b4aa-4cab-9ff7-12c151d0fc58", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 13.89}
+INFO     governance.stages:stage_timing.py:63 {"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.066, "correlation_id": "57d9e780-596b-4827-ac5b-46443e9eb868"}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "57d9e780-596b-4827-ac5b-46443e9eb868", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 2.46}
+_ ERROR at setup of test_core_mapping_matches_api_while_session_mapping_is_orm _
+backend/tests/test_sql_http_plan.py:195: in local_workflow
+    runner.workflows()
+scripts/test_azure_sql_http.py:507: in workflows
+    require(
+scripts/test_azure_sql_http.py:31: in require
+    raise SafetyStop("HTTP acceptance condition failed")
+E   sql_http_driver.SafetyStop: HTTP acceptance condition failed
+---------------------------- Captured stderr setup -----------------------------
+{"event": "http.completed", "correlation_id": "08e0c333-3be7-4d82-9b89-3f5f6ea2a880", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.89}
+{"event": "http.completed", "correlation_id": "6659a900-1a26-4978-8395-a5ae36a26ac5", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 10.22}
+{"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.053, "correlation_id": "61fa57f8-7c2f-4b2f-88e9-031d8d308b69"}
+{"event": "http.completed", "correlation_id": "61fa57f8-7c2f-4b2f-88e9-031d8d308b69", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 2.01}
+------------------------------ Captured log setup ------------------------------
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "08e0c333-3be7-4d82-9b89-3f5f6ea2a880", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.89}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "6659a900-1a26-4978-8395-a5ae36a26ac5", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 10.22}
+INFO     governance.stages:stage_timing.py:63 {"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.053, "correlation_id": "61fa57f8-7c2f-4b2f-88e9-031d8d308b69"}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "61fa57f8-7c2f-4b2f-88e9-031d8d308b69", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 2.01}
+________ ERROR at setup of test_version_mismatch_rejected[document-{}] _________
+backend/tests/test_sql_http_plan.py:195: in local_workflow
+    runner.workflows()
+scripts/test_azure_sql_http.py:507: in workflows
+    require(
+scripts/test_azure_sql_http.py:31: in require
+    raise SafetyStop("HTTP acceptance condition failed")
+E   sql_http_driver.SafetyStop: HTTP acceptance condition failed
+---------------------------- Captured stderr setup -----------------------------
+{"event": "http.completed", "correlation_id": "485f2335-4403-4330-b02c-41bdfa3b0d65", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.75}
+{"event": "http.completed", "correlation_id": "16715839-446c-4654-b3fa-66e1546b9e1a", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 9.85}
+{"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.047, "correlation_id": "02daf934-d812-4379-b9db-2c8be81555e5"}
+{"event": "http.completed", "correlation_id": "02daf934-d812-4379-b9db-2c8be81555e5", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 2.72}
+------------------------------ Captured log setup ------------------------------
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "485f2335-4403-4330-b02c-41bdfa3b0d65", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.75}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "16715839-446c-4654-b3fa-66e1546b9e1a", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 9.85}
+INFO     governance.stages:stage_timing.py:63 {"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.047, "correlation_id": "02daf934-d812-4379-b9db-2c8be81555e5"}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "02daf934-d812-4379-b9db-2c8be81555e5", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 2.72}
+__________ ERROR at setup of test_version_mismatch_rejected[number-1] __________
+backend/tests/test_sql_http_plan.py:195: in local_workflow
+    runner.workflows()
+scripts/test_azure_sql_http.py:507: in workflows
+    require(
+scripts/test_azure_sql_http.py:31: in require
+    raise SafetyStop("HTTP acceptance condition failed")
+E   sql_http_driver.SafetyStop: HTTP acceptance condition failed
+---------------------------- Captured stderr setup -----------------------------
+{"event": "http.completed", "correlation_id": "b4f823ae-560e-408b-bba7-8c3a80d9ee04", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.98}
+{"event": "http.completed", "correlation_id": "cef0261e-43cb-4d7b-9039-f36b82299c20", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 12.15}
+{"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.047, "correlation_id": "3fb3694f-cda6-472f-a238-6a250a6ea521"}
+{"event": "http.completed", "correlation_id": "3fb3694f-cda6-472f-a238-6a250a6ea521", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 2.33}
+------------------------------ Captured log setup ------------------------------
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "b4f823ae-560e-408b-bba7-8c3a80d9ee04", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.98}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "cef0261e-43cb-4d7b-9039-f36b82299c20", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 12.15}
+INFO     governance.stages:stage_timing.py:63 {"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.047, "correlation_id": "3fb3694f-cda6-472f-a238-6a250a6ea521"}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "3fb3694f-cda6-472f-a238-6a250a6ea521", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 2.33}
+__________ ERROR at setup of test_version_mismatch_rejected[number-2] __________
+backend/tests/test_sql_http_plan.py:195: in local_workflow
+    runner.workflows()
+scripts/test_azure_sql_http.py:507: in workflows
+    require(
+scripts/test_azure_sql_http.py:31: in require
+    raise SafetyStop("HTTP acceptance condition failed")
+E   sql_http_driver.SafetyStop: HTTP acceptance condition failed
+---------------------------- Captured stderr setup -----------------------------
+{"event": "http.completed", "correlation_id": "877d31e2-ef7c-4913-815f-5c672a2065ef", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.72}
+{"event": "http.completed", "correlation_id": "b2798c80-f825-4f9a-802a-e405752b3da1", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 15.02}
+{"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.06, "correlation_id": "75043323-5374-4a28-b0ed-86a3f3ade11d"}
+{"event": "http.completed", "correlation_id": "75043323-5374-4a28-b0ed-86a3f3ade11d", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 2.34}
+------------------------------ Captured log setup ------------------------------
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "877d31e2-ef7c-4913-815f-5c672a2065ef", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.72}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "b2798c80-f825-4f9a-802a-e405752b3da1", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 15.02}
+INFO     governance.stages:stage_timing.py:63 {"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.06, "correlation_id": "75043323-5374-4a28-b0ed-86a3f3ade11d"}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "75043323-5374-4a28-b0ed-86a3f3ade11d", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 2.34}
+________ ERROR at setup of test_version_mismatch_rejected[number-True] _________
+backend/tests/test_sql_http_plan.py:195: in local_workflow
+    runner.workflows()
+scripts/test_azure_sql_http.py:507: in workflows
+    require(
+scripts/test_azure_sql_http.py:31: in require
+    raise SafetyStop("HTTP acceptance condition failed")
+E   sql_http_driver.SafetyStop: HTTP acceptance condition failed
+---------------------------- Captured stderr setup -----------------------------
+{"event": "http.completed", "correlation_id": "9da51ecc-7c63-4be8-957e-5fc4be13ba27", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.79}
+{"event": "http.completed", "correlation_id": "f155f19f-3b01-4cda-9921-22204a346189", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 14.05}
+{"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.052, "correlation_id": "02099bc4-93df-4f60-9580-cc01a6286efd"}
+{"event": "http.completed", "correlation_id": "02099bc4-93df-4f60-9580-cc01a6286efd", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 2.04}
+------------------------------ Captured log setup ------------------------------
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "9da51ecc-7c63-4be8-957e-5fc4be13ba27", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.79}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "f155f19f-3b01-4cda-9921-22204a346189", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 14.05}
+INFO     governance.stages:stage_timing.py:63 {"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.052, "correlation_id": "02099bc4-93df-4f60-9580-cc01a6286efd"}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "02099bc4-93df-4f60-9580-cc01a6286efd", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 2.04}
+_ ERROR at setup of test_version_mismatch_rejected[policy_id-00000000-0000-0000-0000-000000000000] _
+backend/tests/test_sql_http_plan.py:195: in local_workflow
+    runner.workflows()
+scripts/test_azure_sql_http.py:507: in workflows
+    require(
+scripts/test_azure_sql_http.py:31: in require
+    raise SafetyStop("HTTP acceptance condition failed")
+E   sql_http_driver.SafetyStop: HTTP acceptance condition failed
+---------------------------- Captured stderr setup -----------------------------
+{"event": "http.completed", "correlation_id": "d8a1642b-238d-4aa5-a0ed-ff7bb92cf296", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.86}
+{"event": "http.completed", "correlation_id": "abd21fa5-755e-47dd-b2d9-c666f988638f", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 13.87}
+{"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.051, "correlation_id": "7b96b2b1-6fd2-47c1-8c89-5555bc95e750"}
+{"event": "http.completed", "correlation_id": "7b96b2b1-6fd2-47c1-8c89-5555bc95e750", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 1.76}
+------------------------------ Captured log setup ------------------------------
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "d8a1642b-238d-4aa5-a0ed-ff7bb92cf296", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.86}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "abd21fa5-755e-47dd-b2d9-c666f988638f", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 13.87}
+INFO     governance.stages:stage_timing.py:63 {"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.051, "correlation_id": "7b96b2b1-6fd2-47c1-8c89-5555bc95e750"}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "7b96b2b1-6fd2-47c1-8c89-5555bc95e750", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 1.76}
+_ ERROR at setup of test_version_mismatch_rejected[id-00000000-0000-0000-0000-000000000000] _
+backend/tests/test_sql_http_plan.py:195: in local_workflow
+    runner.workflows()
+scripts/test_azure_sql_http.py:507: in workflows
+    require(
+scripts/test_azure_sql_http.py:31: in require
+    raise SafetyStop("HTTP acceptance condition failed")
+E   sql_http_driver.SafetyStop: HTTP acceptance condition failed
+---------------------------- Captured stderr setup -----------------------------
+{"event": "http.completed", "correlation_id": "fb1ff503-2c63-4731-b3bd-4c3a11276f3c", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.75}
+{"event": "http.completed", "correlation_id": "ad82cd49-1a07-4151-aa2f-a626f6e4c665", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 10.19}
+{"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.052, "correlation_id": "fa4aaea7-64c1-4fe6-a9fc-bea54ba55ba2"}
+{"event": "http.completed", "correlation_id": "fa4aaea7-64c1-4fe6-a9fc-bea54ba55ba2", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 2.25}
+------------------------------ Captured log setup ------------------------------
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "fb1ff503-2c63-4731-b3bd-4c3a11276f3c", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.75}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "ad82cd49-1a07-4151-aa2f-a626f6e4c665", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 10.19}
+INFO     governance.stages:stage_timing.py:63 {"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.052, "correlation_id": "fa4aaea7-64c1-4fe6-a9fc-bea54ba55ba2"}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "fa4aaea7-64c1-4fe6-a9fc-bea54ba55ba2", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 2.25}
+_______ ERROR at setup of test_version_mismatch_rejected[tenant-foreign] _______
+backend/tests/test_sql_http_plan.py:195: in local_workflow
+    runner.workflows()
+scripts/test_azure_sql_http.py:507: in workflows
+    require(
+scripts/test_azure_sql_http.py:31: in require
+    raise SafetyStop("HTTP acceptance condition failed")
+E   sql_http_driver.SafetyStop: HTTP acceptance condition failed
+---------------------------- Captured stderr setup -----------------------------
+{"event": "http.completed", "correlation_id": "71af9645-8c62-4056-a234-b0fd5e7a1592", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.78}
+{"event": "http.completed", "correlation_id": "d68f92bd-ed49-48f6-930a-046c2950f6d3", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 9.84}
+{"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.047, "correlation_id": "b1520bca-f063-418b-9c06-dd213fa8135d"}
+{"event": "http.completed", "correlation_id": "b1520bca-f063-418b-9c06-dd213fa8135d", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 1.36}
+------------------------------ Captured log setup ------------------------------
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "71af9645-8c62-4056-a234-b0fd5e7a1592", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.78}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "d68f92bd-ed49-48f6-930a-046c2950f6d3", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 9.84}
+INFO     governance.stages:stage_timing.py:63 {"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.047, "correlation_id": "b1520bca-f063-418b-9c06-dd213fa8135d"}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "b1520bca-f063-418b-9c06-dd213fa8135d", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 1.36}
+______ ERROR at setup of test_version_mismatch_rejected[created-changed] _______
+backend/tests/test_sql_http_plan.py:195: in local_workflow
+    runner.workflows()
+scripts/test_azure_sql_http.py:507: in workflows
+    require(
+scripts/test_azure_sql_http.py:31: in require
+    raise SafetyStop("HTTP acceptance condition failed")
+E   sql_http_driver.SafetyStop: HTTP acceptance condition failed
+---------------------------- Captured stderr setup -----------------------------
+{"event": "http.completed", "correlation_id": "8a050838-86bb-4564-afd8-250cc0a920b6", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.84}
+{"event": "http.completed", "correlation_id": "61be7606-730e-42fa-bfb4-2b127d2ca311", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 13.96}
+{"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.063, "correlation_id": "8791969f-249f-4bbe-b422-60ddcdb93553"}
+{"event": "http.completed", "correlation_id": "8791969f-249f-4bbe-b422-60ddcdb93553", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 2.35}
+------------------------------ Captured log setup ------------------------------
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "8a050838-86bb-4564-afd8-250cc0a920b6", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.84}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "61be7606-730e-42fa-bfb4-2b127d2ca311", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 13.96}
+INFO     governance.stages:stage_timing.py:63 {"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.063, "correlation_id": "8791969f-249f-4bbe-b422-60ddcdb93553"}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "8791969f-249f-4bbe-b422-60ddcdb93553", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 2.35}
+_ ERROR at setup of test_changed_database_records_rejected[policy_versions-document-{}] _
+backend/tests/test_sql_http_plan.py:195: in local_workflow
+    runner.workflows()
+scripts/test_azure_sql_http.py:507: in workflows
+    require(
+scripts/test_azure_sql_http.py:31: in require
+    raise SafetyStop("HTTP acceptance condition failed")
+E   sql_http_driver.SafetyStop: HTTP acceptance condition failed
+---------------------------- Captured stderr setup -----------------------------
+{"event": "http.completed", "correlation_id": "97c3bfd2-3850-42fd-9f44-cecd143aff8d", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.79}
+{"event": "http.completed", "correlation_id": "39318beb-1266-4d05-b0c0-4902f5f1a144", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 10.4}
+{"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.065, "correlation_id": "9eb829b8-c069-42c8-9526-83c39be146c0"}
+{"event": "http.completed", "correlation_id": "9eb829b8-c069-42c8-9526-83c39be146c0", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 2.39}
+------------------------------ Captured log setup ------------------------------
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "97c3bfd2-3850-42fd-9f44-cecd143aff8d", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.79}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "39318beb-1266-4d05-b0c0-4902f5f1a144", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 10.4}
+INFO     governance.stages:stage_timing.py:63 {"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.065, "correlation_id": "9eb829b8-c069-42c8-9526-83c39be146c0"}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "9eb829b8-c069-42c8-9526-83c39be146c0", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 2.39}
+_ ERROR at setup of test_changed_database_records_rejected[policy_versions-number-9] _
+backend/tests/test_sql_http_plan.py:195: in local_workflow
+    runner.workflows()
+scripts/test_azure_sql_http.py:507: in workflows
+    require(
+scripts/test_azure_sql_http.py:31: in require
+    raise SafetyStop("HTTP acceptance condition failed")
+E   sql_http_driver.SafetyStop: HTTP acceptance condition failed
+---------------------------- Captured stderr setup -----------------------------
+{"event": "http.completed", "correlation_id": "9109f52d-53d8-4577-bb10-b06facff8c36", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.69}
+{"event": "http.completed", "correlation_id": "f939133a-e399-4e49-97cc-d653bc1b5901", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 15.01}
+{"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.056, "correlation_id": "1a224f1e-bff3-4a01-ae5d-656c93a88d56"}
+{"event": "http.completed", "correlation_id": "1a224f1e-bff3-4a01-ae5d-656c93a88d56", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 2.31}
+------------------------------ Captured log setup ------------------------------
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "9109f52d-53d8-4577-bb10-b06facff8c36", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.69}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "f939133a-e399-4e49-97cc-d653bc1b5901", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 15.01}
+INFO     governance.stages:stage_timing.py:63 {"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.056, "correlation_id": "1a224f1e-bff3-4a01-ae5d-656c93a88d56"}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "1a224f1e-bff3-4a01-ae5d-656c93a88d56", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 2.31}
+_ ERROR at setup of test_changed_database_records_rejected[policy_versions-policy_id-foreign-policy] _
+backend/tests/test_sql_http_plan.py:195: in local_workflow
+    runner.workflows()
+scripts/test_azure_sql_http.py:507: in workflows
+    require(
+scripts/test_azure_sql_http.py:31: in require
+    raise SafetyStop("HTTP acceptance condition failed")
+E   sql_http_driver.SafetyStop: HTTP acceptance condition failed
+---------------------------- Captured stderr setup -----------------------------
+{"event": "http.completed", "correlation_id": "bdee5cd5-ebc0-4d55-8095-1b746f1548a5", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.75}
+{"event": "http.completed", "correlation_id": "ed9dabe3-9c04-4adf-95f4-26769f4edf53", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 13.49}
+{"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.064, "correlation_id": "0ad9e916-c44b-4505-9cb1-12bab3bd7c3e"}
+{"event": "http.completed", "correlation_id": "0ad9e916-c44b-4505-9cb1-12bab3bd7c3e", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 2.24}
+------------------------------ Captured log setup ------------------------------
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "bdee5cd5-ebc0-4d55-8095-1b746f1548a5", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.75}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "ed9dabe3-9c04-4adf-95f4-26769f4edf53", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 13.49}
+INFO     governance.stages:stage_timing.py:63 {"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.064, "correlation_id": "0ad9e916-c44b-4505-9cb1-12bab3bd7c3e"}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "0ad9e916-c44b-4505-9cb1-12bab3bd7c3e", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 2.24}
+_ ERROR at setup of test_changed_database_records_rejected[active_policy_assignments-version_id-foreign-version] _
+backend/tests/test_sql_http_plan.py:195: in local_workflow
+    runner.workflows()
+scripts/test_azure_sql_http.py:507: in workflows
+    require(
+scripts/test_azure_sql_http.py:31: in require
+    raise SafetyStop("HTTP acceptance condition failed")
+E   sql_http_driver.SafetyStop: HTTP acceptance condition failed
+---------------------------- Captured stderr setup -----------------------------
+{"event": "http.completed", "correlation_id": "6c853ce5-2b23-4d00-87f5-03b526089854", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.81}
+{"event": "http.completed", "correlation_id": "76424e79-f1bf-4d91-aef5-d25efb07d3d3", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 15.15}
+{"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.084, "correlation_id": "b0cf259a-1e1e-46be-a455-8cdb411b5d2b"}
+{"event": "http.completed", "correlation_id": "b0cf259a-1e1e-46be-a455-8cdb411b5d2b", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 2.41}
+------------------------------ Captured log setup ------------------------------
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "6c853ce5-2b23-4d00-87f5-03b526089854", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.81}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "76424e79-f1bf-4d91-aef5-d25efb07d3d3", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 15.15}
+INFO     governance.stages:stage_timing.py:63 {"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.084, "correlation_id": "b0cf259a-1e1e-46be-a455-8cdb411b5d2b"}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "b0cf259a-1e1e-46be-a455-8cdb411b5d2b", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 2.41}
+_ ERROR at setup of test_changed_database_records_rejected[validation_executions-policy_id-foreign-policy] _
+backend/tests/test_sql_http_plan.py:195: in local_workflow
+    runner.workflows()
+scripts/test_azure_sql_http.py:507: in workflows
+    require(
+scripts/test_azure_sql_http.py:31: in require
+    raise SafetyStop("HTTP acceptance condition failed")
+E   sql_http_driver.SafetyStop: HTTP acceptance condition failed
+---------------------------- Captured stderr setup -----------------------------
+{"event": "http.completed", "correlation_id": "5733cd25-7692-4be7-b5bb-8b8125286e99", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.67}
+{"event": "http.completed", "correlation_id": "97ac597b-5aea-4448-962e-2066a09f20e5", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 15.08}
+{"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.063, "correlation_id": "b40c79aa-f665-48e7-b881-ef258a2d1db4"}
+{"event": "http.completed", "correlation_id": "b40c79aa-f665-48e7-b881-ef258a2d1db4", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 2.36}
+------------------------------ Captured log setup ------------------------------
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "5733cd25-7692-4be7-b5bb-8b8125286e99", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.67}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "97ac597b-5aea-4448-962e-2066a09f20e5", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 15.08}
+INFO     governance.stages:stage_timing.py:63 {"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.063, "correlation_id": "b40c79aa-f665-48e7-b881-ef258a2d1db4"}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "b40c79aa-f665-48e7-b881-ef258a2d1db4", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 2.36}
+_ ERROR at setup of test_changed_database_records_rejected[validation_executions-version-9] _
+backend/tests/test_sql_http_plan.py:195: in local_workflow
+    runner.workflows()
+scripts/test_azure_sql_http.py:507: in workflows
+    require(
+scripts/test_azure_sql_http.py:31: in require
+    raise SafetyStop("HTTP acceptance condition failed")
+E   sql_http_driver.SafetyStop: HTTP acceptance condition failed
+---------------------------- Captured stderr setup -----------------------------
+{"event": "http.completed", "correlation_id": "738c8bb3-de62-488a-9203-170aace6dd09", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.71}
+{"event": "http.completed", "correlation_id": "8e1b0130-50af-4807-9782-97c0d5f6f121", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 12.81}
+{"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.05, "correlation_id": "863de2e3-643b-4e5d-a3ed-fce22f36a7ff"}
+{"event": "http.completed", "correlation_id": "863de2e3-643b-4e5d-a3ed-fce22f36a7ff", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 2.0}
+------------------------------ Captured log setup ------------------------------
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "738c8bb3-de62-488a-9203-170aace6dd09", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.71}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "8e1b0130-50af-4807-9782-97c0d5f6f121", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 12.81}
+INFO     governance.stages:stage_timing.py:63 {"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.05, "correlation_id": "863de2e3-643b-4e5d-a3ed-fce22f36a7ff"}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "863de2e3-643b-4e5d-a3ed-fce22f36a7ff", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 2.0}
+_ ERROR at setup of test_changed_database_records_rejected[human_review_cases-execution_id-foreign-execution] _
+backend/tests/test_sql_http_plan.py:195: in local_workflow
+    runner.workflows()
+scripts/test_azure_sql_http.py:507: in workflows
+    require(
+scripts/test_azure_sql_http.py:31: in require
+    raise SafetyStop("HTTP acceptance condition failed")
+E   sql_http_driver.SafetyStop: HTTP acceptance condition failed
+---------------------------- Captured stderr setup -----------------------------
+{"event": "http.completed", "correlation_id": "eeb5446b-11de-4869-a7fd-0e2988ce3cef", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.67}
+{"event": "http.completed", "correlation_id": "47ce99a0-889b-43b0-bd9c-78e98140b5f3", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 10.26}
+{"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.066, "correlation_id": "a5ac750c-4d85-4c8e-979f-bb980e5a5650"}
+{"event": "http.completed", "correlation_id": "a5ac750c-4d85-4c8e-979f-bb980e5a5650", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 2.2}
+------------------------------ Captured log setup ------------------------------
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "eeb5446b-11de-4869-a7fd-0e2988ce3cef", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.67}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "47ce99a0-889b-43b0-bd9c-78e98140b5f3", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 10.26}
+INFO     governance.stages:stage_timing.py:63 {"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.066, "correlation_id": "a5ac750c-4d85-4c8e-979f-bb980e5a5650"}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "a5ac750c-4d85-4c8e-979f-bb980e5a5650", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 2.2}
+_ ERROR at setup of test_changed_database_records_rejected[human_review_cases-row_version-9] _
+backend/tests/test_sql_http_plan.py:195: in local_workflow
+    runner.workflows()
+scripts/test_azure_sql_http.py:507: in workflows
+    require(
+scripts/test_azure_sql_http.py:31: in require
+    raise SafetyStop("HTTP acceptance condition failed")
+E   sql_http_driver.SafetyStop: HTTP acceptance condition failed
+---------------------------- Captured stderr setup -----------------------------
+{"event": "http.completed", "correlation_id": "552dc198-8a86-42ba-bed0-47e33bb2d53a", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.7}
+{"event": "http.completed", "correlation_id": "73c9e87c-3d0b-410c-a13d-709523dcad0f", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 15.48}
+{"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.06, "correlation_id": "d507d56a-4b79-4354-80ec-8259d9a76e53"}
+{"event": "http.completed", "correlation_id": "d507d56a-4b79-4354-80ec-8259d9a76e53", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 2.32}
+------------------------------ Captured log setup ------------------------------
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "552dc198-8a86-42ba-bed0-47e33bb2d53a", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.7}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "73c9e87c-3d0b-410c-a13d-709523dcad0f", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 15.48}
+INFO     governance.stages:stage_timing.py:63 {"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.06, "correlation_id": "d507d56a-4b79-4354-80ec-8259d9a76e53"}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "d507d56a-4b79-4354-80ec-8259d9a76e53", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 2.32}
+_ ERROR at setup of test_changed_database_records_rejected[feedback_records-execution_id-foreign-execution] _
+backend/tests/test_sql_http_plan.py:195: in local_workflow
+    runner.workflows()
+scripts/test_azure_sql_http.py:507: in workflows
+    require(
+scripts/test_azure_sql_http.py:31: in require
+    raise SafetyStop("HTTP acceptance condition failed")
+E   sql_http_driver.SafetyStop: HTTP acceptance condition failed
+---------------------------- Captured stderr setup -----------------------------
+{"event": "http.completed", "correlation_id": "1f1bd7da-2885-465f-84b0-0bb22783bd66", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.69}
+{"event": "http.completed", "correlation_id": "4d97640d-66c8-4f45-9168-77f348c617fe", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 9.69}
+{"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.049, "correlation_id": "48334935-d2e5-4c83-ad16-f521fe47bc5b"}
+{"event": "http.completed", "correlation_id": "48334935-d2e5-4c83-ad16-f521fe47bc5b", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 1.47}
+------------------------------ Captured log setup ------------------------------
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "1f1bd7da-2885-465f-84b0-0bb22783bd66", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.69}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "4d97640d-66c8-4f45-9168-77f348c617fe", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 9.69}
+INFO     governance.stages:stage_timing.py:63 {"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.049, "correlation_id": "48334935-d2e5-4c83-ad16-f521fe47bc5b"}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "48334935-d2e5-4c83-ad16-f521fe47bc5b", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 1.47}
+_ ERROR at setup of test_changed_database_records_rejected[feedback_records-rating-4] _
+backend/tests/test_sql_http_plan.py:195: in local_workflow
+    runner.workflows()
+scripts/test_azure_sql_http.py:507: in workflows
+    require(
+scripts/test_azure_sql_http.py:31: in require
+    raise SafetyStop("HTTP acceptance condition failed")
+E   sql_http_driver.SafetyStop: HTTP acceptance condition failed
+---------------------------- Captured stderr setup -----------------------------
+{"event": "http.completed", "correlation_id": "c8ba8cac-4139-490f-a47c-f70477dd5c54", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.81}
+{"event": "http.completed", "correlation_id": "06b121f7-221f-4dba-bd78-edfbb69536b9", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 15.98}
+{"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.074, "correlation_id": "6145af9e-e758-40dc-956c-b5fc6c9c95d2"}
+{"event": "http.completed", "correlation_id": "6145af9e-e758-40dc-956c-b5fc6c9c95d2", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 2.71}
+------------------------------ Captured log setup ------------------------------
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "c8ba8cac-4139-490f-a47c-f70477dd5c54", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.81}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "06b121f7-221f-4dba-bd78-edfbb69536b9", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 15.98}
+INFO     governance.stages:stage_timing.py:63 {"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.074, "correlation_id": "6145af9e-e758-40dc-956c-b5fc6c9c95d2"}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "6145af9e-e758-40dc-956c-b5fc6c9c95d2", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 2.71}
+_ ERROR at setup of test_changed_database_records_rejected[evaluation_exports-status-SUCCEEDED] _
+backend/tests/test_sql_http_plan.py:195: in local_workflow
+    runner.workflows()
+scripts/test_azure_sql_http.py:507: in workflows
+    require(
+scripts/test_azure_sql_http.py:31: in require
+    raise SafetyStop("HTTP acceptance condition failed")
+E   sql_http_driver.SafetyStop: HTTP acceptance condition failed
+---------------------------- Captured stderr setup -----------------------------
+{"event": "http.completed", "correlation_id": "e818ecb5-c723-418a-bf7e-9d70dacc3eb7", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.66}
+{"event": "http.completed", "correlation_id": "c663e3dc-e979-4903-a198-1fcd38111463", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 14.23}
+{"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.073, "correlation_id": "41a2d6d8-cdd7-4045-8cef-60070642d24f"}
+{"event": "http.completed", "correlation_id": "41a2d6d8-cdd7-4045-8cef-60070642d24f", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 2.4}
+------------------------------ Captured log setup ------------------------------
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "e818ecb5-c723-418a-bf7e-9d70dacc3eb7", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.66}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "c663e3dc-e979-4903-a198-1fcd38111463", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 14.23}
+INFO     governance.stages:stage_timing.py:63 {"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.073, "correlation_id": "41a2d6d8-cdd7-4045-8cef-60070642d24f"}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "41a2d6d8-cdd7-4045-8cef-60070642d24f", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 2.4}
+_ ERROR at setup of test_changed_database_records_rejected[audit_events-resource-foreign-resource] _
+backend/tests/test_sql_http_plan.py:195: in local_workflow
+    runner.workflows()
+scripts/test_azure_sql_http.py:507: in workflows
+    require(
+scripts/test_azure_sql_http.py:31: in require
+    raise SafetyStop("HTTP acceptance condition failed")
+E   sql_http_driver.SafetyStop: HTTP acceptance condition failed
+---------------------------- Captured stderr setup -----------------------------
+{"event": "http.completed", "correlation_id": "5d3caf5a-b6f7-4667-8f97-51ac53430037", "route": "/health", "method": "GET", "status": 200, "duration_ms": 1.31}
+{"event": "http.completed", "correlation_id": "acef47f7-e4d9-4e5d-818f-08544708a530", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 15.71}
+{"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.062, "correlation_id": "c80fe2bc-9e93-48a9-96c9-62fa72aab529"}
+{"event": "http.completed", "correlation_id": "c80fe2bc-9e93-48a9-96c9-62fa72aab529", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 2.22}
+------------------------------ Captured log setup ------------------------------
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "5d3caf5a-b6f7-4667-8f97-51ac53430037", "route": "/health", "method": "GET", "status": 200, "duration_ms": 1.31}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "acef47f7-e4d9-4e5d-818f-08544708a530", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 15.71}
+INFO     governance.stages:stage_timing.py:63 {"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.062, "correlation_id": "c80fe2bc-9e93-48a9-96c9-62fa72aab529"}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "c80fe2bc-9e93-48a9-96c9-62fa72aab529", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 2.22}
+_ ERROR at setup of test_changed_database_records_rejected[audit_events-tenant-foreign-tenant] _
+backend/tests/test_sql_http_plan.py:195: in local_workflow
+    runner.workflows()
+scripts/test_azure_sql_http.py:507: in workflows
+    require(
+scripts/test_azure_sql_http.py:31: in require
+    raise SafetyStop("HTTP acceptance condition failed")
+E   sql_http_driver.SafetyStop: HTTP acceptance condition failed
+---------------------------- Captured stderr setup -----------------------------
+{"event": "http.completed", "correlation_id": "68998b58-ea2c-4bd3-adb2-b37d15596bc9", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.97}
+{"event": "http.completed", "correlation_id": "07019a21-6c23-45b7-ad97-d598af0b231d", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 16.06}
+{"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.064, "correlation_id": "85b4ba6d-793e-4f97-b3b2-9a72719caf6d"}
+{"event": "http.completed", "correlation_id": "85b4ba6d-793e-4f97-b3b2-9a72719caf6d", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 2.13}
+------------------------------ Captured log setup ------------------------------
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "68998b58-ea2c-4bd3-adb2-b37d15596bc9", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.97}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "07019a21-6c23-45b7-ad97-d598af0b231d", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 16.06}
+INFO     governance.stages:stage_timing.py:63 {"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.064, "correlation_id": "85b4ba6d-793e-4f97-b3b2-9a72719caf6d"}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "85b4ba6d-793e-4f97-b3b2-9a72719caf6d", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 2.13}
+__________ ERROR at setup of test_unexpected_audit_api_field_rejected __________
+backend/tests/test_sql_http_plan.py:195: in local_workflow
+    runner.workflows()
+scripts/test_azure_sql_http.py:507: in workflows
+    require(
+scripts/test_azure_sql_http.py:31: in require
+    raise SafetyStop("HTTP acceptance condition failed")
+E   sql_http_driver.SafetyStop: HTTP acceptance condition failed
+---------------------------- Captured stderr setup -----------------------------
+{"event": "http.completed", "correlation_id": "e104ea65-a6d6-426f-bf12-32887093df79", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.77}
+{"event": "http.completed", "correlation_id": "6f0fafe0-3f49-4847-ad0c-abe41b284276", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 468.52}
+{"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.07, "correlation_id": "28d2a50b-7657-44fb-8531-916be0e74249"}
+{"event": "http.completed", "correlation_id": "28d2a50b-7657-44fb-8531-916be0e74249", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 2.56}
+------------------------------ Captured log setup ------------------------------
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "e104ea65-a6d6-426f-bf12-32887093df79", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.77}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "6f0fafe0-3f49-4847-ad0c-abe41b284276", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 468.52}
+INFO     governance.stages:stage_timing.py:63 {"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.07, "correlation_id": "28d2a50b-7657-44fb-8531-916be0e74249"}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "28d2a50b-7657-44fb-8531-916be0e74249", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 2.56}
+______ ERROR at setup of test_missing_expected_record_rejected[policies] _______
+backend/tests/test_sql_http_plan.py:195: in local_workflow
+    runner.workflows()
+scripts/test_azure_sql_http.py:507: in workflows
+    require(
+scripts/test_azure_sql_http.py:31: in require
+    raise SafetyStop("HTTP acceptance condition failed")
+E   sql_http_driver.SafetyStop: HTTP acceptance condition failed
+---------------------------- Captured stderr setup -----------------------------
+{"event": "http.completed", "correlation_id": "89519afa-285f-48f1-8e04-844ee78fbb63", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.72}
+{"event": "http.completed", "correlation_id": "0c63f379-6375-455e-b3ca-359ef8b0c6b0", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 13.19}
+{"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.065, "correlation_id": "9fc4d6a1-677e-41f6-b000-afe8443ca243"}
+{"event": "http.completed", "correlation_id": "9fc4d6a1-677e-41f6-b000-afe8443ca243", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 2.38}
+------------------------------ Captured log setup ------------------------------
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "89519afa-285f-48f1-8e04-844ee78fbb63", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.72}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "0c63f379-6375-455e-b3ca-359ef8b0c6b0", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 13.19}
+INFO     governance.stages:stage_timing.py:63 {"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.065, "correlation_id": "9fc4d6a1-677e-41f6-b000-afe8443ca243"}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "9fc4d6a1-677e-41f6-b000-afe8443ca243", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 2.38}
+___ ERROR at setup of test_missing_expected_record_rejected[policy_versions] ___
+backend/tests/test_sql_http_plan.py:195: in local_workflow
+    runner.workflows()
+scripts/test_azure_sql_http.py:507: in workflows
+    require(
+scripts/test_azure_sql_http.py:31: in require
+    raise SafetyStop("HTTP acceptance condition failed")
+E   sql_http_driver.SafetyStop: HTTP acceptance condition failed
+---------------------------- Captured stderr setup -----------------------------
+{"event": "http.completed", "correlation_id": "dc21874f-7901-4dd4-8f87-b577c0fca627", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.74}
+{"event": "http.completed", "correlation_id": "2e03800d-4ce6-4696-96aa-17b7ad04f420", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 9.85}
+{"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.065, "correlation_id": "b1d14eb4-8243-440b-9251-90ba2ebc0400"}
+{"event": "http.completed", "correlation_id": "b1d14eb4-8243-440b-9251-90ba2ebc0400", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 2.23}
+------------------------------ Captured log setup ------------------------------
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "dc21874f-7901-4dd4-8f87-b577c0fca627", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.74}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "2e03800d-4ce6-4696-96aa-17b7ad04f420", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 9.85}
+INFO     governance.stages:stage_timing.py:63 {"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.065, "correlation_id": "b1d14eb4-8243-440b-9251-90ba2ebc0400"}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "b1d14eb4-8243-440b-9251-90ba2ebc0400", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 2.23}
+_ ERROR at setup of test_missing_expected_record_rejected[active_policy_assignments] _
+backend/tests/test_sql_http_plan.py:195: in local_workflow
+    runner.workflows()
+scripts/test_azure_sql_http.py:507: in workflows
+    require(
+scripts/test_azure_sql_http.py:31: in require
+    raise SafetyStop("HTTP acceptance condition failed")
+E   sql_http_driver.SafetyStop: HTTP acceptance condition failed
+---------------------------- Captured stderr setup -----------------------------
+{"event": "http.completed", "correlation_id": "f1dd517b-6529-4222-b015-2afa55ef502c", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.73}
+{"event": "http.completed", "correlation_id": "f852917f-98dd-47d5-bdc8-2a6430d61e42", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 13.71}
+{"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.05, "correlation_id": "6cea2e90-f42f-4687-8a51-e192fee8c907"}
+{"event": "http.completed", "correlation_id": "6cea2e90-f42f-4687-8a51-e192fee8c907", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 1.55}
+------------------------------ Captured log setup ------------------------------
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "f1dd517b-6529-4222-b015-2afa55ef502c", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.73}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "f852917f-98dd-47d5-bdc8-2a6430d61e42", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 13.71}
+INFO     governance.stages:stage_timing.py:63 {"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.05, "correlation_id": "6cea2e90-f42f-4687-8a51-e192fee8c907"}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "6cea2e90-f42f-4687-8a51-e192fee8c907", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 1.55}
+____ ERROR at setup of test_missing_expected_record_rejected[audit_events] _____
+backend/tests/test_sql_http_plan.py:195: in local_workflow
+    runner.workflows()
+scripts/test_azure_sql_http.py:507: in workflows
+    require(
+scripts/test_azure_sql_http.py:31: in require
+    raise SafetyStop("HTTP acceptance condition failed")
+E   sql_http_driver.SafetyStop: HTTP acceptance condition failed
+---------------------------- Captured stderr setup -----------------------------
+{"event": "http.completed", "correlation_id": "1c93ede8-26eb-4df4-a0e4-be89d38708d3", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.89}
+{"event": "http.completed", "correlation_id": "affae955-a84d-4881-8620-997a0c004930", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 15.56}
+{"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.048, "correlation_id": "48c49ade-6206-42e5-acde-f4862465fe43"}
+{"event": "http.completed", "correlation_id": "48c49ade-6206-42e5-acde-f4862465fe43", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 2.22}
+------------------------------ Captured log setup ------------------------------
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "1c93ede8-26eb-4df4-a0e4-be89d38708d3", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.89}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "affae955-a84d-4881-8620-997a0c004930", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 15.56}
+INFO     governance.stages:stage_timing.py:63 {"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.048, "correlation_id": "48c49ade-6206-42e5-acde-f4862465fe43"}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "48c49ade-6206-42e5-acde-f4862465fe43", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 2.22}
+_ ERROR at setup of test_missing_expected_record_rejected[validation_executions] _
+backend/tests/test_sql_http_plan.py:195: in local_workflow
+    runner.workflows()
+scripts/test_azure_sql_http.py:507: in workflows
+    require(
+scripts/test_azure_sql_http.py:31: in require
+    raise SafetyStop("HTTP acceptance condition failed")
+E   sql_http_driver.SafetyStop: HTTP acceptance condition failed
+---------------------------- Captured stderr setup -----------------------------
+{"event": "http.completed", "correlation_id": "938eb9ec-d995-4d8d-8929-314b90573d0a", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.76}
+{"event": "http.completed", "correlation_id": "ad648901-4034-4146-afef-1323fac99a45", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 12.71}
+{"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.043, "correlation_id": "cb64421a-d3ab-4ccf-aad2-9610ce2c41ac"}
+{"event": "http.completed", "correlation_id": "cb64421a-d3ab-4ccf-aad2-9610ce2c41ac", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 1.51}
+------------------------------ Captured log setup ------------------------------
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "938eb9ec-d995-4d8d-8929-314b90573d0a", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.76}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "ad648901-4034-4146-afef-1323fac99a45", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 12.71}
+INFO     governance.stages:stage_timing.py:63 {"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.043, "correlation_id": "cb64421a-d3ab-4ccf-aad2-9610ce2c41ac"}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "cb64421a-d3ab-4ccf-aad2-9610ce2c41ac", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 1.51}
+_ ERROR at setup of test_missing_expected_record_rejected[human_review_cases] __
+backend/tests/test_sql_http_plan.py:195: in local_workflow
+    runner.workflows()
+scripts/test_azure_sql_http.py:507: in workflows
+    require(
+scripts/test_azure_sql_http.py:31: in require
+    raise SafetyStop("HTTP acceptance condition failed")
+E   sql_http_driver.SafetyStop: HTTP acceptance condition failed
+---------------------------- Captured stderr setup -----------------------------
+{"event": "http.completed", "correlation_id": "b6a2fbd2-77dc-479c-b10b-5c36edde646c", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.67}
+{"event": "http.completed", "correlation_id": "f951a681-0f70-420e-b0f6-062d098937cb", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 18.48}
+{"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.067, "correlation_id": "0d92d8e7-1f11-47a2-b10e-2a5f3ae726e5"}
+{"event": "http.completed", "correlation_id": "0d92d8e7-1f11-47a2-b10e-2a5f3ae726e5", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 2.39}
+------------------------------ Captured log setup ------------------------------
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "b6a2fbd2-77dc-479c-b10b-5c36edde646c", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.67}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "f951a681-0f70-420e-b0f6-062d098937cb", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 18.48}
+INFO     governance.stages:stage_timing.py:63 {"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.067, "correlation_id": "0d92d8e7-1f11-47a2-b10e-2a5f3ae726e5"}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "0d92d8e7-1f11-47a2-b10e-2a5f3ae726e5", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 2.39}
+__ ERROR at setup of test_missing_expected_record_rejected[feedback_records] ___
+backend/tests/test_sql_http_plan.py:195: in local_workflow
+    runner.workflows()
+scripts/test_azure_sql_http.py:507: in workflows
+    require(
+scripts/test_azure_sql_http.py:31: in require
+    raise SafetyStop("HTTP acceptance condition failed")
+E   sql_http_driver.SafetyStop: HTTP acceptance condition failed
+---------------------------- Captured stderr setup -----------------------------
+{"event": "http.completed", "correlation_id": "0b5accb4-0380-460c-b134-79b5f690067a", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.71}
+{"event": "http.completed", "correlation_id": "9a887927-a67a-4040-9df8-5fc24b214752", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 15.72}
+{"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.057, "correlation_id": "94c2413e-f4f9-4b2b-97c5-25cb1c5fbfce"}
+{"event": "http.completed", "correlation_id": "94c2413e-f4f9-4b2b-97c5-25cb1c5fbfce", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 2.48}
+------------------------------ Captured log setup ------------------------------
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "0b5accb4-0380-460c-b134-79b5f690067a", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.71}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "9a887927-a67a-4040-9df8-5fc24b214752", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 15.72}
+INFO     governance.stages:stage_timing.py:63 {"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.057, "correlation_id": "94c2413e-f4f9-4b2b-97c5-25cb1c5fbfce"}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "94c2413e-f4f9-4b2b-97c5-25cb1c5fbfce", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 2.48}
+_ ERROR at setup of test_missing_expected_record_rejected[evaluation_exports] __
+backend/tests/test_sql_http_plan.py:195: in local_workflow
+    runner.workflows()
+scripts/test_azure_sql_http.py:507: in workflows
+    require(
+scripts/test_azure_sql_http.py:31: in require
+    raise SafetyStop("HTTP acceptance condition failed")
+E   sql_http_driver.SafetyStop: HTTP acceptance condition failed
+---------------------------- Captured stderr setup -----------------------------
+{"event": "http.completed", "correlation_id": "be997eda-e1f8-4559-a165-87c20bb2ed93", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.7}
+{"event": "http.completed", "correlation_id": "3a91c680-d09c-4b19-9b1c-f9a1e30108e1", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 12.6}
+{"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.045, "correlation_id": "d2a611fe-277b-47b1-a695-9dcca264f814"}
+{"event": "http.completed", "correlation_id": "d2a611fe-277b-47b1-a695-9dcca264f814", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 1.38}
+------------------------------ Captured log setup ------------------------------
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "be997eda-e1f8-4559-a165-87c20bb2ed93", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.7}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "3a91c680-d09c-4b19-9b1c-f9a1e30108e1", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 12.6}
+INFO     governance.stages:stage_timing.py:63 {"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.045, "correlation_id": "d2a611fe-277b-47b1-a695-9dcca264f814"}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "d2a611fe-277b-47b1-a695-9dcca264f814", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 1.38}
+_____ ERROR at setup of test_wrong_relationship_even_if_api_and_sql_agree ______
+backend/tests/test_sql_http_plan.py:195: in local_workflow
+    runner.workflows()
+scripts/test_azure_sql_http.py:507: in workflows
+    require(
+scripts/test_azure_sql_http.py:31: in require
+    raise SafetyStop("HTTP acceptance condition failed")
+E   sql_http_driver.SafetyStop: HTTP acceptance condition failed
+---------------------------- Captured stderr setup -----------------------------
+{"event": "http.completed", "correlation_id": "a2a9fddd-77c7-4ff9-a6c1-05d10a5366ed", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.9}
+{"event": "http.completed", "correlation_id": "387aa74a-5073-4660-93dc-f6f87f3110b4", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 18.39}
+{"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.051, "correlation_id": "7b153904-ecfc-427b-8fb4-8179468922bf"}
+{"event": "http.completed", "correlation_id": "7b153904-ecfc-427b-8fb4-8179468922bf", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 2.44}
+------------------------------ Captured log setup ------------------------------
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "a2a9fddd-77c7-4ff9-a6c1-05d10a5366ed", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.9}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "387aa74a-5073-4660-93dc-f6f87f3110b4", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 18.39}
+INFO     governance.stages:stage_timing.py:63 {"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.051, "correlation_id": "7b153904-ecfc-427b-8fb4-8179468922bf"}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "7b153904-ecfc-427b-8fb4-8179468922bf", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 2.44}
+_ ERROR at setup of test_snapshot_agreement_does_not_hide_wrong_immutable_document _
+backend/tests/test_sql_http_plan.py:195: in local_workflow
+    runner.workflows()
+scripts/test_azure_sql_http.py:507: in workflows
+    require(
+scripts/test_azure_sql_http.py:31: in require
+    raise SafetyStop("HTTP acceptance condition failed")
+E   sql_http_driver.SafetyStop: HTTP acceptance condition failed
+---------------------------- Captured stderr setup -----------------------------
+{"event": "http.completed", "correlation_id": "668b7990-6c15-4abe-872e-11084ec1bf95", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.74}
+{"event": "http.completed", "correlation_id": "e7f52055-84db-4528-8422-d5c3caac7381", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 15.5}
+{"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.064, "correlation_id": "86ec1e82-5439-4567-8d43-04f01d68bedb"}
+{"event": "http.completed", "correlation_id": "86ec1e82-5439-4567-8d43-04f01d68bedb", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 2.26}
+------------------------------ Captured log setup ------------------------------
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "668b7990-6c15-4abe-872e-11084ec1bf95", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.74}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "e7f52055-84db-4528-8422-d5c3caac7381", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 15.5}
+INFO     governance.stages:stage_timing.py:63 {"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.064, "correlation_id": "86ec1e82-5439-4567-8d43-04f01d68bedb"}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "86ec1e82-5439-4567-8d43-04f01d68bedb", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 2.26}
+_____________ ERROR at setup of test_bearers_absent_from_http_logs _____________
+backend/tests/test_sql_http_plan.py:195: in local_workflow
+    runner.workflows()
+scripts/test_azure_sql_http.py:507: in workflows
+    require(
+scripts/test_azure_sql_http.py:31: in require
+    raise SafetyStop("HTTP acceptance condition failed")
+E   sql_http_driver.SafetyStop: HTTP acceptance condition failed
+---------------------------- Captured stderr setup -----------------------------
+{"event": "http.completed", "correlation_id": "b5a6056a-ac54-41f1-8fc0-7029c061106f", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.67}
+{"event": "http.completed", "correlation_id": "d21456b2-5066-4365-b70d-01a8860181a3", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 9.81}
+{"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.051, "correlation_id": "a797c1d1-d8df-4b1a-acf3-19710bf721b7"}
+{"event": "http.completed", "correlation_id": "a797c1d1-d8df-4b1a-acf3-19710bf721b7", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 1.87}
+------------------------------ Captured log setup ------------------------------
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "b5a6056a-ac54-41f1-8fc0-7029c061106f", "route": "/health", "method": "GET", "status": 200, "duration_ms": 0.67}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "d21456b2-5066-4365-b70d-01a8860181a3", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 9.81}
+INFO     governance.stages:stage_timing.py:63 {"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.051, "correlation_id": "a797c1d1-d8df-4b1a-acf3-19710bf721b7"}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "a797c1d1-d8df-4b1a-acf3-19710bf721b7", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 1.87}
+_ ERROR at setup of test_swapped_review_dispositions_even_if_api_and_sql_agree _
+backend/tests/test_sql_http_plan.py:195: in local_workflow
+    runner.workflows()
+scripts/test_azure_sql_http.py:507: in workflows
+    require(
+scripts/test_azure_sql_http.py:31: in require
+    raise SafetyStop("HTTP acceptance condition failed")
+E   sql_http_driver.SafetyStop: HTTP acceptance condition failed
+---------------------------- Captured stderr setup -----------------------------
+{"event": "http.completed", "correlation_id": "7fc911db-646e-4970-b237-bba8e9622799", "route": "/health", "method": "GET", "status": 200, "duration_ms": 1.12}
+{"event": "http.completed", "correlation_id": "39535108-8954-4d00-bf35-0267833518ab", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 11.71}
+{"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.063, "correlation_id": "9c9e0cfa-a211-466f-a296-666ee6fda57c"}
+{"event": "http.completed", "correlation_id": "9c9e0cfa-a211-466f-a296-666ee6fda57c", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 2.39}
+------------------------------ Captured log setup ------------------------------
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "7fc911db-646e-4970-b237-bba8e9622799", "route": "/health", "method": "GET", "status": 200, "duration_ms": 1.12}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "39535108-8954-4d00-bf35-0267833518ab", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 11.71}
+INFO     governance.stages:stage_timing.py:63 {"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 0.063, "correlation_id": "9c9e0cfa-a211-466f-a296-666ee6fda57c"}
+INFO     governance.http:middleware.py:53 {"event": "http.completed", "correlation_id": "9c9e0cfa-a211-466f-a296-666ee6fda57c", "route": "/api/settings", "method": "GET", "status": 200, "duration_ms": 2.39}
+=================================== FAILURES ===================================
+________________________ test_existing_alembic_revision ________________________
+backend/tests/test_sql_inventory.py:96: in test_existing_alembic_revision
+    assert report["expected_alembic_heads"] == ["007"]
+E   AssertionError: assert ['008'] == ['007']
+E     
+E     At index 0 diff: '008' != '007'
+E     Use -v to get more diff
+________________ test_migration_inventory_matches_current_chain ________________
+backend/tests/test_sql_inventory.py:140: in test_migration_inventory_matches_current_chain
+    assert [revision["revision"] for revision in revisions] == ["001", "002", "003", "004", "005", "006", "007"]
+E   AssertionError: assert ['001', '002'...', '006', ...] == ['001', '002'...', '006', ...]
+E     
+E     Left contains one more item: '008'
+E     Use -v to get more diff
+=============================== warnings summary ===============================
+.venv/lib/python3.13/site-packages/fastapi/testclient.py:1
+  /home/sigmoid/AI governance policy validator/.venv/lib/python3.13/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+.venv/lib/python3.13/site-packages/authlib/integrations/httpx_client/assertion_client.py:5
+  /home/sigmoid/AI governance policy validator/.venv/lib/python3.13/site-packages/authlib/integrations/httpx_client/assertion_client.py:5: AuthlibDeprecationWarning: The httpx module is deprecated; please use httpx2 instead.
+    from ._compat import httpx2
+
+tests/test_release_transition.py::test_007_ddl_failure_does_not_advance_marker_or_destroy_audit
+  /home/sigmoid/AI governance policy validator/.venv/lib/python3.13/site-packages/alembic/config.py:604: DeprecationWarning: No path_separator found in configuration; falling back to legacy splitting on spaces, commas, and colons for prepend_sys_path.  Consider adding path_separator=os to Alembic config.
+    util.warn_deprecated(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED backend/tests/test_sql_inventory.py::test_existing_alembic_revision - ...
+FAILED backend/tests/test_sql_inventory.py::test_migration_inventory_matches_current_chain
+ERROR backend/tests/test_sql_http_plan.py::test_http_sequence_and_persisted_counts
+ERROR backend/tests/test_sql_http_plan.py::test_core_mapping_matches_api_while_session_mapping_is_orm
+ERROR backend/tests/test_sql_http_plan.py::test_version_mismatch_rejected[document-{}]
+ERROR backend/tests/test_sql_http_plan.py::test_version_mismatch_rejected[number-1]
+ERROR backend/tests/test_sql_http_plan.py::test_version_mismatch_rejected[number-2]
+ERROR backend/tests/test_sql_http_plan.py::test_version_mismatch_rejected[number-True]
+ERROR backend/tests/test_sql_http_plan.py::test_version_mismatch_rejected[policy_id-00000000-0000-0000-0000-000000000000]
+ERROR backend/tests/test_sql_http_plan.py::test_version_mismatch_rejected[id-00000000-0000-0000-0000-000000000000]
+ERROR backend/tests/test_sql_http_plan.py::test_version_mismatch_rejected[tenant-foreign]
+ERROR backend/tests/test_sql_http_plan.py::test_version_mismatch_rejected[created-changed]
+ERROR backend/tests/test_sql_http_plan.py::test_changed_database_records_rejected[policy_versions-document-{}]
+ERROR backend/tests/test_sql_http_plan.py::test_changed_database_records_rejected[policy_versions-number-9]
+ERROR backend/tests/test_sql_http_plan.py::test_changed_database_records_rejected[policy_versions-policy_id-foreign-policy]
+ERROR backend/tests/test_sql_http_plan.py::test_changed_database_records_rejected[active_policy_assignments-version_id-foreign-version]
+ERROR backend/tests/test_sql_http_plan.py::test_changed_database_records_rejected[validation_executions-policy_id-foreign-policy]
+ERROR backend/tests/test_sql_http_plan.py::test_changed_database_records_rejected[validation_executions-version-9]
+ERROR backend/tests/test_sql_http_plan.py::test_changed_database_records_rejected[human_review_cases-execution_id-foreign-execution]
+ERROR backend/tests/test_sql_http_plan.py::test_changed_database_records_rejected[human_review_cases-row_version-9]
+ERROR backend/tests/test_sql_http_plan.py::test_changed_database_records_rejected[feedback_records-execution_id-foreign-execution]
+ERROR backend/tests/test_sql_http_plan.py::test_changed_database_records_rejected[feedback_records-rating-4]
+ERROR backend/tests/test_sql_http_plan.py::test_changed_database_records_rejected[evaluation_exports-status-SUCCEEDED]
+ERROR backend/tests/test_sql_http_plan.py::test_changed_database_records_rejected[audit_events-resource-foreign-resource]
+ERROR backend/tests/test_sql_http_plan.py::test_changed_database_records_rejected[audit_events-tenant-foreign-tenant]
+ERROR backend/tests/test_sql_http_plan.py::test_unexpected_audit_api_field_rejected
+ERROR backend/tests/test_sql_http_plan.py::test_missing_expected_record_rejected[policies]
+ERROR backend/tests/test_sql_http_plan.py::test_missing_expected_record_rejected[policy_versions]
+ERROR backend/tests/test_sql_http_plan.py::test_missing_expected_record_rejected[active_policy_assignments]
+ERROR backend/tests/test_sql_http_plan.py::test_missing_expected_record_rejected[audit_events]
+ERROR backend/tests/test_sql_http_plan.py::test_missing_expected_record_rejected[validation_executions]
+ERROR backend/tests/test_sql_http_plan.py::test_missing_expected_record_rejected[human_review_cases]
+ERROR backend/tests/test_sql_http_plan.py::test_missing_expected_record_rejected[feedback_records]
+ERROR backend/tests/test_sql_http_plan.py::test_missing_expected_record_rejected[evaluation_exports]
+ERROR backend/tests/test_sql_http_plan.py::test_wrong_relationship_even_if_api_and_sql_agree
+ERROR backend/tests/test_sql_http_plan.py::test_snapshot_agreement_does_not_hide_wrong_immutable_document
+ERROR backend/tests/test_sql_http_plan.py::test_bearers_absent_from_http_logs
+ERROR backend/tests/test_sql_http_plan.py::test_swapped_review_dispositions_even_if_api_and_sql_agree
+2 failed, 1436 passed, 3 warnings, 36 errors in 125.23s (0:02:05)

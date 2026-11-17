@@ -1,0 +1,19 @@
+{
+  "status": "LOCAL PASS / AZURE CONFIRMATION PENDING",
+  "candidate": "1.2-677a11e4b649fa7d",
+  "candidate_sha256": "be1ab97768954fecb5cf26b255bfcecf2a22811848ca910536846b3784174ee9",
+  "focused_source_tests_passed": 107,
+  "extracted_final_tests_passed": 25,
+  "migration_hashes_unchanged": true,
+  "historical_evidence_unchanged": true,
+  "sqlite_unchanged": true,
+  "session_and_config_bytes_unchanged": true,
+  "authentication_logic_ast_unchanged": true,
+  "deadline_seconds": 90,
+  "modeled_metadata_reads_before_minimum": 157,
+  "modeled_metadata_reads_after": 71,
+  "historical_azure_root_cause": "UNCONFIRMED; no per-stage SQL/wait telemetry",
+  "azure_operations": 0,
+  "provider_calls": 0,
+  "approval": "NOT AUTHORIZED / STOP AT APPROVAL GATE"
+}

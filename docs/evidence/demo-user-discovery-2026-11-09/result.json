@@ -1,0 +1,53 @@
+{
+  "utc": "2026-11-08T19:47:31.238213+00:00",
+  "mode": "GRAPH_GET_ONLY",
+  "directory_tenant": "4ac50105-0c66-404e-a107-7cbd8a9a6442",
+  "admin_unchanged": true,
+  "account_writes": 0,
+  "membership_writes": 0,
+  "permission_changes": 0,
+  "interactive_sign_in": false,
+  "subscription": {
+    "id": "25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6",
+    "name": "Devops_Azure_SV",
+    "state": "Enabled",
+    "tenantId": "4ac50105-0c66-404e-a107-7cbd8a9a6442"
+  },
+  "domains": [
+    {
+      "id": "streamvector.onmicrosoft.com",
+      "isDefault": false,
+      "isVerified": true,
+      "isInitial": true
+    },
+    {
+      "id": "Sigmoidanalytics.com",
+      "isDefault": true,
+      "isVerified": true,
+      "isInitial": false
+    }
+  ],
+  "demo_name_matches": [
+    {
+      "id": "03773d13-51ea-4231-97de-26c941e71d48",
+      "displayName": "Demo",
+      "userPrincipalName": "demo@Sigmoidanalytics.com",
+      "userType": "Member",
+      "accountEnabled": true,
+      "active_directory_role_memberships": [],
+      "owner_control_and_login": "NOT_VERIFIED",
+      "recommended_candidate": true
+    },
+    {
+      "id": "f4799f3f-703a-42b7-acf7-4cbbf55e7320",
+      "displayName": "demo-user citizen",
+      "userPrincipalName": "demo-user@Sigmoidanalytics.com",
+      "userType": "Member",
+      "accountEnabled": true,
+      "active_directory_role_memberships": [],
+      "owner_control_and_login": "NOT_VERIFIED",
+      "recommended_candidate": true
+    }
+  ],
+  "status": "READ_ONLY_DISCOVERY_COMPLETE"
+}

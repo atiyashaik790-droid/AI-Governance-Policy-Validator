@@ -1,0 +1,14 @@
+{
+  "stage": "E",
+  "status": "COMMITTED",
+  "started_at_utc": "2026-11-04T17:53:40.927159+00:00",
+  "commit_confirmed": true,
+  "approval_ref": "stage-e-20261104-admin",
+  "approval_basis": "Explicit user approval of exact Admin mapping and conditional provisioning; shorter reference preserves approval linkage while fitting existing audit field",
+  "workflow_modified": false,
+  "schema_modified": false,
+  "membership_id": "cce108dc-72f1-4db2-9aaa-c7128085661c",
+  "audit_id": "5992685e-0f10-44c1-a98a-19e1e4d84137",
+  "audit_resource": "cce108dc-72f1-4db2-9aaa-c7128085661c:Admin:True:stage-e-20261104-admin",
+  "finished_at_utc": "2026-11-04T17:53:53.480844+00:00"
+}

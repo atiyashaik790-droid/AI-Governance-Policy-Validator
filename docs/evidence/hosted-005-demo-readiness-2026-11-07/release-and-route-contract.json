@@ -1,0 +1,207 @@
+{
+  "release": {
+    "backend_sha256": "ad2e4af6c958f24e27e8838cccf8ca9dc46c76fb430c583d2c6737cd3034a813",
+    "build_version": "1.2-ca5df7c1dc19e525",
+    "built_utc": "2026-11-05T12:09:33.571692+00:00",
+    "frontend_sha256": "beb38c3485b8abfb672e5a2bf851f1f178c1a8049f367b450708e5abbe7581d4",
+    "git_commit": "unavailable",
+    "required_migration": "004",
+    "sso_required_migration": "005",
+    "supported_migrations": [
+      "004",
+      "005"
+    ]
+  },
+  "archive_sha256": "6a6a265bc2d27f9965a1a3abb33eaf61a4bd433a1257b241c183a871c12a57db",
+  "assets": [
+    {
+      "path": "/",
+      "status": 200,
+      "matches_preserved_release": true
+    },
+    {
+      "path": "/assets/Overview-B-qW9UWe.js",
+      "status": 200,
+      "matches_preserved_release": true
+    },
+    {
+      "path": "/assets/index-BAiYczn7.js",
+      "status": 200,
+      "matches_preserved_release": true
+    },
+    {
+      "path": "/assets/index-BMnV77cm.css",
+      "status": 200,
+      "matches_preserved_release": true
+    }
+  ],
+  "client_routes": [
+    "*",
+    "/",
+    "/analytics",
+    "/history",
+    "/playground",
+    "/policies",
+    "/policies/:id",
+    "/policies/new",
+    "/reports",
+    "/reviews",
+    "/settings",
+    "/simulator"
+  ],
+  "api_paths": {
+    "/api/auth/session": [
+      "post"
+    ],
+    "/api/auth/logout": [
+      "post"
+    ],
+    "/api/auth/sessions": [
+      "get"
+    ],
+    "/api/auth/sessions/{session_id}/revoke": [
+      "post"
+    ],
+    "/api/sso/status": [
+      "get"
+    ],
+    "/api/sso/login": [
+      "get"
+    ],
+    "/api/sso/callback": [
+      "get"
+    ],
+    "/api/sso/me": [
+      "get"
+    ],
+    "/api/sso/logout": [
+      "post"
+    ],
+    "/api/sso/sessions": [
+      "get"
+    ],
+    "/api/sso/sessions/{session_id}/revoke": [
+      "post"
+    ],
+    "/health": [
+      "get"
+    ],
+    "/ready": [
+      "get"
+    ],
+    "/api/policies": [
+      "get",
+      "post"
+    ],
+    "/api/policies/{policy_id}": [
+      "get",
+      "put",
+      "delete"
+    ],
+    "/api/policies/{policy_id}/simulate": [
+      "post"
+    ],
+    "/api/policies/{policy_id}/versions": [
+      "get"
+    ],
+    "/api/usage": [
+      "get"
+    ],
+    "/api/policies/{policy_id}/rollback": [
+      "post"
+    ],
+    "/api/audit/executions": [
+      "get"
+    ],
+    "/api/audit/events": [
+      "get"
+    ],
+    "/api/analytics/compliance": [
+      "get"
+    ],
+    "/api/analytics/violations": [
+      "get"
+    ],
+    "/api/analytics/overview": [
+      "get"
+    ],
+    "/api/audit/summary": [
+      "get"
+    ],
+    "/api/reviews": [
+      "get"
+    ],
+    "/api/reviews/{review_id}": [
+      "get"
+    ],
+    "/api/reviews/{review_id}/assignment": [
+      "put"
+    ],
+    "/api/feedback": [
+      "post"
+    ],
+    "/api/feedback/summary": [
+      "get"
+    ],
+    "/api/reports/export": [
+      "post"
+    ],
+    "/api/reports/exports/{export_id}/reconcile": [
+      "post"
+    ],
+    "/api/reports/exports": [
+      "get"
+    ],
+    "/api/maintenance": [
+      "get"
+    ],
+    "/api/capabilities": [
+      "get"
+    ],
+    "/api/settings": [
+      "get"
+    ],
+    "/api/policies/{policy_id}/submit": [
+      "post"
+    ],
+    "/api/policies/{policy_id}/approve": [
+      "post"
+    ],
+    "/api/policies/{policy_id}/reject": [
+      "post"
+    ],
+    "/api/policies/{policy_id}/publish": [
+      "post"
+    ],
+    "/api/policies/{policy_id}/activate": [
+      "post"
+    ],
+    "/api/policies/{policy_id}/enable": [
+      "post"
+    ],
+    "/api/policies/{policy_id}/disable": [
+      "post"
+    ],
+    "/api/policies/{policy_id}/archive": [
+      "post"
+    ],
+    "/api/governance/validate-input": [
+      "post"
+    ],
+    "/api/governance/validate-output": [
+      "post"
+    ],
+    "/api/governance/generate": [
+      "post"
+    ],
+    "/api/reviews/{review_id}/approve": [
+      "post"
+    ],
+    "/api/reviews/{review_id}/reject": [
+      "post"
+    ]
+  },
+  "sso_login_called": false,
+  "authenticated_checks": false,
+  "ui_browser_connected": false
+}

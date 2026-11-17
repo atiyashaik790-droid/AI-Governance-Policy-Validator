@@ -1,0 +1,16 @@
+{
+  "scope": "Approval A retry-6 ONLY",
+  "candidate": "1.2-cf0a97a4daffd3e7",
+  "subscription": "25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6",
+  "server": "sql-governance-validator-dev-atiya",
+  "database": "sqldb-gpv-mig-20261106-a1",
+  "maximum_hours": 4,
+  "maximum_estimated_usd": 1,
+  "maximum_sequential_incarnations": 2,
+  "maximum_sku": "S0 / 10 DTUs",
+  "synthetic_only": true,
+  "production_writes": false,
+  "deployment": false,
+  "recovery_B_or_C_to_F": false,
+  "authorization": "Explicit user approval in current conversation"
+}

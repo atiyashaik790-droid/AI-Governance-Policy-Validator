@@ -1,0 +1,25 @@
+{
+  "release": {
+    "git_commit": "60fa94ef9ec01be0d0b4af347a3251255cf7565c",
+    "build_version": "1.2-e4d3f0b8116eb37d",
+    "built_utc": "2026-11-06T18:18:35.072762+00:00",
+    "required_migration": "004",
+    "supported_migrations": [
+      "004",
+      "005",
+      "006",
+      "007"
+    ],
+    "sso_required_migration": "005",
+    "frontend_sha256": "258c37caa9637ec75f437d1ceff53bc8a3e82776a4b6a3066db103aaa7d13c10",
+    "backend_sha256": "39d731e590d7185e7682af21b8185a634225f2ef10c0a1eeb674c7a284d9e354"
+  },
+  "candidate_sha256": "09ef12ae3b0a5c11659083bc4e150860d81f1d5714207165e5262e2bd3dc344b",
+  "crc_ok": true,
+  "sqlite_revision": "003",
+  "sqlite_sha256": "0cad09a35e73ad70bb5ff5e522f783f9b59fdd5b3c31eb5b5dddd4d300795766",
+  "frozen_migrations_unchanged": true,
+  "azure_calls": 0,
+  "provider_calls": 0,
+  "new_azure_window_authorized": false
+}

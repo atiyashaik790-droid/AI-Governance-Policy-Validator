@@ -1,0 +1,26 @@
+{
+  "stage_d": "BLOCKED_REQUIRED_RUNTIME_DATA_PERMISSIONS_MISSING",
+  "stage_c_metadata_permissions": "PASS_UNCHANGED",
+  "actual_runtime_identity_verified": true,
+  "missing_required_operations": [
+    "sso_memberships.SELECT",
+    "sso_transactions.SELECT",
+    "sso_transactions.INSERT",
+    "sso_transactions.UPDATE",
+    "sso_sessions.SELECT",
+    "sso_sessions.INSERT",
+    "sso_sessions.UPDATE"
+  ],
+  "stage_e": "PREPARED_PENDING_D_AND_EXPLICIT_MAPPING_APPROVAL",
+  "auto_admin_assigned": false,
+  "proposed_role": "Reviewer",
+  "proposed_mapping_plan_only_validation": "PASS_DATABASE_NOT_ACCESSED",
+  "membership_applied": false,
+  "permissions_changed": false,
+  "configuration_changed": false,
+  "sso_activated": false,
+  "deployment_performed": false,
+  "stage_b_or_c_acceptance_repeated": false,
+  "demo_login_configuration": "Unchanged; no new acceptance suite repeated",
+  "local_operator_entra_tenant_pin_requires_process_only_binding": true
+}

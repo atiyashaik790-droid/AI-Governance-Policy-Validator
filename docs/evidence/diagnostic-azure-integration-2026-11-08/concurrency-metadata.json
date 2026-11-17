@@ -1,0 +1,13 @@
+{
+  "observed_utc": "2026-11-08T14:41:12.304991+00:00",
+  "mode": "READ_ONLY_CONCURRENCY_METADATA",
+  "api_version": "2024-11-01",
+  "settings_values_retained": false,
+  "configuration_changes": false,
+  "webjobs_calls": 0,
+  "http_status": 200,
+  "etag_header_present": false,
+  "strong_etag_header_present": false,
+  "body_etag_present": false,
+  "conditional_enforcement_verified": false
+}

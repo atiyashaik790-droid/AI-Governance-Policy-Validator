@@ -1,0 +1,20 @@
+{
+  "docs/evidence/phase6b-approval-a-2026-11-06/catalog-1-005.json": "107a3621b9dfec6edd4f0f8df0c1830a9eaf3fde8738f04577a8f369c5e348a7",
+  "docs/evidence/phase6b-approval-a-2026-11-06/execution.json": "43df96656e2e2223bd7972254dcbe897cc7ec23b8885d6d0fcd05236438cd770",
+  "docs/evidence/phase6b-approval-a-2026-11-06/final-verification.json": "aa3889abda694f803367e8852b10b2e4fa3f51359c816b01e9c8aa73e06dbf55",
+  "docs/evidence/phase6b-approval-a-2026-11-06/fixture-progress-counts.json": "b064b1b5d7fe368dacaa44625acbcd064689872b1fac9e9afd3c2da1bef095e4",
+  "docs/evidence/phase6b-approval-a-2026-11-06/harness-dry-run.json": "e24e36f0e50f841623d48dceb58bdd74e01956f394ffb80079e9131c6027c925",
+  "docs/evidence/phase6b-approval-a-2026-11-06/harness-prepared-dry-run.json": "c3e9245d6de0d9a117835f8eb6fdf033a42f93912932bb0c91a46f1532f804ae",
+  "docs/evidence/phase6b-approval-a-2026-11-06/harness.executed.py": "369ab24324391f9961f214523938dd003477d583289c8026e8134120080a75d9",
+  "docs/evidence/phase6b-approval-a-2026-11-06/live-preflight.json": "731ab73290eb7a06740eef991310909264fad57fa8981999569bb686150b240a",
+  "docs/evidence/phase6b-approval-a-2026-11-06/package-candidate-005-failure.txt": "09f28db78712cf8e6b3edaee5e575f5c1fcd6a72195bb04e0c298645bcc6ddba",
+  "docs/evidence/phase6b-approval-a-2026-11-06/package-probe-005.executed.py": "9e8742200028b9c5a99ffa560a64fc9b3545763d9c89a13f8d7f428ebe96b714",
+  "docs/evidence/phase6b-approval-a-2026-11-06/package-probe-pretest-review.json": "63fb01e14990b7efa8057181afb9c9ac2fa1588fa1dfc08553d3c4de16c8153e",
+  "docs/evidence/phase6b-approval-a-2026-11-06/prepared-harness-lint.json": "5ef7fd70d514ac05f15c320c886fec4cee9182def7b769448cff845e53aacb47",
+  "docs/evidence/phase6b-approval-a-2026-11-06/repeat-execution-denial.json": "fc653481cdfcbb58d2719edb6196e9aff099684c3bf5f0363a09260a4d638b74",
+  "docs/evidence/phase6b-approval-a-2026-11-06/request-monitor.json": "4df45ff36f4b8284fe4d961f0ff463dc08f7c6699752865ce2fe50879437d52a",
+  "docs/evidence/phase6b-approval-a-2026-11-06/retail-live.json": "44834a8bdd046339ea70c3e425bf488663cea966af7384567a607e2fe8155d62",
+  "docs/evidence/phase6b-approval-a-2026-11-06/static-undefined-names.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "docs/evidence/phase6b-approval-a-2026-11-06/temporary-resource-snapshot.json": "9b73c305d9282cac8ea87560e0e76af9bccd9ce895b0033a1038fad1dbb6eb4a",
+  "docs/evidence/phase6b-approval-a-2026-11-06/watchdog.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

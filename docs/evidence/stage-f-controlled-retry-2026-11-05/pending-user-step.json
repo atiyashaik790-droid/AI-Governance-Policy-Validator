@@ -1,0 +1,19 @@
+{
+  "stage": "F",
+  "status": "BLOCKED_AWAITING_PRIVATE_USER_SECRET_ENTRY",
+  "activation_submitted": false,
+  "new_worker_verified": false,
+  "sso_enabled": false,
+  "demo_login_enabled": true,
+  "health_and_readiness": "PENDING_CONTROLLED_RETRY_NOT_RUN_BEFORE_NEW_WORKER",
+  "rollback_performed": false,
+  "baseline_worker_pid": 1965,
+  "baseline_worker_started_at_utc": "2026-11-04T18:45:30.069183+00:00",
+  "redirect_and_logging_protection_verified": true,
+  "user_secret_save_confirmation_received": false,
+  "prepared_controller_syntax": "PASS",
+  "next_step": "User privately saves only ENTRA_CLIENT_SECRET while SSO remains false; then wait for replacement worker before sole activation write",
+  "stage_g_executed": false,
+  "hosted_changes_by_agent": false,
+  "observed_at_utc": "2026-11-05T05:42:37.238504+00:00"
+}

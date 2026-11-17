@@ -1,0 +1,21 @@
+{
+  "observed_utc": "2026-11-07T17:26:53.730048+00:00",
+  "sso_enabled": true,
+  "sso_origin_correct": true,
+  "entra_credentials_present": true,
+  "sso_session_minutes": "60",
+  "demo_login_enabled": false,
+  "legacy_credentials_enabled": false,
+  "provider_mode": "live",
+  "pii_mode": "presidio",
+  "generation_endpoint_present": true,
+  "generation_deployment": "gpt-5-mini",
+  "generation_api_key_present": false,
+  "moderation_key_present": true,
+  "adls_config_present": true,
+  "sql_auth_mode": "managed_identity",
+  "review_key_config_present": false,
+  "webjobs_enablement_present": false,
+  "provider_calls_performed": false,
+  "settings_changed": false
+}

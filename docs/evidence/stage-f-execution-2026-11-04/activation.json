@@ -1,0 +1,21 @@
+{
+  "stage": "F",
+  "started_at_utc": "2026-11-04T18:34:57.359740+00:00",
+  "status": "BLOCKED_SERVING_STATE_MISMATCH_RECONCILED_SEPARATELY",
+  "activation_submitted": true,
+  "stage_g_executed": false,
+  "database_writes": false,
+  "secret_value_logged": false,
+  "secret_presence_verified": true,
+  "redirect_and_logging_prerequisites_verified": true,
+  "unrelated_settings_and_secret_preserved": true,
+  "configured_setting_names": [
+    "ENTRA_TENANT_ID",
+    "ENTRA_CLIENT_ID",
+    "SSO_PUBLIC_ORIGIN",
+    "SSO_SESSION_MINUTES",
+    "DEMO_BROWSER_LOGIN_ENABLED",
+    "SSO_ENABLED"
+  ],
+  "verification_note": "Local verifier was stopped after identifying insufficient HTTP timeout; independent 45-second-timeout checks still confirmed saved/serving SSO state mismatch. See http-reconciliation.json and rollback.json."
+}

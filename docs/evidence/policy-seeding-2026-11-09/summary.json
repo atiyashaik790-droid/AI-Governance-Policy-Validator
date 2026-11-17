@@ -1,0 +1,38 @@
+{
+  "policy_seeding": "FAIL_TRANSACTION_ROLLED_BACK",
+  "policies_committed": 0,
+  "active_policies_committed": 0,
+  "independent_postrollback_sql_readback": "NOT_PERFORMED_FIREWALL_WINDOW_CLOSED",
+  "precedence_and_attribution": "PASS_10_SYNTHETIC_CASES_PRECOMMIT_REAL_SQL_DOCUMENTS_MOCK_MODERATION",
+  "firewall_cleanup": "PASS",
+  "elapsed_seconds": 251.43,
+  "original_rules_unchanged": true,
+  "production_app_unchanged": true,
+  "production_source_metadata_unchanged": true,
+  "hosted_after": {
+    "/health": {
+      "http_status": 200,
+      "status": "ok"
+    },
+    "/ready": {
+      "http_status": 200,
+      "status": "ready",
+      "release": "1.2-ca5df7c1dc19e525",
+      "revision": "005"
+    }
+  },
+  "root_cause": "Verifier allowlist used rate_buckets instead of actual lifecycle table inference_rate_buckets",
+  "correction": "Exact inference_rate_buckets allowlist; no lifecycle, frozen migration, policy or application changes",
+  "corrected_local_tests": {
+    "atomic_rollback": "PASS",
+    "committed_readback": "PASS",
+    "idempotence_without_extra_audit": "PASS",
+    "tenant_gate_bucket_count_one": "PASS",
+    "unapproved_tables_remain_empty": "PASS",
+    "lint": "PASS"
+  },
+  "provider_calls": 0,
+  "grants_and_memberships_mutated": false,
+  "cloud_retry_performed": false,
+  "next_approval": "One fresh maximum-15-minute same-IP firewall window and seed retry after SQL confirms rollback/emptiness and exact original state; stop on conflicts; unconditional rule removal."
+}

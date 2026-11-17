@@ -1,0 +1,22 @@
+{
+  "account": {
+    "subscription": "25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6",
+    "tenant": "4ac50105-0c66-404e-a107-7cbd8a9a6442",
+    "type": "user"
+  },
+  "drivers": [
+    "ODBC Driver 18 for SQL Server"
+  ],
+  "dns": true,
+  "tcp_1433": "PASS",
+  "pinned_sql_token_identity": "PASS",
+  "direct_odbc": "FAILED",
+  "sqlstate": "42000",
+  "sql_error_numbers": [
+    "40615"
+  ],
+  "categories": [
+    "firewall",
+    "client_ip_not_allowed"
+  ]
+}

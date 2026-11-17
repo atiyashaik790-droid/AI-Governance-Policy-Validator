@@ -1,0 +1,38 @@
+{
+  "stage": "C",
+  "observation_at_utc": "2026-11-04T16:17:23.164429+00:00",
+  "database_mutated_by_verifier": false,
+  "permission_subject": "executing_cli_identity_not_hosted_runtime",
+  "revision": [
+    "005"
+  ],
+  "schema_contract": {
+    "revision": "005",
+    "versioned": true,
+    "sso_schema": true
+  },
+  "new_table_rows": {
+    "sso_memberships": 0,
+    "sso_transactions": 0,
+    "sso_sessions": 0
+  },
+  "runtime_new_object_permissions": [
+    {
+      "object_name": "sso_memberships",
+      "permission_name": "VIEW DEFINITION",
+      "state_desc": "GRANT"
+    },
+    {
+      "object_name": "sso_sessions",
+      "permission_name": "VIEW DEFINITION",
+      "state_desc": "GRANT"
+    },
+    {
+      "object_name": "sso_transactions",
+      "permission_name": "VIEW DEFINITION",
+      "state_desc": "GRANT"
+    }
+  ],
+  "existing_runtime_membership": true,
+  "status": "PASS"
+}

@@ -1,0 +1,13 @@
+import json,urllib.request
+from pathlib import Path
+from datetime import datetime,timezone
+r={'read_only':True,'observed_at_utc':datetime.now(timezone.utc).isoformat(),'checks':{}}
+try:
+ for route in ('/health','/ready','/api/sso/status'):
+  with urllib.request.urlopen('https://app-governance-validator-atiya-1026.azurewebsites.net'+route,timeout=20) as response:
+   d=json.load(response);r['checks'][route]={'http_status':response.status,'response':d}
+ assert r['checks']['/ready']['response']['status']=='ready'
+ flags=r['checks']['/api/sso/status']['response'];assert flags['sso_enabled'] is False and flags['demo_login_enabled'] is True
+ r['status']='PASS'
+except Exception as e:r['status']='BLOCKED';r['error_kind']=type(e).__name__
+Path('docs/evidence/stage-e-execution-2026-11-04/post-cleanup-app-check.json').write_text(json.dumps(r,indent=2)+'\n');print(json.dumps(r))

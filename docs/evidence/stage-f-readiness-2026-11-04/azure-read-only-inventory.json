@@ -1,0 +1,150 @@
+{
+  "observed_at_utc": "2026-11-04T17:58:51.392666+00:00",
+  "hosted_changes": false,
+  "account": {
+    "subscription": "25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6",
+    "tenant": "4ac50105-0c66-404e-a107-7cbd8a9a6442",
+    "type": "user"
+  },
+  "app": {
+    "defaultHostName": "app-governance-validator-atiya-1026.azurewebsites.net",
+    "enabledHostNames": [
+      "app-governance-validator-atiya-1026.azurewebsites.net",
+      "app-governance-validator-atiya-1026.scm.azurewebsites.net"
+    ],
+    "httpsOnly": true,
+    "id": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Web/sites/app-governance-validator-atiya-1026",
+    "identity": {
+      "principalId": "600447fe-5fea-4801-9033-ab4aafc474cc",
+      "tenantId": "4ac50105-0c66-404e-a107-7cbd8a9a6442",
+      "type": "SystemAssigned",
+      "userAssignedIdentities": null
+    },
+    "state": "Running"
+  },
+  "setting_status": {
+    "SSO_ENABLED": "ABSENT",
+    "DEMO_BROWSER_LOGIN_ENABLED": "ABSENT",
+    "ENTRA_TENANT_ID": "ABSENT",
+    "ENTRA_CLIENT_ID": "ABSENT",
+    "ENTRA_CLIENT_SECRET": "ABSENT",
+    "SSO_PUBLIC_ORIGIN": "ABSENT",
+    "SSO_SESSION_MINUTES": "ABSENT",
+    "CORS_ORIGIN": "SET_NONEMPTY",
+    "AZURE_SQL_AUTH_MODE": "SET_NONEMPTY",
+    "AZURE_SQL_TENANT_ID": "SET_NONEMPTY",
+    "AZURE_SQL_USER_OBJECT_ID": "SET_NONEMPTY",
+    "DATABASE_URL": "SET_NONEMPTY",
+    "DEMO_ACCOUNTS_JSON": "SET_NONEMPTY",
+    "ALLOW_LEGACY_API_CREDENTIALS": "ABSENT",
+    "WEBSITE_HTTPLOGGING_RETENTION_DAYS": "SET_NONEMPTY"
+  },
+  "safe_config_checks": {
+    "tenant_matches_approved": false,
+    "origin_matches_exact": false,
+    "cors_matches_exact": true,
+    "sso_explicitly_disabled": true,
+    "demo_enabled": true,
+    "sql_managed_identity": true,
+    "secret_is_keyvault_reference": false,
+    "effective_session_minutes": 60
+  },
+  "registration_candidates": [
+    {
+      "clientId": "a1a7da0b-ad29-49ec-a9ea-c59219e60df5",
+      "displayName": "Governance-Studio-SSO",
+      "keyCredentials": [],
+      "objectId": "53ae1688-20af-403d-89e2-c33ab08a36e0",
+      "passwordCredentials": [
+        {
+          "displayName": "Governance-Studio-SSO-Backend",
+          "endDateTime": "2027-05-03T11:10:28.038Z",
+          "keyId": "300d88e7-c73a-4bb5-865c-041bde6ebc45",
+          "startDateTime": "2026-11-04T11:10:28.038Z"
+        }
+      ],
+      "publicClient": {
+        "redirectUris": []
+      },
+      "requiredResourceAccess": [
+        {
+          "resourceAccess": [
+            {
+              "id": "e1fe6dd8-ba31-4d61-89e7-88639da4683d",
+              "type": "Scope"
+            }
+          ],
+          "resourceAppId": "00000003-0000-0000-c000-000000000000"
+        }
+      ],
+      "signInAudience": "AzureADMyOrg",
+      "spa": {
+        "redirectUris": []
+      },
+      "web": {
+        "homePageUrl": null,
+        "implicitGrantSettings": {
+          "enableAccessTokenIssuance": false,
+          "enableIdTokenIssuance": false
+        },
+        "logoutUrl": null,
+        "redirectUriSettings": [
+          {
+            "index": null,
+            "uri": "https://app-governance-validator-atiya-1026.azurewebsites.net/api/sso/callback"
+          }
+        ],
+        "redirectUris": [
+          "https://app-governance-validator-atiya-1026.azurewebsites.net/api/sso/callback"
+        ]
+      }
+    }
+  ],
+  "web_config": {
+    "alwaysOn": true,
+    "appCommandLine": "sh startup.sh",
+    "cors": null,
+    "detailedErrorLoggingEnabled": false,
+    "ftpsState": "Disabled",
+    "httpLoggingEnabled": true,
+    "linuxFxVersion": "PYTHON|3.13",
+    "requestTracingEnabled": false
+  },
+  "http/health": {
+    "http_status": 200,
+    "body": {
+      "status": "ok"
+    }
+  },
+  "http/ready": {
+    "http_status": 200,
+    "body": {
+      "status": "ready",
+      "provider_mode": "live",
+      "release": {
+        "git_commit": "60fa94ef9ec01be0d0b4af347a3251255cf7565c",
+        "build_version": "1.2-6749226f1af65b63",
+        "built_utc": "2026-11-04T12:18:02.616350+00:00",
+        "frontend_sha256": "5bef17e44c53f3652b72f143fffbed00c4c3e77d0395654c7a9497e2a2b7f132",
+        "backend_sha256": "00e764d9e2d2ef88872a0546c63b771e9c5c53dae34b7f97419f53e610c52db4",
+        "required_migration": "004",
+        "supported_migrations": [
+          "004",
+          "005"
+        ],
+        "sso_required_migration": "005"
+      },
+      "database_revision": "005",
+      "schema_versioned": true,
+      "sso_available": false
+    }
+  },
+  "http/api/sso/status": {
+    "http_status": 200,
+    "body": {
+      "sso_enabled": false,
+      "configured": false,
+      "demo_login_enabled": true
+    }
+  }
+}

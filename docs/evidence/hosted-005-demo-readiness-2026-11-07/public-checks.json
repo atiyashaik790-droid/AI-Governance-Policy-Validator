@@ -1,0 +1,177 @@
+{
+  "observed_utc": "2026-11-07T17:26:30.986565+00:00",
+  "requests": "GET only, no cookie/authentication/session/login/provider operation",
+  "checks": {
+    "/health": {
+      "http_status": 200,
+      "sha256": "a29ee2b15c494311c52521766e44af56a3ad2248e7a8ab465e5206463c13d288",
+      "content_type": "application/json",
+      "set_cookie": true,
+      "body": {
+        "status": "ok"
+      }
+    },
+    "/ready": {
+      "http_status": 200,
+      "sha256": "0c81ff972598e6fb9e65631e8181a2c063cddc9ca2f0319054a3e745758efaa2",
+      "content_type": "application/json",
+      "set_cookie": true,
+      "body": {
+        "status": "ready",
+        "provider_mode": "live",
+        "release": {
+          "git_commit": "unavailable",
+          "build_version": "1.2-ca5df7c1dc19e525",
+          "built_utc": "2026-11-05T12:09:33.571692+00:00",
+          "frontend_sha256": "beb38c3485b8abfb672e5a2bf851f1f178c1a8049f367b450708e5abbe7581d4",
+          "backend_sha256": "ad2e4af6c958f24e27e8838cccf8ca9dc46c76fb430c583d2c6737cd3034a813",
+          "required_migration": "004",
+          "supported_migrations": [
+            "004",
+            "005"
+          ],
+          "sso_required_migration": "005"
+        },
+        "database_revision": "005",
+        "schema_versioned": true,
+        "sso_available": true
+      }
+    },
+    "/api/sso/status": {
+      "http_status": 200,
+      "sha256": "f71e7f8a1f8cb8e8ccaf27c084de9559184fcba0599fea7ae0521a9419d7a034",
+      "content_type": "application/json",
+      "set_cookie": true,
+      "body": {
+        "sso_enabled": true,
+        "configured": true,
+        "demo_login_enabled": false
+      }
+    },
+    "/openapi.json": {
+      "http_status": 200,
+      "sha256": "1f811c5d8664cb9ff577a4587104ab2be03389a2d3f3dbbc9efc5fa083874b6a",
+      "content_type": "application/json",
+      "set_cookie": true
+    },
+    "/": {
+      "http_status": 200,
+      "sha256": "1ff8163bc8a06aed7ac408d49fafa47f14b7831966c1ed7be172bcc6de807a20",
+      "content_type": "text/html; charset=utf-8",
+      "set_cookie": true
+    },
+    "/policies": {
+      "http_status": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "content_type": null,
+      "set_cookie": false,
+      "error_type": "URLError"
+    },
+    "/playground": {
+      "http_status": 200,
+      "sha256": "1ff8163bc8a06aed7ac408d49fafa47f14b7831966c1ed7be172bcc6de807a20",
+      "content_type": "text/html; charset=utf-8",
+      "set_cookie": true
+    },
+    "/simulator": {
+      "http_status": 200,
+      "sha256": "1ff8163bc8a06aed7ac408d49fafa47f14b7831966c1ed7be172bcc6de807a20",
+      "content_type": "text/html; charset=utf-8",
+      "set_cookie": true
+    },
+    "/history": {
+      "http_status": 200,
+      "sha256": "1ff8163bc8a06aed7ac408d49fafa47f14b7831966c1ed7be172bcc6de807a20",
+      "content_type": "text/html; charset=utf-8",
+      "set_cookie": true
+    },
+    "/reviews": {
+      "http_status": 200,
+      "sha256": "1ff8163bc8a06aed7ac408d49fafa47f14b7831966c1ed7be172bcc6de807a20",
+      "content_type": "text/html; charset=utf-8",
+      "set_cookie": true
+    },
+    "/reports": {
+      "http_status": 200,
+      "sha256": "1ff8163bc8a06aed7ac408d49fafa47f14b7831966c1ed7be172bcc6de807a20",
+      "content_type": "text/html; charset=utf-8",
+      "set_cookie": true
+    },
+    "/analytics": {
+      "http_status": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "content_type": null,
+      "set_cookie": false,
+      "error_type": "URLError"
+    },
+    "/settings": {
+      "http_status": 200,
+      "sha256": "1ff8163bc8a06aed7ac408d49fafa47f14b7831966c1ed7be172bcc6de807a20",
+      "content_type": "text/html; charset=utf-8",
+      "set_cookie": true
+    },
+    "/api/sso/me": {
+      "http_status": 401,
+      "sha256": "e5049dcb663b0ef9f0abbf841032fc6c9bcb6d3b750f607fdc1d1e464ac37147",
+      "content_type": null,
+      "set_cookie": false,
+      "detail": "Sign in with Microsoft to continue"
+    },
+    "/api/policies?limit=1": {
+      "http_status": 401,
+      "sha256": "6c952e7091670072cb3c8c847e802254681414b40874623f478e6815ef126139",
+      "content_type": null,
+      "set_cookie": false,
+      "detail": "Sign in with Microsoft or use an explicitly enabled demonstration session"
+    },
+    "/api/settings": {
+      "http_status": 401,
+      "sha256": "6c952e7091670072cb3c8c847e802254681414b40874623f478e6815ef126139",
+      "content_type": null,
+      "set_cookie": false,
+      "detail": "Sign in with Microsoft or use an explicitly enabled demonstration session"
+    },
+    "/api/audit/executions?limit=1": {
+      "http_status": 401,
+      "sha256": "6c952e7091670072cb3c8c847e802254681414b40874623f478e6815ef126139",
+      "content_type": null,
+      "set_cookie": false,
+      "detail": "Sign in with Microsoft or use an explicitly enabled demonstration session"
+    },
+    "/api/audit/events?limit=1": {
+      "http_status": 401,
+      "sha256": "6c952e7091670072cb3c8c847e802254681414b40874623f478e6815ef126139",
+      "content_type": null,
+      "set_cookie": false,
+      "detail": "Sign in with Microsoft or use an explicitly enabled demonstration session"
+    },
+    "/api/reviews?limit=1": {
+      "http_status": 401,
+      "sha256": "6c952e7091670072cb3c8c847e802254681414b40874623f478e6815ef126139",
+      "content_type": null,
+      "set_cookie": false,
+      "detail": "Sign in with Microsoft or use an explicitly enabled demonstration session"
+    },
+    "/api/analytics/overview": {
+      "http_status": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "content_type": null,
+      "set_cookie": false,
+      "error_type": "URLError"
+    },
+    "/api/reports/exports?limit=1": {
+      "http_status": 401,
+      "sha256": "6c952e7091670072cb3c8c847e802254681414b40874623f478e6815ef126139",
+      "content_type": null,
+      "set_cookie": false,
+      "detail": "Sign in with Microsoft or use an explicitly enabled demonstration session"
+    },
+    "/api/usage": {
+      "http_status": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "content_type": null,
+      "set_cookie": false,
+      "error_type": "URLError"
+    }
+  }
+}

@@ -1,0 +1,168 @@
+{
+  "observed_utc": "2026-11-08T19:18:40.233835+00:00",
+  "status": "BLOCKED_FIREWALL_APPROVAL_REQUIRED",
+  "migrations_executed": false,
+  "arm_writes": 0,
+  "sql_writes": 0,
+  "firewall_changes": 0,
+  "permission_changes": 0,
+  "provider_calls": 0,
+  "migration_chain": "PASS_001_THROUGH_008_UNCHANGED",
+  "migration_hashes": {
+    "backend/migrations/versions/001_foundation.py": "4cced1e6fdcab34608d61144c10a1b4d093e5cfcfe510e0c7b1b03d779b1f121",
+    "backend/migrations/versions/002_policy_concurrency.py": "6f6626c9df86c84612caaa8c4695046d46ab0ace2547d5ed2bbaa39127a7b5e0",
+    "backend/migrations/versions/003_review_concurrency.py": "1473472d75c340c59d3a94f84808471bac92511c722ba690ecf7999038846225",
+    "backend/migrations/versions/004_reliability_controls.py": "c27bdd18d53f6997c5dde45ad4579f07542a4bfcacc15505f948de4dc866c01d",
+    "backend/migrations/versions/005_entra_sso.py": "325a1fc4e0f7f415d102d340e2b737e1734ecdb119c76f78e61a1e4a4658618a",
+    "backend/migrations/versions/006_multi_policy.py": "e9627d8f1b4c1f6385e1573df9bbd9280beef4f7d93bb2b1c3f6ef8a9fbfe9dc",
+    "backend/migrations/versions/007_protected_review_content.py": "f451e1e83c735b333d5c10b012772cbfa1bf3fd9efe59c1dfbc8c8e2f9f7a8ce",
+    "backend/migrations/versions/008_execution_immutability.py": "d95c0644a256e7a029e0f43e6fc594391b9846c7a5f469755ae581acc3641eb6"
+  },
+  "subscription": {
+    "id": "25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6",
+    "name": "Devops_Azure_SV",
+    "state": "Enabled",
+    "tenantId": "4ac50105-0c66-404e-a107-7cbd8a9a6442"
+  },
+  "target": {
+    "id": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/databases/sqldb-gpv-demo-v008-20261108",
+    "database_id": "80dd1ba9-74e5-4d26-8463-081572c9c22e",
+    "status": "Online",
+    "sku": {
+      "name": "Standard",
+      "tier": "Standard",
+      "capacity": 10
+    }
+  },
+  "hosted_before": {
+    "/health": {
+      "http_status": 200,
+      "status": "ok"
+    },
+    "/ready": {
+      "http_status": 200,
+      "status": "ready",
+      "release": "1.2-ca5df7c1dc19e525",
+      "revision": "005"
+    }
+  },
+  "production_source_metadata_matches_creation_evidence": true,
+  "production_app_config_matches_creation_evidence": true,
+  "existing_firewall_rules": [
+    {
+      "name": "ClientIp-2026-10-28_20-51-52",
+      "start_ip": "180.151.36.234",
+      "end_ip": "180.151.36.234"
+    },
+    {
+      "name": "gpv-verifier-single-ip-20261107",
+      "start_ip": "101.0.62.127",
+      "end_ip": "101.0.62.127"
+    },
+    {
+      "name": "gv-appservice-1",
+      "start_ip": "4.149.94.83",
+      "end_ip": "4.149.94.83"
+    },
+    {
+      "name": "gv-appservice-10",
+      "start_ip": "20.29.153.35",
+      "end_ip": "20.29.153.35"
+    },
+    {
+      "name": "gv-appservice-11",
+      "start_ip": "172.179.21.221",
+      "end_ip": "172.179.21.221"
+    },
+    {
+      "name": "gv-appservice-12",
+      "start_ip": "40.125.96.221",
+      "end_ip": "40.125.96.221"
+    },
+    {
+      "name": "gv-appservice-13",
+      "start_ip": "20.42.128.126",
+      "end_ip": "20.42.128.126"
+    },
+    {
+      "name": "gv-appservice-2",
+      "start_ip": "20.115.168.211",
+      "end_ip": "20.115.168.211"
+    },
+    {
+      "name": "gv-appservice-3",
+      "start_ip": "4.246.17.123",
+      "end_ip": "4.246.17.123"
+    },
+    {
+      "name": "gv-appservice-4",
+      "start_ip": "48.202.41.174",
+      "end_ip": "48.202.41.174"
+    },
+    {
+      "name": "gv-appservice-5",
+      "start_ip": "4.149.162.59",
+      "end_ip": "4.149.162.59"
+    },
+    {
+      "name": "gv-appservice-6",
+      "start_ip": "20.72.205.216",
+      "end_ip": "20.72.205.216"
+    },
+    {
+      "name": "gv-appservice-7",
+      "start_ip": "51.143.50.106",
+      "end_ip": "51.143.50.106"
+    },
+    {
+      "name": "gv-appservice-8",
+      "start_ip": "20.72.231.40",
+      "end_ip": "20.72.231.40"
+    },
+    {
+      "name": "gv-appservice-9",
+      "start_ip": "20.72.198.201",
+      "end_ip": "20.72.198.201"
+    },
+    {
+      "name": "local-laptop-temp-20261031-101-0-62-145",
+      "start_ip": "101.0.62.145",
+      "end_ip": "101.0.62.145"
+    }
+  ],
+  "sql_token_identity": "PASS_APPROVED_OPERATOR_AND_DIRECTORY",
+  "sql_failure": {
+    "exception_type": "ProgrammingError",
+    "sqlstate": "42000",
+    "native_codes": [
+      "40615"
+    ]
+  },
+  "azure_sql_reported_blocked_client_ip": "45.127.46.209",
+  "empty_database_verified": false,
+  "sql_permissions": "NOT_VERIFIED",
+  "final_revision": "NOT_READ_NO_MIGRATIONS_EXECUTED",
+  "proposed_firewall_rule": {
+    "name": "gpv-fresh-init-20261108",
+    "server": "sql-governance-validator-dev-atiya",
+    "start_ip": "45.127.46.209",
+    "end_ip": "45.127.46.209",
+    "maximum_window_minutes": 15,
+    "requires_separate_approval": true
+  },
+  "hosted_after": {
+    "/health": {
+      "http_status": 200,
+      "status": "ok"
+    },
+    "/ready": {
+      "http_status": 200,
+      "status": "ready",
+      "release": "1.2-ca5df7c1dc19e525",
+      "revision": "005"
+    }
+  },
+  "production_source_unchanged_during_preflight": true,
+  "production_app_unchanged_during_preflight": true,
+  "firewall_inventory_unchanged": true
+}

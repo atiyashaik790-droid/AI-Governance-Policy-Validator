@@ -1,0 +1,24 @@
+{
+  "status": "PARTIAL",
+  "deployed": false,
+  "watchdog_armed": false,
+  "azure_changes": false,
+  "zip_sha256": "2343ef97b6837d96cb94fee27095c1e8e386a5bb8cc1f300bf605263c71d0edc",
+  "zip_bytes": 5087,
+  "files": {
+    "run.sh": "5954667c23ed1e4151741893aeb0e2e66a9c1b3d381aa24b088b24ad04976ab7",
+    "settings.job": "108054656fff79679f948b8d2a8574cacc6b9851b8ba21e30b7aa63b47a604a4",
+    "policy.json": "1566ae45bd1553c5a45367042eed1cb8637d0534f7ec8320c74c483bc54c7630",
+    "watchdog.py": "04c665dcc1205833cf49528f878a103328e00b670a9d9e27de92d4384c47882c"
+  },
+  "review_files": {
+    "role-assignment.REVIEW_ONLY.json": "7eccfe74872d0f0792d825fcb17733e96f1e14f5f31f3c3b6d58ad2bba05f614",
+    "azure-changes.REVIEW_ONLY.json": "5c6bd3727f1403aa39504ae401daa6f0ee7cc9c7cf870445b6921cde5f15e21d",
+    "role-definition.REVIEW_ONLY.json": "aff8fc475c4f2f28e87e8cfd9724ad6bc1f4435203b827c6105ba81f6c68c7e9"
+  },
+  "observer_sha256": "73d906e867b9ba8d3ade5e668dfc83b7dd569c727d0b775aa7ff1001dfc34f12",
+  "test_sha256": "98f2e6e01dac122f432087f1bfb455c042d87d9f87344b400131a9b8654677af",
+  "extracted_disabled_package_smoke": "PASS",
+  "prior_application_operator_migration_artifacts_unchanged": true,
+  "sqlite_unchanged": true
+}

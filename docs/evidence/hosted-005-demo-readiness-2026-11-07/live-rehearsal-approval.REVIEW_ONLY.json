@@ -1,0 +1,55 @@
+{
+  "review_only": true,
+  "purpose": "15-minute existing005 hosted demo rehearsal ONLY",
+  "target": "https://app-governance-validator-atiya-1026.azurewebsites.net",
+  "release_required": "1.2-ca5df7c1dc19e525",
+  "revision_required": "005",
+  "identity": "Existing enabled Admin only; user completes Microsoft/MFA in connected browser",
+  "session_operations": {
+    "login_attempts_max": 1,
+    "logout_max": 1,
+    "records_allowed": "Only that login transaction/session, OIDC rate bucket and corresponding authentication audit/revocation records"
+  },
+  "read_only_authenticated_views": true,
+  "governance_requests": {
+    "method": "POST",
+    "path": "/api/governance/generate",
+    "maximum_total_requests": 5,
+    "prompt_file": "docs/evidence/hosted-005-demo-readiness-2026-11-07/synthetic-demo-prompts.json",
+    "maximum_input_characters_per_request": 500,
+    "policy": "Existing active policy only; no policy update or activation",
+    "records_allowed": "Only five synthetic executions and associated usage/rate-limit/audit records; at most one incidental review case if actual result HUMAN_REVIEW; do not assign/resolve existing reviews"
+  },
+  "provider_calls": {
+    "azure_openai_calls_max": 2,
+    "completion_tokens_per_call_max": 700,
+    "moderation_calls_max": 8,
+    "estimated_incremental_spend_usd_max": 1,
+    "must_verify_prices_and_bound_before_calls": true,
+    "no_automatic_retries": true,
+    "stop_on_first_provider_failure": true,
+    "if_moderation_test_returns_ALLOW_stop_before_generation": true
+  },
+  "exports": {
+    "adls_calls": 0,
+    "export_or_reconcile": false
+  },
+  "prohibited": [
+    "policy CRUD/activation",
+    "membership/permission changes",
+    "configuration changes",
+    "WebJobs",
+    "temporary SQL",
+    "migrations",
+    "new release deployment",
+    "deleting or editing existing application records",
+    "feedback submission",
+    "export existing data"
+  ],
+  "read_only_fallback": "If provider failure, show already existing history/analytics/review/export metadata; no additional generation or simulation",
+  "stop_at_minutes": 15,
+  "leave_existing_data_untouched": true,
+  "retain_new_audit_records": true,
+  "browser_available_now": false,
+  "execution_authorized_now": false
+}

@@ -1,0 +1,39 @@
+{
+  "source": "https://prices.azure.com/api/retail/prices",
+  "currency": "USD",
+  "purpose": "public price metadata only; no billable provider call",
+  "records": [
+    {
+      "productName": "SQL Database Single Standard",
+      "skuName": "S0 Secondary",
+      "meterName": "S0 Secondary DTUs",
+      "retailPrice": 0.365,
+      "unitOfMeasure": "1/Day",
+      "armRegionName": "westus2",
+      "effectiveStartDate": "2014-11-01T00:00:00Z",
+      "currencyCode": "USD"
+    },
+    {
+      "productName": "SQL Database Single Standard",
+      "skuName": "S0",
+      "meterName": "S0 DTUs",
+      "retailPrice": 0.4839,
+      "unitOfMeasure": "1/Day",
+      "armRegionName": "westus2",
+      "effectiveStartDate": "2014-11-01T00:00:00Z",
+      "currencyCode": "USD"
+    },
+    {
+      "productName": "SQL Database Single Standard",
+      "skuName": "S0 Secondary Active",
+      "meterName": "S0 Secondary Active DTUs",
+      "retailPrice": 0.4839,
+      "unitOfMeasure": "1/Day",
+      "armRegionName": "westus2",
+      "effectiveStartDate": "2016-04-13T00:00:00Z",
+      "currencyCode": "USD"
+    }
+  ],
+  "next_page_present": false,
+  "status": "VERIFIED"
+}

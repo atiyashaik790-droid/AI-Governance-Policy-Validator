@@ -1,0 +1,16 @@
+{
+  "mode": "DEMO_COMPATIBILITY",
+  "revision": "004",
+  "passed": 8,
+  "failed": 0,
+  "checks": [
+    "Protected API denies missing cookie",
+    "Production demo form remains available",
+    "Demo credential exchanges for existing server session",
+    "Policy reads and role denial remain enforced",
+    "Refresh restores demo session after server validation",
+    "Readiness reports the actual migrated revision",
+    "Demo logout ends browser access",
+    "No browser errors"
+  ]
+}

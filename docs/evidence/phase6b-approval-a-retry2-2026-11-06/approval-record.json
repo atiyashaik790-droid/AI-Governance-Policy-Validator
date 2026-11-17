@@ -1,0 +1,11 @@
+{
+  "approval": "User explicitly approved Approval A retry-2 ONLY",
+  "candidate": "1.2-29ce93fc10de32b3",
+  "max_hours": 4,
+  "max_estimated_compute_usd": 1,
+  "max_incarnations": 2,
+  "max_tier": "S0 / 10 DTUs",
+  "production_mutations": false,
+  "deployment": false,
+  "B_through_F": false
+}

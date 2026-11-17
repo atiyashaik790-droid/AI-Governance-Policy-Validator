@@ -1,0 +1,36 @@
+{
+  "observed_at_utc": "2026-11-04T17:59:30.481134+00:00",
+  "hosted_changes": false,
+  "service_principal": {
+    "accountEnabled": true,
+    "appRoleAssignmentRequired": false,
+    "clientId": "a1a7da0b-ad29-49ec-a9ea-c59219e60df5",
+    "objectId": "e9229aa8-0dca-4959-9eac-179637e3b638",
+    "servicePrincipalType": "Application"
+  },
+  "platform_auth": {
+    "azureAdEnabled": null,
+    "enabled": null,
+    "requireAuthentication": null,
+    "tokenStoreEnabled": null,
+    "unauthenticatedClientAction": null
+  },
+  "platform_logs": {
+    "applicationFilesystemLevel": "Information",
+    "detailedErrorMessages": false,
+    "failedRequestsTracing": false,
+    "httpBlobEnabled": false,
+    "httpFilesystem": {
+      "enabled": true,
+      "retentionInDays": 3,
+      "retentionInMb": 100
+    }
+  },
+  "oidc_discovery": {
+    "issuer": "https://login.microsoftonline.com/4ac50105-0c66-404e-a107-7cbd8a9a6442/v2.0",
+    "authorization_endpoint": "https://login.microsoftonline.com/4ac50105-0c66-404e-a107-7cbd8a9a6442/oauth2/v2.0/authorize",
+    "token_endpoint": "https://login.microsoftonline.com/4ac50105-0c66-404e-a107-7cbd8a9a6442/oauth2/v2.0/token",
+    "jwks_uri": "https://login.microsoftonline.com/4ac50105-0c66-404e-a107-7cbd8a9a6442/discovery/v2.0/keys",
+    "end_session_endpoint": "https://login.microsoftonline.com/4ac50105-0c66-404e-a107-7cbd8a9a6442/oauth2/v2.0/logout"
+  }
+}

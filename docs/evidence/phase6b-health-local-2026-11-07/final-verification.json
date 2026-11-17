@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "candidate_id": "1.2-cf0a97a4daffd3e7",
+  "candidate_contains_fix": true,
+  "migration_pins_unchanged": true,
+  "retry5_evidence_unchanged": true,
+  "sqlite_unchanged": true,
+  "focused_tests_passed": 24,
+  "extracted_candidate_tests_passed": 17,
+  "azure_operations": 0,
+  "approval_status": "NOT AUTHORIZED"
+}

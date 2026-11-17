@@ -1,0 +1,8 @@
+{
+  "/ready": {
+    "error_kind": "TimeoutError"
+  },
+  "/api/sso/status": {
+    "error_kind": "TimeoutError"
+  }
+}

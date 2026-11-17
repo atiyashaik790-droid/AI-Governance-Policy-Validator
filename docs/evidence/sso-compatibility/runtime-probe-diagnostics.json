@@ -1,0 +1,19 @@
+{
+  "recorded_on": "2026-11-04",
+  "operator_previous_result": "MAIN_APP_SHELL_OR_COMPLETE_PROBE_RESULT_UNAVAILABLE",
+  "operator_failure_root_cause": "UNRESOLVED_OLD_PROBE_DID_NOT_RETAIN_STAGE_EVIDENCE",
+  "reproduced_local_defects_fixed": ["ANSI_PROMPT_REJECTION", "CLI_EXIT_BEFORE_PTY_OUTPUT_DRAINED"],
+  "agent_remaining_only_attempt": {
+    "status": "UNKNOWN",
+    "category": "AZURE_NETWORK_OR_DNS_UNAVAILABLE",
+    "stage": "app_discovery",
+    "hosted_runtime_identity_verified": false,
+    "database_mutated": false
+  },
+  "focused_tests_passed": 31,
+  "ruff_lint_and_format": "PASS",
+  "shell_syntax_including_manual_fallback": "PASS",
+  "stage_b": "BLOCKED_PENDING_ACTUAL_RUNTIME_PROOF_AND_EXISTING_RELEASE_APPROVAL_GATES",
+  "hosted_mutations": false,
+  "successful_full_cli_schema_or_backup_checks_repeated": false
+}

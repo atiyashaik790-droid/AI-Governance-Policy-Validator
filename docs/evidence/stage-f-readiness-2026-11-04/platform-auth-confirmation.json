@@ -1,0 +1,6 @@
+{
+  "azureAdEnabled": null,
+  "enabled": false,
+  "requireAuthentication": null,
+  "unauthenticatedClientAction": null
+}

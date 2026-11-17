@@ -1,0 +1,14 @@
+{
+  "isolated_local_only": true,
+  "sql_accessed": false,
+  "oidc_called": false,
+  "status_and_auth_share_settings": true,
+  "existing_object_after_environment_change": false,
+  "new_object_after_environment_change": true,
+  "enabled_status": {
+    "sso_enabled": true,
+    "configured": true,
+    "demo_login_enabled": true
+  },
+  "status": "PASS"
+}

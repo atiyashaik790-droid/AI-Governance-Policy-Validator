@@ -1,0 +1,6 @@
+{
+  "sso_enabled": "true",
+  "demo_browser_login_enabled": "true",
+  "allow_legacy_api_credentials": "false (package default)",
+  "secret_present": true
+}

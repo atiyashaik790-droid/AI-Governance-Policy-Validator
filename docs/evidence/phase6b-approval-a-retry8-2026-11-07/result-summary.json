@@ -1,0 +1,28 @@
+{
+  "qualification_status": "PARTIAL",
+  "execution_status": "STOPPED",
+  "candidate": "1.2-597d9528f2d018aa",
+  "blocker": {
+    "assertion": "cleaned[\"healthy\"] and cleaned[\"removed\"] >= 1",
+    "observed": {
+      "removed": 0,
+      "healthy": false
+    },
+    "location": "scripts/tests/phase6b_sql_package_probe.py:455",
+    "root_cause": "Not established; cleanup_once returns this result for backlog or a sanitized exception. No further live diagnosis or retry performed."
+  },
+  "incarnations": 1,
+  "elapsed_seconds": 1046.15,
+  "confirmed_online_to_absence_seconds": 972.944,
+  "create_intent_to_absence_seconds": 1043.195,
+  "estimated_compute_usd": 0.040325,
+  "cleanup_independently_verified": true,
+  "production_metadata_unchanged": true,
+  "source_migrations_sqlite_unchanged": true,
+  "unreached": [
+    "SQL expiry row deletion and expiry audit confirmation",
+    "compatible-copy ciphertext decryptability and retained-row/catalog preservation",
+    "second-incarnation 006 preflight denials and transactional 007 THROW rollback"
+  ],
+  "stop_after": "Approval A retry-8; no Recovery B or production C\u2013F"
+}

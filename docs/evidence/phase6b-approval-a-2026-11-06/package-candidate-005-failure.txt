@@ -1,0 +1,18 @@
+/home/sigmoid/AI governance policy validator/.venv/lib/python3.13/site-packages/authlib/integrations/httpx_client/assertion_client.py:5: AuthlibDeprecationWarning: The httpx module is deprecated; please use httpx2 instead.
+  from ._compat import httpx2
+/home/sigmoid/AI governance policy validator/.venv/lib/python3.13/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+  from starlette.testclient import TestClient as TestClient  # noqa
+{"event": "http.completed", "correlation_id": "d8a96b21-93cb-4429-9756-3474202d747f", "route": "/ready", "method": "GET", "status": 200, "duration_ms": 109026.9}
+{"event": "http.completed", "correlation_id": "f0f94258-505e-492e-af29-bc48e5401f54", "route": "/{path:path}", "method": "GET", "status": 200, "duration_ms": 23.9}
+{"event": "http.completed", "correlation_id": "4656ca6f-90ed-4d00-a8ca-c98d70b323fb", "route": "/api/policies", "method": "GET", "status": 401, "duration_ms": 1.86}
+{"event": "http.completed", "correlation_id": "7d878582-4fa9-4b3f-863d-cd03e2ff0b9d", "route": "/api/sso/login", "method": "GET", "status": 302, "duration_ms": 106738.21}
+{"event": "http.completed", "correlation_id": "299ffc3e-65b2-4e39-a1a3-26808f21b955", "route": "/api/sso/callback", "method": "GET", "status": 303, "duration_ms": 107369.4}
+{"event": "http.completed", "correlation_id": "f93fc316-401a-4baf-97a2-4010ebe15131", "route": "/api/sso/me", "method": "GET", "status": 200, "duration_ms": 107207.94}
+Traceback (most recent call last):
+  File "/home/sigmoid/AI governance policy validator/scripts/tests/phase6b_sql_package_probe.py", line 174, in <module>
+    assert shown.headers["cache-control"] == "no-store"
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sigmoid/AI governance policy validator/scripts/tests/phase6b_sql_package_probe.py", line 114, in probe
+    assert 7100 < lifetime <= 7200
+           ^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

@@ -1,0 +1,1026 @@
+{
+  "status": "PASS",
+  "sql_writes": false,
+  "permission_proof_boundary": "Operator SELECT-only catalog/grant inspection; no impersonation or direct managed-identity login.",
+  "revision": [
+    "005"
+  ],
+  "operator_permissions": {
+    "CONNECT": true,
+    "SELECT": true,
+    "VIEW DEFINITION": true,
+    "CONTROL": true
+  },
+  "deployed005_schema_contract": {
+    "revision": "005",
+    "versioned": true,
+    "sso_schema": true
+  },
+  "tables": [
+    {
+      "name": "active_policy_assignments"
+    },
+    {
+      "name": "alembic_version"
+    },
+    {
+      "name": "audit_events"
+    },
+    {
+      "name": "demo_sessions"
+    },
+    {
+      "name": "evaluation_exports"
+    },
+    {
+      "name": "export_jobs"
+    },
+    {
+      "name": "feedback_records"
+    },
+    {
+      "name": "human_review_cases"
+    },
+    {
+      "name": "inference_rate_buckets"
+    },
+    {
+      "name": "inference_usage"
+    },
+    {
+      "name": "policies"
+    },
+    {
+      "name": "policy_versions"
+    },
+    {
+      "name": "review_assignments"
+    },
+    {
+      "name": "review_notes"
+    },
+    {
+      "name": "sso_memberships"
+    },
+    {
+      "name": "sso_sessions"
+    },
+    {
+      "name": "sso_transactions"
+    },
+    {
+      "name": "validation_executions"
+    }
+  ],
+  "indexes": [
+    {
+      "table_name": "active_policy_assignments",
+      "name": "PK__active_p__B3AE1C6EC7645AD0",
+      "type_desc": "CLUSTERED",
+      "is_unique": true,
+      "is_disabled": false,
+      "is_hypothetical": false,
+      "has_filter": false
+    },
+    {
+      "table_name": "alembic_version",
+      "name": "alembic_version_pkc",
+      "type_desc": "CLUSTERED",
+      "is_unique": true,
+      "is_disabled": false,
+      "is_hypothetical": false,
+      "has_filter": false
+    },
+    {
+      "table_name": "audit_events",
+      "name": "ix_audit_events_tenant",
+      "type_desc": "NONCLUSTERED",
+      "is_unique": false,
+      "is_disabled": false,
+      "is_hypothetical": false,
+      "has_filter": false
+    },
+    {
+      "table_name": "audit_events",
+      "name": "PK__audit_ev__3213E83F47050C96",
+      "type_desc": "CLUSTERED",
+      "is_unique": true,
+      "is_disabled": false,
+      "is_hypothetical": false,
+      "has_filter": false
+    },
+    {
+      "table_name": "demo_sessions",
+      "name": "ix_demo_sessions_expires",
+      "type_desc": "NONCLUSTERED",
+      "is_unique": false,
+      "is_disabled": false,
+      "is_hypothetical": false,
+      "has_filter": false
+    },
+    {
+      "table_name": "demo_sessions",
+      "name": "ix_demo_sessions_tenant",
+      "type_desc": "NONCLUSTERED",
+      "is_unique": false,
+      "is_disabled": false,
+      "is_hypothetical": false,
+      "has_filter": false
+    },
+    {
+      "table_name": "demo_sessions",
+      "name": "PK__demo_ses__3213E83FF0EC080F",
+      "type_desc": "CLUSTERED",
+      "is_unique": true,
+      "is_disabled": false,
+      "is_hypothetical": false,
+      "has_filter": false
+    },
+    {
+      "table_name": "evaluation_exports",
+      "name": "ix_evaluation_exports_tenant",
+      "type_desc": "NONCLUSTERED",
+      "is_unique": false,
+      "is_disabled": false,
+      "is_hypothetical": false,
+      "has_filter": false
+    },
+    {
+      "table_name": "evaluation_exports",
+      "name": "PK__evaluati__3213E83F197730A6",
+      "type_desc": "CLUSTERED",
+      "is_unique": true,
+      "is_disabled": false,
+      "is_hypothetical": false,
+      "has_filter": false
+    },
+    {
+      "table_name": "export_jobs",
+      "name": "ix_export_jobs_state",
+      "type_desc": "NONCLUSTERED",
+      "is_unique": false,
+      "is_disabled": false,
+      "is_hypothetical": false,
+      "has_filter": false
+    },
+    {
+      "table_name": "export_jobs",
+      "name": "ix_export_jobs_tenant",
+      "type_desc": "NONCLUSTERED",
+      "is_unique": false,
+      "is_disabled": false,
+      "is_hypothetical": false,
+      "has_filter": false
+    },
+    {
+      "table_name": "export_jobs",
+      "name": "PK__export_j__3213E83F7D762FD4",
+      "type_desc": "CLUSTERED",
+      "is_unique": true,
+      "is_disabled": false,
+      "is_hypothetical": false,
+      "has_filter": false
+    },
+    {
+      "table_name": "export_jobs",
+      "name": "UQ__export_j__F9D5B9F046AE7B25",
+      "type_desc": "NONCLUSTERED",
+      "is_unique": true,
+      "is_disabled": false,
+      "is_hypothetical": false,
+      "has_filter": false
+    },
+    {
+      "table_name": "feedback_records",
+      "name": "ix_feedback_records_tenant",
+      "type_desc": "NONCLUSTERED",
+      "is_unique": false,
+      "is_disabled": false,
+      "is_hypothetical": false,
+      "has_filter": false
+    },
+    {
+      "table_name": "feedback_records",
+      "name": "PK__feedback__3213E83FDEA17AEC",
+      "type_desc": "CLUSTERED",
+      "is_unique": true,
+      "is_disabled": false,
+      "is_hypothetical": false,
+      "has_filter": false
+    },
+    {
+      "table_name": "human_review_cases",
+      "name": "ix_human_review_cases_tenant",
+      "type_desc": "NONCLUSTERED",
+      "is_unique": false,
+      "is_disabled": false,
+      "is_hypothetical": false,
+      "has_filter": false
+    },
+    {
+      "table_name": "human_review_cases",
+      "name": "PK__human_re__3213E83F0C0C27C8",
+      "type_desc": "CLUSTERED",
+      "is_unique": true,
+      "is_disabled": false,
+      "is_hypothetical": false,
+      "has_filter": false
+    },
+    {
+      "table_name": "inference_rate_buckets",
+      "name": "ix_inference_rate_buckets_expires",
+      "type_desc": "NONCLUSTERED",
+      "is_unique": false,
+      "is_disabled": false,
+      "is_hypothetical": false,
+      "has_filter": false
+    },
+    {
+      "table_name": "inference_rate_buckets",
+      "name": "PK__inferenc__3213E83F63E73599",
+      "type_desc": "CLUSTERED",
+      "is_unique": true,
+      "is_disabled": false,
+      "is_hypothetical": false,
+      "has_filter": false
+    },
+    {
+      "table_name": "inference_usage",
+      "name": "ix_inference_usage_actor",
+      "type_desc": "NONCLUSTERED",
+      "is_unique": false,
+      "is_disabled": false,
+      "is_hypothetical": false,
+      "has_filter": false
+    },
+    {
+      "table_name": "inference_usage",
+      "name": "ix_inference_usage_expires",
+      "type_desc": "NONCLUSTERED",
+      "is_unique": false,
+      "is_disabled": false,
+      "is_hypothetical": false,
+      "has_filter": false
+    },
+    {
+      "table_name": "inference_usage",
+      "name": "ix_inference_usage_tenant",
+      "type_desc": "NONCLUSTERED",
+      "is_unique": false,
+      "is_disabled": false,
+      "is_hypothetical": false,
+      "has_filter": false
+    },
+    {
+      "table_name": "inference_usage",
+      "name": "PK__inferenc__3213E83F2B8CB593",
+      "type_desc": "CLUSTERED",
+      "is_unique": true,
+      "is_disabled": false,
+      "is_hypothetical": false,
+      "has_filter": false
+    },
+    {
+      "table_name": "policies",
+      "name": "ix_policies_tenant",
+      "type_desc": "NONCLUSTERED",
+      "is_unique": false,
+      "is_disabled": false,
+      "is_hypothetical": false,
+      "has_filter": false
+    },
+    {
+      "table_name": "policies",
+      "name": "PK__policies__3213E83F0781968F",
+      "type_desc": "CLUSTERED",
+      "is_unique": true,
+      "is_disabled": false,
+      "is_hypothetical": false,
+      "has_filter": false
+    },
+    {
+      "table_name": "policy_versions",
+      "name": "ix_policy_versions_policy_id",
+      "type_desc": "NONCLUSTERED",
+      "is_unique": false,
+      "is_disabled": false,
+      "is_hypothetical": false,
+      "has_filter": false
+    },
+    {
+      "table_name": "policy_versions",
+      "name": "ix_policy_versions_tenant",
+      "type_desc": "NONCLUSTERED",
+      "is_unique": false,
+      "is_disabled": false,
+      "is_hypothetical": false,
+      "has_filter": false
+    },
+    {
+      "table_name": "policy_versions",
+      "name": "PK__policy_v__3213E83F39606733",
+      "type_desc": "CLUSTERED",
+      "is_unique": true,
+      "is_disabled": false,
+      "is_hypothetical": false,
+      "has_filter": false
+    },
+    {
+      "table_name": "policy_versions",
+      "name": "UQ__policy_v__5808AEE68431CA67",
+      "type_desc": "NONCLUSTERED",
+      "is_unique": true,
+      "is_disabled": false,
+      "is_hypothetical": false,
+      "has_filter": false
+    },
+    {
+      "table_name": "review_assignments",
+      "name": "ix_review_assignments_tenant",
+      "type_desc": "NONCLUSTERED",
+      "is_unique": false,
+      "is_disabled": false,
+      "is_hypothetical": false,
+      "has_filter": false
+    },
+    {
+      "table_name": "review_assignments",
+      "name": "PK__review_a__3213E83FBC169AC0",
+      "type_desc": "CLUSTERED",
+      "is_unique": true,
+      "is_disabled": false,
+      "is_hypothetical": false,
+      "has_filter": false
+    },
+    {
+      "table_name": "review_notes",
+      "name": "ix_review_notes_review_id",
+      "type_desc": "NONCLUSTERED",
+      "is_unique": false,
+      "is_disabled": false,
+      "is_hypothetical": false,
+      "has_filter": false
+    },
+    {
+      "table_name": "review_notes",
+      "name": "ix_review_notes_tenant",
+      "type_desc": "NONCLUSTERED",
+      "is_unique": false,
+      "is_disabled": false,
+      "is_hypothetical": false,
+      "has_filter": false
+    },
+    {
+      "table_name": "review_notes",
+      "name": "PK__review_n__3213E83FAB1B65D3",
+      "type_desc": "CLUSTERED",
+      "is_unique": true,
+      "is_disabled": false,
+      "is_hypothetical": false,
+      "has_filter": false
+    },
+    {
+      "table_name": "sso_memberships",
+      "name": "PK__sso_memb__3213E83F560FCAD0",
+      "type_desc": "CLUSTERED",
+      "is_unique": true,
+      "is_disabled": false,
+      "is_hypothetical": false,
+      "has_filter": false
+    },
+    {
+      "table_name": "sso_memberships",
+      "name": "UQ__sso_memb__083A90D55DA9188E",
+      "type_desc": "NONCLUSTERED",
+      "is_unique": true,
+      "is_disabled": false,
+      "is_hypothetical": false,
+      "has_filter": false
+    },
+    {
+      "table_name": "sso_memberships",
+      "name": "UQ__sso_memb__0FCEA195E5323F82",
+      "type_desc": "NONCLUSTERED",
+      "is_unique": true,
+      "is_disabled": false,
+      "is_hypothetical": false,
+      "has_filter": false
+    },
+    {
+      "table_name": "sso_sessions",
+      "name": "ix_sso_sessions_expires",
+      "type_desc": "NONCLUSTERED",
+      "is_unique": false,
+      "is_disabled": false,
+      "is_hypothetical": false,
+      "has_filter": false
+    },
+    {
+      "table_name": "sso_sessions",
+      "name": "PK__sso_sess__3213E83F4CD6415C",
+      "type_desc": "CLUSTERED",
+      "is_unique": true,
+      "is_disabled": false,
+      "is_hypothetical": false,
+      "has_filter": false
+    },
+    {
+      "table_name": "sso_transactions",
+      "name": "ix_sso_transactions_expires",
+      "type_desc": "NONCLUSTERED",
+      "is_unique": false,
+      "is_disabled": false,
+      "is_hypothetical": false,
+      "has_filter": false
+    },
+    {
+      "table_name": "sso_transactions",
+      "name": "PK__sso_tran__3213E83F7ABDCBAA",
+      "type_desc": "CLUSTERED",
+      "is_unique": true,
+      "is_disabled": false,
+      "is_hypothetical": false,
+      "has_filter": false
+    },
+    {
+      "table_name": "validation_executions",
+      "name": "ix_execution_tenant_created",
+      "type_desc": "NONCLUSTERED",
+      "is_unique": false,
+      "is_disabled": false,
+      "is_hypothetical": false,
+      "has_filter": false
+    },
+    {
+      "table_name": "validation_executions",
+      "name": "ix_validation_executions_decision",
+      "type_desc": "NONCLUSTERED",
+      "is_unique": false,
+      "is_disabled": false,
+      "is_hypothetical": false,
+      "has_filter": false
+    },
+    {
+      "table_name": "validation_executions",
+      "name": "ix_validation_executions_tenant",
+      "type_desc": "NONCLUSTERED",
+      "is_unique": false,
+      "is_disabled": false,
+      "is_hypothetical": false,
+      "has_filter": false
+    },
+    {
+      "table_name": "validation_executions",
+      "name": "PK__validati__3213E83FE9EEF8CC",
+      "type_desc": "CLUSTERED",
+      "is_unique": true,
+      "is_disabled": false,
+      "is_hypothetical": false,
+      "has_filter": false
+    }
+  ],
+  "constraints": [
+    {
+      "table_name": "active_policy_assignments",
+      "name": "FK__active_po__versi__02FC7413",
+      "type": "F "
+    },
+    {
+      "table_name": "active_policy_assignments",
+      "name": "PK__active_p__B3AE1C6EC7645AD0",
+      "type": "PK"
+    },
+    {
+      "table_name": "alembic_version",
+      "name": "alembic_version_pkc",
+      "type": "PK"
+    },
+    {
+      "table_name": "audit_events",
+      "name": "PK__audit_ev__3213E83F47050C96",
+      "type": "PK"
+    },
+    {
+      "table_name": "demo_sessions",
+      "name": "PK__demo_ses__3213E83FF0EC080F",
+      "type": "PK"
+    },
+    {
+      "table_name": "evaluation_exports",
+      "name": "PK__evaluati__3213E83F197730A6",
+      "type": "PK"
+    },
+    {
+      "table_name": "export_jobs",
+      "name": "FK__export_jobs__id__0D7A0286",
+      "type": "F "
+    },
+    {
+      "table_name": "export_jobs",
+      "name": "PK__export_j__3213E83F7D762FD4",
+      "type": "PK"
+    },
+    {
+      "table_name": "export_jobs",
+      "name": "UQ__export_j__F9D5B9F046AE7B25",
+      "type": "UQ"
+    },
+    {
+      "table_name": "feedback_records",
+      "name": "FK__feedback___execu__797309D9",
+      "type": "F "
+    },
+    {
+      "table_name": "feedback_records",
+      "name": "PK__feedback__3213E83FDEA17AEC",
+      "type": "PK"
+    },
+    {
+      "table_name": "human_review_cases",
+      "name": "DF__human_rev__row_v__03F0984C",
+      "type": "D "
+    },
+    {
+      "table_name": "human_review_cases",
+      "name": "FK__human_rev__execu__7C4F7684",
+      "type": "F "
+    },
+    {
+      "table_name": "human_review_cases",
+      "name": "PK__human_re__3213E83F0C0C27C8",
+      "type": "PK"
+    },
+    {
+      "table_name": "inference_rate_buckets",
+      "name": "PK__inferenc__3213E83F63E73599",
+      "type": "PK"
+    },
+    {
+      "table_name": "inference_usage",
+      "name": "PK__inferenc__3213E83F2B8CB593",
+      "type": "PK"
+    },
+    {
+      "table_name": "policies",
+      "name": "PK__policies__3213E83F0781968F",
+      "type": "PK"
+    },
+    {
+      "table_name": "policy_versions",
+      "name": "FK__policy_ve__polic__00200768",
+      "type": "F "
+    },
+    {
+      "table_name": "policy_versions",
+      "name": "PK__policy_v__3213E83F39606733",
+      "type": "PK"
+    },
+    {
+      "table_name": "policy_versions",
+      "name": "UQ__policy_v__5808AEE68431CA67",
+      "type": "UQ"
+    },
+    {
+      "table_name": "review_assignments",
+      "name": "FK__review_assig__id__10566F31",
+      "type": "F "
+    },
+    {
+      "table_name": "review_assignments",
+      "name": "PK__review_a__3213E83FBC169AC0",
+      "type": "PK"
+    },
+    {
+      "table_name": "review_notes",
+      "name": "FK__review_no__revie__1332DBDC",
+      "type": "F "
+    },
+    {
+      "table_name": "review_notes",
+      "name": "PK__review_n__3213E83FAB1B65D3",
+      "type": "PK"
+    },
+    {
+      "table_name": "sso_memberships",
+      "name": "PK__sso_memb__3213E83F560FCAD0",
+      "type": "PK"
+    },
+    {
+      "table_name": "sso_memberships",
+      "name": "UQ__sso_memb__083A90D55DA9188E",
+      "type": "UQ"
+    },
+    {
+      "table_name": "sso_memberships",
+      "name": "UQ__sso_memb__0FCEA195E5323F82",
+      "type": "UQ"
+    },
+    {
+      "table_name": "sso_sessions",
+      "name": "FK__sso_sessi__membe__1EA48E88",
+      "type": "F "
+    },
+    {
+      "table_name": "sso_sessions",
+      "name": "PK__sso_sess__3213E83F4CD6415C",
+      "type": "PK"
+    },
+    {
+      "table_name": "sso_transactions",
+      "name": "PK__sso_tran__3213E83F7ABDCBAA",
+      "type": "PK"
+    },
+    {
+      "table_name": "validation_executions",
+      "name": "PK__validati__3213E83FE9EEF8CC",
+      "type": "PK"
+    }
+  ],
+  "foreign_keys": [
+    {
+      "name": "FK__active_po__versi__02FC7413",
+      "is_disabled": false,
+      "is_not_trusted": false
+    },
+    {
+      "name": "FK__export_jobs__id__0D7A0286",
+      "is_disabled": false,
+      "is_not_trusted": false
+    },
+    {
+      "name": "FK__feedback___execu__797309D9",
+      "is_disabled": false,
+      "is_not_trusted": false
+    },
+    {
+      "name": "FK__human_rev__execu__7C4F7684",
+      "is_disabled": false,
+      "is_not_trusted": false
+    },
+    {
+      "name": "FK__policy_ve__polic__00200768",
+      "is_disabled": false,
+      "is_not_trusted": false
+    },
+    {
+      "name": "FK__review_assig__id__10566F31",
+      "is_disabled": false,
+      "is_not_trusted": false
+    },
+    {
+      "name": "FK__review_no__revie__1332DBDC",
+      "is_disabled": false,
+      "is_not_trusted": false
+    },
+    {
+      "name": "FK__sso_sessi__membe__1EA48E88",
+      "is_disabled": false,
+      "is_not_trusted": false
+    }
+  ],
+  "triggers": [
+    {
+      "table_name": "audit_events",
+      "name": "immutable_audit_events",
+      "is_disabled": false,
+      "definition_sha256": "5FD0334FFB89E5D6403A9160FEC2AAE927E1B6AF574E4E2BDA3F7BE913FC9D9A"
+    },
+    {
+      "table_name": "policy_versions",
+      "name": "immutable_policy_versions",
+      "is_disabled": false,
+      "definition_sha256": "70F9F860E943CCAB9F1FC4738B193E69939F78950DDD330D346C08A53385FFE3"
+    },
+    {
+      "table_name": "review_notes",
+      "name": "immutable_review_notes",
+      "is_disabled": false,
+      "definition_sha256": "557943242A1D14325D4C81D0B1E949FE7F9DD5DBE75917ABD3A22279813C968E"
+    }
+  ],
+  "runtime_mapping": [
+    {
+      "name": "app-governance-validator-atiya-1026",
+      "type": "E",
+      "contained_identity_id": "F7BACACE-698A-4968-8ADD-CBA221319A17"
+    }
+  ],
+  "runtime_role_memberships": [
+    {
+      "role_name": "governance_validator_web_runtime",
+      "member_name": "app-governance-validator-atiya-1026"
+    }
+  ],
+  "runtime_grants": [
+    {
+      "principal": "app-governance-validator-atiya-1026",
+      "state_desc": "GRANT",
+      "permission_name": "CONNECT",
+      "object_name": null
+    },
+    {
+      "principal": "governance_validator_web_runtime",
+      "state_desc": "GRANT",
+      "permission_name": "CONNECT",
+      "object_name": null
+    },
+    {
+      "principal": "governance_validator_web_runtime",
+      "state_desc": "GRANT",
+      "permission_name": "DELETE",
+      "object_name": "policies"
+    },
+    {
+      "principal": "governance_validator_web_runtime",
+      "state_desc": "GRANT",
+      "permission_name": "INSERT",
+      "object_name": "active_policy_assignments"
+    },
+    {
+      "principal": "governance_validator_web_runtime",
+      "state_desc": "GRANT",
+      "permission_name": "INSERT",
+      "object_name": "audit_events"
+    },
+    {
+      "principal": "governance_validator_web_runtime",
+      "state_desc": "GRANT",
+      "permission_name": "INSERT",
+      "object_name": "demo_sessions"
+    },
+    {
+      "principal": "governance_validator_web_runtime",
+      "state_desc": "GRANT",
+      "permission_name": "INSERT",
+      "object_name": "evaluation_exports"
+    },
+    {
+      "principal": "governance_validator_web_runtime",
+      "state_desc": "GRANT",
+      "permission_name": "INSERT",
+      "object_name": "export_jobs"
+    },
+    {
+      "principal": "governance_validator_web_runtime",
+      "state_desc": "GRANT",
+      "permission_name": "INSERT",
+      "object_name": "feedback_records"
+    },
+    {
+      "principal": "governance_validator_web_runtime",
+      "state_desc": "GRANT",
+      "permission_name": "INSERT",
+      "object_name": "human_review_cases"
+    },
+    {
+      "principal": "governance_validator_web_runtime",
+      "state_desc": "GRANT",
+      "permission_name": "INSERT",
+      "object_name": "inference_rate_buckets"
+    },
+    {
+      "principal": "governance_validator_web_runtime",
+      "state_desc": "GRANT",
+      "permission_name": "INSERT",
+      "object_name": "inference_usage"
+    },
+    {
+      "principal": "governance_validator_web_runtime",
+      "state_desc": "GRANT",
+      "permission_name": "INSERT",
+      "object_name": "policies"
+    },
+    {
+      "principal": "governance_validator_web_runtime",
+      "state_desc": "GRANT",
+      "permission_name": "INSERT",
+      "object_name": "policy_versions"
+    },
+    {
+      "principal": "governance_validator_web_runtime",
+      "state_desc": "GRANT",
+      "permission_name": "INSERT",
+      "object_name": "review_assignments"
+    },
+    {
+      "principal": "governance_validator_web_runtime",
+      "state_desc": "GRANT",
+      "permission_name": "INSERT",
+      "object_name": "review_notes"
+    },
+    {
+      "principal": "governance_validator_web_runtime",
+      "state_desc": "GRANT",
+      "permission_name": "INSERT",
+      "object_name": "sso_sessions"
+    },
+    {
+      "principal": "governance_validator_web_runtime",
+      "state_desc": "GRANT",
+      "permission_name": "INSERT",
+      "object_name": "sso_transactions"
+    },
+    {
+      "principal": "governance_validator_web_runtime",
+      "state_desc": "GRANT",
+      "permission_name": "INSERT",
+      "object_name": "validation_executions"
+    },
+    {
+      "principal": "governance_validator_web_runtime",
+      "state_desc": "GRANT",
+      "permission_name": "SELECT",
+      "object_name": "active_policy_assignments"
+    },
+    {
+      "principal": "governance_validator_web_runtime",
+      "state_desc": "GRANT",
+      "permission_name": "SELECT",
+      "object_name": "alembic_version"
+    },
+    {
+      "principal": "governance_validator_web_runtime",
+      "state_desc": "GRANT",
+      "permission_name": "SELECT",
+      "object_name": "audit_events"
+    },
+    {
+      "principal": "governance_validator_web_runtime",
+      "state_desc": "GRANT",
+      "permission_name": "SELECT",
+      "object_name": "demo_sessions"
+    },
+    {
+      "principal": "governance_validator_web_runtime",
+      "state_desc": "GRANT",
+      "permission_name": "SELECT",
+      "object_name": "evaluation_exports"
+    },
+    {
+      "principal": "governance_validator_web_runtime",
+      "state_desc": "GRANT",
+      "permission_name": "SELECT",
+      "object_name": "export_jobs"
+    },
+    {
+      "principal": "governance_validator_web_runtime",
+      "state_desc": "GRANT",
+      "permission_name": "SELECT",
+      "object_name": "feedback_records"
+    },
+    {
+      "principal": "governance_validator_web_runtime",
+      "state_desc": "GRANT",
+      "permission_name": "SELECT",
+      "object_name": "human_review_cases"
+    },
+    {
+      "principal": "governance_validator_web_runtime",
+      "state_desc": "GRANT",
+      "permission_name": "SELECT",
+      "object_name": "inference_rate_buckets"
+    },
+    {
+      "principal": "governance_validator_web_runtime",
+      "state_desc": "GRANT",
+      "permission_name": "SELECT",
+      "object_name": "inference_usage"
+    },
+    {
+      "principal": "governance_validator_web_runtime",
+      "state_desc": "GRANT",
+      "permission_name": "SELECT",
+      "object_name": "policies"
+    },
+    {
+      "principal": "governance_validator_web_runtime",
+      "state_desc": "GRANT",
+      "permission_name": "SELECT",
+      "object_name": "policy_versions"
+    },
+    {
+      "principal": "governance_validator_web_runtime",
+      "state_desc": "GRANT",
+      "permission_name": "SELECT",
+      "object_name": "review_assignments"
+    },
+    {
+      "principal": "governance_validator_web_runtime",
+      "state_desc": "GRANT",
+      "permission_name": "SELECT",
+      "object_name": "review_notes"
+    },
+    {
+      "principal": "governance_validator_web_runtime",
+      "state_desc": "GRANT",
+      "permission_name": "SELECT",
+      "object_name": "sso_memberships"
+    },
+    {
+      "principal": "governance_validator_web_runtime",
+      "state_desc": "GRANT",
+      "permission_name": "SELECT",
+      "object_name": "sso_sessions"
+    },
+    {
+      "principal": "governance_validator_web_runtime",
+      "state_desc": "GRANT",
+      "permission_name": "SELECT",
+      "object_name": "sso_transactions"
+    },
+    {
+      "principal": "governance_validator_web_runtime",
+      "state_desc": "GRANT",
+      "permission_name": "SELECT",
+      "object_name": "validation_executions"
+    },
+    {
+      "principal": "governance_validator_web_runtime",
+      "state_desc": "GRANT",
+      "permission_name": "UPDATE",
+      "object_name": "active_policy_assignments"
+    },
+    {
+      "principal": "governance_validator_web_runtime",
+      "state_desc": "GRANT",
+      "permission_name": "UPDATE",
+      "object_name": "demo_sessions"
+    },
+    {
+      "principal": "governance_validator_web_runtime",
+      "state_desc": "GRANT",
+      "permission_name": "UPDATE",
+      "object_name": "evaluation_exports"
+    },
+    {
+      "principal": "governance_validator_web_runtime",
+      "state_desc": "GRANT",
+      "permission_name": "UPDATE",
+      "object_name": "export_jobs"
+    },
+    {
+      "principal": "governance_validator_web_runtime",
+      "state_desc": "GRANT",
+      "permission_name": "UPDATE",
+      "object_name": "human_review_cases"
+    },
+    {
+      "principal": "governance_validator_web_runtime",
+      "state_desc": "GRANT",
+      "permission_name": "UPDATE",
+      "object_name": "inference_rate_buckets"
+    },
+    {
+      "principal": "governance_validator_web_runtime",
+      "state_desc": "GRANT",
+      "permission_name": "UPDATE",
+      "object_name": "inference_usage"
+    },
+    {
+      "principal": "governance_validator_web_runtime",
+      "state_desc": "GRANT",
+      "permission_name": "UPDATE",
+      "object_name": "policies"
+    },
+    {
+      "principal": "governance_validator_web_runtime",
+      "state_desc": "GRANT",
+      "permission_name": "UPDATE",
+      "object_name": "review_assignments"
+    },
+    {
+      "principal": "governance_validator_web_runtime",
+      "state_desc": "GRANT",
+      "permission_name": "UPDATE",
+      "object_name": "sso_sessions"
+    },
+    {
+      "principal": "governance_validator_web_runtime",
+      "state_desc": "GRANT",
+      "permission_name": "UPDATE",
+      "object_name": "sso_transactions"
+    },
+    {
+      "principal": "governance_validator_web_runtime",
+      "state_desc": "GRANT",
+      "permission_name": "VIEW DEFINITION",
+      "object_name": "sso_memberships"
+    },
+    {
+      "principal": "governance_validator_web_runtime",
+      "state_desc": "GRANT",
+      "permission_name": "VIEW DEFINITION",
+      "object_name": "sso_sessions"
+    },
+    {
+      "principal": "governance_validator_web_runtime",
+      "state_desc": "GRANT",
+      "permission_name": "VIEW DEFINITION",
+      "object_name": "sso_transactions"
+    }
+  ],
+  "runtime_grants_match_last_passed_baseline": true,
+  "contained_identity_matches_last_baseline": true,
+  "006_007_tables_present": [],
+  "008_execution_trigger_present": false
+}

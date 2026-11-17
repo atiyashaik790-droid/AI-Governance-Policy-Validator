@@ -1,0 +1,23 @@
+{
+  "candidate": "1.2-240cc70e239a595f",
+  "candidate_sha256": "274891fe4ce303d9b05751e1b19cd52e5eb535034ccfedb37eae30fb1c228e22",
+  "rollback": "1.2-230d63e0c546e0ba",
+  "rollback_sha256": "b52287bbf048a66a9f7233753a3fb95730397016f03074d4deb399c1e74c0d29",
+  "application_modules_matching_frozen_zip": 64,
+  "frontend_files_matching_frozen_zip": 4,
+  "all_prior_pinned_files_and_sqlite_match": true,
+  "tests_rerun": false,
+  "reason": "No application change; prior focused/preserved/extracted-release evidence reused",
+  "migration_grants_sha256": {
+    "backend/migrations/versions/001_foundation.py": "4cced1e6fdcab34608d61144c10a1b4d093e5cfcfe510e0c7b1b03d779b1f121",
+    "backend/migrations/versions/002_policy_concurrency.py": "6f6626c9df86c84612caaa8c4695046d46ab0ace2547d5ed2bbaa39127a7b5e0",
+    "backend/migrations/versions/003_review_concurrency.py": "1473472d75c340c59d3a94f84808471bac92511c722ba690ecf7999038846225",
+    "backend/migrations/versions/004_reliability_controls.py": "c27bdd18d53f6997c5dde45ad4579f07542a4bfcacc15505f948de4dc866c01d",
+    "backend/migrations/versions/005_entra_sso.py": "325a1fc4e0f7f415d102d340e2b737e1734ecdb119c76f78e61a1e4a4658618a",
+    "backend/migrations/versions/006_multi_policy.py": "e9627d8f1b4c1f6385e1573df9bbd9280beef4f7d93bb2b1c3f6ef8a9fbfe9dc",
+    "backend/migrations/versions/007_protected_review_content.py": "f451e1e83c735b333d5c10b012772cbfa1bf3fd9efe59c1dfbc8c8e2f9f7a8ce",
+    "backend/migrations/versions/008_execution_immutability.py": "d95c0644a256e7a029e0f43e6fc594391b9846c7a5f469755ae581acc3641eb6",
+    "deployment/phase6a-runtime-006-grants.REVIEW_ONLY.sql": "28f1a97fffdeb5c268a328a454938ab9deb83ed94c9b2b9187b8039ab150bdc0",
+    "deployment/phase6a-runtime-007-grants.REVIEW_ONLY.sql": "9d7f4d193154c82c4f60885db0b544c730bd1d9cccab6e379bf406489e9ff2b9"
+  }
+}

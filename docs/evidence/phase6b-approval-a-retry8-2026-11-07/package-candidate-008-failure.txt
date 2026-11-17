@@ -1,0 +1,37 @@
+{"completed": true, "elapsed_seconds": 7.695, "event": "cleanup.startup", "healthy": true}
+{"decision": "HUMAN_REVIEW", "event": "human_review.confirmation", "governance_execution_ms": 67182.31, "model_invoked": false, "precommit_remaining_ms": 27776.886, "status": 200}
+{"event": "http.completed", "correlation_id": "4917c42a-20eb-4668-9a99-e8141a255afa", "route": "/api/reviews/{review_id}/content", "method": "POST", "status": 412, "duration_ms": 2996.78}
+{"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 832.818, "correlation_id": "943fae4a-526a-4e11-9195-3a4e40a790d2"}
+{"event": "governance.stage", "stage": "review.schema", "outcome": "ok", "connection_acquire_ms": 0.03, "duration_ms": 51660.681, "sql_count": 80, "catalog_count": 76, "sql_ms": 35741.862, "correlation_id": "943fae4a-526a-4e11-9195-3a4e40a790d2"}
+{"event": "http.completed", "correlation_id": "943fae4a-526a-4e11-9195-3a4e40a790d2", "route": "/api/reviews/{review_id}/content", "method": "POST", "status": 200, "duration_ms": 63704.78}
+{"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 903.173, "correlation_id": "d7db8a29-6622-4c8f-8c45-826939646a10"}
+{"event": "http.completed", "correlation_id": "d7db8a29-6622-4c8f-8c45-826939646a10", "route": "/api/reviews/{review_id}/approve", "method": "POST", "status": 200, "duration_ms": 7089.1}
+{"event": "governance.stage", "stage": "authentication", "outcome": "ok", "duration_ms": 844.674, "correlation_id": "2b09df8c-d5b4-443a-94f1-01e2d58b592c"}
+{"event": "governance.stage", "stage": "review.schema", "outcome": "ok", "connection_acquire_ms": 0.013, "duration_ms": 52040.434, "sql_count": 80, "catalog_count": 76, "sql_ms": 36050.036, "correlation_id": "2b09df8c-d5b4-443a-94f1-01e2d58b592c"}
+{"event": "governance.stage", "stage": "governance.preflight", "outcome": "ok", "connection_acquire_ms": 0.024, "duration_ms": 53483.944, "sql_count": 82, "catalog_count": 77, "sql_ms": 37223.007, "correlation_id": "2b09df8c-d5b4-443a-94f1-01e2d58b592c"}
+{"event": "governance.stage", "stage": "policy.admission", "outcome": "ok", "connection_acquire_ms": 0.027, "duration_ms": 15636.879, "sql_count": 26, "catalog_count": 2, "sql_ms": 11275.061, "correlation_id": "2b09df8c-d5b4-443a-94f1-01e2d58b592c"}
+{"event": "governance.stage", "stage": "policy.selection", "outcome": "ok", "connection_acquire_ms": 0.039, "duration_ms": 0.493, "sql_count": 0, "catalog_count": 0, "sql_ms": 0, "deadline_remaining_ms": 89747.481, "correlation_id": "2b09df8c-d5b4-443a-94f1-01e2d58b592c"}
+{"event": "governance.stage", "stage": "inspection", "outcome": "ok", "connection_acquire_ms": 0.061, "duration_ms": 2.783, "sql_count": 0, "catalog_count": 0, "sql_ms": 0, "deadline_remaining_ms": 89744.37, "correlation_id": "2b09df8c-d5b4-443a-94f1-01e2d58b592c"}
+{"event": "governance.stage", "stage": "execution.persistence", "outcome": "ok", "connection_acquire_ms": 0.023, "duration_ms": 623.307, "sql_count": 1, "catalog_count": 0, "sql_ms": 416.406, "deadline_remaining_ms": 86206.454, "correlation_id": "2b09df8c-d5b4-443a-94f1-01e2d58b592c"}
+{"event": "governance.stage", "stage": "review.persistence", "outcome": "ok", "connection_acquire_ms": 0.02, "duration_ms": 1251.806, "sql_count": 2, "catalog_count": 0, "sql_ms": 832.468, "deadline_remaining_ms": 84954.443, "correlation_id": "2b09df8c-d5b4-443a-94f1-01e2d58b592c"}
+{"event": "governance.stage", "stage": "review.schema", "outcome": "ok", "connection_acquire_ms": 0.145, "duration_ms": 52221.522, "sql_count": 80, "catalog_count": 76, "sql_ms": 36332.168, "correlation_id": "2b09df8c-d5b4-443a-94f1-01e2d58b592c"}
+{"event": "governance.stage", "stage": "review.capture", "outcome": "ok", "connection_acquire_ms": 0.015, "duration_ms": 54946.057, "sql_count": 85, "catalog_count": 77, "sql_ms": 38422.482, "deadline_remaining_ms": 30008.181, "correlation_id": "2b09df8c-d5b4-443a-94f1-01e2d58b592c"}
+{"event": "governance.stage", "stage": "deadline.precommit", "outcome": "ok", "connection_acquire_ms": 0.014, "duration_ms": 0.143, "sql_count": 0, "catalog_count": 0, "sql_ms": 0, "deadline_remaining_ms": 30007.816, "correlation_id": "2b09df8c-d5b4-443a-94f1-01e2d58b592c"}
+{"event": "governance.stage", "stage": "execution.commit", "outcome": "ok", "connection_acquire_ms": 0.027, "duration_ms": 215.539, "sql_count": 0, "catalog_count": 0, "sql_ms": 0, "deadline_remaining_ms": 24921.729, "correlation_id": "2b09df8c-d5b4-443a-94f1-01e2d58b592c"}
+{"event": "governance.stage", "stage": "governance.execution", "outcome": "ok", "connection_acquire_ms": 251.4, "duration_ms": 65078.742, "sql_count": 101, "catalog_count": 77, "sql_ms": 45250.809, "deadline_remaining_ms": 24921.233, "correlation_id": "2b09df8c-d5b4-443a-94f1-01e2d58b592c"}
+{"event": "http.completed", "correlation_id": "2b09df8c-d5b4-443a-94f1-01e2d58b592c", "route": "/api/governance/generate", "method": "POST", "status": 200, "duration_ms": 136095.66}
+Traceback (most recent call last):
+  File "/home/sigmoid/AI governance policy validator/scripts/tests/phase6b_sql_package_probe.py", line 556, in <module>
+    probe(
+    ~~~~~^
+        args.directory,
+        ^^^^^^^^^^^^^^^
+    ...<3 lines>...
+        args.preserve_only,
+        ^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/sigmoid/AI governance policy validator/scripts/tests/phase6b_sql_package_probe.py", line 455, in probe
+    assert cleaned["healthy"] and cleaned["removed"] >= 1, cleaned
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'removed': 0, 'healthy': False}

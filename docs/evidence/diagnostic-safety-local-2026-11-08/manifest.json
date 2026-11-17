@@ -1,0 +1,9 @@
+{
+  "docs/evidence/diagnostic-safety-local-2026-11-08/historical-controller.py.txt": "fb5cbcee697caccdd281eabf727970f996d749d74aa185738b1bbb5ffe34a4aa",
+  "docs/evidence/diagnostic-safety-local-2026-11-08/result.json": "359dee3057175f91de03b9dc2e634626cda094a6591ff1edab1dfe68a8da3bde",
+  "docs/evidence/diagnostic-safety-local-2026-11-08/tests.xml": "a2c3e5fe0a76f03cd53f2ad6dbcf136f4b7ab480257a305b7325616ea7e4d43e",
+  "docs/evidence/diagnostic-safety-local-2026-11-08/test-results.txt": "dccf05e61a60d5d14af9dcd6b8a782a74007f12a58f3c03d5c95a32054afabba",
+  "scripts/webjobs_diagnostic.py": "edc7c7d0b95017923c9bcb1c3bf555b5ccf30bf55d4ea91077727e13492a9555",
+  "scripts/tests/test_webjobs_diagnostic.py": "ef100fa8bb0c66dcabffe511b9ec6349ae0ca6f2d5bbbb066a9a12d68f5fec7f",
+  "docs/DIAGNOSTIC_DEADLINE_RECOVERY_FIX.md": "fd1b6f14b93f0596c46084f965de5337a7b7d3b26cf7444ad23cc1f39fc59401"
+}

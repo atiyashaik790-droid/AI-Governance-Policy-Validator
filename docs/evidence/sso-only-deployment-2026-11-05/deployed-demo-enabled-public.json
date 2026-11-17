@@ -1,0 +1,46 @@
+{
+  "checks": {
+    "/health": {
+      "http_status": 200,
+      "body": {
+        "status": "ok"
+      }
+    },
+    "/ready": {
+      "http_status": 200,
+      "body": {
+        "status": "ready",
+        "provider_mode": "live",
+        "release": {
+          "git_commit": "60fa94ef9ec01be0d0b4af347a3251255cf7565c",
+          "build_version": "1.2-5aad19f7eea45a42",
+          "built_utc": "2026-11-05T07:58:19.172526+00:00",
+          "frontend_sha256": "beb38c3485b8abfb672e5a2bf851f1f178c1a8049f367b450708e5abbe7581d4",
+          "backend_sha256": "1112eb26744d01e87434210c40cacdb42bca6cdf791a9dc4d1ca0f36655706d9",
+          "required_migration": "004",
+          "supported_migrations": [
+            "004",
+            "005"
+          ],
+          "sso_required_migration": "005"
+        },
+        "database_revision": "005",
+        "schema_versioned": true,
+        "sso_available": true
+      }
+    },
+    "/api/sso/status": {
+      "http_status": 200,
+      "body": {
+        "sso_enabled": true,
+        "configured": true,
+        "demo_login_enabled": true
+      }
+    }
+  },
+  "status": "PASS",
+  "observed_at_utc": "2026-11-05T08:07:39.445256+00:00",
+  "served_frontend_matches_release": true,
+  "only_microsoft_interactive_login": true,
+  "browser_rendering": "UNAVAILABLE_NO_CONNECTED_BROWSER"
+}

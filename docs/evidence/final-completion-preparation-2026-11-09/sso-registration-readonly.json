@@ -1,0 +1,19 @@
+{
+  "mode": "GRAPH_READ_ONLY_NO_SIGN_IN",
+  "interactive_sso_performed": false,
+  "registration": {
+    "client_id": "a1a7da0b-ad29-49ec-a9ea-c59219e60df5",
+    "object_id": "53ae1688-20af-403d-89e2-c33ab08a36e0",
+    "redirect_uris": [
+      "https://app-governance-validator-atiya-1026.azurewebsites.net/",
+      "https://app-governance-validator-atiya-1026.azurewebsites.net/api/sso/callback"
+    ],
+    "sign_in_audience": "AzureADMyOrg"
+  },
+  "admin": {
+    "enabled": true,
+    "object_id": "b5d8bfbe-f03a-4132-a13f-ab49aae834b7",
+    "user_type": "Member"
+  },
+  "callback_registered": true
+}

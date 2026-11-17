@@ -1,0 +1,17 @@
+{
+  "status": "PARTIAL",
+  "hosted_version": "1.2-ca5df7c1dc19e525",
+  "hosted_revision": "005",
+  "public_health_and_readiness": "VERIFIED_2026-11-08",
+  "sso_configuration": "VERIFIED",
+  "admin_login": "NOT_VERIFIED_APPROVAL_REQUIRED",
+  "direct_operator_sql_recheck": "FAILED_SANITIZED",
+  "previous_role_policy_inventory": "2026-11-07_ONLY",
+  "dedicated_user_portal": "UNAVAILABLE_IN_RELEASE",
+  "providers": "NOT_VERIFIED_FRESH",
+  "live_rehearsal": "NOT_AUTHORIZED",
+  "connected_browser": false,
+  "provider_calls_performed": false,
+  "production_writes_performed": false,
+  "demo_guide": "docs/HOSTED_005_DEMO_READINESS.md"
+}

@@ -1,0 +1,33 @@
+
+> governance-console@1.2.0 test
+> vitest run src/UserPortal.test.tsx
+
+
+ RUN  v5.0.5 /home/sigmoid/AI governance policy validator/frontend
+
+ ✓ src/UserPortal.test.tsx (19 tests) 574ms
+
+ Test Files  1 passed (1)
+      Tests  19 passed (19)
+   Start at  00:57:47
+   Duration  1.09s (tests 56%, environment 25%, import 11%, transform 4%, setup 2%)
+
+
+> governance-console@1.2.0 lint
+> eslint src
+
+
+> governance-console@1.2.0 build
+> tsc -b && vite build
+
+vite v8.3.5 building client environment for production...
+transforming...
+✓ 2161 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                     1.01 kB │ gzip:   0.51 kB
+dist/assets/index-DcVWqT0G.css     20.17 kB │ gzip:   5.68 kB
+dist/assets/index-CwJGwHs6.js     340.04 kB │ gzip: 107.30 kB
+dist/assets/Overview-Bns9adhP.js  383.27 kB │ gzip: 110.41 kB
+
+✓ built in 315ms

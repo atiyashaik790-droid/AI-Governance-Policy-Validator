@@ -1,0 +1,8 @@
+{
+  "valid_structured_reason": true,
+  "unchanged_assignment_success_assertion": true,
+  "health_and_90_second_assertions_retained": true,
+  "previous_qualified_legacy_multi_and_sso_checks_reused": true,
+  "new_settings_disabled_gate": true,
+  "azure_mutations": 0
+}

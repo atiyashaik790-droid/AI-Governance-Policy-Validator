@@ -1,0 +1,14 @@
+/home/sigmoid/AI governance policy validator/.venv/lib/python3.13/site-packages/authlib/integrations/httpx_client/assertion_client.py:5: AuthlibDeprecationWarning: The httpx module is deprecated; please use httpx2 instead.
+  from ._compat import httpx2
+/home/sigmoid/AI governance policy validator/.venv/lib/python3.13/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+  from starlette.testclient import TestClient as TestClient  # noqa
+{"event": "http.completed", "correlation_id": "678e19fe-adc2-4df5-b874-18397241e466", "route": "/api/auth/session", "method": "POST", "status": 201, "duration_ms": 10981.83}
+{"event": "http.completed", "correlation_id": "0a1515e3-4e9b-4ba1-907f-76db5112d3cb", "route": "/api/policies", "method": "POST", "status": 201, "duration_ms": 7159.9}
+{"event": "http.completed", "correlation_id": "db147fe3-7ca6-40f5-8dfc-9ab51605e345", "route": "/api/policies/{policy_id}", "method": "GET", "status": 200, "duration_ms": 6647.81}
+{"event": "http.completed", "correlation_id": "8186e8cf-62a1-42e7-8d5e-303b2f2cca1b", "route": "/api/policies/{policy_id}/submit", "method": "POST", "status": 200, "duration_ms": 15867.8}
+{"event": "http.completed", "correlation_id": "0096de92-173a-4ccf-bf4f-788f0feeecd9", "route": "/api/policies/{policy_id}/approve", "method": "POST", "status": 200, "duration_ms": 11974.57}
+{"event": "http.completed", "correlation_id": "a81dda1f-fd0f-46c9-8b7c-12cadd7026e6", "route": "/api/policies/{policy_id}/publish", "method": "POST", "status": 200, "duration_ms": 13305.75}
+{"event": "http.completed", "correlation_id": "770198b6-8cb1-4f81-9630-c168eb69722c", "route": "/api/auth/session", "method": "POST", "status": 201, "duration_ms": 5936.69}
+{"event": "http.completed", "correlation_id": "72246bb1-4665-4407-b02e-e3c4d96af8b2", "route": "/api/policies/{policy_id}", "method": "GET", "status": 404, "duration_ms": 2173.13}
+{"event": "http.completed", "correlation_id": "f42cdde9-511c-4939-af58-1ddeebb75aa6", "route": "/api/v2/workspace/policy-state", "method": "GET", "status": 200, "duration_ms": 4775.98}
+{"passed": true, "revision": "006", "same_tenant_read": 200, "foreign_tenant_read": 404, "cross_tenant_fk_native_code": 547, "failed_insert_retained_rows": 0}

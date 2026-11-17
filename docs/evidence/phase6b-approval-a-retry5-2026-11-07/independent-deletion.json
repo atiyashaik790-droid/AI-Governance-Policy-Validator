@@ -1,0 +1,27 @@
+{
+  "utc": "2026-11-06T19:26:08.262039+00:00",
+  "resource_id": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/databases/sqldb-gpv-mig-20261106-a1",
+  "target_arm_get": {
+    "http_status": 404,
+    "error_code": "ResourceNotFound"
+  },
+  "inventory": [
+    {
+      "id": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/databases/sqldb-governance-validator-dev",
+      "name": "sqldb-governance-validator-dev",
+      "status": "Online"
+    },
+    {
+      "id": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/databases/master",
+      "name": "master",
+      "status": "Online"
+    }
+  ],
+  "unexpected_test_names": [],
+  "incarnations": 1,
+  "harness_status": "STOPPED",
+  "elapsed_seconds": 1117.18,
+  "sqlite_sha256": "0cad09a35e73ad70bb5ff5e522f783f9b59fdd5b3c31eb5b5dddd4d300795766",
+  "source_hashes_unchanged": true,
+  "conservative_compute_estimate_usd": 0.040325
+}

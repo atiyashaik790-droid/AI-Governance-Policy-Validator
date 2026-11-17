@@ -1,0 +1,109 @@
+import hashlib
+import json, logging
+from datetime import datetime, timezone, timedelta
+for log_name in ("azure","msal","sqlalchemy.engine"):
+    logging.getLogger(log_name).setLevel(logging.CRITICAL)
+report={"stage":"C","status":"NOT_STARTED","database_mutated":False,"operator":"Atiya Tabsum Shaik","operator_escalation_decision_maker_confirmed":True,"independent_contact_required":False,"contact":"Confirmed in chat; phone not copied to evidence","rto_minutes":120,"rpo_minutes":15,"quiet_window_minutes":15,"started_at_utc":datetime.now(timezone.utc).isoformat(),"grant_scope":"Only three reviewed object VIEW DEFINITION grants"}
+from pathlib import Path
+evidence=Path("docs/evidence/stage-c-execution-2026-11-04/migration-execution.json")
+from time import monotonic
+from pathlib import Path
+from sqlalchemy import text
+from sqlalchemy.engine import URL
+from sqlalchemy.orm import Session
+from app.config import settings
+from app.azure_sql import create_azure_sql_engine
+from app.models import Base
+from app.schema_compatibility import inspect_schema
+
+assert settings.azure_sql_tenant_id == '4ac50105-0c66-404e-a107-7cbd8a9a6442'
+assert settings.azure_sql_user_object_id == 'b5d8bfbe-f03a-4132-a13f-ab49aae834b7'
+source = Path('backend/migrations/versions/005_entra_sso.py').read_bytes()
+assert hashlib.sha256(source).hexdigest() == '325a1fc4e0f7f415d102d340e2b737e1734ecdb119c76f78e61a1e4a4658618a'
+batch = Path('deployment/stage-c005-with-separate-visibility-approval.REVIEW_ONLY.sql').read_bytes()
+assert hashlib.sha256(batch).hexdigest() == '26b9537cc66fdf7eb4853b177fd5f8fdfd411edcd73949a0f3a0cae9adc02f97'
+engine = create_azure_sql_engine(
+    URL.create('mssql+pyodbc', host='sql-governance-validator-dev-atiya.database.windows.net',
+               database='sqldb-governance-validator-dev'),
+    settings.azure_sql_tenant_id, settings.azure_sql_user_object_id, auth_mode='cli')
+new = {'sso_memberships', 'sso_transactions', 'sso_sessions'}
+baseline = sorted(set(Base.metadata.tables) - new)
+assert len(baseline) == 14
+try:
+    with engine.begin() as connection:
+        transaction_started = monotonic()
+        connection.exec_driver_sql('SET XACT_ABORT ON; SET LOCK_TIMEOUT 15000;')
+        assert connection.scalar(text('SELECT DB_NAME()')) == 'sqldb-governance-validator-dev'
+        assert list(connection.execute(text('SELECT version_num FROM dbo.alembic_version')).scalars()) == ['004']
+        with Session(bind=connection) as db:
+            assert inspect_schema(db, require_sso=False)['revision'] == '004'
+        # Fresh pre-DDL quiet-window and recoverability gates, SELECT only.
+        assert connection.scalar(text("SELECT HAS_PERMS_BY_NAME(DB_NAME(),'DATABASE','VIEW DATABASE STATE')"))==1
+        log_backup=connection.execute(text("SELECT TOP(1) backup_start_date,backup_finish_date FROM sys.dm_database_backups WHERE backup_type='L' AND in_retention=1 ORDER BY backup_finish_date DESC")).one()
+        observed=connection.scalar(text('SELECT SYSUTCDATETIME()')).replace(tzinfo=timezone.utc)
+        point=log_backup[0].replace(tzinfo=timezone.utc)-timedelta(seconds=1)
+        window=json.loads(Path('docs/evidence/stage-c-execution-2026-11-04/recovery-window.json').read_text())
+        earliest=datetime.fromisoformat(window['earliestRestoreDate'].replace('Z','+00:00'))
+        assert earliest < point < observed and (observed-point).total_seconds()<=900, 'RPO recovery point gate'
+        report['pre_ddl_utc']=observed.isoformat()
+        report['recovery_point_utc']=point.isoformat()
+        report['log_backup_start_utc']=log_backup[0].replace(tzinfo=timezone.utc).isoformat()
+        report['log_backup_finish_utc']=log_backup[1].replace(tzinfo=timezone.utc).isoformat()
+        report['recovery_point_age_seconds']=(observed-point).total_seconds()
+        report['recovery_point_basis']='One second before start of latest completed retained log backup; inside published continuous window. Metadata-supported candidate; no restore performed.'
+        assert connection.scalar(text("SELECT COUNT(*) FROM sys.dm_exec_requests r JOIN sys.dm_exec_sessions s ON r.session_id=s.session_id WHERE r.database_id=DB_ID() AND r.session_id<>@@SPID AND s.is_user_process=1"))==0, 'Concurrent user request'
+        assert connection.scalar(text("SELECT COUNT(*) FROM sys.dm_tran_session_transactions t JOIN sys.dm_tran_database_transactions d ON d.transaction_id=t.transaction_id AND d.database_id=DB_ID() JOIN sys.dm_exec_sessions s ON s.session_id=t.session_id WHERE t.session_id<>@@SPID AND t.is_user_transaction=1 AND s.is_user_process=1"))==0, 'Concurrent user transaction'
+        assert connection.scalar(text("SELECT COUNT(*) FROM sys.dm_tran_locks WHERE resource_database_id=DB_ID() AND request_session_id<>@@SPID AND request_mode IN ('X','IX','SIX','U','IU','SIU','UIX','BU','Sch-M')"))==0, 'Concurrent write lock'
+        assert connection.scalar(text("SELECT COUNT(*) FROM dbo.inference_usage WHERE status='RESERVED' AND expires>:now"),{'now':observed.isoformat()})==0, 'Active inference'
+        assert connection.scalar(text("SELECT COUNT(*) FROM dbo.export_jobs WHERE state='UPLOADING' OR (lease_until<>'' AND lease_until>:now)"),{'now':observed.isoformat()})==0, 'Active export'
+        report['quiet_window_start_utc']=observed.isoformat()
+        report['quiet_window_end_utc']=(observed+timedelta(minutes=15)).isoformat()
+        report['quiet_gates']='PASS'
+        # Approved quiet window: lock baseline tables until commit to hold counts stable.
+        before = {n: connection.scalar(text(f'SELECT COUNT_BIG(*) FROM dbo.[{n}] WITH (TABLOCKX,HOLDLOCK)'))
+                  for n in baseline}
+        trigger_sql = text("SELECT name,is_disabled,OBJECT_DEFINITION(object_id) FROM sys.triggers WHERE parent_class=1 ORDER BY name")
+        triggers_before = list(connection.execute(trigger_sql))
+        assert monotonic() - transaction_started < 300, 'Transaction budget exceeded'
+        report['status']='SUBMITTING_ATOMIC_BATCH'
+        evidence.write_text(json.dumps(report,indent=2)+'\n')
+        connection.exec_driver_sql('SET NOCOUNT ON;\n' + batch.decode()).close()
+        visible_grants = set(connection.execute(text("""
+            SELECT OBJECT_NAME(p.major_id)
+            FROM sys.database_permissions p
+            JOIN sys.database_principals r ON r.principal_id=p.grantee_principal_id
+            WHERE r.name='governance_validator_web_runtime' AND p.class=1
+              AND p.permission_name='VIEW DEFINITION' AND p.state='G'
+              AND p.major_id IN (OBJECT_ID('dbo.sso_memberships'),
+                                OBJECT_ID('dbo.sso_transactions'), OBJECT_ID('dbo.sso_sessions'))
+        """)).scalars())
+        assert visible_grants == new
+        report["verified_view_definition_objects"]=sorted(visible_grants)
+        assert list(connection.execute(text('SELECT version_num FROM dbo.alembic_version')).scalars()) == ['005']
+        assert all(connection.scalar(text(f'SELECT COUNT_BIG(*) FROM dbo.[{n}]')) == before[n]
+                   for n in baseline)
+        assert all(connection.scalar(text(f'SELECT COUNT_BIG(*) FROM dbo.[{n}]')) == 0 for n in new)
+        assert list(connection.execute(trigger_sql)) == triggers_before
+        with Session(bind=connection) as db:
+            assert inspect_schema(db, require_sso=False)['revision'] == '005'
+        assert monotonic() - transaction_started < 300, 'Transaction budget exceeded'
+        report['baseline_row_counts_preserved']=True
+        report['baseline_trigger_definitions_preserved']=True
+        report['new_tables_empty']=True
+        report['single_revision005']=True
+        report['transaction_seconds']=round(monotonic()-transaction_started,3)
+        # Outer transaction commits only after every in-transaction assertion passes.
+    report['status']='COMMITTED_005_WITH_APPROVED_METADATA_VISIBILITY'
+    report['database_mutated']=True
+    report['committed_at_utc']=datetime.now(timezone.utc).isoformat()
+except Exception as error:
+    # No raw database errors, secrets, or automatic retries.
+    report['status']='STOP_AND_INSPECT_ACTUAL_REVISION_AND_PARTIAL_STATE_NO_RETRY'
+    report['error_kind']=type(error).__name__
+    report['database_mutated']='UNKNOWN_UNTIL_FRESH_INSPECTION' if report.get('quiet_gates')=='PASS' else False
+finally:
+    engine.dispose()
+    report['finished_at_utc']=datetime.now(timezone.utc).isoformat()
+    evidence.write_text(json.dumps(report,indent=2)+'\n')
+    print(json.dumps(report))
+raise SystemExit(0 if report['status']=='COMMITTED_005_WITH_APPROVED_METADATA_VISIBILITY' else 1)

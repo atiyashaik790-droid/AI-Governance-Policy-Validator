@@ -1,0 +1,46 @@
+{
+  "observed_utc": "2026-11-08T08:41:17.819097+00:00",
+  "mode": "READ_ONLY_AND_LOCAL_REVIEW",
+  "independent_expiry": "BLOCKED",
+  "recovery": "BLOCKED",
+  "migration_qualification": "BLOCKED",
+  "deployment": "NO-GO",
+  "fresh_visible_resource_inventory_types": [
+    "Microsoft.CognitiveServices/accounts",
+    "Microsoft.CognitiveServices/accounts/projects",
+    "Microsoft.Sql/servers",
+    "Microsoft.Sql/servers/databases",
+    "Microsoft.Web/serverFarms",
+    "Microsoft.Web/sites",
+    "Microsoft.Storage/storageAccounts"
+  ],
+  "resource_inventory_scope": "Existing enabled subscription visible to current login; does not rule out undiscoverable company infrastructure",
+  "existing_executor_findings": {
+    "git_remotes": [],
+    "ci": "ubuntu-latest test workflow; no identified remote/Azure auth/expiry execution",
+    "azure_devops": "Prior discovery found no accessible organization; no new organization created",
+    "webjob": "Not installed/armed; known Kudu internal agent50555 failure; no broken API retry",
+    "application_worker": "Review-row cleanup only; not independent ARM database-expiry safeguard",
+    "initiator_stop_expiry_test": "NOT RUN: no configured eligible executor; no temporary database created"
+  },
+  "reused_passes": [
+    "Azure migrations005-through008 and boundary hashes",
+    "MULTI/tenant/session/immutability qualification under existing pins",
+    "Retry9 encrypted capture/reveal/denial/audit/resolution purge/actual expiry DELETE",
+    "Candidate/repaired-rollback local exact decryption and compatibility tests",
+    "Production005 schema/runtime mapping/51grant baseline and firewall removal",
+    "Production encryption staging"
+  ],
+  "minimum_remaining_tests": [
+    "Compatible copy ready with stable keys; exact original decryption and unchanged retained rows/ciphertext/full catalog",
+    "006 RESERVED and invalid LEGACY preflight failures; unchanged revision/data/catalog",
+    "007 injected transactional THROW; rollback preserves retained rows/catalog/encryption; subsequent clean migration",
+    "Actual approved PITR: Online, operator SELECT access, correct point/revision/catalog/data consistency; source preserved; cleanup independently confirmed",
+    "Hosted actual managed-identity/schema/cleanup readiness and scoped Admin/User feature acceptance after later authorized deployment"
+  ],
+  "recovery_method": "Azure SQL PITR into a separately approved isolated database on the existing server; no source overwrite/cutover; refresh point/target/cost/access and cleanup authorization first",
+  "single_root_blocker": "No verified independently running exact-target database expiry executor; previous four-hour lifetime breached",
+  "next_action": "Obtain supported diagnosis for existing Kudu agent failure using already-approved free support draft; review exact repair and disabled watchdog parent-stop/restart test before separate authorization. A working job alone is not proof of a hard four-hour bound. No safe database/deployment approval is currently executable.",
+  "cloud_mutations": false,
+  "tests_repeated": false
+}

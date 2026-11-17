@@ -1,0 +1,16 @@
+{
+  "source": "Explicit user Stage C execution approval, followed by actual contact and self-managed project ownership confirmation in chat",
+  "approved_operator": "Atiya Tabsum Shaik",
+  "verified_cli_object_id": "b5d8bfbe-f03a-4132-a13f-ab49aae834b7",
+  "scope": [
+    "Migration 004 to005",
+    "Exactly three object-level VIEW DEFINITION grants to existing governance_validator_web_runtime in same transaction",
+    "Bounded postmigration demo acceptance"
+  ],
+  "independent_contact_requirement": "No such requirement found in the reviewed Stage C documents",
+  "contact": "Provided in chat; phone not copied",
+  "rto_minutes": 120,
+  "rpo_minutes": 15,
+  "quiet_window_minutes": 15,
+  "approved_atomic_sql_sha256": "26b9537cc66fdf7eb4853b177fd5f8fdfd411edcd73949a0f3a0cae9adc02f97"
+}

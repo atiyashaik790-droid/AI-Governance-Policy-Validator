@@ -1,0 +1,2584 @@
+{
+  "columns": [
+    {
+      "table_name": "active_policy_assignments",
+      "column_name": "tenant",
+      "type_name": "varchar",
+      "max_length": 80,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "active_policy_assignments",
+      "column_name": "version_id",
+      "type_name": "varchar",
+      "max_length": 36,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "alembic_version",
+      "column_name": "version_num",
+      "type_name": "varchar",
+      "max_length": 32,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "audit_events",
+      "column_name": "id",
+      "type_name": "varchar",
+      "max_length": 36,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "audit_events",
+      "column_name": "tenant",
+      "type_name": "varchar",
+      "max_length": 80,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "audit_events",
+      "column_name": "actor",
+      "type_name": "varchar",
+      "max_length": 80,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "audit_events",
+      "column_name": "action",
+      "type_name": "varchar",
+      "max_length": 80,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "audit_events",
+      "column_name": "resource",
+      "type_name": "varchar",
+      "max_length": 80,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "audit_events",
+      "column_name": "created",
+      "type_name": "varchar",
+      "max_length": 40,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "demo_sessions",
+      "column_name": "id",
+      "type_name": "varchar",
+      "max_length": 64,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "demo_sessions",
+      "column_name": "tenant",
+      "type_name": "varchar",
+      "max_length": 80,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "demo_sessions",
+      "column_name": "actor",
+      "type_name": "varchar",
+      "max_length": 100,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "demo_sessions",
+      "column_name": "role",
+      "type_name": "varchar",
+      "max_length": 30,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "demo_sessions",
+      "column_name": "credential_hash",
+      "type_name": "varchar",
+      "max_length": 64,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "demo_sessions",
+      "column_name": "expires",
+      "type_name": "varchar",
+      "max_length": 40,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "demo_sessions",
+      "column_name": "revoked",
+      "type_name": "int",
+      "max_length": 4,
+      "precision": 10,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "demo_sessions",
+      "column_name": "created",
+      "type_name": "varchar",
+      "max_length": 40,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "evaluation_exports",
+      "column_name": "id",
+      "type_name": "varchar",
+      "max_length": 36,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "evaluation_exports",
+      "column_name": "tenant",
+      "type_name": "varchar",
+      "max_length": 80,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "evaluation_exports",
+      "column_name": "status",
+      "type_name": "varchar",
+      "max_length": 20,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "evaluation_exports",
+      "column_name": "path",
+      "type_name": "varchar",
+      "max_length": 300,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "evaluation_exports",
+      "column_name": "created",
+      "type_name": "varchar",
+      "max_length": 40,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "execution_policy_evidence",
+      "column_name": "tenant",
+      "type_name": "varchar",
+      "max_length": 80,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "execution_policy_evidence",
+      "column_name": "execution_id",
+      "type_name": "varchar",
+      "max_length": 36,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "execution_policy_evidence",
+      "column_name": "policy_id",
+      "type_name": "varchar",
+      "max_length": 36,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "execution_policy_evidence",
+      "column_name": "version_id",
+      "type_name": "varchar",
+      "max_length": 36,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "execution_policy_evidence",
+      "column_name": "set_revision",
+      "type_name": "bigint",
+      "max_length": 8,
+      "precision": 19,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "execution_policy_evidence",
+      "column_name": "document_sha256",
+      "type_name": "char",
+      "max_length": 64,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "execution_policy_evidence",
+      "column_name": "effective_decision",
+      "type_name": "varchar",
+      "max_length": 12,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "execution_policy_evidence",
+      "column_name": "inspection_status",
+      "type_name": "varchar",
+      "max_length": 16,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "execution_policy_evidence",
+      "column_name": "evidence_json",
+      "type_name": "nvarchar",
+      "max_length": -1,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "execution_policy_evidence",
+      "column_name": "created_at",
+      "type_name": "datetime2",
+      "max_length": 8,
+      "precision": 27,
+      "scale": 7,
+      "is_nullable": false,
+      "default_definition": "(sysutcdatetime())"
+    },
+    {
+      "table_name": "export_jobs",
+      "column_name": "id",
+      "type_name": "varchar",
+      "max_length": 36,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "export_jobs",
+      "column_name": "tenant",
+      "type_name": "varchar",
+      "max_length": 80,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "export_jobs",
+      "column_name": "idempotency_key",
+      "type_name": "varchar",
+      "max_length": 100,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "export_jobs",
+      "column_name": "request_hash",
+      "type_name": "varchar",
+      "max_length": 64,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "export_jobs",
+      "column_name": "content_hash",
+      "type_name": "varchar",
+      "max_length": 64,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "export_jobs",
+      "column_name": "content",
+      "type_name": "varchar",
+      "max_length": -1,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "export_jobs",
+      "column_name": "state",
+      "type_name": "varchar",
+      "max_length": 20,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "export_jobs",
+      "column_name": "attempts",
+      "type_name": "int",
+      "max_length": 4,
+      "precision": 10,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "export_jobs",
+      "column_name": "lease_until",
+      "type_name": "varchar",
+      "max_length": 40,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "export_jobs",
+      "column_name": "error_code",
+      "type_name": "varchar",
+      "max_length": 50,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "export_jobs",
+      "column_name": "created",
+      "type_name": "varchar",
+      "max_length": 40,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "export_jobs",
+      "column_name": "updated",
+      "type_name": "varchar",
+      "max_length": 40,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "feedback_records",
+      "column_name": "id",
+      "type_name": "varchar",
+      "max_length": 36,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "feedback_records",
+      "column_name": "tenant",
+      "type_name": "varchar",
+      "max_length": 80,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "feedback_records",
+      "column_name": "execution_id",
+      "type_name": "varchar",
+      "max_length": 36,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "feedback_records",
+      "column_name": "rating",
+      "type_name": "int",
+      "max_length": 4,
+      "precision": 10,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "human_review_cases",
+      "column_name": "id",
+      "type_name": "varchar",
+      "max_length": 36,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "human_review_cases",
+      "column_name": "tenant",
+      "type_name": "varchar",
+      "max_length": 80,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "human_review_cases",
+      "column_name": "execution_id",
+      "type_name": "varchar",
+      "max_length": 36,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "human_review_cases",
+      "column_name": "status",
+      "type_name": "varchar",
+      "max_length": 40,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "human_review_cases",
+      "column_name": "created",
+      "type_name": "varchar",
+      "max_length": 40,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "human_review_cases",
+      "column_name": "row_version",
+      "type_name": "int",
+      "max_length": 4,
+      "precision": 10,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": "('1')"
+    },
+    {
+      "table_name": "inference_rate_buckets",
+      "column_name": "id",
+      "type_name": "varchar",
+      "max_length": 64,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "inference_rate_buckets",
+      "column_name": "used",
+      "type_name": "int",
+      "max_length": 4,
+      "precision": 10,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "inference_rate_buckets",
+      "column_name": "expires",
+      "type_name": "varchar",
+      "max_length": 40,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "inference_usage",
+      "column_name": "id",
+      "type_name": "varchar",
+      "max_length": 36,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "inference_usage",
+      "column_name": "tenant",
+      "type_name": "varchar",
+      "max_length": 80,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "inference_usage",
+      "column_name": "actor",
+      "type_name": "varchar",
+      "max_length": 100,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "inference_usage",
+      "column_name": "status",
+      "type_name": "varchar",
+      "max_length": 30,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "inference_usage",
+      "column_name": "expires",
+      "type_name": "varchar",
+      "max_length": 40,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "inference_usage",
+      "column_name": "created",
+      "type_name": "varchar",
+      "max_length": 40,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "inference_usage",
+      "column_name": "finished",
+      "type_name": "varchar",
+      "max_length": 40,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": true,
+      "default_definition": null
+    },
+    {
+      "table_name": "inference_usage",
+      "column_name": "prompt_tokens",
+      "type_name": "int",
+      "max_length": 4,
+      "precision": 10,
+      "scale": 0,
+      "is_nullable": true,
+      "default_definition": null
+    },
+    {
+      "table_name": "inference_usage",
+      "column_name": "completion_tokens",
+      "type_name": "int",
+      "max_length": 4,
+      "precision": 10,
+      "scale": 0,
+      "is_nullable": true,
+      "default_definition": null
+    },
+    {
+      "table_name": "policies",
+      "column_name": "id",
+      "type_name": "varchar",
+      "max_length": 36,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "policies",
+      "column_name": "tenant",
+      "type_name": "varchar",
+      "max_length": 80,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "policies",
+      "column_name": "name",
+      "type_name": "varchar",
+      "max_length": 120,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "policies",
+      "column_name": "draft",
+      "type_name": "varchar",
+      "max_length": -1,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "policies",
+      "column_name": "status",
+      "type_name": "varchar",
+      "max_length": 20,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "policies",
+      "column_name": "enabled",
+      "type_name": "int",
+      "max_length": 4,
+      "precision": 10,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "policies",
+      "column_name": "revision",
+      "type_name": "int",
+      "max_length": 4,
+      "precision": 10,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "policies",
+      "column_name": "row_version",
+      "type_name": "int",
+      "max_length": 4,
+      "precision": 10,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "policy_versions",
+      "column_name": "id",
+      "type_name": "varchar",
+      "max_length": 36,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "policy_versions",
+      "column_name": "policy_id",
+      "type_name": "varchar",
+      "max_length": 36,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "policy_versions",
+      "column_name": "tenant",
+      "type_name": "varchar",
+      "max_length": 80,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "policy_versions",
+      "column_name": "number",
+      "type_name": "int",
+      "max_length": 4,
+      "precision": 10,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "policy_versions",
+      "column_name": "document",
+      "type_name": "varchar",
+      "max_length": -1,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "policy_versions",
+      "column_name": "created",
+      "type_name": "varchar",
+      "max_length": 40,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "review_assignments",
+      "column_name": "id",
+      "type_name": "varchar",
+      "max_length": 36,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "review_assignments",
+      "column_name": "tenant",
+      "type_name": "varchar",
+      "max_length": 80,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "review_assignments",
+      "column_name": "assigned_reviewer",
+      "type_name": "varchar",
+      "max_length": 100,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "review_assignments",
+      "column_name": "reason",
+      "type_name": "varchar",
+      "max_length": 1000,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "review_assignments",
+      "column_name": "updated",
+      "type_name": "varchar",
+      "max_length": 40,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "review_notes",
+      "column_name": "id",
+      "type_name": "varchar",
+      "max_length": 36,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "review_notes",
+      "column_name": "review_id",
+      "type_name": "varchar",
+      "max_length": 36,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "review_notes",
+      "column_name": "tenant",
+      "type_name": "varchar",
+      "max_length": 80,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "review_notes",
+      "column_name": "actor",
+      "type_name": "varchar",
+      "max_length": 100,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "review_notes",
+      "column_name": "action",
+      "type_name": "varchar",
+      "max_length": 40,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "review_notes",
+      "column_name": "reason",
+      "type_name": "varchar",
+      "max_length": 1000,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "review_notes",
+      "column_name": "created",
+      "type_name": "varchar",
+      "max_length": 40,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "review_protected_content",
+      "column_name": "tenant",
+      "type_name": "varchar",
+      "max_length": 80,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "review_protected_content",
+      "column_name": "review_id",
+      "type_name": "varchar",
+      "max_length": 36,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "review_protected_content",
+      "column_name": "content_kind",
+      "type_name": "varchar",
+      "max_length": 20,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "review_protected_content",
+      "column_name": "format_version",
+      "type_name": "int",
+      "max_length": 4,
+      "precision": 10,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "review_protected_content",
+      "column_name": "key_id",
+      "type_name": "varchar",
+      "max_length": 64,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "review_protected_content",
+      "column_name": "nonce",
+      "type_name": "varbinary",
+      "max_length": 12,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "review_protected_content",
+      "column_name": "ciphertext",
+      "type_name": "varbinary",
+      "max_length": -1,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "review_protected_content",
+      "column_name": "created_at",
+      "type_name": "bigint",
+      "max_length": 8,
+      "precision": 19,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "review_protected_content",
+      "column_name": "expires_at",
+      "type_name": "bigint",
+      "max_length": 8,
+      "precision": 19,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "sso_memberships",
+      "column_name": "id",
+      "type_name": "varchar",
+      "max_length": 36,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "sso_memberships",
+      "column_name": "directory_tenant",
+      "type_name": "varchar",
+      "max_length": 36,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "sso_memberships",
+      "column_name": "object_id",
+      "type_name": "varchar",
+      "max_length": 36,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "sso_memberships",
+      "column_name": "tenant",
+      "type_name": "varchar",
+      "max_length": 80,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "sso_memberships",
+      "column_name": "actor",
+      "type_name": "varchar",
+      "max_length": 80,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "sso_memberships",
+      "column_name": "role",
+      "type_name": "varchar",
+      "max_length": 30,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "sso_memberships",
+      "column_name": "enabled",
+      "type_name": "int",
+      "max_length": 4,
+      "precision": 10,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "sso_sessions",
+      "column_name": "id",
+      "type_name": "varchar",
+      "max_length": 64,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "sso_sessions",
+      "column_name": "membership_id",
+      "type_name": "varchar",
+      "max_length": 36,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "sso_sessions",
+      "column_name": "expires",
+      "type_name": "varchar",
+      "max_length": 40,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "sso_sessions",
+      "column_name": "revoked",
+      "type_name": "int",
+      "max_length": 4,
+      "precision": 10,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "sso_transactions",
+      "column_name": "id",
+      "type_name": "varchar",
+      "max_length": 64,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "sso_transactions",
+      "column_name": "binding_hash",
+      "type_name": "varchar",
+      "max_length": 64,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "sso_transactions",
+      "column_name": "nonce",
+      "type_name": "varchar",
+      "max_length": 100,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "sso_transactions",
+      "column_name": "verifier",
+      "type_name": "varchar",
+      "max_length": 128,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "sso_transactions",
+      "column_name": "return_path",
+      "type_name": "varchar",
+      "max_length": 500,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "sso_transactions",
+      "column_name": "expires",
+      "type_name": "varchar",
+      "max_length": 40,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "sso_transactions",
+      "column_name": "consumed",
+      "type_name": "int",
+      "max_length": 4,
+      "precision": 10,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "validation_executions",
+      "column_name": "id",
+      "type_name": "varchar",
+      "max_length": 36,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "validation_executions",
+      "column_name": "tenant",
+      "type_name": "varchar",
+      "max_length": 80,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "validation_executions",
+      "column_name": "actor",
+      "type_name": "varchar",
+      "max_length": 80,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "validation_executions",
+      "column_name": "policy_id",
+      "type_name": "varchar",
+      "max_length": 36,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": true,
+      "default_definition": null
+    },
+    {
+      "table_name": "validation_executions",
+      "column_name": "version",
+      "type_name": "int",
+      "max_length": 4,
+      "precision": 10,
+      "scale": 0,
+      "is_nullable": true,
+      "default_definition": null
+    },
+    {
+      "table_name": "validation_executions",
+      "column_name": "model",
+      "type_name": "varchar",
+      "max_length": 120,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "validation_executions",
+      "column_name": "decision",
+      "type_name": "varchar",
+      "max_length": 20,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "validation_executions",
+      "column_name": "metadata_json",
+      "type_name": "varchar",
+      "max_length": -1,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "validation_executions",
+      "column_name": "created",
+      "type_name": "varchar",
+      "max_length": 40,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "validation_executions",
+      "column_name": "execution_mode",
+      "type_name": "varchar",
+      "max_length": 6,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": "('LEGACY')"
+    },
+    {
+      "table_name": "workspace_policy_assignment_events",
+      "column_name": "id",
+      "type_name": "varchar",
+      "max_length": 36,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "workspace_policy_assignment_events",
+      "column_name": "tenant",
+      "type_name": "varchar",
+      "max_length": 80,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "workspace_policy_assignment_events",
+      "column_name": "set_revision",
+      "type_name": "bigint",
+      "max_length": 8,
+      "precision": 19,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "workspace_policy_assignment_events",
+      "column_name": "event_ordinal",
+      "type_name": "int",
+      "max_length": 4,
+      "precision": 10,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "workspace_policy_assignment_events",
+      "column_name": "event_type",
+      "type_name": "varchar",
+      "max_length": 16,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "workspace_policy_assignment_events",
+      "column_name": "policy_id",
+      "type_name": "varchar",
+      "max_length": 36,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": true,
+      "default_definition": null
+    },
+    {
+      "table_name": "workspace_policy_assignment_events",
+      "column_name": "old_version_id",
+      "type_name": "varchar",
+      "max_length": 36,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": true,
+      "default_definition": null
+    },
+    {
+      "table_name": "workspace_policy_assignment_events",
+      "column_name": "new_version_id",
+      "type_name": "varchar",
+      "max_length": 36,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": true,
+      "default_definition": null
+    },
+    {
+      "table_name": "workspace_policy_assignment_events",
+      "column_name": "old_active",
+      "type_name": "bit",
+      "max_length": 1,
+      "precision": 1,
+      "scale": 0,
+      "is_nullable": true,
+      "default_definition": null
+    },
+    {
+      "table_name": "workspace_policy_assignment_events",
+      "column_name": "new_active",
+      "type_name": "bit",
+      "max_length": 1,
+      "precision": 1,
+      "scale": 0,
+      "is_nullable": true,
+      "default_definition": null
+    },
+    {
+      "table_name": "workspace_policy_assignment_events",
+      "column_name": "old_mode",
+      "type_name": "varchar",
+      "max_length": 6,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": true,
+      "default_definition": null
+    },
+    {
+      "table_name": "workspace_policy_assignment_events",
+      "column_name": "new_mode",
+      "type_name": "varchar",
+      "max_length": 6,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": true,
+      "default_definition": null
+    },
+    {
+      "table_name": "workspace_policy_assignment_events",
+      "column_name": "actor",
+      "type_name": "varchar",
+      "max_length": 80,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "workspace_policy_assignment_events",
+      "column_name": "created_at",
+      "type_name": "datetime2",
+      "max_length": 8,
+      "precision": 27,
+      "scale": 7,
+      "is_nullable": false,
+      "default_definition": "(sysutcdatetime())"
+    },
+    {
+      "table_name": "workspace_policy_assignments",
+      "column_name": "tenant",
+      "type_name": "varchar",
+      "max_length": 80,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "workspace_policy_assignments",
+      "column_name": "policy_id",
+      "type_name": "varchar",
+      "max_length": 36,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "workspace_policy_assignments",
+      "column_name": "version_id",
+      "type_name": "varchar",
+      "max_length": 36,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "workspace_policy_assignments",
+      "column_name": "active",
+      "type_name": "bit",
+      "max_length": 1,
+      "precision": 1,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "workspace_policy_assignments",
+      "column_name": "changed_revision",
+      "type_name": "bigint",
+      "max_length": 8,
+      "precision": 19,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "workspace_policy_assignments",
+      "column_name": "updated_at",
+      "type_name": "datetime2",
+      "max_length": 8,
+      "precision": 27,
+      "scale": 7,
+      "is_nullable": false,
+      "default_definition": "(sysutcdatetime())"
+    },
+    {
+      "table_name": "workspace_policy_assignments",
+      "column_name": "updated_by",
+      "type_name": "varchar",
+      "max_length": 80,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "workspace_policy_states",
+      "column_name": "tenant",
+      "type_name": "varchar",
+      "max_length": 80,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    },
+    {
+      "table_name": "workspace_policy_states",
+      "column_name": "mode",
+      "type_name": "varchar",
+      "max_length": 6,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": "('LEGACY')"
+    },
+    {
+      "table_name": "workspace_policy_states",
+      "column_name": "set_revision",
+      "type_name": "bigint",
+      "max_length": 8,
+      "precision": 19,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": "('1')"
+    },
+    {
+      "table_name": "workspace_policy_states",
+      "column_name": "updated_at",
+      "type_name": "datetime2",
+      "max_length": 8,
+      "precision": 27,
+      "scale": 7,
+      "is_nullable": false,
+      "default_definition": "(sysutcdatetime())"
+    },
+    {
+      "table_name": "workspace_policy_states",
+      "column_name": "updated_by",
+      "type_name": "varchar",
+      "max_length": 80,
+      "precision": 0,
+      "scale": 0,
+      "is_nullable": false,
+      "default_definition": null
+    }
+  ],
+  "checks": [
+    {
+      "name": "ck_execution_mode_identity",
+      "is_disabled": false,
+      "is_not_trusted": false,
+      "definition": "(([execution_mode]='MULTI' OR [execution_mode]='LEGACY') AND ([execution_mode]='LEGACY' AND [policy_id] IS NOT NULL AND [version] IS NOT NULL AND [version]>=(1) OR [execution_mode]='MULTI' AND [policy_id] IS NULL AND [version] IS NULL))"
+    },
+    {
+      "name": "ck_wps_mode",
+      "is_disabled": false,
+      "is_not_trusted": false,
+      "definition": "([mode]='MULTI' OR [mode]='LEGACY')"
+    },
+    {
+      "name": "ck_wps_revision",
+      "is_disabled": false,
+      "is_not_trusted": false,
+      "definition": "([set_revision]>=(1))"
+    },
+    {
+      "name": "ck_epe_revision",
+      "is_disabled": false,
+      "is_not_trusted": false,
+      "definition": "([set_revision]>=(1))"
+    },
+    {
+      "name": "ck_epe_decision",
+      "is_disabled": false,
+      "is_not_trusted": false,
+      "definition": "([effective_decision]='BLOCK' OR [effective_decision]='HUMAN_REVIEW' OR [effective_decision]='REDACT' OR [effective_decision]='ALLOW')"
+    },
+    {
+      "name": "ck_epe_status",
+      "is_disabled": false,
+      "is_not_trusted": false,
+      "definition": "([inspection_status]='NOT_RUN' OR [inspection_status]='INCOMPLETE' OR [inspection_status]='COMPLETE')"
+    },
+    {
+      "name": "ck_epe_json",
+      "is_disabled": false,
+      "is_not_trusted": false,
+      "definition": "(isjson([evidence_json])=(1))"
+    },
+    {
+      "name": "ck_wpae_revision",
+      "is_disabled": false,
+      "is_not_trusted": false,
+      "definition": "([set_revision]>=(1) AND [event_ordinal]>=(1))"
+    },
+    {
+      "name": "ck_wpae_shape",
+      "is_disabled": false,
+      "is_not_trusted": false,
+      "definition": "(([event_type]='SET_MODE' OR [event_type]='INITIALIZE') AND [policy_id] IS NULL AND [old_version_id] IS NULL AND [new_version_id] IS NULL AND [old_active] IS NULL AND [new_active] IS NULL AND [new_mode] IS NOT NULL AND ([new_mode]='MULTI' OR [new_mode]='LEGACY') AND ([event_type]='INITIALIZE' AND [old_mode] IS NULL OR [event_type]='SET_MODE' AND [old_mode] IS NOT NULL AND ([old_mode]='MULTI' OR [old_mode]='LEGACY') AND [old_mode]<>[new_mode]) OR ([event_type]='REPIN' OR [event_type]='DEACTIVATE' OR [event_type]='ACTIVATE') AND [policy_id] IS NOT NULL AND [new_version_id] IS NOT NULL AND [new_active] IS NOT NULL AND [old_mode] IS NULL AND [new_mode] IS NULL AND ([event_type]='ACTIVATE' AND [new_active]=(1) AND ([old_version_id] IS NULL AND [old_active] IS NULL OR [old_version_id] IS NOT NULL AND [old_active] IS NOT NULL AND [old_active]=(0)) OR [event_type]='DEACTIVATE' AND [old_version_id] IS NOT NULL AND [old_active] IS NOT NULL AND [old_active]=(1) AND [new_active]=(0) AND [old_version_id]=[new_version_id] OR [event_type]='REPIN' AND [old_version_id] IS NOT NULL AND [old_active] IS NOT NULL AND [old_active]=(1) AND [new_active]=(1) AND [old_version_id]<>[new_version_id]))"
+    },
+    {
+      "name": "ck_wpae_old_active",
+      "is_disabled": false,
+      "is_not_trusted": false,
+      "definition": "([old_active] IS NULL OR ([old_active]=(1) OR [old_active]=(0)))"
+    },
+    {
+      "name": "ck_wpae_new_active",
+      "is_disabled": false,
+      "is_not_trusted": false,
+      "definition": "([new_active] IS NULL OR ([new_active]=(1) OR [new_active]=(0)))"
+    },
+    {
+      "name": "ck_wpa_revision",
+      "is_disabled": false,
+      "is_not_trusted": false,
+      "definition": "([changed_revision]>=(1))"
+    },
+    {
+      "name": "ck_wpa_active",
+      "is_disabled": false,
+      "is_not_trusted": false,
+      "definition": "([active]=(1) OR [active]=(0))"
+    },
+    {
+      "name": "ck_rpc_format",
+      "is_disabled": false,
+      "is_not_trusted": false,
+      "definition": "([content_kind]='original_prompt' AND [format_version]=(1))"
+    },
+    {
+      "name": "ck_rpc_retention",
+      "is_disabled": false,
+      "is_not_trusted": false,
+      "definition": "([expires_at]>[created_at] AND [expires_at]<=([created_at]+(604800)))"
+    },
+    {
+      "name": "ck_rpc_bytes",
+      "is_disabled": false,
+      "is_not_trusted": false,
+      "definition": "(datalength([nonce])=(12) AND datalength([ciphertext])>=(16) AND datalength([ciphertext])<=(48016))"
+    }
+  ],
+  "foreign_keys": [
+    {
+      "name": "FK__policy_ve__polic__00200768",
+      "is_disabled": false,
+      "is_not_trusted": false
+    },
+    {
+      "name": "FK__active_po__versi__02FC7413",
+      "is_disabled": false,
+      "is_not_trusted": false
+    },
+    {
+      "name": "FK__export_jobs__id__0D7A0286",
+      "is_disabled": false,
+      "is_not_trusted": false
+    },
+    {
+      "name": "FK__review_assig__id__10566F31",
+      "is_disabled": false,
+      "is_not_trusted": false
+    },
+    {
+      "name": "FK__review_no__revie__1332DBDC",
+      "is_disabled": false,
+      "is_not_trusted": false
+    },
+    {
+      "name": "FK__sso_sessi__membe__1EA48E88",
+      "is_disabled": false,
+      "is_not_trusted": false
+    },
+    {
+      "name": "fk_epe_execution",
+      "is_disabled": false,
+      "is_not_trusted": false
+    },
+    {
+      "name": "fk_epe_policy",
+      "is_disabled": false,
+      "is_not_trusted": false
+    },
+    {
+      "name": "fk_epe_version",
+      "is_disabled": false,
+      "is_not_trusted": false
+    },
+    {
+      "name": "fk_wpae_workspace",
+      "is_disabled": false,
+      "is_not_trusted": false
+    },
+    {
+      "name": "fk_wpae_policy",
+      "is_disabled": false,
+      "is_not_trusted": false
+    },
+    {
+      "name": "fk_wpae_old_version",
+      "is_disabled": false,
+      "is_not_trusted": false
+    },
+    {
+      "name": "fk_wpae_new_version",
+      "is_disabled": false,
+      "is_not_trusted": false
+    },
+    {
+      "name": "fk_wpa_workspace",
+      "is_disabled": false,
+      "is_not_trusted": false
+    },
+    {
+      "name": "fk_wpa_policy",
+      "is_disabled": false,
+      "is_not_trusted": false
+    },
+    {
+      "name": "fk_wpa_version",
+      "is_disabled": false,
+      "is_not_trusted": false
+    },
+    {
+      "name": "fk_rpc_review_tenant",
+      "is_disabled": false,
+      "is_not_trusted": false
+    },
+    {
+      "name": "FK__feedback___execu__797309D9",
+      "is_disabled": false,
+      "is_not_trusted": false
+    },
+    {
+      "name": "FK__human_rev__execu__7C4F7684",
+      "is_disabled": false,
+      "is_not_trusted": false
+    }
+  ],
+  "triggers": [
+    {
+      "name": "immutable_audit_events",
+      "is_disabled": false,
+      "definition": "CREATE TRIGGER dbo.immutable_audit_events ON dbo.audit_events INSTEAD OF UPDATE, DELETE AS BEGIN SET NOCOUNT ON; THROW 51000, 'Historical records are append-only', 1; END"
+    },
+    {
+      "name": "immutable_policy_versions",
+      "is_disabled": false,
+      "definition": "CREATE TRIGGER dbo.immutable_policy_versions ON dbo.policy_versions INSTEAD OF UPDATE, DELETE AS BEGIN SET NOCOUNT ON; THROW 51000, 'Historical records are append-only', 1; END"
+    },
+    {
+      "name": "immutable_review_notes",
+      "is_disabled": false,
+      "definition": "CREATE TRIGGER dbo.immutable_review_notes ON dbo.review_notes INSTEAD OF UPDATE, DELETE AS BEGIN SET NOCOUNT ON; THROW 51000, 'Historical records are append-only', 1; END"
+    },
+    {
+      "name": "immutable_workspace_policy_assignment_events",
+      "is_disabled": false,
+      "definition": "CREATE TRIGGER dbo.immutable_workspace_policy_assignment_events ON dbo.workspace_policy_assignment_events INSTEAD OF UPDATE, DELETE AS BEGIN SET NOCOUNT ON; THROW 51000, 'Historical records are append-only', 1; END"
+    },
+    {
+      "name": "immutable_execution_policy_evidence",
+      "is_disabled": false,
+      "definition": "CREATE TRIGGER dbo.immutable_execution_policy_evidence ON dbo.execution_policy_evidence INSTEAD OF UPDATE, DELETE AS BEGIN SET NOCOUNT ON; THROW 51000, 'Historical records are append-only', 1; END"
+    },
+    {
+      "name": "immutable_review_content_update",
+      "is_disabled": false,
+      "definition": "CREATE TRIGGER immutable_review_content_update ON dbo.review_protected_content AFTER UPDATE AS BEGIN SET NOCOUNT ON; THROW 51000, 'Protected review content is immutable', 1; END"
+    }
+  ],
+  "indexes": [
+    {
+      "table_name": "active_policy_assignments",
+      "index_name": "PK__active_p__B3AE1C6E1766078D",
+      "column_name": "tenant",
+      "key_ordinal": 1,
+      "is_included_column": false,
+      "is_unique": true,
+      "is_disabled": false
+    },
+    {
+      "table_name": "alembic_version",
+      "index_name": "alembic_version_pkc",
+      "column_name": "version_num",
+      "key_ordinal": 1,
+      "is_included_column": false,
+      "is_unique": true,
+      "is_disabled": false
+    },
+    {
+      "table_name": "audit_events",
+      "index_name": "ix_audit_events_tenant",
+      "column_name": "tenant",
+      "key_ordinal": 1,
+      "is_included_column": false,
+      "is_unique": false,
+      "is_disabled": false
+    },
+    {
+      "table_name": "audit_events",
+      "index_name": "PK__audit_ev__3213E83F59323D79",
+      "column_name": "id",
+      "key_ordinal": 1,
+      "is_included_column": false,
+      "is_unique": true,
+      "is_disabled": false
+    },
+    {
+      "table_name": "demo_sessions",
+      "index_name": "ix_demo_sessions_expires",
+      "column_name": "expires",
+      "key_ordinal": 1,
+      "is_included_column": false,
+      "is_unique": false,
+      "is_disabled": false
+    },
+    {
+      "table_name": "demo_sessions",
+      "index_name": "ix_demo_sessions_tenant",
+      "column_name": "tenant",
+      "key_ordinal": 1,
+      "is_included_column": false,
+      "is_unique": false,
+      "is_disabled": false
+    },
+    {
+      "table_name": "demo_sessions",
+      "index_name": "PK__demo_ses__3213E83F7B1CB052",
+      "column_name": "id",
+      "key_ordinal": 1,
+      "is_included_column": false,
+      "is_unique": true,
+      "is_disabled": false
+    },
+    {
+      "table_name": "evaluation_exports",
+      "index_name": "ix_evaluation_exports_tenant",
+      "column_name": "tenant",
+      "key_ordinal": 1,
+      "is_included_column": false,
+      "is_unique": false,
+      "is_disabled": false
+    },
+    {
+      "table_name": "evaluation_exports",
+      "index_name": "PK__evaluati__3213E83F97D61C0C",
+      "column_name": "id",
+      "key_ordinal": 1,
+      "is_included_column": false,
+      "is_unique": true,
+      "is_disabled": false
+    },
+    {
+      "table_name": "execution_policy_evidence",
+      "index_name": "ix_epe_tenant_policy_created",
+      "column_name": "tenant",
+      "key_ordinal": 1,
+      "is_included_column": false,
+      "is_unique": false,
+      "is_disabled": false
+    },
+    {
+      "table_name": "execution_policy_evidence",
+      "index_name": "ix_epe_tenant_policy_created",
+      "column_name": "policy_id",
+      "key_ordinal": 2,
+      "is_included_column": false,
+      "is_unique": false,
+      "is_disabled": false
+    },
+    {
+      "table_name": "execution_policy_evidence",
+      "index_name": "ix_epe_tenant_policy_created",
+      "column_name": "created_at",
+      "key_ordinal": 3,
+      "is_included_column": false,
+      "is_unique": false,
+      "is_disabled": false
+    },
+    {
+      "table_name": "execution_policy_evidence",
+      "index_name": "ix_epe_tenant_policy_created",
+      "column_name": "execution_id",
+      "key_ordinal": 4,
+      "is_included_column": false,
+      "is_unique": false,
+      "is_disabled": false
+    },
+    {
+      "table_name": "execution_policy_evidence",
+      "index_name": "PK__executio__02898F3BC147F2C5",
+      "column_name": "tenant",
+      "key_ordinal": 1,
+      "is_included_column": false,
+      "is_unique": true,
+      "is_disabled": false
+    },
+    {
+      "table_name": "execution_policy_evidence",
+      "index_name": "PK__executio__02898F3BC147F2C5",
+      "column_name": "execution_id",
+      "key_ordinal": 2,
+      "is_included_column": false,
+      "is_unique": true,
+      "is_disabled": false
+    },
+    {
+      "table_name": "execution_policy_evidence",
+      "index_name": "PK__executio__02898F3BC147F2C5",
+      "column_name": "policy_id",
+      "key_ordinal": 3,
+      "is_included_column": false,
+      "is_unique": true,
+      "is_disabled": false
+    },
+    {
+      "table_name": "export_jobs",
+      "index_name": "ix_export_jobs_state",
+      "column_name": "state",
+      "key_ordinal": 1,
+      "is_included_column": false,
+      "is_unique": false,
+      "is_disabled": false
+    },
+    {
+      "table_name": "export_jobs",
+      "index_name": "ix_export_jobs_tenant",
+      "column_name": "tenant",
+      "key_ordinal": 1,
+      "is_included_column": false,
+      "is_unique": false,
+      "is_disabled": false
+    },
+    {
+      "table_name": "export_jobs",
+      "index_name": "PK__export_j__3213E83F12863939",
+      "column_name": "id",
+      "key_ordinal": 1,
+      "is_included_column": false,
+      "is_unique": true,
+      "is_disabled": false
+    },
+    {
+      "table_name": "export_jobs",
+      "index_name": "UQ__export_j__F9D5B9F0084947FD",
+      "column_name": "tenant",
+      "key_ordinal": 1,
+      "is_included_column": false,
+      "is_unique": true,
+      "is_disabled": false
+    },
+    {
+      "table_name": "export_jobs",
+      "index_name": "UQ__export_j__F9D5B9F0084947FD",
+      "column_name": "idempotency_key",
+      "key_ordinal": 2,
+      "is_included_column": false,
+      "is_unique": true,
+      "is_disabled": false
+    },
+    {
+      "table_name": "feedback_records",
+      "index_name": "ix_feedback_records_tenant",
+      "column_name": "tenant",
+      "key_ordinal": 1,
+      "is_included_column": false,
+      "is_unique": false,
+      "is_disabled": false
+    },
+    {
+      "table_name": "feedback_records",
+      "index_name": "PK__feedback__3213E83F15A5CF47",
+      "column_name": "id",
+      "key_ordinal": 1,
+      "is_included_column": false,
+      "is_unique": true,
+      "is_disabled": false
+    },
+    {
+      "table_name": "human_review_cases",
+      "index_name": "ix_human_review_cases_tenant",
+      "column_name": "tenant",
+      "key_ordinal": 1,
+      "is_included_column": false,
+      "is_unique": false,
+      "is_disabled": false
+    },
+    {
+      "table_name": "human_review_cases",
+      "index_name": "PK__human_re__3213E83F227AF810",
+      "column_name": "id",
+      "key_ordinal": 1,
+      "is_included_column": false,
+      "is_unique": true,
+      "is_disabled": false
+    },
+    {
+      "table_name": "human_review_cases",
+      "index_name": "ux_review_cases_tenant_id",
+      "column_name": "tenant",
+      "key_ordinal": 1,
+      "is_included_column": false,
+      "is_unique": true,
+      "is_disabled": false
+    },
+    {
+      "table_name": "human_review_cases",
+      "index_name": "ux_review_cases_tenant_id",
+      "column_name": "id",
+      "key_ordinal": 2,
+      "is_included_column": false,
+      "is_unique": true,
+      "is_disabled": false
+    },
+    {
+      "table_name": "inference_rate_buckets",
+      "index_name": "ix_inference_rate_buckets_expires",
+      "column_name": "expires",
+      "key_ordinal": 1,
+      "is_included_column": false,
+      "is_unique": false,
+      "is_disabled": false
+    },
+    {
+      "table_name": "inference_rate_buckets",
+      "index_name": "PK__inferenc__3213E83FC0A6AEBB",
+      "column_name": "id",
+      "key_ordinal": 1,
+      "is_included_column": false,
+      "is_unique": true,
+      "is_disabled": false
+    },
+    {
+      "table_name": "inference_usage",
+      "index_name": "ix_inference_usage_actor",
+      "column_name": "actor",
+      "key_ordinal": 1,
+      "is_included_column": false,
+      "is_unique": false,
+      "is_disabled": false
+    },
+    {
+      "table_name": "inference_usage",
+      "index_name": "ix_inference_usage_expires",
+      "column_name": "expires",
+      "key_ordinal": 1,
+      "is_included_column": false,
+      "is_unique": false,
+      "is_disabled": false
+    },
+    {
+      "table_name": "inference_usage",
+      "index_name": "ix_inference_usage_tenant",
+      "column_name": "tenant",
+      "key_ordinal": 1,
+      "is_included_column": false,
+      "is_unique": false,
+      "is_disabled": false
+    },
+    {
+      "table_name": "inference_usage",
+      "index_name": "PK__inferenc__3213E83F74E9D3EF",
+      "column_name": "id",
+      "key_ordinal": 1,
+      "is_included_column": false,
+      "is_unique": true,
+      "is_disabled": false
+    },
+    {
+      "table_name": "policies",
+      "index_name": "ix_policies_tenant",
+      "column_name": "tenant",
+      "key_ordinal": 1,
+      "is_included_column": false,
+      "is_unique": false,
+      "is_disabled": false
+    },
+    {
+      "table_name": "policies",
+      "index_name": "PK__policies__3213E83F1B8D58D1",
+      "column_name": "id",
+      "key_ordinal": 1,
+      "is_included_column": false,
+      "is_unique": true,
+      "is_disabled": false
+    },
+    {
+      "table_name": "policies",
+      "index_name": "ux_policies_tenant_id",
+      "column_name": "tenant",
+      "key_ordinal": 1,
+      "is_included_column": false,
+      "is_unique": true,
+      "is_disabled": false
+    },
+    {
+      "table_name": "policies",
+      "index_name": "ux_policies_tenant_id",
+      "column_name": "id",
+      "key_ordinal": 2,
+      "is_included_column": false,
+      "is_unique": true,
+      "is_disabled": false
+    },
+    {
+      "table_name": "policy_versions",
+      "index_name": "ix_policy_versions_policy_id",
+      "column_name": "policy_id",
+      "key_ordinal": 1,
+      "is_included_column": false,
+      "is_unique": false,
+      "is_disabled": false
+    },
+    {
+      "table_name": "policy_versions",
+      "index_name": "ix_policy_versions_tenant",
+      "column_name": "tenant",
+      "key_ordinal": 1,
+      "is_included_column": false,
+      "is_unique": false,
+      "is_disabled": false
+    },
+    {
+      "table_name": "policy_versions",
+      "index_name": "PK__policy_v__3213E83FF6D1B0AF",
+      "column_name": "id",
+      "key_ordinal": 1,
+      "is_included_column": false,
+      "is_unique": true,
+      "is_disabled": false
+    },
+    {
+      "table_name": "policy_versions",
+      "index_name": "UQ__policy_v__5808AEE63808E7B5",
+      "column_name": "policy_id",
+      "key_ordinal": 1,
+      "is_included_column": false,
+      "is_unique": true,
+      "is_disabled": false
+    },
+    {
+      "table_name": "policy_versions",
+      "index_name": "UQ__policy_v__5808AEE63808E7B5",
+      "column_name": "number",
+      "key_ordinal": 2,
+      "is_included_column": false,
+      "is_unique": true,
+      "is_disabled": false
+    },
+    {
+      "table_name": "policy_versions",
+      "index_name": "ux_policy_versions_tenant_policy_id",
+      "column_name": "tenant",
+      "key_ordinal": 1,
+      "is_included_column": false,
+      "is_unique": true,
+      "is_disabled": false
+    },
+    {
+      "table_name": "policy_versions",
+      "index_name": "ux_policy_versions_tenant_policy_id",
+      "column_name": "policy_id",
+      "key_ordinal": 2,
+      "is_included_column": false,
+      "is_unique": true,
+      "is_disabled": false
+    },
+    {
+      "table_name": "policy_versions",
+      "index_name": "ux_policy_versions_tenant_policy_id",
+      "column_name": "id",
+      "key_ordinal": 3,
+      "is_included_column": false,
+      "is_unique": true,
+      "is_disabled": false
+    },
+    {
+      "table_name": "review_assignments",
+      "index_name": "ix_review_assignments_tenant",
+      "column_name": "tenant",
+      "key_ordinal": 1,
+      "is_included_column": false,
+      "is_unique": false,
+      "is_disabled": false
+    },
+    {
+      "table_name": "review_assignments",
+      "index_name": "PK__review_a__3213E83F04AA9A42",
+      "column_name": "id",
+      "key_ordinal": 1,
+      "is_included_column": false,
+      "is_unique": true,
+      "is_disabled": false
+    },
+    {
+      "table_name": "review_notes",
+      "index_name": "ix_review_notes_review_id",
+      "column_name": "review_id",
+      "key_ordinal": 1,
+      "is_included_column": false,
+      "is_unique": false,
+      "is_disabled": false
+    },
+    {
+      "table_name": "review_notes",
+      "index_name": "ix_review_notes_tenant",
+      "column_name": "tenant",
+      "key_ordinal": 1,
+      "is_included_column": false,
+      "is_unique": false,
+      "is_disabled": false
+    },
+    {
+      "table_name": "review_notes",
+      "index_name": "PK__review_n__3213E83FD1E961A3",
+      "column_name": "id",
+      "key_ordinal": 1,
+      "is_included_column": false,
+      "is_unique": true,
+      "is_disabled": false
+    },
+    {
+      "table_name": "review_protected_content",
+      "index_name": "ix_rpc_expiry",
+      "column_name": "expires_at",
+      "key_ordinal": 1,
+      "is_included_column": false,
+      "is_unique": false,
+      "is_disabled": false
+    },
+    {
+      "table_name": "review_protected_content",
+      "index_name": "ix_rpc_expiry",
+      "column_name": "tenant",
+      "key_ordinal": 2,
+      "is_included_column": false,
+      "is_unique": false,
+      "is_disabled": false
+    },
+    {
+      "table_name": "review_protected_content",
+      "index_name": "ix_rpc_expiry",
+      "column_name": "review_id",
+      "key_ordinal": 3,
+      "is_included_column": false,
+      "is_unique": false,
+      "is_disabled": false
+    },
+    {
+      "table_name": "review_protected_content",
+      "index_name": "PK__review_p__A5A69FB797C50630",
+      "column_name": "tenant",
+      "key_ordinal": 1,
+      "is_included_column": false,
+      "is_unique": true,
+      "is_disabled": false
+    },
+    {
+      "table_name": "review_protected_content",
+      "index_name": "PK__review_p__A5A69FB797C50630",
+      "column_name": "review_id",
+      "key_ordinal": 2,
+      "is_included_column": false,
+      "is_unique": true,
+      "is_disabled": false
+    },
+    {
+      "table_name": "review_protected_content",
+      "index_name": "ux_rpc_key_nonce",
+      "column_name": "key_id",
+      "key_ordinal": 1,
+      "is_included_column": false,
+      "is_unique": true,
+      "is_disabled": false
+    },
+    {
+      "table_name": "review_protected_content",
+      "index_name": "ux_rpc_key_nonce",
+      "column_name": "nonce",
+      "key_ordinal": 2,
+      "is_included_column": false,
+      "is_unique": true,
+      "is_disabled": false
+    },
+    {
+      "table_name": "sso_memberships",
+      "index_name": "PK__sso_memb__3213E83F0585D48A",
+      "column_name": "id",
+      "key_ordinal": 1,
+      "is_included_column": false,
+      "is_unique": true,
+      "is_disabled": false
+    },
+    {
+      "table_name": "sso_memberships",
+      "index_name": "UQ__sso_memb__083A90D5D29E507C",
+      "column_name": "tenant",
+      "key_ordinal": 1,
+      "is_included_column": false,
+      "is_unique": true,
+      "is_disabled": false
+    },
+    {
+      "table_name": "sso_memberships",
+      "index_name": "UQ__sso_memb__083A90D5D29E507C",
+      "column_name": "actor",
+      "key_ordinal": 2,
+      "is_included_column": false,
+      "is_unique": true,
+      "is_disabled": false
+    },
+    {
+      "table_name": "sso_memberships",
+      "index_name": "UQ__sso_memb__0FCEA195B57969AB",
+      "column_name": "directory_tenant",
+      "key_ordinal": 1,
+      "is_included_column": false,
+      "is_unique": true,
+      "is_disabled": false
+    },
+    {
+      "table_name": "sso_memberships",
+      "index_name": "UQ__sso_memb__0FCEA195B57969AB",
+      "column_name": "object_id",
+      "key_ordinal": 2,
+      "is_included_column": false,
+      "is_unique": true,
+      "is_disabled": false
+    },
+    {
+      "table_name": "sso_sessions",
+      "index_name": "ix_sso_sessions_expires",
+      "column_name": "expires",
+      "key_ordinal": 1,
+      "is_included_column": false,
+      "is_unique": false,
+      "is_disabled": false
+    },
+    {
+      "table_name": "sso_sessions",
+      "index_name": "PK__sso_sess__3213E83FDE9E1AEA",
+      "column_name": "id",
+      "key_ordinal": 1,
+      "is_included_column": false,
+      "is_unique": true,
+      "is_disabled": false
+    },
+    {
+      "table_name": "sso_transactions",
+      "index_name": "ix_sso_transactions_expires",
+      "column_name": "expires",
+      "key_ordinal": 1,
+      "is_included_column": false,
+      "is_unique": false,
+      "is_disabled": false
+    },
+    {
+      "table_name": "sso_transactions",
+      "index_name": "PK__sso_tran__3213E83F7AC1A580",
+      "column_name": "id",
+      "key_ordinal": 1,
+      "is_included_column": false,
+      "is_unique": true,
+      "is_disabled": false
+    },
+    {
+      "table_name": "validation_executions",
+      "index_name": "ix_execution_tenant_created",
+      "column_name": "tenant",
+      "key_ordinal": 1,
+      "is_included_column": false,
+      "is_unique": false,
+      "is_disabled": false
+    },
+    {
+      "table_name": "validation_executions",
+      "index_name": "ix_execution_tenant_created",
+      "column_name": "created",
+      "key_ordinal": 2,
+      "is_included_column": false,
+      "is_unique": false,
+      "is_disabled": false
+    },
+    {
+      "table_name": "validation_executions",
+      "index_name": "ix_execution_tenant_created",
+      "column_name": "id",
+      "key_ordinal": 3,
+      "is_included_column": false,
+      "is_unique": false,
+      "is_disabled": false
+    },
+    {
+      "table_name": "validation_executions",
+      "index_name": "ix_validation_executions_decision",
+      "column_name": "decision",
+      "key_ordinal": 1,
+      "is_included_column": false,
+      "is_unique": false,
+      "is_disabled": false
+    },
+    {
+      "table_name": "validation_executions",
+      "index_name": "ix_validation_executions_tenant",
+      "column_name": "tenant",
+      "key_ordinal": 1,
+      "is_included_column": false,
+      "is_unique": false,
+      "is_disabled": false
+    },
+    {
+      "table_name": "validation_executions",
+      "index_name": "PK__validati__3213E83FD3BF2F22",
+      "column_name": "id",
+      "key_ordinal": 1,
+      "is_included_column": false,
+      "is_unique": true,
+      "is_disabled": false
+    },
+    {
+      "table_name": "validation_executions",
+      "index_name": "ux_validation_executions_tenant_id",
+      "column_name": "tenant",
+      "key_ordinal": 1,
+      "is_included_column": false,
+      "is_unique": true,
+      "is_disabled": false
+    },
+    {
+      "table_name": "validation_executions",
+      "index_name": "ux_validation_executions_tenant_id",
+      "column_name": "id",
+      "key_ordinal": 2,
+      "is_included_column": false,
+      "is_unique": true,
+      "is_disabled": false
+    },
+    {
+      "table_name": "workspace_policy_assignment_events",
+      "index_name": "ix_wpae_tenant_created_id",
+      "column_name": "tenant",
+      "key_ordinal": 1,
+      "is_included_column": false,
+      "is_unique": false,
+      "is_disabled": false
+    },
+    {
+      "table_name": "workspace_policy_assignment_events",
+      "index_name": "ix_wpae_tenant_created_id",
+      "column_name": "created_at",
+      "key_ordinal": 2,
+      "is_included_column": false,
+      "is_unique": false,
+      "is_disabled": false
+    },
+    {
+      "table_name": "workspace_policy_assignment_events",
+      "index_name": "ix_wpae_tenant_created_id",
+      "column_name": "id",
+      "key_ordinal": 3,
+      "is_included_column": false,
+      "is_unique": false,
+      "is_disabled": false
+    },
+    {
+      "table_name": "workspace_policy_assignment_events",
+      "index_name": "PK__workspac__3213E83F629DA9E3",
+      "column_name": "id",
+      "key_ordinal": 1,
+      "is_included_column": false,
+      "is_unique": true,
+      "is_disabled": false
+    },
+    {
+      "table_name": "workspace_policy_assignment_events",
+      "index_name": "uq_wpae_revision_ordinal",
+      "column_name": "tenant",
+      "key_ordinal": 1,
+      "is_included_column": false,
+      "is_unique": true,
+      "is_disabled": false
+    },
+    {
+      "table_name": "workspace_policy_assignment_events",
+      "index_name": "uq_wpae_revision_ordinal",
+      "column_name": "set_revision",
+      "key_ordinal": 2,
+      "is_included_column": false,
+      "is_unique": true,
+      "is_disabled": false
+    },
+    {
+      "table_name": "workspace_policy_assignment_events",
+      "index_name": "uq_wpae_revision_ordinal",
+      "column_name": "event_ordinal",
+      "key_ordinal": 3,
+      "is_included_column": false,
+      "is_unique": true,
+      "is_disabled": false
+    },
+    {
+      "table_name": "workspace_policy_assignments",
+      "index_name": "ix_wpa_tenant_active_policy",
+      "column_name": "tenant",
+      "key_ordinal": 1,
+      "is_included_column": false,
+      "is_unique": false,
+      "is_disabled": false
+    },
+    {
+      "table_name": "workspace_policy_assignments",
+      "index_name": "ix_wpa_tenant_active_policy",
+      "column_name": "active",
+      "key_ordinal": 2,
+      "is_included_column": false,
+      "is_unique": false,
+      "is_disabled": false
+    },
+    {
+      "table_name": "workspace_policy_assignments",
+      "index_name": "ix_wpa_tenant_active_policy",
+      "column_name": "policy_id",
+      "key_ordinal": 3,
+      "is_included_column": false,
+      "is_unique": false,
+      "is_disabled": false
+    },
+    {
+      "table_name": "workspace_policy_assignments",
+      "index_name": "ix_wpa_tenant_active_policy",
+      "column_name": "version_id",
+      "key_ordinal": 0,
+      "is_included_column": true,
+      "is_unique": false,
+      "is_disabled": false
+    },
+    {
+      "table_name": "workspace_policy_assignments",
+      "index_name": "ix_wpa_tenant_active_policy",
+      "column_name": "changed_revision",
+      "key_ordinal": 0,
+      "is_included_column": true,
+      "is_unique": false,
+      "is_disabled": false
+    },
+    {
+      "table_name": "workspace_policy_assignments",
+      "index_name": "PK__workspac__97D3BF9E826A9AAD",
+      "column_name": "tenant",
+      "key_ordinal": 1,
+      "is_included_column": false,
+      "is_unique": true,
+      "is_disabled": false
+    },
+    {
+      "table_name": "workspace_policy_assignments",
+      "index_name": "PK__workspac__97D3BF9E826A9AAD",
+      "column_name": "policy_id",
+      "key_ordinal": 2,
+      "is_included_column": false,
+      "is_unique": true,
+      "is_disabled": false
+    },
+    {
+      "table_name": "workspace_policy_states",
+      "index_name": "PK__workspac__B3AE1C6ED371D9BC",
+      "column_name": "tenant",
+      "key_ordinal": 1,
+      "is_included_column": false,
+      "is_unique": true,
+      "is_disabled": false
+    }
+  ]
+}

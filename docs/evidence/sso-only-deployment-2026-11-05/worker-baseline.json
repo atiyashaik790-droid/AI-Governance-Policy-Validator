@@ -1,0 +1,461 @@
+{
+  "status": "PASS",
+  "method": "EXISTING_MAIN_CONTAINER_EXEC_WEBSOCKET",
+  "hosted_changes": false,
+  "sql_accessed": false,
+  "pinned_operator_identity_verified": true,
+  "handshake": "PASS",
+  "payload_sent": true,
+  "hosted_files_written": false,
+  "loaded_config_path": "/tmp/8df3a86dbc4c092/app/config.py",
+  "reconstructed_settings": {
+    "sso_enabled": true,
+    "demo_enabled": true,
+    "secret_present": true
+  },
+  "shell_environment": {
+    "SSO_ENABLED": "true",
+    "APPSETTING_SSO_ENABLED": "true",
+    "DEMO_BROWSER_LOGIN_ENABLED": "true",
+    "ALLOW_LEGACY_API_CREDENTIALS": null,
+    "WEBSITE_SLOT_NAME": null,
+    "WEBSITE_HOSTNAME": "app-governance-validator-atiya-1026.azurewebsites.net",
+    "secret_present": true
+  },
+  "source_hashes": {
+    "config.py": "7b5f2fc2537a42478bbc5c150de6947bcaa320c9a0ea2be61568c36d60cd189d",
+    "sso.py": "52d28783b714ede29c1b28391816c9e57015db4ee9e83ae2ddb5bccb0fba1be0",
+    "hosting.py": "9a30fea705f04feb5eca26d713da1732b489c9f76fad631fb5263c4e26d9e8d3",
+    "security.py": "84e7de886defacb0d81e921f190827866176be88b375681ae561872988444c60",
+    "sessions.py": "f4204f1e29025da2e193d9d19f155fcc5ba4345bf2cdc5cc8248a3bfa6e6a358"
+  },
+  "source_matches_reviewed": false,
+  "env_file_path": "/tmp/.env",
+  "env_file_exists": false,
+  "workers": [
+    {
+      "pid": 1966,
+      "environment": {
+        "secret_present": true,
+        "DEMO_BROWSER_LOGIN_ENABLED": "true",
+        "APPSETTING_SSO_ENABLED": "true",
+        "WEBSITE_HOSTNAME": "app-governance-validator-atiya-1026.azurewebsites.net",
+        "SSO_ENABLED": "true"
+      },
+      "started_at_utc": "2026-11-05T05:55:59.367037+00:00",
+      "entrypoint_hosting": true,
+      "executable": "/tmp/8df3a86dbc4c092/antenv/bin/python",
+      "safe_argv": [
+        "EXECUTABLE_OR_OTHER_REDACTED",
+        "-m",
+        "uvicorn",
+        "app.hosting:app",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "8000",
+        "--workers",
+        "1",
+        "--no-access-log"
+      ]
+    }
+  ],
+  "lifecycle_events": [
+    {
+      "log_file": "2026_11_04_lw0sdlwk0003R4_docker.log",
+      "timestamp": "2026-11-04T18:25:43.7289954Z",
+      "categories": [
+        "starting_container"
+      ],
+      "worker_pid": null
+    },
+    {
+      "log_file": "2026_11_04_lw0sdlwk0003R4_docker.log",
+      "timestamp": "2026-11-04T18:25:44.4657826Z",
+      "categories": [
+        "container_start_finished"
+      ],
+      "worker_pid": null
+    },
+    {
+      "log_file": "2026_11_04_lw0sdlwk0003R4_docker.log",
+      "timestamp": "2026-11-04T18:25:44.4670193Z",
+      "categories": [
+        "container_ready"
+      ],
+      "worker_pid": null
+    },
+    {
+      "log_file": "2026_11_04_lw0sdlwk0003R4_docker.log",
+      "timestamp": "2026-11-04T18:28:15.0551051Z",
+      "categories": [
+        "site_startup_probe_succeeded"
+      ],
+      "worker_pid": null
+    },
+    {
+      "log_file": "2026_11_04_lw0sdlwk0003R4_docker.log",
+      "timestamp": "2026-11-04T18:28:15.5830492Z",
+      "categories": [
+        "site_startup_probe_succeeded"
+      ],
+      "worker_pid": null
+    },
+    {
+      "log_file": "2026_11_04_lw0sdlwk0003R4_docker.log",
+      "timestamp": "2026-11-04T18:28:16.8554961Z",
+      "categories": [
+        "site_running"
+      ],
+      "worker_pid": null
+    },
+    {
+      "log_file": "2026_11_04_lw0sdlwk0003R4_docker.log",
+      "timestamp": "2026-11-04T18:28:16.9007451Z",
+      "categories": [
+        "site_running"
+      ],
+      "worker_pid": null
+    },
+    {
+      "log_file": "2026_11_04_lw0sdlwk0003R4_docker.log",
+      "timestamp": "2026-11-04T18:28:37.6607074Z",
+      "categories": [
+        "termination_started"
+      ],
+      "worker_pid": null
+    },
+    {
+      "log_file": "2026_11_04_lw0sdlwk0003R4_docker.log",
+      "timestamp": "2026-11-04T18:28:37.7270815Z",
+      "categories": [
+        "stopping_container"
+      ],
+      "worker_pid": null
+    },
+    {
+      "log_file": "2026_11_04_lw0sdlwk0003R4_docker.log",
+      "timestamp": "2026-11-04T18:33:41.0468767Z",
+      "categories": [
+        "starting_container"
+      ],
+      "worker_pid": null
+    },
+    {
+      "log_file": "2026_11_04_lw0sdlwk0003R4_docker.log",
+      "timestamp": "2026-11-04T18:33:41.6465421Z",
+      "categories": [
+        "container_start_finished"
+      ],
+      "worker_pid": null
+    },
+    {
+      "log_file": "2026_11_04_lw0sdlwk0003R4_docker.log",
+      "timestamp": "2026-11-04T18:33:41.9213628Z",
+      "categories": [
+        "container_ready"
+      ],
+      "worker_pid": null
+    },
+    {
+      "log_file": "2026_11_04_lw0sdlwk0003R4_docker.log",
+      "timestamp": "2026-11-04T18:35:26.2525230Z",
+      "categories": [
+        "site_startup_probe_succeeded"
+      ],
+      "worker_pid": null
+    },
+    {
+      "log_file": "2026_11_04_lw0sdlwk0003R4_docker.log",
+      "timestamp": "2026-11-04T18:35:27.1030866Z",
+      "categories": [
+        "site_startup_probe_succeeded"
+      ],
+      "worker_pid": null
+    },
+    {
+      "log_file": "2026_11_04_lw0sdlwk0003R4_docker.log",
+      "timestamp": "2026-11-04T18:35:28.0407565Z",
+      "categories": [
+        "site_running"
+      ],
+      "worker_pid": null
+    },
+    {
+      "log_file": "2026_11_04_lw0sdlwk0003R4_docker.log",
+      "timestamp": "2026-11-04T18:35:28.0678640Z",
+      "categories": [
+        "site_running"
+      ],
+      "worker_pid": null
+    },
+    {
+      "log_file": "2026_11_04_lw0sdlwk0003R4_docker.log",
+      "timestamp": "2026-11-04T18:35:48.7718967Z",
+      "categories": [
+        "termination_started"
+      ],
+      "worker_pid": null
+    },
+    {
+      "log_file": "2026_11_04_lw0sdlwk0003R4_docker.log",
+      "timestamp": "2026-11-04T18:35:48.9448164Z",
+      "categories": [
+        "stopping_container"
+      ],
+      "worker_pid": null
+    },
+    {
+      "log_file": "2026_11_04_lw0sdlwk0003R4_docker.log",
+      "timestamp": "2026-11-04T18:38:14.0830425Z",
+      "categories": [
+        "starting_container"
+      ],
+      "worker_pid": null
+    },
+    {
+      "log_file": "2026_11_04_lw0sdlwk0003R4_docker.log",
+      "timestamp": "2026-11-04T18:38:15.2601885Z",
+      "categories": [
+        "container_start_finished"
+      ],
+      "worker_pid": null
+    },
+    {
+      "log_file": "2026_11_04_lw0sdlwk0003R4_docker.log",
+      "timestamp": "2026-11-04T18:38:15.5539361Z",
+      "categories": [
+        "container_ready"
+      ],
+      "worker_pid": null
+    },
+    {
+      "log_file": "2026_11_04_lw0sdlwk0003R4_docker.log",
+      "timestamp": "2026-11-04T18:39:09.7367881Z",
+      "categories": [
+        "site_startup_probe_failed"
+      ],
+      "worker_pid": null
+    },
+    {
+      "log_file": "2026_11_04_lw0sdlwk0003R4_docker.log",
+      "timestamp": "2026-11-04T18:39:12.6970723Z",
+      "categories": [
+        "container_ready"
+      ],
+      "worker_pid": null
+    },
+    {
+      "log_file": "2026_11_04_lw0sdlwk0003R4_docker.log",
+      "timestamp": "2026-11-04T18:39:12.8266773Z",
+      "categories": [
+        "container_ready"
+      ],
+      "worker_pid": null
+    },
+    {
+      "log_file": "2026_11_04_lw0sdlwk0003R4_docker.log",
+      "timestamp": "2026-11-04T18:39:12.9426095Z",
+      "categories": [
+        "container_ready"
+      ],
+      "worker_pid": null
+    },
+    {
+      "log_file": "2026_11_04_lw0sdlwk0003R4_docker.log",
+      "timestamp": "2026-11-04T18:39:12.9431179Z",
+      "categories": [
+        "termination_started"
+      ],
+      "worker_pid": null
+    },
+    {
+      "log_file": "2026_11_04_lw0sdlwk0003R4_docker.log",
+      "timestamp": "2026-11-04T18:39:13.9113110Z",
+      "categories": [
+        "stopping_container"
+      ],
+      "worker_pid": null
+    },
+    {
+      "log_file": "2026_11_04_lw0sdlwk0003R4_docker.log",
+      "timestamp": "2026-11-04T18:39:50.7898418Z",
+      "categories": [
+        "termination_started"
+      ],
+      "worker_pid": null
+    },
+    {
+      "log_file": "2026_11_04_lw0sdlwk0003R4_docker.log",
+      "timestamp": "2026-11-04T18:39:50.8230083Z",
+      "categories": [
+        "stopping_container"
+      ],
+      "worker_pid": null
+    },
+    {
+      "log_file": "2026_11_04_lw0sdlwk0003R4_docker.log",
+      "timestamp": "2026-11-04T18:43:53.7064463Z",
+      "categories": [
+        "site_stopped"
+      ],
+      "worker_pid": null
+    },
+    {
+      "log_file": "2026_11_04_lw0sdlwk0003R4_docker.log",
+      "timestamp": "2026-11-04T18:43:57.6947020Z",
+      "categories": [
+        "site_stopped"
+      ],
+      "worker_pid": null
+    },
+    {
+      "log_file": "2026_11_04_lw0sdlwk0003R4_docker.log",
+      "timestamp": "2026-11-04T18:44:19.6866003Z",
+      "categories": [
+        "site_stopped"
+      ],
+      "worker_pid": null
+    },
+    {
+      "log_file": "2026_11_04_lw0sdlwk0003R4_docker.log",
+      "timestamp": "2026-11-04T18:44:22.5439968Z",
+      "categories": [
+        "starting_container"
+      ],
+      "worker_pid": null
+    },
+    {
+      "log_file": "2026_11_04_lw0sdlwk0003R4_docker.log",
+      "timestamp": "2026-11-04T18:44:24.0136021Z",
+      "categories": [
+        "container_start_finished"
+      ],
+      "worker_pid": null
+    },
+    {
+      "log_file": "2026_11_04_lw0sdlwk0003R4_docker.log",
+      "timestamp": "2026-11-04T18:44:24.1287142Z",
+      "categories": [
+        "container_ready"
+      ],
+      "worker_pid": null
+    },
+    {
+      "log_file": "2026_11_04_lw0sdlwk0003R4_docker.log",
+      "timestamp": "2026-11-04T18:45:38.2801922Z",
+      "categories": [
+        "site_startup_probe_succeeded"
+      ],
+      "worker_pid": null
+    },
+    {
+      "log_file": "2026_11_04_lw0sdlwk0003R4_docker.log",
+      "timestamp": "2026-11-04T18:45:38.5412271Z",
+      "categories": [
+        "site_startup_probe_succeeded"
+      ],
+      "worker_pid": null
+    },
+    {
+      "log_file": "2026_11_04_lw0sdlwk0003R4_docker.log",
+      "timestamp": "2026-11-04T18:45:40.7950420Z",
+      "categories": [
+        "site_running"
+      ],
+      "worker_pid": null
+    },
+    {
+      "log_file": "2026_11_04_lw0sdlwk0003R4_docker.log",
+      "timestamp": "2026-11-04T18:45:40.9795931Z",
+      "categories": [
+        "site_running"
+      ],
+      "worker_pid": null
+    }
+  ],
+  "application_diagnostics": [],
+  "application_log_files": [
+    {
+      "name": "2026_11_03_lw0sdlwk0003R4_default_docker.log",
+      "bytes": 326766
+    },
+    {
+      "name": "2026_11_04_lw0sdlwk0003R4_default_docker.log",
+      "bytes": 302947
+    },
+    {
+      "name": "2026_11_04_lw0sdlwk0003R4_default_scm_docker.log",
+      "bytes": 12770
+    }
+  ],
+  "application_log_summary": [
+    {
+      "name": "2026_11_03_lw0sdlwk0003R4_default_docker.log",
+      "mtime_epoch": 1793750372.1151001,
+      "keyword_counts": {
+        "Traceback": 0,
+        "RuntimeError": 0,
+        "Started server process": 0,
+        "Application startup": 0,
+        "ERROR": 0
+      },
+      "timestamp_samples": [
+        "2026-11-03T23:58:32.1263452",
+        "2026-11-03T23:59:00.1103492",
+        "2026-11-03T23:59:32.1183096"
+      ]
+    },
+    {
+      "name": "2026_11_04_lw0sdlwk0003R4_default_docker.log",
+      "mtime_epoch": 1793816895.0822875,
+      "keyword_counts": {
+        "Traceback": 0,
+        "RuntimeError": 0,
+        "Started server process": 1,
+        "Application startup": 1,
+        "ERROR": 0
+      },
+      "timestamp_samples": [
+        "2026-11-04T18:26:55.8443941",
+        "2026-11-04T18:27:55.5257667",
+        "2026-11-04T18:28:15.0748428"
+      ]
+    },
+    {
+      "name": "2026_11_04_lw0sdlwk0003R4_default_scm_docker.log",
+      "mtime_epoch": 1793805829.75537,
+      "keyword_counts": {
+        "Traceback": 0,
+        "RuntimeError": 0,
+        "Started server process": 0,
+        "Application startup": 0,
+        "ERROR": 0
+      },
+      "timestamp_samples": [
+        "2026-11-04T15:23:34.8772972",
+        "2026-11-04T15:23:34.9159773",
+        "2026-11-04T15:23:34.9426175"
+      ]
+    }
+  ],
+  "startup_files": [
+    {
+      "path": "/opt/startup/startup.sh",
+      "sha256": "b685378c1463463f751711aa111d423ccfba667a605d13e67cc12ad128a3c9dc",
+      "mentions_sso_enabled": false,
+      "uses_uvicorn": false,
+      "uses_hosting_entrypoint": false,
+      "mtime_utc": "2026-11-05T05:55:59.047493+00:00"
+    },
+    {
+      "path": "/tmp/8df3a86dbc4c092/startup.sh",
+      "sha256": "24b9751425f00677fec4e7709eec0f6e9264bcb3226ed4b636870d675cfa5bea",
+      "mentions_sso_enabled": false,
+      "uses_uvicorn": true,
+      "uses_hosting_entrypoint": true,
+      "mtime_utc": "2026-11-04T15:18:39+00:00"
+    }
+  ],
+  "observed_at_utc": "2026-11-05T07:58:29.384929+00:00"
+}

@@ -1,0 +1,185 @@
+{
+  "status": "PARTIAL",
+  "candidate": "1.2-677a11e4b649fa7d",
+  "health": {
+    "completed": true,
+    "elapsed_seconds": 8.838,
+    "event": "cleanup.startup",
+    "healthy": true
+  },
+  "human_review": {
+    "decision": "HUMAN_REVIEW",
+    "event": "human_review.confirmation",
+    "governance_execution_ms": 66079.636,
+    "model_invoked": false,
+    "precommit_remaining_ms": 29038.186,
+    "status": 200
+  },
+  "human_review_stages": [
+    {
+      "event": "governance.stage",
+      "stage": "authentication",
+      "outcome": "ok",
+      "duration_ms": 821.697,
+      "correlation_id": "66c8fc68-4bef-4cfe-9a71-22acceaa7b1a"
+    },
+    {
+      "event": "governance.stage",
+      "stage": "review.schema",
+      "outcome": "ok",
+      "duration_ms": 53117.565,
+      "sql_count": 80,
+      "catalog_count": 76,
+      "sql_ms": 36165.899,
+      "connection_acquire_ms": 0.023,
+      "correlation_id": "66c8fc68-4bef-4cfe-9a71-22acceaa7b1a"
+    },
+    {
+      "event": "governance.stage",
+      "stage": "governance.preflight",
+      "outcome": "ok",
+      "duration_ms": 54209.74,
+      "sql_count": 82,
+      "catalog_count": 77,
+      "sql_ms": 37053.814,
+      "connection_acquire_ms": 0.046,
+      "correlation_id": "66c8fc68-4bef-4cfe-9a71-22acceaa7b1a"
+    },
+    {
+      "event": "governance.stage",
+      "stage": "policy.admission",
+      "outcome": "ok",
+      "duration_ms": 17362.132,
+      "sql_count": 29,
+      "catalog_count": 2,
+      "sql_ms": 12836.629,
+      "connection_acquire_ms": 0.043,
+      "correlation_id": "66c8fc68-4bef-4cfe-9a71-22acceaa7b1a"
+    },
+    {
+      "event": "governance.stage",
+      "stage": "policy.selection",
+      "outcome": "ok",
+      "duration_ms": 0.413,
+      "sql_count": 0,
+      "catalog_count": 0,
+      "sql_ms": 0,
+      "connection_acquire_ms": 0.058,
+      "deadline_remaining_ms": 89796.397,
+      "correlation_id": "66c8fc68-4bef-4cfe-9a71-22acceaa7b1a"
+    },
+    {
+      "event": "governance.stage",
+      "stage": "inspection",
+      "outcome": "ok",
+      "duration_ms": 7.018,
+      "sql_count": 0,
+      "catalog_count": 0,
+      "sql_ms": 0,
+      "connection_acquire_ms": 0.024,
+      "deadline_remaining_ms": 89788.98,
+      "correlation_id": "66c8fc68-4bef-4cfe-9a71-22acceaa7b1a"
+    },
+    {
+      "event": "governance.stage",
+      "stage": "execution.persistence",
+      "outcome": "ok",
+      "duration_ms": 618.984,
+      "sql_count": 1,
+      "catalog_count": 0,
+      "sql_ms": 408.527,
+      "connection_acquire_ms": 0.056,
+      "deadline_remaining_ms": 85906.812,
+      "correlation_id": "66c8fc68-4bef-4cfe-9a71-22acceaa7b1a"
+    },
+    {
+      "event": "governance.stage",
+      "stage": "review.persistence",
+      "outcome": "ok",
+      "duration_ms": 1229.406,
+      "sql_count": 2,
+      "catalog_count": 0,
+      "sql_ms": 820.138,
+      "connection_acquire_ms": 0.036,
+      "deadline_remaining_ms": 84676.91,
+      "correlation_id": "66c8fc68-4bef-4cfe-9a71-22acceaa7b1a"
+    },
+    {
+      "event": "governance.stage",
+      "stage": "review.schema",
+      "outcome": "ok",
+      "duration_ms": 52705.583,
+      "sql_count": 80,
+      "catalog_count": 76,
+      "sql_ms": 35525.276,
+      "connection_acquire_ms": 0.014,
+      "correlation_id": "66c8fc68-4bef-4cfe-9a71-22acceaa7b1a"
+    },
+    {
+      "event": "governance.stage",
+      "stage": "review.capture",
+      "outcome": "ok",
+      "duration_ms": 55637.669,
+      "sql_count": 85,
+      "catalog_count": 77,
+      "sql_ms": 37811.857,
+      "connection_acquire_ms": 0.023,
+      "deadline_remaining_ms": 29038.853,
+      "correlation_id": "66c8fc68-4bef-4cfe-9a71-22acceaa7b1a"
+    },
+    {
+      "event": "governance.stage",
+      "stage": "deadline.precommit",
+      "outcome": "ok",
+      "duration_ms": 0.233,
+      "sql_count": 0,
+      "catalog_count": 0,
+      "sql_ms": 0,
+      "connection_acquire_ms": 0.029,
+      "deadline_remaining_ms": 29038.186,
+      "correlation_id": "66c8fc68-4bef-4cfe-9a71-22acceaa7b1a"
+    },
+    {
+      "event": "governance.stage",
+      "stage": "execution.commit",
+      "outcome": "ok",
+      "duration_ms": 355.558,
+      "sql_count": 0,
+      "catalog_count": 0,
+      "sql_ms": 0,
+      "connection_acquire_ms": 0.037,
+      "deadline_remaining_ms": 23920.826,
+      "correlation_id": "66c8fc68-4bef-4cfe-9a71-22acceaa7b1a"
+    },
+    {
+      "event": "governance.stage",
+      "stage": "governance.execution",
+      "outcome": "ok",
+      "duration_ms": 66079.636,
+      "sql_count": 101,
+      "catalog_count": 77,
+      "sql_ms": 44921.105,
+      "connection_acquire_ms": 202.646,
+      "deadline_remaining_ms": 23920.318,
+      "correlation_id": "66c8fc68-4bef-4cfe-9a71-22acceaa7b1a"
+    }
+  ],
+  "stop_assertion": "assigned.status_code == 200",
+  "actual_assignment_http_status": 422,
+  "fixture_reason": "Synthetic test",
+  "actual_detail": "Select a structured review reason; free-form sensitive commentary is not accepted",
+  "incarnations": 1,
+  "elapsed_seconds": 932.05,
+  "conservative_compute_estimate_usd": 0.040325,
+  "independent_deletion_confirmed": true,
+  "production_unchanged": true,
+  "pinned_sources_unchanged_since_launch": true,
+  "sqlite_unchanged": true,
+  "not_reached": [
+    "successful assignment/reveal/access-audit and remaining authorization checks",
+    "tampering/expiry cleanup and remaining MULTI application checks",
+    "compatible-copy ciphertext preservation",
+    "second-incarnation 006 preflight denials/007 rollback"
+  ],
+  "scope_end": "STOP after Approval A retry-7"
+}

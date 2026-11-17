@@ -1,0 +1,185 @@
+import base64, hashlib, json, os, signal, subprocess, sys, time, zipfile
+from datetime import datetime, timezone
+from pathlib import Path
+from urllib.request import Request, build_opener, HTTPRedirectHandler
+from urllib.error import HTTPError
+
+ROOT=Path('/home/sigmoid/AI governance policy validator')
+OUT=ROOT/'docs/evidence/webapp-watchdog-disabled-check-2026-11-07'
+OUT.mkdir(mode=0o700,exist_ok=True)
+SUB='25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6'; GROUP='rg_techdemo_Atiya_Tabsum_Shaik'; APP='app-governance-validator-atiya-1026'; JOB='gpv-sql-expiry-watchdog'; FLAG='WEBSITE_SKIP_RUNNING_KUDUAGENT'
+ARM='https://management.azure.com'; SITE=f'/subscriptions/{SUB}/resourceGroups/{GROUP}/providers/Microsoft.Web/sites/{APP}'; API='?api-version=2024-11-01'
+SCM=f'https://{APP}.scm.azurewebsites.net'; PUBLIC=f'https://{APP}.azurewebsites.net'
+ZIP=ROOT/'artifacts/webapp-watchdog-review/webjob-disabled-final.zip'; EXPECTED='fc4070ec948fd1465fa2226e7979357eec8def1f9dd9ab97fe2f3ef9bb2d7cd1'
+START=time.time(); DEADLINE=START+900; WORK_STOP=START+420
+STATE={'started_utc':datetime.now(timezone.utc).isoformat(),'deadline_utc':datetime.fromtimestamp(DEADLINE,timezone.utc).isoformat(),'scope':'disabled compatibility only','events':[],'settings_changed':False,'upload_intent':False,'sql_operations':False,'permission_changes':False,'status':'RUNNING'}
+TOKEN=None; ORIGINAL=None; rollback=True
+class Stop(Exception):pass
+class NoRedirect(HTTPRedirectHandler):
+ def redirect_request(self,*a,**k):return None
+opener=build_opener(NoRedirect())
+def save():
+ p=OUT/'execution.json'; p.write_text(json.dumps(STATE,indent=2)+'\n')
+def emit(event,**kw):
+ row={'utc':datetime.now(timezone.utc).isoformat(),'event':event,**kw};STATE['events'].append(row);save();print(json.dumps(row),flush=True)
+def call(base,path,method='GET',body=None,headers=None):
+ if time.time()>DEADLINE:raise Stop('AUTHORIZATION_DEADLINE')
+ assert base in (ARM,SCM,PUBLIC)
+ if base==ARM:
+  assert path.startswith(SITE)
+  assert (method=='GET' or (method=='POST' and path==SITE+'/config/appsettings/list'+API) or (method=='PUT' and path==SITE+'/config/appsettings'+API))
+ if base==SCM and method!='GET':
+  assert path in ('/api/continuouswebjobs/'+JOB,'/api/continuouswebjobs/'+JOB+'/stop','/api/continuouswebjobs/'+JOB+'/start')
+  assert method in ('PUT','POST','DELETE')
+ h={'Authorization':'Bearer '+TOKEN} if base!=PUBLIC else {}
+ h.update(headers or {})
+ data=body
+ if isinstance(body,dict):data=json.dumps(body).encode();h['Content-Type']='application/json'
+ try:
+  with opener.open(Request(base+path,data=data,headers=h,method=method),timeout=15) as r:return r.status,r.read(1000000)
+ except HTTPError as e:
+  status=e.code;e.close();return status,b''
+def js(base,path,method='GET',body=None):
+ status,data=call(base,path,method,body)
+ if status not in (200,201,204):raise Stop('HTTP_'+str(status))
+ return json.loads(data) if data else {}
+def settings():return js(ARM,SITE+'/config/appsettings/list'+API,'POST')['properties']
+def health(label,baseline=None):
+ result={}
+ for path in ('/health','/ready'):
+  status,data=call(PUBLIC,path)
+  if status!=200:emit('health_failed',stage=label,path=path,status=status);raise Stop('APPLICATION_UNHEALTHY')
+  body=json.loads(data);result[path]=body
+ if result['/health'].get('status')!='ok' or result['/ready'].get('status')!='ready':raise Stop('APPLICATION_UNHEALTHY')
+ if baseline and result['/ready'].get('release')!=baseline['/ready'].get('release'):raise Stop('APPLICATION_RELEASE_CHANGED')
+ (OUT/(label+'-health.json')).write_text(json.dumps(result,indent=2)+'\n')
+ emit('health_pass',stage=label,release=result['/ready'].get('release',{}).get('build_version'),revision=result['/ready'].get('database_revision'))
+ return result
+def pause(seconds):
+ if time.time()+seconds>WORK_STOP:raise Stop('CLEANUP_MARGIN_REACHED')
+ time.sleep(seconds)
+try:
+ assert hashlib.sha256(ZIP.read_bytes()).hexdigest()==EXPECTED
+ with zipfile.ZipFile(ZIP) as z:
+  assert set(z.namelist())=={'run.sh','settings.job','policy.json','watchdog.py'}
+  assert json.loads(z.read('policy.json'))['mode']=='disabled'
+  assert b'--permit-delete' not in z.read('run.sh')
+ emit('package_verified',sha256=EXPECTED,mode='disabled',deletion_flag=False)
+ env=os.environ.copy();env['AZURE_CONFIG_DIR']=str(ROOT/'.azure-sql-cli')
+ result=subprocess.run(['az','account','get-access-token','--subscription',SUB,'--resource',ARM+'/','--query','accessToken','-o','tsv','--only-show-errors'],capture_output=True,text=True,env=env,timeout=25)
+ if result.returncode:raise Stop('AZURE_AUTHENTICATION_UNAVAILABLE')
+ TOKEN=result.stdout.strip();claims=json.loads(base64.urlsafe_b64decode(TOKEN.split('.')[1]+'==='))
+ assert claims['tid']=='4ac50105-0c66-404e-a107-7cbd8a9a6442'
+ emit('operator_verified',tenant=claims['tid'],principal=claims.get('oid'))
+ site=js(ARM,SITE+API);config=js(ARM,SITE+'/config/web'+API)['properties']
+ assert site['id'].lower()==SITE.lower() and site['properties']['state']=='Running'
+ assert site['identity']['principalId']=='600447fe-5fea-4801-9033-ab4aafc474cc'
+ assert config['alwaysOn'] is True and config['linuxFxVersion']=='PYTHON|3.13' and config['numberOfWorkers']==1
+ ORIGINAL=settings(); assert FLAG not in ORIGINAL
+ STATE['original_setting']={'present':False,'value':None};STATE['original_settings_sha256']=hashlib.sha256(json.dumps(ORIGINAL,sort_keys=True).encode()).hexdigest();save()
+ secure=Path('/tmp/gpv-webjob-disabled-original-settings.json');fd=os.open(secure,os.O_WRONLY|os.O_CREAT|os.O_EXCL,0o600)
+ with os.fdopen(fd,'w') as f:json.dump(ORIGINAL,f)
+ emit('baseline_recorded',original_flag='ABSENT',always_on=True,runtime=config['linuxFxVersion'],workers=config['numberOfWorkers'])
+ baseline=health('baseline')
+ for path in ('/api/vfs/site/wwwroot/App_Data/jobs/','/api/vfs/site/wwwroot/app_data/jobs/'):
+  status,_=call(SCM,path)
+  if status!=404:raise Stop('LATENT_JOB_BASELINE_CHANGED_'+str(status))
+ emit('scm_auth_verified_and_job_directories_absent')
+ if settings()!=ORIGINAL:raise Stop('CONCURRENT_CONFIGURATION_CHANGE')
+ STATE['settings_changed']=True;save()
+ status,_=call(ARM,SITE+'/config/appsettings'+API,'PUT',{'properties':{**ORIGINAL,FLAG:'false'}})
+ if status not in (200,201):raise Stop('SETTING_UPDATE_FAILED_'+str(status))
+ current=settings();assert current=={**ORIGINAL,FLAG:'false'}
+ emit('only_documented_setting_enabled')
+ # The first unsuccessful health check triggers rollback, not a retry to conceal it.
+ health('after-enable',baseline)
+ for attempt in range(8):
+  status,body=call(SCM,'/api/continuouswebjobs')
+  if status==200:
+   jobs=json.loads(body);assert not any(j.get('name')==JOB for j in jobs);break
+  if status not in (409,503):raise Stop('WEBJOBS_ENABLEMENT_FAILED_'+str(status))
+  pause(5)
+ else:raise Stop('WEBJOBS_NOT_AVAILABLE')
+ STATE['upload_intent']=True;save()
+ status,_=call(SCM,'/api/continuouswebjobs/'+JOB,'PUT',ZIP.read_bytes(),{'Content-Type':'application/zip','Content-Disposition':'attachment; filename=webjob-disabled-final.zip'})
+ emit('disabled_job_upload_response',http_status=status)
+ if status not in (200,201,204):raise Stop('JOB_UPLOAD_FAILED_'+str(status))
+ first_events=[]
+ for attempt in range(10):
+  pause(5)
+  job=js(SCM,'/api/continuouswebjobs/'+JOB)
+  emit('job_observed',status=job.get('status'),run_command=job.get('run_command'))
+  status,raw=call(SCM,'/api/vfs/data/gpv-sql-expiry-watchdog/audit.jsonl')
+  if status==200:
+   events=[json.loads(line) for line in raw.decode().splitlines() if line.strip()]
+   if any(e.get('event') not in ('DISABLED','PASS_FINISHED') for e in events):raise Stop('UNEXPECTED_DISABLED_JOB_EVENT')
+   if any(e.get('event')=='DISABLED' for e in events):first_events=events;break
+  if job.get('status') in ('Stopped','Aborted'):raise Stop('JOB_DID_NOT_START')
+ else:raise Stop('NO_DISABLED_STARTUP_EVIDENCE')
+ (OUT/'hosted-log-first.json').write_text(json.dumps(first_events,indent=2)+'\n')
+ # No active CLI/SCM session remains while Azure continues its own worker.
+ pause(20)
+ status,raw=call(SCM,'/api/vfs/data/gpv-sql-expiry-watchdog/audit.jsonl');assert status==200
+ events=[json.loads(line) for line in raw.decode().splitlines() if line.strip()]
+ assert all(e.get('event') in ('DISABLED','PASS_FINISHED') for e in events)
+ assert len([e for e in events if e.get('event')=='DISABLED'])>len([e for e in first_events if e.get('event')=='DISABLED'])
+ (OUT/'hosted-log-final.json').write_text(json.dumps(events,indent=2)+'\n')
+ emit('independent_disabled_heartbeats_confirmed',events=len(events),no_cli_session_seconds=20)
+ # Verify exact deployed bytes rather than infer the policy from logs.
+ for directory in ('App_Data','app_data'):
+  path='/api/vfs/site/wwwroot/'+directory+'/jobs/continuous/'+JOB+'/'
+  status,raw=call(SCM,path+'policy.json')
+  if status==200:
+   with zipfile.ZipFile(ZIP) as z:
+    assert raw==z.read('policy.json')
+    for name in ('run.sh','settings.job','watchdog.py'):
+     status,raw=call(SCM,path+name);assert status==200 and raw==z.read(name)
+   emit('remote_disabled_package_bytes_verified');break
+ else:raise Stop('REMOTE_PACKAGE_PATH_UNVERIFIED')
+ health('after-running',baseline)
+ STATE['status']='PASS'
+except Exception as e:
+ STATE['status']='PARTIAL' if STATE['settings_changed'] else 'BLOCKED'
+ emit('check_stopped',reason=str(e) if isinstance(e,Stop) else type(e).__name__)
+finally:
+ if STATE['upload_intent']:
+  try:
+   status,raw=call(SCM,'/api/vfs/data/jobs/continuous/'+JOB+'/job_log.txt')
+   if status==200:
+    text=raw.decode(errors='replace').lower()
+    emit('platform_log_summary',sha256=hashlib.sha256(raw).hexdigest(),python_missing=('python3: not found' in text or 'python3: command not found' in text),pass_failed=('pass_failed' in text),traceback=('traceback' in text))
+  except Exception:pass
+  try:
+   status,_=call(SCM,'/api/continuouswebjobs/'+JOB+'/stop','POST');emit('job_stop_response',http_status=status)
+   pause(3)
+   status,raw=call(SCM,'/api/continuouswebjobs/'+JOB)
+   if status==200:
+    job=json.loads(raw);emit('job_final_status',status=job.get('status'))
+    assert job.get('status')=='Stopped'
+   elif status!=404:raise Stop('STOP_UNCONFIRMED')
+  except Exception:
+   STATE['status']='PARTIAL';emit('job_stop_unconfirmed')
+ if STATE['upload_intent'] and STATE['status']!='PASS':
+  try:
+   status,_=call(SCM,'/api/continuouswebjobs/'+JOB,'DELETE');emit('failed_check_job_removed',http_status=status)
+  except Exception:emit('failed_check_job_removal_unconfirmed')
+ # Restore absent flag even on success: no persistent global enablement is needed
+ # after this compatibility check. Preserve any unrelated concurrent settings.
+ if STATE['settings_changed']:
+  try:
+   current=settings()
+   if current.get(FLAG)!='false':raise Stop('CONCURRENT_FLAG_CHANGE')
+   restored={k:v for k,v in current.items() if k!=FLAG}
+   status,_=call(ARM,SITE+'/config/appsettings'+API,'PUT',{'properties':restored})
+   assert status==200 and settings()==restored
+   emit('original_setting_restored',present=False,other_settings_match_baseline=restored==ORIGINAL)
+  except Exception:
+   STATE['status']='PARTIAL';emit('setting_restore_unconfirmed')
+ try:
+  health('final',locals().get('baseline'))
+ except Exception:
+  STATE['status']='PARTIAL';emit('final_health_unconfirmed')
+ STATE['elapsed_wall_seconds']=round(time.time()-START,2);STATE['finished_utc']=datetime.now(timezone.utc).isoformat();STATE['within_15_minutes']=time.time()<=DEADLINE
+ if not STATE['within_15_minutes']:STATE['status']='PARTIAL'
+ emit('finished',status=STATE['status'],within_15_minutes=STATE['within_15_minutes'],elapsed_wall_seconds=STATE['elapsed_wall_seconds'])
+ sys.exit(0 if STATE['status']=='PASS' else 1)

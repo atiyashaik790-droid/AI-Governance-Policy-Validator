@@ -1,0 +1,99 @@
+[
+  {
+    "path": "/api/vfs/LogFiles/kudu/trace/",
+    "status": 200,
+    "file_count": 1198,
+    "check_related": [
+      {
+        "name": "2026-11-07T16-54-11_3e6c5f_043_GET_api-vfs-site-wwwroot-App_Data-jobs_404_0s.xml",
+        "mtime": "2026-11-07T16:54:11.3932022+00:00",
+        "size": 905,
+        "mime": "text/xml"
+      },
+      {
+        "name": "2026-11-07T16-54-12_3e6c5f_044_GET_api-vfs-site-wwwroot-app_data-jobs_404_0s.xml",
+        "mtime": "2026-11-07T16:54:12.2682215+00:00",
+        "size": 905,
+        "mime": "text/xml"
+      },
+      {
+        "name": "2026-11-07T16-54-23_3e6c5f_045_GET_api-continuouswebjobs_409_0s.xml",
+        "mtime": "2026-11-07T16:54:23.3656461+00:00",
+        "size": 995,
+        "mime": "text/xml"
+      },
+      {
+        "name": "2026-11-07T16-54-29_3e6c5f_046_GET_api-continuouswebjobs_409_0s.xml",
+        "mtime": "2026-11-07T16:54:29.2481226+00:00",
+        "size": 997,
+        "mime": "text/xml"
+      },
+      {
+        "name": "2026-11-07T16-54-35_3e6c5f_047_GET_api-continuouswebjobs_409_0s.xml",
+        "mtime": "2026-11-07T16:54:35.0757345+00:00",
+        "size": 996,
+        "mime": "text/xml"
+      },
+      {
+        "name": "2026-11-07T16-54-40_3e6c5f_048_GET_api-continuouswebjobs_409_0s.xml",
+        "mtime": "2026-11-07T16:54:41.1671299+00:00",
+        "size": 998,
+        "mime": "text/xml"
+      },
+      {
+        "name": "2026-11-07T16-54-46_3e6c5f_049_GET_api-continuouswebjobs_409_0s.xml",
+        "mtime": "2026-11-07T16:54:47.0120124+00:00",
+        "size": 998,
+        "mime": "text/xml"
+      },
+      {
+        "name": "2026-11-07T16-54-52_3e6c5f_050_GET_api-continuouswebjobs_409_0s.xml",
+        "mtime": "2026-11-07T16:54:53.0642151+00:00",
+        "size": 998,
+        "mime": "text/xml"
+      },
+      {
+        "name": "2026-11-07T16-55-02_3e6c5f_001_Startup_GET_api-continuouswebjobs_0s.xml",
+        "mtime": "2026-11-07T16:55:02.4345197+00:00",
+        "size": 229,
+        "mime": "text/xml"
+      },
+      {
+        "name": "2026-11-07T16-55-02_3e6c5f_002_GET_api-continuouswebjobs_pending.xml",
+        "mtime": "2026-11-07T16:55:05.1504637+00:00",
+        "size": 6634,
+        "mime": "text/xml"
+      },
+      {
+        "name": "2026-11-07T16-59-46_3e6c5f_001_Startup_GET_api-vfs-LogFiles-kudu-trace_0s.xml",
+        "mtime": "2026-11-07T16:59:46.6227652+00:00",
+        "size": 235,
+        "mime": "text/xml"
+      },
+      {
+        "name": "2026-11-07T16-59-46_3e6c5f_002_GET_api-vfs-LogFiles-kudu-trace_pending.xml",
+        "mtime": "2026-11-07T16:59:46.6629435+00:00",
+        "size": 712,
+        "mime": "text/xml"
+      }
+    ]
+  },
+  {
+    "path": "/api/vfs/LogFiles/kudu/",
+    "status": 200,
+    "file_count": 2,
+    "check_related": []
+  },
+  {
+    "path": "/api/vfs/LogFiles/",
+    "status": 200,
+    "file_count": 6,
+    "check_related": []
+  },
+  {
+    "path": "/api/deployments/latest",
+    "status": 200,
+    "file_count": 0,
+    "check_related": []
+  }
+]

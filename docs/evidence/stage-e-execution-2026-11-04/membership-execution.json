@@ -1,0 +1,22 @@
+{
+  "stage": "E",
+  "status": "FAILED_STOP_INSPECT_NO_RETRY",
+  "started_at_utc": "2026-11-04T16:34:26.863746+00:00",
+  "approval_ref": "stage-e-20261104-atiya-admin-explicit",
+  "membership_write_committed": false,
+  "database_permissions_changed": false,
+  "schema_changed": false,
+  "approved_mapping_sha256": "24f916c8062f1bf2da22d40617006ecc5a891ad6ec89e3555fdc8102e4bbb689",
+  "reviewed_workflow_sha256": "e24095f392edb22d4ae070fc0f1e139353da78ee461c232cbf8fdb8ac6f9374b",
+  "operator_is_db_owner": true,
+  "operator_permissions": {
+    "sso_memberships.SELECT": 1,
+    "sso_memberships.INSERT": 1,
+    "sso_memberships.UPDATE": 1,
+    "audit_events.SELECT": 1,
+    "audit_events.INSERT": 1
+  },
+  "existing_workspace_policy_count": 8,
+  "error_kind": "ProgrammingError",
+  "finished_at_utc": "2026-11-04T16:34:40.622455+00:00"
+}

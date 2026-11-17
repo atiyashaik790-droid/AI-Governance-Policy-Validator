@@ -1,0 +1,88 @@
+{
+  "started_utc": "2026-11-07T16:53:53.667246+00:00",
+  "deadline_utc": "2026-11-07T17:08:53.667236+00:00",
+  "scope": "disabled compatibility only",
+  "events": [
+    {
+      "utc": "2026-11-07T16:53:53.678012+00:00",
+      "event": "package_verified",
+      "sha256": "fc4070ec948fd1465fa2226e7979357eec8def1f9dd9ab97fe2f3ef9bb2d7cd1",
+      "mode": "disabled",
+      "deletion_flag": false
+    },
+    {
+      "utc": "2026-11-07T16:53:54.222005+00:00",
+      "event": "operator_verified",
+      "tenant": "4ac50105-0c66-404e-a107-7cbd8a9a6442",
+      "principal": "b5d8bfbe-f03a-4132-a13f-ab49aae834b7"
+    },
+    {
+      "utc": "2026-11-07T16:53:56.658502+00:00",
+      "event": "baseline_recorded",
+      "original_flag": "ABSENT",
+      "always_on": true,
+      "runtime": "PYTHON|3.13",
+      "workers": 1
+    },
+    {
+      "utc": "2026-11-07T16:54:10.306989+00:00",
+      "event": "health_pass",
+      "stage": "baseline",
+      "release": "1.2-ca5df7c1dc19e525",
+      "revision": "005"
+    },
+    {
+      "utc": "2026-11-07T16:54:12.373396+00:00",
+      "event": "scm_auth_verified_and_job_directories_absent"
+    },
+    {
+      "utc": "2026-11-07T16:54:18.868126+00:00",
+      "event": "only_documented_setting_enabled"
+    },
+    {
+      "utc": "2026-11-07T16:54:22.488813+00:00",
+      "event": "health_pass",
+      "stage": "after-enable",
+      "release": "1.2-ca5df7c1dc19e525",
+      "revision": "005"
+    },
+    {
+      "utc": "2026-11-07T16:55:05.290653+00:00",
+      "event": "check_stopped",
+      "reason": "WEBJOBS_ENABLEMENT_FAILED_500"
+    },
+    {
+      "utc": "2026-11-07T16:55:09.948143+00:00",
+      "event": "original_setting_restored",
+      "present": false,
+      "other_settings_match_baseline": true
+    },
+    {
+      "utc": "2026-11-07T16:55:14.301861+00:00",
+      "event": "health_pass",
+      "stage": "final",
+      "release": "1.2-ca5df7c1dc19e525",
+      "revision": "005"
+    },
+    {
+      "utc": "2026-11-07T16:55:14.302817+00:00",
+      "event": "finished",
+      "status": "PARTIAL",
+      "within_15_minutes": true,
+      "elapsed_wall_seconds": 80.64
+    }
+  ],
+  "settings_changed": true,
+  "upload_intent": false,
+  "sql_operations": false,
+  "permission_changes": false,
+  "status": "PARTIAL",
+  "original_setting": {
+    "present": false,
+    "value": null
+  },
+  "original_settings_sha256": "3a8359fa7ee71311e1f92f5ba64e73cc851c659fe7d8965f9126fcdb2ad71996",
+  "elapsed_wall_seconds": 80.64,
+  "finished_utc": "2026-11-07T16:55:14.302779+00:00",
+  "within_15_minutes": true
+}

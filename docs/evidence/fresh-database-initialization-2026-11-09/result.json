@@ -1,0 +1,183 @@
+{
+  "status": "PASS",
+  "firewall_creation": "PASS",
+  "connectivity": "PASS",
+  "firewall_cleanup": "PASS",
+  "independent_cleanup_supervisor": "NOT_VERIFIED",
+  "source_sql_mutations": 0,
+  "webapp_mutations": 0,
+  "runtime_grant_changes": 0,
+  "providers": 0,
+  "subscription": {
+    "id": "25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6",
+    "name": "Devops_Azure_SV",
+    "state": "Enabled",
+    "tenantId": "4ac50105-0c66-404e-a107-7cbd8a9a6442"
+  },
+  "hosted_before": {
+    "/health": {
+      "http_status": 200,
+      "status": "ok"
+    },
+    "/ready": {
+      "http_status": 200,
+      "status": "ready",
+      "release": "1.2-ca5df7c1dc19e525",
+      "revision": "005"
+    }
+  },
+  "target_database": "sqldb-gpv-demo-v008-20261108",
+  "server": "sql-governance-validator-dev-atiya",
+  "source_before": {
+    "id": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Sql/servers/sql-governance-validator-dev-atiya/databases/sqldb-governance-validator-dev",
+    "name": "sqldb-governance-validator-dev",
+    "location": "westus2",
+    "sku": {
+      "name": "Standard",
+      "tier": "Standard",
+      "capacity": 10
+    },
+    "properties": {
+      "databaseId": "7e5a90aa-ec16-46cc-8298-9d27ead9a27e",
+      "creationDate": "2026-10-28T15:24:20.563Z",
+      "status": "Online",
+      "collation": "SQL_Latin1_General_CP1_CI_AS",
+      "maxSizeBytes": 268435456000,
+      "currentServiceObjectiveName": "S0",
+      "requestedServiceObjectiveName": "S0",
+      "currentBackupStorageRedundancy": "Local",
+      "requestedBackupStorageRedundancy": "Local",
+      "elasticPoolId": null,
+      "zoneRedundant": false,
+      "readScale": "Disabled"
+    },
+    "retention": {
+      "retentionDays": 7,
+      "diffBackupIntervalInHours": 24
+    }
+  },
+  "app_before": {
+    "id": "/subscriptions/25ddf5d2-6e0b-4a34-82fc-bfc91415e7a6/resourceGroups/rg_techdemo_Atiya_Tabsum_Shaik/providers/Microsoft.Web/sites/app-governance-validator-atiya-1026",
+    "state": "Running",
+    "identity_principal": "600447fe-5fea-4801-9033-ab4aafc474cc",
+    "web_config_sha256": "031a5a5e141fe953e6adfb022270cbb629a1566259c4fcad2bedddc47f924921"
+  },
+  "rule": "gpv-fresh-init-20261108",
+  "ip": "45.127.46.209",
+  "window_started_epoch": 1794165548.0564716,
+  "window_deadline_epoch": 1794166448.0564716,
+  "sql_operation_deadline_epoch": 1794166208.0564716,
+  "events": [
+    {
+      "utc": "2026-11-08T19:19:08.056507+00:00",
+      "event": "RULE_CREATION_INTENT_DURABLE"
+    },
+    {
+      "utc": "2026-11-08T19:19:09.526520+00:00",
+      "event": "FIREWALL_CREATION_PASS"
+    },
+    {
+      "utc": "2026-11-08T19:19:12.809579+00:00",
+      "event": "CONNECTIVITY_PASS"
+    },
+    {
+      "utc": "2026-11-08T19:20:41.128882+00:00",
+      "event": "SQL_WORK_FINISHED"
+    },
+    {
+      "utc": "2026-11-08T19:20:41.131137+00:00",
+      "event": "CLEANUP_STARTED"
+    },
+    {
+      "utc": "2026-11-08T19:20:42.994681+00:00",
+      "event": "CLEANUP_VERIFIED"
+    },
+    {
+      "utc": "2026-11-08T19:20:49.240215+00:00",
+      "event": "PRODUCTION_POSTCHECK"
+    },
+    {
+      "utc": "2026-11-08T19:20:49.240990+00:00",
+      "event": "FINISHED"
+    }
+  ],
+  "sql_result": {
+    "status": "PASS",
+    "migrations_started": true,
+    "migration_execution": "PASS",
+    "final_revision": [
+      "008"
+    ],
+    "schema_qualification": "PASS",
+    "runtime_grants_changed": false,
+    "migration_hashes_match": true,
+    "sql_context": {
+      "database": "sqldb-gpv-demo-v008-20261108",
+      "server": "sql-governance-validator-dev-atiya",
+      "engine_edition": 5,
+      "database_control": 1,
+      "compatibility_level": 170
+    },
+    "tables_before": [],
+    "empty_database_verified": true,
+    "initial_revision": "ABSENT_EMPTY_DATABASE",
+    "migration_started_utc": "2026-11-08T19:19:18.626603+00:00",
+    "runtime_permission_qualification": "NOT_RUN_OPERATOR_SCHEMA_CHECK_ONLY_NO_RUNTIME_PRINCIPAL_PROVISIONED",
+    "schema_contract": {
+      "revision": "008",
+      "versioned": true,
+      "sso_schema": true
+    },
+    "schema_counts": {
+      "tables": 23,
+      "indexes": 37,
+      "foreign_keys": 19,
+      "check_constraints": 16,
+      "triggers": 7
+    },
+    "table_rows": {
+      "active_policy_assignments": 0,
+      "alembic_version": 1,
+      "audit_events": 0,
+      "demo_sessions": 0,
+      "evaluation_exports": 0,
+      "execution_policy_evidence": 0,
+      "export_jobs": 0,
+      "feedback_records": 0,
+      "human_review_cases": 0,
+      "inference_rate_buckets": 0,
+      "inference_usage": 0,
+      "policies": 0,
+      "policy_versions": 0,
+      "review_assignments": 0,
+      "review_notes": 0,
+      "review_protected_content": 0,
+      "sso_memberships": 0,
+      "sso_sessions": 0,
+      "sso_transactions": 0,
+      "validation_executions": 0,
+      "workspace_policy_assignment_events": 0,
+      "workspace_policy_assignments": 0,
+      "workspace_policy_states": 0
+    }
+  },
+  "temporary_rule_absent": true,
+  "original_rules_unchanged": true,
+  "firewall_elapsed_seconds": 94.938,
+  "restoration_overdue": false,
+  "hosted_after": {
+    "/health": {
+      "http_status": 200,
+      "status": "ok"
+    },
+    "/ready": {
+      "http_status": 200,
+      "status": "ready",
+      "release": "1.2-ca5df7c1dc19e525",
+      "revision": "005"
+    }
+  },
+  "production_source_unchanged": true,
+  "production_app_unchanged": true,
+  "finished_utc": "2026-11-08T19:20:49.240974+00:00"
+}

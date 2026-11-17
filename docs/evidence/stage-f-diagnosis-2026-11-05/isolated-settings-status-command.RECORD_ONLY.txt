@@ -1,0 +1,16 @@
+import sys,os,json,ast
+from pathlib import Path
+from unittest.mock import patch
+R=Path.cwd();sys.path.insert(0,str(R/'backend'))
+from app.config import Settings,settings
+from app import sso
+r={'isolated_local_only':True,'sql_accessed':False,'oidc_called':False,'status_and_auth_share_settings':sso.settings is settings and sso.configuration.__defaults__[0] is settings}
+with patch.dict(os.environ,{'SSO_ENABLED':'false'}):
+ cached=Settings(_env_file=None)
+ os.environ['SSO_ENABLED']='true'
+ r['existing_object_after_environment_change']=cached.sso_enabled;r['new_object_after_environment_change']=Settings(_env_file=None).sso_enabled
+with patch.multiple(settings,sso_enabled=True,demo_browser_login_enabled=True,entra_tenant_id='4ac50105-0c66-404e-a107-7cbd8a9a6442',entra_client_id='a1a7da0b-ad29-49ec-a9ea-c59219e60df5',entra_client_secret='SYNTHETIC_LOCAL_ONLY',sso_public_origin='https://app-governance-validator-atiya-1026.azurewebsites.net'):
+ with patch('app.schema_compatibility.inspect_schema',return_value={'sso_schema':True}):
+  r['enabled_status']=sso.status(object())
+  assert r['enabled_status']=={'sso_enabled':True,'configured':True,'demo_login_enabled':True}
+r['status']='PASS';(R/'docs/evidence/stage-f-diagnosis-2026-11-05/isolated-settings-status.json').write_text(json.dumps(r,indent=2)+'\n');print(json.dumps(r))

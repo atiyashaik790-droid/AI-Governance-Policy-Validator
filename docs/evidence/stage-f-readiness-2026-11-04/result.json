@@ -1,0 +1,22 @@
+{
+  "stage": "F",
+  "readiness": "BLOCKED",
+  "preparation_complete": true,
+  "hosted_changes": false,
+  "code_deployment_required": false,
+  "current_release": "1.2-6749226f1af65b63",
+  "database_revision": "005",
+  "registration_verified": true,
+  "client_id": "a1a7da0b-ad29-49ec-a9ea-c59219e60df5",
+  "callback_verified": true,
+  "logout_return_uri_registered": false,
+  "secret_setting": "ABSENT",
+  "existing_secret_credential_metadata": "NON_EXPIRED",
+  "existing_secret_value_availability": "UNCONFIRMED",
+  "platform_http_logging": "ENABLED_QUERY_PROTECTION_REQUIRED",
+  "sso_enabled": false,
+  "demo_login_enabled": true,
+  "accepted_membership_workspace": "demo-appservice-4e2dcce8d618",
+  "stage_g_executed": false,
+  "report": "docs/STAGE_F_READINESS_AND_APPROVAL.md"
+}

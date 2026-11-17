@@ -1,0 +1,19 @@
+{
+  "report": "docs/PHASE6B_SQL_RECOVERY_PREFLIGHT.md",
+  "proposal": "deployment/phase6b-recovery-validation.REVIEW_ONLY.sql",
+  "evidence": [
+    "docs/evidence/phase6b-readonly-2026-11-06/approval-scope.json",
+    "docs/evidence/phase6b-readonly-2026-11-06/azure-current.json",
+    "docs/evidence/phase6b-readonly-2026-11-06/database-shape.json",
+    "docs/evidence/phase6b-readonly-2026-11-06/fallback-inventory.json",
+    "docs/evidence/phase6b-readonly-2026-11-06/local-artifacts.json",
+    "docs/evidence/phase6b-readonly-2026-11-06/local-database-preserved.json",
+    "docs/evidence/phase6b-readonly-2026-11-06/retail-prices.json",
+    "docs/evidence/phase6b-readonly-2026-11-06/sql-detail-run.log",
+    "docs/evidence/phase6b-readonly-2026-11-06/sql-detail.json",
+    "docs/evidence/phase6b-readonly-2026-11-06/sql-readonly.json",
+    "docs/evidence/phase6b-readonly-2026-11-06/summary.json",
+    "docs/evidence/phase6b-readonly-2026-11-06/changed-files.json"
+  ],
+  "previous_files_modified": []
+}
